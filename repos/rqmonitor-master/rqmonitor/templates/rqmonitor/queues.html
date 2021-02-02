@@ -1,0 +1,10 @@
+{% extends "rqmonitor/base_dashboard.html" %}
+{% block actionbuttons %}
+  <button type="button" data-action="deleteall" data-toggle="modal" data-target="#confirmation"  
+        class="btn btn-danger float-right" data-targetclass="queue">Delete Selected Queues</button>
+        <button type="button" data-action="emptyall" data-toggle="modal" data-target="#confirmation"  
+        class="btn btn-warning float-right mr-2" data-targetclass="queue">Empty Selected Queues</button>
+{% endblock %}
+{% block table %}
+  {% include 'rqmonitor/table_queues.html' %}
+{% endblock %}

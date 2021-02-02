@@ -1,0 +1,133 @@
+{% from 'forms/_form.html' import form_header, form_rows, form_footer %}
+{% from 'message_box.html' import message_box %}
+{% from 'steps.html' import render_steps, render_step %}
+
+{% macro render_edited_hint(dt, user=None) %}
+    {% if user %}
+        <span class="review-comment-edited"
+            title="{% trans dt=dt|format_human_date, name=user.name %}On {{ dt }} by {{ name }}{% endtrans %}">
+            · {% trans %}edited{% endtrans %}
+        </span>
+    {% else %}
+        <span class="review-comment-edited" title="{{ dt|format_human_date }}">
+            · {% trans %}edited{% endtrans %}
+        </span>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_group(title, url=none, long_title=none) -%}
+    <div class="review-group truncate-text">
+        {%- if url -%}
+            <a href="{{ url }}" title="{{ long_title or title }}">{{ title }}</a>
+        {%- else -%}
+            <span title="{{ long_title or title }}">{{ title }}</span>
+        {%- endif -%}
+    </div>
+{%- endmacro %}
+
+{% macro render_instruction_box(container_id, instructions, title) %}
+    {% if instructions|trim %}
+        {% set link %}
+            <a data-title="{{ title }}"
+               data-content="#{{ container_id }} .hidden-instructions"
+               data-close-button
+               data-ajax-dialog>
+        {% endset %}
+        {% set endlink='</a>'|safe %}
+        {% set text = caller(link, endlink) %}
+        {% call message_box('warning', classes='review-instructions', fixed_width=true) %}
+            {{ text }}
+            <div class="hidden-instructions weak-hidden">
+                {{ instructions | markdown }}
+            </div>
+        {% endcall %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_score(score, rating_range, classes='i-tag outline') %}
+    {% set score = score|round(1) %}
+    {% set max_score = rating_range[1]|round(1) %}
+    <span class="highlight {{ classes }}"
+          title="{% trans %}Score: {{ score }} / {{ max_score }}{% endtrans %}">
+        {{ score }}
+    </span>
+{% endmacro %}
+
+{% macro render_visibility_hint(visibility) %}
+    {% if visibility.name != 'contributors' %}
+        <i class="review-comment-visibility {{ visibility.name }} icon-shield" title="{{ visibility.title }}"></i>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_user_avatar(user) %}
+    <div class="avatar-div">
+        <img src="{{ user.avatar_url }}" alt="" class="ui image circular profile-picture">
+    </div>
+{% endmacro %}
+
+{% macro render_summary_state(state) %}
+    <div class="i-tag {{ state.css_class }}">
+        {{- state.title -}}
+    </div>
+{% endmacro %}
+
+{% macro render_review_state(review) %}
+    <span class="bold underline semantic-text {{ review.proposed_action.css_class }}">
+{% endmacro %}
+
+{% macro render_decision_box(proposal, form, user) %}
+    {% set event = proposal.event %}
+    {{ render_user_avatar(user) }}
+    <div class="i-timeline-item-box footer-only header-indicator-left review-form">
+        <div class="i-box-footer">
+            {% set form_id = 'judgment-form' %}
+            {% call form_header(form, action=proposal.get_save_judgment_url(), orientation='vertical', id=form_id) %}
+                data-form-container="#proposal-decision-box"
+                data-update="#reviewing-page"
+                data-replace-update
+                data-ajax-form
+            {% endcall %}
+            {% set instructions = proposal.cfp.judgment_instructions %}
+            {% call(link, endlink) render_instruction_box(form_id, instructions, _("Judgment instructions")) %}
+                {% trans -%}
+                    Please don't forget to read the {{ link }}judgment instructions{{ endlink }} before taking your decision.
+                {%- endtrans %}
+            {% endcall %}
+            {% if form._order %}
+                {{ form_rows(form, fields=form._order, skip_labels=true) }}
+            {% else %}
+                {{ form_rows(form, skip_labels=true) }}
+            {% endif %}
+            {% call form_footer(form) %}
+                <button class="i-button big highlight">
+                    {%- trans %}Judge{% endtrans -%}
+                </button>
+            {% endcall %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_timeline_section(cfp) %}
+    {% set tz = cfp.event.display_tzinfo %}
+    {% set start_date %}
+        <time datetime="{{ cfp.start_dt.isoformat() }}">
+            {{- cfp.start_dt|format_datetime(timezone=tz) -}}
+        </time>
+    {% endset %}
+    {% set end_date %}
+        {% if cfp.end_dt %}
+            <time datetime="{{ cfp.end_dt.isoformat() }}">
+                {{- cfp.end_dt|format_datetime(timezone=tz) -}}
+            </time>
+        {% else %}
+            {%- trans %}No deadline{% endtrans -%}
+        {% endif %}
+    {% endset %}
+
+    <section>
+        {% call render_steps() %}
+            {{ render_step(_("Opening day"), text=start_date, completed=cfp.has_started) }}
+            {{ render_step(_("Submission deadline"), text=end_date, completed=cfp.has_ended) }}
+        {% endcall %}
+    </section>
+{% endmacro %}

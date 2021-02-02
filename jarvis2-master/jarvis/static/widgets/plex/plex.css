@@ -1,0 +1,25 @@
+[data-widget="plex"] {
+  height: 100%;
+  padding: 5px;
+  background: #7A3E48;
+  text-align: center;
+}
+[data-widget="plex"] table {
+  margin: 0 10px 0 10px;
+}
+[data-widget="plex"] .title {
+  text-align: left;
+  width: 100%;
+  font-size: 16px;
+}
+[data-widget="plex"] .year {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 16px;
+}
+[data-widget="plex"] hr {
+  border: 0;
+  height: 1px;
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.2);
+}

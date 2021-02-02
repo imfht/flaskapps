@@ -1,0 +1,29 @@
+# Python bytecode / optimized files
+*.py[co]
+*.egg-info
+build
+sdist
+.vscode
+__pycache__/
+
+# virtualenv
+venv/
+
+# Sphinx documentation
+docs/_build
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+.eggs/
+coverage.xml
+tests/junit.xml
+
+pytest_flask/_version.py
+
+# Editors
+.vscode
+.code-workspace

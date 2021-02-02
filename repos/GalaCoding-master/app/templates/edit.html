@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}GalaCoding - 新建文章{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
+
+{% block page_content %}
+<h2>新建博文</h2><br/>
+<form action="" method="post" class="form" role="form">
+  <!--<div style="display:none;"><input id="csrf_token" name="csrf_token" type="hidden" value="1462806066##e1e0f3c19e8bda792f90247becde9c4fad3042a8"></div>-->
+    {{ form.csrf_token }}
+
+    {{ wtf.form_field(form.title) }}
+  <!--<div class="form-group  required"><label class="control-label" for="title">博文标题</label>
+
+          <input class="form-control" id="title" name="title" required="" type="text" value="{{ form.title.data }}" style="width: 520px;">
+
+  </div>-->
+    {{ wtf.form_field(form.tags) }}
+  <!--<div class="form-group  required"><label class="control-label" for="tags">博文标签</label>
+
+          <input class="form-control" id="tags" name="tags" required="" type="text" value="{{ form.tags.data }}" style="width: 520px;">
+
+  </div>-->
+
+  <div class="form-group  required"><label class="control-label" for="body">有什么好的想法？</label>
+    <div style="left: 0px; top: 170px; width: 1016px; height: 561px;">
+        <script type="text/javascript">
+            function edit_tab(obj){
+              if (event.keyCode == 9)
+              {
+                 obj.value = obj.value + "    "; // 跳几格由你自已决定
+                 event.returnValue = false;
+              }
+            }
+            function edit_scroll(obj){
+              document.getElementById("flask-pagedown-body-preview").scrollTop = obj.scrollTop;
+            }
+        </script>
+    <div class="flask-pagedown"><textarea class="form-control flask-pagedown-input" style="display: block; width: 487px; height: 561px; float: left;    background-color: #fff;" id="flask-pagedown-body" name="body" required="" onkeydown="edit_tab(this)"  onscroll="edit_scroll(this)">{{ form.body.data }}</textarea></div>
+    <div class="markdown" id="flask-pagedown-body-preview" style="overflow:scroll; width: 519px; height: 561px; margin-left: 497px;"></div>
+    </div>
+
+
+  </div>
+
+    <input class="btn btn-default" id="submit" name="submit" type="submit" value="提交">
+
+</form>
+<!--
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Sanitizer.min.js"></script>-->
+
+<script type="text/javascript" src="/static/js/marked.min.js"></script>
+<script type="text/javascript">
+f = function() {
+    if (typeof flask_pagedown_converter === "undefined") {
+        //flask_pagedown_converter = Markdown.getSanitizingConverter().makeHtml;
+        flask_pagedown_converter = marked;
+    }
+    var textarea = document.getElementById("flask-pagedown-body");
+    var preview = document.getElementById("flask-pagedown-body-preview");
+    textarea.onkeyup = function() { preview.innerHTML = flask_pagedown_converter(textarea.value); }
+    textarea.onkeyup.call(textarea);
+}
+if (document.readyState === 'complete')
+    f();
+else if (window.addEventListener)
+    window.addEventListener("load", f, false);
+else if (window.attachEvent)
+    window.attachEvent("onload", f);
+else
+    f();
+</script>
+{% endblock %}

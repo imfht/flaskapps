@@ -1,0 +1,85 @@
+.info {
+  height: 280rpx;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  position: relative;
+  display: flex;
+}
+
+.cover {
+  height: 100%;
+  width: 30%;
+  border-radius: 16rpx;
+}
+
+.info-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-sizing: border-box;
+  padding: 30rpx 50rpx;
+}
+
+.bookname {
+  font-size: 46rpx;
+}
+
+.authorname {
+  align-self: flex-end;
+  font-size: 34rpx;
+  color: #333;
+}
+
+.classify {
+  display: flex;
+  background-color: #fff;
+  margin-top: 16rpx;
+  padding: 40rpx 30rpx;
+  justify-content: space-between;
+  font-size: 32rpx;
+  color: #888;
+}
+
+.desc {
+  background-color: #fff;
+  padding: 30rpx 0;
+  margin-top: 16rpx;
+}
+
+.desc-title {
+  margin: 30rpx;
+  color: #333;
+  font-size: 40rpx;
+  line-height: 60rpx;
+}
+
+.desc-content {
+  margin: 25rpx 30rpx 0;
+  color: #666;
+  font-size: 28rpx;
+  line-height: 42rpx;
+}
+
+.btn-groups {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.btn-item {
+  box-sizing: border-box;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 30rpx;
+}
+
+.btn-shelf {
+  border: 1px solid #6190e8;
+  background: #6190e8;
+  color: #fff;
+}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content%}
+  <div class="container-fluid">
+        <div class="row">
+           <div class="col-md-offset-2 col-md-8">
+                <form role="form" action={{url_for('main.add_task')}} method="post">
+                <div class="form-group">
+                    <label for="name">任务名称</label>
+                    <input type="text" name="task_name" class="form-control" placeholder="学习计划"/>
+                    <br>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">邮箱地址</label>
+                    <input type="text" name="emails" class="form-control" placeholder="发送提醒到邮箱"/>
+                    <br>
+                </div>
+                
+                <div class="form-group">
+                    <div>
+                        <label for="name">提醒类型</label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="t_type"  value="1" checked> 每日提醒
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="t_type" value="2"/>曲线提醒
+                        </label>
+                    </div>
+                    
+                    <br>
+                    <textarea id="mymarkdown" name="task_content"></textarea>
+                    <button type="submit" class="btn btn-primary">发布任务</button>
+                </div>
+                </form>
+                
+           </div>
+        </div>
+     </div>
+   
+     <!-- markdown begin -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+   <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+   <script>
+      new SimpleMDE({
+         element: document.getElementById("mymarkdown"),
+         spellChecker: false,
+         autosave: {
+            enabled: true,
+            unique_id: "demo2",
+         },
+      });
+      
+      </script>
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+        ga('create', 'UA-5808021-18', 'auto');
+        ga('send', 'pageview');
+      
+      </script>
+      <!-- markdown end -->
+
+      {{super()}}
+{% endblock %}

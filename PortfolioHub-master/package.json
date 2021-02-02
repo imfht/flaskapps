@@ -1,0 +1,38 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "@mdi/font": "^5.9.55",
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "cross-env": "^7.0",
+        "deepmerge": "^4.2.2",
+        "fibers": "^5.0.0",
+        "jquery": "^3.5.1",
+        "laravel-mix": "^6.0.10",
+        "laravel-mix-bundle-analyzer": "^1.0.5",
+        "lodash": "^4.17.20",
+        "popper.js": "^1.12",
+        "resolve-url-loader": "^3.1.2",
+        "sass": "^1.32.5",
+        "sass-loader": "^10.1.1",
+        "serverless-domain-manager": "^5.1.0",
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "install": "^0.13.0",
+        "serverless-python-requirements": "^5.1.0",
+        "vue": "^2.6.11",
+        "vue-router": "^3.5.0",
+        "vuetify": "^2.4.3"
+    }
+}

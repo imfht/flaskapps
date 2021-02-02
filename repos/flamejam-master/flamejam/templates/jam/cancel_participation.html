@@ -1,0 +1,45 @@
+{% extends "jam/base.html" %}
+{% from "_formhelpers.html" import form_errors %}
+
+{% block content %}
+
+<h1>Cancel participation in {{ jam.title }}</h1>
+
+<form method="post" action="{{ url_for('jam_cancel_participation', jam_slug = jam.slug) }}">
+{{ form.hidden_tag() }}
+{{ form_errors(form) }}
+
+<div class="row-fluid">
+    <div class="span3">
+    </div>
+    <div class="span6">
+        <h2>Confirm unregistration</h2>
+        <p>
+            You are in the process of unregistering from this game jam.
+        </p>
+        <p>
+            Notice that you will leave your current team. If there is no
+            user left in that team, it is <b style="color: red;">PERMANENTLY DELETED</b>,
+            including all games, invitations and other team-related
+            data.
+        </p>
+        <p>
+            You can register again, but the data will be gone. You may have to
+            enter everything again.
+        </p>
+        <p>
+            <label class="checkbox">
+                {{ form.confirm() }}
+                {{ form.confirm.label.text }}
+            </label>
+        </p>
+        <p>
+            <input type="submit" class="btn btn-primary" value="I understand, cancel my participation" />
+        </p>
+    </div>
+    <div class="span3">
+    </div>
+</div>
+</form>
+
+{% endblock %}

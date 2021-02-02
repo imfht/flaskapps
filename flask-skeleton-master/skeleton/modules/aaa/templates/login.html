@@ -1,0 +1,20 @@
+{% extends "layout/base.html" %}
+{% block title %}aaa/login{% endblock %}
+{% block content %}
+<h1>Login</h1>
+
+{% if form.errors %}<p class="error"><strong>Unable to proceed with the provided authentication credentials.</strong><br/><p>Do you want to <a href="{{ url_for('aaa.register') }}">register</a>?</p>{% endif %}
+{% from "_formhelpers.html" import render_field %}
+<form method="POST" action="">
+  <dl>
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.idle_ttl) }}
+    <dd>{{ form.submit }}</dd>
+  </dl>
+  {{ form.hidden_tag() }}
+</form>
+</p>
+{% endblock %}
+
+

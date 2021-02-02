@@ -1,0 +1,28 @@
+[
+  {
+    "body": {
+      "content": "cms-about.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "CMS"
+      }
+    ],
+    "experiment": "CMS",
+    "short_description": {
+      "content": "The Compact Muon Solenoid (CMS) Experiment is one of the large particle detectors at CERN's Large Hadron Collider. The CMS Collaboration consists of more than 3000 scientists, engineers, technicians and students from 180+ institutes and universities from 40+ countries."
+    },
+    "slug": "about-cms",
+    "tags": [
+      "Getting Started"
+    ],
+    "title": "About CMS",
+    "type": {
+      "primary": "Documentation",
+      "secondary": [
+        "About"
+      ]
+    }
+  }
+]

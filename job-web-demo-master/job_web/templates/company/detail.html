@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ company.name }}
+{% endblock %}
+
+{% block head %}
+<div class="jumbotron">
+  <div class="container">
+    <div class="col-md-3">
+      <div class="thumbnail">
+        <img src="{{ company.logo }}" class="img-rounded big-logo-img">
+      </div>
+    </div>
+    <div class="col-md-9">
+      <h2>{{ company.name }}</h2>
+      <p style="font-size: 16px">{{ company.description }}</p>
+      {% if company.address %}
+      <p style="font-size: 16px">所在城市：{{ company.address }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-8">
+  <ul class="nav nav-tabs">
+      <li role="presentation" class="{% if panel == 'about' %}active{% endif %}">
+        <a href="{{ url_for('company.detail', company_id=company.id) }}">公司介绍</a>
+      </li>
+      <li role="presentation" class="{% if panel == 'jobs' %}active{% endif %}">
+        <a href="{{ url_for('company.detail', company_id=company.id, job='job') }}">在招职位({{ company.enabled_jobs().count() }})</a>
+      </li>
+  </ul>
+    {% if panel == 'about' %}
+      <div class="company-detail">
+        {{ company.details | safe }}
+      </div>
+    {% else %}
+      <ul class="company-detail list-group">
+        {% for job in pagination.items %}
+          <li class="job-item list-group-item">
+            <a href="{{ url_for('job.detail', job_id=job.id) }}">
+            <div class="item-title">{{ job.name }}</div>
+            <p>
+              <span class="job-salary">{{ job.salary_min }}k-{{ job.salary_max }}k</span>
+              <span class="job-meta">&nbsp;&nbsp;{{ job.exp }}经验 / {{ job.education }}</span>
+            </p>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      {% if pagination.pages > 1 %}
+        <nav class="nav-pagination" aria-label="Page navigation">
+          <ul class="pagination">
+            {% if pagination.has_prev %}
+                <li><a href="{{url_for('company.detail', page=pagination.prev_num, company_id=company.id, job='job' ) }}">&laquo;</a></li>
+            {% endif %}
+              {% for page in pagination.iter_pages() %}
+                {% if page %}
+                  {% if page != pagination.page %}
+                  <li><a href="{{ url_for('company.detail', page=page, company_id=company.id, job='job') }}">{{ page }}</a></li>
+                  {% else %}
+                  <li class="active"><a class="disabled">{{page}} <span class="sr-only">(current)</span></a></li>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% if pagination.has_next %}
+                <li><a href="{{url_for('company.detail', page=pagination.next_num, company_id=company.id, job='job') }}">&raquo;</a>  </li>
+            {% endif %}
+          </ul>
+        </nav>
+        {% endif %}
+      {% endif %}
+</div>
+<div class="col-md-4">
+    <h4>公司基本信息</h4>
+    <p>领域：{{ company.field }}</p>
+    <p>融资：{{ company.finance_stage }}</p>
+    {% if company.website %}
+      <p>网站：<a href="{{ company.website }}">{{ company.website }}</a></p>
+    {% endif %}
+</div>
+{% endblock %}

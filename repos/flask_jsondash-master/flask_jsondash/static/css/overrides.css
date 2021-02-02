@@ -1,0 +1,130 @@
+/**
+ * DataTables
+ */
+
+.dataTables_wrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 1em;
+    margin: 0.4em auto;
+}
+
+/**
+ * D3js
+ */
+
+/* Circle Packing */
+
+.node circle {
+    fill: rgb(31, 119, 180);
+    fill-opacity: .25;
+    stroke: rgb(31, 119, 180);
+    stroke-width: 1px;
+}
+.node.leaf circle {
+    fill: #FDF59A;
+    fill-opacity: 1;
+}
+.node text {
+    font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+/*Voronoi - from http://bl.ocks.org/mbostock/4060366 */
+
+.q0-9 { fill: rgb(197,27,125); }
+.q1-9 { fill: rgb(222,119,174); }
+.q2-9 { fill: rgb(241,182,218); }
+.q3-9 { fill: rgb(253,224,239); }
+.q4-9 { fill: rgb(247,247,247); }
+.q5-9 { fill: rgb(230,245,208); }
+.q6-9 { fill: rgb(184,225,134); }
+.q7-9 { fill: rgb(127,188,65); }
+.q8-9 { fill: rgb(77,146,33); }
+
+/**
+ * Custom
+ */
+
+.singlenum {
+    text-align: center;
+    font-weight: 100;
+    display: block;
+}
+.numgroup tr {
+    text-align: center;
+}
+.numgroup tr > td {
+    padding: 1em;
+    border-right:  1px solid #ccc;
+}
+.numgroup tr > td:last-of-type {
+    border: none;
+}
+.numgroup tr > td > .numgroup-title {
+    font-size: 20px;
+    font-weight: 200;
+}
+.numgroup tr > td > .numgroup-val {
+    font-size: 60px;
+}
+.numgroup tr > td > .numgroup-val .numgroup-val-units {
+    font-weight: 200;
+    font-size: 60%;
+}
+.numgroup tr > td > .numgroup-desc {
+    font-size: 15px;
+    color: #888;
+    font-weight: 400;
+}
+
+/**
+ * Plotly
+ */
+
+.plotly-container .main-svg {
+    border-radius: 5px;
+}
+.js-plotly-plot .plotly .modebar {
+    background-color: #f1f1f1;
+    padding: 2px;
+    border: 1px solid #ccc;
+}
+.plotly-notifier .notifier-note {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+
+/* Vega */
+
+.vega-embed {
+    text-align: center;
+}
+.vega-embed canvas {
+    display: block;
+    margin: 0 auto;
+}
+.vega-actions .btn-group {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+/**
+ * Digraph (graphlibDot)
+ */
+
+/* Arrows */
+
+.dashboard-charts .widget .chart-graph .edgePath > path {
+    stroke: black;
+    fill: none;
+}
+.dashboard-charts .widget .chart-graph .edgePath > marker > path {
+    stroke: black;
+    fill: black;
+}

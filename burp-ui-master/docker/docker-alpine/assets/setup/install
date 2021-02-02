@@ -1,0 +1,200 @@
+#!/bin/ash
+# Build: @build@
+set -e
+
+SETUP_DIR="/app/setup"
+CONFIG_DIR="${SETUP_DIR}/config"
+
+apk add --no-cache --virtual .build-deps \
+  python3-dev \
+	mariadb-dev \
+	libressl-dev \
+	libffi-dev \
+	git \
+	gcc \
+	libc-dev \
+	postgresql-dev \
+	make
+
+apk add --no-cache mariadb-connector-c libpq
+
+# Install burp-ui
+cd /burp-ui
+git submodule update --init
+pip install -r requirements.txt
+python setup.py sdist
+mkdir meta
+cd pkgs
+for pkg in *
+do
+    [ "$pkg" = "burp-ui-tpl" -o -f "$pkg" ] && continue
+    cd $pkg
+    python setup.py sdist
+    find dist -type f -exec cp "{}" ../../meta/ \;
+    cd ..
+done
+cd ..
+pip install gunicorn
+pip install gevent
+pip install gevent-websocket
+pip install redis
+pip install mysqlclient
+pip install psycopg2
+pip install psycogreen
+pip install flask-limiter
+pip install Flask-SQLAlchemy
+pip install Flask-Migrate
+pip install sqlalchemy-utils
+pip install celery
+pip install Flask-SocketIO
+pip install dist/*.tar.gz
+pip install meta/*.tar.gz
+
+cd
+rm -rf /burp-ui
+
+mkdir -p /var/log/gunicorn /var/log/supervisor
+
+# configure supervisord log rotation
+cat > /etc/logrotate.d/supervisord <<EOF
+/var/log/supervisor/*.log {
+  weekly
+  missingok
+  rotate 52
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+EOF
+
+# configure gunicorn log rotation
+cat > /etc/logrotate.d/gunicorn <<EOF
+/var/log/gunicorn/*.log {
+  daily
+  missingok
+  rotate 14
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+EOF
+
+mkdir /etc/supervisor.d
+# configure supervisord to start crond
+cat > /etc/supervisor.d/cron.ini <<EOF
+[program:cron]
+priority=20
+directory=/tmp
+command=/usr/sbin/crond -f
+user=root
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure celery worker template
+cat > /etc/supervisor.d/bui-celery.ini.sample <<EOF
+[program:bui-celery]
+priority=20
+directory=/tmp
+command=/usr/local/bin/bui-celery -c @BURPUI_CONFIG@
+user=burpui
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure celery beat template
+cat > /etc/supervisor.d/bui-celery-beat.ini.sample <<EOF
+[program:bui-celery-beat]
+priority=20
+directory=/tmp
+command=/usr/local/bin/bui-celery -c @BURPUI_CONFIG@ -t beat -s /var/lib/burpui/celerybeat-schedule --pidfile=/var/lib/burpui/celerybeat.pid
+user=burpui
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure monitor worker template
+cat > /etc/supervisor.d/bui-monitor.ini.sample <<EOF
+[program:bui-monitor]
+priority=20
+directory=/tmp
+command=/usr/local/bin/bui-monitor -c @BURPUI_MONITOR_CONFIG@
+user=burpui
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure gunicorn worker template
+cat > /etc/supervisor.d/gunicorn.ini.sample <<EOF
+[program:gunicorn]
+command=/usr/local/bin/gunicorn -c /etc/burp-ui/burpui_gunicorn.py 'burpui.app:create_app("@BURPUI_CONFIG@",logfile="/var/log/gunicorn/burp-ui_info.log",verbose=@BURPUI_VERBOSE@)'
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure websocket worker template
+cat > /etc/supervisor.d/websocket.ini.sample <<EOF
+[program:websocket-@WORKER_ID@]
+command=/usr/local/bin/bui-manage -c @BURPUI_CONFIG@ websocket -p @WORKER_PORT@
+user=burpui
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# burp-server monitoring script
+cat > /check-burp-server.py <<EOF
+from xmlrpc.client import ServerProxy
+server = ServerProxy('http://burp-server:9001/RPC2')
+
+try:
+    server.supervisor.stopProcess('burp-server', True)
+except:
+    pass
+try:
+    server.supervisor.startProcess('burp-server', True)
+except:
+    pass
+EOF
+
+# configure nginx
+cat >/etc/supervisor.d/websocket.ini <<EOF
+[program:nginx]
+command=/usr/sbin/nginx
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+mkdir -p /etc/burp-ui
+cp ${CONFIG_DIR}/burp-ui/burpui_gunicorn.py /etc/burp-ui/burpui_gunicorn.py.sample
+
+# this is used in case nothing is monted on /etc/burp
+mkdir -p /etc/burp/clientconfdir
+cp ${CONFIG_DIR}/burp-ui/burpui.cfg /etc/burp/burpui.cfg
+
+cat ${CONFIG_DIR}/burp/burp.conf >/etc/burp/burp.conf
+cat ${CONFIG_DIR}/burp/burp-server.conf >/etc/burp/burp-server.conf
+rm -rf /etc/burp/clientconfdir/*
+echo "password = abcdefgh" >/etc/burp/clientconfdir/agent
+
+touch /etc/burp/this_is_a_decoy_file_to_know_if_we_can_chown
+
+# cleanup
+delgroup ping
+apk del .build-deps
+rm -rf ~/.cache

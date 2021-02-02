@@ -1,0 +1,67 @@
+{% extends 'site_layout.html.j2' %}
+{% set title="Admin" %}
+
+{% block content %}
+<h1>Administrate Titan Embeds</h1>
+<p class="flow-text">Select an action.</p>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Online Members Count - {{ count["total"] }}</h4>
+      <p>Discord Users: {{ count["authenticated"] }}</p>
+      <p>Guest Users: {{ count["guest"] }}</p>
+      <p><em>(Excluding those utilizing visitor view)</em></p>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Cosmetics</h4>
+      <p class="flow-text">Give or revoke special <em>cosmetics privilages</em> for users.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.cosmetics') }}">Manage</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Guilds</h4>
+      <p class="flow-text">Manage any guild in Titan, this will give you the normal dashboard.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.guilds') }}">Manage</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Titan Tokens</h4>
+      <p class="flow-text">View transactions and modify Titan Tokens per user.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.manage_titan_tokens') }}">Manage</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>User Defined CSS</h4>
+      <p class="flow-text">Manage user defined css (custom css).</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.list_custom_css_get') }}">Manage</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Voting Statistics</h4>
+      <p class="flow-text">Discord Bot List Voting Statics.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.voting_get') }}">Manage</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Disabled Servers</h4>
+      <p class="flow-text">Block or reinstate servers from using Titan Embeds.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.get_disabled_guilds') }}">Manage</a>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Application Settings</h4>
+      <p class="flow-text">Configure Titan Embeds.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('admin.application_settings_get') }}">Manage</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

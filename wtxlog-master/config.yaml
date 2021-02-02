@@ -1,0 +1,13 @@
+---
+name: appname
+version: 1 
+handlers:
+- url: /favicon.ico
+  static_path: wtxlog/static/favicon.ico
+- url: /static/
+  static_path: wtxlog/static
+- url: /admin/static/
+  static_path: wtxlog/static/admin
+- url: /_theme/imtx/
+  static_path: wtxlog/themes/imtx/static
+...

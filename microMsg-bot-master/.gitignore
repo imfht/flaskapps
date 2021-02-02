@@ -1,0 +1,9 @@
+*.swp
+.ropeproject/
+__pycache__/
+*.pkl
+.idea/
+.mypy_cache/
+searched
+settings
+bot_status

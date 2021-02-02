@@ -1,0 +1,60 @@
+{% extends 'events/display/conference/base.html' %}
+
+{% from 'events/contributions/display/_contribution_list.html' import render_contribution_list %}
+{% from 'events/management/_lists.html' import render_displayed_entries_fragment %}
+
+{% block title %}
+    {{- page_title -}}
+{% endblock %}
+
+{% block content -%}
+    {% if total_entries %}
+        <div class="toolbar f-j-end space-after">
+            <div id="counter" class="group">
+                {{- render_displayed_entries_fragment(contribs|length, total_entries) -}}
+            </div>
+            <div class="group">
+                <span class="i-button label icon-search"></span>
+                <input type="text" id="search-input" placeholder="{% trans %}Enter #id or search string{% endtrans %}">
+            </div>
+            {% if not g.static_site %}
+                <div class="group">
+                    <button class="i-button icon-filter js-dialog-action"
+                            data-href="{{ url_for('.customize_contribution_list', event) }}"
+                            data-title="{% trans %}Contribution list configuration{% endtrans %}"
+                            data-dialog-classes="list-filter-dialog"
+                            data-update='{"html": "#display-contribution-list", "counter": "#counter"}'
+                            data-ajax-dialog
+                            title="{%- trans %}Filters{% endtrans -%}"></button>
+                </div>
+            {% endif %}
+            <div class="group">
+                {% if indico_config.LATEX_ENABLED %}
+                    <a href="{{ url_for('contributions.contribution_list_pdf', event) }}"
+                       title="{% trans %}Export to PDF{% endtrans %}"
+                       class="i-button icon-file-pdf"></a>
+                {% endif %}
+                {% if not g.static_site %}
+                   <button class="i-button icon-link js-static-url"
+                           data-href="{{ url_for('.contribution_list_static_url', event) }}"
+                           title="{% trans %}Generate a URL for the selected filters.{% endtrans %}"></button>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    <div id="display-contribution-list" class="contribution-list">
+        {{ render_contribution_list(event, timezone, contribs, total_entries) }}
+    </div>
+    {% if event.type != 'conference' -%}
+        <p>
+            <a href="{{ event.url }}" class="i-button">
+                {%- trans %}Back to the event{% endtrans -%}
+            </a>
+        </p>
+    {%- endif %}
+    {% if total_entries %}
+        <script>
+            setupEventDisplayContributionList();
+        </script>
+    {% endif %}
+{%- endblock %}

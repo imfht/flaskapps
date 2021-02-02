@@ -1,0 +1,7 @@
+formatter:
+- clippy: {}
+- histo: {}
+tools:
+  shellcheck:
+    ignores: []
+    run: true

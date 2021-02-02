@@ -1,0 +1,6 @@
+include README
+include requirements.txt
+include share/burpui/etc/buimonitor.sample.cfg
+global-exclude *.pyc
+global-exclude __pycache__
+graft burpui_monitor

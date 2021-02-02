@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BraintreeFlaskExample</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/overrides.css') }}">
+</head>
+<body>
+  <header class="main">
+    <div class="container wide">
+      <div class="content slim">
+        <div class="set">
+          <div class="fill">
+            <a class="pseudoshop" href="/">PSEUDO<strong>SHOP</strong></a>
+          </div>
+
+          <div class="fit">
+            <a class="braintree" href="https://developers.braintreepayments.com/guides/drop-in" target="_blank">Braintree</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice-wrapper">
+      {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+          <div class="show notice error notice-error">
+            <span class="notice-message">{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endwith %}
+    </div>
+  </header>
+
+
+  {% block content %}{% endblock %}
+  <script src="{{ url_for('static', filename='javascript/demo.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: titanembeds\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-02-18 22:46+0000\n"
+"PO-Revision-Date: 2018-06-25 18:21\n"
+"Last-Translator: EndenDragon <jeremyzhang5000@gmail.com>\n"
+"Language-Team: Chinese Simplified\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: crowdin.com\n"
+"X-Crowdin-Project: titanembeds\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /master/webapp/titanembeds/translations/messages.pot\n"
+"Language: zh_CN\n"
+
+#: titanembeds/blueprints/embed/embed.py:15
+msgid "Let's get to know each other! My name is Titan, what's yours?"
+msgstr "让我们相互认识吧！ \n"
+"我的名字是 Titan，你叫什么名字?"
+
+#: titanembeds/blueprints/embed/embed.py:16
+msgid "Hello and welcome!"
+msgstr "您好, 欢迎您!"
+
+#: titanembeds/blueprints/embed/embed.py:17
+msgid "What brings you here today?"
+msgstr "你今天要做什么？"
+
+#: titanembeds/blueprints/embed/embed.py:18
+msgid "....what do you expect this text to say?"
+msgstr "....你期望这个文本说什么？"
+
+#: titanembeds/blueprints/embed/embed.py:19
+msgid "Aha! ..made you look!"
+msgstr "啊哈！ ..让你看！"
+
+#: titanembeds/blueprints/embed/embed.py:20
+msgid "Initiating launch sequence..."
+msgstr "启动发射序列..."
+
+#: titanembeds/blueprints/embed/embed.py:21
+msgid "Captain, what's your option?"
+msgstr "老板，你要选什么？"
+
+#: titanembeds/blueprints/embed/embed.py:22
+msgid "Alright, here's the usual~"
+msgstr "好的，这是通常的情况〜"
+
+#: titanembeds/templates/embed.html.j2:78
+msgid "Actions"
+msgstr "行动"
+
+#: titanembeds/templates/embed.html.j2:79
+msgid "Manage Guild Embed"
+msgstr "管理公会嵌入"
+
+#: titanembeds/templates/embed.html.j2:80
+msgid "Open Server on Discordapp"
+msgstr "在Discordapp上打开服务器"
+
+#: titanembeds/templates/embed.html.j2:84
+msgid "Channel Topic"
+msgstr "频道主题"
+
+#: titanembeds/templates/embed.html.j2:89
+msgid "Channels"
+msgstr "频道"
+
+#: titanembeds/templates/embed.html.j2:94
+msgid "Online Server Members"
+msgstr "在线服务器成员"
+
+#: titanembeds/templates/embed.html.j2:99
+msgid "Authenticated Embed Users"
+msgstr "已验证的嵌入用户"
+
+#: titanembeds/templates/embed.html.j2:102
+msgid "Guest Embed Users"
+msgstr "来宾嵌入用户"
+
+#: titanembeds/templates/embed.html.j2:122
+msgid "Please choose one of the following methods to authenticate!"
+msgstr "请选择以下方法之一进行验证！"
+
+#: titanembeds/templates/embed.html.j2:128
+msgid "Discord Login"
+msgstr "Discord 登录"
+
+#: titanembeds/templates/embed.html.j2:129
+msgid "You will be invited into this server."
+msgstr "您将被邀请进此服务器。"
+
+#: titanembeds/templates/embed.html.j2:133
+msgid "Of course, you also have the option to login by picking a temporary username for your current browsing session."
+msgstr "当然了，您也可以进行登录由选择一个临时用户名在当前浏览器会话期间使用。"
+
+#: titanembeds/templates/embed.html.j2:135
+msgid "Username (Hit ENTER/RETURN key to confirm)"
+msgstr "用户名（按ENTER / RETURN键确认）"
+
+#: titanembeds/templates/embed.html.j2:147
+msgid "Change Username"
+msgstr "更改用户名"
+
+#: titanembeds/templates/embed.html.j2:150
+msgid "Guests Accounts Only"
+msgstr "仅来宾帐户"
+
+#: titanembeds/templates/embed.html.j2:152
+msgid "Change your username (Hit ENTER/RETURN key to confirm)"
+msgstr "更改您的用户名（按ENTER / RETURN键确认）"
+
+#: titanembeds/templates/embed.html.j2:156
+msgid "Theme"
+msgstr "主题"
+
+#: titanembeds/templates/embed.html.j2:167
+msgid "Overwrite Current Embed Theme w/ User CSS"
+msgstr "用用户CSS来覆盖当前嵌入主题"
+
+#: titanembeds/templates/embed.html.j2:171
+msgid "Notification Sound"
+msgstr "通知声音"
+
+#: titanembeds/templates/embed.html.j2:176
+msgid "New Messages"
+msgstr "新消息"
+
+#: titanembeds/templates/embed.html.j2:180
+msgid "Mentions"
+msgstr "提及"
+
+#: titanembeds/templates/embed.html.j2:184
+msgid "Nothing"
+msgstr "无声"
+
+#: titanembeds/templates/embed.html.j2:188
+msgid "Display Rich Embeds"
+msgstr "显示 Rich Embeds"
+
+#: titanembeds/templates/embed.html.j2:193
+msgid "Enable"
+msgstr "启用"
+
+#: titanembeds/templates/embed.html.j2:197
+msgid "Disable"
+msgstr "停用"
+
+#: titanembeds/templates/embed.html.j2:209
+msgid "Just one more step..."
+msgstr "之剩一步..."
+
+#: titanembeds/templates/embed.html.j2:217
+msgid "NSFW Channel"
+msgstr "NSFW 通道"
+
+#: titanembeds/templates/embed.html.j2:218
+msgid "You must be at least eighteen years old to view this channel. Are you over eighteen and willing to see adult content?"
+msgstr "你必须满十八岁以上才能观看此频道。您是否满十八岁并且愿意看到成人内容？"
+
+#: titanembeds/templates/embed.html.j2:220
+msgid "Nope"
+msgstr "算了"
+
+#: titanembeds/templates/embed.html.j2:221
+msgid "Continue"
+msgstr "继续"
+
+#: titanembeds/templates/embed.html.j2:232
+msgid "Mention"
+msgstr "只有 @被提到"
+
+#: titanembeds/templates/embed.html.j2:237
+msgid "TitanEmbeds Administrator"
+msgstr "TitanEmbeds 管理员"
+
+#: titanembeds/templates/embed.html.j2:238
+msgid "TitanEmbeds Partner"
+msgstr "TitanEmbeds 合作伙伴"
+
+#: titanembeds/templates/embed.html.j2:239
+msgid "TitanEmbeds Supporter"
+msgstr "TitanEmbeds 支持人"
+
+#: titanembeds/templates/embed.html.j2:240
+msgid "I have voted for Titan on Discord Bots today!"
+msgstr "我今天有在 Discord Bots 上面给 Titan 投票！"
+
+#: titanembeds/templates/embed.html.j2:242
+msgid "User is offline in Discord."
+msgstr "用户在Discord上已经离线了。"
+
+#: titanembeds/templates/embed.html.j2:243
+msgid "Playing"
+msgstr "正在玩"
+
+#: titanembeds/templates/embed.html.j2:244
+msgid "Roles"
+msgstr "身份"
+
+#: titanembeds/templates/embed.html.j2:253
+msgid "Server Emoji"
+msgstr "服务器表情"
+
+#: titanembeds/templates/embed.html.j2:270
+msgid "Please login to post a message."
+msgstr "请登录后发送消息。"
+
+#: titanembeds/templates/embed.html.j2:270
+msgid "Login"
+msgstr "登录"
+

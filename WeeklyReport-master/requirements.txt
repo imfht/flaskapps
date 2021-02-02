@@ -1,0 +1,13 @@
+flask
+flask_bootstrap
+flask_login
+flask_script
+flask_wtf
+Flask-Mail
+flask-admin
+gunicorn
+chartkick
+flask_sqlalchemy
+flask_migrate
+flask_babelex
+psycopg2

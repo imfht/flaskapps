@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% from "utils.html" import like_list, comments_list %}
+
+{% block content %}
+<div class="entry-info">
+    <a href="{{ url_for('album_detail_page', album_id=photo.album_id, page=1) }}">回到相册</a>
+    <span class="entry-stat">
+        <a class="js-prev-page" href="{{ url_for('photo_detail_page', photo_id=photo.prev) }}">上一张</a> /
+        {{ photo.pos + 1 }} /
+        <a class="js-next-page" href="{{ url_for('photo_detail_page', photo_id=photo.next) }}">下一张</a>
+    </span>
+</div>
+<div class="ui divider"></div>
+
+<div class="ui segment">
+    <div class="photo-container">
+        <a class="photo-link" href="{{ photo.src }}" target="_blank">
+            <img class="ui centered image" src="{{ photo.src }}">
+        </a>
+    </div>
+    <div class="ui divider"></div>
+    <p>
+        {{ photo.title|safe }}
+    </p>
+</div>
+
+<div class="ui divider"></div>
+<div class="entry-info">
+    <span class="entry-time">{{ photo.t.strftime("%Y-%m-%d") }}</span>
+    <span class="entry-stat">
+        {{ like_list(likes) }}
+        {% if photo.like > 0 %}等{% endif %}
+        {{ photo.like }} 赞 / {{ photo.share }} 转 / {{ photo.comment }} 评 / {{ photo.view }} 看
+    </span>
+</div>
+<div class="ui divider"></div>
+{{ comments_list(comments) }}
+{% endblock %}

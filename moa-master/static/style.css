@@ -1,0 +1,163 @@
+body {
+    font-family: Monaco, monospace;
+}
+
+input, select {
+    font-family: Monaco, monospace;
+
+}
+
+form {
+    display: inline;
+}
+
+.center {
+    margin: auto;
+}
+
+@media only screen and (min-width : 320px) {
+    .center { width: 100%; border: none; padding: 5px; }
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .center { width: 100%; border: none; padding: 5px; }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .center { width: 100%; border: none; padding: 5px; }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .center { width: 60%; padding: 10px;border: 0.6rem double; }
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .center { width: 60%; padding: 10px;border: 0.6rem double; }
+
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.message {
+    font-weight: bold;
+    color: red;
+}
+
+.message:before {
+    content: "»";
+    margin-right: 6px;
+}
+
+.red {
+    font-weight: bold;
+    color: red;
+}
+
+input,
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    font-size: 1.0em;
+    color: inherit;
+    border: 0;
+    margin-left: 0px;
+    white-space: nowrap;
+    background: none;
+    width: auto;
+}
+
+input[type="radio"]:before,
+input[type="checkbox"]:before {
+    content: "[\00a0";
+}
+
+input[type="radio"]:checked:before,
+input[type="checkbox"]:checked:before {
+    content: "[";
+}
+
+input[type="radio"]:after,
+input[type="checkbox"]:after {
+    content: "]\00a0";
+}
+
+input[type="radio"]:checked:after,
+input[type="checkbox"]:checked:after {
+    content: "✔]\00a0"
+}
+
+input[type="text"],input[type="email"] {
+    color: #444444;
+    background: #CCCCCC;
+
+}
+
+input[type="submit"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+
+    border: 0;
+    font-size: inherit;
+    position: relative;
+
+    /*margin: 0.3rem 1rem;*/
+    padding: 0.3rem 1rem;
+
+    background: #999999;
+    color: white;
+    top: 0.1rem;
+    left: 0.1rem;
+    box-shadow: 0.15rem 0.15rem 0 #000;
+
+}
+
+input[type="submit"]:hover {
+
+}
+
+input[type="submit"]:active {
+    top: 0.15rem;
+    left: 0.15rem;
+    box-shadow: inset 0.10rem 0.10rem 0 #000;
+}
+
+input[type="submit"] {
+}
+
+input[type="submit"]:first-letter {
+    color: #dd7777;
+    text-decoration: underline;
+}
+
+ul {
+    padding-left: 0px;
+    list-style: none;
+}
+
+ul ul {
+    padding-left: 30px;
+    list-style: none;
+}
+
+.badge {
+    text-align: center;
+    margin: auto;
+    padding-top: 20px;
+}

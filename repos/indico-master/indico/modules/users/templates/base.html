@@ -1,0 +1,28 @@
+{% extends 'layout/management_page.html' %}
+{% from 'message_box.html' import message_box %}
+
+{% set show_nav = request.endpoint != 'users.user_dashboard' %}
+
+{% block banner_title %}
+    {% if user == session.user %}
+        {% trans %}My Profile{% endtrans %}
+    {% else %}
+        {% trans name=user.full_name %}Profile of {{ name }}{% endtrans %}
+    {% endif %}
+{% endblock %}
+
+{% block side_menu -%}
+    {% if show_nav %}
+        {{ render_sidemenu('user-profile-sidemenu', active_item=active_menu_item, user=user) }}
+    {% endif %}
+{%- endblock %}
+
+{% block content %}
+    {% if user.is_system %}
+        {%- call message_box('warning', fixed_width=true) -%}
+            {% trans %}This is the system user. Most user features are not available.{% endtrans %}
+        {%- endcall %}
+    {% endif %}
+
+    {% block user_content %}{% endblock %}
+{% endblock %}

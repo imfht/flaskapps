@@ -1,0 +1,683 @@
+<html>
+    <head>
+        <title>Grid Notify v{{ version }}</title>
+        <link rel="stylesheet" href="css/base-min.css">
+        <link rel="stylesheet" href="css/pure-min.css">
+        <link rel="stylesheet" href="css/grids-responsive-min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="js/socket.io-1.4.5.js"></script>
+        <script type="text/javascript" src="js/localstoragedb.min.js"></script>
+        <script type="text/javascript">
+            var lib = new localStorageDB('msgs', localStorage);
+            if (lib.isNew()) {
+                lib.createTable('messages', ['uuid', 'timestamp', 'user', 'room', 'msg']);
+                lib.commit();
+            }
+
+            function b64e(str) {
+                return window.btoa(unescape(encodeURIComponent(str)));
+            }
+
+            function b64d(str) {
+                return decodeURIComponent(escape(window.atob(str)));
+            }
+
+            add_to_chat = function(msg) {
+                $('#chat').val($('#chat').val() + msg);
+                $('#chat').scrollTop($('#chat')[0].scrollHeight);
+            };
+
+            show_history_for = function(room_id) {
+                msg_history = lib.queryAll('messages', {
+                    query: {room: room_id},
+                    sort: [['timestamp', 'asc']]
+                });
+
+                for (i = 0; i < msg_history.length; i++) {
+                    add_to_chat(msg_history[i].timestamp + ' <' + msg_history[i].user + '> ' + msg_history[i].msg + '\n');
+                }
+            };
+
+            on_room_click = function() {
+                $('a.room').click(function() {
+                    room_id = $(this).attr('id').split('room-id-', 2)[1]
+                    $('#chat').html('');
+                    $('#target').val($(this).text());
+                    $('#room-id').val(room_id);
+                    $('#private').attr('checked', false);
+                    socket.emit('join', {
+                        verb: 'join',
+                        target: {
+                            id: room_id
+                        }
+                    });
+                });
+            };
+            
+            on_channel_click = function() {
+                $('a.channel').click(function() {
+                    channel_id = $(this).attr('id').split('channel-id-', 2)[1];
+                    $('#channel-id').val(channel_id);
+
+                    socket.emit('list_rooms', {
+                        object: {
+                            url: channel_id
+                        },
+                        verb: 'list'
+                    });
+                });
+            };
+
+            on_user_click = function() {
+                $('a.user').click(function() {
+                    room_id = $(this).attr('id').split('user-', 2)[1];
+                    $('#target').val($(this).text());
+                    $('#private').attr('checked', true);
+                    $('#room-id').val(room_id)
+                    $('#current-room').html($('#target').val());
+                    $('#chat').html('');
+                    add_to_chat('<< chatting with ' + $(this).text() + ' >>\n');
+                    show_history_for(room_id);
+                });
+            };
+
+            var socket;
+            $(document).ready(function() {
+                //socket = io.connect('ws://' + document.domain + ':' + location.port + '/ws', {path: '/ws', transports:['websocket']});
+                socket = io.connect('ws://' + document.domain + ':' + location.port + '/ws', {transports:['websocket']});
+
+                socket.on('connect', function() {
+                    socket.emit('login', {
+                        verb: 'login',
+                        actor: {
+                            id: '{{ user_id }}',
+                            displayName: b64e('{{ user_name }}'),
+                            attachments: [
+                                {
+                                    objectType: 'token',
+                                    content: '{{ token }}'
+                                }
+                            ]
+                        }
+                    }, function(data) {
+                        console.log(data);
+                    });
+                });
+
+                socket.on('gn_room_removed', function(data) {
+                    console.log('a room was removed');
+                    console.log(data);
+                });
+
+                socket.on('gn_login', function(data) {
+                    console.log(data);
+                    socket.emit('list_channels', {
+                        verb: 'list'
+                    });
+                });
+
+                socket.on('gn_banned', function(data) {
+                    console.log('you were banned!')
+                    console.log(data);
+                });
+
+                socket.on('gn_broadcast', function(data) {
+                    console.log('received broadcast event')
+                    console.log(data);
+                });
+
+                socket.on('gn_list_channels', function(response) {
+                    console.log('listing channels');
+                    console.log(response);
+
+                    channels = response.data.object.attachments
+
+                    $('#channels').html('');
+                    for (var i = 0; i < channels.length; i++) {
+                        channel_name = b64d(channels[i].displayName)
+                        channel_id = channels[i].id
+                        $('#channels').html('<a href="#" id="channel-id-' + channel_id + '" class="channel">' + channel_name + '</a>' + ' ' + $('#channels').html());
+                    }
+                    on_channel_click();
+                });
+
+                socket.on('gn_status', function(response) {
+                    add_to_chat('<< ' + response.data + ' >>\n');
+                });
+
+                socket.on('gn_user_info_updated', function(response) {
+                    console.log('gn_user_info_updated');
+                    console.log(response);
+                });
+
+                socket.on('gn_update_user_info', function(response) {
+                    console.log('gn_update_user_info');
+                    console.log(response);
+                });
+
+                socket.on('gn_join', function(response) {
+                    console.log(response);
+                    if (response.status_code != 200) {
+                        add_to_chat('<< not allowed to join room ' + $('#target').val() + ' >>\n');
+                        return;
+                    }
+
+                    $('#current-room').html($('#target').val());
+
+                    data = response.data;
+                    attachments = data.object.attachments;
+                    users = undefined;
+                    msgs = undefined;
+                    acls = undefined;
+                    owners = undefined;
+
+                    for (i = 0; i < attachments.length; i++) {
+                        attachment = attachments[i];
+                        if (attachment.objectType === 'user') {
+                            users = attachment.attachments;
+                        }
+                        else if (attachment.objectType === 'history') {
+                            msgs = attachment.attachments;
+                        }
+                        else if (attachment.objectType === 'acl') {
+                            acls = attachment.attachments;
+                        }
+                        else if (attachment.objectType === 'owner') {
+                            owners = attachment.attachments;
+                        }
+                    }
+
+                    $('#current-owners').html('');
+                    if (owners !== undefined && owners.length > 0) {
+                        for (i = 0; i < owners.length; i++) {
+                            $('#current-owners').html(b64d(owners[i].displayName) + ' ' + $('#current-owners').html());
+                        }
+                    }
+
+                    $('#chat').val('');
+                    if (msgs !== undefined && msgs.length > 0) {
+                        for (i = 0; i < msgs.length; i++) {
+                            msg = msgs[i];
+                            lib.insertOrUpdate('messages', {uuid: msg.id}, {
+                                uuid: msg.id,
+                                user: b64d(msg.author.displayName),
+                                room: data.target.id,
+                                msg: b64d(msg.content),
+                                timestamp: msg.published
+                            });
+                        }
+
+                        lib.commit();
+                        show_history_for(data.target.id);
+                    }
+
+                    $('#users_in_room').html('');
+                    if (users !== undefined && users.length > 0) {
+                        for (i = 0; i < users.length; i++) {
+                            user_id = users[i].id;
+                            user_name = b64d(users[i].displayName)
+
+                            if ($('#user-' + user_id).length > 0) {
+                                continue;
+                            }
+
+                            $('#users_in_room').html('<a href="#" id="user-' + user_id + '" class="user">' + user_name + '</a>' + ' ' + $('#users_in_room').html());
+                        }
+                        on_user_click();
+                    }
+
+                    $('#acl-in-room').html('');
+                    if (acls !== undefined && acls.length > 0) {
+                        for (i = 0; i < acls.length; i++) {
+                            acl = acls[i];
+                            $('#acl-in-room').html(acl.objectType + '=' + acl.content + ' ' + $('#acl-in-room').html());
+                        }
+                    }
+                });
+
+                socket.on('gn_list_rooms', function(response) {
+                    console.log(response);
+                    if (response.status_code != 200) {
+                        return;
+                    }
+
+                    rooms = response.data.object.attachments
+
+                    $('#rooms').html('');
+                    for (i = 0; i < rooms.length; i++) {
+                        room_name = b64d(rooms[i].displayName)
+                        nr_users = rooms[i].summary
+                        room_id = rooms[i].id
+                        $('#rooms').html('<a href="#" id="room-id-' + room_id + '" class="room">' + room_name + ' (' + nr_users + ')</a>' + ' ' + $('#rooms').html());
+                    }
+                    on_room_click();
+                });
+
+                socket.on('gn_user_connected', function(data) {
+                    console.log(data);
+                    if ($('a#online-user-' + data.actor.id).length > 0) {
+                        return;
+                    }
+
+                    $('#online').html($('#online').html() + '<a href="#" id="online-user-' + data.actor.id + '">' + b64d(data.actor.displayName) + '</a> ');
+                    $('a#online-user-' + data.actor.id).click(function() {
+                        $('#target').val($(this).text());
+                        $('#private').attr('checked', true);
+                        $('#room-id').val($(this).attr('id').split('-', 2)[1])
+                        $('#current-room').html($('#target').val());
+                        add_to_chat('<< chatting with ' + b64d(data.actor.displayName) + ' >>\n')
+                        show_history_for(data.actor.id);
+                    });
+                });
+
+                socket.on('gn_user_disconnected', function(data) {
+                    console.log(data);
+                    $('a#online-user-' + data.actor.id).remove();
+                    $('a#user-' + data.actor.id).remove();
+                    add_to_chat('<< ' + b64d(data.actor.displayName) + ' has disconnected >>\n');
+                });
+
+                socket.on('gn_room_created', function(data) {
+                    console.log(data);
+                    $('#rooms').html('<a href="#" id="room-id-' + data.target.id + '" class="room">' + b64d(data.target.displayName) + '</a>' + ' ' + $('#rooms').html());
+                    on_room_click();
+                });
+
+                socket.on('gn_user_left', function(data) {
+                    console.log(data);
+                    $('a#user-' + data.actor.id).remove();
+                    add_to_chat('<< ' + b64d(data.actor.displayName) + ' has left room ' + b64d(data.target.displayName) + ' >>\n');
+                });
+
+                socket.on('gn_user_kicked', function(data) {
+                    console.log(data);
+                    $('a#user-' + data.actor.id).remove();
+                    add_to_chat('<< ' + b64d(data.object.displayName) + ' has been kicked from room ' + b64d(data.target.displayName) + ' >>\n');
+                });
+
+                socket.on('gn_user_joined', function(data) {
+                    console.log(data);
+
+                    if ($('#user-' + data.actor.id).length > 0) {
+                        return;
+                    }
+
+                    add_to_chat('<< ' + b64d(data.actor.displayName) + ' has joined room ' + b64d(data.target.displayName) + ' >>\n');
+                    $('#users_in_room').html($('#users_in_room').html() + ' <a href="#" id="user-' + data.actor.id + '" class="user">' + b64d(data.actor.displayName) + '</a>');
+
+                    $('a#user-' + data.actor.id).click(function() {
+                        $('#target').val(data.actor.displayName);
+                        $('#private').attr('checked', true);
+                        $('#room-id').val($(this).attr('id').split('-', 2)[1])
+                        $('#current-room').html($('#target').val());
+                        add_to_chat('<< chatting with ' + b64d(data.actor.displayName) + ' >>\n')
+                        show_history_for(data.actor.id);
+                    });
+                });
+
+                handle_message = function(data) {
+                    console.log(data);
+                    if ($('#room-id').val() == data.target.id || $('#room-id').val() == data.actor.id) {
+                        add_to_chat(data.published + ' <' + b64d(data.actor.displayName) + '> ' + b64d(data.object.content) + '\n');
+                    }
+                    else if (data.target.objectType == 'private') {
+                        add_to_chat(data.published + ' [private msg] <' + b64d(data.actor.displayName) + '> ' + b64d(data.object.content) + '\n');
+                    }
+                    room_id = data.target.id
+                    if ('{{ user_id }}' === data.target.id) {
+                        room_id = data.actor.id;
+                    }
+
+                    lib.insertOrUpdate('messages', {uuid: data.id}, {
+                        uuid: data.id,
+                        user: b64d(data.actor.displayName),
+                        room: room_id,
+                        msg: b64d(data.object.content),
+                        timestamp: data.published
+                    });
+                    lib.commit();
+                };
+
+                socket.on('gn_request_admin', function(response) {
+                    console.log(response);
+                });
+
+                socket.on('gn_message', function(response) {
+                    console.log(response);
+                    var data = response.data;
+
+                    socket.emit('received', {
+                        verb: 'receive',
+                        target: {
+                            id: room_id
+                        },
+                        object: {
+                            attachments: [{
+                                id: data.id
+                            }]
+                        }
+                    }, function(status_code, error_msg) {
+                        console.log('callback for received api: ' + status_code)
+                    });
+                    if (response.status_code === 200) {
+                        handle_message(data);
+                    }
+                });
+
+                socket.on('message', function(data) {
+                    console.log(data);
+                    if (data.actor.id == '{{ user_id }}') {
+                        return;
+                    }
+                    handle_message(data);
+                });
+
+                socket.on('gn_create', function(response) {
+                    console.log(response);
+                    if (response.status_code == 200) {
+                        $('#new-room-name').val('');
+                    }
+                });
+
+                socket.on('gn_set_acl', function(response) {
+                    console.log(response);
+                });
+
+                socket.on('gn_room_removed', function(response) {
+                    console.log('gn_room_removed');
+                    console.log(response);
+                });
+
+                socket.on('gn_remove_room', function(response) {
+                    console.log('gn_remove_room');
+                    console.log(response);
+                });
+
+                $('#text').keypress(function(e) {
+                    var code = e.keyCode || e.which;
+                    if (code == 13) {
+                        text = $('#text').val();
+                        room_name = $('#target').val();
+                        room_id = $('#room-id').val();
+                        channel_id = $('#channel-id').val();
+                        $('#text').val('');
+
+                        target_type = 'room';
+                        if ($('#private').attr('checked')) {
+                            target_type = 'private';
+                        }
+
+                        socket.emit('message', {
+                            verb: 'send',
+                            target: {
+                                id: room_id,
+                                objectType: target_type
+                            },
+                            object: {
+                                content: b64e(text)
+                            }
+                        });
+                    }
+                });
+
+                $('button#set-streaming-on').click(function() {
+                    socket.emit('update_user_info', {
+                        'verb': 'update',
+                        'object': {
+                            'objectType': 'userInfo',
+                            'attachments': [
+                                {
+                                    'objectType': 'is_streaming',
+                                    'content': b64e('1')
+                                }
+                            ]
+                        }
+                    });
+                });
+
+                $('button#set-streaming-off').click(function() {
+                    socket.emit('update_user_info', {
+                        'verb': 'update',
+                        'object': {
+                            'objectType': 'userInfo',
+                            'attachments': [
+                                {
+                                    'objectType': 'is_streaming',
+                                    'content': b64e('0')
+                                }
+                            ]
+                        }
+                    });
+                });
+
+                $('input#create-the-room').click(function() {
+                    socket.emit('create', {
+                        object: {
+                            url: $('#channel-id').val()
+                        },
+                        verb: 'create',
+                        target: {
+                            displayName: b64e($('#new-room-name').val())
+                        }
+                    });
+                });
+
+                $('button#set-invisible').click(function() {
+                    socket.emit('status', {
+                        verb: 'invisible'
+                    });
+                });
+
+                $('button#request-admin').click(function() {
+                    socket.emit('request_admin', {
+                        verb: 'admin',
+                        target: {
+                            id: $('#room-id').val()
+                        },
+                        object: {
+                            content: b64e('some message for admins')
+                        }
+                    });
+                });
+
+                $('button#set-visible').click(function() {
+                    socket.emit('status', {
+                        verb: 'online'
+                    });
+                });
+
+                $('button#remove-room').click(function() {
+                    socket.emit('remove_room', {
+                        verb: 'remove',
+                        target: {
+                            id: $('#room-id').val()
+                        }
+                    });
+                });
+
+                $('a#leave').click(function() {
+                    socket.emit('leave', {
+                        verb: 'leave',
+                        target: {
+                            id: $('#room-id').val()
+                        }
+                    });
+                    $('#current-room').html('');
+                    $('#users_in_room').html('');
+                    $('#chat').html('');
+                    $('#target').val('');
+                });
+
+                $('#update-acl').click(function()  {
+                    genders = $('#genders').val();
+                    memberships = $('#memberships').val();
+                    webcam = $('#webcam').is(':checked');
+                    image = $('#image').is(':checked');
+                    fake = $('#fake').is(':checked');
+                    age_min = $('#age-min').val();
+                    age_max = $('#age-max').val();
+                    country = $('#country').val();
+                    city = $('#city').val();
+
+                    webcam = webcam ? 'y': '';
+                    image = image ? 'y': '';
+                    fake = fake ? 'y': '';
+
+                    age = ':'
+                    if (age_min != '') {
+                        age = age_min + ':';
+                    }
+                    if (age_max != '') {
+                        age += age_max;
+                    }
+                    if (age == ':') {
+                        age = '';
+                    }
+
+                    socket.emit('set_acl', {
+                        verb: 'set',
+                        object: {
+                            objectType: 'acl',
+                            attachments: [
+                                {
+                                    objectType: 'gender',
+                                    content: genders
+                                },
+                                {
+                                    objectType: 'membership',
+                                    content: memberships
+                                },
+                                {
+                                    objectType: 'has_webcam',
+                                    content: webcam
+                                },
+                                {
+                                    objectType: 'image',
+                                    content: image
+                                },
+                                {
+                                    objectType: 'fake_checked',
+                                    content: fake
+                                },
+                                {
+                                    objectType: 'age',
+                                    content: age
+                                },
+                                {
+                                    objectType: 'country',
+                                    content: country
+                                },
+                                {
+                                    objectType: 'city',
+                                    content: city
+                                }
+                            ]
+                        },
+                        target: {
+                            id: $('#room-id').val(),
+                            objectType: 'room'
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Grid Notify <small>v{{ version }}</small></h1>
+        User name: <b>{{ user_name }}</b>, gender: <b>{{ gender }}</b>, membership: <b>{{ membership }}</b>, age: <b>{{ age }}</b>, faked checked: <b>{{ fake_checked }}</b>,
+        image: <b>{{ image }}</b>, has webcam: <b>{{ has_webcam }}</b>, country: <b>{{ country }}</b>, city: <b>{{ city }}</b><br />
+        Current room: <span id="current-room" style="font-weight: bold;">none</span>,
+        Owner(s) of room: <span id="current-owners" style="font-weight: bold;">none</span><br />
+
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="l-box">
+                    <textarea id="chat" class="pure-u-1" style="height: 400px;" readonly></textarea>
+                    <input id="text" class="pure-u-1" placeholder="Enter your message here and press enter to send" />
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <div class="l-box">
+                    <div>
+                        ACL for this room: <span id="acl-in-room" style="font-weight: bold;"></span>
+                    </div>
+                    <form class="pure-form pure-form-aligned">
+                        <fieldset>
+                            <div class="pure-control-group">
+                                <label for="genders">Genders</label>
+                                <input id="genders" type="text" placeholder="e.g. m,f,ts">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="memberships">Memberships</label>
+                                <input id="memberships" type="text" placeholder="e.g. 0,1,4">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="age-min">Min age</label>
+                                <input id="age-min" type="text" placeholder="e.g. 25">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="age-max">Max age</label>
+                                <input id="age-max" type="text" placeholder="e.g. 35">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="country">Country</label>
+                                <input id="country" type="text" placeholder="e.g. cn,de,dk">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="city">City</label>
+                                <input id="city" type="text" placeholder="e.g. Berlin,Shanghai">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="webcam" class="pure-checkbox">Needs webcam?</label>
+                                <input id="webcam" type="checkbox" value="">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="image" class="pure-checkbox">Needs image?</label>
+                                <input id="image" type="checkbox" value="">
+                            </div>
+
+                            <div class="pure-control-group">
+                                <label for="fake" class="pure-checkbox">Needs to be fake checked?</label>
+                                <input id="fake" type="checkbox" value="">
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+                    <button type="submit" id="update-acl" class="pure-button pure-input-1-2 pure-button-primary">Update ACL</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="remove-room">Remove room</button>
+        <button id="set-invisible">Set invisible</button>
+        <button id="set-visible">Set visible</button>
+        <button id="request-admin">Request admin</button>
+        <button id="set-streaming-on">Streaming on</button>
+        <button id="set-streaming-off">Streaming off</button>
+
+        <input id="target" type="hidden" />
+        <input id="room-id" type="hidden" />
+        <input id="channel-id" type="hidden" />
+        <input id="private" type="checkbox" hidden />
+        <br /><br />
+
+        Users in current room: <span id="users_in_room"></span><br /><br />
+        All channels: <span id="channels"></span><br />
+        All rooms in the channel: <span id="rooms"></span><br /><br />
+
+        <a id="leave" href="#">Leave this room</a><br /><br /><br />
+
+        Create new room: <input id="new-room-name" />
+        <input type="button" id="create-the-room" value="Create" />
+    </body>
+</html>

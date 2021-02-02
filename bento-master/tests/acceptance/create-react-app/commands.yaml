@@ -1,0 +1,127 @@
+target_repo: https://github.com/facebook/create-react-app
+target_hash: 053f9774d3f592c17741d2a86de66a7ca58f90c0
+steps:
+  - name: install-project
+    description: Project should be installed before bento run
+    command:
+      - yarn
+      - install
+  - name: noconfig
+    description: bento check fails when no configuration file is found
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: noconfig.err
+    expected_out: null
+    returncode: 3
+  - name: bento-init
+    description: bento init detects node-js and installs eslint
+    command:
+      - bento
+      - --agree
+      - init
+    expected_err: bento-init.err
+    expected_out: bento-init.out
+    returncode: 0
+  - name: update ignores
+    description: update ignore file with additional patterns
+    command:
+      - bash
+      - -c
+      - 'echo -e "\n:include .eslintignore\n\nlib/\n" >> .bentoignore'
+    expected_err: null
+    expected_out: null
+    returncode: 0
+  - name: bento-enable-eslint
+    description: enable eslint tool
+    command:
+      - bento
+      - --agree
+      - enable
+      - tool
+      - eslint
+    expected_err: enable-eslint.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-with-init
+    description: bento check after init has findings
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-with-init.err
+    expected_out: bento-check-with-init.out
+    returncode: 2
+  - name: disable-finding
+    description: try disabling a finding
+    command:
+      - bento
+      - --agree
+      - disable
+      - check
+      - eslint
+      - no-use-before-define
+    expected_err: disable-finding.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-with-disable
+    description: bento check should hide disabled finding
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-with-disable.err
+    expected_out: bento-check-with-disable.out
+    returncode: 2
+  - name: reenable-check
+    description: enable a finding that was previously disabled
+    command:
+      - bento
+      - --agree
+      - enable
+      - check
+      - eslint
+      - no-use-before-define
+    expected_err: reenable-check.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-reenable
+    description: bento check should show finding that was reenabled
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-reenable.err
+    expected_out: bento-check-with-init.out
+    returncode: 2
+  - name: bento-archive
+    description: should archive all existing findings
+    command:
+      - bento
+      - --agree
+      - archive
+      - --all
+      - .
+    expected_err: bento-archive.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-with-archive
+    description: should have no findings after archiving
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-with-archive.err
+    expected_out: bento-check-with-archive.out
+    returncode: 0

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+
+#coverage
+.coverage
+htmlcov/
+
+.ropeproject
+.idea

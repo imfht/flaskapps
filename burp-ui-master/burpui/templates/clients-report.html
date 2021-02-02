@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block body %}
+        {% include "notifications.html" %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {% include "small_topbar.html" %}
+          <ul class="breadcrumb" style="margin-bottom: 5px;">
+            {% if server -%}
+            <li><a href="{{ url_for('view.home') }}">{{ _('Home') }}</a></li>
+            <li class="active">{{ _('%(server)s clients', server=server) }}</li>
+            {% else -%}
+            <li class="active">{{ _('Home') }}</li>
+            {% endif -%}
+          </ul>
+          <br />
+          <h1 class="page-header">{{ _('Global server report') }}</h1>
+          <div class="row">
+            <form class="form-inline col-md-4">
+              <div class="form-group">
+                <label for="limit">{{ _('Number of clients to display') }}&nbsp;</label>
+                <select name="limit" id="limit" class="form-control" onchange="_clients()">
+                  {% for x,y in ((0, _('All')), (8, 8), (16, 16), (32, 32)) %}
+                  {% if (g.limit is not none and g.limit == x) or x == 8 %}
+                  <option value="{{ x }}" selected>{{ y }}</option>
+                  {% else %}
+                  <option value="{{ x }}">{{ y }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+            </form>
+            <form class="form-inline col-md-4 col-md-offset-4">
+              <div class="form-group">
+                <label for="aggreg">{{ _('Sort by') }}&nbsp;</label>
+                <select name="aggreg" id="aggreg" class="form-control" onchange="_clients()">
+                  {% for x,y in (('none', _('none')), ('number', _('number of backups')), ('files', _('number of files')), ('size', _('used space'))) %}
+                  {% if (g.aggreg is not none and g.aggreg == x) or x == 'number' %}
+                  <option value="{{ x }}" selected>{{ y }}</option>
+                  {% else %}
+                  <option value="{{ x }}">{{ y }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="row"><br/></div>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Clients repartition') }}</h4>
+                <div class="mycharts" id="chart_repartition" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Used space') }}</h4>
+                <div class="mycharts" id="chart_size" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Total files') }}</h4>
+                <div class="mycharts" id="chart_files" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Number of backups') }}</h4>
+                <div class="mycharts" id="chart_backups" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

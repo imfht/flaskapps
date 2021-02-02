@@ -1,0 +1,5 @@
+{% extends "json/base.json" %}
+
+{% block content %}
+        "tags": {{ hots_json }}
+{% endblock %}

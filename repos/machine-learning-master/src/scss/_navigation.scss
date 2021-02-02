@@ -1,0 +1,210 @@
+// _navigation.scss: generates css solution for general navigation, and menu
+//     links, for all users.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+#bootstrap-override {
+  .menu-container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .small-viewport {
+    .menu-container {
+      .main-navigation {
+        padding: 0;
+      }
+
+      .navbar-header {
+        padding: 0 0 0 $gutter-1 / 2;
+      }
+
+      .navbar-right {
+        .dropdown {
+          .caret {
+            left: 0;
+            top: -.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  .medium-viewport,
+  .large-viewport {
+    .anonymous {
+      .menu-container {
+        .main-navigation {
+          margin-top: .75rem;
+          padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
+        }
+      }
+    }
+  }
+
+  .main-navigation {
+    font-weight: 500;
+    padding: .75rem 0;
+    text-align: right;
+  }
+
+  .menu-home,
+  .menu-register {
+    .home {
+      float: left;
+      margin-left: .5rem;
+    }
+  }
+
+  .menu-login {
+    .home {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .navbar-nav {
+    margin-top: 0;
+
+    .dropdown-menu {
+      padding: 0;
+
+      .divider {
+        margin: 0;
+      }
+
+      li {
+        a {
+          background-color: transparent;
+          border-bottom: 1px solid $gray-8;
+          color: $header-font-color;
+          padding: 1rem 1.5rem;
+        }
+
+        a:hover {
+          background-color: $gray-8;
+        }
+      }
+
+      a:hover {
+        color: $header-font-color-hover;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+
+    .navbar-brand {
+      padding: 5px 0;
+    }
+
+    .navbar-text {
+      a {
+        color: $gray-7;
+      }
+    }
+
+    .menu-label {
+      color: $header-font-color;
+      position: relative;
+      top: -.80rem;
+    }
+
+    .menu-label:hover {
+      color: $header-font-color-hover;
+    }
+
+    #basic-nav-dropdown {
+      color: $gray-1;
+      text-decoration: none;
+    }
+
+    #basic-nav-dropdown:hover,
+    .navbar-brand:hover {
+      color: $white-1;
+    }
+
+    .dropdown-toggle {
+      padding: 0;
+    }
+
+    .nav-item {
+      a {
+        color: $header-font-color;
+        margin-bottom: 1.25rem;
+        padding: 0;
+        text-decoration: none;
+      }
+    }
+
+    .nav-item:last-of-type {
+      a {
+        color: $header-font-color;
+        margin-bottom: 0;
+        padding: 0;
+        text-decoration: none;
+      }
+    }
+
+    .dropdown {
+      .caret {
+        left: -.5rem;
+        position: relative;
+        top: -.85rem;
+      }
+    }
+
+    .svg-dropdown-user {
+      .dropdown-toggle {
+        padding-left: $gutter-1 / 2;
+      }
+    }
+  }
+
+  .navbar-collapse {
+    li {
+      text-align: left;
+    }
+  }
+
+  .lcolumn-container {
+    .lcolumn {
+      background-color: $gray-8;
+    }
+  }
+
+  .side-menu {
+    list-style: none;
+    padding-left: 0;
+
+    a,
+    a:link,
+    a:visited {
+      border-bottom: 1px solid $gray-7;
+      border-left: .6rem solid $gray-8;
+      color: $white-2;
+      display: inline-block;
+      padding: 1rem 0 1rem .75rem;
+      width: 100%;
+    }
+
+    .menu-item.active {
+      background-color: $green-7;
+      border-left: .6rem solid $green-4;
+      color: $white-1;
+    }
+
+    a:hover {
+      background-color: $gray-7;
+      border-left: .6rem solid $green-7;
+      color: $white-1;
+    }
+  }
+}

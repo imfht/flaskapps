@@ -1,0 +1,34 @@
+# Adjust environment
+dist: xenial
+sudo: required
+
+# Set up matrix for multiple languages check.
+matrix:
+  include:
+    # Check for python 3.8
+    - language: python
+      python: "3.8"
+      install:
+        # Use newest pip and install check tools.
+        - python -m pip install --upgrade pip
+        - pip install -r requirements.txt
+        - pip install -r dev_requirements.txt
+      script:
+        # Test for python static analysis.
+        - flake8 --ignore E121,E123,E126,E226,E24,E704,W503,W504,E741
+        # Unit testing
+        - pytest --cov=./lexos
+        - codecov
+        # Doc style, at the moment only test files under models and receivers.
+        - pydocstyle lexos/models/
+        - pydocstyle lexos/receivers/
+
+    # Check for node_js 10.x.
+    - language: node_js
+      node_js: "10"
+      # Install dependencies.
+      install:
+        - cd ./lexos/frontend
+        - npm install
+      script:
+        - ./node_modules/.bin/eslint ./js/script_*.js

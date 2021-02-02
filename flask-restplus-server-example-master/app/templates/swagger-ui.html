@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    {% include 'swagger-ui-css.html' %}
+    {% include 'swagger-ui-libs.html' %}
+    <script type="text/javascript">
+        // NOTE: `onOAuthComplete` implementation is extracted from the deprecated swagger-ui/lib/swagger-oauth.js
+        onOAuthComplete = function onOAuthComplete(token, OAuthSchemeKey) {
+
+          if (token === '') {
+            alert("Authorization failed for unknown reason, please, check your credentials!")
+            return
+          }
+
+          if(token.error) {
+            var checkbox = $('input[type=checkbox],.secured')
+            checkbox.each(function(pos) {
+                checkbox[pos].checked = false
+            })
+            alert(token.error)
+          }
+          else {
+            var access_token = token[window.swaggerUiAuth.tokenName]
+
+            if (!OAuthSchemeKey) {
+              OAuthSchemeKey = token.state;
+            }
+
+            if(access_token) {
+              // if all roles are satisfied
+              window.swaggerUi.api.clientAuthorizations.add(OAuthSchemeKey, new SwaggerClient.ApiKeyAuthorization('Authorization', 'Bearer ' + access_token, 'header'))
+              window.swaggerUi.load()
+            }
+          }
+        }
+
+        $(function () {
+            window.swaggerUi = new SwaggerUi({
+                url: "{{ specs_url }}",
+                validatorUrl: "{{ config.SWAGGER_VALIDATOR_URL }}" || null,
+                dom_id: "swagger-ui-container",
+                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch', 'options'],
+                onComplete: function(swaggerApi, swaggerUi){
+                    if(typeof initOAuth == "function") {
+                        {% if config.SWAGGER_UI_OAUTH_CLIENT_ID -%}
+                            initOAuth({
+                                clientId: "{{ config.SWAGGER_UI_OAUTH_CLIENT_ID }}",
+                                realm: "{{ config.SWAGGER_UI_OAUTH_REALM }}",
+                                appName: "{{ config.SWAGGER_UI_OAUTH_APP_NAME }}"
+                            });
+                        {%- endif %}
+                    }
+                    $('pre code').each(function(i, e) {
+                        hljs.highlightBlock(e)
+                    });
+                },
+                onFailure: function(data) {
+                    log("Unable to Load SwaggerUI");
+                },
+                jsonEditor: {{ config.SWAGGER_UI_JSONEDITOR | default(False) | string | lower }},
+                docExpansion: "{{ config.SWAGGER_UI_DOC_EXPANSION | default('none') }}"
+            });
+            window.swaggerUi.load();
+        });
+    </script>
+</head>
+
+<body class="swagger-section">
+    <div id="header">
+        <div class="swagger-ui-wrap">
+            <a id="logo"><span class="logo__title">Flask-RESTplus Example API</span></a>
+            <form id="api_selector">
+                <div id="auth_container"></div>
+            </form>
+        </div>
+    </div>
+    <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
+    <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+</body>
+</html>

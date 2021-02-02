@@ -1,0 +1,247 @@
+{% from 'message_box.html' import message_box %}
+{% from 'attachments/_management_info_column.html' import render_attachment_info %}
+{% from 'events/management/_lists.html' import render_num_reviews_tooltip %}
+
+{% macro _get_track_full_title(track, searchable=false) -%}
+    {% if track.code -%}
+        {{ track.code }} {% if not searchable %}- {% endif %}
+    {%- endif -%}
+    {{ track.title }}
+{%- endmacro %}
+
+{% macro _get_track_titles(tracks, searchable=false) -%}
+    {% for track in tracks -%}
+        {{ _get_track_full_title(track, searchable=searchable) }}
+        {%- if not loop.last -%}
+            {% if searchable %} {% else %}, {% endif %}
+        {%- endif %}
+    {%- endfor %}
+{%- endmacro %}
+
+{% macro _render_multi_track_column(tracks) -%}
+    <td class="i-table" data-text="{{ _get_track_titles(tracks) }}"
+        data-searchable="{{ _get_track_titles(tracks, searchable=true) | lower }}">
+        {%- for track in tracks | sort(attribute='title') -%}
+            <div class="truncate-text">{{ track.short_title }}</div>
+        {%- endfor %}
+        {%- if not tracks %}
+            {%- trans %}No track{% endtrans %}
+        {%- endif -%}
+    </td>
+{%- endmacro %}
+
+{% macro _render_abstract_state(abstract) %}
+    {% set abstract_css_class = abstract.reviewing_state.css_class if abstract.can_convene(session.user) else abstract.public_state.css_class %}
+    <div class="i-tag outline semantic-text state-badge {{ abstract_css_class }}"
+         data-qbubble="{{ render_num_reviews_tooltip(abstract, _render_proposed_contrib_types)|trim|forceescape }}">
+        {% if abstract.public_state.name == 'under_review' and abstract.can_judge(session.user) %}
+            {% trans count=abstract.reviews|length -%}
+                {{- count }} review
+            {%- pluralize -%}
+                {{- count }} reviews
+            {%- endtrans %}
+            (
+                {%- trans count=abstract.reviewed_for_tracks|length -%}
+                    {{- count }} track
+                {%- pluralize -%}
+                    {{- count }} tracks
+                {%- endtrans -%}
+            )
+        {% else %}
+            {{- abstract.public_state.title -}}
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro _render_proposed_contrib_types(review_list) %}
+    {%- for type, reviews in review_list|groupby('proposed_contribution_type') if type %}
+        {{- reviews|selectattr('proposed_contribution_type', 'equalto', type)|list|length }}
+        {{ type.name -}}
+        {{- ", " if not loop.last -}}
+    {% endfor -%}
+{% endmacro %}
+
+{% macro render_abstract_list(abstracts, dynamic_columns, static_columns, total_abstracts, context_track=none, reviewed_abstracts=none) %}
+    {% if abstracts %}
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            {% set num_filtered_abstracts = abstracts | length %}
+            {% if num_filtered_abstracts != total_abstracts %}
+                <div class="info-message-box">
+                    <div class="message-text">
+                        {%- trans -%}
+                            Filtering is enabled. Displaying {{ num_filtered_abstracts }} out of {{ total_abstracts }} abstracts.
+                        {%- endtrans -%}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="js-list-table-wrapper">
+                <table class="i-table tablesorter">
+                    <thead>
+                        <tr class="i-table">
+                            <th class="i-table thin-column" data-sorter="false"></th>
+                            <th class="i-table id-column">{% trans %}ID{% endtrans %}</th>
+                            <th class="i-table">{% trans %}Title{% endtrans %}</th>
+                            {% for item in static_columns %}
+                                <th class="i-table" data-sorter="text">{{ item.caption }}</th>
+                            {% endfor %}
+                            {% for item in dynamic_columns %}
+                                <th class="i-table">{{ item.title }}</th>
+                            {% endfor %}
+                            {% if reviewed_abstracts is not none %}
+                                <th class="i-table centered">
+                                    {%- trans %}Reviewed{% endtrans -%}
+                                </th>
+                            {% endif %}
+                            <th class="i-table thin-column" data-sorter="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for abstract in abstracts %}
+                            {% if (context_track is not none and abstract.state.name == 'accepted' and
+                                   abstract.accepted_track != context_track) %}
+                                {% set accepted_other = true %}
+                                {% set accepted_other_msg -%}
+                                    {%- trans other_track=abstract.accepted_track.full_title -%}
+                                        This abstract has already been accepted for the track "{{ other_track }}"
+                                    {%- endtrans -%}
+                                {%- endset %}
+                            {% else %}
+                                {% set accepted_other = false %}
+                                {% set accepted_other_msg = '' %}
+                            {% endif %}
+                            <tr class="i-table abstract-row {{ 'accepted-on-other-track disabled' if accepted_other }}"
+                                title="{{ accepted_other_msg | forceescape }}"
+                                data-friendly-id="{{ abstract.friendly_id }}"
+                                data-title="{{ abstract.title }}">
+                                <td class="i-table id-column">
+                                    <input type="checkbox" class="select-row" name="abstract_id"
+                                           value="{{ abstract.id }}">
+                                </td>
+                                <td class="i-table id-column">
+                                    {{- abstract.friendly_id -}}
+                                </td>
+                                <td class="i-table" data-searchable="{{ abstract.title | lower }}">
+                                    <a class="js-mathjax" href="{{ url_for('.display_abstract', abstract) }}">
+                                        {{- abstract.title -}}
+                                    </a>
+                                </td>
+                                {% for item in static_columns %}
+                                    {% if item.id == 'state' %}
+                                        {% set acceptances = abstract.reviews|selectattr('proposed_action.name', 'equalto', 'accept')|list|length %}
+                                        {% set sort_text = '{}-{}-{}'.format('1' if abstract.is_in_final_state else '0', abstract.state.name, acceptances) %}
+                                        <td class="i-table" data-searchable="{{ abstract.public_state.title|lower }}" data-text="{{ sort_text }}">
+                                            {{ _render_abstract_state(abstract) }}
+                                            {% if context_track is not none and abstract.state.name == 'accepted' and abstract.accepted_track != context_track  %}
+                                                <span class="icon-warning"></span>
+                                            {% endif %}
+                                        </td>
+                                    {% elif item.id == 'submitter' %}
+                                        <td class="i-table" data-searchable="{{ abstract.submitter.display_full_name }}">
+                                            {{- abstract.submitter.display_full_name -}}
+                                        </td>
+                                    {% elif item.id == 'authors' %}
+                                        <td class="i-table person-row-cell"
+                                            data-searchable="{{ abstract.primary_authors | join(', ', attribute='display_full_name') | lower }}">
+                                            {% for author in abstract.primary_authors | sort(attribute='display_order_key_lastname') -%}
+                                                <div class="person-row icon-user">{{ author.display_full_name }}</div>
+                                            {%- endfor %}
+                                        </td>
+                                    {% elif item.id == 'submitted_contrib_type' %}
+                                        {% set contrib_type = abstract.submitted_contrib_type.name if abstract.submitted_contrib_type else '' %}
+                                        <td class="i-table type-column" data-text="{{ contrib_type }}"
+                                            data-searchable="{{ contrib_type | lower }}">
+                                            {%- if contrib_type %}
+                                                {{- contrib_type }}
+                                            {%- else %}
+                                                {%- trans %}n/a{% endtrans %}
+                                            {%- endif -%}
+                                        </td>
+                                    {% elif item.id == 'accepted_contrib_type' %}
+                                        {% set contrib_type = abstract.accepted_contrib_type.name if abstract.accepted_contrib_type else '' %}
+                                        <td class="i-table type-column" data-text="{{ contrib_type }}"
+                                            data-searchable="{{ contrib_type | lower }}">
+                                            {%- if contrib_type %}
+                                                {{- contrib_type }}
+                                            {%- else %}
+                                                {%- trans %}n/a{% endtrans %}
+                                            {%- endif -%}
+                                        </td>
+                                    {% elif item.id == 'submitted_for_tracks' %}
+                                        {{ _render_multi_track_column(abstract.submitted_for_tracks) }}
+                                    {% elif item.id == 'reviewed_for_tracks' %}
+                                        {{ _render_multi_track_column(abstract.reviewed_for_tracks) }}
+                                    {% elif item.id == 'accepted_track' %}
+                                        {% set track = abstract.accepted_track %}
+                                        {% if track %}
+                                            {% set track_text = track.short_title %}
+                                            {% set track_full = _get_track_full_title(track) %}
+                                            {% set track_searchable = _get_track_full_title(track, searchable=true) | lower %}
+                                        {% else %}
+                                            {% set track_text = '' %}
+                                            {% set track_full = '' %}
+                                            {% set track_searchable = '' %}
+                                        {% endif %}
+                                        <td class="i-table" data-text="{{ track_full }}"
+                                            data-searchable="{{ track_searchable }}">
+                                            {%- if track %}
+                                                {{- track_text }}
+                                            {%- else %}
+                                                {%- trans %}No track{% endtrans %}
+                                            {%- endif -%}
+                                        </td>
+                                    {% elif item.id == 'score' %}
+                                        <td class="i-table">
+                                            {{- abstract.score | round(1) if abstract.score is not none else '-' }}
+                                        </td>
+                                    {% elif item.id == 'submitted_dt' %}
+                                        {% set dt = abstract.submitted_dt | format_datetime('short', timezone=abstract.event.timezone) %}
+                                        <td class="i-table" data-text="{{ dt }}">{{- dt -}}</td>
+                                    {% elif item.id == 'modified_dt' %}
+                                        {% set dt = abstract.modified_dt | format_datetime('short', timezone=abstract.event.timezone) if abstract.modified_dt else '' %}
+                                        <td class="i-table" data-text="{{ dt }}">{{ dt if dt else '-' }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                {% set data = abstract.data_by_field %}
+                                {% for item in dynamic_columns %}
+                                    {% set friendly_data = data[item.id].friendly_data if item.id in data else '' %}
+                                    <td class="i-table" data-text="{{ friendly_data }}"
+                                        data-searchable="{{ friendly_data | lower }}">
+                                        {{- friendly_data if friendly_data else '-' -}}
+                                    </td>
+                                {% endfor %}
+                                {% if reviewed_abstracts is not none %}
+                                    {% set is_reviewed = abstract in reviewed_abstracts %}
+                                    <td class="text-center" data-text="{{ 1 if is_reviewed else 0 }}">
+                                        {% if is_reviewed %}
+                                            <span class="icon-file-check"
+                                                  title="{% trans %}You have reviewed this abstract{% endtrans %}">
+                                            </span>
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                                <td class="i-table">
+                                    {% if abstract.state.name == 'accepted' and abstract.contribution %}
+                                        <a class="icon-arrow-right-sparse"
+                                           href="{{ url_for('contributions.display_contribution', abstract.contribution) }}"
+                                           title="{% trans %}Go to contribution{% endtrans %}"></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    {%- else %}
+        {%- call message_box('info') %}
+            {%- if total_abstracts %}
+                {%- trans -%}
+                    The filtering criteria do not match with any of the existing abstracts. Try to clear the filters.
+                {%- endtrans %}
+            {%- else %}
+                {%- trans %}There are no abstracts yet.{% endtrans %}
+            {%- endif %}
+        {%- endcall %}
+    {%- endif %}
+{% endmacro %}

@@ -1,0 +1,7 @@
+Flask==0.10.1
+HackerNews
+beautifulsoup4
+gunicorn
+requests
+python-binary-memcached
+newrelic

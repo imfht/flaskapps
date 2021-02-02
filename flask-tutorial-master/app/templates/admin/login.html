@@ -1,0 +1,13 @@
+{% extends 'admin/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>请登录</h1>
+    </div>
+    <div class="form-signin">
+        {{ wtf.quick_form(form) }}
+        <p>有帐号吗，没有？ <a href="{{ url_for('admin.register') }}">click me</a></p>
+    </div>
+{% endblock %}

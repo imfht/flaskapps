@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.8"
+install:
+  - python -m pip install --upgrade pip
+  - pip install --upgrade setuptools coveralls pipenv
+  - pipenv lock --dev --requirements > requirements.txt
+  - pip install -r requirements.txt
+script:
+  - coverage erase
+  - python setup.py test
+after_success:
+  - coverage combine
+  - coveralls
+
+notifications:
+  email:
+    - a.vara.1986@gmail.com

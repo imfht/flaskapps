@@ -1,0 +1,62 @@
+{#
+# This file is part of Zenodo.
+# Copyright (C) 2015 CERN.
+#
+# Zenodo is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# Zenodo is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Zenodo; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+-#}
+  <h4>{{_('Share')}}</h4>
+  <!-- AddThis Button BEGIN -->
+  <div class="addthis_toolbox addthis_default_style addthis_32x32_style"{% if record.doi and record.doi is local_doi %} addthis:url="{{record.doi|pid_url}}{% else %}{{ url_for('invenio_records_ui.recid', pid_value=pid.pid_value)}}{%- endif %}">
+  <a class="addthis_button_mendeley"></a>
+  <a class="addthis_button_citeulike"></a>
+  <a class="addthis_button_twitter"></a>
+  <a class="addthis_button_preferred_1"></a>
+  <a class="addthis_button_preferred_2"></a>
+  <a class="addthis_button_compact"></a>
+  </div>
+  {#- NOTE: zenodo_records/record_detail.html includes the JavaScript #}
+  <!-- AddThis Button END -->
+  <h4>{{_('Cite as')}}</h4>
+  <div id='invenio-csl'>
+    {% set citation_result = record|citation(pid, style='apa') %}
+    <invenio-csl
+      {%- if citation_result %}
+        ng-init="vm.citationResult = '{{citation_result}}'"
+      {%- else %}
+        ng-init="vm.error = '{{_('Your record could not be processed by the citation formatter')}}'"
+      {%- endif %}
+    >
+      <invenio-csl-citeproc
+       endpoint="{{ config.CSL_RECORDS_API_ENDPOINT ~ pid.pid_value }}"
+       template="{{ url_for('static', filename=config.CSL_JSTEMPLATE_CITEPROC) }}"></invenio-csl-citeproc>
+      <invenio-csl-error
+       template="{{ url_for('static', filename=config.CSL_JSTEMPLATE_ERROR) }}"></invenio-csl-error>
+      <invenio-csl-loading
+       template="{{ url_for('static', filename=config.CSL_JSTEMPLATE_LOADING) }}"></invenio-csl-loading>
+      <invenio-csl-typeahead
+       lazy="true"
+       placeholder="Start typing a citation style..."
+       remote="{{ config.CSL_STYLES_API_ENDPOINT }}"
+       template="{{ url_for('static', filename=config.CSL_JSTEMPLATE_TYPEAHEAD) }}"
+       item-template="{{ url_for('static', filename=config.CSL_JSTEMPLATE_LIST_ITEM) }}">
+      </invenio-csl-typeahead>
+    </invenio-csl>
+  </div>
+  {#- NOTE: Angular initialization in zenodo_records/record_detail.html #}

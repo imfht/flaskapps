@@ -1,0 +1,362 @@
+$post-footer-height: $spacer-large * 1.5;
+$post-background-color: white;
+$faded-background-color: darken($post-background-color, 10%);
+$icon-size: 20px;
+$post-padding: $spacer-large;
+$post-hidden-padding: $spacer-small * 0.5;
+
+.post {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35);
+
+  .author {
+    font-weight:700;
+    font-size: 20px;
+  }
+
+  .account {
+    font-size: 12px;
+    color: #8e8e8e;
+  }
+
+  .img-circle {
+    @extend .rounded-circle;
+    height:40px;
+  }
+
+  .date {
+    font-size:12px;
+    color: $text-color;
+    font-weight: 100;
+  }
+
+  .hidden-by {
+    width: 100%;
+    text-align: left;
+    background-color: $faded-background-color;
+    border-radius: 0;
+    padding: $spacer-small * 0.5;
+    padding-left: $spacer-small;
+    margin: 0;
+    min-height: 30px;  // same as what's used on a button
+    line-height: 30px;  // same as what's used on a button
+    color: $filter-color;
+  }
+
+  .post-header{
+    display: inline-block;
+    padding-bottom: 1em;
+    width: 100%;
+
+    .rt-comment {
+      padding-bottom: 15px;
+      .icon-twitter_retweet {
+        display: inline-block;
+        width: 24px;
+      }
+    }
+
+    .source-icon {
+      color: $light-gray;
+      margin-right: $post-hidden-padding - $post-padding;
+      margin-top: -15px;
+    }
+  }
+
+  .rule-icon {
+    font-size: 24px;
+    position: relative;
+    top: -2px;
+    vertical-align: middle;
+  }
+
+  .avatar {
+    display: inline-block;
+    padding: 0.4em;
+  }
+
+  .post-header-details {
+    display:inline-block;
+    margin-left: 15px;
+    vertical-align: middle;
+  }
+
+  .post-inner-content {
+    width: 100%;
+    text-align: center;
+  }
+
+  .post-inner-content video {
+    max-width: 100%;
+  }
+
+  .front {
+    position:relative;
+  }
+
+  .post-content {
+    padding: $post-padding;
+    padding-bottom: $post-padding + $post-footer-height;
+  }
+
+  .post-footer {
+    //position: absolute;
+    width: 100%;
+    background-color: $primary-color;
+    padding: 0.4em;
+    bottom:0px;
+    position: absolute;
+    height:$post-footer-height;
+    vertical-align: middle;
+
+    &.additive-post {
+      background-color: $additive-color;
+    }
+
+    @media print {
+      display: none;
+    }
+  }
+
+  @media print {
+    border: black 3px;
+    border-style: dotted;
+  }
+}
+
+.flip-container {
+  @include transform(perspective(900px));
+  //@include transform-style(preserve-3d);
+  perspective: 900px;
+  // for safari blur
+  transform: translateZ(0);
+}
+
+.flipper.flipped {
+  @include transform(rotateY(180deg));
+}
+
+.flipper {
+  @include transition(0.8s);
+  @include transform-style(preserve-3d);
+  position: relative;
+}
+
+.front, .back {
+  @include backface-visibility(hidden);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $post-background-color;
+}
+
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+.back {
+  @include transform(rotateY(180deg));
+
+  text-align:center;
+  width:100%;
+  height: 100%;
+}
+
+.back-content {
+  @extend .tk-futura-pt;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+  .icon {
+    font-size:2em;
+    margin-right: -4px;
+    vertical-align: middle;
+    color: $filter-color;
+  }
+
+  .explanation {
+    $size: $spacer-small * 0.5;
+    display: inline-block;
+    padding-left: $size;
+    padding-right: $size;
+    margin-bottom: $size;
+  }
+}
+
+.post-inner-content div> img {
+  max-width: 100%;
+}
+
+.source-icon, .source-icon:hover {
+  float: left;
+  font-size: $icon-size;
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-content {
+  line-height:$post-footer-height / 2;
+  padding: $post-footer-height / 8;
+  padding-left: $spacer-large;
+
+  .footer-text {
+    color: $inverse-text-color;
+    float: right;
+    text-decoration: none;
+    line-height: 18px;
+
+    .footer-underline {
+      border-bottom: 1px dotted $inverse-text-color;
+    }
+  }
+
+  .footer-text:hover {
+    color: darken($inverse-text-color, 20%);
+    text-decoration: none;
+  }
+}
+
+.post-container {
+  padding-bottom: $spacer-small * 0.5;
+  max-width: 900px;
+  margin: 0 auto;
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: $spacer-small;
+  }
+
+  @media print {
+    break-inside: avoid;
+
+    &:nth-child(n+50) {
+      display: none;
+    }
+  }
+}
+
+.post-container-hidden {
+  @media print {
+    display: none;
+  }
+
+  padding-bottom: 0;
+
+  .source-icon {
+    // centers the icon
+    margin-top: 1px;
+  }
+
+  .post {
+    height: $post-footer-height;
+    box-shadow: unset;
+    background-color: $faded-background-color;
+    color: $filter-color;
+    .icon-additive {
+      color: $additive-color;
+    }
+  }
+
+  &.clickable:hover {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35);
+  }
+
+  .front {
+    padding: $post-hidden-padding;
+  }
+
+  .reasons-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-top: 4px; // centers text
+  }
+}
+
+.post-content-text {
+  font-family: 'Nunito Sans', sans-serif;
+  overflow-wrap: break-word;
+  p {
+    margin-bottom: 0px;
+  }
+
+  // mastodon adds this class to hide parts URIs
+  .invisible {
+    display: none;
+  }
+}
+
+.twitter-tweet{
+  margin: 0 !important;
+}
+
+[id^="twitter-widget-"]::shadow div.Tweet-brand {
+  display: none;
+}
+
+.tweet-InformationCircle::shadow {
+  display: none !important;
+}
+
+.post-actions-list {
+  color: $inverse-text-color;
+
+  a {
+    color: $inverse-text-color;
+  }
+
+  .action {
+
+    padding: 0 $spacer-large * 2 0 0;
+
+    @include media-breakpoint-up(md) {
+      padding: 0 40px 0 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 0 80px 0 0;
+    }
+
+    .action-icon {
+
+      display: inline-block;
+      font-size: 12px;
+
+      &.icon-twitter_retweet {
+        min-width: 24px;
+      }
+    }
+
+    .action-count {
+      padding-left: 4px;
+    }
+  }
+}
+
+.link-card {
+  text-align: left;
+  margin-top: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+  img {
+    height: auto;
+    min-height: initial;
+    width: 100%;
+  }
+
+  .link-text {
+    padding: 1.2em;
+  }
+
+  .link-caption {
+    font-weight: 700;
+    font-size: 1.3em;
+  }
+
+  .link-name {
+    padding-top: 1em;
+    font-size: 0.7em;
+  }
+
+}

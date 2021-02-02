@@ -1,0 +1,43 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'partials/qtips';
+
+.qtip-default.qbubble {
+  @extend %qtip-light;
+  @extend %default-border-radius;
+  @include single-box-shadow();
+  @include border-all();
+  color: $light-black;
+
+  .qtip-content {
+    padding: 5px;
+    text-align: left;
+  }
+
+  .action-row {
+    @include transition(background);
+    cursor: pointer;
+    display: block;
+    margin: 0 -5px;
+    padding: 5px 10px;
+
+    &:hover {
+      color: $black;
+      background-color: $light-gray;
+    }
+  }
+
+  .titled-rule {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  &.no-max-width {
+    max-width: none;
+  }
+}

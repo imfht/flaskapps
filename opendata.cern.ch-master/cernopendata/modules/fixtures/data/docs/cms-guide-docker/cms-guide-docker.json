@@ -1,0 +1,29 @@
+[
+  {
+    "body": {
+      "content": "cms-guide-docker.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "CMS"
+      },
+      {
+        "primary": "VM"
+      }
+    ],
+    "experiment": "CMS",
+    "short_description": {
+      "content": "As an alternative to using a virtual machine, you can run CMS analysis code in a Docker container. If you have not already installed Docker..."
+    },
+    "slug": "cms-guide-docker",
+      "tags": [
+        "Getting Started"
+      ],
+    "title": "Running CMS analysis code using Docker",
+    "type": {
+      "primary": "Documentation",
+        "secondary": ["Guide"]
+    }
+  }
+]

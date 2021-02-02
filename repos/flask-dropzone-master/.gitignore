@@ -1,0 +1,95 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+venv/
+*.pyc
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+.eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+__pycache__
+
+# Installer logs
+pip-log.txt
+
+# dev
+.idea
+.coverage
+docs/_build/
+
+# uploads
+examples/basic/uploads/*
+examples/csrf/uploads/*
+examples/parallel-upload/uploads/*
+examples/complete-redirect/uploads/*
+examples/click-upload/uploads/*
+examples/in-form/uploads/*
+examples/large-file/uploads/*
+examples/custom-options/uploads/*
+
+!examples/basic/uploads/.gitkeep
+!examples/csrf/uploads/.gitkeep
+!examples/parallel-upload/uploads/.gitkeep
+!examples/complete-redirect/uploads/.gitkeep
+!examples/click-upload/uploads/.gitkeep
+!examples/in-form/uploads/.gitkeep
+!examples/large-file/uploads/.gitkeep
+!examples/custom-options/uploads/.gitkeep
+

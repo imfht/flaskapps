@@ -1,0 +1,19 @@
+# python related files
+*.pyc
+*.pyo
+*.egg
+*.egg-info
+__pycache__
+
+# sqlite db
+*.db
+
+# test, build, etc
+build
+docs/_build
+dist
+results
+venv
+
+# editor (vim + plugin)
+.ropeproject

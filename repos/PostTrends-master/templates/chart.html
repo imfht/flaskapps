@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PostTrends | Simple Instagram Analytics</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/posttrends.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/bd59d293d8.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.fittext.js') }}"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-93761436-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="row">
+    <div class="col-sm-3" id="sidebar">
+        <a href="/" id="home-page"><h4 id="logo"><i class="fa fa-pie-chart" aria-hidden="true"></i> PostTrends <sup>BETA</sup></h4></a>
+        <br>
+        <h1 id="username-text">{{all_data['user_info']['username']}}</h1>
+        <img src="{{all_data['user_info']['profile_picture']}}">
+        <h4 id="stats-fs">{{'{0:,}'.format(all_data['user_info']['followed_by'])}} followers</h4>
+        <h4 id="stats-fs">{{'{0:,}'.format(all_data['user_info']['following'])}} following</h4>
+        <br>
+        <hr>
+
+<form type="submit" onsubmit="showSnapshot(); return false;" id="form">
+
+<h4>Search</h4>
+<input type="text" class="form-control" align="center" id="input_value" placeholder="Username"><br>
+
+</form>
+
+    </div>
+
+<div class="col-sm-9" id="data">
+<h3 id="header">Snapshot</h3>
+<hr>
+    <div class="col-sm-6" id="chart_div" >
+        <h4> <i class="fa fa-heart" aria-hidden="true"></i> <span id="total_likes"></span> Likes</h4>
+        <br>        
+        <canvas id="likesChart" width="350" height="200"></canvas>
+    </div>
+    <div class="col-sm-6" id="chart_div" >
+        <h4> <i class="fa fa-comment" aria-hidden="true"></i> <span id="total_comments"></span> Comments</h4>
+        <br>        
+        <canvas id="commentsChart" width="350" height="200"></canvas>
+    </div>
+    <div class="col-sm-6" id="chart_div" >
+        <h4> <i class="fa fa-calendar" aria-hidden="true"></i> Days Posted</h4>
+        <br>        
+        <canvas id="daysRadar" width="350" height="200"></canvas>
+    </div>
+	<div class="col-sm-6" id="chart_div" >
+        <h4> <i class="fa fa-clock-o" aria-hidden="true"></i> Hours Posted</h4>
+        <br>        
+        <canvas id="hoursRadar" width="350" height="200"></canvas>
+    </div>
+	<div class="col-sm-12" id="chart_div" >
+        <h4> <i class="fa fa-adjust" aria-hidden="true"></i> 
+            {% if all_data['user_info']['following'] == 0%}
+                Infinite Follow Ratio
+            {% else %}
+                {{(all_data['user_info']['followed_by']/all_data['user_info']['following'])|round(1)}}
+             Follow Ratio
+             {% endif %}
+         </h4>
+        <br>        
+        <canvas id="followRatio" width="350" height="200"></canvas>
+    </div>
+
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    $("#username-text").fitText();     
+
+    // load JSON
+    var allData = JSON.parse('{{ all_data | tojson | safe}}');
+
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/posttrends_charts.js') }}"></script>
+
+
+
+

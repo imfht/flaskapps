@@ -1,0 +1,136 @@
+/* Logo */
+#lexos-dragon {
+   cursor: pointer;
+   height: 5rem;
+   margin-right: 2.3rem;
+}
+
+#lexos-dragon .circle { fill: var(--background-color); }
+#lexos-dragon .base { fill: var(--highlight-color-light); }
+#lexos-dragon .shadow { fill: var(--highlight-color); }
+#lexos-dragon .lines { fill: none; stroke: var(--text-color); }
+#lexos-dragon .iris { fill: var(--highlight-color); }
+
+#lexos-dragon #eye-2 { opacity: 0; }
+#lexos-dragon * { transition: opacity var(--fade-duration); }
+
+
+/* Navbar */
+#navbar {
+   z-index: 3;
+   display: grid;
+   grid-template-columns: min-content 1fr;
+   padding: 0 var(--gap) 0 var(--gap);
+   align-items: center;
+   width: 100%;
+   min-width: 100rem;
+   height: 7rem;
+   background-color: var(--foreground-color);
+}
+
+#navbar-left {
+   display: flex;
+   align-items: center;
+   white-space: nowrap;
+}
+
+#lexos-text {
+   white-space: nowrap;
+   margin-right: var(--gap);
+}
+
+#page-title {
+   opacity: .5;
+}
+
+#navbar-walkthrough-button {
+   font-family: Libre Baskerville;
+   margin-bottom: 2.3rem;
+   border-radius: 50%;
+   color: var(--text-color);
+   background-color: var(--foreground-color);
+   border: .17rem solid var(--button-border-color);
+   padding-right: .06rem;
+   width: 1.83rem;
+   height: 1.83rem;
+}
+
+#navbar-walkthrough-button:hover {
+   color: var(--foreground-color);
+   background-color: var(--button-border-color);
+}
+
+#navbar-walkthrough-button i {
+   color: inherit;
+}
+
+#navbar-right > a,
+#navbar-right > h2 {
+   margin: var(--small-gap);
+}
+
+#navbar-right > #help-button{
+   cursor: pointer;
+   color: var(--secondary-highlight-color);
+   transition: opacity var(--fade-duration);
+}
+
+#navbar-right > #help-button:hover{
+   opacity: .6;
+}
+
+
+/* Navbar dropdown menus */
+.navbar-menu {
+   position: absolute;
+   top: 7rem;
+   transform: translate(-2rem, 0);
+   display: inline-grid;
+   row-gap: var(--small-gap);
+   padding: var(--small-gap);
+   white-space: nowrap;
+   background-color: var(--foreground-color);
+   border: var(--gap) solid var(--background-color);
+   border-top: none;
+}
+
+
+/* Footer */
+footer {
+   display: grid;
+   grid-template-columns: min-content .7fr .3fr;
+   grid-gap: var(--small-gap);
+   align-items: center;
+   height: 4rem;
+   padding: 0 var(--gap) 0 var(--gap);
+   background-color: var(--foreground-color);
+}
+
+#neh-logo {
+   height: 3rem;
+   margin-top: .5rem;
+   filter: var(--neh-logo-filters);
+}
+
+
+/* Section */
+.section {
+   background-color: var(--foreground-color);
+   overflow: hidden;
+}
+
+.section-top {
+   height: 3rem;
+   margin: var(--small-gap);
+}
+
+.section-body {
+   width: calc(100% - var(--gap));
+   height: calc(100% - 6rem);
+   margin: 0 var(--small-gap) var(--small-gap) var(--small-gap);
+   background-color: var(--foreground-color);
+}
+
+.borderless-section-body {
+   height: calc(100% - 5rem);
+}

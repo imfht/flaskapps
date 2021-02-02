@@ -1,0 +1,2 @@
+graft flask_ckeditor/static
+include README.md LICENSE

@@ -1,0 +1,5 @@
+Flask
+gunicorn
+flask-seasurf
+six>=1.9.0
+flask-talisman

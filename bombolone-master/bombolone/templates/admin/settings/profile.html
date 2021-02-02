@@ -1,0 +1,51 @@
+ {% extends "admin/settings/index.html" %}
+
+
+{% block title %} User profile {% endblock %}
+{% block description %}  {% endblock %}
+
+{% block nav_active_1 %}class="active"{% endblock %}
+
+{% block settings %}
+<div class="form-horizontal form-settings" ng-controller="UsersCtrl">
+    <fieldset>
+        <legend>Profile</legend>
+        {% include "error/message.html" %}
+        {% include "admin/users/upload_image.html" %}
+        {% include "admin/users/profile.html" %}
+        <div class="form-actions">
+            <button tabindex="200" ng-click="stop_upload();update_profile()" data-test="submit"
+            class="btn btn-primary">{{ g.users.save }}</button>
+        </div>
+    </fieldset>
+</div><!-- .form-horizontal -->
+{% endblock %}  
+
+{% block js_names %}
+  'bombolone.controllers.users',
+  'bombolone.controllers.upload',
+{% endblock %}
+
+{% block js_files %}
+  "{{ '/static/js/%s' % js_version['controllers/users'] }}",
+  "{{ '/static/js/%s' % js_version['controllers/upload'] }}",
+{% endblock %}
+
+{% block js_data %}
+<script>
+page["user"] = {
+  _id: "{{ data.user._id }}",
+  username: "{{ data.user.username }}",
+  email: "{{ data.user.email }}",
+  rank: "{{ data.user.rank }}",
+  lan: "{{ data.user.lan }}",
+  time_zone: "{{ data.user.time_zone }}",
+  name: "{{ data.user.name }}",
+  location: "{{ data.user.location }}",
+  web: "{{ data.user.web }}",
+  description: "{{ data.user.description }}",
+  image_show: "{{ data.user.image_show }}",
+  status: {{ data.user.status }}
+}
+</script>
+{% endblock %} 

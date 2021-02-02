@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block fulltitle%}{% block title %}{% endblock %} - {{ config['SITE_NAME'] }}{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link href="{{ url_for('main.feed') }}" rel="alternate" type="application/atom+xml" />
+    <link href="{{ theme_static('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+    {% block head_extend %}{% endblock %}
+  </head>
+
+{# 面包屑导航开始 #}
+{# notself为真则不加链接，用于栏目页 #}
+{% macro nav_by_category(category, notself=False) -%}
+{% for cate in category.parents -%}
+{% if notself and cate == category %}{{ cate.name }}{% else %}<a href="{{ cate.link }}">{{ cate.name }}</a>{% endif %}{% if not loop.last %}<b>&#187;</b>{% endif %}
+{% endfor -%}
+{%- endmacro %}
+{# 面包屑导航结束 #}
+
+{# LOGO部分代码开始 #}
+{% macro logo() -%}
+<a href="{{ url_for('main.index') }}" title="{{ config['SITE_NAME'] }}"><span class="none">{{ config['SITE_NAME'] }}</span></a>
+{% endmacro %}
+{# LOGO部分代码结束 #}
+
+{# 定义导航菜单 #}
+{% set navigation_bar = [
+    (url_for('main.index'), 'index', 'Home'),
+    (url_for('main.topics'), 'topics', 'Topics'),
+    (url_for('main.tags'), 'tags', 'Tags'),
+    (url_for('main.flatpage', slug='about'), 'about', 'About'),
+] -%}
+{% set active_page = active_page|default('index') -%}
+
+  <body>
+    <div id="bgcontain">
+      <div id="header">
+        {% block logo %}
+        <div class="logo">{{ logo() }}</div>
+        {% endblock %}
+        <form action="{{ url_for('main.search') }}" method="GET">
+          <div>
+            <input type="text" value="Search..." onfocus="if (value =='Search...'){value =''}" onblur="if (value ==''){value='Search...'}" name="keyword" id="keyword" />
+            <input type="submit" id="searchsubmit" value="" />
+          </div>
+        </form>
+      </div>
+
+      <div id="menu">
+        <ul>
+          {% for href, id, caption in navigation_bar %}
+          <li class="page_item{% if id == active_page %} current_page_item{% endif %}"><a href="{{ href|e }}">{{ caption|e }}</a></li>
+          {% endfor %}
+          <li id="pattern"></li>
+        </ul>
+      </div>
+      {% block crumbwrap %}<div class="crumb"><a href="{{ url_for('main.index') }}">Home</a><b>&#187;</b>{% block crumb %}{% endblock %}</div>{% endblock %}
+      <div class="contain clear">
+        <div id="content" class="narrowcolumn">
+          {% block main %}
+
+          <div class="article" id="article-1859">
+            <ul class="date">
+              <li class="day">13</li>
+              <li class="month">Oct</li>
+            </ul>
+
+            <div class="title">
+              <h2 class="topic"><a href="/archives/1859.html" rel="bookmark" title="Permanent Link to Ubuntu Tweak 0.8.6 正式发布：支持Ubuntu 13.10">Ubuntu Tweak 0.8.6 正式发布：支持Ubuntu 13.10</a></h2>
+              <span class="postmeta">Post by TualatriX at 2013 . Category: <a href="/archives/category/applications/">Applications</a>.  359 Views. <a href="/archives/1859.html#comments">2 Comments </a> </span></div>
+
+            <div class="clear"></div>
+            <div class="entry">
+
+              <p> <a href="/archives/1859.html#more-1859">Read More...</a>
+
+            </div>
+          </div>
+          {% endblock %}
+
+        </div>
+
+        <div id="sidebar">
+          {% block sidebar %}
+          <h2>Wechat</h2>
+          <p align="center"><img width="180px" height="180px" src="{{ theme_static('images/digwtx-qrcode.png') }}" alt="digwtx-wechat-qrcode"/></p>
+
+          {% set cate = None %}
+          {% if article %}{% set cate = article.category %}{% endif %}
+          {% if category %}{% set cate = category %}{% endif %}
+
+          {% with articles = get_latest_articles(cate, 15) %}
+          {% if articles %}
+          <h2>Recent Posts</h2>
+          <ul>
+            {%- for article in articles %}
+            <li><a href="{{ article.link|e }}" title="{{ article.title }}">{{ article.title|e }}</a></li>
+            {%- endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+
+          {% with articles = get_top_articles(limit=15) %}
+          {% if articles %}
+          <h2>Top 15 Posts</h2>
+          <ul>
+            {%- for article in articles %}
+            <li><a href="{{ article.link|e }}" title="{{ article.title }}">{{ article.title|e }}</a></li>
+            {%- endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+
+          {% with articles = get_recommend_articles(cate, limit=15) %}
+          {% if articles %}
+          <h2>Recommended Posts</h2>
+          <ul>
+            {%- for article in articles %}
+            <li><a href="{{ article.link|e }}" title="{{ article.title }}">{{ article.title|e }}</a></li>
+            {%- endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+
+          {% with trees = category_tree() %}
+          {% if trees %}
+          <h2>Categories</h2>
+          <ul>
+            {%- for tree in trees %}
+            <li>{{ tree[0] * '----' }}<a href="{{ tree[1].link|e }}">{{ tree[1].name|e }}</a>({{ tree[1].count }})</li>
+            {%- endfor %}
+          </ul>
+          {% endif %}
+          {% endwith %}
+
+          <h2>Archives</h2>
+          <ul>
+            {%- for item in archives() %}
+            <li><a href="{{ url_for('main.archives', year=item.year, month=item.month)|e }}">{{ item|date('%B') }} {{ item|date('%Y') }}</a></li>
+            {%- endfor %}
+          </ul>
+
+          {# 友情链接 #}
+          {% block friendlinks %}{% endblock %}
+
+          {% block sidebar_other %}
+          <h2>Other</h2>
+          <ul>
+            <li><a rel="nofollow" href="{{ url_for('admin.index') }}">Admin</a></li>
+          </ul>
+          {% endblock %}
+          {% endblock %}
+        </div>
+
+      </div>
+      <hr />
+      {% block footer %}
+      <div id="footer">
+        <p>&copy; 2014 {{ config['SITE_NAME'] }}
+        - <a href="{{ url_for('main.feed') }}">Entries(RSS)</a>
+        - <a href="{{ url_for('main.sitemap') }}">Sitemap</a>
+        <br/>
+        Powered by <a href="http://flask.pocoo.org" target="_blank" rel="external nofollow">Flask</a> |
+    Theme designed By <a href="http://imtx.me/" target="_blank" rel="nofollow">IMTX</a> & <a href="http://www.hoofei.com/" rel="nofollow" target="_blank">Hoofei</a>
+        </p>
+      </div>
+      {% endblock %}
+      <!-- go top -->
+      <div class="top-btn none on" id="top_btn"></div>
+      <!-- go top end -->
+    </div>
+    <script language="javascript" type="text/javascript" src="{{ theme_static('js/jquery-1.8.3.min.js') }}"></script>
+    <script language="javascript" type="text/javascript" src="{{ theme_static('js/util.js') }}"></script>
+    {% block tail %}{% endblock %}
+  </body>
+</html>

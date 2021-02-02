@@ -1,0 +1,9 @@
+.color-block{
+    input {
+        display:  inline-block;
+        max-width: calc(100% - 26px);
+    }
+    .rc-color-picker-wrap {
+        margin-left: 4px;
+    }
+}

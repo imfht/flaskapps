@@ -1,0 +1,2 @@
+-r tasks/requirements.txt
+-r app/requirements.txt

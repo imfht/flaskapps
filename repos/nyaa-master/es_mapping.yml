@@ -1,0 +1,145 @@
+---
+# CREATE DTABASE/TABLE equivalent for elasticsearch, in yaml
+# fo inline comments.
+settings:
+  analysis:
+    analyzer:
+      my_search_analyzer:
+        type: custom
+        tokenizer: standard
+        char_filter:
+          - my_char_filter
+        filter:
+          - lowercase
+      my_index_analyzer:
+        type: custom
+        tokenizer: standard
+        char_filter:
+          - my_char_filter
+        filter:
+          - resolution
+          - lowercase
+          - word_delimit
+          - my_ngram
+          - trim_zero
+          - unique
+      # For exact matching - separate each character for substring matching + lowercase
+      exact_analyzer:
+        tokenizer: exact_tokenizer
+        filter:
+          - lowercase
+      # For matching full words longer than the ngram limit (15 chars)
+      my_fullword_index_analyzer:
+        type: custom
+        tokenizer: standard
+        char_filter:
+          - my_char_filter
+        filter:
+          - lowercase
+          - word_delimit
+          # Skip tokens shorter than N characters,
+          # since they're already indexed in the main field
+          - fullword_min
+          - unique
+
+    tokenizer:
+      # Splits input into characters, for exact substring matching
+      exact_tokenizer:
+        type: pattern
+        pattern: "(.)"
+        group: 1
+
+    filter:
+      my_ngram:
+        type: edge_ngram
+        min_gram: 1
+        max_gram: 15
+      fullword_min:
+        type: length
+        # Remember to change this if you change the max_gram below!
+        min: 16
+      resolution:
+        type: pattern_capture
+        patterns: ["(\\d+)[xX](\\d+)"]
+      trim_zero:
+        type: pattern_capture
+        patterns: ["0*([0-9]*)"]
+      word_delimit:
+        type: word_delimiter_graph
+        preserve_original: true
+        split_on_numerics: false
+        # https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-word-delimiter-graph-tokenfilter.html#word-delimiter-graph-tokenfilter-configure-parms
+        # since we're using "trim" filters downstream, otherwise
+        # you get weird lucene errors about startOffset
+        adjust_offsets: false
+    char_filter:
+      my_char_filter:
+        type: mapping
+        mappings: ["-=>_", "!=>_", "_=>\\u0020"]
+  index:
+    # we're running a single es node, so no sharding necessary,
+    # plus replicas don't really help either.
+    number_of_shards: 1
+    number_of_replicas : 0
+    query:
+      default_field: display_name
+mappings:
+  # disable elasticsearch's "helpful" autoschema
+  dynamic: false
+  properties:
+    id:
+      type: long
+    display_name:
+      # TODO could do a fancier tokenizer here to parse out the
+      # the scene convention of stuff in brackets, plus stuff like k-on
+      type: text
+      analyzer: my_index_analyzer
+      fielddata: true # Is this required?
+      fields:
+        # Multi-field for full-word matching (when going over ngram limits)
+        # Note: will have to be queried for, not automatic
+        fullword:
+          type: text
+          analyzer: my_fullword_index_analyzer
+        # Stored for exact phrase matching
+        exact:
+          type: text
+          analyzer: exact_analyzer
+    created_time:
+      type: date
+      #
+    # Only in the ES index for generating magnet links
+    info_hash:
+      type: keyword
+      index: false
+    filesize:
+      type: long
+    anonymous:
+      type: boolean
+    trusted:
+      type: boolean
+    remake:
+      type: boolean
+    complete:
+      type: boolean
+    hidden:
+      type: boolean
+    deleted:
+      type: boolean
+    has_torrent:
+      type: boolean
+    download_count:
+      type: long
+    leech_count:
+      type: long
+    seed_count:
+      type: long
+    comment_count:
+      type: long
+    # these ids are really only for filtering, thus keyword
+    uploader_id:
+      type: keyword
+    main_category_id:
+      type: keyword
+    sub_category_id:
+      type: keyword

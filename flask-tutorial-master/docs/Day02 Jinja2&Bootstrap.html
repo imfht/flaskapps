@@ -1,0 +1,714 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Day02 Jinja2&Bootstrap · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Day03 Web表单.html" />
+    
+    
+    <link rel="prev" href="Day01 Hello Flask.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Day01 Hello Flask.html">
+            
+                <a href="Day01 Hello Flask.html">
+            
+                    
+                    Day01 Hello Flask
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="Day02 Jinja2&Bootstrap.html">
+            
+                <a href="Day02 Jinja2&Bootstrap.html">
+            
+                    
+                    Day02 Jinja2&Bootstrap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Day03 Web表单.html">
+            
+                <a href="Day03 Web表单.html">
+            
+                    
+                    Day03 Web表单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="Day04 Sqlite数据库.html">
+            
+                <a href="Day04 Sqlite数据库.html">
+            
+                    
+                    Day04 Sqlite数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Day05 大型程序结构.html">
+            
+                <a href="Day05 大型程序结构.html">
+            
+                    
+                    Day05 大型程序结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Day06 创建用户.html">
+            
+                <a href="Day06 创建用户.html">
+            
+                    
+                    Day06 创建用户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Day07 后台管理与发布文章.html">
+            
+                <a href="Day07 后台管理与发布文章.html">
+            
+                    
+                    Day07 后台管理与发布文章
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Day08 难说再见.html">
+            
+                <a href="Day08 难说再见.html">
+            
+                    
+                    Day08 难说再见
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="使用Flask-Mail提供电子邮件支持.html">
+            
+                <a href="使用Flask-Mail提供电子邮件支持.html">
+            
+                    
+                    使用Flask-Mail提供电子邮件支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="使用Flasky-SQLAlchemy 管理数据库.html">
+            
+                <a href="使用Flasky-SQLAlchemy 管理数据库.html">
+            
+                    
+                    使用Flasky-SQLAlchemy 管理数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Day02 Jinja2&Bootstrap</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="jinja2&#x6A21;&#x677F;&#x5F15;&#x64CE;-&#x4F7F;&#x7528;twitter-bootstrap">Jinja2&#x6A21;&#x677F;&#x5F15;&#x64CE;, &#x4F7F;&#x7528;Twitter Bootstrap</h1>
+<p>&#x6E90;&#x4EE3;&#x7801;: <a href="https://github.com/ltoddy/flask-tutorial" target="_blank">https://github.com/ltoddy/flask-tutorial</a></p>
+<p>&#x6280;&#x672F;&#x4EA4;&#x6D41;&#x7FA4;:630398887(&#x6B22;&#x8FCE;&#x4E00;&#x8D77;&#x5439;&#x725B;)</p>
+<p>&#x6709;&#x4E9B;&#x5730;&#x65B9;&#x6CA1;&#x770B;&#x61C2;&#x6CA1;&#x5173;&#x7CFB;&#xFF0C;&#x575A;&#x6301;&#x5F80;&#x4E0B;&#x770B;&#xFF0C;&#x4E0B;&#x9762;&#x4F1A;&#x6709;&#x6F14;&#x793A;&#x4EE3;&#x7801;&#x6765;&#x8BF4;&#x660E;&#x3002;</p>
+<p>&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#x5982;&#x4E0B;&#x4EE3;&#x7801;</p>
+<pre><code class="lang-python"><span class="hljs-meta">@app.route(&apos;/&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;Hello World!&apos;</span>
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5F88;&#x4E0D;&#x723D;&#xFF0C;&#x80FD;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;HTML&#x9875;&#x9762;&#xFF0C;&#x5F53;&#x7136;&#x53EF;&#x4EE5;&#x3002;</p>
+<p>&#x5728;templates&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;index.html</p>
+<p><small>templates/index.html</small></p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Just for fun<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello World<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p><small>blog.py</small></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template
+<span class="hljs-comment">#...</span>
+<span class="hljs-meta">@app.route(&apos;/&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;index.html&apos;</span>)
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#x5C31;&#x76F4;&#x63A5;&#x628A;&#x90A3;&#x4E2A;index.html&#x9875;&#x9762;&#x663E;&#x793A;&#x4E86;&#x51FA;&#x6765;.</p>
+<h2 id="jinja2&#x6A21;&#x677F;&#x5F15;&#x64CE;">Jinja2&#x6A21;&#x677F;&#x5F15;&#x64CE;</h2>
+<h3 id="&#x6E32;&#x67D3;&#x6A21;&#x677F;">&#x6E32;&#x67D3;&#x6A21;&#x677F;</h3>
+<p>&#x5728;blog.py&#x7684;def user(username) &#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4E2D;,&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x628A;&#x90A3;&#x4E2A;username&#x4F20;&#x5165;html&#x9875;&#x9762;&#x600E;&#x4E48;&#x529E;&#x5462;?
+&#x5728;templates&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x65B0;&#x5EFA;user.html</p>
+<p><small>templates/user.html</small></p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Just for fun<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello {{ name }}.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>&#x89C6;&#x56FE;&#x51FD;&#x6570;user()&#x8FD4;&#x56DE;&#x7684;&#x54CD;&#x5E94;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;&#x53D8;&#x91CF;&#x8868;&#x793A;&#x7684;&#x52A8;&#x6001;&#x90E8;&#x5206;.
+<small>blog.py</small></p>
+<pre><code class="lang-python"><span class="hljs-meta">@app.route(&apos;/&lt;username&gt;&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">user</span><span class="hljs-params">(username)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;user.html&apos;</span>, name=username)
+</code></pre>
+<p>&#x6CE8;&#x610F;&#x770B;&#x8FD9;&#x91CC;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;,&#x5728;return&#x90A3;&#x91CC;,render_template&#x63A5;&#x53D7;&#x4E86;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x90E8;&#x5206;:</p>
+<ul>
+<li>&apos;user.html&apos; &#x8FD9;&#x4E2A;&#x662F;&#x8981;&#x5C55;&#x73B0;&#x7684;&#x9875;&#x9762;&#x540D;&#x5B57;,&#x9875;&#x9762;&#x8981;&#x653E;&#x5728;templates&#x6587;&#x4EF6;&#x5939;&#x4E0B;,jinja2&#x5F15;&#x64CE;&#x4F1A;&#x81EA;&#x52A8;&#x53BB;templates&#x6587;&#x4EF6;&#x5939;&#x5BFB;&#x627E;&#x6B64;&#x6587;&#x4EF6;.</li>
+<li>&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x5C31;&#x662F;user.html&#x4E2D;&#x6240;&#x9700;&#x8981;&#x7684;&#x53C2;&#x6570;,&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x6709;&#x5F88;&#x591A;&#x4E2A;&#x53C2;&#x6570;,&#x4E0B;&#x6587;&#x5C06;&#x4F1A;&#x770B;&#x5230;.&#x5728;&#x8FD9;&#x91CC;,name=username,&#x5DE6;&#x8FB9;&#x7684;name&#x8868;&#x793A;&#x53C2;&#x6570;&#x540D;,&#x5C31;&#x662F;&#x6A21;&#x677F;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x5360;&#x4F4D;&#x7B26;,&#x53F3;&#x8FB9;&#x7684;username&#x662F;&#x5F53;&#x524D;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x7684;&#x53D8;&#x91CF;.</li>
+</ul>
+<h3 id="&#x53D8;&#x91CF;">&#x53D8;&#x91CF;</h3>
+<p>&#x521A;&#x624D;&#x4F7F;&#x7528;&#x7684;&#x7ED3;&#x6784;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;,&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5360;&#x4F4D;&#x7B26;,&#x544A;&#x8BC9;&#x6A21;&#x677F;&#x5F15;&#x64CE;&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#x7684;&#x503C;&#x4ECE;&#x6E32;&#x67D3;&#x6A21;&#x677F;&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x636E;&#x4E2D;&#x83B7;&#x53D6;.
+Jinja2&#x80FD;&#x8BC6;&#x522B;&#x6240;&#x6709;&#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;,&#x751A;&#x81F3;&#x662F;&#x4E00;&#x4E9B;&#x7279;&#x6B8A;&#x7684;&#x7C7B;&#x578B;:&#x4F8B;&#x5982;&#x5217;&#x8868;,&#x5B57;&#x5178;&#x548C;&#x5BF9;&#x8C61;.
+e.g.</p>
+<pre><code>A value from a dictionary: {{ mydict[&apos;key&apos;] }}.
+A value from a list: {{ mylist[3] }}.
+A value from a list, with a variable index: {{ mylist[myintvar] }}
+A value from a object&apos;s method: {{ myobj.somemethod() }}.
+</code></pre><p>Jinja2&#x53E6;&#x5916;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x53EB; <em>&#x8FC7;&#x6EE4;&#x5668;</em> &#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x600E;&#x4E48;&#x7528;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x518D;&#x8BF4;&#x660E;&#x4E86;&#x3002;</p>
+<p><a href="http://jinja.pocoo.org/docs/templates/#builtin-filters" target="_blank">Jinja2&#x8FC7;&#x6EE4;&#x5668;&#x5B8C;&#x6574;&#x6587;&#x6863;</a></p>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E9B;&#x77E5;&#x8BC6;&#x7684;&#x4ECB;&#x7ECD;,&#x4E86;&#x89E3;&#x4E00;&#x4E0B;&#x5C31;&#x597D;.</p>
+<h3 id="&#x63A7;&#x5236;&#x7ED3;&#x6784;">&#x63A7;&#x5236;&#x7ED3;&#x6784;</h3>
+<h4 id="&#x6761;&#x4EF6;&#x63A7;&#x5236;&#x7ED3;&#x6784;&#x8BED;&#x53E5;">&#x6761;&#x4EF6;&#x63A7;&#x5236;&#x7ED3;&#x6784;&#x8BED;&#x53E5;:</h4>
+<pre><code class="lang-jinja2">{% if user %}
+    Hello, {{ user }}!
+{% else %}
+    Hello, Stranger!
+{% endif %}
+</code></pre>
+<h4 id="&#x5FAA;&#x73AF;&#x63A7;&#x5236;&#x7ED3;&#x6784;">&#x5FAA;&#x73AF;&#x63A7;&#x5236;&#x7ED3;&#x6784;</h4>
+<pre><code class="lang-jinja2">&lt;ul&gt;
+    {% for comment in comments %}
+        &lt;li&gt;comment&lt;/li&gt;
+    {% endfor %
+&lt;/ul&gt;
+</code></pre>
+<p>&#x9700;&#x8981;&#x5728;&#x591A;&#x51FA;&#x91CD;&#x590D;&#x4F7F;&#x7528;&#x7684;&#x6A21;&#x677F;&#x4EE3;&#x7801;&#x7247;&#x6BB5;&#x53EF;&#x4EE5;&#x5199;&#x5165;&#x5355;&#x72EC;&#x7684;&#x6587;&#x4EF6;,&#x518D;&#x5305;&#x542B;&#x5728;&#x6240;&#x6709;&#x6A21;&#x677F;&#x4E2D;,&#x4EE5;&#x907F;&#x514D;&#x91CD;&#x590D;:</p>
+<pre><code class="lang-jinja2">{% include &apos;common.html&apos; %}
+</code></pre>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x91CD;&#x590D;&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x7684;&#x5F3A;&#x5927;&#x65B9;&#x5F0F;&#x662F;&#x6A21;&#x677F;&#x7EE7;&#x627F;.
+&#x9996;&#x5148;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;base.html&#x7684;&#x6A21;&#x677F;</p>
+<pre><code class="lang-jinja2">&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    {% block head %}
+        &lt;title&gt;{% block title %}{% endblock %} - My Application&lt;/title&gt;
+    {% endblock %}
+&lt;/head&gt;
+&lt;body&gt;
+{% block body %}
+{% endblock %}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>block&#x6807;&#x7B7E;&#x5B9A;&#x4E49;&#x7684;&#x5143;&#x7D20;&#x53EF;&#x5728;&#x884D;&#x751F;&#x6A21;&#x677F;&#x4E2D;&#x4FEE;&#x6539;.&#x4F8B;&#x5982;</p>
+<pre><code class="lang-jinja2">{% extends &apos;base.html&apos; %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    &lt;style&gt;
+    &lt;/style&gt;
+{% endblock %}
+{% block body %}
+&lt;h1&gt;Hello, World!&lt;/h1&gt;
+{% endblock %}
+</code></pre>
+<p>block&#x6807;&#x7B7E;&#x5B9A;&#x4E49;&#x7684;&#x5143;&#x7D20;&#x53EF;&#x4EE5;&#x5728;&#x884D;&#x751F;&#x7684;&#x6A21;&#x677F;&#x4E2D;&#x4FEE;&#x6539;.
+extends&#x6307;&#x4EE4;&#x58F0;&#x660E;&#x8FD9;&#x4E2A;&#x6A21;&#x677F;&#x884D;&#x751F;&#x81EA;base.html.&#x5728;extends&#x6307;&#x4EE4;&#x4E4B;&#x540E;,&#x57FA;&#x6A21;&#x677F;&#x4E2D;&#x7684;3&#x4E2A;&#x5757;&#x88AB;&#x91CD;&#x65B0;&#x5B9A;&#x4E49;,&#x6A21;&#x677F;&#x5F15;&#x64CE;&#x4F1A;&#x5C06;&#x5176;&#x63D2;&#x5165;&#x9002;&#x5F53;&#x7684;&#x4F4D;&#x7F6E;.</p>
+<h2 id="&#x4F7F;&#x7528;flask-bootstrap&#x96C6;&#x6210;twitter-bootstrap">&#x4F7F;&#x7528;Flask-Bootstrap&#x96C6;&#x6210;Twitter Bootstrap</h2>
+<p>&#x5982;&#x679C;&#x7535;&#x8111;&#x4E0A;&#x6709;pip&#x7684;&#x53EF;&#x4EE5;:</p>
+<pre><code>pip install flask-bootstrap
+</code></pre><p>&#x6CA1;&#x6709;&#x7684;&#x5C31;&#x5982;&#x4E0A;&#x7BC7;&#x6587;&#x7AE0;&#x90A3;&#x6837;,&#x901A;&#x8FC7;Pycharm&#x81EA;&#x52A8;&#x5E2E;&#x4F60;&#x5B89;&#x88C5;.
+Bootstrap CSS&#x6837;&#x5F0F;&#x5E93;,&#x7B80;&#x5355;&#x70B9;&#x7406;&#x89E3;&#x5C31;&#x662F;&#x4F60;&#x83B7;&#x5F97;&#x4E86;&#x4E00;&#x5927;&#x5806;&#x5316;&#x5986;&#x54C1;(&#x5B9A;&#x5236;&#x597D;&#x7684;,&#x800C;&#x975E;&#x6309;&#x7167;&#x81EA;&#x5DF1;&#x60F3;&#x6CD5;&#x5B9A;&#x5236;&#x7684;&#x6837;&#x5B50;),&#x53EF;&#x4EE5;&#x6709;&#x9009;&#x62E9;&#x7684;&#x53BB;&#x4F7F;&#x7528;.</p>
+<p>&#x521D;&#x59CB;&#x5316;Flask-Bootstrap:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> flask_bootstrap <span class="hljs-keyword">import</span> Bootstrap
+<span class="hljs-comment"># ...</span>
+bootstrap = Bootstrap(app)
+</code></pre>
+<p>&#x5F85;&#x4F1A;&#x8981;&#x901A;&#x8FC7;&#x7EE7;&#x627F;Bootstrap&#x7684;base.html&#x9875;&#x9762;&#x6765;&#x5B9E;&#x73B0;&#x6A21;&#x677F;&#x7684;&#x590D;&#x7528;.
+&#x5148;&#x770B;&#x770B;bootstrap&#x7684;base.html&#x4E3A;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x4EC0;&#x4E48;:</p>
+<pre><code class="lang-jinja2">{% block doc -%}
+    &lt;!DOCTYPE html&gt;
+    &lt;html{% block html_attribs %}{% endblock html_attribs %}&gt;
+    {%- block html %}
+        &lt;head&gt;
+            {%- block head %}
+                &lt;title&gt;{% block title %}{% endblock title %}&lt;/title&gt;
+
+                {%- block metas %}
+                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+                {%- endblock metas %}
+
+                {%- block styles %}
+                    &lt;!-- Bootstrap --&gt;
+                    &lt;link href=&quot;{{ bootstrap_find_resource(&apos;css/bootstrap.css&apos;, cdn=&apos;bootstrap&apos;) }}&quot; rel=&quot;stylesheet&quot;&gt;
+                {%- endblock styles %}
+            {%- endblock head %}
+        &lt;/head&gt;
+        &lt;body{% block body_attribs %}{% endblock body_attribs %}&gt;
+        {% block body -%}
+            {% block navbar %}
+            {%- endblock navbar %}
+            {% block content -%}
+            {%- endblock content %}
+
+            {% block scripts %}
+                &lt;script src=&quot;{{ bootstrap_find_resource(&apos;jquery.js&apos;, cdn=&apos;jquery&apos;) }}&quot;&gt;&lt;/script&gt;
+                &lt;script src=&quot;{{ bootstrap_find_resource(&apos;js/bootstrap.js&apos;, cdn=&apos;bootstrap&apos;) }}&quot;&gt;&lt;/script&gt;
+            {%- endblock scripts %}
+        {%- endblock body %}
+        &lt;/body&gt;
+    {%- endblock html %}
+    &lt;/html&gt;
+{% endblock doc -%}
+</code></pre>
+<p>&#x4E3B;&#x8981;&#x7528;&#x5230;&#x4E24;&#x4E2A;&#x5757;: navbar(&#x5BFC;&#x822A;&#x680F;)&#x548C;content(&#x9875;&#x9762;&#x4E3B;&#x8981;&#x5185;&#x5BB9;).</p>
+<p>&#x5728;templates&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x65B0;&#x5EFA;base.html&#x6587;&#x4EF6;</p>
+<p><small>templates/base.html</small></p>
+<pre><code class="lang-jinja2">{% extends &apos;bootstrap/base.html&apos; %}
+
+{% block title %}Just for fun{% endblock %}
+
+{% block navbar %}
+    &lt;nav class=&quot;navbar navbar-inverse&quot;&gt;
+        &lt;div class=&quot;container-fluid&quot;&gt;
+            &lt;div class=&quot;navbar-header&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;navbar-toggle&quot; data-toggle=&quot;collapse&quot; data-target=&quot;.navbar-collapse&quot;&gt;
+                    &lt;span class=&quot;sr-only&quot;&gt;Toggle navigation&lt;/span&gt;
+                    &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                    &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                    &lt;span class=&quot;icon-bar&quot;&gt;&lt;/span&gt;
+                &lt;/button&gt;
+                &lt;a class=&quot;navbar-brand&quot; href=&quot;/&quot;&gt;Just for fun&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;navbar-collapse collapse&quot;&gt;
+                &lt;ul class=&quot;nav navbar-nav&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+{% endblock %}
+
+{% block content %}
+    &lt;div class=&quot;container&quot;&gt;
+        {% block page_content %}{% endblock %}
+    &lt;/div&gt;
+{% endblock %}
+</code></pre>
+<p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x66F4;&#x6539;&#x4E00;&#x4E0B;index.html&#x548C;user.html
+<small>templates/index.html</small></p>
+<pre><code class="lang-jinja2">{% extends &apos;base.html&apos; %}
+
+{% block page_content %}
+    &lt;div class=&quot;page-header&quot;&gt;
+        &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;/div&gt;
+{% endblock %}
+</code></pre>
+<p><small>templates/user.html</small></p>
+<pre><code class="lang-jinja2">{% extends &apos;base.html&apos; %}
+
+{% block page_content %}
+    &lt;div class=&quot;page-header&quot;&gt;
+        &lt;h1&gt;Hello {{ name }}.&lt;/h1&gt;
+    &lt;/div&gt;
+{% endblock %}
+</code></pre>
+<p>OK,&#x6211;&#x4EEC;&#x8FD0;&#x884C;&#x4E00;&#x4E0B;&#x770B;&#x770B;&#x6548;&#x679C;:
+<img src="http://img.vim-cn.com/62/ad0e9a8cd76db05f4267f2dfebc4716bd86f0f.png" alt=""></p>
+<p>&#x8FD8;&#x4E0D;&#x9519;.</p>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;&#x9875;&#x9762;">&#x81EA;&#x5B9A;&#x4E49;&#x9519;&#x8BEF;&#x9875;&#x9762;.</h3>
+<p>&#x6709;&#x65F6;&#x5019;&#x8F93;&#x5165;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#x7684;&#x7F51;&#x5740;&#x7684;&#x65F6;&#x5019;,&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;404 page not found&#x9519;&#x8BEF;.
+&#x5206;&#x522B;&#x5728;templates&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x521B;&#x5EFA;404.html&#x548C;500.html</p>
+<p><small>templates/404.html</small></p>
+<pre><code class="lang-jinja2">{% extends &apos;base.html&apos; %}
+
+{% block title %}404 - Page Not Found{% endblock %}
+
+{% block page_content %}
+    &lt;div class=&quot;page-header&quot;&gt;
+        &lt;h1&gt;Not Found&lt;/h1&gt;
+    &lt;/div&gt;
+{% endblock %}
+</code></pre>
+<p><small>templates/500.html</small></p>
+<pre><code class="lang-jinja2">{% extends &apos;base.html&apos; %}
+
+{% block title %}500 - Internal Server Error{% endblock %}
+
+{% block page_content %}
+    &lt;div class=&quot;page-header&quot;&gt;
+        &lt;h1&gt;Server Error&lt;/h1&gt;
+    &lt;/div&gt;
+{% endblock %}
+</code></pre>
+<p>&#x4EE5;&#x53CA;&#x6211;&#x4EEC;&#x8981;&#x5728;blog.py&#x4E2D;&#x6DFB;&#x52A0;&#x76F8;&#x5E94;&#x7684;&#x8DEF;&#x7531;:</p>
+<p><small>blog.py</small></p>
+<pre><code class="lang-python"><span class="hljs-meta">@app.errorhandler(404)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">page_not_found</span><span class="hljs-params">(e)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;404.html&apos;</span>), <span class="hljs-number">404</span>
+
+
+<span class="hljs-meta">@app.errorhandler(500)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">internal_server_error</span><span class="hljs-params">(e)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;500.html&apos;</span>), <span class="hljs-number">500</span>
+</code></pre>
+<p><img src="http://img.vim-cn.com/7d/184b4965124b019a1aa2b85f8445bd80c9f47d.png" alt=""></p>
+<p>&#x770B;&#x4E00;&#x4E0B;blog.py&#x7684;&#x5B8C;&#x6574;&#x4EE3;&#x7801;:
+<small>blog.py</small></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask
+<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template
+<span class="hljs-keyword">from</span> flask_bootstrap <span class="hljs-keyword">import</span> Bootstrap
+
+app = Flask(__name__)
+bootstrap = Bootstrap(app)
+
+
+<span class="hljs-meta">@app.route(&apos;/&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;index.html&apos;</span>)
+
+
+<span class="hljs-meta">@app.route(&apos;/&lt;username&gt;&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">user</span><span class="hljs-params">(username)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;user.html&apos;</span>, name=username)
+
+
+<span class="hljs-meta">@app.errorhandler(404)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">page_not_found</span><span class="hljs-params">(e)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;404.html&apos;</span>), <span class="hljs-number">404</span>
+
+
+<span class="hljs-meta">@app.errorhandler(500)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">internal_server_error</span><span class="hljs-params">(e)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;500.html&apos;</span>), <span class="hljs-number">500</span>
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    app.run(debug=<span class="hljs-keyword">True</span>)
+</code></pre>
+<p>&#x5728;&#x6700;&#x540E;&#x4E00;&#x884C;,&#x6211;&#x52A0;&#x5165;&#x4E86;:debug=True,&#x76EE;&#x7684;&#x662F;&#x5F53;&#x4F60;&#x5BF9;&#x7A0B;&#x5E8F;&#x505A;&#x51FA;&#x4E86;&#x6539;&#x53D8;&#x4E4B;&#x540E;,&#x4E0D;&#x9700;&#x8981;&#x624B;&#x52A8;&#x91CD;&#x542F;&#x9879;&#x76EE;,&#x9879;&#x76EE;&#x4F1A;&#x81EA;&#x52A8;&#x5E2E;&#x4F60;&#x505A;&#x51FA;&#x91CD;&#x542F;.</p>
+<p>&#x6700;&#x540E;&#x8BF4;&#x4E00;&#x70B9;&#x5185;&#x5BB9;,&#x4E0B;&#x4E00;&#x7BC7;&#x5C06;&#x4F1A;&#x7528;&#x5230;</p>
+<h2 id="&#x4F7F;&#x7528;flask-script&#x652F;&#x6301;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;">&#x4F7F;&#x7528;Flask-Script&#x652F;&#x6301;&#x547D;&#x4EE4;&#x884C;&#x9009;&#x9879;</h2>
+<p>&#x5B89;&#x88C5;Flask-Script:</p>
+<pre><code>pip install flask-script
+</code></pre><p>Flask&#x7684;&#x5F00;&#x53D1;web&#x670D;&#x52A1;&#x5668;&#x652F;&#x6301;&#x5F88;&#x591A;&#x542F;&#x52A8;&#x8BBE;&#x7F6E;&#x9009;&#x9879;,&#x4F20;&#x9012;&#x8BBE;&#x7F6E;&#x9009;&#x9879;&#x7684;&#x7406;&#x60F3;&#x65B9;&#x5F0F;&#x662F;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;.</p>
+<p>e.g.:</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> flask_script <span class="hljs-keyword">import</span> Manager
+manager = Manager(app)
+
+<span class="hljs-comment"># ...</span>
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    manager.run()
+</code></pre>
+<p>&#x6B64;&#x65F6;&#x7684;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#xFF1A;
+<small>blog.py</small></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> Flask
+<span class="hljs-keyword">from</span> flask <span class="hljs-keyword">import</span> render_template
+<span class="hljs-keyword">from</span> flask_bootstrap <span class="hljs-keyword">import</span> Bootstrap
+<span class="hljs-keyword">from</span> flask_script <span class="hljs-keyword">import</span> Manager
+
+app = Flask(__name__)
+bootstrap = Bootstrap(app)
+manager = Manager(app)
+
+
+<span class="hljs-meta">@app.route(&apos;/&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello_world</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;index.html&apos;</span>)
+
+
+<span class="hljs-meta">@app.route(&apos;/&lt;username&gt;&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">user</span><span class="hljs-params">(username)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;user.html&apos;</span>, name=username)
+
+
+<span class="hljs-meta">@app.errorhandler(404)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">page_not_found</span><span class="hljs-params">(e)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;404.html&apos;</span>), <span class="hljs-number">404</span>
+
+
+<span class="hljs-meta">@app.errorhandler(500)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">internal_server_error</span><span class="hljs-params">(e)</span>:</span>
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;500.html&apos;</span>), <span class="hljs-number">500</span>
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&apos;__main__&apos;</span>:
+    manager.run()
+</code></pre>
+<p>&#x73B0;&#x5728;&#x5982;&#x4F55;&#x542F;&#x52A8;&#x7A0B;&#x5E8F;&#xFF1F;</p>
+<p><img src="http://img.vim-cn.com/c9/878ea4942459a4a10af794eab4c8ff56a1e781.png" alt=""></p>
+<p>&#x5728;&#x8F6F;&#x4EF6;&#x7684;&#x5DE6;&#x4E0B;&#x89D2;,&#x9009;&#x62E9;&#x70B9;&#x51FB;Terminal,
+&#x8F93;&#x5165;:</p>
+<pre><code>python3 blog.py runserver
+</code></pre><p>&#x5982;&#x4E0B;:</p>
+<p><img src="http://img.vim-cn.com/af/1873798f4d0fd05bb7b803e6a4d0732a13167d.png" alt=""></p>
+<p>&#x8FD9;&#x91CC;&#x8981;&#x6CE8;&#x610F;&#x4E00;&#x4E0B;,&#x6211;&#x76EE;&#x524D;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x6211;&#x7684;Linux&#x7CFB;&#x7EDF;,Python2&#x548C;Python3&#x90FD;&#x6709;,&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x5199;&#x660E;&#x662F;Python3,&#x5982;&#x679C;&#x4F60;&#x7535;&#x8111;&#x4E0A;&#x53EA;&#x6709;Python3,&#x90A3;&#x4E48;&#x4F60;&#x628A;&#x8FD9;&#x91CC;&#x7684;python3&#x66FF;&#x6362;&#x6210;python&#x5C31;&#x53EF;&#x4EE5;&#x4E86;.&#x6309;&#x7167;&#x81EA;&#x5DF1;&#x7535;&#x8111;&#x4E3A;&#x4E3B;.</p>
+<p>&#x7136;&#x540E;&#x6253;&#x5F00;&#x6D4F;&#x89C8;&#x5668;,&#x5728;&#x5730;&#x5740;&#x680F;&#x586B;&#x5165;: <a href="http://localhost:5000/" target="_blank">http://localhost:5000/</a> &#x56DE;&#x8F66;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Day01 Hello Flask.html" class="navigation navigation-prev " aria-label="Previous page: Day01 Hello Flask">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Day03 Web表单.html" class="navigation navigation-next " aria-label="Next page: Day03 Web表单">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Day02 Jinja2&Bootstrap","level":"1.3","depth":1,"next":{"title":"Day03 Web表单","level":"1.4","depth":1,"path":"Day03 Web表单.md","ref":"./Day03 Web表单.md","articles":[]},"previous":{"title":"Day01 Hello Flask","level":"1.2","depth":1,"path":"Day01 Hello Flask.md","ref":"./Day01 Hello Flask.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Day02 Jinja2&Bootstrap.md","mtime":"2018-03-24T04:51:29.602Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-24T10:18:17.126Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% from "utils.html" import pager %}
+
+{% block content %}
+<div class="ui feed blog-list">
+    {% for b in blog_list %}
+    <div id="blog-{{ b.id }}" class="event blog-item">
+        <div class="content">
+            <div class="summary">
+                <a href="{{ url_for('blog_detail_page', blog_id=b.id) }}">{{ b.title }}</a>
+                <div class="date">
+                    {{ b.t.strftime("%Y-%m-%d %H:%M:%S") }}
+                </div>
+            </div>
+            <div class="extra text">
+                {{ b.summary|safe }}
+            </div>
+            <div class="meta entry-info">
+                {{ b.like }} 赞 / {{ b.share }} 分享 / {{ b.comment }} 评论 / {{ b.read }} 阅读
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{{ pager('blog_list_page', page, total_page) }}
+{% endblock %}

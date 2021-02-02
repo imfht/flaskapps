@@ -1,0 +1,49 @@
+{#
+# This file is part of Zenodo.
+# Copyright (C) 2015 CERN.
+#
+# Zenodo is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# Zenodo is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Zenodo; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+-#}
+
+{%- extends "zenodo_records/record_detail.html" %}
+
+{%- set canonical_url = url_for('invenio_records_ui.recid', pid_value=pid.pid_value) %}
+
+{% block record_body %}
+<p>
+  <time datetime="{{ publication_date|dateformat(format='long') }}" data-toggle="tooltip" title="{{_("Publication date")}}">{{ publication_date|dateformat(format='long') }}</time>
+  <span class="pull-right">
+    {{ objecttype_label(object_type, lang=current_i18n.language) }}
+    {{ accessright_label(record.access_right, embargo_date=embargo_date) }}
+  </span>
+</p>
+<a href="{{canonical_url}}"><h1>{{ record.title }}</h1></a>
+<p>{{ authors(record.creators) }}</p>
+<hr />
+{% set extra_format_mimetype = request.args.get('mimetype') %}
+{% if format_code == 'ef' and extra_format_mimetype %}
+<h3>{{ extra_format_mimetype | extra_formats_title }} Export</h3>
+{% else %}
+<h3>{{ format_title }} Export</h3>
+{% endif %}
+<pre style="white-space: pre-wrap;">{{data}}</pre>
+{% endblock record_body %}
+{% block record_body_extra %}{% endblock record_body_extra %}
+{%- block record_jsonld %}{%- endblock record_jsonld %}

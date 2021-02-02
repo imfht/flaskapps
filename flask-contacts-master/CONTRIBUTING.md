@@ -1,0 +1,1 @@
+The main objective of this repository is to provide an example of CRUD with Flask, maximum simplicity. If you want to add new features, please create a Fork of it and notify me of its existence so I can add it in the README as support material.

@@ -1,0 +1,203 @@
+= Semestrální práce 
+:toc:
+
+
+Součástí hodnocení je semestrální práce. Uvítáme, pokud si vyberete vlastní téma, které budete moci použít v jiném předmětu nebo sami pro sebe. Téma je třeba nechat si od nás schválit. Komplexnější témata mohou být po konzultaci s cvičícími uznaná jako jediná podmínka pro splnění předmětu.
+
+Ve všech případech (kromě případných explicitních výjimek) musí práce splňovat tyto požadavky:
+
+* musí být napsaná v jazyce Python verze 3.6 nebo vyšší (Cython se samozřejmě také počítá),
+* musí splnit zadání, na kterém jsme se dohodli,
+* musí být v gitovém repozitáři,
+* kód musí splňovat https://www.python.org/dev/peps/pep-0008/[konvence PEP8],
+* kód, komentáře i dokumentace musí být v angličtině,
+* commity musí obsahovat vhodně atomické změny a mít vysvětlující message,
+* kód musí být dostatečně pokryt testy (nechceme stanovovat číselnou hranici, použijte selský rozum),
+* projekt musí být zabalen jako pythonní balíček (za zveřejnění na PyPI pod svobodnou licencí jsou body navíc),
+* projekt by měl stavět na nějakém tématu probraném v předmětu NI-PYT.
+
+Nemusí jít nutně o nový projekt nebo nápad. *Přispění do existujícího open-source projektu je také možné.* Máte oblíbenou knihovnu v Pythonu a chybí vám funkce na zalévání kočiček? Dopiště ji. Na čemkoliv, co dává smysl, se dá domluvit.
+
+Pro nerozhodné časem připravíme několik témat, které můžete použít, budeme ale raději, pokud si zvolíte téma vlastní.
+
+
+== Termíny
+
+
+* *Téma schváleno do:* 9.12.2020 (předposlední cvičení)
+* *Odevzdáno do:* 31.1.2021 včetně, možnost pozdního odevzdání do 10.2.2021 s penalizací
+
+Pozdní odevzdání semestrálky do 10.2.2021 včetně s penalizací -10 bodů.
+Tato penalizace se nepočítá do podmínky 25 bodů za semestrálku.
+Je tedy možné mít 35+ bodů ze semestru a 25-10 ze semestrálky a stále dostat E.
+
+
+
+== Volná témata
+
+
+Následuje seznam témat, které si můžete po dohodě s námi zvolit, pokud nemáte téma vlastní. V žádném případě není vhodné na zde vypsaném tématu rovnou začít pracovat a doufat, že ho potom prostě jen odevzdáte. I téma z tohoto seznamu musí být odladěno a schváleno, témata uvedená zde jsou pouze rámcová.
+
+
+=== Synchronization between Google and Phabricator calendars
+
+
+In Showmax, we have two calendar systems which need to be synchronized.
+
+See also https://is.fit.cvut.cz/group/ssp/assignee/assignmentdetail?aid=900[SSP portal and subscribe there] to get a financial reward too.
+
+==== Goals 
+
+* Investigate possibilities of synchronization (both calendars have slightly different features)
+  and representation of different pieces of information in both calendars.
+* Investigate ways to keep them in sync when editing happens on either side.
+* Create a tool to synchronize calendar events from Google calendar to internal Showmax Phabricator installation via APIs,
+  email or other automated means. The tool should:
+** be documented (basic README, commented source code);
+** have proper logging implemented;
+** be either triggered regularly or run as a daemon.
+
+There is
+https://secure.phabricator.com/book/phabricator/article/calendar_imports/[an interface to synchronize Google calendar one way to Phabricator].
+However that doesn’t fit our requirements. For example:
+
+* Many calendars are too big on Google so the import ends with a timeout.
+* We need to be able to filter events somehow.
+* Events are not paired with Phabricator users (by email address).
+
+==== Required outputs
+
+Working prototype in Python that would pass code review
+and would run on our Jenkins machine in our Debian based docker container
+(we’ll help with this step)
+or in our private cloud (also running Debian based docker containers).
+It can use PostgreSQL database if needed.
+In case it is going to run as a daemon,
+it should be implemented as a https://12factor.net/[12 factor app].
+
+==== Point of contact
+
+Showmax, s.r.o.
+
+* mailto:adam.cincura@showmax.com[Adam Činčura]
+* mailto:jan.pipek@showmax.com[Jan Pipek]
+
+
+=== Automated API documentation
+
+
+In Showmax, we have a manually maintained API documentation. We want to move the documentation to
+the code using OpenAPI specification.
+
+See also https://is.fit.cvut.cz/group/ssp/assignee/assignmentdetail?aid=899[SSP portal and subscribe there]
+to get financial reward too.
+
+==== Goals
+
+* Given a Grape API and a corresponding hand-written documentation in the RST (ReStructuredText) format,
+annotate the source code of the API with the information found in the docs.
+
+* This requires you to parse the RST and for each documented Grape API end-point,
+locate the end-point in the given source file, and attach the information
+into the source in the format required by Swagger.
+
+* Then, Swagger can be executed to generate the actual documentation output.
+
+* The ultimate goal is to get rid of the handwritten doc altogether.
+
+* There are some troubles: the documentation is handwritten, and hence it will
+contain little deviations in style. You need to come up with heuristics at times
+to stick the right information from the handwritten doc into the appropriate places
+in the source code. However, this is doable, as the handwritten doc is fairly simple.
+
+* In case the tool would fail (this should be at most few percent of documentation
+that doesn’t repeat) it should give operator enough information on what to handle manually and how.
+
+==== Required outputs
+
+A working tool with complete source code. It must be possible to run the tool you’ve provided on
+at least three API source files and obtain correct, swagger-processable source file containing
+the original API with all the metadata from the original handwritten doc.
+
+==== Recommended sources
+
+* https://github.com/OAI/OpenAPI-Specification/
+
+* https://swagger.io/
+
+* https://github.com/ruby-grape/grape-swagger
+
+* https://swagger.io/tools/open-source/open-source-integrations/
+
+
+==== Point of contact
+
+Showmax, s.r.o.
+
+* mailto:adam.cincura@showmax.com[Adam Činčura]
+* mailto:jan.pipek@showmax.com[Jan Pipek]
+
+
+=== Synchronizace definic štítků mezi repozitáři na různých GitHubech/Labech/...
+
+Zadání spočívá ve vytvoření služby,
+která bude mít na starost synchronizaci definic štítků mezi různými repozitáři
+na různých službách.
+
+Uživatel připraví konfiguraci štítků (jména, barvy, popisy) a konfiguraci
+repozitářů (služba, identifikátor repozitáře).
+Ideálně do gitového repozitáře.
+
+Služba pak zajistí, že všechny definované repozitáře budou mít tyto štítky definované.
+
+Přístupové údaje ke službám se budou zadávat postranním kanálem.
+Nebudou tedy součástí konfigurace, aby konfigurace mohla být veřejná.
+
+Mělo by se jednat o modulární aplikaci, která musí být jednoduše rozšířitelná
+o další platformy. Součástí odevzdání musí být podpora pro GitHub a další jinou
+službu (Pagure, GitLab...).
+
+Možno implementovat jako webovou aplikaci nebo jako cron job běžící na nějakém CI.
+
+Kontaktní osobou je Miro Hrončok.
+
+=== Lazy converter of YouTube playlists into podcasts
+
+The LinuxDays conference has produced a lot of video recordings of many interesting presentations. It would be nice if there was a service turning those recordings into audio-only podcasts which could then allow listeners to download and listen to them without internet connection.
+
+The goal is to automate this without need to download and convert all the audio files in advance.
+
+==== Goals 
+
+* Investigate a way how to interact with the YouTube API to get a list of videos' metadata from a given playlist.
+* Create a web service presenting these metadata in a form of an RSS/Atom feed. Each item should contain a linked audio file which would be generated on-the-fly when downloaded by user.
+* Whenever a user tries to download a linked audio file, the app should download the MPEG-DASH audio from YouTube using https://ytdl-org.github.io/youtube-dl/index.html[youtube-dl] or anything similar, convert the downloaded file in order to be accepted by a common player (ie. change container from MPEG-DASH to regular MPEG using for instance FFmpeg) and stream it to the user.
+* The converted audio files should be cached by the app. If there are two concurrent downloads of the same file, the pull from YouTube should be done only once. The cache should be configurable.
+
+==== Required outputs
+
+A standalone application configured by a simple config file. The app should be published under a free software license of your choice.
+
+==== Point of contact
+
+mailto:ondrej.caletka@cesnet.cz[Ondřej Caletka]
+
+
+
+=== MicroPythonator
+
+Design and implement an application that allows mass flashing and testing of ESP8266/ESP32 devices with MicroPython.
+The user provides an image with MicroPython and a script to run on the flashed devices.
+When a new device is plugged in, it gets immediately flashed and the script is run on the device.
+When the script exists cleanly or errors, signalize it on the device appropriately (for example via the builtin LED).
+
+ * use existing free software tools to flash individual devices
+ * asynchronously run the flashing in parallel
+ * provide an user interface for the tool (GUI, TUI or web UI)
+   * it lets the user select the image, the script and configure how success/failure is signaled
+   * it displays the list of ports and their status
+ * release as a well documented and tested free (open source) software
+
+==== Point of contact
+
+mailto:encukou@gmail.com[Petr Viktorin]

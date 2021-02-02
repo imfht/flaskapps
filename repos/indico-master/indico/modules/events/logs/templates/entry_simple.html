@@ -1,0 +1,37 @@
+{% extends 'events/logs/entry_base.html' %}
+
+{% macro render_diff(data) %}
+    {% for key, values in data.items() if key != '_diff' %}
+        {{ render_row(key, compare(*values), 'diff preformatted') }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro render_row(caption, content, content_class='') %}
+    <tr class="i-table content">
+        <td class="i-table caption log-caption">
+            {{ caption }}
+        </td>
+        <td class="i-table value searchable">
+            <div class="{{ content_class }}">
+                {{- content -}}
+            </div>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% block entry_detail_rows %}
+    {% for key, value in data if value not in ('', none) %}
+        {% if value._diff %}
+            {{ render_diff(value) }}
+        {% else %}
+            {{ render_row(key, value) }}
+        {% endif %}
+    {% else %}
+        <tr class="i-table content">
+            <td class="i-table caption log-caption"></td>
+            <td class="i-table value empty">
+                {% trans %}No data to display{% endtrans %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'forms/base_widget.html' %}
+{% from 'message_box.html' import message_box %}
+
+{% macro render_track(track_id, title, role_data, global=false) %}
+    <li class="i-box no-shadow js-track-config {{ 'highlight' if global else '' }}">
+        <div class="i-box-header">
+            <span class="i-box-title">{{ title }}</span>
+        </div>
+        <div class="i-box-content">
+            {% if caller %}
+                <p class="text-superfluous">
+                    {{ caller() }}
+                </p>
+            {% endif %}
+        <div id="track-roles-{{ 'global' if global else track_id }}" data-track-id="{{ track_id }}"></div>
+    </li>
+{% endmacro %}
+
+{% block html %}
+    <input type="hidden" id="{{ field.id }}" name="{{ field.name }}" value="{{ field._value() }}">
+    <div id="role-widget-{{ field.id }}" class="abstract-role-widget">
+        <ul class="abstract-role-list">
+            {% if not field.tracks %}
+                {% call message_box('warning') %}
+                    {% trans -%}
+                        Since this event has no tracks, reviewer roles are disabled. Only judgment is available.
+                    {%- endtrans %}
+                {% endcall %}
+            {% endif %}
+            {% call render_track('*', _("All Tracks"), field.data['global'], global=true) -%}
+                {% trans %}These users will be able to access/review all tracks in the event.{% endtrans %}
+            {%- endcall %}
+            {% for track in field.tracks %}
+                {{ render_track(track.id, track.title, field.data[track.id|string]) }}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#{{ field.id }}').trackrolewidget({
+            containerElement: $('#role-widget-{{ field.id }}'),
+            permissionsInfo: {{ field.permissions_info|tojson }},
+            eventId: {{ field.event.id }},
+            eventRoles: {{ field.event_roles|tojson }},
+            categoryRoles: {{ field.category_roles|tojson }},
+        });
+    </script>
+{% endblock %}

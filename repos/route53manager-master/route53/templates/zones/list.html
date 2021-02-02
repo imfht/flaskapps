@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block breadcrumbs %}
+  <li>Zones</li>
+{% endblock %}
+
+{% block body %}
+<h2>Zones</h2>
+<p><a href="{{ url_for('zones.zones_new') }}">Add new zone</a></p>
+<ul>
+  {% for zone in zones %}
+  <li>
+    <a href="{{ url_for('zones.zones_detail', zone_id=zone['Id']|shortid) }}">{{ zone['Name'] }}</a>
+    <a href="{{ url_for('zones.zones_records', zone_id=zone['Id']|shortid) }}"><small>Records</small></a>
+    <a href="{{ url_for('zones.zones_clone', zone_id=zone['Id']|shortid) }}"><small>Clone</small></a>
+    <a href="{{ url_for('zones.zones_delete', zone_id=zone['Id']|shortid) }}"><small>Delete</small></a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

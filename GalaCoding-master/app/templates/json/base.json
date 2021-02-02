@@ -1,0 +1,8 @@
+{
+  "status": "{{ rsp['status'] }}",
+  "response": {
+{% block content %}
+{% endblock %}
+  },
+  "error": {{ rsp['err_code'] }}
+}

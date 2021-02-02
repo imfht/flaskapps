@@ -1,0 +1,31 @@
+# Python stuff
+__pycache__
+
+# Build stuff
+build/
+dist/
+*.egg
+*.egg-info/
+
+# Editor stuff
+.vscode
+
+# Virtual Environment
+.venv
+.testing-venv
+
+# Logs
+*.log
+
+# External program testing
+program
+main.py
+
+# Auto-generated documentation
+documentation.md
+openapi.json
+
+# Jekyll site
+_site
+.jekyll-cache
+Gemfile.lock

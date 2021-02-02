@@ -1,0 +1,17 @@
+*.pyc
+app.db
+./tmp
+./build/*
+./.idea
+./.idea/*
+env
+venv
+*.sublime*
+/data
+/node_modules
+/app/static
+/app/templates
+/info.log
+/errors.log
+/.idea
+/set_env.bat

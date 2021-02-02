@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta lang="en">
+    {% if title %}
+    <title>{{ title }} | URL Shortener</title>
+    {% else %}
+    <title>Pygmy | URL Shortener </title>
+    {% endif %}
+    <!--Mobile Friendly-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="/static/logo/logov2.png"/>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script src="/static/js/app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pygmy(pygy.co): Open-source, extensible & easy-to-use URL shortener. One of the most powerful, feature-rich open-source URL shortener. Pygy.co is written in python 3">
+    <meta name="keywords" content="Pygmy,URL Shortener,pygy,pygyco,open source url shortener,python url shortener">
+  </head>
+  <body>
+    <nav class="navbar navbar-light navbar-fixed-top" role="navigation" style="background-color:#6FBF45">
+    <!--#00FA9A;">-->
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" style="color: white; font-size: 30px">
+            <img style="background-color: white;"
+                 src="/static/logo/logov2.svg"
+                 onerror="this.src='/static/logo/logov2.png'"
+                 alt="Pygy.co (Pygmy) logo"
+                 height="70"
+                 width="150">
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            {% if request.COOKIES.refresh_token %}
+              <li><a href="/dashboard">DASHBOARD</a></li>
+            {% endif %}
+            <li><a href="/about">ABOUT</a></li>
+            <li><a href="/contact">CONTACT</a></li>
+            <li><a href="https://github.com/amitt001/pygmy">GITHUB</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+{% if not request.COOKIES.refresh_token %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">SIGN UP <span class="caret"></span></a>
+              <ul class="dropdown-menu dropdown-lr" role="menu">
+                <div class="col-lg-12">
+                  <div class="text-center">
+                    <h3><b>SIGN UP</b></h3>
+                  </div>
+                  <form id="ajax-register-form" action="/signup" method="post" role="form" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <input type="text" name="f_name" id="f_name" tabindex="1" class="form-control" placeholder="First Name" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="text" name="l_name" id="l_name" tabindex="1" class="form-control" placeholder="Last Name" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="password" id="signup_password" tabindex="2" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" name="confirm_password" id="confirm_password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-xs-6 col-xs-offset-3">
+                          <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Register Now">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">LOGIN <span class="caret"></span></a>
+              <ul class="dropdown-menu dropdown-lr" role="menu">
+                <div class="col-lg-12">
+                  <div class="text-center">
+                    <h3><b>LOGIN</b></h3>
+                  </div>
+                  <form id="ajax-login-form" action="/login" method="post" role="form" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="username">Email</label>
+                      <input type="text" name="email" id="username" tabindex="1" class="form-control" placeholder="Email" value="" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" name="password" id="login_password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <!--<div class="col-xs-7">-->
+                          <!--<input type="checkbox" tabindex="3" name="remember" id="remember">-->
+                          <!--<label for="remember"> Remember Me</label>-->
+                        <!--</div>-->
+                        <div class="col-xs-5 pull-right">
+                          <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
+                        </div>
+                      </div>
+                    </div>
+                    <!--Forgot password block-->
+                    <!--<div class="form-group">-->
+                      <!--<div class="row">-->
+                        <!--<div class="col-lg-12">-->
+                          <!--<div class="text-center">-->
+                            <!--<a href="/forgot" tabindex="5" class="forgot-password">Forgot Password?</a>-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                    <!--</div>-->
+                  </form>
+                </div>
+              </ul>
+            </li>
+{% else %}
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{ request.COOKIES.f_name }}<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <!--<li><a href="/settings">Settings</a></li>-->
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </li>
+{% endif %}
+        </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

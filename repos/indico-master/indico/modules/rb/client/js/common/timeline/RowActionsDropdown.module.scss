@@ -1,0 +1,47 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'rb:styles/palette';
+
+.actions-dropdown {
+  :global(.dropdown.icon) {
+    display: none;
+  }
+
+  .dropdown-button {
+    color: $gray;
+    background: none !important;
+    padding-bottom: 1em;
+
+    &:hover {
+      color: $booking-color;
+    }
+
+    &:global(.button) {
+      padding: 0 !important;
+    }
+  }
+
+  .open {
+    :global(.icon) {
+      color: $dark-orange !important;
+    }
+  }
+}
+
+.rejection-form {
+  margin: 1.25em;
+
+  :global(.button) {
+    background-color: $dark-red !important;
+    margin-top: 1.3em;
+  }
+
+  .form-description {
+    padding-bottom: 1em;
+  }
+}

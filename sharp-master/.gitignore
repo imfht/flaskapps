@@ -1,0 +1,7 @@
+*.pyc
+__pycache__
+.vscode
+*.egg-info
+build
+dist
+playground/

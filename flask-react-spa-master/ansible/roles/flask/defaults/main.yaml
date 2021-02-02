@@ -1,0 +1,62 @@
+---
+dependencies:
+  - '@Development Tools'
+  - python-setuptools
+  - python36
+  - python36-devel
+  - python36-pip
+  - python36-setuptools
+  - python36-virtualenv
+  - git
+  - libffi-devel
+  - openssl-devel
+
+project_virtualenv_dir: '{{ virtualenv_dir }}/{{ project_name }}'
+venv_exec: '{{ project_virtualenv_dir }}/bin/venv_exec'
+project_dir: '{{ project_virtualenv_dir }}/{{ project_name }}'
+requirements_path: '{{ project_dir }}/requirements.txt'
+static_dir_name: 'static'
+articles_dir_name: 'articles'
+
+__all_the_env_vars__:
+  FLASK_ENV: '{{ FLASK_ENV | default(omit) }}'
+  FLASK_SECRET_KEY: '{{ FLASK_SECRET_KEY | default(omit) }}'
+  FLASK_DEBUG: '{{ FLASK_DEBUG | default(omit) }}'
+  FLASK_STATIC_FOLDER: '{{ FLASK_STATIC_FOLDER | default(omit) }}'
+  FLASK_DOMAIN: '{{ FLASK_DOMAIN | default(omit) }}'
+  SESSION_COOKIE_SECURE: '{{ SESSION_COOKIE_SECURE | default(omit) }}'
+
+  FLASK_DATABASE_NAME: '{{ FLASK_DATABASE_NAME | default(omit) }}'
+  FLASK_DATABASE_USER: '{{ FLASK_DATABASE_USER | default(omit) }}'
+  FLASK_DATABASE_PASSWORD: '{{ FLASK_DATABASE_PASSWORD | default(omit) }}'
+  FLASK_DATABASE_HOST: '{{ FLASK_DATABASE_HOST | default(omit) }}'
+  FLASK_DATABASE_PORT: '{{ FLASK_DATABASE_PORT | default(omit) }}'
+
+  FLASK_MAIL_HOST: '{{ FLASK_MAIL_HOST | default(omit) }}'
+  FLASK_MAIL_PORT: '{{ FLASK_MAIL_PORT | default(omit) }}'
+  FLASK_MAIL_HOST_USER: '{{ FLASK_MAIL_HOST_USER | default(omit) }}'
+  FLASK_MAIL_HOST_PASSWORD: '{{ FLASK_MAIL_HOST_PASSWORD | default(omit) }}'
+  FLASK_MAIL_DEFAULT_SENDER_NAME: '{{ FLASK_MAIL_DEFAULT_SENDER_NAME | default(omit) }}'
+  FLASK_MAIL_DEFAULT_SENDER_EMAIL: '{{ FLASK_MAIL_DEFAULT_SENDER_EMAIL | default(omit) }}'
+  FLASK_MAIL_USE_TLS: '{{ FLASK_MAIL_USE_TLS | default(omit) }}'
+  FLASK_MAIL_USE_SSL: '{{ FLASK_MAIL_USE_SSL | default(omit) }}'
+
+flask_environment: '{{ __all_the_env_vars__ | filter_omitted }}'
+
+run_migrations: yes
+run_fixtures: no
+import_articles: yes
+
+supervisor_virtualenv_dir: '{{ virtualenv_dir }}/supervisor'
+supervisord: '{{ supervisor_virtualenv_dir }}/bin/supervisord'
+supervisorctl: '{{ supervisor_virtualenv_dir }}/bin/supervisorctl'
+supervisor_conf_dir: '/etc/supervisor'
+supervisord_conf_file: '{{ supervisor_conf_dir }}/supervisord.conf'
+supervisor_log_dir: '/var/log/supervisor'
+supervisord_log_file: '/var/log/supervisor/supervisord.log'
+supervisord_pid_file: '/var/run/supervisord.pid'
+supervisord_sock_file: '/var/run/supervisord.sock'
+
+celery: '{{ project_virtualenv_dir }}/bin/celery'
+celery_worker_log_file: '{{ application_log_dir }}/celery_worker.log'
+celery_beat_log_file: '{{ application_log_dir }}/celery_beat.log'

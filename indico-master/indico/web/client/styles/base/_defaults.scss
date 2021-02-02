@@ -1,0 +1,60 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+// -----------------------------------------------------------------------------
+// Custom mixins default variables
+// -----------------------------------------------------------------------------
+
+$default-border-radius: 2px;
+$default-transition-duration: 0.25s;
+$default-transition-function: ease-out;
+$default-transition-delay: null;
+
+$default-border-color: $pastel-gray;
+$default-border-style: solid;
+$default-border-width: 1px;
+
+$color-variation: 15%;
+$light-color-variation: 5%;
+
+$default-box-shadow-inset: null;
+$default-box-shadow-h-offset: 1px;
+$default-box-shadow-v-offset: 1px;
+$default-box-shadow-blur: 1px;
+$default-box-shadow-spread: null;
+$default-box-shadow-color: lighten($gray, $color-variation);
+
+// -----------------------------------------------------------------------------
+// Custom mixins
+// -----------------------------------------------------------------------------
+
+@mixin gradient($start-color, $end-color) {
+  background: $start-color;
+  background-image: linear-gradient(to bottom, $start-color, $end-color);
+}
+
+@mixin placeholder-color($color: inherit) {
+  &::-webkit-input-placeholder {
+    // Chrome/Opera/Safari
+    color: $color;
+  }
+
+  &::-moz-placeholder {
+    // Firefox 19+
+    color: $color;
+  }
+
+  &:-ms-input-placeholder {
+    // IE 10+
+    color: $color;
+  }
+
+  &:-moz-placeholder {
+    // Firefox 18-
+    color: $color;
+  }
+}

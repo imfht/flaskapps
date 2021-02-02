@@ -1,0 +1,8 @@
+Flask
+pyjwt
+requests
+oauthlib
+discord.py
+cachetools
+setuptools
+requests_oauthlib

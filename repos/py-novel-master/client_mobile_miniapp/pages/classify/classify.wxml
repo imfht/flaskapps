@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="navbar">
+    公羊阅读
+  </view>
+
+  <!-- 搜索 -->
+  <view class="search">
+    <view class="input" bindtap="handleGoSearchPage">
+      <image class="icon" src="../../images/search.png"></image>
+      <view style="margin-left: 20rpx">搜索</view>
+    </view>
+  </view>
+
+  <view class="body">
+    <!-- 左边分类列表 -->
+    <scroll-view class="classify" scroll-y>
+      <view wx:for="{{classifyList}}" wx:key="{{item.id}}" 
+        bindtap="handleClickClassify" data-id="{{item.id}}" 
+        class="classify-item {{selectedClassify === item.id ? 'classify-active' : ''}}">
+        {{item.desc}}
+      </view>
+    </scroll-view>
+
+    <!-- 右边小说列表 -->
+    <scroll-view class="novel" scroll-y>
+      <view wx:for="{{novelList}}" wx:key="{{item.book_name}}" class="novel-item">
+        <view class="novel-wrapper" bindtap="handleGoIntroPage" data-url="{{item.book_url}}">
+          <image src="../../images/cover.png" class="novel-cover"></image>
+          <view class="novel-novelname">{{item.book_name}}</view>
+          <view class="novel-authorname">{{item.author_name}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

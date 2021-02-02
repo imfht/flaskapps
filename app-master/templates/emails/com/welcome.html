@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block greeting %}
+  <h1 style="margin-top: 0; color: #333333; font-size: 22px; font-weight: bold; text-align: left;" align="left">
+    Welcome!
+  </h1>
+{% endblock %}
+
+{% block content %}
+  {% if alias %}
+    {% call text() %}
+      This is the first email you receive via your <b>first alias</b> <em>{{ alias }}</em>.
+    {% endcall %}
+
+    {% call text() %}
+      This alias is automatically created for receiving SimpleLogin news and tips -
+      feel free to <a href="{{ URL + '/dashboard/setting#notification' }}">disable</a> it if you don't need any of
+      these.
+    {% endcall %}
+  {% endif %}
+
+  {% call text() %}
+    To better secure your account, we recommend enabling Multi-Factor Authentication (MFA) or WebAuthn (Yubikey) on your
+    <a href="{{ URL + '/dashboard/setting/#totp' }}">Setting page</a>.
+  {% endcall %}
+
+  {% call text() %}
+    If you are using Firefox or a Chromium-browser like Chrome, Edge, Brave, you can
+    install our <a href="https://addons.mozilla.org/firefox/addon/simplelogin/">Firefox add-on</a>
+    or <a href="https://chrome.google.com/webstore/detail/dphilobhebphkdjbpfohgikllaljmgbn">Chrome extension</a>
+    to create aliases in one click (literally).
+  {% endcall %}
+
+  {% call text() %}
+    <img src="https://simplelogin.io/images/one-click-alias.gif" style="max-width: 80%; margin: auto; border: 1px solid">
+  {% endcall %}
+
+  {% call text() %}
+    SimpleLogin is also available on
+    <a href="https://play.google.com/store/apps/details?id=io.simplelogin.android">Android</a> and
+    <a href="https://apps.apple.com/app/id1494359858">iOS</a>
+    so you can create new aliases on the fly.
+  {% endcall %}
+
+  {% if user.in_trial() and user.trial_end %}
+    {% call text() %}
+      When you signed up, you can use all premium features like <em>custom domain</em>, <em>alias directory</em>,
+      <em>mailbox</em>,
+      <em>PGP</em> without any limit during 7 days (the "trial period"). <br>
+      No worries: all aliases you create during this period
+      will continue to work normally even if you don't upgrade.
+    {% endcall %}
+  {% endif %}
+
+  {% call text() %}
+    At any time, you can reach out to us by: <br>
+    <ul>
+      <li>Simply replying to this email </li>
+      <li>On <a href="https://twitter.com/simple_login">Twitter</a> </li>
+      <li>On <a href="https://www.reddit.com/r/Simplelogin/">Reddit</a></li>
+    </ul>
+  {% endcall %}
+
+  {% call text() %}
+    SimpleLogin Team.
+  {% endcall %}
+
+{% endblock %}
+

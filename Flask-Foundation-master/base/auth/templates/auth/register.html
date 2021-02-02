@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="span4 well">
+
+            {% import "bootstrap_wtf.html" as wtf %}
+
+            <form action="{{ url_for('auth.register') }}" method="POST">
+                <legend>{{ _('New to Foundation? Sign up!') }}</legend>
+                {{ form.hidden_tag() }}
+                {{ wtf.horizontal_field(form.username) }}
+                {{ wtf.horizontal_field(form.email) }}
+                {{ wtf.horizontal_field(form.password) }}
+                {{ wtf.horizontal_field(form.password_confirm) }}
+                <div class="form-actions">
+                    <button name="action_save" type="submit" class="btn btn-primary">{{ _('Register') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

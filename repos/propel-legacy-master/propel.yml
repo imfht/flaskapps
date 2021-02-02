@@ -1,0 +1,174 @@
+################################################################################
+#                                   Propel
+#
+# Propel is tool that help you deploy site
+#
+# Config file
+# propel --all-webs  to deploy all sited
+# or
+# propel -w mysite.com
+################################################################################
+
+---
+# VIRTUALENV
+virtualenv:
+
+  # The name of the virtualenv. Required for python web/workers
+  name: ""
+
+  # The directory of the virtualenvs, by default it's /root/.virtualenvs
+  directory: ""
+
+   # (bool) if True, it will rebuild the virtualenv
+  rebuild: ""
+
+  # Add extra options for pip, ie: --process-dependency-links --upgrade
+  pip_options: ""
+
+
+# WEB:
+# list of dict of web sites/application to deploy
+# Site can be launched individually: [ --websites [site1.com site.com ...]]
+web:
+  -
+    # The site name
+    name: "mysite.com"
+
+    # for python application only, the application entry point, ie: `server:app`
+    application: "run_mysite:flask_app"
+
+    # A list of key/value pairs in the form KEY="val",KEY2="val2" that will be placed in the supervisord process’ environment
+    environment: ""
+
+    # NGINX
+    # The config below is optional.
+    nginx:
+      # Port, optional. Propel will launch the sites on port 80 by default
+      port: 80
+      # Server name options: if the server name is different than name, or has multiple server_name
+      server_name: "mysite.com"
+      # Log dir: optional
+      logs_dir: ""
+      # root dir: optional
+      root_dir: ""
+      # aliases: dict
+      aliases:
+        "/static": "mysite/static"
+      #
+      force_non_www: True
+      #
+      force_www: False
+      #
+      server_directives: ""
+      #
+      ssl_directives: ""
+      #
+      ssl_cert: ""
+      #
+      ssl_key: ""
+
+    # GUNICORN
+    # Optional. Python only
+    gunicorn:
+      workers: 4
+      threads: 8
+
+    # REMOVE
+    # When True it will  remove the site
+    remove: False
+
+    # EXCLUDE
+    # When True it will not try to build the site
+    exclude: False
+
+  - name: "sub.mysite.com"
+    application: "run_submysite:flask_app"
+    nginx:
+      aliases:
+        "/static": "my_static_dir"
+      ssl_cert: "ssl/site.cert"
+      ssl_key: "ssl/site.key"
+    remove: False
+
+  - name: "myphphtmlsite.com"
+    nginx:
+      root_dir: "html"
+
+
+
+# SCRIPTS
+# A dict of all scripts to execute
+# Script can be run by doing [ --scripts [script_name_1, name_2 ....]]
+scripts:
+
+  # BUILTIN SCRIPT
+  # Scripts that get executed by propel
+
+  # Script to run before
+  before_all:
+    - command: "$PYTHON_ENV myscript.py"
+
+  # Run after all
+  after_all:
+    - command: "$PYTHON_ENV myscript.py"
+
+  # run before web deployment
+  before_web:
+    - command: "$PYTHON_ENV myscript.py"
+
+  # run after web deployment
+  after_web:
+    - command: "$PYTHON_ENV myscript.py"
+
+  # run before web deployment
+  before_workers:
+    - command: "$PYTHON_ENV myscript.py"
+
+  # run after web deployment
+  after_workers:
+    - command: "$PYTHON_ENV myscript.py"
+
+  # run this script when UNDEPLOYING
+  undeploy:
+    - command: ""
+
+  # CUSTOM SCRIPT
+
+  # MY_SCRIPT_NAME: Custom script by name
+  my_script_name:
+    -
+      command: ""
+    -
+      directory: ""
+      command: "$PYTHON_ENV myscript.py"
+
+
+# WORKERS:
+# Script or apps that run in the background using Supervisor
+workers:
+
+  # To run this: propel -k managers
+  managers:
+    -
+      name: "manager1"
+      command: "$PYTHON_ENV trigger.py"
+      environment: ""
+
+  # To run this: propel -k jobs
+  jobs:
+    -
+      name: "myworker1"
+      command: "$PYTHON_ENV myyworker1.py
+      environment: ""
+    -
+      name: "myworker2"
+      directory: ""
+      command: "$PYTHON_ENV myyworker2.py"
+      environment: ""
+      user: ""
+      exclude: True  # Prevent this worker from rerunning
+
+
+
+
+

@@ -1,0 +1,153 @@
+{% extends "base_templates/base.html" %}
+
+{% block header %}
+<title>SaaS Tutorial</title>
+
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+<link href="css/creative.min.css" rel="stylesheet">
+<link href="css/pricing.css" rel="stylesheet">
+{% endblock %}
+
+{% block body_attributes %}
+id="page-top"
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">ML SaaS Tutorial</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#pricing">Pricing</a>
+          </li>
+          {% if is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">Back To Dashboard</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="/login_page">Login</a>
+          </li>
+          {% endif %}
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Masthead -->
+<header class="masthead pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_slant-light" id="section-home">
+    <div class="h-100">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-6 text-white" id="main_heading">
+            <h2 class="heading mb-3">Flask + Stripe = Success</h2>
+            <div class="sub-heading">
+              <p class="mb-4">The best service out there.</p>
+              <p class="mb-5"><a class="btn btn-primary btn-lg pb_btn-pill js-scroll-trigger" href="#pricing"><span class="pb_font-14 text-uppercase pb_letter-spacing-1">See Pricing</span></a></p>
+            </div>
+          </div>
+          <div class="col-md-5 relative align-self-center shadow-lg">
+            <form id="signup-form" class="bg-white rounded"
+                  autocomplete="no" id="signup-form" action="/signup" method="post">
+                <h2 class="mt-0 mb-0 text-center">Sign Up For</h2>
+                <h2 class="mb-4 mt-0 text-center">Free Trial</h2>
+                <input type="text" class="form-control mb-2" required placeholder="Name" id="fieldForName" autocomplete="new-name">
+                <input type="email" name="email" class="form-control mb-2" required id="fieldForEmail" placeholder="Email" autocomplete="new-email">
+                <input type="password" name="password" class="form-control mb-2" type="password" name="password" required id="fieldForPassword" placeholder="Password" autocomplete="new-pass">
+                <div id="output" class="pb-2 row align-items-center justify-content-center text-danger font-weight-bold">{{ message }}</div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" value="" autocomplete="new-submit">
+                  <div id="register-text">Register</div>
+                  {% include 'partials/spinner.html' %}
+                </button>
+                
+            </form>
+          </div>
+      </div>
+    </div>
+
+    <style>
+      #signup-form {
+        padding: 60px; 
+        box-shadow: 1px 11px 68px -20px rgba(0, 170, 248, 0.705);
+      }
+      @media(max-width: 768px) {
+        #main_heading {
+          text-align: center!important;
+        }
+      }
+      
+    </style>
+</header>
+
+{% include 'partials/services.html' %}
+
+{% include 'partials/index_pricing.html' %}
+
+{% include 'partials/index_footer.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/creative.min.js"></script>
+<script>
+  $(function(){
+    $("#signup-form").submit(function(e) {
+      e.preventDefault();
+    });
+
+    $('#signup-form').keypress(function(e){
+      if(e.which == 13) {
+        if(this.checkValidity() === true) {
+          registerUser(this[0], true);
+          e.preventDefault();
+        }
+      }
+    });
+    
+    // On button click, get data and make AJAX call
+    $('.btn.btn-primary.btn-lg.btn-block').click(function(){
+      registerUser($('#signup-form')[0]);
+    });
+
+    function registerUser(element, valid = false) {
+      if(valid == true || element.checkValidity() === true) {
+        $('#register-text').css("display", "none");
+        $('#spinner').css("display", "flex");
+        data = JSON.stringify({
+          name: $('#fieldForName').val(),
+          email: $('#fieldForEmail').val(), 
+          password: $('#fieldForPassword').val()
+        })
+      
+      ajax('/signup', 'POST', data,
+            function(response){
+              json_obj = JSON.parse(response);
+              url = json_obj.message;
+              window.location.replace(url);
+            },
+            function(error){
+              $('#spinner').css("display", "none")
+              $('#register-text').css("display", "block");
+              json_obj = JSON.parse(error.responseText);
+              $('#output').html(json_obj.message);
+            }
+      )
+      }
+    }
+});
+</script>
+{% endblock %}

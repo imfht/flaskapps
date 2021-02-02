@@ -1,0 +1,34 @@
+-i "https://mirrors.aliyun.com/pypi/simple"
+alembic==1.4.2
+blinker==1.4
+click==7.1.1
+cssmin==0.2.0
+flask-assets==2.0
+flask-caching==1.8.0
+flask-ckeditor==0.4.3
+flask-debugtoolbar==0.11.0
+flask-dropzone==1.5.4
+flask-mail==0.9.1
+flask-migrate==2.5.3
+flask-sqlalchemy==2.4.1
+flask-wtf==0.14.3
+flask==1.1.2
+itsdangerous==1.1.0
+jinja2==2.11.1
+jsmin==2.2.2
+mako==1.1.2
+markupsafe==1.1.1
+python-dateutil==2.8.1
+python-dotenv==0.12.0
+python-editor==1.0.4
+python-http-client==3.2.7
+redis==3.4.1
+sendgrid==5.3.0
+six==1.14.0
+sqlalchemy==1.3.15
+webassets==2.0
+werkzeug==1.0.1
+wtforms==2.2.1
+# dev
+pathtools==0.1.2
+watchdog==0.10.2

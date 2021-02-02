@@ -1,0 +1,759 @@
+/*@import "../node_modules/react-image-gallery/styles/scss/image-gallery.scss";*/
+/*妈的这个，css必须这里引入，不然根本不能看 。。。我修改了源码，现在改为导入自己的*/
+/*@import "../node_modules/react-image-gallery/styles/css/image-gallery.css";*/
+@import "./image-gallery.css";
+
+body {
+  margin: 0;
+  padding: 0;
+  /*background: #f4f6f9;*/
+  color: #222;
+  font-family: 'Raleway', sans-serif;
+  /*background-image: url('../public/ace.jpg');*/
+}
+
+.category-bar{
+  margin: auto;
+  height: 5rem;
+  /*background-color: darkcyan;*/
+  /*border: 10px solid blue;*/
+  /*border-image: url('../public/op1.jpeg') 50% round;*/
+
+
+}
+
+.category-nav{
+  /*background-color: darkcyan; */
+  height: 5rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  /*border: 2px solid darkorchid;*/
+
+  width: 100%;
+  margin-left: 0;
+
+  padding-left: 10.4%;
+  padding-right: 10.4%;
+}
+
+.category-item{
+  width: 85%; /*必须设置一个宽度，上面的align-items才有效。。什么鬼 */
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: lavender;
+  /*border-color: #ffe484;*/
+  
+
+  padding-left: 0;
+  padding-right: 0;
+  margin: auto;
+}
+
+.category-item div{
+  position: absolute;;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.category-item img{
+  max-width: 100%;
+  /*position: absolute;*/
+}
+
+.category-item span{
+  /*position: absolute;*/
+  position: relative;
+  left: -50%;
+  color: black;
+  white-space: nowrap;
+}
+
+.manga-view{
+  /*background-image: url('../public/images/black_border.png');*/
+  border: 20px solid blue;
+  top: .8rem;
+  /*原来雪花是33%。。好像20效果更好也*/
+  border-image: url('../public/images/snow.png') 20 20 20 20 round;
+
+  /*border: 40px solid blue;*/
+  /*border-image: url('../public/images/yugioh.png') 140 140 140 140 round;*/
+
+  /*border: 20px solid blue;*/
+  /*border-image: url('../public/images/black_border.png')  ;*/
+  /*border-image-slice: 20 20 20 20 ;*/
+
+  /*background-size: cover;*/
+
+  margin-bottom: 6rem;
+  padding-bottom: 1.2rem;
+}
+
+.manga-item{
+  /*border: 1px solid blue;*/
+  /*border-image: url('../public/images/op1.jpeg') 50% repeat;*/
+
+  /*好像同时指定宽高是不行的，看你想用哪个当做标准了，一般是用width，毕竟横向捏着更难受*/
+  /*height: 30%;*/
+  /*width: 16.6%;*/
+  white-space:nowrap; 
+
+  /*重写col的padding*/
+  padding-left: .8%;
+  padding-right: .8%;
+  /*margin-bottom: .5rem;*/
+}
+
+.manga-item-content{
+  object-fit: fill;
+  margin-top: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.manga-item-image{
+  /*如果height定义了具体数字那就是可以使用background，不然高度是0.。。但是这样就没有圆角了*/
+  height: 17rem;
+  /*width: 95%;*/
+  background-size: cover;
+  border-radius: 10px;
+  border: 2px solid blue;
+  border-color: darkmagenta;
+
+}
+
+/*这个没用啦，哈哈哈，用background自适应咯 哦也*/
+.manga-item img{
+  border-radius: 10px;
+  border: 2px solid blue;
+  height: 95%;
+  width: 95%;
+}
+
+.manga-item span{
+  color: black;
+  font-size: medium;
+}
+
+.manga-item p{
+  color: blueviolet;
+}
+
+.last-update{
+  /*background-color: aliceblue;*/
+  background: rgba(240, 248, 255, 0.8);
+  height: 1.9rem;
+  position: absolute;
+  bottom: 2.2rem;
+  width: 88%;
+  border-radius: 2px;
+}
+
+.no-result {
+  font-size: 2rem;
+}
+
+.no-result img{
+  width: 16rem;
+  float: right;
+  margin-right: 1rem
+}
+
+.no-result p{
+  float: left;
+  text-align: left;
+}
+
+.no-result-txt{
+  float: left;
+  margin-top: 4.5rem;
+  /*margin-left: 3rem;*/
+  margin-right: 0;
+  margin-bottom: 2rem;
+
+}
+
+.logo{
+  /*border: 2px solid red;*/
+  background-color: currentColor;
+  background-color: #3d3d3d;
+  height: 10rem;
+}
+
+.logo-center{
+  height: 10rem;
+  /*下面三行用于居中*/
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*这里还有其他的naruto&sasuke图片*/
+.logo img{
+  height: 9rem;
+  max-width: 100%; /*神器1*/
+}
+
+.logo-soul img{
+  height: 10rem;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  /*height: 50%*/
+  /*width: 100%;*/
+}
+
+.logo-fluid{
+  position: relative;
+  width: 100%;
+  height: 10rem;
+  float: left;
+  /*textAlign: right;*/
+  display: flex;
+  /*用了反而svg不居中了。。。什么鬼）*/
+  /*align-items: center;*/
+  /*left: 20rem;*/
+  /*display: none;*/
+}
+
+/*原来height用的auto是符合文字大小的高度*/
+.logo-fluid svg{
+  font-weight:bold;
+  max-width:30rem;
+  height:10rem;
+  top:50%;
+  display: block;
+  margin: 0 auto;
+  shape-rendering: crispEdges;
+  font-family: "Hiragino Sans GB", "Microsoft YaHei",
+             "WenQuanYi Micro Hei", sans-serif;
+}
+
+
+.logo-text{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/*原来真的有用。。。，原来用在sasuke_left上，变白了。。。 ;*/
+.mix-blend{
+  mix-blend-mode: screen;
+}
+
+.search-bar{
+  height: 5rem;
+}
+
+.search-pre{
+
+}
+
+.ft1{
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 11%;
+  margin-right: 0;
+  width: 10%;
+  top: .3rem;
+}
+
+.ft1 img{
+  max-width: 100%;
+  height: 5rem;
+  margin-top: 1rem;
+  margin: auto;
+  float: right;
+  transform: scaleX(-1);
+  filter: FlipH;
+  margin-right: 20%;
+}
+
+.ft2{
+  padding-left: 0;
+  padding-right: 0;
+  width: 10%;
+  margin-left: 0;
+  margin-right: 0;
+  top: .3rem;
+}
+
+.ft2 img{
+  max-width: 100%;
+  height: 5rem;
+  margin-top: 1rem;
+  margin: auto;
+  float: left;
+  margin-left: 20%;
+}
+
+.input-control{
+  top: 1.3rem;
+  width: 34.5%;
+}
+
+/*button-control的padding可以整个直接移动 categorybar下移，好像他才是控制权。。*/
+.button-control{
+  top:1rem; /*top 没用...，只能用padding*/
+  height: 5rem;
+  padding: 1.3rem;
+}
+
+.input-text{
+  font-size: 16;
+  height: 3rem;
+}
+
+.loader{
+  margin-top: 20px;
+  font-size: 16pt;
+  /*transform:scale(0.3)*/
+}
+
+.loader-info img{
+  height: 18rem;
+}
+
+.loader span{
+  margin-left: 3rem;
+}
+
+
+
+/*  ------------------------------------ info page ---------------------------------*/
+
+.info-page{
+  height: auto;
+  top: 30px;
+  border: 4px solid #3d3d3d;
+  /*background-color: darkgray;*/
+  background: rgba(240, 248, 255, 0.8);
+  /*border-image: url('../public/images/fire_border.png') 50% repeat ;*/
+  min-height: 800px;
+  border-width: 20px;
+  border-image: url('../public/images/snow.png') 20 20 20 20 round;
+  border-image-outset: 1;
+  /*border-bottom-color: transparent;*/
+  margin-bottom: 5rem;
+}
+
+.info{
+  /*same with .cover*/
+  height: 28rem; 
+  border: 2px solid black;
+  padding: 10px 20px;
+  margin-top: 1rem;
+  /*padding: 5rem*/
+  border-color: darkmagenta;
+  /*width: 50%;*/
+  /*float: right;*/
+}
+
+.info div{
+  text-align: left;
+  line-height: 2;
+  position: absolute;
+  z-index: 0;
+}
+
+.info-image{
+  position: absolute;
+  z-index: 1; 
+  bottom:0px;
+  margin-left: 60px;
+}
+
+.mengbi{
+  position: absolute;
+  width: 80px;
+  /*margin-top: 90px;*/
+  bottom: 2px;
+  left: 15%;
+}
+
+.disco{
+  position: absolute;
+  width: 30%; 
+  bottom: 1px;
+  left: 10%;
+}
+
+.auto-type{
+  position: absolute;
+  color: black;
+  font-weight: 400;
+  bottom: 110px;
+  z-index: 3;
+  left: 4rem;
+  /*width: 10rem;*/
+}
+
+.buka{
+  /*mix-blend-mode: multiply;*/
+  width: 14rem;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.cover{
+  /*border: 3px solid black;  */
+  /*height: 360px;*/
+  /*height: 25rem;*/
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-top: 1rem;
+  background-color: azure;
+
+  border-top-style: inset;
+  border-left-style: inset;
+  border-bottom-style: outset;
+  border-right-style: outset;
+  padding: .2rem;
+  padding-right:0.5rem;
+  padding-bottom: 1rem;
+  /*width: 80%;*/
+  height: 28rem;
+}
+
+.cover img{
+  width: 87%;
+  height: 100%;
+  /*border: 1px solid #8a4419;*/
+  /*border-style: inset;*/
+  filter: drop-shadow(5px 5px 5px #222);
+  margin: auto;
+}
+
+.summary{
+  border: 2px solid black; 
+  text-align: center; 
+  /*注意不能用top，因为top会导致overflow，用margin，top能实现的，margin都能，甚至可以用margin-top直接替代*/
+  /*top: 2rem;*/
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+}
+
+.summary img{
+  width: 10rem;
+}
+
+.summary-title{
+  color: blue;
+  font-size: 13pt;
+  font-weight: 400;
+  /*color: white;*/
+  text-shadow: 2px 2px 4px aqua;
+  /*text-shadow: 1px 1px 1px black, 0 0 2px white, 0 0 5px white;*/
+
+}
+
+.summary-content{
+ /*border: 3px solid black; */
+ padding: .5rem 0; 
+ text-align: left; 
+}
+
+.vol{
+  padding: 1rem;
+  /*因为summary用了top，所以下面的所有div都要top至少2rem*/
+  /*top: 4rem;*/ 
+  border: 2px solid black;
+  margin: 2rem auto;
+  /*margin-bottom: 5rem;*/
+}
+
+.vol table{
+  margin: auto;
+}
+
+.vol td{
+  /*迷之1%....好像自适应了*/
+  width: 1%;
+}
+
+.chapter{
+  padding: 1rem;
+  /*因为summary用了top，所以下面的所有div都要top至少2rem*/
+  /*top: 4rem;*/ 
+  border: 2px solid black;
+  margin: 2rem auto;
+  margin-bottom: 5rem;
+}
+
+.chapter table{
+  margin: auto;
+}
+
+.chapter td{
+  /*迷之1%....好像自适应了*/
+  width: 1%;
+}
+
+
+.chapter-item{
+  top: 0; 
+  border: 1px solid blue;
+  text-align: center;  
+  color: black;
+  margin: .1rem;
+  /*重写md，自己适应*/
+  width: 98%;
+  padding: .1rem
+}
+
+.chapter-item a{
+  color: black;
+  /*text-decoration: underline;*/
+}
+
+.chapter-item a:hover{
+  /*background: white;*/
+  color:white;
+  font-weight: 500;
+}
+
+.footer{
+  /*top: 6rem;*/
+  height: 50px;
+  /*background-color: rgba(25, 255, 255, 128);*/
+  /*border: 1px solid ghostwhite;*/
+  text-align: center;
+  font-weight: 500;
+  font-size: 12pt;
+  position: fixed;
+  /*margin: 10px;*/
+  bottom: 0px;
+  padding: 12px ;
+}
+
+.clear{
+  clear: both;
+}
+
+
+/*------------------------------------------------------------------ read page -------------------------------------*/
+.image-gallery-left-nav{
+  
+}
+
+.hint{
+  position: absolute;
+  top: 12rem;
+  left: 4rem;
+  z-index: 10;
+}
+
+
+
+circle { mix-blend-mode: multiply; }
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  padding: 3px 0;
+  display: inline-block;
+}
+
+label {
+  margin-left: 5px;
+}
+
+.app {
+
+}
+
+.app-header {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.play-button {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 60px;
+  width: 100px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.play-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.play-button:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 16.5px;
+  left: 40px;
+  margin: 0 auto;
+  border-style: solid;
+  border-width: 12.5px 0 12.5px 20px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 1);
+}
+
+.close-video::before {
+  content: '✖';
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 20px;
+  padding: 20px;
+  z-index: 1;
+  line-height: .7;
+  display: block;
+  color: #fff;
+}
+
+.video-wrapper {
+  position: relative;
+  padding: 33.35% 0; /* 16:9 */
+  height: 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/*这里.image-gallery没生效啊握草，原来是中间少了一个逗号。。。沃日*/
+.app, .image-gallery,
+.app-sandbox {
+  margin: 0 auto;
+  /*width: 65%;*/
+  /*width: 98%; */
+  /*height: 100%;*/
+  transition: all 1s easeo;
+  /*text-align:'center';*/
+}
+
+.image-gallery-content{
+  text-align:'center';
+}
+
+
+@media (max-width: 1320px) {
+  .app-sandbox-content {
+    padding: 0 20px;
+  }
+}
+
+.app-sandbox {
+  margin: 40px auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.app-buttons li {
+  display: block;
+}
+
+@media (max-width: 768px) {
+
+  .app-header {
+    font-size: 20px;
+  }
+
+  .app-buttons li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .app-buttons li + li {
+    padding: 0;
+  }
+
+  .play-button {
+    height: 40px;
+    width: 65px;
+  }
+
+  .play-button:after {
+    top: 11px;
+    left: 27px;
+    border-width: 8.5px 0 8.5px 12px;
+  }
+
+  .close-video::before {
+    font-size: 16px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /*添加逗号*/
+  .app, .image-gallery,
+  .app-sandbox {
+    width: 100%;
+  }
+}
+
+.app-interval-input-group {
+  display: table;
+}
+
+.app-interval-label {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 3px solid #ccc;
+  border-right: none;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.app-interval-input {
+  -webkit-appearance: none;
+  display: table-cell;
+  margin: 0;
+  padding: 9px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: 3px solid #ccc;
+  background: #fff;
+  width: 100%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+input.app-interval-input {
+  width: 65px;
+}
+
+.app-checkboxes {
+  margin-top: 10px;
+}
+
+.app-checkboxes li {
+  display: block;
+}
+
+
+

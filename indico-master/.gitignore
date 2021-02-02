@@ -1,0 +1,47 @@
+# temporary/bytecode files
+*~
+.*.swp
+*.py[co]
+__pycache__/
+.pytest_cache/
+
+# configs
+*.conf
+logging.yaml
+
+# python packaging
+/dist
+/build
+*.egg-info
+
+# generated stuff
+*.mo
+indico/web/static/dist
+url_map.json
+messages-react.json
+
+# fetched external dependencies
+indico/htdocs/*/lib/
+node_modules
+/ext_modules/node_env/
+
+# IDE files
+.idea/
+*.sublime-*
+.vscode/
+
+# testing
+.coverage
+coverage.xml
+htmlcov/
+/.cache/
+
+# sphinx
+/docs/build/
+
+# logs
+*.log
+
+# node/webpack
+webpack-build-config.json
+*.lock

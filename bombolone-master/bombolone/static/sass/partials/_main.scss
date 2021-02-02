@@ -1,0 +1,32 @@
+@import "compass";
+@import "partials/palette";
+
+/* =============================================================================
+Main layout style
+============================================================================= */
+body {
+  background-color: $tint-body-bg;
+  color: $tint-body-color;
+  font-family: 'Arial','Helvetica Neue','Helvetica',sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: left;
+}
+
+.content {
+  margin: 20px auto 0;
+  padding: 15px 0;
+  width: 800px;
+
+  p.intro {
+    margin: 12px auto;
+    width: 740px;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+  }
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

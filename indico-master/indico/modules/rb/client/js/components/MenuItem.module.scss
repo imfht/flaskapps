@@ -1,0 +1,41 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'rb:styles/palette';
+
+.rb-menu-item {
+  background-color: $highlight-color;
+  transition: background-color 0.25s ease-in;
+  height: 100%;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.2em;
+
+  a,
+  a:hover {
+    color: $white;
+    display: block;
+  }
+
+  &:hover {
+    background: darken($highlight-color, 5%);
+  }
+
+  .disabled {
+    color: lighten($highlight-color, 25%);
+    display: block;
+  }
+}
+
+.rb-menu-item:global(.active) {
+  border-bottom: none;
+  background: darken($highlight-color, 10%);
+}
+
+.rb-menu-item:global(.selected) {
+  background: darken($highlight-color, 15%);
+}

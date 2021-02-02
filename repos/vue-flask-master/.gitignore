@@ -1,0 +1,7 @@
+*.pyc
+/env/
+/.idea/
+/vue-flask.iml
+/app/static/node_modules/
+/app/prometheus_multiproc_dir
+/app/cache/

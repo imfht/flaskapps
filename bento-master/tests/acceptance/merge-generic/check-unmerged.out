@@ -1,0 +1,5 @@
+Running Bento checks on staged files...
+
+✘ Please resolve merge conflicts in these files before continuing:
+foo.py
+✘ Cannot complete running command in this git state.

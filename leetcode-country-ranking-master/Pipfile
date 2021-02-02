@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+gunicorn = "*"
+requests = "*"
+flask = "*"
+pymongo = "*"
+flask-paginate = "*"
+flask-compress = "*"
+flask-caching = "*"
+scout-apm = "*"
+
+[requires]
+python_version = "3.7"
+
+[dev-packages]
+pylint = "*"

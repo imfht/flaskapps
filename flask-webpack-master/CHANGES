@@ -1,0 +1,44 @@
+Flask-Webpack changelog
+=======================
+
+Version 0.1.0
+-------------
+
+- Add support for old (< 0.10) versions of Flask
+
+Version 0.0.7
+-------------
+
+- Add better support for Python 3.x
+
+
+Version 0.0.6
+-------------
+
+- Fix legacy `print` statement in `setup.py`
+
+Version 0.0.5
+-------------
+
+- Fix issue where `None` could be emit by the javascript and script tags
+
+Version 0.0.4
+-------------
+
+- This was never a release, the `VERSION` file jumped from 0.0.3 to 0.0.5
+
+Version 0.0.3
+-------------
+
+- Add WEBPACK_ASSETS_URL setting
+
+Version 0.0.2
+-------------
+
+- Add flask_webpack to the package list in setup.py
+- Add zip_safe=False to comply with Flask's extension authoring rules
+
+Version 0.0.1
+-------------
+
+- First release

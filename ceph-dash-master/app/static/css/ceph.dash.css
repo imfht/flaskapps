@@ -1,0 +1,55 @@
+.icon-ok {
+    color: #62C462;
+}
+
+.icon-warn {
+    color: #F89406;
+}
+
+.icon-err {
+    color: #EE5F5B;
+}
+
+.panel-body {
+    font-weight: bold;
+}
+
+.panel-title {
+    font-weight: bold;
+}
+
+.cd-collapsable h3:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e113";
+    cursor: pointer;
+    float: right;
+}
+
+.cd-collapsed h3:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e114";
+    cursor: pointer;
+    float: right;
+}
+
+.graphite {
+     width: 500px;
+     height: 150px;
+     font-size: 14px;
+     line-height: 1.2em;
+}
+
+.influxdb {
+     width: 500px;
+     height: 150px;
+     font-size: 14px;
+     line-height: 1.2em;
+}
+
+#tooltip {
+    position: absolute;
+    display: none;
+    border: 1px solid #000;
+    padding: 2px;
+    background-color: #272b30;
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Moa</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://moa.party"/>
+    <meta property="og:title" content="Moa: Mastodon/Twitter/Instagram Crossposter"/>
+    <meta property="og:description" content="Link your Mastodon account to Twitter and Instagram"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Moa: Mastodon/Twitter/Instagram Crossposter"/>
+    <meta name="twitter:description" content="Link your Mastodon account to Twitter and Instagram"/>
+    <link rel="icon" href="data:,">
+
+</head>
+<body>
+<div class="center">
+<pre>
+ _ __ ___   ___   __ _
+| '_ ` _ \ / _ \ / _` |
+| | | | | | (_) | (_| |
+|_| |_| |_|\___/ \__,_|
+</pre>
+
+    <p>Link your <a href="https://joinmastodon.org">Mastodon</a> account to <a href="https://twitter.com">Twitter</a><!--
+        and <a href="https://instagram.com">Instagram</a>-->. No bamboozle.</p>
+    <p>
+    <a target="_new" href="https://liberapay.com/hypnagogic/donate">Please consider donating to the project.
+    <img src="https://img.shields.io/liberapay/receives/hypnagogic.svg?logo=liberapay">
+    <img src="https://img.shields.io/liberapay/gives/hypnagogic.svg?logo=liberapay">
+    </a>
+    </p>
+
+    <p id="cookiecheck" class="message" style="display: none;">Please allow cookies for this site or it won't work
+        properly.</p>
+
+    {% for message in get_flashed_messages() %}
+        <p class="message">{{ message }}</p>
+    {% endfor %}
+
+    {% block body %}{% endblock %}
+
+    <hr>
+
+    <p>Important Changes:</p>
+    <p>
+    <ul>
+        <li><strong>07/09/20</strong>: Instagram is disabled for now while I sort out their new API.</li>
+        <li><strong>05/01/19</strong>: Twitter accounts are no longer required to use Moa. You do still need a Mastodon account however so crossposting between just Twitter and Instagram won't work.</li>
+        <li><strong>18/07/18</strong>: Moa can no longer create replies and mentions on Twitter. Text of the form '@user@twitter.com' on Mastodon used to translate to '@user' on Twitter but now it translates to just 'user'. This change was made in order to stay compliant with Twitter's rules.
+        </li>
+    </ul>
+    </p>
+    <hr>
+    <p>Created by <a target="_new" rel="me" href="https://pdx.social/@foozmeat">James Moore</a>.
+        Code available on <a target="_new" href="https://github.com/foozmeat/moa">Github</a>.</p>
+    <p>Get Updates on <a href="https://pdx.social/@moa_party">Mastodon</a>.
+        <a href="{{ url_for('privacy') }}">Privacy Policy</a>.</p>
+
+</div>
+<div class="badge">
+    <a target="_blank" href="https://www.jetbrains.com/pycharm/">
+        <img style="image-rendering: pixelated;" src="{{ url_for('static', filename='madewpc.gif') }}">
+    </a>
+</div>
+
+<script>
+    if (!navigator.cookieEnabled) {
+        var el = document.getElementById('cookiecheck');
+        el.style.display = "block";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% from "utils.html" import like_list, comments_list %}
+
+{% block content %}
+<div class="ui segment">
+    <h2 class="ui header">
+        {{ blog.title }}
+        <div class="sub header">{{ blog.t.strftime("%Y-%m-%d %H:%M:%S") }}</div>
+    </h2>
+    <div class="ui divider"></div>
+    <div class="blog-detail">
+        {{ blog.content|safe }}
+    </div>
+</div>
+
+<div class="ui divider"></div>
+<div class="entry-info">
+    <span class="entry-stat">
+        {{ like_list(likes) }}
+        {% if blog.like > 0 %}等{% endif %}
+        {{ blog.like }} 赞 / {{ blog.share }} 转 / {{ blog.comment }} 评 / {{ blog.read }} 读
+    </span>
+</div>
+<div class="ui divider"></div>
+{{ comments_list(comments) }}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'emails/base.txt' %}
+
+{% block header_recipient -%}{{ recipient_name }}{%- endblock %}
+
+{% block body -%}
+{% block body_text %}{% endblock %}
+You can view details on the following URL:
+{{ timeline_url }}
+{%- endblock %}

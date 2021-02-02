@@ -1,0 +1,63 @@
+{% extends "rq_dashboard/base.html" %}
+
+{% block content %}
+
+<div class="section">
+
+    <h1>Workers</h1>
+
+    <p class="intro">
+        This list below contains all the registered workers with their state and work queues.
+    </p>
+
+    <div class="table-responsive">
+        <table id="workers" class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Worker</th>
+                    <th>Current&nbsp;job</th>
+                    <th>Queues</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-role="loading-placeholder">
+                    <td colspan="3">Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script name="worker-row" type="text/template">
+        <tr data-role="worker">
+            <td <% if (d.version && d.python_version) { %>title ="RQ <%= d.version %> / Python <%= d.python_version %>" <% } %>>
+                <%= d.name %>
+            </td>
+            
+            <% if (d.current_job !== 'idle') { %>
+            <td title="Job ID: <%= d.current_job.job_id %>&#013;&#010;Description: <% if (d.current_job.description){ %> <%- d.current_job.description %> <% } %>&#013;&#010;Created at: <%= toRelative(d.current_job.created_at) %>&#013;&#010;">
+                <a href="<%= url_for_single_job_view(d.current_job.job_id) %>">
+                    <%= d.current_job.call_string %>
+                </a>
+            </td>
+            <% } else { %>
+            <td><%= d.current_job %></td>
+            <% } %>
+
+            <td><%= d.queues.join(', ') %></td>
+        </tr>
+    </script>
+
+    <script name="no-workers-row" type="text/template">
+        <tr>
+            <td colspan="3">No workers.</td>
+        </tr>
+    </script>
+
+</div>
+
+{% endblock %}
+
+
+{% block content_scripts %}
+    {% include "rq_dashboard/scripts/workers.js" %}
+{% endblock%}

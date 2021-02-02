@@ -1,0 +1,10 @@
+{% extends 'layout/base.html' %}
+{% block page_class %}fixed-width-standalone-text-page{% endblock %}
+
+{% block title %}
+    {% trans %}Terms and Conditions{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    {{ tos|sanitize_html }}
+{% endblock %}

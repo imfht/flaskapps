@@ -1,0 +1,19 @@
+{% extends "layout/base.html" %}
+{% block title %}mod3 index.html{% endblock %}
+{% block content %}
+<h1>mod3's some_random_view!!!!</h1>
+<p class="important">Welcome to the mod3 module! <a href="{{ url_for('.static', filename='mod3/asset.txt') }}">mod3 asset (note '.static' and not 'static')</a></p>
+<p>mod3 demonstrates adding a third url_prefix to an app (e.g. '<code>/mod3</code>'). Note trailing slashes.</p>
+<ul>
+  <li><a href="{{ url_for('page_list') }}">Page List</a>{% if session.li %}
+    - <a href="{{ url_for('page_submit') }}">Submit a New Page</a>
+{% endif %}</li>
+  <li><a href="{{ url_for('tag_list') }}">Tag List</a></li>
+</ul>
+<hr/>
+<p>According to the timezone information stored in the database, the local time for you is: <code>{{time}}</code></p>
+{% endblock %}
+{% block footer %}
+{{ super() }}
+More uninteresting things to say from mod3.
+{% endblock %}

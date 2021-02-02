@@ -1,0 +1,20 @@
+{
+    "status_code": 201, 
+    "data": {
+        "id": "szdwm0", 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 201, 
+            "RequestId": "976f3698-28f7-11e6-8233-6d2c402681cd"
+        }, 
+        "createdDate": {
+            "hour": 15, 
+            "__class__": "datetime", 
+            "month": 6, 
+            "second": 15, 
+            "microsecond": 0, 
+            "year": 2016, 
+            "day": 2, 
+            "minute": 24
+        }
+    }
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "body": {
+      "content": "cms-guide-for-conddb.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "CMS"
+      },
+      {
+        "primary": "research"
+      }
+    ],
+    "experiment": "CMS",
+    "short_description": {
+      "content": "This page explains the use of global tags and the condition database with the CMS Open Data. A Global Tag is a coherent collection of records of additional data needed by the reconstruction and analysis software."
+    },
+    "slug": "cms-guide-for-condition-database",
+    "title": "CMS Guide to the CMS condition database",
+    "type": {
+      "primary": "Documentation",
+      "secondary": [
+        "Guide"
+      ]
+    }
+  }
+]

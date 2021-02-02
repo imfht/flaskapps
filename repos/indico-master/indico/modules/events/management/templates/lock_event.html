@@ -1,0 +1,13 @@
+{% from 'confirmation_dialog.html' import confirmation_dialog %}
+
+{% set confirmation_message %}
+    {% trans -%}
+        Please note that if you lock this event, you will not be able to change it anymore.
+        Only the creator of the event or a category manager will be able to unlock it.
+    {%- endtrans %}
+{% endset %}
+
+{% call confirmation_dialog('warning', message=confirmation_message, ok_text=_('Lock event'),
+                            extra_confirmation=false) %}
+    {% trans %}You are about to lock this event!{% endtrans %}
+{% endcall %}

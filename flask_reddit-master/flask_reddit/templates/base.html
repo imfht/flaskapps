@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="description" content="An extendable Reddit clone built with flask by 
+         Lucas Ou-Yang.">
+    <meta name="author" content="Lucas Ou-Yang">
+    <title>{% block title %}Reddit clone built with flask, python, nginx, etc{% endblock %}</title>
+    <meta name="keywords" content="flask,reddit,python,reddit-clone,nginx,lucas ou-yang">
+
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+    <link rel="icon" href="https://reddit.codelucas.com/static/imgs/favicon.ico" type="image/x-icon">
+    {% block css %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% endblock %}
+
+    <!-- Add custom CSS here -->
+    <style>
+        body {margin-top: 60px;}
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+              <li>
+                  <a class="brand-nav" href="/">
+                      {% if cur_subreddit is defined and cur_subreddit.id != 1 %}
+                          {{ cur_subreddit.name }}
+                      {% else %} 
+                          {{ config.BRAND }}
+                      {% endif %}
+                  </a>
+              </li>
+              <li>
+                  <a href="/?trending=true">trending</a>
+              </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+          {% if user is not defined or user == None %}
+              <li><a href="{{ url_for('frontends.register', next=request.path) }}">Register</a></li>
+              <li><a href="{{ url_for('frontends.login', next=request.path) }}">Login</a></li>
+          {% else %}
+              <p class="navbar-text login-nav-text">logged in as 
+                  <a href="{{ url_for('users.home_page', username=user.username) }}">
+                      {{ user.username }}</a>, &nbsp;
+                  {{ user.get_thread_karma() }} <span class="karma-star">★</span> 
+              </p>
+              <li class="logout-button"><a href="{{ config.ROOT_URL }}/logout">logout</a></li>
+          {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+
+    <div class="container">
+      <div id="messages-wrap">
+        <div id="messages">
+          {% for category, msg in get_flashed_messages(with_categories=true) %}
+          <div class="flash-{{ category }} alert alert-dismissable alert-{{ category }} flash-banner">
+              {{ msg }}</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="row main-box">
+      {% block content %}
+
+      {% endblock %}
+      </div>
+
+      <div class="row" class="" id="footer-row">
+          <div class="col-lg-12">
+          </div>
+      </div>
+
+    </div><!-- /.container -->
+
+    <!-- JavaScript -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-37131973-4', 'codelucas.com');
+      ga('send', 'pageview');
+    </script>
+
+    <!-- Let's use a CDN -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    {% block scripts %}
+
+    {% endblock %}
+  </body>
+</html>

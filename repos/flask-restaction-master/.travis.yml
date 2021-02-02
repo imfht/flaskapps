@@ -1,0 +1,17 @@
+language: python
+python:
+- '3.3'
+- '3.4'
+- '3.5'
+install:
+- pip install -r requires-dev.txt
+- pip install .
+before_script:
+- (python server/index.py > /dev/null 2>&1 &)
+- sleep 3
+script:
+- export FLASK_RESTACTION=$(cd tests&&python -c "print(__import__('flask_restaction').__path__[0])")
+- pytest --cov=$FLASK_RESTACTION
+- flake8
+after_success:
+- codecov

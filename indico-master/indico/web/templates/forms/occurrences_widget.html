@@ -1,0 +1,17 @@
+{% extends 'forms/base_widget.html' %}
+{% from 'forms/_form.html' import form_field %}
+
+{% block html %}
+    <div class="occurrences-widget i-form-field-fixed-width" id="{{ field.id }}-container"></div>
+    <input type="hidden" name="{{ field.name }}" id="{{ field.id }}" value="{{ field._value() }}" autofocus>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        setupOccurrencesWidget({
+            fieldId: {{ field.id | tojson }},
+            locale: {{ session.moment_lang | tojson }}
+        });
+    </script>
+{% endblock %}

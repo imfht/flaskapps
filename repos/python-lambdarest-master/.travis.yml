@@ -1,0 +1,29 @@
+language: python
+
+jobs:
+  include:
+    - stage: python 3.6 pytest
+      python: 3.6
+    - stage: python 3.7 pytest
+      python: 3.7
+    - stage: python 3.8 pytest
+      python: 3.8
+    - stage: lint
+      python: 3.7
+      script: poetry run black --check tests/ lambdarest/
+
+cache: pip
+
+before_install:
+  - pip install --upgrade pip
+  - pip install poetry
+
+install:
+  - poetry config virtualenvs.create false
+  - poetry install --verbose
+
+script:
+  - poetry run task test
+
+notifications:
+  email: false

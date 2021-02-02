@@ -1,0 +1,28 @@
+{% extends 'indico_base.html' %}
+
+{% from 'announcement/display.html' import render_announcements %}
+{% from 'core/impersonation.html' import render_impersonation %}
+
+{% block extra_meta_tags %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block early_js %}{% endblock %}
+{% block late_js %}{% endblock %}
+
+{% block html_body %}
+    {% block topbar %}
+        {{ render_impersonation() }}
+        <div class="indico-top-bar">
+            {% block logo %}
+                {%- set logo_url = indico_config.LOGO_URL or (indico_config.IMAGES_BASE_URL + '/logo_indico_bw.png') -%}
+                <a class="indico-top-bar-logo" href="{{ url_for_index() }}">
+                    <img src="{{ logo_url }}">
+                </a>
+            {% endblock %}
+            <div class="indico-user-menu" id="indico-user-menu-container"></div>
+        </div>
+        {{ render_announcements() }}
+    {% endblock %}
+    {% block body %}{% endblock %}
+{% endblock %}

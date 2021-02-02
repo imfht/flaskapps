@@ -1,0 +1,10 @@
+Hi
+
+You have added {{mailbox_email}} as an additional mailbox.
+
+To confirm, please click on this link:
+
+{{link}}
+
+Regards,
+SimpleLogin Team.

@@ -1,0 +1,100 @@
+.about, .privacy {
+
+	$spacing-between-sections: 40px;
+
+	h1 {
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	h2 {
+		font-size: 18px;
+	}
+
+	.about-section {
+		$small-screen: 576px;
+		max-width:  $small-screen;
+
+		margin-bottom: $spacing-between-sections;
+		margin-top: $spacing-between-sections;
+		padding-left: $spacer-small * 3;
+		padding-right: $spacer-small * 3;
+
+		@include media-breakpoint-up(sm) {
+			float: unset;
+			margin-left: auto;
+			margin-right: auto;
+
+			margin-bottom: $spacing-between-sections * 2;
+			margin-top: $spacing-between-sections * 2;
+
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	.about-navigation {
+		margin-top: $spacing-between-sections / 2;
+		@include media-breakpoint-up(sm) {
+			margin-top: $spacing-between-sections;
+		}
+	}
+}
+
+.about {
+	ul {
+		@extend .list-unstyled;
+		li {
+			padding-bottom: $spacer-small;
+		}
+	}
+
+	.about-team {
+		font-size: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 300px;
+	}
+
+	.colored-button {
+		$size: 120px;
+		border-radius: 0;
+		padding: 0;
+		width: $size;
+		height: $size;
+		font-size: 20px
+	}
+
+	.colored-background {
+		color: $inverse-text-color;
+
+		a {
+			color: $inverse-text-color;
+			border-bottom-width: 1px;
+			border-bottom-style: dotted;
+			border-bottom-color: $inverse-text-color;
+
+			&:hover {
+				$hover-color: darken($inverse-text-color, 15%);
+				color: $hover-color;
+				border-bottom-color: $hover-color;
+			}
+		}
+	}
+
+	.orange-background {
+		background-color: $orange;
+	}
+
+	.red-background {
+		background-color: $red;
+	}
+
+	.green-background {
+		background-color: $green;
+	}
+
+	.purple-background {
+		background-color: $purple;
+	}
+}

@@ -1,0 +1,36 @@
+<a name="comment"></a>
+<h3>Comments</h3><br>
+
+{% import "_msg.html" as messages %}
+{{ messages.render_msg() }}
+
+{% import "_form.html" as forms %}
+<form method="POST" action="#comment">
+    {{ forms.render(form) }}
+    <button type="submit" class="btn btn-primary" name="oct-comment" value="oct-comment">Submit</button>
+</form>
+<br>
+
+<table>
+    {% for comment in comments %}
+    <tr>
+        <td style="width: 8%">
+            <!-- <img class="media-object" src="http://7tsygu.com1.z0.glb.clouddn.com/user-avatar.jpg" alt="user-avatar"> -->
+            <img class="media-object" src="{{ comment.get_gavatar_url() }}" alt="user-avatar">
+        </td>
+        <td>
+            <h4>{{ comment.author }} 
+                {% if comment.homepage %}
+                    <a href="{{ comment.homepage }}" rel="nofollow" target="_blank"><i class="fa fa-home" aria-hidden="true"></i></a>
+                {% endif %}
+            </h4>
+            <div>
+                {{ comment.html_content|safe }} 
+            </div>
+        </td>
+        <td style="width: 5%">
+            <small>{{ comment.pub_time.strftime('%Y/%m/%d') }}</small>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

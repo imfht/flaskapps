@@ -1,0 +1,45 @@
+**/images/hidden/*
+
+# Note: Any leading '**' need to be followed by a '/'. 
+# Seems like '**/thing_to_ignore_always[/*]' covers all bases.
+**/.*.swp
+**/.log
+**/tmp*
+**/.idea/*
+**/.ipynb_checkpoints/*
+**/__pycache__/*
+**/*.pyc
+**/*.h5/*
+**/out/**
+.cache/**
+**/.cache/**
+**/pretrained/**
+**/notebooks/*.txt
+.DS*
+**/.DS*
+
+# Muh training scripts.
+overnight.sh
+experimental.sh
+tests/macros/**
+compact.sh
+
+# Ignore collection of useful tf files that once 
+# existed in tf repo but have since been removed. 
+# They will be missed. 
+**/reference/*
+**/saved_train_data/**
+/webpage/data_dev.db
+/notebooks/reference/
+/notebooks/.ipynb_checkpoints/
+
+# TEMP:
+**/frozen_models/*
+**/ubuntu/*
+**/data_dev.db
+**/data_test.db
+/webpage/deepchat/static/assets/frozen_models/
+/configs/test_lstm.yml
+/configs/cornell.yml
+/ae.py
+**/individual_tb_plots/*

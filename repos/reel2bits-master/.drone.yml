@@ -1,0 +1,150 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+clone:
+  depth: 50
+
+steps:
+- name: restore-cache
+  pull: default
+  image: drillster/drone-volume-cache
+  settings:
+    mount:
+    - .cache
+    restore: true
+  volumes:
+  - name: 2f746d702f6361636865
+    path: /cache
+
+- name: build
+  pull: default
+  image: python:3-alpine
+  commands:
+  - apk -U add sox sox-dev taglib taglib-dev libmagic file-dev libffi libffi-dev
+  - apk add cmake gcc g++ make pkgconfig git boost-dev gd-dev libmad-dev libsndfile-dev libid3tag-dev wget postgresql-dev
+  - pip install --upgrade --cache-dir=.cache/pip pip setuptools
+  - pip install --cache-dir=.cache/pip flake8
+  - pip install --cache-dir=.cache/pip black
+  - pip install --cache-dir=.cache/pip -r requirements.txt
+  - python setup.py install
+  - ./tests/install_audiowaveform.sh
+  - black --check .
+  - flake8 . --count --show-source --statistics
+  - cp tests/config_test.py config.py
+  - python setup.py test
+
+- name: front-lint-build
+  pull: default
+  image: node:10
+  commands:
+      - cd front
+      - yarn
+      - npm run lint
+      - npm run build
+
+- name: migrations
+  pull: default
+  image: python:3-alpine
+  commands:
+  - apk -U add sox sox-dev taglib taglib-dev libmagic file-dev libffi libffi-dev postgresql-client
+  - apk add cmake gcc g++ make pkgconfig git boost-dev gd-dev libmad-dev libsndfile-dev libid3tag-dev wget postgresql-dev
+  - pip install --upgrade --cache-dir=.cache/pip pip setuptools
+  - pip install --cache-dir=.cache/pip flake8
+  - pip install --cache-dir=.cache/pip black
+  - pip install --cache-dir=.cache/pip -r requirements.txt
+  - python setup.py install
+  - "psql -U postgres -h database -w -c 'CREATE DATABASE reel2bits'"
+  - "psql -U postgres -h database -w -c 'CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";' reel2bits"
+  - cp config.py.sample config.py
+  - flask db upgrade
+
+- name: rebuild-cache
+  pull: default
+  image: drillster/drone-volume-cache
+  settings:
+    mount:
+    - .cache
+    rebuild: true
+  volumes:
+  - name: 2f746d702f6361636865
+    path: /cache
+
+- name: publish-web
+  pull: default
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile-web
+    repo: dashie/reel2bits-web
+    tags:
+    - latest
+  environment:
+    DOCKER_PASSWORD:
+      from_secret: DOCKER_PASSWORD
+    DOCKER_USERNAME:
+      from_secret: DOCKER_USERNAME
+  when:
+    branch:
+      - master
+    event:
+      - push
+      - tag
+
+- name: publish-worker
+  pull: default
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile-worker
+    repo: dashie/reel2bits-worker
+    tags:
+    - latest
+  environment:
+    DOCKER_PASSWORD:
+      from_secret: DOCKER_PASSWORD
+    DOCKER_USERNAME:
+      from_secret: DOCKER_USERNAME
+  when:
+    branch:
+      - master
+    event:
+      - push
+      - tag
+
+- name: notify
+  pull: default
+  image: plugins/slack
+  settings:
+    channel: gitea
+  environment:
+    SLACK_WEBHOOK:
+      from_secret: SLACK_WEBHOOK
+  when:
+    event:
+    - push
+    - tag
+    - pull_request
+    status:
+    - changed
+    - failure
+    - success
+
+services:
+- name: database
+  pull: default
+  image: postgres
+  environment:
+    POSTGRES_DB: reel2bits_test
+    POSTGRES_USER: postgres
+
+- name: redis
+  pull: default
+  image: redis
+
+volumes:
+- name: 2f746d702f6361636865
+  host:
+    path: /tmp/cache

@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content%}
+ 
+<div class="container-fluid">
+        <div class="row">
+        <!--左边栏  -->
+          <div class="col-md-8">
+    
+             <ol class="breadcrumb">
+                <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li><a href="#"></a>{{article.article_type}}</li>
+                <li class="active">{{article.article_title}}</li>
+            </ol>
+    
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>{{article.article_title}}</h3>
+                    <p >
+                      <span ><a href="#"><span class="glyphicon glyphicon-user"></span>{{article.article_author}}&nbsp;&nbsp;</a></span>
+                      <span class="glyphicon glyphicon-time"></span>{{article.article_date}}&nbsp;&nbsp;
+                      <span class="glyphicon glyphicon-eye-open"></span>浏览({{article.article_read_cnt}})&nbsp;&nbsp;
+                      <span ><a href="#"><span class="glyphicon glyphicon-star"></span>收藏({{article.article_sc}})&nbsp;&nbsp;</a></span>
+                      <span ><a href="#"><span class="glyphicon glyphicon-comment"></span>评论({{article.article_pl}})&nbsp;&nbsp;</a></span>
+                    </p>
+                    <hr>
+                    <!-- 段落开始 -->
+                    <span>
+                        <article class="markdown-body">
+                            {{article.article_text|safe}}
+                          </article>
+                    </span>
+                       <!-- 评论部分 -->
+                    <form role="form"  action="/wrcomment/{{article.article_id}}" method="post">
+                        <div class="form-group">
+                        <label for="name">发表你的评论吧</label>
+                        <hr>
+                        <input type="text" class="form-control" name="name" placeholder="请输入昵称">
+                        </div>
+                        <div class="form-group">
+                        <input type="text" class="form-control" name="email" placeholder="请输入邮箱">
+                        </div>
+                        <div class="form-group">
+                        <textarea  class="form-control" name="commentary" rows="3" placeholder="说点什么吧 "></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">发表评论</button>
+                        </div>
+                    </form>
+                    <!-- 段落结束 -->
+                    <br>
+                    <br>
+                    <!-- 评论部分 -->
+                    <div class="list-group">
+                      <a href="#" class="list-group-item active">
+                          <h4 class="list-group-item-heading">
+                              评论列表
+                          </h4>
+                      </a>
+                      {% for comment in comments%}
+                      <div href="#" class="list-group-item">
+                          <p>#{{loop.index}}楼 {{comment.comment_date}} {{comment.comment_name}} </p>
+                          <p>
+                              {{comment.comment_text|safe}}
+                          <p class="label"><a href = "/comment_support/{{comment.comment_id}}">支持({{comment.comment_support}})</a></p>
+                          <p class="label"><a href= "/comment_oppose/{{comment.comment_id}}">反对({{comment.comment_oppose}})</a></p>
+                        </p>
+                      </div>
+                      {% endfor %}
+                      </div>
+
+                </div>
+              </div>
+              <br>
+              <br>
+    
+          </div>
+          <!--右边栏  -->
+          <div class="col-md-4">
+            <div class="list-group">
+              <a href="#" class="list-group-item active">猜你喜欢</a>
+              {% for article in articles %}
+                <div class="list-group-item">
+                  <div class="media">
+
+                    <a href="/get_article/{{article.article_id}}" class="pull-left"><img width="120" height="90" src="{{article.article_url}}" /></a>
+                    <div class="media-body">
+                       <a href="/get_article/{{article.article_id}}"><p>{{article.article_title}}</p></a>
+                      <p>
+                        {{article.article_date}} 评论({{article.article_pl}})
+                      </p>
+                    </div>
+                   
+                  </div>
+                </div>
+                {% endfor %}
+               
+            </div>
+          </div>
+    
+    
+    
+        </div>
+      </div>
+    
+
+    {{super()}}
+{% endblock %}

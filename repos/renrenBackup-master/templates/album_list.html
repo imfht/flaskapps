@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% from "utils.html" import pager %}
+
+{% block content %}
+<div class="ui cards album-list">
+    {% for a in album_list %}
+        <div id="album-{{ a.id }}" class="card">
+            <div class="content">
+                <div class="right floated meta">{{ a.count }}</div>
+                <a class="header" href="{{ url_for('album_detail_page', album_id=a.id, page=1) }}">{{ a.name }}</a>
+                {% if a.desc %}
+                <div class="meta">
+                    {{ a.desc }}
+                </div>
+                {% endif %}
+            </div>
+            <a class="image" href="{{ url_for('album_detail_page', album_id=a.id, page=1) }}">
+                <img class="album-cover" src="{{ a.cover }}">
+            </a>
+            <div class="content entry-info">
+                {{ a.like }} 赞 / {{ a.share }} 分享 / {{ a.comment }} 评论
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{{ pager('album_list_page', page, total_page) }}
+{% endblock %}

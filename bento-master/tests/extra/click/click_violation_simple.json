@@ -1,0 +1,49 @@
+{
+  "bad_examples.py": [
+    {
+      "code": "r2c-click-option-function-argument-check",
+      "filename": "bad_examples.py",
+      "line_number": 12,
+      "column_number": 1,
+      "text": "function `bad_option_one` missing parameter `d` for `@click.option`",
+      "severity": 2,
+      "physical_line": "@click.command()"
+    },
+    {
+      "code": "r2c-click-names-are-well-formed",
+      "filename": "bad_examples.py",
+      "line_number": 19,
+      "column_number": 1,
+      "text": "option 'd' should begin with a '-'",
+      "severity": 2,
+      "physical_line": "@click.command()"
+    },
+    {
+      "code": "r2c-click-names-are-well-formed",
+      "filename": "bad_examples.py",
+      "line_number": 26,
+      "column_number": 1,
+      "text": "argument '-a' should not begin with a '-'",
+      "severity": 2,
+      "physical_line": "@click.command()"
+    },
+    {
+      "code": "r2c-click-names-are-well-formed",
+      "filename": "bad_examples.py",
+      "line_number": 33,
+      "column_number": 1,
+      "text": "missing parameter name",
+      "severity": 2,
+      "physical_line": "@click.command()"
+    },
+    {
+      "code": "r2c-click-launch-uses-literal",
+      "filename": "bad_examples.py",
+      "line_number": 41,
+      "column_number": 5,
+      "text": "calls to click.launch() should use literal urls to prevent arbitrary site redirects",
+      "severity": 2,
+      "physical_line": "    click.launch(x)"
+    }
+  ]
+}

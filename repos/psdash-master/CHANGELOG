@@ -1,0 +1,94 @@
+--- v0.6.2 [2015-12-02] ---
+
+* [NEW] Changed gevent version from 1.0.1 to 1.0.2.
+
+* [FIX] Fixed bug that showed incorrect disk usage percentage on the overview page.
+
+--- v0.6.1 [2014-12-13] ---
+
+* [NEW] Changed psutil version from 2.1.1 to 2.1.3
+
+* [FIX] Fixed bug that caused file-based configuration options to be wrongly overriden by defaulted program args.
+
+* [FIX] Added a fix for an unhandled error in psutil when the uid of a process is not associated with an user.
+
+* [NEW] Added a whitelist option to make it possible to decide which env vars values to display. 
+
+--- v0.6.0 [2014-09-24] ---
+
+* [NEW] Major updates to the UI design.
+
+* [NEW] Added user proceses filtering to processes page.
+
+* [FIX] Fixed bug where the highlighted text when searching a log could be misplaced.
+
+--- v0.5.0 [2014-09-06] ---
+
+* [NEW] Added HTTPS support.
+
+* [NEW] Added support for multiple hosts.
+
+* [NEW] Changed to using the netifaces lib for reading the host ip-address. (Thanks to Leonardo Santagada)
+
+* [NEW] Made it possible to filter on remote/local address port on the system-wide connections page.
+
+--- v0.4.0 [2014-07-24] ---
+
+* [NEW] Added a environment variables sub-page to the process view.
+
+* [NEW] Updated psutil to 2.1.1
+
+* [NEW] Added a system-wide connections table on the network page.
+
+* [FIX] Removed accidentally committed print statement.
+
+* [NEW] Added more tests and made some refactorings as a consequence.
+
+* [NEW] Added Travis CI setup and test coverage.
+
+* [NEW] Added filters to system-wide connections table
+
+* [NEW] Some rather large refactorings in general due to added tests.
+
+--- v0.3.0 [2014-04-15] ---
+
+* [NEW] Added a PSDASH_URL_PREFIX configuration setting to allow psdash to be served from a sub-url rather than always on root.
+
+* [NEW] Now updating the list of available logs every minute.
+
+* [NEW] The list of logs is now sorted in alphabetical order.
+
+* [FIX] Fixed bug where the view logs page would crash if a previously added log becomes unavailable.
+
+* [FIX] Fix for Python 3 support.
+
+--- v0.2.0 [2014-04-05] ---
+
+* [NEW] It's now possible to pass a pattern (e.g /var/log/**/*.log) when adding log files through the arg option --log.
+
+* [FIX] Fixed issue where file size formatted values would be displayed as zero.
+
+* [FIX] Fixed multiple issues related to non-ascii chars.
+
+* [FIX] Fixed issue where HTML was not escaped in the log contents.
+
+--- v0.1.2 [2014-03-31] ---
+
+* [FIX] Fixed issue where a non-ascii process command-line would cause the process pages to crash.
+
+* [FIX] Fixed issue where network interface info can be defaulted to a empty dict but a key was expected to exist for sorting.
+
+* [FIX] Fixed issue where a network interface alias would cause psdash to crash
+
+* [FIX] Improved the Vagrantfile when using a windows host.
+
+--- v0.1.1 [2014-03-29] ---
+
+* [FIX] Fixed error when specifying a unreadable log file. psdash will now check that
+        each log file is readable on startup.
+
+* [FIX] Fixed issue where fetching network interface addresses did not work on 32 bit arch.
+
+* [NEW] Added a PSDASH_ prefix on all psdash specific configuration options.
+
+* [FIX] Added argparse to setup.py requirements for Python 2.6 compatibility

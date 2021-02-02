@@ -1,0 +1,25 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0.2em;
+  margin-bottom: 1em;
+
+  li:not(:last-child) {
+    margin-right: 0.2em;
+  }
+
+  .page-arrow {
+    a {
+      height: 100%;
+    }
+  }
+}

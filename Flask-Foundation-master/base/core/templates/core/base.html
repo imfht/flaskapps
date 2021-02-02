@@ -1,0 +1,51 @@
+{% extends "bootstrap_responsive.html" %}
+
+{% block style %}
+    <link href="{{'css/bootstrap.css'|bootstrap_find_resource}}?{{REVISION}}" rel="stylesheet">
+    <link href="{{'css/bootstrap-responsive.css'|bootstrap_find_resource}}?{{REVISION}}" rel="stylesheet">
+    <style type="text/css" media="screen">
+        body { margin-top: 60px; }
+    </style>
+{%- endblock %}
+
+{%- block favicons %}
+    <link rel="shortcut icon" href="{{ url_for('core.static', filename='foundation.ico') }}" />
+{%- endblock %}
+
+{% block title %}{{ title or 'Foundation' }}{% endblock %}
+
+{% block body_content %}
+
+    {# Navbar #}
+    {% block navigation %}{% include 'core/blocks/nav.html' %}{% endblock %}
+
+    {# Messages #}
+    {% block messages %}{% include "core/blocks/messages.html" %}{% endblock %}
+
+    {# Content #}
+    <div class="container">
+        {% block page_content %}{% endblock %}
+    </div>
+
+    {# Footer #}
+    {% block footer %}
+        <style type="text/css" media="screen">
+            .footer {
+                padding: 70px 0;
+                margin-top: 70px;
+                border-top: 1px solid #E5E5E5;
+                background-color: whiteSmoke; }
+        </style>
+        <footer class="footer">
+            <div class='container'>
+                <p>&copy; Company 2012</p>
+            </div>
+        </footer>
+    {% endblock %}
+
+    {% if config.get('FOUNDATION_METRIKA') %} {% include "core/blocks/metrika.html" %} {% endif %}
+    {% if config.get('FOUNDATION_ANALYTICS') %} {% include "core/blocks/analytics.html" %} {% endif %}
+
+    <!-- {{ config.get('MODE', 'unknown' ) }}:{{ config.get('DEBUG', False) }} -->
+
+{% endblock %}

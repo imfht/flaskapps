@@ -1,0 +1,13 @@
+cmake_minimum_required (VERSION 3.10)
+
+add_subdirectory (json)
+add_subdirectory (login)
+add_subdirectory (static)
+add_subdirectory (upload)
+
+find_package (SQLITE3)
+if (SQLITE3_FOUND)
+  set(SQLITE3_INCLUDE_DIR ${SQLITE3_INCLUDE_DIR})
+  set(SQLITE3_LIBRARIES ${SQLITE3_LIBRARY})
+  add_subdirectory (sqlite3)
+endif (SQLITE3_FOUND)

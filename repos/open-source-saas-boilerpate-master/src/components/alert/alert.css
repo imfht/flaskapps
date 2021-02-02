@@ -1,0 +1,13 @@
+.alert-box {
+    font-size: 16px;
+    line-height: 1.8rem;
+    padding: 15px 10px;
+    display: flex;
+    margin: 10px 0px;
+}
+.alert-box .icon-block {
+    margin: 0px 20px 0px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

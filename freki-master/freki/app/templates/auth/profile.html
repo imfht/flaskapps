@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %} {{ current_user.username }} - Project Freki {% endblock %}
+
+{% block content %}
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <br/>
+                <p class="custom-warning">{{ messages[0] }}</p>
+            {% endif %}
+        {% endwith %}
+        <div class="card dark-card">
+            <div class="card-body">
+                <h4 class="card-title">Profile</h4>
+                <form class="row custom-form" action="/update_profile" method="POST">
+                    <div class="col-sm">
+                        Username
+                        <input type="text" name="username" id="username" value="{{ current_user.username }}"/>
+                        Email
+                        <input type="email" name="email" id="email" value="{{ current_user.email }}" disabled/>
+                        New password
+                        <input type="password" name="password" id="password"/>
+                    </div>
+                    <div class="col-sm">
+                        Freki API key<i onclick="copyKey()" class="copylbl custom-link cpointer fa fa-copy" data-toggle="tooltip" data-placement="bottom" title="Copy key to clipboard"></i>
+                        <input type="text" name="freki_key" id="freki_key" value="{{ current_user.freki_key }}" readonly/>
+                        VirusTotal API key
+                        <input type="text" name="vt_key" id="vt_key" value="{{ current_user.vt_key }}"/>
+                        <br/><br/>
+                        <button type="submit" class="btn btn-success float-right">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card dark-card">
+            <div class="card-body">
+                <h4 class="card-title">Submissions</h4>
+                    <table class="table table-borderless custom-table table-responsive-lg table-hover">
+                        <thead>
+                            <tr>
+                                <th>SHA1</th>
+                                <th>File name</th>
+                                <th>Submit date</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in my_submissions %}
+                            <tr>
+                                <td><a href="/analysis?sha1={{ i.submission.sha1 }}&name={{ i.name }}">{{ i.submission.sha1 }}</a></td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.sub_date }}</td>
+                                <td align="center"><a href="/file/{{ i.submission.sha1 }}/{{ i.submission.sha1 }}.zip" class="custom-link" data-toggle="tooltip" data-placement="bottom" title="Download sample"><i class="fa fa-download"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+        <div class="card dark-card">
+            <div class="card-body">
+                <h4 class="card-title">Comments</h4>
+                {% for c in my_comments %}
+                <div class="card comment-card">
+                    <div class="card-body">
+                        <form action="/edit_comment/{{ c.id }}" method="POST">
+                            <span class="float-right">{{ c.date }}</span>
+                            <a href="/analysis?sha1={{ c.submission.sha1 }}" class="custom-link font-weight-bold">{{ c.submission.sha1 }}</a>
+                            <textarea class="comment-textarea form-control" name="text" id="{{ c.id }}" disabled>{{ c.text }}</textarea>
+                            <br/>
+                            <div class="float-right">
+                                <button class="btn btn-success" type="submit" id="save_{{ c.id }}" style="display: none;">Save</button>
+                                <button class="btn btn-primary" type="button" id="save_{{ c.id }}" onclick="javascript:enableEdit({{ c.id }})">Edit</button>
+                                <button class="btn btn-danger" type="button" id="save_{{ c.id }}" onclick="location.href='/delete_comment/{{ c.id }}';">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function copyKey() {
+            var txt = document.getElementById("freki_key");
+            txt.select();
+            txt.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+        }
+
+        function enableEdit(elem){
+            document.getElementById(elem).disabled = false;
+            var x = document.getElementById("save_" + elem);
+            if (x.style.display === "none") {
+                x.style.display = "inline";
+            } else {
+                x.style.display = "none";
+                document.getElementById(elem).disabled = true;
+            }
+        }
+    </script>
+{% endblock %}

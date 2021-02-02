@@ -1,0 +1,321 @@
+{#
+# This file is part of Zenodo.
+# Copyright (C) 2015, 2016, 2017 CERN.
+#
+# Zenodo is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# Zenodo is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Zenodo; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+-#}
+{%- from "zenodo_records/macros/objecttype.html" import objecttype_label -%}
+{%- from "invenio_pidrelations/macros/pid_versions.html" import pid_versions_dropdown -%}
+  <dl>
+  {%- if record.publication_date %}
+    <dt>{{_('Publication date')}}:</dt>
+    <dd>{{ record.publication_date|from_isodate|dateformat(format='long') }}</dd>
+  {%- endif %}
+
+  {%- if embargo_date is embargoed(record.accessright) %}
+    <dt>{{_('Embargoed')}}:</dt>
+    <dd>
+      {% trans open_access_label=accessright_label('open'), embargo_date=embargo_date|dateformat('long') %}Files available as {{open_access_label}} after {{embargo_date}}.{% endtrans %}
+    </dd>
+  {%- endif %}
+
+  {%- if record.doi %}
+    {%- set is_local_doi = "doi" in record and (record.doi|doi_locally_managed) %}
+    {%- set doi_badge_img_url = url_for('invenio_formatter_badges.badge', title='DOI', value=record.doi, ext='svg') %}
+    <dt>{{_('DOI')}}:</dt>
+    <dd>
+      {%- if is_local_doi %}
+      <span class="get-badge" data-toggle="`tooltip" data-placement="bottom"
+            title="Get the DOI badge!">
+        <img data-toggle="modal" data-target="[data-modal='{{ record.doi }}']"
+              src="{{ doi_badge_img_url }}" alt="{{ record.doi }}">
+        </img>
+      </span>
+      <div class="modal fade badge-modal" data-modal="{{ record.doi }}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <h4>Zenodo DOI Badge</h4>
+              <h4>
+                  <small>DOI</small>
+              </h4>
+              <h4>
+                  <pre>{{record.doi}}</pre>
+              </h4>
+              {% from "invenio_formatter/macros/badges.html" import badges_formats_list %}
+              {{ badges_formats_list(url_for('invenio_formatter_badges.badge', title='DOI', value=record.doi, ext='svg', _external=True, _scheme='https'), record.doi|pid_url(scheme='doi')) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- else %}
+      <a href="{{record.doi|pid_url(scheme='doi')}}" target="_blank">
+        <img src="{{ doi_badge_img_url }}" alt="{{ record.doi }}"></img>
+      </a>
+      {%- endif %}
+    </dd>
+  {%- endif %}
+  {%- if record.imprint and record.imprint.isbn %}
+    <dt>{{_('ISBN')}}:</dt>
+    <dd>{{ record.imprint.isbn }}</dd>
+  {%- endif %}
+
+  {%- if record.keywords %}
+    <dt>{{_('Keyword(s)')}}:</dt>
+    <dd>
+    {%- for keyword in record.keywords %}
+      {% set q = {"keywords": keyword}|make_query %}
+      <a class="label-link" href="{{url_for('invenio_search_ui.search', q=q)}}">
+        <span class="label label-default">{{keyword}}</span>
+      </a>
+    {%- endfor %}
+    </dd>
+  {%- endif %}
+
+  {%- if record.subjects %}
+    <dt>{{_('Subject(s)')}}:</dt>
+    <dd>
+    {%- for subject in record.subjects %}
+      {%- set q = {"subject.term": subject.term}|make_query %}
+      {%- set subject_url = subject.identifier|pid_url(scheme=subject.scheme) %}
+      <a class="label-link" href="{{url_for('invenio_search_ui.search', q=q)}}">
+        <div class="label label-default">
+          {{subject.term}}
+          <a class="label-external-link" href="{{subject_url}}">
+            <i data-toggle="tooltip" data-title="{{subject.identifier}}" class="fa fa-fw fa-external-link"></i>
+          </a>
+        </div>
+      </a>
+    {%- endfor %}
+    </dd>
+  {%- endif %}
+
+  {% with i=record.get('imprint'), p=record.get('part_of') %}
+  {%- if i and not p %}
+    <dt>{{_('Imprint')}}:</dt>
+    <dd>
+      {{i.publisher}}{% if i.place %}, {{i.place}}{%- endif %}{% if i.isbn %} ({{i.isbn}}){%- endif %}.
+    </dd>
+  {%- elif p and p.title %}
+    <dt>{{_('Published in')}}:</dt>
+    <dd>
+        {{p.title}}{% if i.publisher %}, {{i.publisher}}{%- endif %}{% if i.place %}, {{i.place}}{%- endif %}{% if p.pages %}, pp. {{p.pages}}{%- endif %}{% if i.isbn %} ({{i.isbn}}){%- endif %}.
+    </dd>
+  {%- endif %}
+  {%- endwith %}
+
+  {%- if record.journal %}
+  {% with j=record.journal %}
+    {% if j.title %}
+    <dt>{{_('Published in')}}:</dt>
+    <dd>
+      {{j.title}}:{% if j.volume %} {{j.volume}}{% endif%}{% if j.year %} ({{j.year}}){% endif %}{% if j.number %} no. {{j.number}},{% endif %}{% if j.pages %} pp. {{j.pages}}{% endif %}{% if j.issue %} ({{j.issue}}){% endif %}.
+    </dd>
+    {% endif %}
+  {%- endwith %}
+  {%- endif %}
+
+  {%- if resolved_record.grants %}
+    <dt>{{_('Grants')}}:</dt>
+    <dd>
+      {%- for group in resolved_record.grants|groupby('funder.name') %}
+        <u>{{group.grouper}}:</u><br />
+        <ul>
+        {%- for grant in group.list %}
+          <li>{% if grant.url or grant.identifiers.purl %}<a href="{{grant.url or grant.identifiers.purl}}">{% endif %}
+          {% if grant.acronym %}{{grant.acronym}} - {% endif %}{{grant.title}}{% if grant.code %} ({{grant.code}}){% endif %} {% if not loop.last %}<br />{% endif %}
+          {% if grant.url or grant.identifiers.purl %}</a>{% endif %}</li>
+        {%- endfor %}
+        </ul>
+      {%- endfor %}
+    </dd>
+  {%- endif %}
+
+  {%- if record.thesis and record.thesis.university %}
+    <dt>{{ _('Awarding University') }}:</dt>
+    <dd>{{record.thesis.university}}</dd>
+  {%- endif %}
+
+  {%- if record.meeting %}
+    {%- set m = record.meeting%}
+    {%- set m_title = m|meeting_title %}
+    <dt>{{ _('Meeting') }}:</dt>
+    <dd>
+      {%- if m.url %}
+      <a href="{{m.url}}"><i class="fa fa-external-link"></i> {{m_title}}</a>
+      {%- else %}
+      {{m_title}}
+      {%- endif%}
+      {%- if m.place %}, {{m.place}} {%- endif %}
+      {%- if m.dates %}, {{m.dates}} {%- endif %}
+      {% if m.session %}(Session {{m.session}}{% if m.session_part %}, Part {{m.session_part}}{%- endif %}){%- endif %}
+    </dd>
+    {%- if m.url and not m_title %}
+      <dd><a href="{{m.url}}"><i class="fa fa-external-link"></i> {{_('Conference website')}}</a></dd>
+    {%- endif %}
+  {%- endif %}
+
+  {%- for group in record.related_identifiers|groupby('relation') %}
+    {%- if loop.first %}
+    <dt>{{ _('Related identifiers') }}:</dt>
+    {%- endif %}
+    <dd>{{group.grouper|relation_title}}<br />
+    <ul class="list-unstyled">
+    {%- for related_id in group.list %}
+      {%- if related_id.resource_type %}
+        {% set resource_type_title %}({{(related_id.resource_type|objecttype).title.en}}){% endset %}
+      {%- endif %}
+      {%- set related_url = related_id.identifier|pid_url(scheme=related_id.scheme) %}
+      <li>
+        {%- if related_url %}
+        <a href="{{related_url}}">{{related_id.identifier}}</a> {{resource_type_title}}
+        {%- else %}
+        <i>{{related_id.identifier}}</i> ({{related_id.scheme|upper}}) {{resource_type_title}}
+      {%- endif %}
+      </li>
+    {%- endfor %}
+    </ul>
+    </dd>
+  {%- endfor %}
+
+  {%- if record.alternate_identifiers %}
+    <dt>{{ _('Alternate identifiers') }}:</dt>
+    <dd>
+      <ul class="list-unstyled">
+      {%- for alt_id in record.alternate_identifiers %}
+        <li>
+        {%- if alt_id.resource_type %}
+          {% set resource_type_title %}({{(alt_id.resource_type|objecttype).title.en}}){% endset %}
+        {%- endif %}
+        {%- set alt_url = alt_id.identifier|pid_url(scheme=alt_id.scheme) %}
+        {%- if alt_url %}
+          <a href="{{alt_url}}">{{alt_id.identifier}}</a> {{resource_type_title}}
+        {%- else %}
+          <i>{{alt_id.identifier}}</i> ({{alt_id.scheme|upper}}) {{resource_type_title}}
+        {%- endif %}
+        </li>
+      {%- endfor %}
+      </ul>
+    </dd>
+  {%- endif %}
+
+  {%- if record.custom %}
+    <dt>{{ _('Custom keywords') }}:</dt>
+    <dd class="custom-keywords">
+      <ul class="list-unstyled">
+      {%- for custom_field, custom_field_values in record.custom.items() %}
+        {%- set custom_field_info = custom_metadata.terms[custom_field] %}
+        <li>
+          {{ custom_field_info.label or custom_field }}
+          <a href="{{ custom_field_info.url }}"><i data-toggle="tooltip" data-title="{{ custom_field_info.url }}" class="fa fa-fw fa-external-link "></i>
+          </a><br/>
+          <div>
+          {% if custom_field_info.type in ('text', 'keyword') %}
+            {%- for custom_val in custom_field_values %}
+              {%- set custom_search_param = '[' + custom_field + ']:[' + custom_val + ']' %}
+              <a href="{{url_for('invenio_search_ui.search', custom=custom_search_param)}}">
+              {{ custom_val }}</a>{%- if not loop.last %}, {% endif %}
+            {%- endfor %}
+          {% elif custom_field_info.type == 'relationship' %}
+            {%- for custom_rel in custom_field_values %}
+              ({% for custom_subject in custom_rel.subject %}
+                {%- set custom_search_param = '[' + custom_field + ']:[' + custom_subject + ':]' %}
+                <a href="{{url_for('invenio_search_ui.search', custom=custom_search_param)}}">
+                {{ custom_subject }}</a>{%- if not loop.last %}, {% endif %}
+              {% endfor %}) &rarr;
+              ({% for custom_object in custom_rel.object %}
+                {%- set custom_search_param = '[' + custom_field + ']:[:' + custom_object + ']' %}
+                <a href="{{url_for('invenio_search_ui.search', custom=custom_search_param)}}">
+                {{ custom_object }}</a>{%- if not loop.last %}, {% endif %}
+              {% endfor %})<br/>
+            {%- endfor %}
+          {% endif %}
+          </div>
+        </li>
+      {%- endfor %}
+      </ul>
+    </dd>
+  {%- endif %}
+
+  {%- if record.locations %}
+    <dt>{{ _('Locations') }}:</dt>
+    <dd class="locations">
+      <ul class="list-unstyled">
+        {%- for location in record.locations %}
+          <li>
+            {{location.place}} {%- if location.lat and location.lon %} (<a href="https://google.com/maps/place/{{location.lat}},{{location.lon}}">{{ location.lat }}, {{ location.lon }} <i class="fa fa-fw fa-external-link"></i></a>){% endif %}<br/>
+            <small>{{location.description}}</small>
+          </li>
+        {%- endfor %}
+      </ul>
+    </dd>
+  {%- endif %}
+
+  {%- if record.dates %}
+    <dt>{{ _('Dates') }}:</dt>
+    <dd class="dates">
+    <ul class="list-unstyled">
+    {%- for group in record.dates | groupby('type') %}
+      <li>
+        {{ group.grouper }}<br/>
+        <div>
+          {%- for date in group.list %}
+            {{ date | format_date_range }}<br/>
+          {%- endfor %}
+        </div>
+      </li>
+    {%- endfor %}
+    </ul>
+    </dd>
+  {%- endif %}
+
+  {%- if all_accepted_comms %}
+    <dt>{{ _('Communities') }}:</dt>
+    <dd>
+      <ul class="list-unstyled">
+      {%- for c in all_accepted_comms %}
+        <li><a href="{{url_for('invenio_communities.detail', community_id=c.id)}}">{{c.title}}</a></li>
+      {%- endfor %}
+      </ul>
+    </dd>
+
+  {%- endif %}
+
+  {%- if resolved_record.license %}
+    <dt>{{_('License (for files)')}}:</dt>
+    <dd><a rel="license" href="{{resolved_record.license.url}}"><i class="fa fa-external-link"></i> {{resolved_record.license.title}}</a></dd>
+  {%- endif %}
+
+  {%- set userprofile = record.owner.id|userprofile if record.owner and record.owner.id else None %}
+  {%- if userprofile %}
+    <dt>{{_('Uploaded by')}}:</dt>
+    <dd>
+      {{ userprofile.displayname }}
+      {%- if record.get('creation_date') %}
+        {%- trans upload_date=record.get('creation_date')|from_isodatetime|dateformat('long') %}
+          (on {{upload_date}})
+        {%- endtrans %}
+      {%- endif %}
+    </dd>
+    {% elif record.get('creation_date') %}
+    <dt>{{_('Uploaded on')}}:</dt>
+    <dd>{{ record.get('creation_date')|from_isodatetime|dateformat('long') }}</dd>
+  {%- endif %}
+  </dl>

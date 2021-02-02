@@ -1,0 +1,78 @@
+.. _specs/rfc7662:
+
+RFC7662: OAuth 2.0 Token Introspection
+======================================
+
+.. meta::
+    :description: API references on RFC7009, OAuth 2.0 Token Introspection,
+        in Python via Authlib implementation.
+
+This section contains the generic implementation of RFC7662_. OAuth 2.0 Token
+Introspection is usually designed to let resource servers to know content of
+a token.
+
+.. _RFC7662: https://tools.ietf.org/html/rfc7662
+
+.. module:: authlib.oauth2.rfc7662
+
+.. _register_introspection_endpoint:
+
+Register Introspection Endpoint
+-------------------------------
+
+Authlib is designed to be very extendable, with the method of
+``.register_endpoint`` on ``AuthorizationServer``, it is easy to add the
+introspection endpoint to the authorization server. It works on both
+:ref:`flask_oauth2_server` and :ref:`django_oauth2_server`. But first,
+we need to implement the missing methods::
+
+    from authlib.oauth2.rfc7662 import IntrospectionEndpoint
+
+    class MyIntrospectionEndpoint(IntrospectionEndpoint):
+        def query_token(self, token, token_type_hint, client):
+            if token_type_hint == 'access_token':
+                tok = Token.query.filter_by(access_token=token).first()
+            elif token_type_hint == 'refresh_token':
+                tok = Token.query.filter_by(refresh_token=token).first()
+            else:
+                # without token_type_hint
+                tok = Token.query.filter_by(access_token=token).first()
+                if not tok:
+                    tok = Token.query.filter_by(refresh_token=token).first()
+            if tok:
+                if tok.client_id == client.client_id:
+                    return tok
+                if has_introspect_permission(client):
+                    return tok
+
+        def introspect_token(self, token):
+            return {
+                'active': True,
+                'client_id': token.client_id,
+                'token_type': token.token_type,
+                'username': get_token_username(token),
+                'scope': token.get_scope(),
+                'sub': get_token_user_sub(token),
+                'aud': token.client_id,
+                'iss': 'https://server.example.com/',
+                'exp': token.expires_at,
+                'iat': token.issued_at,
+            }
+
+    # register it to authorization server
+    server.register_endpoint(MyIntrospectionEndpoint)
+
+After the registration, we can create a response with::
+
+    @app.route('/oauth/introspect', methods=['POST'])
+    def introspect_token():
+        return server.create_endpoint_response(MyIntrospectionEndpoint.ENDPOINT_NAME)
+
+
+API Reference
+-------------
+
+.. autoclass:: IntrospectionEndpoint
+    :member-order: bysource
+    :members:
+    :inherited-members:

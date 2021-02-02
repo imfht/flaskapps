@@ -1,0 +1,15 @@
+Running Bento checks on staged files...
+
+flake8 undefined-name https://lintlyci.github.io/Flake8Rules/rules/F821.html
+     > foo.py:1
+     ╷
+    1│   x = z
+     ╵
+     = undefined name 'z'
+
+⚠ 1 finding(s) due to staged changes in  s
+
+Please fix these issues, or:
+
+◦ To archive findings as tech debt, run $ bento archive
+◦ To disable a specific check, run $ bento disable check TOOL CHECK

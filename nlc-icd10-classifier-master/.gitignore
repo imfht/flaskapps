@@ -1,0 +1,16 @@
+.env
+.vscode
+demo1
+### Python ###
+
+# Byte-compiled / optimized / DLL files
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# virtualenv
+.venv/
+venv/
+ENV/
+mytestenv/

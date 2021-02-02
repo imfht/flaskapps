@@ -1,0 +1,178 @@
+{% extends 'events/display/conference/base.html' %}
+
+{% from 'events/contributions/display/_contribution_list.html' import render_contribution_list %}
+{% from 'events/display/common/_conferences.html' import render_attachments %}
+{% from 'events/display/indico/_common.html' import render_location, render_users %}
+{% from 'message_box.html' import message_box %}
+
+{% block page_class %}conference-page item-summary{% endblock %}
+
+{% block title %}
+    {%- trans %}Session{% endtrans -%}
+{% endblock %}
+
+{% block subtitle %}
+    {{- sess.title -}}
+{% endblock %}
+
+{% block info %}
+    <div class="time-data">
+        <i class="icon-time header-data"></i>
+        <span class="time-info">
+            {% if sess.start_dt -%}
+                {{ sess.start_dt|format_datetime(timezone=event.display_tzinfo) }}
+            {%- else -%}
+                {% trans %}Not scheduled{% endtrans %}
+            {%- endif %}
+        </span>
+    </div>
+    {% if sess.has_location_info %}
+        <div class="location-data">
+            {{ render_location(sess, class='session-location') }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block page_actions -%}
+    <div class="toolbar">
+        {% if sess.can_manage(session.user) -%}
+            <div class="group">
+                <a href="#" class="i-button icon-edit"
+                   title="{% trans %}Edit session{% endtrans %}"
+                   data-title="{% trans %}Edit session{% endtrans %}"
+                   data-href="{{ url_for('.modify_session', sess) }}"
+                   data-ajax-dialog
+                   data-reload-after></a>
+                <a href="#" class="i-button icon-shield" title="{% trans %}Manage protection{% endtrans %}"
+                   data-title="{% trans title=sess.title %}Manage protection{% endtrans %}"
+                   data-href="{{ url_for('.session_protection', sess) }}"
+                   data-ajax-dialog
+                   data-reload-after></a>
+                <a href="{{ url_for('timetable.manage_session', sess) }}"
+                   class="i-button icon-time"
+                   title="{% trans %}Manage timetable{% endtrans %}"></a>
+            </div>
+        {%- endif %}
+        <div class="group">
+            <a href="{{ url_for('sessions.export_session_timetable', sess) }}" class="i-button icon-file-pdf"></a>
+            {% if sess.start_dt -%}
+                {% if g.static_site %}
+                    <a href="{{ url_for('sessions.export_ics', sess) }}" class="i-button icon-calendar"></a>
+                {% else %}
+                    <a id="exportIcal{{ sess.id }}" href="#"
+                       class="i-button icon-calendar js-export-ical"
+                       data-id="{{ sess.id }}"></a>
+                {% endif %}
+            {%- endif %}
+        </div>
+        {% if sess.start_dt -%}
+            {% with item=sess, ics_url=url_for('sessions.export_ics', sess) -%}
+                {% include 'events/sessions/display/session_ical_export.html' %}
+            {%- endwith %}
+        {%- endif %}
+    </div>
+{%- endblock %}
+
+{% block content -%}
+    {% if sess.blocks and sess.conveners -%}
+        <section>
+            <div class="flexrow">
+                <div class="session-conveners">
+                    <div class="header">
+                        <div class="header-row">
+                            <h3>{% trans %}Conveners{% endtrans %}</h3>
+                        </div>
+                    </div>
+                    {% for block in sess.blocks -%}
+                        <div class="header-row">
+                            <h4>{{ block.full_title }}</h4>
+                        </div>
+                        <ul>
+                            {% for convener in block.person_links -%}
+                                <li class="icon-user">
+                                    {% if sess.can_manage(session.user) %}
+                                        <a href="mailto:{{ convener.email }}">
+                                            {{ convener.full_name }}
+                                        </a>
+                                    {% else %}
+                                        {{ convener.full_name }}
+                                    {% endif %}
+                                    ({{ convener.affiliation }})
+                                </li>
+                            {%- else -%}
+                                <li>{% trans %}There are no conveners in this block{% endtrans %}</li>
+                            {%- endfor %}
+                        </ul>
+                    {%- endfor %}
+                </div>
+            </div>
+        </section>
+    {%- endif %}
+
+    {% if sess.description %}
+        <section>
+            <div class="header">
+                <div class="header-row">
+                    <h3>{% trans %}Description{% endtrans %}</h3>
+                </div>
+                <div class="description">
+                    {{ sess.description }}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    {{ render_attachments(sess) }}
+
+    <section>
+        <div class="item-subitems toolbar">
+            {% if sess.contributions %}
+                <a href="#" class="i-button icon-list js-switch-view" data-show="session-contrib-list">
+                    {%- trans %}Contribution list{% endtrans -%}
+                </a>
+            {% endif %}
+            {% if not sess.is_poster %}
+                <a href="#" class="i-button icon-time highlight js-switch-view" data-show="session-timetable">
+                    {%- trans %}Timetable{% endtrans -%}
+                </a>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="js-container">
+        {% if sess.contributions %}
+            <div id="session-contrib-list" class="contribution-list js-view">
+                {{ render_contribution_list(event, event.display_tzinfo, sess.contributions, with_session_info=false) }}
+            </div>
+        {% endif %}
+
+        {% if not sess.is_poster -%}
+            <div id="session-timetable" class="js-view">
+                {% set timetable_html = template_hook('session-timetable', session=sess, timetable_layout=none) %}
+                {% if timetable_html %}
+                    {{ timetable_html }}
+                {% else %}
+                    {% call message_box('info') -%}
+                        {% trans %}No scheduled contributions{% endtrans %}
+                    {%- endcall %}
+                {% endif %}
+            </div>
+        {%- endif %}
+    </div>
+
+    <script>
+        setupAttachmentTreeView();
+        $('.js-switch-view').on('click', function(evt) {
+            evt.preventDefault();
+
+            $('.js-switch-view').removeClass('highlight');
+            $('.js-container .js-view').hide();
+            $(this).addClass('highlight');
+            $('#' + $(this).data('show')).show();
+        }).trigger('click');
+
+        setupSessionsList({
+            createSessionTypeURL: {{ url_for('sessions.create_type', event) | tojson }}
+        });
+    </script>
+{%- endblock %}

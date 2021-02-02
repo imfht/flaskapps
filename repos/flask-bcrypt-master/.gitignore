@@ -1,0 +1,13 @@
+.*
+*.pyc
+*.eggi*
+*.orig
+**/_build/*
+bin/*
+build/*
+dist/*
+include/*
+lib/*
+src/*
+!.gitignore
+venv*

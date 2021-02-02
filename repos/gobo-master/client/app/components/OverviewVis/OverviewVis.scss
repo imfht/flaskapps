@@ -1,0 +1,23 @@
+$overview-height: 20px;
+
+.overview-post {
+  height: $overview-height;
+  display: inline-flex;
+}
+
+.overview-post-filtered {
+  background-color: $light-gray;
+}
+
+.overview-post-visible {
+  background-color: $primary-color;
+
+  &.overview-post-additive {
+    background-color: $additive-color;
+  }
+}
+
+.overview-wrapper {
+  height: $overview-height;
+  font-size: 0;  // this fixes an odd gap that appears at the top
+}

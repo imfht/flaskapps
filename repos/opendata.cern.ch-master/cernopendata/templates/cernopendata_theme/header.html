@@ -1,0 +1,48 @@
+{%- extends "invenio_theme/header.html" %}
+{%- block navbar %}
+<nav class="navbar-custom">
+  <a class="navbar-brand" href="{{ url_for('cernopendata_pages.index') }}">
+    <img src="{{ url_for('static', filename='assets/img/logo_blue.png') }}" width="115" alt="">
+  </a>
+
+  {% block search_bar %}
+  <div class="searchbar">
+      <form {% if request.endpoint=='cernopendata_pages.index' %} id="main-search" {% endif %}
+      class="form-inline my-2 my-lg-0" action="{{config.THEME_SEARCH_ENDPOINT}}">
+        <div class="ui action input input-box">
+            <input class="text" type="text" placeholder="Search" name="q" aria-label="Search"
+                  value="{{ request.args.get('q','')}}">
+            <button class="ui icon button blue">
+              <i class="search icon"></i>
+            </button>
+        </div>
+      </form>
+  </div>
+  {% endblock search_bar %}
+
+  <ul class="link-menu">
+    <li>
+      <a href="https://opendata-forum.cern.ch/">Help</a>
+    </li>
+    <li class="ui dropdown">
+      <span class="navbar-item">
+        <span>About<i class="dropdown icon"></i></span>
+      </span>
+      <div class="menu dropdown-items">
+        <div class="item"><a href="/docs/about">CERN Open Data</a></div>
+        <div class="item"><a href="/docs/about-adivce">AdivCE</a></div>
+        <div class="item"><a href="/docs/about-atlas">ATLAS</a></div>
+        <div class="item"><a href="/docs/about-cms">CMS</a></div>
+        <div class="item"><a href="/docs/about-lhcb">LHCb</a></div>
+        <div class="item"><a href="/docs/about-opera">OPERA</a></div>
+        <div class="item"><a href="/search?type=Glossary&sort=title">Glossary</a></div>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+{%- endblock navbar %}
+
+{%- block breadcrumbs %}
+{%- include "cernopendata_theme/breadcrumbs.html" %}
+{%- endblock breadcrumbs %}

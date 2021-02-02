@@ -1,0 +1,7 @@
+include LICENSE.rst
+graft docs
+prune docs/_build
+recursive-include sopy/migrations *.py
+graft sopy/static
+graft sopy/templates
+global-exclude *.pyc

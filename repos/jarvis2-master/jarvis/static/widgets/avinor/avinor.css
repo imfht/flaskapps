@@ -1,0 +1,22 @@
+[data-widget="avinor"] {
+  height: 100%;
+  padding: 5px;
+  background: #84596b;
+  text-align: center;
+}
+[data-widget="avinor"] h1 {
+  font-size: 40px;
+  margin: 0;
+}
+[data-widget="avinor"] h2 {
+  font-size: 18px;
+  margin: 14px 0 14px 0;
+}
+[data-widget="avinor"] table {
+  width: 100%;
+  margin: 0 10px 0 10px;
+}
+[data-widget="avinor"] em {
+  font-style: normal;
+  color: white;
+}

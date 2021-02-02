@@ -1,0 +1,52 @@
+{
+  "name": "neo4j-movies-api",
+  "version": "0.0.20",
+  "author": {
+    "name": "The SilveLogic",
+    "email": "info@tsl.io",
+    "url": "tsl.io"
+  },
+  "description": "API for a movie demo app using Neo4j",
+  "repository": {
+    "type": "git",
+    "url": "tbd"
+  },
+  "keywords": [
+    "node",
+    "neo4j",
+    "express",
+    "api",
+    "http",
+    "rest",
+    "swagger",
+    "server"
+  ],
+  "engines": {
+    "node": ">=0.11.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "hat": "0.0.3",
+    "install": "^0.13.0",
+    "lodash": "^4.17.20",
+    "md5": "^2.2.1",
+    "method-override": "^3.0.0",
+    "mocha": "^7.2.0",
+    "moment": "^2.26.0",
+    "morgan": "^1.10.0",
+    "nconf": "^0.10.0",
+    "neo4j-driver": "^4.1.2",
+    "node-uuid": "^1.4.8",
+    "pug": "^3.0.0",
+    "randomstring": "^1.1.5",
+    "serve-favicon": "^2.5.0",
+    "should": "^13.2.3",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,14 @@
+include indico/*.sample indico/web/indico.wsgi
+recursive-include indico *.html *.txt *.js *.yaml *.tex *.svg
+exclude indico/logging.yaml
+
+graft indico/core/plugins/alembic/
+graft indico/migrations/
+graft indico/translations/
+graft indico/web/static
+prune indico/web/client
+prune indico/htdocs
+include indico/legacy/pdfinterface/texmf.cnf
+
+global-exclude *.pyc __pycache__ .keep
+include indico/migrations/versions/.keep

@@ -1,0 +1,36 @@
+{% set version = '0.3.4' %}
+
+package:
+  name: flask-ldap-login
+  version: {{ version }}
+
+build:
+  entry_points:
+    - flask-ldap-login-check = flask_ldap_login.check:main
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - python-ldap
+    - flask
+    - flask-wtf
+
+  run:
+    - python
+    - python-ldap
+    - flask
+    - flask-wtf
+
+test:
+  imports:
+    - examples
+    - flask_ldap_login
+
+  commands:
+    - flask-ldap-login-check --help
+
+about:
+  home: https://github.com/ContinuumIO/flask-ldap-login
+  license: BSD
+  summary: 'Flask ldap login is designed to work on top of an existing application.'

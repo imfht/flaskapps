@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+
+    <form class="form form-inline" method="GET" role="form">
+        {{ wtf.form_errors(form, hiddens="only") }}
+
+        <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>{{ wtf.form_field(form.start_at) }}
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>{{ wtf.form_field(form.end_at) }}
+        <hr style="height:10pt; visibility:hidden;" />
+
+        <i class="fa fa-user" aria-hidden="true"></i>{{ wtf.form_field(form.user) }}
+        <i class="fa fa-users" aria-hidden="true"></i>{{ wtf.form_field(form.department) }}
+
+        <i class="fa fa-search" aria-hidden="true"></i>{{ wtf.form_field(form.submit) }}
+    </form>
+    <hr>
+
+
+    {% for report in pagination.items %}
+    <div class="post-preview">
+
+        <a rel="tag" class="post-tag">{{_('Employee')}}:{{ report.author.username }}</a>
+        <a rel="tag" class="post-tag">{{_('Department')}}:{{ report.department.name }}</a>
+        <a rel="tag" class="post-tag">{{_('Week Count')}}:{{ report.week_count }}</a>
+        <a rel="tag" class="post-tag">{{_('Year')}}:{{ report.year }}</a>
+		<a rel="tag" class="post-tag">{{_('Start')}}:{{ report.year | get_week_days(report.week_count,0) }}</a>
+		<a rel="tag" class="post-tag">{{_('End')}}:{{ report.year | get_week_days(report.week_count,1) }}</a>		
+        <table class="table table-striped table-bordered table-hover model-list">
+        <thead>
+            <tr>
+	              <th class="column-header col-last_content">
+	                  {{_('Last Week')}}
+	              </th>
+	              
+	              <th class="column-header col-content">
+	                  {{_('Current Week')}}
+	              </th>
+            </tr>
+        </thead>
+        <tbody><tr>
+                    <td class="col-last_content">
+                            {{report.last_content|safe}}
+                    </td>
+                
+                    <td class="col-content">
+                            {{report.content|safe}}
+                    </td>
+            
+        </tr>
+        </tbody>
+					</table>
+        
+        <hr>
+    </div>
+    {% endfor %}
+
+    <ul class="pager">
+        {% if pagination.has_prev %}
+            <li class="previous">
+                <a href="{{ url_for('report.read_crew',
+                page=pagination.page-1,
+                start_at=form.start_at.data,
+                end_at=form.end_at.data,
+                user=form.user.data,
+                department=form.department.data
+                )}}">
+                    &larr; Newer
+                </a>
+            </li>
+        {% else %}
+            <li class="previous disabled"><a href="#">&larr; Newer </a></li>
+        {% endif %}
+
+        {% if pagination.has_next %}
+            <li class="next">
+                <a href="{{ url_for('report.read_crew',
+                page=pagination.page+1,
+                start_at=form.start_at.data,
+                end_at=form.end_at.data,
+                user=form.user.data,
+                department=form.department.data
+                )}}">
+                    Older &rarr;
+                </a>
+            </li>
+        {% else %}
+            <li class="next disabled"><a href="#">Older &rarr;</a></li>
+        {% endif %}
+    </ul>
+
+{% endblock %}

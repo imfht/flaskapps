@@ -1,0 +1,127 @@
+{% extends "bootstrap/base.html" %}
+{% block title %} 人生苦短、我用python{% endblock title %}
+{%- block styles %}
+{{super()}}
+ <link href="{{url_for('static',filename='css/mycss.css',_external=True)}}" rel="stylesheet">
+ <link href="{{url_for('static',filename='css/xscss.css')}}" rel="stylesheet">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="{{url_for('static',filename='css/github-markdown.css')}}">
+ <style>
+    
+    html, body, .wrap { height:100%; }
+    .wrap {
+        height:auto; 
+        min-height:100%; 
+        _height:100%; 
+    }
+    .main { padding-bottom:80px; }
+    .footer { 
+        position:relative; 
+        height:80px; 
+        line-height: 80px; 
+        margin-top:-80px; 
+        background:#333; 
+        color:#fff; 
+        font-size:16px; 
+        text-align:center; 
+    }
+     .markdown-body {
+         box-sizing: border-box;
+         min-width: 200px;
+         max-width: 980px;
+         margin: 0 auto;
+         padding: 45px;
+     }
+ 
+     @media (max-width: 767px) {
+         .markdown-body {
+             padding: 15px;
+         }
+     }
+ </style>
+{%- endblock styles %}
+
+{% block navbar %}
+ <!-- 导航栏开始 -->
+ <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">个人博客</a>
+        </div>
+    <div>
+        <ul class="nav navbar-nav">
+            {% if flag == 1 %}
+            <li class="active"><a href="/">首页</a></li>
+            {% else%}
+            <li><a href="/">首页</a></li>
+            {% endif %}
+            {% if flag == 2 %}
+            <li class="active"><a href="{{url_for('main.get_technology')}}">技术杂谈</a></li>
+            {% else%}
+            <li ><a href="{{url_for('main.get_technology')}}">技术杂谈</a></li>
+            {% endif %}
+            {% if flag == 3 %}
+            <li class="active"><a href="{{url_for('main.get_life')}}">人生感悟</a></li>
+            {% else%}
+            <li ><a href="{{url_for('main.get_life')}}">人生感悟</a></li>
+            {% endif %}
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    个人爱好 <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url_for('fiction.book_index')}}">小说频道</a></li>
+                    <li><a href="#">技术文章下载</a></li>
+                </ul>
+            </li>
+            {% if flag == 4 %}
+            <li class="active"><a href="{{url_for('fiction.book_index')}}">小说频道</a></li>
+            {% else%}
+            <li><a href="{{url_for('fiction.book_index')}}">小说频道</a></li>
+            {% endif %}
+            {% if flag == 5 %}
+            <li class="active"><a href="{{url_for('main.tasks')}}">学习计划</a></li>
+            {% else%}
+            <li><a href="{{url_for('main.tasks')}}">学习计划</a></li>
+            {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right"> 
+            {% if current_user.is_authenticated %}
+            <li><a href="{{url_for('main.wrarticle')}}"><span class="glyphicon glyphicon-user"></span>写点什么吧</a></li> 
+            <li><a href="{{url_for('main.manage_article')}}"><span class="glyphicon glyphicon-user"></span>管理文章</a></li> 
+            <li><a>Hello,{{current_user.user_name}}</a></li> 
+            <li><a href="{{url_for('main.login_out')}}"><span class="glyphicon glyphicon-user"></span>登出</a></li> 
+            {% else %}
+          <li><a href="{{url_for('main.login_up')}}"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
+          <li><a href="{{ url_for('main.login_in')}}"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
+          {% endif %}
+      </ul> 
+    </div>
+    </div>
+</nav>
+<div class="wrap">
+    <div class="main">
+{% endblock navbar %}
+
+{% block content %}
+    </div>
+</div>
+<!-- 底部begin -->
+<div class ="footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-offset-4 col-md-8">
+               <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">关于我们</a></li>
+                  <li ><a href="#">联系我们</a></li>
+                  <li><a href="#">广告服务</a></li>
+                  <li><a href="#">免责声明</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- 底部end -->
+{% endblock %}
+
+

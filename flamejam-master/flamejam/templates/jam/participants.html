@@ -1,0 +1,66 @@
+{% extends "jam/base.html" %}
+
+{% block title %}Participants of {{ jam.title }}{% endblock %}
+
+{% block content %}
+
+<h1>Participants
+
+    {% if jam.get_status().code >= 1 %}
+        <small>{{ jam.participations | length }} people are registered</small>
+
+        <a class="btn btn-primary pull-right" href="{{ url_for('map', mode = 'jam', id = jam.id) }}">Participant Map</a>
+    {% endif %}
+</h1>
+
+{% if jam.participations | length == 0 %}
+    {% if jam.get_status().code <= 0 %}
+        <p class="alert alert-info">Registrations are still closed, so naturally, nobody is participating yet.</p>
+    {% else %}
+        <p class="alert alert-info">Nobody is participating yet.</p>
+    {% endif %}
+{% else %}
+    <table class="table table-hover table-bordered full">
+    <thead>
+        <tr class="sorters">
+            <th style="width: 2em;"></th>
+            <th>Username</th>
+            <th>Abilities</th>
+            <th>Location</th>
+            <th>Registered</th>
+            <th>Team status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in jam.participations %}
+        <tr>
+            <td>{{ loop.index }}</td>
+
+            <td data-value="{{ p.user.username }}">{{ p.user.get_link() }}</td>
+
+            <td>{{ p.user.ability_string() | safe or "n/a" }}</td>
+
+            <td>{{ p.user.get_location() }}</td>
+
+            <td data-value="{{ p.registered }}" style="white-space: nowrap;">
+                {{ p.registered | humantime }}
+            </td>
+
+            {% set looking = p.show_in_finder and p.team.isSingleTeam %}
+            <td data-value="{{ '' if looking else p.team.name }}">
+                {% if looking %}
+                    Looking for team
+                {% else %}
+                    <a href="{{ p.team.url() if p.team else '' }}">{{ p.team.name }}</a>
+                {% endif %}
+            </td>
+
+            <td><a href="{{ url_for('team_settings', jam_slug = jam.slug) }}?invite={{ p.user.username }}">Invite</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endif %}
+
+{% endblock %}

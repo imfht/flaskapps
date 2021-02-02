@@ -1,0 +1,90 @@
+{% macro render_paper_content(paper, contribution_page=false) %}
+    <div class="paper-content flexcol">
+        <div class="flexrow">
+            {% set spotlight_file = paper.last_revision.get_spotlight_file() %}
+            {% if spotlight_file %}
+                {% set only_spotlight = paper.last_revision.files | length == 1 %}
+                {{ _render_spotlight_file(spotlight_file, full_width=only_spotlight and not contribution_page) }}
+                {% if not only_spotlight %}
+                    {{ _render_paper_files(paper.last_revision.files, spotlight_file) }}
+                {% endif %}
+            {% else %}
+                <div class="paper-files-list flexrow f-a-baseline">
+                    <div class="paper-files-list-label f-self-no-shrink">
+                        {%- trans %}Paper files:{% endtrans -%}
+                    </div>
+                    {{ _render_paper_files(paper.last_revision.files, full_width=true) }}
+                </div>
+            {% endif %}
+        </div>
+        {% if not contribution_page %}
+            {{ render_paper_metadata(paper) }}
+        {% endif %}
+    </div>
+{% endmacro %}
+
+
+{% macro _render_spotlight_file(file, full_width=false) %}
+    {% set icon = icon_from_mimetype(file.content_type, 'icon-file-filled') %}
+    {% set class = 'full-width' if full_width else None %}
+    <div class="flexrow f-a-center spotlight-file i-button text-color borderless paper-file {{ class }}"
+         title="{{ file.filename }}">
+        <a href="{{ url_for('papers.download_file', file) }}"
+           class="attachment spotlight-file-name flexrow f-a-center truncate-text {{ icon }}">
+            <span class="title truncate-text">{{ file.filename }}</span>
+        </a>
+    </div>
+{% endmacro %}
+
+
+{% macro _render_paper_files(files, spotlight_file=none, full_width=false) %}
+    {% set class = 'full-width' if full_width else None %}
+    <ul class="paper-files flexrow f-wrap f-a-center {{ class }}">
+        {% for file in files if file != spotlight_file %}
+            {% set icon = icon_from_mimetype(file.content_type, 'icon-file-filled') %}
+            <li>
+                <a href="{{ url_for('papers.download_file', file) }}"
+                   class="attachment paper-file i-button text-color borderless {{ icon }}"
+                   title="{{ file.filename }}">
+                    <span class="title truncate-text">{{ file.filename }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+
+{% macro render_paper_metadata(paper, contribution_page=False) %}
+    <div class="paper-metadata flexrow f-j-end">
+        {% set date_time %}
+            {% if contribution_page %}
+                {% if paper.can_manage(session.user) %}
+                    <a class="paper-metadata-dt" href="{{ url_for('papers.paper_timeline', paper) }}">
+                        <time datetime="{{ paper.last_revision.judgment_dt.isoformat() }}">
+                            {{- paper.last_revision.judgment_dt|format_human_date -}}
+                        </time>
+                    </a>
+                {% else %}
+                    <time datetime="{{ paper.last_revision.judgment_dt.isoformat() }}">
+                        {{- paper.last_revision.judgment_dt|format_human_date -}}
+                    </time>
+                {% endif %}
+            {% else %}
+                <a class="paper-metadata-dt" href="#revision-info-{{ paper.last_revision.id }}">
+                    <time datetime="{{ paper.last_revision.submitted_dt.isoformat() }}">
+                        {{- paper.last_revision.submitted_dt|format_human_date -}}
+                    </time>
+                </a>
+            {% endif %}
+        {% endset %}
+        {% if contribution_page %}
+            {%- trans judge=paper.last_revision.judge.full_name -%}
+                Accepted on {{ date_time }} by {{ judge }}
+            {%- endtrans -%}
+        {% else %}
+            {%- trans submitter=paper.last_revision.submitter.full_name -%}
+                Submitted on {{ date_time }} by {{ submitter }}
+            {%- endtrans -%}
+        {% endif %}
+    </div>
+{% endmacro %}

@@ -1,0 +1,16 @@
+language: python
+dist: xenial
+python:
+  - 2.7
+  - 3.7
+services:
+  - redis
+env:
+  - FLASK=1.0.2
+  - FLASK=0.10.1
+install:
+  - pip install -q Flask==$FLASK
+  - pip install -q -r dev_requirements.txt
+  - pip install -q -e .
+script:
+  - python setup.py test

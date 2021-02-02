@@ -1,0 +1,97 @@
+#!/bin/bash
+
+## local variables
+CMD="$1"
+CWD=$(pwd)
+
+## install linters
+if [ "$CMD" = 'install' ]; then
+    ## install ruby: needed for scss-lint
+    if ! ruby -v &> /dev/null; then
+        curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+        sudo apt-get update
+        sudo apt-get -y install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs yarn
+
+        cd /root || exit 1
+        wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.2.tar.gz
+        tar -xzvf ruby-2.4.2.tar.gz
+        cd ruby-2.4.2/ || exit 1
+        ./configure
+        make
+        sudo make install
+    fi
+
+    ## install puppet
+    if ! /opt/puppetlabs/bin/puppet -V &> /dev/null; then
+        wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+        sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+        sudo apt-get update
+        sudo apt-get install -y puppet-agent=1.10.9-1trusty
+    fi
+
+    ##
+    ## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
+    ##
+    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
+
+    ## install linters
+    pip install flake8==2.5.4
+    gem install scss_lint -v 0.54.0
+    npm install -g bootlint@0.14.2
+    gem install puppet-lint -v 1.1.0
+    gem install r10k -v 2.2.0
+    npm install -g jsonlint@1.6.2
+    gem install csvlint -v 0.3.0
+    sudo apt-get update
+    sudo apt-get install libxml2-utils=2.9.1*
+    gem install mdl -v 0.3.1
+    sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
+    npm install -g eslint babel-eslint@7.2.3
+    npm install -g eslint-plugin-react@4.2.3
+    gem install yaml-lint -v 0.0.7
+    npm install -g dockerlint@0.3.1
+    pip install restructuredtext_lint==1.1.2
+
+## run linters
+##
+## @puppet-lint, the following issue needs to be checked if it has been
+##     resolved, so the '--no-ensure_first_param-check' abusive flag
+##     implementation (below) can be removed:
+##
+##     - https://github.com/rodjek/puppet-lint/issues/410
+##
+else
+    EXIT_FLAG=0
+
+    cd "$CWD" || exit 1
+    flake8 . --config=test/lint/setup.cfg || EXIT_FLAG=2
+    scss-lint src/scss/*.scss --config 'test/lint/.scss-lint.yml' || EXIT_FLAG=3
+    bootlint -d W005 interface/templates/*.html || EXIT_FLAG=4
+    find puppet/environment -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=5
+    puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules || EXIT_FLAG=6
+    find puppet -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \; || EXIT_FLAG=7
+    find . -maxdepth 0 -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=8
+    find src -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=9
+    find test -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=10
+    find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=11
+    find . -name '*.csv' -exec csvlint {} \; || EXIT_FLAG=12
+    xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd || EXIT_FLAG=13
+    xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd || EXIT_FLAG=14
+    xmllint --noout interface/static/data/xml/*.xsd || EXIT_FLAG=15
+    mdl . --style test/lint/markdown.rb || EXIT_FLAG=16
+    find . -type f ! -name '*.erb' -exec grep -q '^#!/bin/bash' {} \; -exec shellcheck {} + || EXIT_FLAG=17
+    find . -name '*.sh' -type f -exec shellcheck {} \; || EXIT_FLAG=18
+    eslint . --ext=jsx -c test/lint/eslint.json || EXIT_FLAG=19
+    yaml-lint hiera/ || EXIT_FLAG=20
+    yaml-lint ./*.yaml || EXIT_FLAG=21
+    find . -name '*.dockerfile' -type f -exec dockerlint {} \; || EXIT_FLAG=22
+    find . -name '*.rst' -type f -exec rst-lint {} \; | (! grep -E 'ERROR') || EXIT_FLAG=23
+    cd "$CWD" || exit 1
+
+    if [ "$EXIT_FLAG" -gt 1 ]; then
+        exit "$EXIT_FLAG"
+    fi
+fi

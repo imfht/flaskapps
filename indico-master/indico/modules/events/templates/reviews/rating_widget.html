@@ -1,0 +1,33 @@
+{% extends 'forms/base_widget.html' %}
+
+{% block html %}
+    <div id="{{ field.id }}" class="rating-scale flexrow f-a-start">
+        <span class="score">{{ '-' if field.object_data is none else field.data }}</span>
+        {% for bullet in range(field.rating_range[1], field.rating_range[0] - 1, -1) %}
+            {% set radio_id = '%s-%d'|format(field.id, bullet) %}
+            <input type="radio" id="{{ radio_id }}" name="{{ field.name }}" value="{{ bullet }}"
+                   {{ 'checked' if field.data == bullet }}>
+            <label class="bullet" for="{{ radio_id }}" data-value="{{ bullet }}"></label>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#{{ field.id }} input[type="radio"]').on('click', function() {
+            var $this = $(this);
+            var $widget = $this.closest('.rating-scale');
+            $widget.find('.score').text($this.val());
+        });
+
+        $('#{{ field.id }} label').on('mouseenter', function() {
+            var $this = $(this);
+            var $widget = $this.closest('.rating-scale');
+            $widget.find('.score').text($this.data('value'));
+        }).on('mouseleave', function() {
+            var $this = $(this);
+            var $widget = $this.closest('.rating-scale');
+            $widget.find('.score').text($widget.find(':checked').val() || '-');
+        });
+    </script>
+{% endblock %}

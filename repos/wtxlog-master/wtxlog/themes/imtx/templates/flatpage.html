@@ -1,0 +1,29 @@
+{% extends theme('layout.html') %}
+{% if flatpage.slug == 'about' %}
+  {% set active_page = "about" %}
+{% endif %}
+
+{% block title %}{{ flatpage.seotitle or flatpage.title }}{% endblock %}
+
+{% block head_extend -%}
+  <link href="{{ theme_static('css/highlight-default.css') }}" rel="stylesheet" type="text/css" media="all" />
+  <link rel="canonical" href="{{ flatpage.link }}" />
+  <meta name="mobile-agent" content="format=html5;url={{ flatpage.link }}"/>
+  <meta name="mobile-agent" content="format=xhtml;url={{ flatpage.link }}"/>
+{%- endblock %}
+
+{% block crumb %}{{ flatpage.title }}{% endblock %}
+
+{% block main %}
+  <div class="post">
+    <h2 class="pagetitle">{{ flatpage.title }}</h2>
+    <div class="entry">
+      {{ flatpage.body_html|safe }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block tail -%}
+  <script src="{{ theme_static('js/highlight.min.js') }}"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+{%- endblock %}

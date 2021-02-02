@@ -1,0 +1,143 @@
+{% extends 'events/management/full_width_base.html' %}
+
+{% from 'events/sessions/management/_session_list.html' import render_session_list %}
+{% from 'events/management/_lists.html' import render_displayed_entries_fragment %}
+
+{% block title %}
+    {%- trans %}Sessions{% endtrans -%}
+{% endblock %}
+
+{% block title_actions %}
+    {%- if event.type == 'conference' -%}
+        <a id="contributions-settings-dropdown"
+           class="i-button borderless icon-settings arrow js-dropdown"
+           data-toggle="dropdown">{% trans %}Settings{% endtrans %}</a>
+        <ul class="i-dropdown">
+            <li>
+                <a href="#"
+                   title="{% trans %}Manage session types{% endtrans %}"
+                   data-reload-after="customData"
+                   data-title="{% trans %}Manage session types{% endtrans %}"
+                   data-href="{{ url_for('.manage_types', event) }}"
+                   data-qtip-position="right"
+                   data-ajax-dialog>
+                    {% trans %}Session types{% endtrans %}</a>
+            </li>
+        </ul>
+    {%- endif -%}
+{% endblock %}
+
+{% block description %}
+    {%- trans -%}
+        Manage the sessions of the event from the list below or configure the <strong>session types</strong>
+        from the settings menu above.
+    {%- endtrans -%}
+{% endblock %}
+
+{% block content %}
+    <div id="sessions">
+        <div class="toolbars space-after">
+            <div class="toolbar">
+                <div class="group">
+                    <a class="icon-checkbox-checked i-button arrow js-dropdown" href="#" data-toggle="dropdown"></a>
+                    <ul class="i-dropdown">
+                        <li>
+                            <a href="#" data-select-all="#sessions-wrapper input.select-row">
+                                {% trans %}All{% endtrans %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-select-none="#sessions-wrapper input.select-row">
+                                {% trans %}None{% endtrans %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="group hide-if-locked">
+                    <a id="add-new-session" class="i-button highlight icon-plus"
+                       data-href="{{ url_for('.create_session', event) }}"
+                       data-title="{% trans %}Add new session{% endtrans %}"
+                       data-update="#sessions-wrapper"
+                       data-ajax-dialog>
+                        {% trans %}Add new session{% endtrans %}
+                    </a>
+                </div>
+                <div class="group hide-if-locked">
+                    <a id="remove-selected-sessions"
+                       class="i-button icon-remove js-requires-selected-row disabled"
+                       data-title="{% trans %}Remove selected sessions{% endtrans %}"
+                       data-method="POST"
+                       data-params-selector="#sessions input[name=session_id]:checkbox:checked"
+                       data-update="#sessions-wrapper"
+                       data-href="{{ url_for('.delete_sessions', event) }}"
+                       data-confirm="{% trans %}Do you really want to delete the selected sessions?{% endtrans %}">
+                        {%- trans %}Remove{% endtrans -%}
+                    </a>
+                </div>
+                <div class="group">
+                    <a class="i-button icon-users js-requires-selected-row disabled"
+                       data-title="{% trans %}Author list{% endtrans %}"
+                       data-href="{{ url_for('.person_list', event) }}"
+                       data-params-selector="#sessions input[name=session_id]:checkbox:checked"
+                       data-method="POST"
+                       data-ajax-dialog>
+                        {%- trans %}Author list{% endtrans -%}
+                    </a>
+                </div>
+                <div class="group">
+                    <a class="i-button arrow js-requires-selected-row disabled js-dropdown"
+                       data-toggle="dropdown">
+                        {%- trans %}Export{% endtrans -%}
+                    </a>
+                    <ul class="i-dropdown">
+                        <li>
+                            <a data-href="{{ url_for('.export_pdf', event) }}"
+                               class="icon-file-pdf js-requires-selected-row js-submit-session-form disabled">
+                                {%- trans %}PDF{% endtrans -%}
+                            </a>
+                        </li>
+                        <li>
+                            <a data-href="{{ url_for('.export_csv', event) }}"
+                               class="icon-file-spreadsheet js-requires-selected-row js-submit-session-form disabled">CSV</a>
+                        </li>
+                        <li>
+                            <a data-href="{{ url_for('.export_excel', event) }}"
+                               class="icon-file-excel js-requires-selected-row js-submit-session-form disabled">XLSX (Excel)</a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="i-button js-requires-selected-row disabled"
+                        data-title="{% trans %}Assign programme codes{% endtrans %}"
+                        data-href="{{ url_for('event_management.assign_program_codes_sessions', event) }}"
+                        data-params-selector="#sessions input[name=session_id]:checkbox:checked"
+                        data-method="POST"
+                        data-ajax-dialog
+                        data-reload-after>
+                    {%- trans %}Assign programme codes{% endtrans -%}
+                </button>
+            </div>
+            <div class="toolbar">
+                <div class="group" id="contributions-counter">
+                    {{ render_displayed_entries_fragment(sessions|length, sessions|length) }}
+                </div>
+                <div class="group">
+                    <span class="i-button label icon-search"></span>
+                    <input type="text" id="search-input" placeholder="{% trans %}Enter #id or search string{% endtrans %}">
+                </div>
+            </div>
+        </div>
+        <div class="list" id="sessions-wrapper">
+            {{- render_session_list(event, sessions, default_colors, types) -}}
+        </div>
+        <div id="filter-placeholder"></div>
+    </div>
+
+    <script>
+        setupSessionsList({
+           createTypeURL: {{ url_for('sessions.create_type', event) | tojson }},
+        });
+        {% if selected_entry %}
+            $('#search-input').val('#{{ selected_entry }}').trigger('change');
+        {% endif %}
+    </script>
+{% endblock %}

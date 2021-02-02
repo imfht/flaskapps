@@ -1,0 +1,74 @@
+<!doctype html>
+<html style="{{ 'height: 100%' if network else '' }}">
+    <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% if is_app_root_defined(config.APPLICATION_ROOT) %}
+        <script type="text/javascript">
+            window.resourceBaseUrl = '{{config.APPLICATION_ROOT}}';
+        </script>
+    {% endif %}
+	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <title>{{ title }}</title>
+    {% if missing_js is not defined %}
+        <script type="text/javascript" src="{{ url_for('static', filename='dist/base_styles_bundle.js') }}"></script>
+    {% endif %}
+    {% block css %}{% endblock %}
+    {#
+        Despite the fact we reload these again later on, in order for the header to rendered correctly
+        before the rest of the page is built we need to load them here as well.
+    #}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+    </head>
+    <body class="{{ theme }}-mode" style="{{ 'height: 100%' if network else '' }}">
+        {% if github_fork %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/github_fork.css') }}" />
+        <span id="forkongithub">
+            <a href="https://github.com/man-group/dtale">Fork me on GitHub</a>
+        </span>
+        {% endif %}
+        <input type="hidden" id="data_id" value="{{data_id}}" />
+        <input type="hidden" id="xarray" value="{{xarray}}" />
+        <input type="hidden" id="xarray_dim" value="{{xarray_dim}}" />
+        <input type="hidden" id="app_settings" value="{{app_settings}}" />
+        <input type="hidden" id="settings" value="{{settings}}" />
+        <input type="hidden" id="version" value="{{version}}" />
+        <input type="hidden" id="hide_shutdown" value="{{hide_shutdown}}" />
+        <input type="hidden" id="allow_cell_edits" value="{{allow_cell_edits}}" />
+        <input type="hidden" id="processes" value={{processes}} />
+        <input type="hidden" id="theme" value="{{theme}}" />
+        <input type="hidden" id="python_version" value="{{python_version}}" />
+        {% block full_content %}{% endblock %}
+        {% if missing_js is not defined %}
+        <script type="text/javascript" src="{{ url_for('static', filename='dist/polyfills_bundle.js') }}"></script>
+        {% endif %}
+        {% block js %}{% endblock %}
+        {#
+          In order to get styles to load correctly, we need to reload these files.
+          In CSS, the last style declared takes precedence.
+        #}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+        {#
+           When loaded in an iframe, the code below will allow the parent
+           window to register and listen for the data id.
+        #}
+        <script type="text/javascript" >
+            const msg = {
+                data_id: '{{data_id}}',
+                xarray: '{{xarray}}',
+                xarray_dim: '{{xarray_dim}}',
+                settings: '{{settings}}',
+                version: '{{version}}',
+                hide_shutdown: '{{hide_shutdown}}',
+                processes: '{{processes}}',
+            };
+            window.addEventListener(
+                'load',
+                function() { window.parent.postMessage(msg, '*'); },
+                false
+            );
+        </script>
+    </body>
+</html>

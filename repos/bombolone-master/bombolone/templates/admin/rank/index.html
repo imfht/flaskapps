@@ -1,0 +1,26 @@
+{% extends "admin/index.html" %}
+
+{% block title %} {{ g.rank.title }} {% endblock %}
+{% block description %} {{ g.rank.description }} {% endblock %}
+
+{% block nav_active_3 %}class="active"{% endblock %}
+
+{% block admin %}
+<div ng-controller="RankCtrl">
+  <h2>{{ g.rank.title }}</h2>
+  <br />
+  {% if my.rank < 15 %}
+  <a href="/admin/rank/new/" title="" class="btn btn-primary">{{ g.rank.create_rank }}</a>
+  {% endif %}
+  <table table-admin table-type="ranks" table-list="items_list" on-remove="remove"></table>
+  {% include "error/loader.html" %}
+</div>
+{% endblock %}
+
+{% block js_module_names %}
+	'bombolone.controllers.rank',
+{% endblock %}
+
+{% block js_module_files %}
+  "{{ '/static/js/%s' % js_version['admin/rank'] }}",
+{% endblock %}

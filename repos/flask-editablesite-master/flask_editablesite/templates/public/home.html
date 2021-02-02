@@ -1,0 +1,641 @@
+{% extends "layout.html" %}
+
+{% import 'macros/short_text.html' as short_text %}
+{% import 'macros/rich_text.html' as rich_text %}
+{% import 'macros/image.html' as image %}
+{% import 'macros/hiddenfield.html' as hiddenfield %}
+
+{% block content %}
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+
+  <h1 class="text-center">
+    {% with model_name = 'short_text_content_block' %}
+    {% with field_name = 'content' %}
+    {% with model_identifier = 'site-welcome-prefix' %}
+    {% if stc_blocks[model_identifier].form is defined %}
+    {% with form = stc_blocks[model_identifier].form %}
+
+    {{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<span>', wrap_element_end='</span>') }}
+
+    {% endwith %}
+    {% else %}
+    {{ stc_blocks[model_identifier].content }}
+    {% endif %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+
+    {{ config.SITE_NAME }}
+  </h1>
+
+  {% with model_name = 'image_content_block' %}
+  {% with field_name = 'image' %}
+  {% with model_identifier = 'site-logo' %}
+  {% set image_url = url_for('static', filename=ic_blocks[model_identifier].image|thumbnail('256x256', crop='fit')) %}
+  {% if ic_blocks[model_identifier].form is defined %}
+  {% with form = ic_blocks[model_identifier].form %}
+
+  {{ image.form(model_name, field_name, model_identifier, form, image_url, class='img-responsive img-circle img-lesswidth', alt=config.SITE_NAME) }}
+
+  {% endwith %}
+  {% else %}
+  <img class="img-responsive img-circle img-lesswidth" src="{{ image_url }}" alt="{{ config.SITE_NAME }}">
+  {% endif %}
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+
+  {% with model_name = 'short_text_content_block' %}
+  {% with field_name = 'content' %}
+  {% with model_identifier = 'site-byline' %}
+  {% if stc_blocks[model_identifier].form is defined %}
+  {% with form = stc_blocks[model_identifier].form %}
+
+  {{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<p>', wrap_element_end='</p>') }}
+
+  {% endwith %}
+  {% else %}
+  <p>{{ stc_blocks[model_identifier].content }}</p>
+  {% endif %}
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+
+  {% with model_name = 'short_text_content_block' %}
+  {% with field_name = 'content' %}
+  {% with model_identifier = 'site-byline-link-title' %}
+
+  {% if stc_blocks[model_identifier].form is defined %}
+
+  <div><span class="btn btn-primary btn-large">
+
+  {% with form = stc_blocks[model_identifier].form %}
+
+  {{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<span>', wrap_element_end='</span>') }}
+
+  {% endwith %}
+
+  {% with model_name = 'short_text_content_block' %}
+  {% with field_name = 'content' %}
+  {% with model_identifier = 'site-byline-link-url' %}
+  {% if stc_blocks[model_identifier].form is defined %}
+  {% with form = stc_blocks[model_identifier].form %}
+
+  ( {{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<span>', wrap_element_end='</span>') }} )
+
+  {% endwith %}
+  {% endif %}
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+
+  &raquo;</span></div>
+
+  {% else %}
+  <p><a href="{{ stc_blocks['site-byline-link-url'].content }}" class="btn btn-primary btn-large">{{ stc_blocks[model_identifier].content }} &raquo;</a></p>
+  {% endif %}
+  {% endwith %}
+  {% endwith %}
+  {% endwith %}
+</div><!-- /.jumbotron -->
+
+<div class="body-content">
+
+<!-- Gallery -->
+<div class="row" id="gallery">
+  <div class="col-sm-12">
+
+{% with model_name = 'short_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'gallery-title' %}
+{% if stc_blocks[model_identifier].form is defined %}
+{% with form = stc_blocks[model_identifier].form %}
+
+{{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<h2 class="text-center">', wrap_element_end='</h2>') }}
+
+{% endwith %}
+{% else %}
+<div class="short-text-content">
+<h2 class="text-center">{{ stc_blocks[model_identifier].content }}</h2>
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+  </div>
+</div>
+
+<div class="row{% if gallery_forms %} weight-sortable{% endif %}">
+  {% for o in gallery_items %}
+  <div class="col-sm-4{% if gallery_forms %} weight-item{% endif %}"{% if gallery_forms %} id="for-gallery_items-{{ loop.index0 }}-weight"{% else %}{% if not is_gallery_showlimited and (loop.index == config.GALLERY_LIMIT+1) %} id="gallery-more"{% endif %}{% endif %}>
+    <a href="#galleryModal{{ o.id }}" class="rollover-link" data-toggle="modal">
+      <div class="caption">
+        <div class="caption-content">
+          <i class="fa fa-search-plus fa-3x"></i>
+        </div>
+      </div>
+      <img src="{{ url_for('static', filename=o.image|thumbnail('400x300', crop='fit')) }}" class="img-responsive" alt="{{ o.title }}">
+    </a>
+
+    {% if gallery_forms %}
+    <div class="weight-controls">
+      {% if not loop.first %}<a href="#" class="btn btn-primary weight-move-up" title="Move up"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a> {% endif %}{% if not loop.last %}<a href="#" class="btn btn-primary weight-move-down" title="Move down"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></a> {% endif %}
+    </div>
+    {% endif %}
+
+    {% if gallery_forms and (gallery_forms[o.id].delete is defined) %}
+    {% with form = gallery_forms[o.id].delete %}
+    <form method="POST" action="{{ url_for('editable.delete', model_name='gallery_item', model_identifier=o.id) }}" id="gi-delete-{{ o.id }}" class="form-delete-item">
+      {{ form.hidden_tag() }}
+
+      <button type="submit" class="btn btn-danger delete-confirm-link" data-delete-confirm-item-type="delete this gallery item">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button>
+    </form>
+    {% endwith %}
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+{% if gi_reorder_form %}
+<form class="form" method="post" action="{{ url_for('editable.reorder', model_name='gallery_item') }}" id="gi-reorder" role="form">
+
+  {{ gi_reorder_form.hidden_tag() }}
+
+  {% for f in gi_reorder_form.items %}
+    <div style="display:none;">{{ f.csrf_token() }}</div>
+
+    {{ hiddenfield.field(f.identifier) }}
+    {{ hiddenfield.field(f.weight) }}
+  {% endfor %}
+
+  <button type="submit" class="btn btn-primary hidden">Save new ordering</button>
+
+</form>
+{% endif %}
+
+{% if gi_add_form %}
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <form method="POST" action="{{ url_for('editable.add', model_name='gallery_item') }}" id="gi-add" class="form-add-plus">
+      {{ gi_add_form.hidden_tag() }}
+
+      <button type="submit" class="add-plus">
+        <div class="add-plus-caption">&nbsp;<span>Add a gallery item</span>&nbsp;</div>
+        <div class="add-plus-wrapper"><span class="fa fa-plus"></span></div>
+      </button>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+{% if is_gallery_showlimited %}
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <div class="form-add-plus">
+      <a href="{{ url_for('public.home') }}?gallery_showmore=1#gallery-more" class="add-plus">
+        <div class="add-plus-caption">&nbsp;<span>Show more</span>&nbsp;</div>
+        <div class="add-plus-wrapper"><span class="fa fa-plus"></span></div>
+      </a>
+    </div>
+   </div>
+</div>
+{% endif %}
+
+<!-- Events -->
+<div class="row" id="events">
+  <div class="col-sm-12">
+
+{% with model_name = 'short_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'events-title' %}
+{% if stc_blocks[model_identifier].form is defined %}
+{% with form = stc_blocks[model_identifier].form %}
+
+{{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<h2 class="text-center">', wrap_element_end='</h2>') }}
+
+{% endwith %}
+{% else %}
+<div class="short-text-content">
+<h2 class="text-center">{{ stc_blocks[model_identifier].content }}</h2>
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-5 col-lg-offset-1 col-sm-6">
+    <h3>Upcoming</h3>
+
+    {% if events_upcoming|length %}
+    {% for o in events_upcoming %}
+      {% with loop_index = loop.index %}
+      {% with events_limit = config.EVENT_UPCOMING_LIMIT %}
+      {% include 'event.html' %}
+      {% endwith %}
+      {% endwith %}
+    {% endfor %}
+    {% else %}{# events_upcoming|length #}
+    <p>No upcoming events.</p>
+    {% endif %}{# events_upcoming|length #}
+  </div>
+
+  <div class="col-lg-5 col-sm-6">
+    <h3>Past</h3>
+
+    {% if events_past|length %}
+    {% for o in events_past %}
+      {% with loop_index = loop.index %}
+      {% with events_limit = config.EVENT_PAST_LIMIT %}
+      {% include 'event.html' %}
+      {% endwith %}
+      {% endwith %}
+    {% endfor %}
+    {% else %}{# events_past|length #}
+    <p>No past events.</p>
+    {% endif %}{# events_past|length #}
+  </div>
+</div>
+
+{% if event_add_form %}
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <form method="POST" action="{{ url_for('editable.add', model_name='event') }}" id="event-add" class="form-add-plus">
+      {{ gi_add_form.hidden_tag() }}
+
+      <button type="submit" class="add-plus">
+        <div class="add-plus-caption">&nbsp;<span>Add an event</span>&nbsp;</div>
+        <div class="add-plus-wrapper"><span class="fa fa-plus"></span></div>
+      </button>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+{% if is_events_showlimited %}
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <div class="form-add-plus">
+      <a href="{{ url_for('public.home') }}?events_showmore=1#events-more" class="add-plus">
+        <div class="add-plus-caption">&nbsp;<span>Show more</span>&nbsp;</div>
+        <div class="add-plus-wrapper"><span class="fa fa-plus"></span></div>
+      </a>
+    </div>
+   </div>
+</div>
+{% endif %}
+
+<!-- About Section -->
+<div class="row" id="about">
+  <div class="col-sm-12">
+
+{% with model_name = 'short_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'about-title' %}
+{% if stc_blocks[model_identifier].form is defined %}
+{% with form = stc_blocks[model_identifier].form %}
+
+{{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<h2 class="text-center">', wrap_element_end='</h2>') }}
+
+{% endwith %}
+{% else %}
+<div class="short-text-content">
+<h2 class="text-center">{{ stc_blocks[model_identifier].content }}</h2>
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+
+{% with model_name = 'rich_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'about-text-left-column' %}
+{% if rtc_blocks[model_identifier].form is defined %}
+{% with form = rtc_blocks[model_identifier].form %}
+
+{{ rich_text.form(model_name, field_name, model_identifier, form, placeholder=rtc_blocks[model_identifier].title) }}
+
+{% endwith %}
+{% else %}
+<div class="rich-text-content">
+{{ rtc_blocks[model_identifier].content|safe }}
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+  </div>
+
+  <div class="col-sm-6">
+
+{% with model_name = 'rich_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'about-text-right-column' %}
+{% if rtc_blocks[model_identifier].form is defined %}
+{% with form = rtc_blocks[model_identifier].form %}
+
+{{ rich_text.form(model_name, field_name, model_identifier, form, placeholder=rtc_blocks[model_identifier].title) }}
+
+{% endwith %}
+{% else %}
+<div class="rich-text-content">
+{{ rtc_blocks[model_identifier].content|safe }}
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+
+<div class="text-center">
+{% with model_name = 'rich_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'about-text-below-columns' %}
+{% if rtc_blocks[model_identifier].form is defined %}
+{% with form = rtc_blocks[model_identifier].form %}
+
+{{ rich_text.form(model_name, field_name, model_identifier, form, placeholder=rtc_blocks[model_identifier].title) }}
+
+{% endwith %}
+{% else %}
+<div class="rich-text-content">
+{{ rtc_blocks[model_identifier].content|safe }}
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+</div>
+
+  </div>
+</div>
+
+<!-- Contact Section -->
+<div class="row" id="contact">
+  <div class="col-sm-12">
+
+{% with model_name = 'short_text_content_block' %}
+{% with field_name = 'content' %}
+{% with model_identifier = 'contact-title' %}
+{% if stc_blocks[model_identifier].form is defined %}
+{% with form = stc_blocks[model_identifier].form %}
+
+{{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder=stc_blocks[model_identifier].title, wrap_element_start='<h2 class="text-center">', wrap_element_end='</h2>') }}
+
+{% endwith %}
+{% else %}
+<div class="short-text-content">
+<h2 class="text-center">{{ stc_blocks[model_identifier].content }}</h2>
+</div>
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <form method="POST" action="{{ url_for('public.contact') }}" name="sentMessage" id="contactForm" class="form">
+      {{ contact_form.hidden_tag() }}
+
+      <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+          {{ contact_form.name.label }}
+          <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+          <p class="help-block text-danger"></p>
+        </div>
+      </div>
+      <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+          {{ contact_form.email.label }}
+          <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required>
+          <p class="help-block text-danger"></p>
+        </div>
+      </div>
+      <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+          {{ contact_form.phone.label }}
+          <input type="tel" class="form-control" placeholder="Phone Number" id="phone" name="phone" required>
+          <p class="help-block text-danger"></p>
+        </div>
+      </div>
+      <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+          {{ contact_form.message.label }}
+          <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" required></textarea>
+          <p class="help-block text-danger"></p>
+        </div>
+      </div>
+      <br>
+      <div id="success"></div>
+      <div class="row">
+        <div class="form-group col-xs-12">
+          <button type="submit" class="btn btn-success btn-lg" id="btnSubmit">Send</button>
+        </div>
+
+        <br>&nbsp;<br>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% if not current_user.is_authenticated() %}
+
+<!-- Login instructions / content credits -->
+<div class="row greybox">
+  <div class="col-sm-{% if config.EDITABLE_SAMPLE_IMAGES_CREDITS and config.EDITABLE_SAMPLE_TEXT_CREDITS %}4{% elif config.EDITABLE_SAMPLE_IMAGES_CREDITS or config.EDITABLE_SAMPLE_TEXT_CREDITS %}6{% else %}12{% endif %}">
+
+<h2 class="text-center">Start editing</h2>
+
+<div class="rich-text-content">
+<p>
+  Click the "Login" link at the bottom of the page (right-hand side), and
+
+{% if config.USE_SESSIONSTORE_NOT_DB %}
+
+use the following credentials:
+</p>
+<p>
+  <strong>Email:</strong> {{ config.SESSIONSTORE_USER_EMAIL }}
+  <br>
+  <strong>Password:</strong> {{ config.SESSIONSTORE_USER_PASSWORD }}
+
+{% else %}{# config.USE_SESSIONSTORE_NOT_DB #}
+
+use the credentials that have been provided to you by the site administrators.
+
+{% endif %}{# config.USE_SESSIONSTORE_NOT_DB #}
+</p>
+</div>
+
+  </div>
+
+  {% if config.EDITABLE_SAMPLE_TEXT_CREDITS %}
+  <div class="col-sm-{% if config.EDITABLE_SAMPLE_IMAGES_CREDITS %}4{% else %}6{% endif %}">
+
+<h2 class="text-center">Text credits</h2>
+
+<div class="rich-text-content">
+{{ config.EDITABLE_SAMPLE_TEXT_CREDITS|safe }}
+</div>
+
+  </div>
+  {% endif %}
+
+  {% if config.EDITABLE_SAMPLE_IMAGES_CREDITS %}
+  <div class="col-sm-{% if config.EDITABLE_SAMPLE_TEXT_CREDITS %}4{% else %}6{% endif %}">
+
+<h2 class="text-center">Image credits</h2>
+
+<div class="rich-text-content">
+{{ config.EDITABLE_SAMPLE_IMAGES_CREDITS|safe }}
+</div>
+
+  </div>
+  {% endif %}
+</div>
+
+{% endif %}{# not current_user.is_authenticated() #}
+
+</div><!-- /.body-content -->
+
+<!-- Gallery Modals -->
+{% for o in gallery_items %}
+<div class="modal editable-modal fade" id="galleryModal{{ o.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-content">
+    <div class="close-modal" data-dismiss="modal">
+      <div class="lr">
+        <div class="rl">
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <div class="modal-body">
+            {% with model_name = 'gallery_item' %}
+            {% with field_name = 'title' %}
+            {% with model_identifier = o.id %}
+            {% if gallery_forms and (gallery_forms[model_identifier][field_name] is defined) %}
+            {% with form = gallery_forms[model_identifier][field_name] %}
+
+            {{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder='Type your title', wrap_element_start='<h2 class="text-center">', wrap_element_end='</h2>') }}
+
+            {% endwith %}
+            {% else %}
+            <h2 class="text-center">{{ o.title }}</h2>
+            {% endif %}
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+
+            {% with model_name = 'gallery_item' %}
+            {% with field_name = 'image' %}
+            {% with model_identifier = o.id %}
+            {% set image_url = url_for('static', filename=o.image_or_placeholder|thumbnail('1200x900', crop='fit')) %}
+            {% if gallery_forms and (gallery_forms[model_identifier][field_name] is defined) %}
+            {% with form = gallery_forms[model_identifier][field_name] %}
+
+            {{ image.form(model_name, field_name, model_identifier, form, image_url, class='img-responsive img-centered', alt=o.title, placeholder='Upload your image') }}
+
+            {% endwith %}
+            {% else %}
+            <img class="img-responsive img-centered" src="{{ image_url }}" alt="{{ o.title }}">
+            {% endif %}
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+
+            <div style="position: relative">
+            {% with model_name = 'gallery_item' %}
+            {% with field_name = 'content' %}
+            {% with model_identifier = o.id %}
+            {% if gallery_forms and (gallery_forms[model_identifier][field_name] is defined) %}
+            {% with form = gallery_forms[model_identifier][field_name] %}
+
+            {{ rich_text.form(model_name, field_name, model_identifier, form, placeholder='Type your content') }}
+
+            {% endwith %}
+            {% else %}
+            <div class="rich-text-content">
+            {{ o.content|safe }}
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+
+            </div>
+
+            <ul class="list-inline item-details">
+              <li>Date:
+                {% with model_name = 'gallery_item' %}
+                {% with field_name = 'date_taken' %}
+                {% with model_identifier = o.id %}
+                {% if gallery_forms and (gallery_forms[model_identifier][field_name] is defined) %}
+                {% with form = gallery_forms[model_identifier][field_name] %}
+
+                {{ short_text.form(model_name, field_name, model_identifier, form, class='', placeholder='Type your date taken', wrap_element_start='<span>', wrap_element_end='</span>') }}
+
+                {% endwith %}
+                {% else %}
+                <strong>{{ o.date_taken }}</strong>
+                {% endif %}
+                {% endwith %}
+                {% endwith %}
+                {% endwith %}
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block css_before %}
+{% if not login_form %}
+{% assets "css_admin" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}">
+{% endassets %}
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{% if not login_form %}
+{% assets "js_admin" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% endif %}
+
+{% if config.GOOGLE_ANALYTICS_ACCOUNT_ID %}
+{% with google_analytics_account_id = config.GOOGLE_ANALYTICS_ACCOUNT_ID %}
+{% include 'google_analytics.html' %}
+{% endwith %}
+{% endif %}
+{% endblock %}

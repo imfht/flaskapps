@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<div class="login box">
+  <h1>Accedi a Bombolone</h1>
+  {% include "error/message_old.html" %}
+  <section class="login_classic">
+    <form name="login" action="{{ url_for('login.index') }}" method="post">
+      <p>
+        <label>{{ g.login.username }}</label>
+        <input type="text" name="username" class="form-control" value="" size="50" tabindex="10" />
+      </p>
+      <p>
+        <label>{{ g.login.password }}</label>
+        <input type="password" name="password" class="form-control" value="" size="50" tabindex="20" />
+      </p>
+      <p class="submit">
+        <button tabindex="200" type="submit" id="submit"
+        class="btn btn-primary">Accedi</button>
+      </p>
+    </form>
+  </section>
+</div>
+{% endblock %}

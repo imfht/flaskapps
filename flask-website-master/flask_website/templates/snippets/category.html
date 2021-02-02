@@ -1,0 +1,12 @@
+{% extends "snippets/layout.html" %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block body %}
+  {{ super() }}
+  <h2>{{ category.name }}</h2>
+  <ul>
+  {% for snippet in snippets %}
+    <li><a href="{{ snippet.url }}">{{ snippet.title }}</a>
+        <small>({{ snippet.pub_date|dateformat }})</small>
+  {% endfor %}
+  </ul>
+{% endblock %}

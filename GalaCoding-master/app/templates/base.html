@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+{% macro theme_file(theme, filename) %}
+    /static/themes/{{ theme }}/{{ filename }}
+{% endmacro %}
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    {% block header %}
+    {% endblock %}
+
+    {% set mirror_site = '' %}
+    <!-- CSS styles -->
+    {% set theme = 'flatly' %}
+    <link href="{{ mirror_site }}/static/themes/{{ theme }}/bootstrap.min.css" rel="stylesheet"/>
+    <link href="{{ mirror_site }}/static/assets/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/static/css/styles.css" rel="stylesheet"/>
+    {#
+    {% set markdown_theme = 'haroopad' %}
+    <link href="/static/css/markdown/{{ markdown_theme }}/{{ markdown_theme }}.css" rel="stylesheet"/>
+    #}
+    <link href="/static/css/markdown/markdown.css" rel="stylesheet"/>
+
+    <link href="{{ mirror_site }}/static/assets/bootstrap/lightbox/ekko-lightbox.css" rel="stylesheet"/>
+    <link href="{{ mirror_site }}/static/assets/bootstrap/lightbox/dark.css" rel="stylesheet"/>
+
+    <link href="{{ mirror_site }}/static/themes/base.css" rel="stylesheet"/>
+    {% set theme_css = theme_file(theme, "styles.css") %}
+    {% if theme_css %}
+    <link href="{{ mirror_site }}{{ theme_css }}" rel="stylesheet"/>
+    {% endif %}
+    {% block css %}
+    {% endblock %}
+
+<!-- Script -->
+<script src="//ajax.useso.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>window.jQuery || document.write(unescape('%3Cscript src="{{ mirror_site }}/static/assets/jquery/jquery-1.11.1.min.js"%3E%3C/script%3E'))</script>
+<script src="//libs.useso.com/js/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>$.fn.carousel || document.write(unescape('%3Cscript src="{{ mirror_site }}/static/assets/bootstrap/bootstrap-3.1.1.min.js"%3E%3C/script%3E'))</script>
+
+<script src="{{ mirror_site }}/static/assets/bootstrap/lightbox/ekko-lightbox.js"></script>
+
+<script src="{{ mirror_site }}/static/js/main.js"></script>
+
+{#% set theme_js = theme_file(theme, "script.js") %#}
+{#% if theme_js %#}
+{# <script src="{{ mirror_site }}{{ theme_js }}"></script> #}
+{#% endif %#}
+
+<script type="text/javascript">
+/* Document Ready */
+$(document).ready(function() {
+    $("#tags_cloud_btn").popover({
+        "html": true,
+        "placement": "bottom",
+        "content": function(){
+            return $("#tags_cloud").html();
+        }
+    });
+
+    $.json_action("tags/hot",{},
+        function(resp){
+            var tags_cloud = $("#tags_cloud>.tags_cloud");
+            tags_cloud.empty();
+            $.each(resp.tags, function(index, tag){
+                tags_cloud.append('<a class="tag btn btn-default btn-sm" href="/tags/{0}">{0}({1})</a>'.format(tag.name, tag.post_count));
+            });
+        },function(err){
+            bootbox.alert(err);
+    });
+
+    // delegate calls to data-toggle="lightbox"
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        return $(this).ekkoLightbox({
+            left_arrow_class: '.fa .fa-chevron-left .glyphicon-chevron-left',
+            right_arrow_class: '.fa .fa-chevron-right .glyphicon-chevron-right'
+        });
+    });
+
+    $(window).resize(function() {
+      if($(window).width() <= 768) {
+        $(".navbar").removeClass("navbar-fixed-top").addClass("navbar-top");
+      } else {
+        $(".navbar").removeClass("navbar-top").addClass("navbar-fixed-top");
+      }
+    }).trigger("resize");
+});
+</script>
+<script src="/static/assets/moment-with-locales.min.js"></script>
+<script type="application/javascript">
+    moment.locale('zh-cn');
+function flask_moment_render(elem) {
+    $(elem).text(eval('moment("' + $(elem).data('timestamp') + '").' + $(elem).data('format') + ';'));
+    $(elem).removeClass('flask-moment').show();
+}
+function flask_moment_render_all() {
+    $('.flask-moment').each(function() {
+        flask_moment_render(this);
+        if ($(this).data('refresh')) {
+            (function(elem, interval) { setInterval(function() { flask_moment_render(elem) }, interval); })(this, $(this).data('refresh'));
+        }
+    })
+}
+$(document).ready(function() {
+    flask_moment_render_all();
+});
+</script>
+{% block script %}
+{% endblock %}
+</head>
+
+<body>
+<!-- Nav Bar -->
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <div class="navbar-header ">
+      <a  class="navbar-brand" href="{{ url_for('main.index') }}" >
+        GalaCoding
+      </a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse" id="navbar-main">
+      <ul class="nav navbar-nav">
+          <li class="{% if request.base_url == '/' %}active{% endif %}">
+            <a href="{{ url_for('main.index') }}">广场</a>
+          </li>
+          <li class="{% if request.base_url == '/photo' %}active{% endif %}">
+            <a href="{{ url_for('main.index') }}">照片墙</a>
+          </li>
+          {% if current_user.is_authenticated %}
+          <li class="{% if request.base_url == '/photo' %}active{% endif %}">
+            <a href="{{ url_for('main.index', shows='recommend') }}">推荐</a>
+          </li>
+          <li class="{% if request.base_url == '/photo' %}active{% endif %}">
+            <a href="{{ url_for('main.index', shows='concern') }}">关注</a>
+          </li>
+          <li class="{% if request.base_url == '/photo' %}active{% endif %}">
+            <a href="{{ url_for('main.index', shows='home') }}">主页</a>
+          </li>
+          {% endif %}
+          {% block nav_list %}{% endblock %}
+          <li class="{# active #}">
+            <a href="javascript:;" id="tags_cloud_btn">
+                <i class="fa fa-tags"></i> 热门标签
+                <span class="caret"></span>
+            </a>
+          </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+
+      {% if current_user.is_authenticated %}
+        <li class="dropdown {# active #}">
+            <a class="dropdown-toggle"
+               data-toggle="dropdown" href="#" id="user">
+                <img src="{{ current_user.avatar_url_auto(size=40) }}" class="avatar24"/>
+                <span>{{ current_user.username }}</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="user">
+                {% if current_user.can(Permission.MODERATE_USERS) %}
+                <li> <a href="{{ url_for('user.manage') }}"><i class="fa fa-wrench"></i>用户管理</a> </li>
+                {% endif %}
+                <li> <a href="{{ url_for('main.new') }}"><i class="fa fa-file-text"></i> 写博客</a> </li>
+                <li> <a href="{{ url_for('user.profile', username=current_user.username) }}"><i class="fa fa-user"></i> 个人资料</a> </li>
+                <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-sign-out"></i>退出</a></li>
+            </ul>
+        </li>
+      {% else %}
+        <li>
+           <a href="{{ url_for('auth.register') }}"><i class="fa fa-user"></i>注册</a>
+        </li>
+        <li>
+           <a href="{{ url_for('auth.login') }}"><i class="fa fa-user"></i>登陆</a>
+        </li>
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    {% for flash_message in get_flashed_messages() %}
+        <div class="alert alert-warning" style="width: 500px;">
+            <button class="close" type="button" data-dismiss="alert">&times;</button>
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    {% block page_content %}
+    {% endblock %}
+</div>
+<!-- Footer -->
+<div class="container">
+    <footer>
+    <div class="row">
+      <div class="col-lg-12">
+        <hr/>
+        <p><i class="icon-heart"></i>
+            <span class=""> GalaCoding @2016 <a href="https://github.com/GalaIO"><code>GalaIO</code></a>.</span>
+            Powered by <a href="http://flask.pocoo.org/"><code>flask</code></a>.
+            Code hosted in <a href="https://github.com/GalaIO/GalaCoding"><code>GalaCoding</code></a>.
+        </p>
+      </div>
+    </div>
+    </footer>
+</div>
+<!-- Tags -->
+<div id="tags_cloud" class="dis-none">
+    <div class="tags_cloud">
+        <img class="loading" src="{{ mirror_site }}/static/images/posts_loading.gif" alt="加载中..."/>
+    </div>
+</div>
+</body>
+</html>

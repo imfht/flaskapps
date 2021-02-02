@@ -1,0 +1,4 @@
+DEFAULT:
+    YAMLVAR: Come from YAML
+staging:
+    YAMLVAR: Come from YAML staging

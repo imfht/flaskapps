@@ -1,0 +1,14 @@
+/.venv/
+*.py[co]
+.*.swp
+.tox
+docs/_build/*
+*.egg-info
+build/*
+dist/
+.idea/
+.idea/*
+.coverage
+.cache
+.xprocess
+.vscode

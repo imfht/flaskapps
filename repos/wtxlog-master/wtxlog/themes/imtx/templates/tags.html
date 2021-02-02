@@ -1,0 +1,39 @@
+{% extends theme('layout.html') %}
+{% set active_page = "tags" %}
+
+{% block title %}标签{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ url_for('main.tags', _external=True) }}" />
+  <meta name="mobile-agent" content="format=html5;url={{ url_for('main.tags', _external=True) }}"/>
+  <meta name="mobile-agent" content="format=xhtml;url={{ url_for('main.tags', _external=True) }}"/>
+{%- endblock %}
+
+{% block crumb %}Tags{% endblock %}
+
+{% block main %}
+<div class="post">
+  <h2 class="">栏目</h2>
+  <div class="entry">
+    {% with categories = category_lists() %}
+    <ul class="taglist clearfix">
+    {% for category in categories -%}
+    <li><a href="{{ category.link }}">{{ category.name }}</a>{% if not loop.last %}&nbsp;&nbsp;{% endif %}</li>
+    {%- endfor %}
+    </ul>
+    {% endwith %}
+  </div>
+
+  <h2 class="">标签</h2>
+  <div class="entry">
+    {% with tags = tag_lists() %}
+    <ul class="taglist clearfix">
+    {% for tag in tags -%}
+    <li><a href="{{ tag.link }}">{{ tag.name }}</a>({{ tag.count }}){% if not loop.last %}&nbsp;&nbsp;{% endif %}</li>
+    {%- endfor %}
+    </ul>
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}
+

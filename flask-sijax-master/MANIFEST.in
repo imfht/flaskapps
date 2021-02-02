@@ -1,0 +1,11 @@
+include LICENSE.txt README.rst tests.py
+recursive-include docs *
+recursive-include examples *.py
+recursive-include examples/templates *.html
+
+recursive-exclude * *.swp
+recursive-exclude * *.pyc
+recursive-exclude examples/static *
+recursive-exclude docs/_build *
+recursive-exclude docs/_themes/.git *
+exclude docs/_themes/.gitignore

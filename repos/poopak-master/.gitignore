@@ -1,0 +1,12 @@
+.bash_history
+.idea
+*.pyc
+Pipefile.lock
+mongodb
+.DS_Store
+*.log
+*.rdb
+__pycache__
+application/files/screenshots/*.png
+application/files/seeds/*.*
+application/files/exif/*.*

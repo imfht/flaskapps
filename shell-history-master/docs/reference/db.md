@@ -1,0 +1,1 @@
+::: shellhistory.db

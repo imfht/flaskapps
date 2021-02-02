@@ -1,0 +1,32 @@
+[
+  {
+    "filePath": "/Users/nbrahms/dev/echelon-backend/r2c/bento/test/integration/init.js",
+    "messages": [
+      {
+        "ruleId": "no-console",
+        "severity": 1,
+        "message": "Unexpected console statement.",
+        "line": 7,
+        "column": 1,
+        "nodeType": "MemberExpression",
+        "messageId": "unexpected",
+        "endLine": 7,
+        "endColumn": 12
+      },
+      {
+        "ruleId": "semi",
+        "severity": 2,
+        "message": "Missing semicolon.",
+        "line": 7,
+        "column": 24,
+        "nodeType": "ExpressionStatement",
+        "fix": { "range": [109, 109], "text": ";" }
+      }
+    ],
+    "errorCount": 1,
+    "warningCount": 1,
+    "fixableErrorCount": 1,
+    "fixableWarningCount": 0,
+    "source": "function helloWorld() {\n  const a = 'hello ';\n  const b = 'world';\n  return a + b;\n}\n\nconsole.log(helloWorld)\n"
+  }
+]

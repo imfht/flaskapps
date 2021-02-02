@@ -1,0 +1,19 @@
+{% extends 'forms/base_widget.html' %}
+
+
+{% block html %}
+    <input type="hidden" name="{{ field.name }}" id="{{ field.id }}" value="{{ field._value() }}">
+    <div id="{{ field.id }}-editor" style="margin-bottom: 10px;"></div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        setupCKEditorWidget({
+            fieldId: {{ field.id | tojson }},
+            simple: {{ simple | tojson }},
+            images: {{ images | tojson }},
+            height: {{ height | tojson }}
+        });
+    </script>
+{% endblock %}

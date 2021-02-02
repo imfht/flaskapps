@@ -1,0 +1,73 @@
+{% extends 'admin/base.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>微电影管理系统</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 评论管理</a></li>
+            <li class="active">评论列表</li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">评论列表</h3>
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right"
+                                       placeholder="请输入关键字...">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body box-comments">
+                        {% include 'admin/alert_info.html' %}
+
+                        {% for comment in page_comments.items %}
+                            <div class="box-comment">
+                                <img class="img-circle img-sm"
+                                     src="{{ url_for('static',filename='user/'+comment.user.face) }}" alt="User Image">
+                                <div class="comment-text">
+                                    <span class="username">
+                                        {{ comment.user.name }}
+                                        <span class="text-muted pull-right">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                                            &nbsp;
+                                            {{ comment.add_time }}
+                                        </span>
+                                    </span>
+                                    关于电影<a>《{{ comment.movie.title }}》</a>的评论：{{ comment.content }}
+                                    <br>
+                                    <a class="label label-danger pull-right" href="{{ url_for('admin.comment_delete', delete_id=comment.id) }}">删除</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="box-footer clearfix">
+                        {% import 'admin/pagination.html' as pg %}
+                        {{ pg.render_pagination(page_comments, 'admin.comment_list') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        // 激活菜单栏
+        $(document).ready(function () {
+            $("#g-6").addClass('active');
+            $("#g-6-1").addClass('active');
+        })
+    </script>
+{% endblock %}

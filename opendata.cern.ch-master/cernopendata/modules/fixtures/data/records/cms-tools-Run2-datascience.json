@@ -1,0 +1,332 @@
+[
+  {
+    "abstract": {
+      "description": "This is a CMSSW module for producing flat tuples containing jet properties from 13 TeV Run2 MC samples. The code is intended to run inside the CMS Open Data environment."
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "Kallonen, Kimmo",
+        "orcid": "0000-0001-9769-7163"
+      }
+    ],
+    "collections": [
+      "CMS-Tools"
+    ],
+    "date_created": [
+      "2019"
+    ],
+    "date_published": "2019",
+    "distribution": {
+      "formats": [
+        "zip"
+      ],
+      "number_files": 1,
+      "size": 858332
+    },
+    "doi": "10.7483/OPENDATA.CMS.ORHE.XAJE",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:23625e68",
+        "size": 858332,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/software/JetNtupleProducerTool/JetNtupleProducerTool-1.0.zip"
+      }
+    ],
+    "keywords": [
+      "datascience"
+    ],
+    "license": {
+      "attribution": "GNU General Public License (GPL) version 3"
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12101",
+    "relations": [
+      {
+        "description": "The ouput dataset of this software tool is available in",
+        "recid": "12100",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2"
+    ],
+    "source_code_repository": {
+      "url": "https://github.com/cms-opendata-analyses/JetNtupleProducerTool"
+    },
+    "system_details": {
+      "description": "Use this code with the CMS Open Data VM environment",
+      "recid": "252",
+      "release": "CMSSW_8_0_26"
+    },
+    "title": "JetNtupleProducerTool - Jet tuple producer from CMS Run2 MiniAOD",
+    "type": {
+      "primary": "Software",
+      "secondary": [
+        "Tool"
+      ]
+    },
+    "usage": {
+      "description": "<p>If you do not have the CERN Virtual Machine for CMS open data installed, follow the instructions in step 1 at <a href=\"/VM/CMS/2011\">How to install a CERN Virtual Machine</a>.  <p>To run this tool, follow the instructions in <a href=\"https://github.com/cms-opendata-analyses/JetNtupleProducerTool\">JetNtupleProducerTool documentation on GitHub</a>.</p>"
+    },
+    "use_with": {
+      "description": "Use this with Run2 QCD MiniAODSIM dataset (or any Run2 MiniAOD containing jets).",
+      "links": [
+        {
+          "recid": "12021"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "ROOT ntuple producer for developing machine learning algorithms to differentiate jets originating from a Higgs boson decaying to a bottom quark-antiquark pair (Hbb) from quark or gluon jets originating from quantum chromodynamic (QCD) multijet production."
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "Duarte, Javier",
+        "orcid": "0000-0002-5076-7096"
+      },
+      {
+        "name": "Qu, Huilin",
+        "orcid": "0000-0002-0250-8655"
+      },
+      {
+        "name": "Kieseler, Jan",
+        "orcid": "0000-0003-1644-7678"
+      },
+      {
+        "name": "Verzetti, Mauro",
+        "orcid": "0000-0001-9958-0663"
+      },
+      {
+        "name": "Gouskos, Loukas",
+        "orcid": "0000-0002-9547-7471"
+      },
+      {
+        "name": "Stoye, Markus",
+        "orcid": "0000-0002-0903-0877"
+      },
+      {
+        "name": "Vernieri, Caterina",
+        "orcid": "0000-0002-0235-1053"
+      }
+    ],
+    "collections": [
+      "CMS-Tools"
+    ],
+    "date_created": [
+      "2019"
+    ],
+    "date_published": "2019",
+    "distribution": {
+      "formats": [
+        "zip"
+      ],
+      "number_files": 1,
+      "size": 89741
+    },
+    "doi": "10.7483/OPENDATA.CMS.MWG0.J8V6",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a7d6e7ee",
+        "size": 89741,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/software/HiggsToBBNtupleProducerTool/HiggsToBBNtupleProducerTool-1.0.1.zip"
+      }
+    ],
+    "keywords": [
+      "datascience"
+    ],
+    "license": {
+      "attribution": "GNU General Public License (GPL) version 3"
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12103",
+    "relations": [
+      {
+        "description": "The ouput dataset of this software tool is available in",
+        "recid": "12102",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2"
+    ],
+    "source_code_repository": {
+      "url": "https://github.com/cms-opendata-analyses/HiggsToBBNtupleProducerTool"
+    },
+    "system_details": {
+      "description": "Use this code with the CMS Open Data VM environment",
+      "recid": "252",
+      "release": "CMSSW_8_0_28"
+    },
+    "title": "HiggsToBBNtupleProducerTool - ROOT ntuple producer for developing machine learning algorithms from CMS Run2 MiniAOD",
+    "type": {
+      "primary": "Software",
+      "secondary": [
+        "Tool"
+      ]
+    },
+    "usage": {
+      "description": "<p>If you do not have the CERN Virtual Machine for CMS open data installed, follow the instructions in step 1 at <a href=\"/VM/CMS/2011\">How to install a CERN Virtual Machine</a>.  <p>To run this tool, follow the instructions in <a href=\"https://github.com/cms-opendata-analyses/HiggsToBBNtupleProducerTool\">HiggsToBBNtupleProducerTool documentation on GitHub</a>.</p>"
+    },
+    "use_with": {
+      "description": "Use this with Run2 QCD MiniAODSIM datasets",
+      "links": [
+        {
+          "recid": "12000"
+        },
+        {
+          "recid": "12002"
+        },
+        {
+          "recid": "12003"
+        },
+        {
+          "recid": "12004"
+        },
+        {
+          "recid": "12005"
+        },
+        {
+          "recid": "12006"
+        },
+        {
+          "recid": "12007"
+        },
+        {
+          "recid": "12008"
+        },
+        {
+          "recid": "12009"
+        },
+        {
+          "recid": "12010"
+        },
+        {
+          "recid": "12011"
+        },
+        {
+          "recid": "12012"
+        },
+        {
+          "recid": "12013"
+        },
+        {
+          "recid": "12014"
+        },
+        {
+          "recid": "12015"
+        },
+        {
+          "recid": "12016"
+        },
+        {
+          "recid": "12017"
+        },
+        {
+          "recid": "12018"
+        },
+        {
+          "recid": "12019"
+        },
+        {
+          "recid": "12020"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> An example workflow to produce datasets to be used to develop machine learning algorithms for selection and filtering pixel doublet seeds in tracking applications with CMS 2018 simulated data. The code can be run inside the CMS Open Data environment</p> <p> One of the first steps of the track finding workflow is the creation of track seeds, i.e. compatible pairs of hits from different detector layers, that are subsequently fed to to higher level pattern recognition steps. However the set of compatible hit pairs is highly affected by combinatorial background resulting in the next steps of the tracking algorithm to process a significant fraction of fake doublets. For each event an $O(10^6)$ doublets are produced while only an $O(10^3)$ are genuine resulting in a fake ratio of $O(10^3)$. A possible way of reducing this effect is using Machine Learning and Deep Learning techniques to check the compatibility between two hits. Indeed, the task of fake rejection can be seen as a typical classification problem for which networks and MVA methods have been widely proven to provide reliable results. The dataset provided is intended to be used to explore this techniques. <p> <p> The workflow provided produces a dataset consisting of a collection of pixel doublet seeds,  i.e. the hit pairs that could belong to the same particle. The compatibility between two hits is evaluated only on the basis of geometrical considerations, such as cuts in $\\eta$, $\\phi$ and $r$. These doublets define the building blocks for further tracks. Each doublet is characterised by a set of features, such as its coordinates and the charge released in the Pixel detector, and the pixel cluster shape, projected on 2D histogram.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "Di Florio, Adriano",
+        "orcid": "0000-0003-3719-8041"
+      },
+      {
+        "name": "Pantaleo, Felice",
+        "orcid": "0000-0003-3266-4357"
+      },
+      {
+        "name": "Pierini, Maurizio",
+        "orcid": "0000-0003-1939-4268"
+      }
+    ],
+    "collections": [
+      "CMS-Tools"
+    ],
+    "date_created": [
+      "2019"
+    ],
+    "date_published": "2019",
+    "distribution": {
+      "formats": [
+        "zip"
+      ],
+      "number_files": 1,
+      "size": 11627574
+    },
+    "doi": "10.7483/OPENDATA.CMS.T709.ZN5Z",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:ae560687",
+        "size": 11627574,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/software/CNNPixelSeedsProducerTool/CNNPixelSeedsProducerTool-1.0.zip"
+      }
+    ],
+    "keywords": [
+      "datascience"
+    ],
+    "license": {
+      "attribution": "GNU General Public License (GPL) version 3"
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12310",
+    "relations": [
+      {
+        "description": "The ouput dataset of this software tool is available in",
+        "recid": "12320",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2018A",
+      "Run2018B",
+      "Run2018C",
+      "Run2018D",
+      "Run2018E"
+    ],
+    "source_code_repository": {
+      "url": "https://github.com/cms-opendata-analyses/CNNPixelSeedsProducerTool"
+    },
+    "system_details": {
+      "description": "Use this code with the CMS Open Data VM environment",
+      "recid": "252",
+      "release": "CMSSW_10_2_5"
+    },
+    "title": "CNNPixelSeedsProducerTool - Example workflow using ML in track reconstruction with CMS 2018 simulated data",
+    "type": {
+      "primary": "Software",
+      "secondary": [
+        "Tool"
+      ]
+    },
+    "usage": {
+      "description": " <p>If you do not have the CERN Virtual Machine for CMS open data installed, follow the instructions in step 1 at <a href=\"/VM/CMS/2011\">How to install a CERN Virtual Machine</a>.  <p>To run the analysis, follow the instructions in <a href=\"https://github.com/cms-opendata-analyses/CNNPixelSeedsProducerTool\">CNNPixelSeedsProducerTool documentation on Github</a>.</p>"
+    },
+    "use_with": {
+      "description": "Use this with:",
+      "links": [
+        {
+          "recid": "12303"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,8 @@
+{% extends 'admin/layout.html' %}
+{% import 'admin/_macros.html' as lib with context %}
+
+{% block body %}
+    <h4>{{ _gettext('Please provide new name for %(name)s', name=name) }}</h4>
+    <br>/{{ base_path.split('/')[-1] }}/{% if path %}{{path}}/{% endif %}
+    {{ lib.render_form(form, dir_url) }}
+{% endblock %}

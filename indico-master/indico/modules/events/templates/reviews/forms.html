@@ -1,0 +1,126 @@
+{% from 'events/abstracts/reviewing/_common.html' import render_track %}
+{% from 'events/reviews/_common.html' import render_instruction_box, render_group %}
+{% from 'forms/_form.html' import form_header, form_rows, form_footer, form_row %}
+
+
+{% macro render_review_form(form, proposal=none, group=none, on_pageload=false, review=none) %}
+    {% set proposal = proposal or review.revision.proposal %}
+    {% set group = group or review.group %}
+    {% set url = proposal.get_save_review_url(group=group, review=review) %}
+    {% set form_id = 'group-review-form-%s'|format(group.id) %}
+    {% call form_header(form, action=url, orientation='vertical', id=form_id, classes='review-form') %}
+        {% if on_pageload %}
+            data-href="{{ url }}"
+            data-form-container="#review-timeline-input .js-form-container"
+            data-update="#reviewing-page"
+            data-replace-update
+            data-confirm-close-unsaved
+            data-ajax-form
+        {% endif %}
+    {% endcall %}
+
+    {% set instructions = proposal.cfp.reviewing_instructions %}
+    {% call(link, endlink) render_instruction_box(form_id, instructions, _("Reviewing instructions")) %}
+       {% trans -%}
+           Please don't forget to read the {{ link }}reviewing instructions{{ endlink }} before submitting a review.
+       {%- endtrans %}
+    {% endcall %}
+
+    {% if not review %}
+        {% if proposal.proposal_type == 'abstract' %}
+            {% set group_title = render_track(group) %}
+        {% else %}
+            {% set group_title = render_group(group.title) %}
+        {% endif %}
+        <div class="form-preface">
+            {% trans -%}
+                Reviewing in {{ group_title }}
+            {%- endtrans %}
+        </div>
+        {% if form.has_questions %}
+            <div class="titled-rule">
+                {%- trans %}Ratings{% endtrans -%}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if form.has_questions %}
+        <div class="review-questions">
+            {{ render_question_rows(form) }}
+        </div>
+    {% endif %}
+
+    <div class="titled-rule">
+        {%- trans %}Proposal{% endtrans -%}
+    </div>
+    {{ form_rows(form, fields=form._order, skip_labels=true) }}
+    {% call form_footer(form) %}
+        {% if not review %}
+            <button class="i-button big highlight text-color" data-disabled-until-change>
+                {% trans %}Submit review{% endtrans %}
+            </button>
+        {% else %}
+            <button class="i-button big highlight text-color" data-disabled-until-change>
+                {% trans %}Change review{% endtrans %}
+            </button>
+        {% endif %}
+        {% if not on_pageload %}
+            <button class="i-button big text-color color-on-hover danger {% if review %}js-edit-cancel{% else %}js-new-cancel{% endif %}"
+                    data-button-back>
+                {% trans %}Cancel{% endtrans %}
+            </button>
+        {% endif %}
+    {% endcall %}
+{% endmacro %}
+
+
+{% macro render_comment_form(form, proposal, comment=none, edit=false) %}
+    {% set url = proposal.get_save_comment_url(comment) %}
+    {% set form_class = 'edit-comment' if edit else 'new-comment unfocused' %}
+    {% call form_header(form, action=url, orientation='vertical', classes=form_class) %}
+        {% if not comment %}
+            data-form-container="#review-timeline-input .js-form-container"
+            data-update="#reviewing-page"
+            data-replace-update
+            data-confirm-close-unsaved
+            data-initially-hidden
+            data-ajax-form
+        {% endif %}
+    {% endcall %}
+    {{ form_rows(form, skip_labels=true) }}
+    {% call form_footer(form) %}
+        <button type="submit" class="i-button big highlight text-color"
+                data-disabled-until-change>
+            {% if comment %}
+                {% trans %}Update comment{% endtrans %}
+            {% else %}
+                {% trans %}Comment{% endtrans %}
+            {% endif %}
+        </button>
+        <button class="i-button big text-color color-on-hover danger {{ 'js-new-cancel' if not comment }}"
+                data-button-back>
+            {% trans %}Cancel{% endtrans %}
+        </button>
+    {% endcall %}
+{% endmacro %}
+
+{% macro render_question_rows(form) %}
+    {% for field in _iter_form_fields(form) if 'question_' in field.name %}
+        <div class="flexrow question-row" title="{{ field.description }}">
+            <div>
+                <span class="question-index">
+                    {{ loop.index }}
+                </span>
+            </div>
+            <div class="question-text f-self-stretch">
+                {{- field.label.text }}
+                {%- if field.flags.required -%}
+                    <i class="question-required" title="{% trans %}Rating this question is mandatory{% endtrans %}"> *</i>
+                {% endif -%}
+            </div>
+            <div class="flexrow f-a-start">
+                {{ form_row(field, skip_label=true, hide_description=true) }}
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}

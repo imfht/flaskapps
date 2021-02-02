@@ -1,0 +1,15 @@
+*.pyc
+*.log
+cover/*
+.coverage*
+.test_env
+.idea
+build/
+dist/
+doc/_build
+htmlcov
+*egg-info*
+.cache
+.eggs
+.python-version
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>$(title)</title>
+    <link rel="stylesheet" href="?f=docs.min.css" charset="utf-8">
+    <script src="?f=pace.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <textarea id="meta-text" hidden style="display:none">$(meta)</textarea>
+    <div id="app" class="container">
+        <section class="sidebar" :style="{display:sidebar}">
+            <ul style="display:none;" v-show="meta">
+                <li><a href="#desc" @click="showBasic">Desc</a></li>
+                <li><a href="#meta" @click="showMeta">Meta</a></li>
+                <li>
+                    <span>Roles</span>
+                    <ul>
+                        <li v-for="(item,role) in roles">
+                            <a :href="'#roles.'+role" @click="showRole(role)">{{role}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span>Resources</span>
+                    <ul>
+                        <li v-for="(item,resource) in resources">
+                            <a :href="'#res.'+resource" @click="showResource(resource)">{{resource}}</a>
+                            <ul>
+                                <li v-for="(__,action) in item" v-if="!isSpecial(action)">
+                                    <a :href="'#res.'+resource+'.'+action" @click="showResource(resource)">{{action}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <div class="content" @click="hideSidebar">
+            <div class="content-wrapper">
+                <span @click.stop="toggleSidebar" class="show-on-mobile toggle-sidebar"><i class="iconfont icon-index"></i></span>
+                <section style="display:none;" v-if="basic" v-show="view=='basic'">
+                    <div id="desc" v-marked="basic.$desc"></div>
+                    <h3>Auth</h3>
+                    <pre v-highlight="basic.$auth"></pre>
+                    <div v-if="!isEmpty(basic.$shared)">
+                        <h3><span>Shared</span></h3>
+                        <div v-for="(schema,name) in basic.$shared">
+                            <h4>@{{name}}</h4>
+                            <pre v-highlight="schema"></pre>
+                        </div>
+                    </div>
+                    <h3>Error</h3>
+                    <pre v-highlight="basic.$error">No Error Info</pre>
+                </section>
+                <section style="display:none;" v-if="meta" v-show="view=='meta'">
+                    <h3 id='meta'><span>Meta</span></h3>
+                    <pre v-highlight="metaText"></pre>
+                </section>
+                <section style="display:none;" class="section-role" v-if="role" v-show="view=='role'">
+                    <h3 :id="'roles.'+roleName">{{roleName}}</h3>
+                    <table>
+                        <tr v-for="(item,resource) in role">
+                            <td class="role-resource">{{resource}}</td>
+                            <td v-for="(info,action) in item" class="role-item">
+                                <div class="role-item-title">
+                                    <i class="iconfont" :class="{'icon-allow':info.allow, 'icon-block':!info.allow}"></i>
+                                    <span>{{action}}</span>
+                                </div>
+                                <div class="role-item-desc">{{info.desc}}</div>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section style="display:none;" v-if="resource" v-show="view=='resource'">
+                    <h1 :id="'res.'+resourceName">{{resourceName}}</h1>
+                    <p v-marked="resource.$desc"></p>
+                    <div v-if="!isEmpty(resource.$shared)">
+                        <h3><span>Shared</span></h3>
+                        <div v-for="(schema,name,index) in resource.$shared" :key="index">
+                            <h4>@{{name}}</h4>
+                            <pre v-highlight="schema"></pre>
+                        </div>
+                    </div>
+                    <div v-for="(item,action,index) in resource" :key="index" v-if="!isSpecial(action)">
+                        <h2 :id="'res.'+resourceName+'.'+action">
+                          <span>{{action}}: </span>
+                          <code class="action-url">{{toUrl(resourceName,action)}}</code>
+                        </h2>
+                        <p v-marked="item.$desc"></p>
+                        <p>Input</p>
+                        <pre v-highlight="item.$input">No Input Schema</pre>
+                        <p>Output</p>
+                        <pre v-highlight="item.$output">No Output Schema</pre>
+                        <p>Error</p>
+                        <pre v-highlight="item.$error">No Error Info</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="?f=vue.min.js" charset="utf-8"></script>
+    <script src="?f=marked.min.js" charset="utf-8"></script>
+    <script src="?f=highlight.min.js" charset="utf-8"></script>
+    <script src="?f=docs.min.js" charset="utf-8"></script>
+    <script src="?f=res.min.js" charset="utf-8"></script>
+</body>
+
+</html>

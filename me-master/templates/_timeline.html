@@ -1,0 +1,308 @@
+{% include "__post_script.html" %}
+{% block script %}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        var $container = $(".container-timeline");
+
+        var show_post = function(post, scrollto){
+            var post_date =post.post_date.to_date();
+            var updated_date = post.updated_date.to_date();
+            post.post_date = post_date;
+            post.updated_date = updated_date;
+
+            var $post = get_post_div(post);
+
+            $post = build_post_panel($post, post);
+
+            $("div.post-date", $post).html('{0}.{1}<span>{2}</span>'.format(post_date.getMonth()+1,
+                    post_date.getDate(), post_date.getFullYear()));
+
+            build_post_body($post, post);
+            build_thumbnails($(".thumbnails", $post), post, "thumbnails_"+post.id, ".thumbnails");
+
+            reset_scroll();
+            $post.show();
+            if (scrollto) {
+                $container.find(".post.active").removeClass("active");
+                $post.scrollto(120).addClass("active");
+            }
+        };
+
+        var get_post_div = function(post){
+            var $post = $("#post_"+post.id);
+            $post.remove();
+            $post = $("#post_"+post.id);
+            if ($post.length <= 0){
+                $post = $("#post_template").clone();
+                if (post.sticky){
+                    $post.addClass("sticky");
+                    var first_year = $container.find(".timeline-year:first");
+                    if (first_year.length > 0){
+                        first_year.before($post);
+                    }
+                    else {
+                        $container.append($post);
+                    }
+                } else {
+                    var $year = get_year_div(post.post_date.getFullYear());
+                    var $posts = $(".post", $year);
+                    var found = false;
+                    for ( var i=0; i<$posts.length; i++ ){
+                        var $p = $($posts[i]);
+                        {% if category.order == "desc" %}
+                            if ( get_post_date($p) < post.post_date )
+                            {
+                                $p.before($post);
+                                found = true;
+                                break;
+                            }
+                        {% else %}
+                            if ( get_post_date($p) > post.post_date )
+                            {
+                                $p.after($post);
+                                found = true;
+                                break;
+                            }
+                        {% endif %}
+
+                    }
+                    if (!found){
+                        $year.append($post);
+                    }
+                }
+
+                var $comments_panel = $(".comments_panel", $post);
+                $(".cmdbar .comment", $post).unbind("click").click(function(){
+                    if ($comments_panel.is(":visible")) {
+                        $comments_panel.hide();
+                    } else {
+                        $comments_panel.show();
+                        var comment = new Comment(md2html);
+                        comment.show_comments($comments_panel,  post.id);
+                    }
+                });
+
+                $(".cmdbar .stats", $post).unbind("click").click(function(){
+                    var $this = $(this);
+                    var $icon = $this.find("i").clone();
+                    $.json_action("stats",{
+                        stats_type: $.toJSON($this.attr("stats_type")),
+                        id: $.toJSON(post.id),
+                        oper: $.toJSON($this.attr("oper")),
+                        name: $.toJSON($this.attr("name"))
+                    },function(resp){
+                        $this.empty();
+                        $this.append($icon);
+                        $this.append(resp.stats[$this.attr("name")]);
+                    },function(err){
+                        bootbox.alert(err);
+                    });
+                    $this.unbind("click");
+                });
+
+                // bind actions
+                $post.attr("id", "post_{0}".format(post.id));
+            }
+            return $post;
+        };
+
+        var get_year_div = function(year){
+            var $year_div = $("#year_" + year);
+            if ($year_div.length <= 0 ){
+                var $year = $('<div class="timeline-year">' +
+                          '<a class="collapse_btn" href="javascript:;" data-target="#year_{0}">'.format(year) +
+                          '{0} </a></div>'.format(year) +
+                          '<div id="year_{0}" class="collapse in year-content"></div>'.format(year));
+
+                var $years = $(".timeline-year");
+                var found = false;
+                for ( var i=0; i<$years.length; i++ ){
+                    var $y = $($years[i]);
+                {% if category.order == "desc" %}
+                    if ( $("a", $y).attr("data-target") < "#year_"+year )
+                {% else %}
+                    if ( $("a", $y).attr("data-target") > "#year_"+year )
+                {% endif %}
+                    {
+                        $y.before($year);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found){
+                    $container.append($year);
+                }
+                $year_div = $("#year_"+year);
+
+                $(".collapse_btn", $year).unbind("click").click(function(){
+                    if ($year_div.hasClass("in")) {
+                        $year_div.collapse('hide').removeClass("in");
+                        $year_div.attr("style", "height:0px;");
+                    } else {
+                        $year_div.collapse('show').addClass("in");
+                        $year_div.attr("style", "height:auto;");
+                    }
+                    return false;
+                });
+            }
+            return $year_div;
+        };
+
+        $(window).resize(function() {
+           bind_img_info($(".post-body", $container), 200, 150);
+        });
+
+        $(".load-more-post").unbind("click").click(function() {
+            load_posts(show_post);
+        });
+        $(window).bind("scroll", $.debounce(50, function(){
+            if ($(document).scrollTop() + $(window).height() > $(document).height() - 10) {
+                load_posts(show_post);
+            }
+        }));
+        load_posts(show_post);
+
+
+        var active_post = function($menu){
+            if ($menu && $menu.length > 0){
+                $container.find(".post").removeClass("active");
+                reset_scroll();
+                $menu.addClass("active").scrollto(120);
+            }
+        };
+
+        bind_shortcuts($container, active_post, show_post, ".post");
+
+        var stop_scroll = false;
+        var reset_scroll = function(delay){
+            delay = delay || 2000;
+            stop_scroll = true;
+            window.setTimeout(function(){
+                stop_scroll = false;
+            }, delay);
+            return true;
+        };
+        $(window).scroll($.debounce(500, function(){
+            if (!stop_scroll) {
+                var $posts = $(".post");
+                var current = $posts.filter(function() {
+                    return $(this).offset().top > $(document).scrollTop() + 30 &&
+                            $(this).offset().top < $(document).scrollTop()+ 230;
+                });
+                current = $(current[0]);
+                if(current && current.length > 0){
+                    $container.find(".post").removeClass("active");
+                    current.addClass("active");
+                }
+            }
+        }));
+
+        {% if user.is_admin() %}
+        var find_timeline_date=function(pageY){
+            var posts = $( ".post", $container);
+
+            var $last_post, last_date=new Date();
+
+            for (var i = 0, len = posts.length; i < len; i++) {
+                var $post = $(posts[i]);
+
+                if ($post.offset().top > pageY) {
+                    if ($last_post) {
+                        var post_date = get_post_date($post);
+                        var last_post_date = get_post_date($last_post);
+                        var distance = $post.offset().top - $last_post.offset().top;
+                        var ratio = (pageY-$last_post.offset().top)/distance;
+                        return new Date(+last_post_date + (post_date - last_post_date) * ratio);
+                    } else {
+                        return new Date();
+                    }
+                }
+                $last_post = $post;
+                last_date = get_post_date($last_post);
+            }
+            return last_date;
+        };
+
+        var post_callback = function(post_data){
+            editor.hide();
+            show_post(post_data, true);
+        };
+
+        editor = new Editor(md_converter, post_callback);
+
+        /* Timeline Actions */
+        $(".timeline").unbind("click").click(function(e){
+            editor.new_post(find_timeline_date(e.pageY).format()); //new post
+        });
+        $("#new-post").unbind("click").click(function(){
+            editor.new_post();
+        });
+        {% endif %}
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="timeline-page">
+    {% if user.is_admin() %}
+        {% include "_editor.html" %}
+    {% endif %}
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9 col-xs-12">
+            <table class="col-xs-11">
+                <tr>
+                    <td class="timeline" {% if user.is_admin() %}title="{{ _("New Post") }}"{% endif %}></td>
+                    <td>
+                        <div id="post_template" class="post dis-none" >
+                            <input type="hidden" class="date_val" />
+                            <div class="post-date">
+                                <span></span>
+                            </div>
+                            {% if user.is_admin() %}
+                            <div class="menu btn-group pull-right">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                    <h4><i class="fa fa-toggle-down text-default"></i></h4>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="menu-edit" href="javascript:;">{{ _("Edit") }}</a></li>
+                                    <li><a class="menu-delete" href="javascript:;">{{ _("Delete") }}</a></li>
+                                </ul>
+                            </div>
+                            {% endif %}
+                            <span class=""><img src="" class="avatar avatar32"/></span>
+                            <span class="label label-default pull-left post-hide dis-none"></span>
+                            <span class="post-sticky dis-none" title="{{ _("Sticky") }}"></span>
+                            <span class="post-title"><a class="title" href=""></a></span>
+                            <ul class="tags"></ul>
+                            <div class="post-body"></div>
+                            <div class="thumbnails dis-none"></div>
+                            <div class="clearfix"></div>
+                            <a class="post-category" href=""><i class="icon-th-large icon-white"></i></a>
+                            <div class="cmdbar">
+                                <i class="fa fa-eye"></i> <span class="post-viewed"></span>
+                                &nbsp;<a class="share" href="javascript:;" title="{{ _("Share") }}"><i class="fa fa-share"></i></a>
+                                &nbsp;<a class="stats" stats_type="Post" name="like_count" oper="increase"
+                                   href="javascript:;" title="{{ _("Like") }}"><i class="fa fa-thumbs-o-up"></i>
+                                </a>
+                                &nbsp;<a class="stats" stats_type="Post" name="unlike_count" oper="increase"
+                                   href="javascript:;" title="{{ _("Unlike") }}"><i class="fa fa-thumbs-o-down"></i>
+                                </a>
+                                &nbsp;<a class="comment" href="javascript:;" title="{{ _("Comment") }}"><i class="fa fa-comment-o"></i></a>
+                            </div>
+                            <div class="comments_panel dis-none"></div>
+                        </div>
+                        <!-- end post template -->
+                        <div class="container-timeline">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="clearfix"></div>
+            <img class="post-loading loading dis-none" src="{{ settings.MirrorSite }}/static/images/posts_loading.gif" alt="{{ _("loading") }}..."/>
+            <button class="load-more-post btn dis-none">{{ _("More") }}...</button>
+        </div>
+    </div>
+</div>
+{% include "__comment.html" %}
+{% endblock %}

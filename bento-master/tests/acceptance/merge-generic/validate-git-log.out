@@ -1,0 +1,4 @@
+Merge branch 'lhs' into rhs
+
+# Conflicts:
+#	foo.py

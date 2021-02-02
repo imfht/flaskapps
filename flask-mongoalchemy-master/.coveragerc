@@ -1,0 +1,6 @@
+[run]
+source=flask_mongoalchemy
+omit=examples
+
+[html]
+directory=cover

@@ -1,0 +1,96 @@
+# Configure.
+services:
+  - mysql
+  - postgresql
+
+# Environment and matrix.
+environment:
+  PATH: C:\%PYTHON%;C:\%PYTHON%\Scripts;C:\Program Files\MySQL\MySQL Server 5.7\bin;C:\Program Files\PostgreSQL\9.5\bin;%PATH%
+  PGPASSWORD: Password12!
+  PYTHON: Python34
+  matrix:
+    - TOX_ENV: lint
+      BROKER: sqlite
+    - TOX_ENV: py34
+      BROKER: sqlite
+    - TOX_ENV: py33
+      BROKER: sqlite
+    - TOX_ENV: py27
+      BROKER: sqlite
+    - TOX_ENV: py
+      PYTHON: Python34-x64
+      BROKER: sqlite
+    - TOX_ENV: py
+      PYTHON: Python33-x64
+      BROKER: sqlite
+    - TOX_ENV: py
+      PYTHON: Python27-x64
+      BROKER: sqlite
+
+    - TOX_ENV: lint
+      BROKER: mysql
+    - TOX_ENV: py34
+      BROKER: mysql
+    - TOX_ENV: py33
+      BROKER: mysql
+    - TOX_ENV: py27
+      BROKER: mysql
+    - TOX_ENV: py
+      PYTHON: Python34-x64
+      BROKER: mysql
+    - TOX_ENV: py
+      PYTHON: Python33-x64
+      BROKER: mysql
+    - TOX_ENV: py
+      PYTHON: Python27-x64
+      BROKER: mysql
+
+    - TOX_ENV: lint
+      BROKER: postgres
+    - TOX_ENV: py34
+      BROKER: postgres
+    - TOX_ENV: py33
+      BROKER: postgres
+    - TOX_ENV: py27
+      BROKER: postgres
+    - TOX_ENV: py
+      PYTHON: Python34-x64
+      BROKER: postgres
+    - TOX_ENV: py
+      PYTHON: Python33-x64
+      BROKER: postgres
+    - TOX_ENV: py
+      PYTHON: Python27-x64
+      BROKER: postgres
+
+    - TOX_ENV: lint
+      BROKER: redis
+    - TOX_ENV: py34
+      BROKER: redis
+    - TOX_ENV: py33
+      BROKER: redis
+    - TOX_ENV: py27
+      BROKER: redis
+    - TOX_ENV: py
+      PYTHON: Python34-x64
+      BROKER: redis
+    - TOX_ENV: py
+      PYTHON: Python33-x64
+      BROKER: redis
+    - TOX_ENV: py
+      PYTHON: Python27-x64
+      BROKER: redis
+
+# Run.
+build_script: pip install tox
+after_build:
+  - IF %BROKER% EQU redis cinst redis-64
+  - IF %BROKER% EQU redis redis-server --service-install
+  - IF %BROKER% EQU redis redis-server --service-start
+  - IF %BROKER% EQU mysql mysql -u root -p"Password12!" -e "CREATE DATABASE flask_celery_helper_test;"
+  - IF %BROKER% EQU mysql mysql -u root -p"Password12!" -e "GRANT ALL PRIVILEGES ON flask_celery_helper_test.* TO 'user'@'localhost' IDENTIFIED BY 'pass';"
+  - IF %BROKER% EQU postgres psql -U postgres -c "CREATE DATABASE flask_celery_helper_test;"
+  - IF %BROKER% EQU postgres psql -U postgres -c "CREATE USER user1 WITH PASSWORD 'pass';"
+  - IF %BROKER% EQU postgres psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE flask_celery_helper_test TO user1;"
+test_script: tox -e %TOX_ENV%
+on_success: IF %TOX_ENV% NEQ lint pip install codecov & codecov

@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}{% if title %}{{ title }}{% else %}{{ filename or '' }} - Grip{% endif %}{% endblock %}
+
+{%- block styles -%}
+  {%- for style_url in style_urls %}
+  <link rel="stylesheet" href="{{ style_url }}" />
+  {%- endfor %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='octicons/octicons.css') }}" />
+  {%- if styles %}
+  <style>
+    {%- for style in styles %}
+    {{ style|safe }}
+    {%- endfor %}
+  </style>
+  {%- endif %}
+  <style>
+    /* Page tweaks */
+    .preview-page {
+      margin-top: 64px;
+      margin-bottom: 21px;
+    }
+    /* User-content tweaks */
+    .timeline-comment-wrapper > .timeline-comment:after,
+    .timeline-comment-wrapper > .timeline-comment:before {
+      content: none;
+    }
+    /* User-content overrides */
+    .discussion-timeline.wide {
+      width: 920px;
+    }
+  </style>
+{%- endblock -%}
+
+{%- block scripts -%}
+  <script>
+    function showCanonicalImages() {
+      var images = document.getElementsByTagName('img');
+      if (!images) {
+        return;
+      }
+      for (var index = 0; index < images.length; index++) {
+        var image = images[index];
+        if (image.getAttribute('data-canonical-src') && image.src !== image.getAttribute('data-canonical-src')) {
+          image.src = image.getAttribute('data-canonical-src');
+        }
+      }
+    }
+
+    function scrollToHash() {
+      if (location.hash && !document.querySelector(':target')) {
+        var element = document.getElementById('user-content-' + location.hash.slice(1));
+        if (element) {
+           element.scrollIntoView();
+        }
+      }
+    }
+
+    function autorefreshContent(eventSourceUrl) {
+      var initialTitle = document.title;
+      var contentElement = document.getElementById('grip-content');
+      var source = new EventSource(eventSourceUrl);
+      var isRendering = false;
+
+      source.onmessage = function(ev) {
+        var msg = JSON.parse(ev.data);
+        if (msg.updating) {
+          isRendering = true;
+          document.title = '(Rendering) ' + document.title;
+        } else {
+          isRendering = false;
+          document.title = initialTitle;
+          contentElement.innerHTML = msg.content;
+          showCanonicalImages();
+        }
+      }
+
+      source.onerror = function(e) {
+        if (e.readyState === EventSource.CLOSED && isRendering) {
+          isRendering = false;
+          document.title = initialTitle;
+        }
+      }
+    }
+
+    window.onhashchange = function() {
+      scrollToHash();
+    }
+
+    window.onload = function() {
+      scrollToHash();
+    }
+
+    showCanonicalImages();
+
+    var autorefreshUrl = document.getElementById('preview-page').getAttribute('data-autorefresh-url');
+    if (autorefreshUrl) {
+      autorefreshContent(autorefreshUrl);
+    }
+  </script>
+{%- endblock -%}
+
+{%- block page -%}
+  <div id="preview-page" class="preview-page" data-autorefresh-url="{{ autorefresh_url if autorefresh_url }}">
+    <main id="js-repo-pjax-container">
+      <div class="container new-discussion-timeline experiment-repo-nav">
+        <div class="repository-content">
+
+          {% if not user_content %}
+
+            <div id="readme" class="Box Box--condensed instapaper_body md js-code-block-container">
+              {% if title or filename %}
+                <div class="Box-header d-flex flex-items-center flex-justify-between px-2">
+                  <h3 class="Box-title pr-3">
+                    <span class="octicon octicon-book"></span>
+                    {{ title or filename }}
+                  </h3>
+                </div>
+              {% endif %}
+              <div class="Box-body">
+                <article id="grip-content" class="markdown-body entry-content p-5" itemprop="text">
+                  {{ content|safe }}
+                </article>
+              </div>
+            </div>
+
+          {% else %}
+
+            <div class="js-check-all-container">
+              <div class="clearfix js-issues-results">
+                <div class="clearfix pull-request-tab-content is-visible js-socket-channel js-updatable-content">
+                  <div class="discussion-timeline pull-discussion-timeline js-pull-discussion-timeline js-quote-selection-container js-review-state-classes">
+                    <div class="js-discussion js-socket-channel">
+                      <div class="timeline-comment-wrapper js-comment-container mt-0 js-socket-channel">
+                        <div class="timeline-comment-group js-minimizable-comment-group js-targetable-comment">
+                          <div class="unminimized-comment editable-comment comment previewable-edit js-comment js-task-list-container timeline-comment reorderable-task-lists">
+                            {% if title %}
+                              <div class="timeline-comment-header clearfix">
+                                <h3 class="timeline-comment-header-text f5 text-normal">
+                                  <strong class="css-truncate expandable"><span class="author text-inherit css-truncate-target">{{ title }}</span></strong>
+                                </h3>
+                              </div>
+                            {% endif %}
+                            <div class="edit-comment-hide">
+                              <div class="d-block comment-body markdown-body js-comment-body" id="grip-content">
+                                {{ content|safe }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          {% endif %}
+
+        </div>
+      </div>
+    </main>
+  </div>
+{%- endblock -%}

@@ -1,0 +1,9 @@
+{% extends 'rb/emails/base_email.txt' %}
+{% block recipient %}{{ reservation.room.owner.first_name }}{% endblock %}
+
+{% block email_body -%}
+{% block body %}{% endblock %}
+
+You can check the details of the booking here:
+{{ reservation.external_details_url }}
+{%- endblock %}

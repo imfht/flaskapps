@@ -1,0 +1,4 @@
+{
+    "default": {"jsonvar": "come from json"},
+    "staging": {"jsonvar": "come from json staging"}
+}

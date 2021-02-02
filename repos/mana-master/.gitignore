@@ -1,0 +1,9 @@
+*.pyc
+**/*.pyc
+**/*_build/
+venv/
+mana.egg-info/
+dist/
+_build/
+test/
+examples/

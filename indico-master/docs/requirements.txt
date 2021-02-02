@@ -1,0 +1,6 @@
+pojson
+babel
+flask
+Flask-BabelEx
+sphinx-issues
+plantweb

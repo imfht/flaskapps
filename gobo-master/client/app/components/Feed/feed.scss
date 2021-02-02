@@ -1,0 +1,86 @@
+$settings-width: 420px;
+
+.feed-wrapper {
+  padding-top: $rules-mobile-height;
+
+  @include media-breakpoint-up(lg) {
+    padding-top: 0;
+  }
+}
+
+.feed {
+  width: 100%;
+
+  @include media-breakpoint-up(lg) {
+    margin-right: $settings-width;
+  }
+}
+
+.sidebar {
+  width: 100%;
+
+  @include media-breakpoint-up(lg) {
+    width: $settings-width;
+  }
+}
+
+.posts {
+  margin: $spacer-small;
+
+  @include media-breakpoint-up(lg) {
+    margin: $spacer-small;
+    margin-left: $spacer-large * 2;
+    margin-right: $spacer-large * 2;
+  }
+}
+
+.filtered-text {
+  padding-bottom: $spacer-small;
+
+  @media print {
+    display: none;
+  }
+}
+
+.no-posts-text {
+  margin: 0 auto;
+  max-width: 900px;
+  color: $text-color;
+  font-size:1.5em;
+  padding-bottom: 1em;
+  font-weight: 900;
+}
+
+.filtered-count {
+  font-weight: 600;
+}
+
+.filtered-link {
+  color: $text-color;
+  border-bottom: 1px dotted $text-color;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: darken($text-color, 20%);
+    text-decoration: none;
+  }
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

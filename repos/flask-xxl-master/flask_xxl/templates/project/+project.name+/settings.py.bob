@@ -1,0 +1,145 @@
+# -*- coding: utf-8 -*-
+{{% macro add_blueprint(name) %}}
+    '{{{ name }}}.{{{ name }}}',
+{{% endmacro %}}
+{{% macro render_dburi(driver,host,user,pw,db,port='3306') %}}
+    SQLALCHEMY_DATABASE_URI = '{{{ driver }}}://{{{ user }}}:{{{ pw }}}@{{{ host }}}:{{{ port }}}/{{{ db }}}'
+{{% endmacro %}}
+{{% macro render_app_urls(app) %}}
+    'flask_xxl.apps.{{{ app }}}.urls.routes',
+{{% endmacro %}}
+{{% macro render_install_app(app) %}}
+    'flask_xxl.apps.{{{ app }}}.{{{ app }}}',
+{{% endmacro %}}
+
+"""
+    settings
+    ~~~~~~~~
+    Global settings for project.
+"""
+import os
+from local_settings import LocalConfig
+
+class BaseConfig(LocalConfig):
+    ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
+    CSRF_ENABLED = True
+    #ADMIN_PER_PAGE = 5
+    #CODEMIRROR_LANGUAGES = ['python','python2','python3','php','javascript','xml']
+    #CODEMIRROR_THEME = 'blackboard'#'vivid-chalk'#'3024-night'
+    #SQLALCHEMY_ECHO = True
+    #SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+
+
+    #####################################################
+    # Define url modules with routes defined inside
+    #
+    #   in bp.urls.py file make routes
+    #   routes = [
+    #       ((bp_name),
+    #           ('/url_rule',ViewClass.as_view('endpoint')),
+    #           ('/next_url',view_func)),
+    #       ]
+    #
+    #####################################################
+    URL_MODULES = [
+            '{{{project.name}}}.urls.routes',
+            {{% if project.add_apps -%}}
+                {{%- for app in ['admin','page','auth','menu'] -%}}
+                    {{%- if project.get('add_%s' % app) -%}}
+                        {{{ render_app_urls(app) }}}
+                    {{%- endif %}}
+                {{%- endfor %}}
+            {{%- endif %}}                        
+            #'flask.ext.xxl.apps.admin.urls.routes',
+            #'flask.ext.xxl.apps.auth.urls.routes',
+            #'flask.ext.xxl.apps.page.urls.routes',
+    ]
+    
+    #####################################################
+    # define sub dirs as blueprints
+    # in __init__.py file define blueprint like this:
+    #   from flask import BluePrint
+    #   blueprint = BluePrint('blueprint',__name__,
+    #                           url_prefix='/blueprint',
+    #                           template_dir='templates')
+    #####################################################
+    BLUEPRINTS = [
+            '{{{project.name}}}.{{{project.name}}}',
+            {{%- if project.add_apps %}}
+                {{%- for app in ['admin','page','menu','auth'] %}}
+                    {{%- if project.get('add_%s' % app) %}}
+                        {{{ render_install_app(app) }}}
+                    {{% endif -%}}
+                {{% endfor -%}}
+            {{% endif -%}}
+            #'flask.ext.xxl.apps.admin.admin',
+            #'flask.ext.xxl.apps.menu.menu',
+            #'flask.ext.xxl.apps.page.page',
+            #'flask.ext.xxl.apps.auth.auth',
+    ]
+
+    ####################################################
+    # define flask extensions to use in your app
+    # in ext.py import and create instance of extensions
+    # from flask.ext.name import Extension
+    #
+    # extension = Extension()
+    #####################################################
+
+    EXTENSIONS = [
+            'ext.db',
+            {{% if project.add_migration -%}}
+            'ext.alembic',
+            {{% else %}}
+            #'ext.alembic',
+            {{%- endif %}}
+            #'ext.toolbar',
+            #'ext.pagedown',
+            #'ext.codemirror',
+
+    ]
+    
+    ###################################################
+    # context processors add global variables or
+    # functions to your templates
+    #
+    # define like this:
+    # def my_processor_name():
+    #   def the_func_to_add():
+    #       #w/e you want to do
+    #   return {name:the_func_to_add}
+    # then in templates name is available
+    ######################################################
+
+    CONTEXT_PROCESSORS = [
+            'flask.ext.xxl.context_processors.add_get_model',
+            #'flask.ext.xxl.context_processors.add_is_page',
+            #'flask.ext.xxl.context_processors.common_context',
+            #'flask.ext.xxl.context_processors.common_forms',
+            #'flask.ext.xxl.apps.menu.context_processors.frontend_nav',
+            #'flask.ext.xxl.apps.menu.context_processors.admin_nav',
+            #'flask.ext.xxl.apps.auth.context_processors.user_context',
+    ]
+
+    TEMPLATE_FILTERS = [
+            'flask.ext.xxl.filters.date',
+            'flask.ext.xxl.filters.date_pretty',
+            'flask.ext.xxl.filters.datetime',
+            'flask.ext.xxl.filters.pluralize',
+            'flask.ext.xxl.filters.month_name',
+            'flask.ext.xxl.filters.markdown',
+    ]
+
+   
+def get_choices(option):
+    return BaseConfig.DYNAMIC_SETTINGS[option]
+
+
+class DevelopmentConfig(BaseConfig):
+    DEBUG = True
+    DEBUG_TB_PROFILER_ENABLED = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+
+class TestingConfig(BaseConfig):
+    TESTING = True

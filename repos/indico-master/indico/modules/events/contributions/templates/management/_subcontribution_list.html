@@ -1,0 +1,121 @@
+{% from 'attachments/_management_info_column.html' import render_attachment_info %}
+
+{% macro render_subcontribution_list(event, contrib, subcontributions) %}
+    {% set has_codes = subcontributions|selectattr('code')|any %}
+    <div class="flashed-messages"></div>
+    <div id="subcontribution-list">
+        <div class="hide-if-locked">
+            <div class="toolbar form-group space-after">
+                <a class="icon-checkbox-checked i-button arrow js-dropdown" href="#" data-toggle="dropdown"></a>
+                <ul class="i-dropdown">
+                    <li>
+                        <a href="#" data-select-all="#subcontribution-list input.select-row:visible">
+                            {%- trans %}All{% endtrans -%}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-select-none="#subcontribution-list input.select-row:visible">
+                            {%- trans %}None{% endtrans -%}
+                        </a>
+                    </li>
+                </ul>
+                <button class="i-button highlight icon-plus"
+                        data-title="{% trans %}Add new subcontribution{% endtrans %}"
+                        data-href="{{ url_for('.manage_create_subcontrib', contrib) }}"
+                        data-update="#subcontribution-list"
+                        data-ajax-dialog>
+                    {%- trans %}Add new subcontribution{% endtrans -%}
+                </button>
+                <button class="i-button js-enable-if-checked icon-remove" disabled
+                        title="{% trans %}Remove{% endtrans %}"
+                        data-method="POST"
+                        data-href="{{ url_for('.manage_delete_subcontribs', contrib) }}"
+                        data-params-selector="#subcontribution-list input[name=subcontribution_id]:checked"
+                        data-confirm="{% trans %}Do you really want to delete the selected subcontributions?{% endtrans %}"
+                        data-title="{% trans %}Confirm deletion{% endtrans %}"
+                        data-update="#subcontribution-list">
+                    {%- trans %}Remove{% endtrans -%}
+                </button>
+            </div>
+        </div>
+        <div class="form-group">
+            <form method="POST">
+                <table class="i-table-widget tablesorter">
+                    <thead>
+                        <tr class="i-table">
+                            <th class="i-table hide-if-locked" data-sorter="false"></th>
+                            <th class="i-table thin-column hide-if-locked" data-sorter="false"></th>
+                            <th class="i-table id-column">
+                                {% trans %}ID{% endtrans %}
+                            </th>
+                            <th class="i-table">
+                                {% trans %}Title{% endtrans %}
+                            </th>
+                            <th class="i-table">
+                                {% trans %}Duration{% endtrans %}
+                            </th>
+                            {% if has_codes %}
+                                <th class="i-table">
+                                    {% trans %}Code{% endtrans %}
+                                </th>
+                            {% endif %}
+                            <th class="i-table" data-sorter="false">
+                                {% trans %}Material{% endtrans %}
+                            </th>
+                            <th data-sorter="false" class="hide-if-locked">
+                                {# Actions #}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subcontribution in subcontributions -%}
+                            <tr class="i-table js-sortable-subcontribution-row"
+                                id="{{ subcontribution.id }}"
+                                data-sort-url="{{ url_for('.sort_subcontributions', contrib) }}">
+                                <td class="js-sort-handle hide-if-locked"></td>
+                                <td class="i-table hide-if-locked">
+                                    <input type="checkbox" class="select-row" name="subcontribution_id"
+                                           value="{{ subcontribution.id }}">
+                                </td>
+                                <td class="i-table">{{ subcontribution.friendly_id }}</td>
+                                <td class="i-table subcontribution-title">{{ subcontribution.title }}</td>
+                                <td class="i-table">{{ subcontribution.duration | format_timedelta(format='medium') }}</td>
+                                {% if has_codes %}
+                                    <td class="i-table">{{ subcontribution.code or _('n/a') }}</td>
+                                {% endif %}
+                                {{ render_attachment_info(subcontribution) }}
+                                <td class="i-table hide-if-locked">
+                                    <div class="group right">
+                                        <a href="#" class="icon-edit i-link"
+                                           data-title="{% trans %}Edit subcontribution{% endtrans %}"
+                                           data-subtitle="{{ subcontribution.title }}"
+                                           data-href="{{ url_for('.manage_edit_subcontrib', subcontribution) }}"
+                                           data-update="#subcontribution-list"
+                                           data-ajax-dialog>
+                                        </a>
+                                        <a href="#" class="icon-remove i-link"
+                                           data-href="{{ url_for('.manage_subcontrib_rest', subcontribution) }}"
+                                           data-method="DELETE"
+                                           data-title="{% trans title=subcontribution.title %}Delete subcontribution '{{ title }}'{% endtrans %}"
+                                           data-confirm="{% trans %}Are you sure you want to delete this subcontribution?{% endtrans %}"
+                                           data-update="#subcontribution-list">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {%- else -%}
+                            <tr class="i-table">
+                                <td colspan="7">
+                                    {%- trans %}There are no subcontributions in this contribution yet{% endtrans -%}
+                                </td>
+                            </tr>
+                        {%- endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script>
+        setupSubContributionList();
+    </script>
+{% endmacro %}

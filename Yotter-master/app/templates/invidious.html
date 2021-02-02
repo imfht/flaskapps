@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+    {% if videos %}
+      <div class="ui centered cards">
+        {% for video in videos %}
+          {% include '_video_item.html' %}
+        {% endfor %}
+      </div>
+    {% else %}
+      {% include '_empty_feed.html' %}
+    {% endif %}
+{% endblock %}

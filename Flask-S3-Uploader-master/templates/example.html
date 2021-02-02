@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</HEAD>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<form method="POST" enctype="multipart/form-data" action=".">
+    {{ form.csrf_token }}
+    {{ form.example }}
+    <input type="submit" value="Go">
+</form>
+

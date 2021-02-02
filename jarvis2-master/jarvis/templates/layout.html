@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row">
+    {% if is_job_enabled('yr') %}
+    <div class="col-3">
+      <div data-widget="yr"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('time') %}
+    <div class="col-3">
+      <div data-widget="time"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('atb') %}
+    <div class="col-3">
+      <div data-widget="atb"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('hackernews') %}
+    <div class="col-3">
+      <div data-widget="hn" data-job="hackernews"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('sonos') %}
+    <div class="col-3">
+      <div data-widget="sonos"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('calendar') %}
+    <div class="col-3">
+      <div data-widget="calendar"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('uptime') %}
+    <div class="col-3">    
+      <div data-widget="uptime"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('rss-nrk') %}
+    <div class="col-3">
+      <div data-widget="rss" data-job="rss-nrk"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('rss-guardian') %}
+    <div class="col-3">
+      <div data-widget="rss" data-job="rss-guardian"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('plex') %}
+    <div class="col-3">      
+      <div data-widget="plex"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('nsb') %}
+    <div class="col-3">
+      <div data-widget="nsb"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('ping') %}
+    <div class="col-6">
+      <div data-widget="ping"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('gmail') %}
+    <div class="col-3">    
+      <div data-widget="email" data-job="gmail"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('imap') %}
+    <div class="col-3">    
+      <div data-widget="email" data-job="imap"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('avinor') %}
+    <div class="col-3">
+      <div data-widget="avinor"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('stats') %}
+    <div class="col-3">
+      <div data-widget="stats"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('flybussen') %}
+    <div class="col-3">
+      <div data-widget="flybussen"></div>
+    </div>
+    {% endif %}
+    {% if is_job_enabled('vaernesekspressen') %}
+    <div class="col-3">
+      <div data-widget="flybussen" data-job="vaernesekspressen"></div>
+    </div>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,67 @@
+/dist
+**/examples/**/res.js
+**/examples/**/res.min.js
+**/tests/**/res.js
+**/tests/**/res.min.js
+**/test/**/res.js
+**/test/**/res.min.js
+**/docs/**/res.js
+**/docs/**/res.min.js
+
+tests/static/
+node_modules/
+
+.ropeproject/
+.venv/
+*.db
+
+# pkg resource
+MANIFEST
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+docs/build/
+
+# PyBuilder
+target/

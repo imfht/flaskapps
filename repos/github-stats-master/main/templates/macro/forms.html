@@ -1,0 +1,198 @@
+# macro field_errors(field)
+  # for error in field.errors
+    <p class="help-block">{{error}}</p>
+  # endfor
+# endmacro
+
+
+# macro field_description(field)
+  # if field.description
+    <p class="help-block">{{field.description}}</p>
+  # endif
+# endmacro
+
+
+# macro field_optional(field)
+  # if not field.flags.required
+    <small class="text-muted">(optional)</small>
+  # endif
+# endmacro
+
+
+# macro input_field(field, prefix='', suffix='')
+  <div class="form-group {{'has-error' if field.errors}}">
+    {{field.label(class='control-label')}}
+    {{field_optional(field)}}
+    # if prefix or suffix
+      <div class="input-group">
+        # if prefix
+          <span class="input-group-addon">{{prefix}}</span>
+        # endif
+        {{field(class='form-control', **kwargs)}}
+        # if suffix
+          <span class="input-group-addon">{{suffix}}</span>
+        # endif
+      </div>
+    # else
+      {{field(class='form-control', **kwargs)}}
+    # endif
+    {{field_errors(field)}}
+    {{field_description(field)}}
+  </div>
+# endmacro
+
+
+# macro text_field(field)
+  {{input_field(field, type='text', **kwargs)}}
+# endmacro
+
+
+# macro password_field(field)
+  {{input_field(field, type='password', **kwargs)}}
+# endmacro
+
+
+# macro password_visible_field(field, size='')
+  <div class="form-group {{'has-error' if field.errors}}">
+    {{field.label(class='control-label')}}
+    {{field_optional(field)}}
+    <div class="input-group {{'input-group-%s' % size if size}}">
+      {{field(class='form-control', type='password', autocomplete='off', **kwargs)}}
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-password-show" type="button" data-target="#{{field.name}}" data-toggle="button" title="Show/Hide Password" tabindex="-1">
+          <span class="fa fa-eye"></span>
+        </button>
+      </span>
+    </div>
+    {{field_errors(field)}}
+    {{field_description(field)}}
+  </div>
+# endmacro
+
+
+# macro number_field(field)
+  {{input_field(field, type='number', **kwargs)}}
+# endmacro
+
+
+# macro date_field(field)
+  {{input_field(field, type='date', **kwargs)}}
+# endmacro
+
+
+# macro datetime_field(field)
+  {{input_field(field, type='datetime-local', **kwargs)}}
+# endmacro
+
+
+# macro email_field(field)
+  {{input_field(field, type='email', **kwargs)}}
+# endmacro
+
+
+# macro select_field(field)
+  {{input_field(field, **kwargs)}}
+# endmacro
+
+
+# macro hidden_field(field)
+  {{field(type='hidden', **kwargs)}}
+# endmacro
+
+
+# macro textarea_field(field, rows=4)
+  <div class="form-group {{'has-error' if field.errors}}">
+    {{field.label(class='control-label')}}
+    {{field_optional(field)}}
+    {{field(class='form-control', rows=rows, **kwargs)}}
+    {{field_errors(field)}}
+    {{field_description(field)}}
+  </div>
+# endmacro
+
+
+# macro checkbox_field(field)
+  <div class="checkbox {{'has-error' if field.errors}}">
+    <label class="{{'text-muted' if 'disabled' in kwargs}}">
+      {{field(**kwargs)}} {{field.label.text}}
+    </label>
+    {{field_errors(field)}}
+    {{field_description(field)}}
+  </div>
+# endmacro
+
+
+# macro list_input_field(field, type)
+  <div class="form-group {{'has-error' if field.errors}}">
+    {{field.label(class='control-label')}}
+    {{field_optional(field)}}
+    {{field_description(field)}}
+    # for key, value in field.choices
+      <div class="{{type}}">
+        <label>
+          <input type="{{type}}" name="{{field.name}}" value="{{key}}"
+            # if field.data and key in field.data
+              checked
+            # endif
+          > {{value}}
+        </label>
+      </div>
+    # endfor
+    {{field_errors(field)}}
+  </div>
+# endmacro
+
+
+# macro multiple_checkbox_field(field)
+  {{list_input_field(field, 'checkbox')}}
+# endmacro
+
+
+# macro radio_field(field)
+  {{list_input_field(field, 'radio')}}
+# endmacro
+
+
+# macro recaptcha_field(field)
+  # if field
+    <div class="form-group recaptcha {{'has-error' if field.errors}}">
+      {{field.widget.server}}
+      {{field.widget.script_url}}
+      {{field.widget.frame_url}}
+      {{field}}
+      {{field_errors(field)}}
+      {{field_description(field)}}
+    </div>
+  # endif
+# endmacro
+
+
+# macro panel_fields(name, fields, help)
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent=".panel-group" href="#{{slugify(name)}}">{{name}}</a>
+        <span class="fa fa-check pull-right {{'hide' if not check_form_fields(fields)}}"></span>
+      </h4>
+    </div>
+    <div id="{{slugify(name)}}" class="panel-collapse collapse">
+      <div class="panel-body">
+        # for field in (fields if is_iterable(fields) else [fields]):
+          {{text_field(field)}}
+        # endfor
+        # if help
+          <p class="help-block">{{help|safe}}</p>
+        # endif
+      </div>
+    </div>
+  </div>
+# endmacro
+
+
+# macro data_loading_text(text='Please wait..', icon='fa fa-spin fa-spinner')
+  # if icon
+    data-loading-text="<span class='{{icon}}'></span> {{text}}"
+  # else
+    data-loading-text="{{text}}"
+  # endif
+# endmacro

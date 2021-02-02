@@ -1,0 +1,61 @@
+#help-section {
+    display: block;
+    width: 40rem;
+    padding-bottom: var(--gap);
+    overflow-y: auto;
+}
+
+#help-section-navbar {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: var(--gap);
+    justify-items: center;
+    margin-top: var(--gap);
+    padding: var(--small-gap) var(--gap) var(--gap) var(--gap);
+    background-color: var(--foreground-color);
+}
+
+.help-section-title {
+    display: block;
+    margin-top: var(--gap);
+    padding: var(--gap);
+    color: var(--secondary-highlight-color);
+    background-color: var(--foreground-color);
+}
+
+.help-section-paragraph,
+.help-section-list {
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+    padding-bottom: var(--gap);
+}
+
+.help-section-paragraph {
+    display: block;
+    background-color: var(--foreground-color);
+}
+
+.help-section-list {
+    background-color: var(--foreground-color);
+    display: block;
+}
+
+.help-section-list > li {
+    padding-bottom: var(--small-gap);
+}
+
+.help-section-list > li:last-child {
+    padding-bottom: 0;
+}
+table {
+    font-size: 1.3rem;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    font-size: 1.3rem;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}

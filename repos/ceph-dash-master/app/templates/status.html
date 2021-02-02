@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Ceph Dashboard</title>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.slate.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/ceph.dash.css') }}" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/icon.png') }}" />
+</head>
+<body>
+  <div class="container">
+    <div class="well">
+      <h1>Ceph Dashboard</h1>
+      <p>
+        <!--show warning icon if data is getting to old-->
+        <span id="last_update" style="display:none;" class="glyphicon glyphicon-warning-sign icon-warn"></span>
+        <!--add cluster fsid for informational purposes-->
+        <small id="cluster_fsid"></small>
+      </p>
+    </div>
+
+    <!--START CEPH OVERALL CLUSTER STATUS-->
+    <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster Overall Status
+        </h3>
+      </div>
+      <!--here we add the overall status-->
+      <div class="panel-body" id="overall_status"></div>
+    </div>
+    <!--END CEPH OVERALL CLUSTER STATUS-->
+
+    <!--START CEPH MONITOR STATUS-->
+    <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster Monitor Status
+        </h3>
+      </div>
+      <div class="panel-body">
+        <!--here we add the monitor status-->
+        <div class="row" id="monitor_status"></div>
+      </div>
+    </div>
+    <!--END CEPH MONITOR STATUS-->
+
+    <!--START CEPH OSD STATUS-->
+    <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster OSD Status
+        </h3>
+      </div>
+      <div class="panel-body" align="center">
+
+        <!--here we add warnings about nearfull / full osds-->
+        <div id="osd_warning"></div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="panel panel-info">
+              <div class="panel-heading">Total</div>
+              <!--here we add the total number of osds-->
+              <div class="panel-body" id="num_osds"></div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="panel panel-success">
+              <div class="panel-heading">In</div>
+              <!--here we add the number of osds with IN state-->
+              <div class="panel-body" id="num_in_osds"></div>
+            </div>
+          </div>  
+
+          <div class="col-md-3">
+            <div class="panel panel-success">
+              <div class="panel-heading">Up</div>
+              <!--here we add the number of osds with UP state-->
+              <div class="panel-body" id="num_up_osds"></div>
+            </div>
+          </div>  
+
+          <div class="col-md-3">
+            <div class="panel panel-danger">
+              <div class="panel-heading">Unhealthy</div>
+              <!--here we count the osds with and unhealthy state-->
+              <div class="panel-body" id="unhealthy_osds"></div>
+            </div>
+          </div>  
+        </div>
+
+      </div>
+    </div>
+    <!--END CEPH OSD STATUS-->
+
+    <!--START GRAPHITE METRICS-->
+    {% if "graphite" in config or "influxdb" in config %}
+    <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster Performance Metrics
+        </h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          {% for index in config.get('graphite', {}).get('metrics', []) %}
+            <div class="col-md-6">
+              <div id="graphite{{ loop.index }}" class="graphite"></div>
+            </div>
+          {% endfor %}
+          {% for index in config.get('influxdb', {}).get('metrics', []) %}
+            <div class="col-md-6">
+              <div id="influxdb{{ loop.index }}" class="influxdb"></div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!--END CEPH OSD STATUS-->
+
+
+    <!--START CEPH PLACEMENTGROUP STATUS-->
+    <div class="panel panel-primary">
+      <div class="panel-heading cd-collapsable">
+        <h3 class="panel-title">
+          Ceph Cluster Placement Group Status
+        </h3>
+      </div>
+      <div class="panel-body">
+
+        <div class="row">
+
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Storage</div>
+              <!--here we place the fancy storage usage gauge-->
+              <div class="panel-body" id="utilization" style="height:385px"></div>
+              <div class="panel-footer">
+                <strong>
+                  <!--here we place the text information about storage usage-->
+                  <center id="utilization_info">
+                  </center>
+                </strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Write / second</div>
+              <div class="panel-body" align="center">
+                <!--here we add the bytes written per second-->
+                <h1 id="write_bytes"></h1>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">Read / second</div>
+              <div class="panel-body" align="center">
+                <!--here we add the bytes read per second-->
+                <h1 id="read_bytes"></h1>
+              </div>
+            </div>
+
+            <div class="panel panel-default" id="ops_container">
+              <div class="panel-heading">Operations / second</div>
+              <div class="panel-body" align="center">
+                <!--here we add the operations per second-->
+                <h1 id="operations_per_second"></h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6" id="write_ops_container">
+                <div class="panel panel-default" >
+                  <div class="panel-heading">Write ops / second</div>
+                  <div class="panel-body" align="center">
+                    <!--here we add the operations per second-->
+                    <h1 id="write_operations_per_second"></h1>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" id="read_ops_container">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Read ops / second</div>
+                  <div class="panel-body" align="center">
+                    <!--here we add the operations per second-->
+                    <h1 id="read_operations_per_second"></h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">PG Status</div>
+              <!--here we place the fancy pg donut chart-->
+              <div class="panel-body" id="pg_status" style="max-width:300px;height: 385px;"></div>
+              <div class="panel-footer">
+                <strong>
+                  <!--here we add the total number of placement groups-->
+                  <center id="pg_status_info">
+                  </center>
+                </strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!--START CEPH RECOVERING SECTION-->
+        <div class="row">
+          <div class="col-md-4" id="recovering_bytes"></div>
+          <div class="col-md-4" id="recovering_keys"></div>
+          <div class="col-md-4" id="recovering_objects"></div>
+        </div>
+        <!--END CEPH RECOVERING SECTION-->
+
+      </div>
+    </div>
+    <!--END CEPH PLACEMENTGROUP STATUS-->
+
+  </div>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/globalize.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/dx.chartjs.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.flot.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.flot.time.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.flot.byte.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.flot.tooltip.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/ceph.dash.js') }}"></script>
+
+</body>
+</html>

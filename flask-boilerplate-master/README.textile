@@ -1,0 +1,40 @@
+h1. Flask Boilerplate Project
+
+h2. Introduction
+
+I wanted a super-quick way to create new websites with all my favorite code settings and customizations. Hence, I created this boilerplate project based on the "Flask (Python) microwebframework":http://flask.pocoo.org.
+
+Why Flask-Boilerplate? Because you get:
+
+# Good code defaults - for example, (1) it uses "packages and modules":http://flask.pocoo.org/docs/patterns/packages/ by default so that controllers and models are organized into a standard directory structure and split into multiple files, (2) it merges and compresses your various CSS files into one, your multiple JS files into one, for performance reasons. And so on.
+# New Project script - sets up everything for you right from generating the secret key (for secure cookies) to integrating memcache (including mimicing @Rails.cache.fetch@ with helpers).
+# Deploy to a Ubuntu server with a single command - sets up everything for you, including @virtualenv@, etc.
+#* NOTE: The installation script works specifically for Ubuntu Linux, Apache, mod_wsgi only.
+# jQuery - no webapp is complete without it.
+# Grid system, via the "960 Grid System":http://960.gs - so that you can get started with your UI quickly.
+# HTML5 goodness, via "HTML5 Boilerplate":http://html5boilerplate.com - for a good base UI.
+
+h2. Get Started
+
+@git clone git://github.com/swaroopch/flask-boilerplate.git mynewapp@
+@cd mynewapp@
+@pip install Fabric@
+@fab code_init:mynewapp.com@
+@fab env_setup@
+Write your code in @flask_application/controllers/frontend.py@
+@fab server@
+
+When you're ready to deploy your code to a server:
+
+@fab server_setup@ # once per server
+@fab deploy@
+
+When you clone a repo and want to run it:
+
+@fab env_setup@
+@fab server@
+
+h2. Also See
+
+* "Mobile browser detection":https://github.com/shichuan/mobile-html5-boilerplate/wiki/Server-side-redirection-script to redirect users to a version of the website that uses the "Mobile HTML5 Boilerplate":http://html5boilerplate.com/mobile/.
+* API wrapper like "simpleapi":https://github.com/flosch/simpleapi.

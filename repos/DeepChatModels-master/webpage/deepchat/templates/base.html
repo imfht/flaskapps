@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- block head:
+    - defines the head element for this html file and can be used by all children.
+    - Children can either override or add to it.
+    - See index.html for a simple example. -->
+  {% block head %}
+
+    {% block metas %}
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="sentient-machine">
+    {% endblock metas %}
+
+    <title>
+      {% block title %}
+        Deep Chat Models
+      {% endblock title %}
+    </title>
+
+    <!-- Lil yelcornell_bot bot favicon -->
+    <link href="/static/img/favicon.ico" rel="icon" type="image/x-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" id="theme-link"
+          href="{{ url_for('static', filename='css/lumen-bootstrap.min.css') }}">
+
+    <!-- Custom styles for this template (I see ur overrule with an overrule. -->
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='css/theme.css') }}">
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}"
+          rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+          rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script"
+          rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic"
+          rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+          rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato"
+          rel="stylesheet" type="text/css" >
+
+    <!-- CSS Modifications -->
+    <link rel="stylesheet" type="text/css"
+          href="{{ url_for('static', filename='css/style_modifications.css') }}">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+
+  {% endblock head %}
+</head>
+
+<body id="page-top" class="index">
+
+<!-- Navigation -->
+{% block navbar %}
+  {%  set navigation_bar = [
+        ('/', 'index', 'Home'),
+        ('/plots', 'plots', 'Plots'),
+        ('/about', 'about', 'About')
+    ] -%}
+  {%  set active_page = active_page|default('index') -%}
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          {% for _ in range(3) %}
+            <span class="icon-bar"></span>
+          {% endfor %}
+        </button>
+        <a class="navbar-brand" href="/">DeepChatModels</a>
+      </div>
+
+      <div id="navbar" class="navbar-collapse collapse">
+
+        <ul class="nav navbar-nav">
+          {%  for href, id, caption in navigation_bar %}
+            <li {% if id == active_page %} class="active" {% endif %}>
+              <a href="{{ href|e }}">{{ caption|e }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        {% block nav_session_user %}
+        <ul class="nav navbar-nav navbar-right">
+        <span id='nav-session-user' class="navbar-text">
+          <!-- user_form.js injects name of current user here -->
+        </span>
+        </ul>
+        {% endblock nav_session_user %}
+
+      </div>  <!-- end: navbar -->
+
+    </div>  <!-- end: container -->
+  </nav>
+{% endblock navbar %}
+
+<!-- Declare a block with name 'content' for derived templates. -->
+{% block content %}
+  <div class="container">
+    <!-- Display any flash() message calls from e.g. views.py -->
+    {%  with messages = get_flashed_messages() %}
+      {%  if messages %}
+        <div class="alert alert-info">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>  <!-- end: container -->
+
+  <!-- Inject derived pages' content inside the following container. -->
+  <div class="container">
+    {% block page_content %}
+    {% endblock page_content %}
+  </div>
+{%  endblock content %}
+
+
+{% block scripts %}
+  <!-- Recommended by flask docs. -->
+  <script>
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      var $INDEX_URL = "{{ url_for('main.index', _scheme='https', _external=True ) }}";
+  </script>
+
+
+  <!-- Latest Bootstrap JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.easing.1.3.js') }}"></script>
+  <!--<script src="{{ url_for('static', filename='vendor/plugins/tether.min.js') }}"></script>-->
+
+  <!-- Contact Form JavaScript -->
+  <script src="{{ url_for('static', filename='js/jqBootstrapValidation.js') }}">
+  </script>
+
+
+{% endblock scripts %}
+
+</body>
+</html>

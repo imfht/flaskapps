@@ -1,0 +1,24 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.show-only-filter {
+  display: flex;
+  align-items: center;
+  width: 300px;
+
+  &:not(:nth-last-child(2)) {
+    margin-bottom: 10px;
+  }
+
+  :global(.toggle.checkbox) {
+    margin-right: 10px;
+  }
+
+  :global(.icon) {
+    height: 100%;
+  }
+}

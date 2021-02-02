@@ -1,0 +1,108 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+<!-- <form method="POST" action="" id='new-post'>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            
+            <br><br><br><br>
+            <div class="row">
+                <button type="submit" class="btn btn-primary" name="publish" value="publish">submit</button>
+                
+            </div>
+        
+        </div>
+    </div>
+            
+    
+</form> -->
+<div class="col-md-6 col-md-offset-1">
+    <h3>Edit</h3>
+    <hr>
+    {% import "_form.html" as forms %}
+    <form method="POST" action="">
+        {{ forms.render(form) }}
+
+        <div class="form-group">
+            <label for="post_type">Post Type</label>
+            <!-- <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email"> -->
+            <select class="form-control" id="post_type" name="post_type">
+                {% for post_type in post_types %}
+                <option value="{{ post_type }}" {% if post_type==post.post_type %}selected{% endif %} >{{ post_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="publish_time">Publish Time</label>
+            <div class='input-group date' id='publish_time'>
+                <input type='text' class="form-control" name="publish_time" value="{{ post.pub_time.strftime('%Y-%m-%d %H:%M:%S') }}" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="update_time">Update Time</label>
+            <div class='input-group date' id='update_time'>
+                <input type='text' class="form-control" name="update_time" value="{{ post.update_time.strftime('%Y-%m-%d %H:%M:%S') }}" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="user" value="user">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript">
+    // using jQuery
+    
+    $('.tag').on('click', function(event){
+        var tag = $(this).data('tag');
+        // alert(category);
+        var elem = document.getElementById("tags_str");
+        if(elem.value==''){
+            elem.value = tag;
+        }else{
+            // elem.value += ', ';
+            // elem.value += tag;
+            elem.value = [elem.value, tag].join(', ')
+        }
+
+        // $(this).remove();
+        return false
+    });
+
+    $('.category-name').on('click', function(event){
+        var category = $(this).data('category');
+        // alert(category);
+        var elem = document.getElementById("category");
+        elem.value = category;
+
+        return false
+    });
+
+    $(function () {
+        $('.date').datetimepicker({format:'YYYY-MM-DD HH:mm:ss'});
+    }); 
+
+</script>
+{% endblock %}

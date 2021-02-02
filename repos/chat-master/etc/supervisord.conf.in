@@ -1,0 +1,36 @@
+[unix_http_server]
+file=/tmp/supervisor_comet.sock ; path to your socket file
+
+;[inet_http_server]
+;port = 127.0.0.1:9001
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor_comet.sock ; use a unix:// URL for a unix socket
+;[supervisorctl]
+;serverurl = http://localhost:9001
+
+
+[supervisord]
+logfile = ${buildout:directory}/log/supervisor/supervisord.log
+logfile_maxbytes = 50MB
+logfile_backups = 10
+loglevel = info
+pidfile = ${buildout:directory}/tmp/supervisord.pid
+nodaemon = false
+
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory=supervisor.rpcinterface:make_main_rpcinterface
+
+#[include]
+#files = *.supervisor
+
+[program:web]
+command=${buildout:directory}/bin/python ${buildout:directory}/src/app.py
+stderr_logfile = ${buildout:directory}/log/supervisor/web-stderr.log
+stdout_logfile = ${buildout:directory}/log/supervisor/web-stdout.log
+
+[program:gc]
+command=${buildout:directory}/bin/python ${buildout:directory}/src/gc.py
+stderr_logfile = ${buildout:directory}/log/supervisor/gc-stderr.log
+stdout_logfile = ${buildout:directory}/log/supervisor/gc-stdout.log

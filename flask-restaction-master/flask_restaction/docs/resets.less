@@ -1,0 +1,103 @@
+html {
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: @font-family;
+    font-size: @font-size;
+    line-height: @line-height;
+    min-width: 320px;
+    color: @color-text-dark;
+    background-color: @color-background-light;
+}
+
+a {
+    text-decoration: none;
+    color: @color-link;
+
+    &:hover {
+        cursor: pointer;
+        color: darken(@color-link, 15%);
+    }
+
+    &:active,
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+code, pre {
+    background-color: @color-background-gray;
+}
+
+code {
+    font-family: @font-family-monospace;
+    padding: @padding-small;
+}
+
+pre {
+    font-size: @font-size-small;
+    line-height: @line-height-small;
+    overflow: auto;
+    padding: @width-gap;
+    border-radius: 2px;
+
+    code {
+        background-color: transparent;
+        padding: 0;
+
+    }
+}
+
+blockquote {
+    padding-left: @width-gap;
+    border-left: @width-gap / 3 solid @color-text-gray;
+}
+
+@media (max-width: @width-breakpoint) {
+    pre {
+        padding: @padding-small;
+    }
+    blockquote {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2 * @width-gap;
+    margin-bottom: @width-gap;
+}
+
+h1 { font-size: floor(2.6 * @font-size); }
+h2 { font-size: floor(2.15 * @font-size); }
+h3 { font-size: ceil(1.7 * @font-size); }
+h4 { font-size: ceil(1.25 * @font-size); }
+h5 { font-size: ceil(1.0 * @font-size); }
+h6 { font-size: ceil(0.85 * @font-size); }
+
+p,
+blockquote,
+table,
+hr,
+dl,
+ul,
+ol,
+pre,
+address,
+figure {
+  margin-top: @width-gap;
+  margin-bottom: @width-gap / 2;
+}

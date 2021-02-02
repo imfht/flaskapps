@@ -1,0 +1,39 @@
+# Everything needed in production
+
+# Flask
+Flask==1.1.2
+MarkupSafe==1.1.1
+Werkzeug==1.0.1
+Jinja2==2.11.2
+itsdangerous==1.1.0
+
+# Database
+Flask-SQLAlchemy==2.4.4
+SQLAlchemy==1.3.22
+
+# Migrations
+Flask-Migrate==2.6.0
+
+# Deployment
+gevent==21.1.1
+gunicorn>=19.9.0
+supervisor==4.2.1
+
+# Assets
+Flask-Assets==0.12
+cssmin==0.2.0
+jsmin==2.2.2
+
+# Caching
+Flask-Caching>=1.7.2
+
+# Pysolar
+Pysolar==0.9
+
+#pytz
+pytz>=2017.2
+
+python-dateutil>=2.6.1
+
+#Sentry
+sentry-sdk==0.19.5

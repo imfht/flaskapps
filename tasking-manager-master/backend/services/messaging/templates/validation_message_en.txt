@@ -1,0 +1,9 @@
+Hi [USERNAME],<br />
+<br />
+The [TASK_LINK] you marked as "Completely Mapped" was just validated!<br />
+<br />
+This is an automated message, the person who validated it hopefully shared some feedback with you.<br />
+<br />
+Thank you very much for mapping!<br />
+[ORG_NAME]<br />
+<br />

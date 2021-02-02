@@ -1,0 +1,72 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    List of Users
+{% endblock %}
+
+{% block content %}
+<p>
+    <input type="text" placeholder="Quick filter" id="filter" data-filter=".user-row" />
+</p>
+
+<form action="{{ url_for('admin_users_form') }}" method="post">
+
+<table id="checkbox-toggle-table">
+    <tr>
+        <th></th>
+        <th>Username</th>
+        <th>Real Name</th>
+        <th>eMail</th>
+        <th>Registered since</th>
+        <th>Location</th>
+        <th>Flags</th>
+        <th></th>
+    </tr>
+{% for user in users %}
+    <tr class="checkbox-toggle user-row">
+        <td>
+            <input type="checkbox" name="user-{{ user.id }}" style="vertical-align: top;"/>
+        </td>
+        <td>
+            <a href="{{ url_for('admin_user', username = user.username) }}">{{ user.username }}</a>
+        </td>
+        <td>{{ user.real_name or "n/a" }}</td>
+        <td><a href="mailto:{{ user.email}}">{{ user.email }}</a></td>
+        <td>{{ user.registered | formattime }}</td>
+        <td>{{ user.get_location() }}</td>
+        <td>
+            {% if user.is_admin %}
+                <span class="flags red">ADMIN</span>
+            {% endif %}
+
+            {% if user.is_deleted %}
+                <span class="flags">DELETED</span>
+            {% endif %}
+
+            {% if not user.is_verified %}
+                <span class="flags orange">UNVERIFIED</span>
+            {% endif %}
+
+            {% if user.avatar %}
+                <span class="flags green">CUSTOM AVATAR</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{ user.url() }}"><i class="icon-eye-open"></i></a>
+            <a href="{{ url_for('admin_user', username = user.username) }}"><i class="icon-edit"></i></a>
+        </td>
+    </tr>
+{% endfor %}
+<tr>
+    <th colspan="8" class="actions">
+        <input type="submit" name="submit" value="Toggle Deleted" class="btn btn-small"/>
+        <input type="submit" name="submit" value="Toggle Admin" class="btn btn-small"/>
+        <input type="submit" name="submit" value="Toggle Verified" class="btn btn-small"/>
+        <span style="margin-left:10px;" id="table-count">0</span> users selected
+    </th>
+</tr>
+</table>
+
+</form>
+
+{% endblock %}

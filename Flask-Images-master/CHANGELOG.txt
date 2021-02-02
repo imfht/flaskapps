@@ -1,0 +1,73 @@
+
+3.0.2
+-----
+- Fix a couple Python3 dict API changes.
+- More forgiving USM syntax.
+- `class_` passed through as image attribute.
+- A bit more precision in path escaping.
+
+3.0.1
+-----
+- Fix Python2 regression in HTTP error handling.
+
+3.0.0
+-----
+- Python3 support.
+- ValueError is raised (instead of whatever different versions of Flask/werkzeuf raise) when `mode` kwarg is specified along with `images.{mode}` route.
+- Fix for changing location of functions in dependencies. (#50)
+- Fix If-Modified-Since which erroneously had microseconds. (#37)
+
+2.1.2
+-----
+- Fix for local cache not taking "enlarge" parameter into account.
+
+2.1.1
+-----
+- Fix for Cache-Control header to be a string (as all headers should be).
+
+2.1.0
+-----
+- Retina/HiDPI support (still alpha; the API is subject to change).
+- Transformation support (still alpha; the API is subject to change).
+- `url_for(..., _external=True)` works.
+- `enlarge=False` will not enlarge images.
+- `resized_img_attrs(...)` to calculate final width and height.
+
+2.0.0
+-----
+- INCOMPATIBILITY: Many things moved to flask.ext.images.core; `Images` and
+  `resized_img_src` remain.
+- Compatible with Flask 0.9 (from 0.10).
+
+1.1.5
+-----
+- Background colours are parsed by PIL; hex and html colours are now allowed.
+- Fix for extension parsing bugs with URLs.
+
+1.1.4
+-----
+- Fix regression introduced by 1.1.3 (such that remote images did not work).
+
+1.1.3
+-----
+- Fix 3 security bugs, each of which would allow for reading any image on disk.
+
+1.1.2
+-----
+- Depend on Pillow OR PIL.
+
+1.1.1
+-----
+- Fix bug stopping remote images from working.
+
+1.1.0
+-----
+- `url_for('images', **kw)` to ease transition from static files.
+- Compatible with Pillow.
+
+1.0.0
+-----
+- First official release!
+- Removed lots of backwards compatibility with my own sites:
+    - restricted default path to ['static'];
+    - removed synonyms for `resized_img_src`.

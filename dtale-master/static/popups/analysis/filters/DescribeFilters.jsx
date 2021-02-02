@@ -1,0 +1,195 @@
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
+
+import ButtonToggle from "../../../ButtonToggle";
+import { exports as gu } from "../../../dtale/gridUtils";
+import { renderCodePopupAnchor } from "../../CodePopup";
+import CategoryInputs from "./CategoryInputs";
+import { ANALYSIS_AGGS, TITLES } from "./Constants";
+import { default as GeoFilters, hasCoords, loadCoordVals } from "./GeoFilters";
+import OrdinalInputs from "./OrdinalInputs";
+import TextEnterFilter from "./TextEnterFilter";
+
+function wrapFilterMarkup(filterMarkup) {
+  return (
+    <div className="form-group row small-gutters mb-3 mt-3">
+      <div className="row">{filterMarkup}</div>
+    </div>
+  );
+}
+
+function buildState(props) {
+  return {
+    type: "boxplot",
+    bins: "20",
+    top: (props.top || 100) + "",
+    ordinalCol: null,
+    ordinalAgg: _.find(ANALYSIS_AGGS, { value: "sum" }),
+    categoryCol: null,
+    categoryAgg: _.find(ANALYSIS_AGGS, { value: "mean" }),
+    ...loadCoordVals(props.selectedCol, props.cols),
+  };
+}
+
+class DescribeFilters extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = buildState(props);
+    this.buildChart = this.buildChart.bind(this);
+    this.buildChartTypeToggle = this.buildChartTypeToggle.bind(this);
+    this.buildFilter = this.buildFilter.bind(this);
+    this.buildGeoFilter = this.buildGeoFilter.bind(this);
+    this.updateOrdinal = this.updateOrdinal.bind(this);
+    this.updateCategory = this.updateCategory.bind(this);
+  }
+
+  shouldComponentUpdate(newProps, newState) {
+    const props = ["cols", "dtype", "code", "details"];
+    if (!_.isEqual(_.pick(this.props, props), _.pick(newProps, props))) {
+      return true;
+    }
+    return !_.isEqual(this.state, newState);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!_.isEqual(this.props.details, prevProps.details)) {
+      this.setState(buildState(this.props));
+    }
+  }
+
+  buildChartTypeToggle() {
+    const { dtype, cols, selectedCol } = this.props;
+    const colType = gu.findColType(dtype);
+    const options = [{ label: TITLES.boxplot, value: "boxplot" }];
+    if (_.includes(["float", "int"], colType)) {
+      options.push({ label: TITLES.histogram, value: "histogram" });
+    }
+    if (colType === "float") {
+      options.push({ label: TITLES.categories, value: "categories" });
+    } else if (colType == "string") {
+      options.push({
+        label: TITLES.word_value_counts,
+        value: "word_value_counts",
+      });
+      options.push({ label: TITLES.value_counts, value: "value_counts" });
+    } else {
+      options.push({ label: TITLES.value_counts, value: "value_counts" });
+    }
+    if (hasCoords(selectedCol, cols)) {
+      options.push({ label: TITLES.geolocation, value: "geolocation" });
+    }
+    const update = value => this.setState({ type: value }, this.buildChart);
+    return <ButtonToggle options={options} update={update} defaultValue={this.state.type} />;
+  }
+
+  buildFilter(prop) {
+    const propagateState = state => this.setState(state);
+    return (
+      <TextEnterFilter
+        {...{
+          key: "prop",
+          prop,
+          buildChart: this.buildChart,
+          dtype: this.props.dtype,
+          propagateState,
+          defaultValue: this.state[prop],
+        }}
+      />
+    );
+  }
+
+  buildGeoFilter() {
+    const { selectedCol, cols } = this.props;
+    const { latCol, lonCol } = this.state;
+    const update = val => this.setState(val, this.buildChart);
+    return <GeoFilters col={selectedCol} columns={cols} {...{ latCol, lonCol, update }} />;
+  }
+
+  buildChart() {
+    this.props.buildChart(this.state);
+  }
+
+  updateOrdinal(prop, val) {
+    const currState = _.assignIn({}, _.pick(this.state, ["ordinalCol", "ordinalAgg", "cleaners"]), { [prop]: val });
+    const cleanerChange = _.get(currState, "cleaners") !== _.get(this.state, "cleaners");
+    this.setState(currState, () => {
+      if ((currState.ordinalCol && currState.ordinalAgg) || cleanerChange) {
+        this.buildChart();
+      }
+    });
+  }
+
+  updateCategory(prop, val) {
+    const currState = _.assignIn({}, _.pick(this.state, ["categoryCol", "categoryAgg"]), { [prop]: val });
+    this.setState(currState, () => {
+      if (currState.categoryCol && currState.categoryAgg) {
+        this.buildChart();
+      }
+    });
+  }
+
+  render() {
+    if (_.isNull(this.props.type)) {
+      return null;
+    }
+    const { code, dtype } = this.props;
+    const colType = gu.findColType(dtype);
+    let filterMarkup = null;
+    if (this.state.type === "boxplot") {
+      filterMarkup = null;
+    } else if (this.state.type === "geolocation") {
+      filterMarkup = wrapFilterMarkup(this.buildGeoFilter());
+    } else if ("int" === colType) {
+      // int -> Value Counts or Histogram
+      if (this.state.type === "histogram") {
+        filterMarkup = wrapFilterMarkup(this.buildFilter("bins"));
+      } else {
+        filterMarkup = wrapFilterMarkup([
+          this.buildFilter("top"),
+          <OrdinalInputs key="ordinal" colType={colType} updateOrdinal={this.updateOrdinal} {...this.props} />,
+        ]);
+      }
+    } else if ("float" === colType) {
+      // floats -> Histogram or Categories
+      if (this.state.type === "histogram") {
+        filterMarkup = wrapFilterMarkup(this.buildFilter("bins"));
+      } else {
+        filterMarkup = wrapFilterMarkup([
+          this.buildFilter("top"),
+          <CategoryInputs key="category" updateCategory={this.updateCategory} {...this.props} />,
+        ]);
+      }
+    } else {
+      // date, string, bool -> Value Counts
+      filterMarkup = wrapFilterMarkup([
+        this.buildFilter("top"),
+        <OrdinalInputs key="ordinal" colType={colType} updateOrdinal={this.updateOrdinal} {...this.props} />,
+      ]);
+    }
+    return (
+      <React.Fragment>
+        <div className="form-group row small-gutters mb-5 mt-3">
+          <div className="col p-0 type-toggle">{this.buildChartTypeToggle()}</div>
+          <div className="col-auto">
+            <div>{renderCodePopupAnchor(code, TITLES[this.state.type])}</div>
+          </div>
+        </div>
+        {filterMarkup}
+      </React.Fragment>
+    );
+  }
+}
+DescribeFilters.displayName = "DescribeFilters";
+DescribeFilters.propTypes = {
+  selectedCol: PropTypes.string,
+  cols: PropTypes.array,
+  dtype: PropTypes.string,
+  code: PropTypes.string,
+  type: PropTypes.string,
+  top: PropTypes.number,
+  buildChart: PropTypes.func,
+  details: PropTypes.object,
+};
+
+export { DescribeFilters };

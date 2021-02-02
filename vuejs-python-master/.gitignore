@@ -1,0 +1,6 @@
+*.pyc
+*.log
+node_modules
+# pycharm friendly
+.idea
+.vscode

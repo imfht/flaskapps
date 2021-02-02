@@ -1,0 +1,2498 @@
+[
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4598
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:bae343fd",
+        "size": 4598,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_HTMHTParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7000",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_HTMHTParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4595
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:4d3a4346",
+        "size": 4595,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_TauPlusX.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7001",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_TauPlusX",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6103
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:ffe428e8",
+        "size": 6103,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_MuOniaParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7002",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_MuOniaParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4592
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:ef6e41e0",
+        "size": 4592,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_JetHT.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7003",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_JetHT",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4049
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:65068dea",
+        "size": 4049,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_MuEG.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7004",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_MuEG",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4055
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:81c49003",
+        "size": 4055,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_VBF1Parked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7005",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_VBF1Parked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 5587
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:62f285b2",
+        "size": 5587,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_Commissioning.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7006",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_Commissioning",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4050
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:1d228e6c",
+        "size": 4050,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_MuHad.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7007",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_MuHad",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 8819
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2291816d",
+        "size": 8819,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_SingleMu.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7008",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_SingleMu",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4593
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:78df426e",
+        "size": 4593,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_JetMon.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7009",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_JetMon",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4050
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:0f318e6b",
+        "size": 4050,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_MuHad.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7010",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_MuHad",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4596
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:e82a43a5",
+        "size": 4596,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_PhotonHad.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7011",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_PhotonHad",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4596
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:f83343a6",
+        "size": 4596,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_PhotonHad.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7012",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_PhotonHad",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4590
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:fdb14106",
+        "size": 4590,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_MET.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7013",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_MET",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4591
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2634417e",
+        "size": 4591,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_BTag.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7014",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_BTag",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4057
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a296916f",
+        "size": 4057,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_DoublePhoton.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7015",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_DoublePhoton",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4054
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:96118ffe",
+        "size": 4054,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_BJetPlusX.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7016",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_BJetPlusX",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 7384
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:46b2e70e",
+        "size": 7384,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_MinimumBias.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7017",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_MinimumBias",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4063
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2c8d93b3",
+        "size": 4063,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_DoublePhotonHighPt.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7018",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_DoublePhotonHighPt",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6624
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:d5b9b73c",
+        "size": 6624,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_SingleElectron.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7019",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_SingleElectron",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6638
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:3b58d920",
+        "size": 6638,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_MuOnia.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7020",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_MuOnia",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4595
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:5d424347",
+        "size": 4595,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_TauPlusX.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7021",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_TauPlusX",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 5817
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:28d0cd30",
+        "size": 5817,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_HcalNZS.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7022",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_HcalNZS",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4056
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:784590e5",
+        "size": 4056,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_ElectronHad.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7023",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_ElectronHad",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6624
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:9791b72f",
+        "size": 6624,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_DoubleElectron.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7024",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_DoubleElectron",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4599
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:4a8f44fb",
+        "size": 4599,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_SinglePhoton.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7025",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_SinglePhoton",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 7384
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2be4e70d",
+        "size": 7384,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_MinimumBias.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7026",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_MinimumBias",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 5587
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:4f1e85b1",
+        "size": 5587,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_Commissioning.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7027",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_Commissioning",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4593
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:4871421b",
+        "size": 4593,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_NoBPTX.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7028",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_NoBPTX",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4591
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:3638417f",
+        "size": 4591,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_BTag.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7029",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_BTag",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4598
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:aad843fc",
+        "size": 4598,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_HTMHTParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7030",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_HTMHTParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6103
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:15d628e9",
+        "size": 6103,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_MuOniaParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7031",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_MuOniaParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4055
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:73ce9002",
+        "size": 4055,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_VBF1Parked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7032",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_VBF1Parked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 8768
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:c5a86b68",
+        "size": 8768,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_DoubleMuParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7033",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_DoubleMuParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4056
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:863c90e6",
+        "size": 4056,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_ElectronHad.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7034",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_ElectronHad",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4593
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:68d9426d",
+        "size": 4593,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_JetMon.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7035",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_JetMon",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4054
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:54a0901e",
+        "size": 4054,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_TauParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7036",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_TauParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6638
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2362d91f",
+        "size": 6638,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_MuOnia.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7037",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_MuOnia",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 8768
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a5686b67",
+        "size": 8768,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_DoubleMuParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7038",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_DoubleMuParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 8819
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:430a816e",
+        "size": 8819,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_SingleMu.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7039",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_SingleMu",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 5817
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:1427cd2f",
+        "size": 5817,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_HcalNZS.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7040",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_HcalNZS",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4593
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:5877421c",
+        "size": 4593,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_NoBPTX.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7041",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_NoBPTX",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4057
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:b08e9170",
+        "size": 4057,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_DoublePhoton.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7042",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_DoublePhoton",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6624
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:7fb1b72e",
+        "size": 6624,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_DoubleElectron.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7043",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_DoubleElectron",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 6624
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:ed99b73d",
+        "size": 6624,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_SingleElectron.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7044",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_SingleElectron",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4049
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:72f68deb",
+        "size": 4049,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_MuEG.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7045",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_MuEG",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4054
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:46ab901d",
+        "size": 4054,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_TauParked.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7046",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_TauParked",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4592
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:df6941df",
+        "size": 4592,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_JetHT.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7047",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_JetHT",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4599
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:3a8344fa",
+        "size": 4599,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_SinglePhoton.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7048",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_SinglePhoton",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4054
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:881c8ffd",
+        "size": 4054,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012B_BJetPlusX.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7049",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for RECO step reco_2012B_BJetPlusX",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4590
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:0dc34107",
+        "size": 4590,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_MET.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7050",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_MET",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The configuration file used in RECO data processing step.</p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 4063
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:3a8b93b4",
+        "size": 4063,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/reco_2012C_DoublePhotonHighPt.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "7051",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for RECO step reco_2012C_DoublePhotonHighPt",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration RECO"
+      ]
+    }
+  }
+]

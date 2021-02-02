@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "black",
+  "alias": "black",
+  "builds": [
+    { "src": "package.json", "use": "@now/next" }
+  ]
+}

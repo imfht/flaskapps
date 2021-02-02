@@ -1,0 +1,16 @@
+.idea/
+*.pyc
+db.sqlite
+.env
+.pytest_cache
+.vscode
+.DS_Store
+config
+static/node_modules
+db.sqlite-journal
+static/upload
+venv/
+.venv
+.coverage
+htmlcov
+adhoc

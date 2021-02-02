@@ -1,0 +1,47 @@
+{% extends "company/base.html" %}
+
+{% block title %}
+简历管理
+{% endblock %}
+
+{% block right %}
+<ul class="nav nav-tabs">
+  <li role="presentation" class="{% if status == '1' %}active{% endif %}"><a href="{{ url_for('company.resumes', status=1) }}">未处理</a></li>
+  <li role="presentation" class="{% if status == '3' %}active{% endif %}"><a href="{{ url_for('company.resumes', status=3) }}">面试</a></li>
+  <li role="presentation" class="{% if status == '2' %}active{% endif %}"><a href="{{ url_for('company.resumes', status=2) }}">不合适</a></li>
+</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>职位</th>
+      <th>姓名</th>
+      <th>投递时间</th>
+      <th>操作</th>
+    </tr>
+    <tbody>
+      {%for delivery in pagination.items %}
+      <tr>
+        <td>{{ delivery.job.name }}</td>
+        <td>{{ delivery.user.name }}</td>
+        <td>{{ delivery.created_at }}</td>
+        <td>
+            <div class="btn-group" role="group">
+              <a href="{{ delivery.resume }}" type="button" class="btn btn-default" title="简历">
+                  简历
+              </a>
+              <li type="button" class="btn btn-default dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  处理
+              </li>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url_for('company.resume_accept', delivery_id=delivery.id) }}">面试</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{ url_for('company.resume_reject', delivery_id=delivery.id) }}">不合适</a></li>
+              </ul>
+            </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

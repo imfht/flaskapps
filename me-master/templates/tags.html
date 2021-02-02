@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link href="{{ settings.MirrorSite }}/static/assets/google-code-prettify/desert.css" rel="stylesheet"/>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{{ settings.MirrorSite }}/static/assets/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var $container = $(".container-list");
+
+        var show_post = function(post, scrollto){
+            post.post_date = post.post_date.to_date();
+            post.updated_date = post.updated_date.to_date();
+
+            show_list_menu(post);
+
+            var $post = get_post_div(post);
+
+            $post = build_post_panel($post, post);
+
+            build_thumbnails($(".post-thumbnails", $post), post, "thumbnails_"+post.id, ".post-thumbnails");
+
+            build_post_body($post, post);
+
+            reset_scroll();
+            $post.show();
+            scrollto && $post.scrollto(120).addClass("active");
+        };
+
+        var get_post_div = function(post){
+            var $post = $("#post_"+post.id);
+            //$post.remove();
+            //$post = $("#post_"+post.id);
+            if ($post.length <= 0){
+                $post = $("#post_template").clone();
+
+                var found = false;
+                if (!found){
+                    $container.append($post);
+                }
+
+                $post.attr("id", "post_{0}".format(post.id));
+                var $comments_panel = $(".comments_panel", $post);
+                $(".cmdbar .comment", $post).click(function(){
+                    $comments_panel.show();
+                    var comment = new Comment(md2html);
+                    comment.show_comments($comments_panel,  post.id);
+                });
+
+                $(".cmdbar .stats", $post).click(function(){
+                    var $this = $(this);
+                    var $icon = $this.find("i").clone();
+                    $.json_action("stats",{
+                        stats_type: $.toJSON($this.attr("stats_type")),
+                        id: $.toJSON(post.id),
+                        oper: $.toJSON($this.attr("oper")),
+                        name: $.toJSON($this.attr("name"))
+                    },function(resp){
+                        $this.empty();
+                        $this.append($icon);
+                        $this.append(resp.stats[$this.attr("name")]);
+                    },function(err){
+                        bootbox.alert(err);
+                    });
+                    $this.unbind("click");
+                });
+            }
+            return $post;
+        };
+
+        var $list_menu = $(".list-menu");
+
+        var get_list_menu = function(post){
+            var $menu = $("#list_menu_"+post.id);
+            if ($menu.length <= 0){
+                $menu = $("#list_menu_template").clone();
+                $menu.attr("id", "list_menu_{0}".format(post.id));
+                $list_menu.append($menu);
+            }
+            return $menu;
+        };
+        var show_list_menu = function(post){
+            var $menu = get_list_menu(post);
+
+            $("a", $menu).attr("href", "#post_"+post.id);
+            $(".name", $menu).text(post.title);
+            $(".post-date", $menu).text(post.post_date.format("yyyy-MM-dd"));
+
+            $menu.unbind("click");
+            $menu.click(function(){
+                active_menu($menu);
+                return false;
+            });
+
+            $menu.show();
+            resize_list_holder();
+        };
+
+        var pager = { "cur_page" : {{ pager.cur_page }},
+                    "per_page" : {{ pager.per_page }},
+                    "is_last_page" : {% if pager.is_last_page %}true{% else %}false{% endif %}
+        };
+
+        var load_posts = function(callback){
+            var $load_more_post = $(".load-more-post");
+            var $post_loading = $(".post-loading");
+            if (pager.is_last_page){
+                $load_more_post.remove();
+                return;
+            }
+            $load_more_post.hide();
+            $post_loading.show();
+            $.json_action("tag/posts",
+                {'name':$.toJSON('{{ tag.name }}'),
+                 'page':  $.toJSON(pager.cur_page + 1),
+                 'per_page': $.toJSON(pager.per_page)
+                },
+                function(resp){
+                    pager = resp.pager;
+                    $post_loading.fadeOut(1000);
+                    $.each(resp.posts, function(index, post){
+                        callback(post);
+                    });
+                    pager.is_last_page ? $load_more_post.remove() : $load_more_post.show();
+                },function(err){
+                    bootbox.alert(err);
+                    $load_more_post.show();
+                    $post_loading.fadeOut(1000);
+            });
+        };
+
+        var active_menu = function($menu){
+            if ($menu && $menu.length > 0){
+                $list_menu.find("li").removeClass("active");
+                $container.find(".post").removeClass("active");
+                $menu.addClass("active");
+                reset_scroll();
+                $("#post_"+$menu.attr("id").replace("list_menu_", "")).scrollto(120).addClass("active");
+            }
+        };
+        var stop_scroll = false;
+        var reset_scroll = function(delay){
+            delay = delay || 2000;
+            stop_scroll = true;
+            window.setTimeout(function(){
+                stop_scroll = false;
+            }, delay);
+            return true;
+        };
+        $(window).scroll($.debounce(500, function(){
+            if (!stop_scroll) {
+                var $posts = $(".post");
+                var current = $posts.filter(function() {
+                    return $(this).offset().top > $(document).scrollTop()+20 &&
+                            $(this).offset().top < $(document).scrollTop()+220;
+                });
+                current = $(current[0]);
+                if (current.length > 0){
+                    var $menu = $("#list_menu_"+current.attr("id").replace("post_", ""))
+                    $list_menu.find("li").removeClass("active");
+                    $menu.addClass("active");
+                    $container.find(".post").removeClass("active");
+                    current.addClass("active");
+                }
+            }
+        }));
+
+        var $list_holder = $(".list-holder");
+        var $slider_bar = $(".slider-bar");
+        var resize_list_holder = function(){
+            if ($slider_bar.css("position") === "fixed"){
+                $list_holder.height($slider_bar.height()/2+40);
+                $list_holder.outerWidth($slider_bar.outerWidth());
+            } else {
+                $list_holder.height(0);
+            }
+        };
+        resize_list_holder();
+
+        $(window).resize(function() {
+            resize_list_holder();
+            bind_img_info($(".post-body", $container), 200, 150);
+        });
+
+        $(".load-more-post").click(function() {
+            load_posts(show_post);
+        });
+
+        load_posts(show_post);
+
+        bind_shortcuts($list_menu, active_menu, show_post);
+        {% if user.is_admin() %}
+        var post_callback = function(post_data){
+            editor.hide();
+            show_post(post_data, true);
+        };
+        editor = new Editor(md_converter, post_callback);
+        $("#new-post").click(function(){
+            editor.new_post();
+        });
+        {% endif %}
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+{% include "__post_script.html" %}
+<div class="row">
+    {% if user.is_admin() %}
+      <!-- Editor -->
+      {% include "_editor.html" %}
+    {% endif %}
+    <!-- Post Template -->
+    <div id="post_template" class="post dis-none panel panel-default">
+      <input type="hidden" class="date_val" />
+      <div class="panel-heading">
+          <div class="post-title">
+            <span class=""><img src="" class="avatar avatar32"/></span>
+            <span class="label label-default post-hide dis-none"></span>
+            <a href="" class="title"></a>
+            {% if user.is_admin() %}
+            <div class="menu btn-group pull-right">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                    <h4><i class="fa fa-toggle-down text-default"></i></h4>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="menu-edit" href="javascript:;">{{ _("Edit") }}</a></li>
+                    <li><a class="menu-delete" href="javascript:;">{{ _("Delete") }}</a></li>
+                </ul>
+            </div>
+            {% endif %}
+            <div class="pull-right">
+                <div class="tags"></div>
+            </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="post-body">
+        </div>
+        <div class="post-thumbnails dis-none"></div>
+        <div style="clear: both"></div>
+      </div>
+      <div class="panel-footer">
+          <small>
+          <i class="fa fa-clock-o"></i> <span class="post-date"></span>
+          <span class="cmdbar pull-right">
+            <i class="fa fa-user"></i> <span class="post-author"></span>&nbsp;
+            <i class="fa fa-eye"></i> <span class="post-viewed"></span>&nbsp;
+            <button class="share btn btn-default btn-xs" title="{{ _("Share") }}">
+                <i class="fa fa-share"></i></button>
+            <button class="stats btn btn-default btn-xs" stats_type="Post" name="like_count" oper="increase"
+                title="{{ _("Like") }}"><i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button class="stats btn btn-default btn-xs" stats_type="Post" name="unlike_count" oper="increase"
+                title="{{ _("Unlike") }}"><i class="fa fa-thumbs-o-down"></i>
+            </button>
+            <button class="comment btn btn-default btn-xs" title="{{ _("Comment") }}">
+                <i class="fa fa-comment-o"></i></button>
+          </span>
+          <div class="clearfix"></div>
+          </small>
+      </div>
+      <div class="comments_panel dis-none"></div>
+    </div>
+    <!-- End Post Template -->
+
+<!-- Menu and Posts -->
+    <div class="col-lg-3 slider-bar well">
+        <h4><i class="fa fa-tags"></i> {{ tag.name }} ({{ tag.post_count }})</h4>
+        <li class="dis-none" id="list_menu_template">
+            <a href="javascript:;" class="">
+                <span class="name">template</span>
+                <br><i class="fa fa-clock-o text-muted"></i> <span class="post-date text-muted"></span>
+            </a>
+        </li>
+        <ul class="nav nav-pills nav-stacked list-menu">
+        </ul>
+        <p class="text-center">
+            <button class="load-more-post btn btn-block btn-info dis-none">{{ _("More") }}...</button>
+            <img class="post-loading loading" src="{{ settings.MirrorSite }}/static/images/posts_loading.gif" alt="{{ _("loading") }}..."/>
+        </p>
+    </div>
+    <div class="col-lg-3 list-holder">
+    </div>
+    <div class="col-lg-7">
+        <div class="container-list"></div>
+        <p class="text-center">
+            <button class="load-more-post btn btn-block btn-info dis-none">{{ _("More") }}...</button>
+            <img class="post-loading loading" src="{{ settings.MirrorSite }}/static/images/posts_loading.gif" alt="{{ _("loading") }}..."/>
+        </p>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- End Menu and Posts -->
+<!-- Comments -->
+{% include "__comment.html" %}
+{% endblock %}

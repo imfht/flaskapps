@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.1.0",
+    "nodemon": "^1.18.9"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "aws-sdk": "^2.383.0",
+    "concurrently": "^4.0.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "uuid": "^3.3.2"
+  },
+  "scripts": {
+    "client": "cd client && npm start",
+    "build": "cd client && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon app.js",
+    "heroku": "node app.js"
+  }
+}

@@ -1,0 +1,27 @@
+[data-widget="ping"] {
+  padding: 5px;
+  background: #333333;
+}
+
+[data-widget="ping"] path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+
+[data-widget="ping"] text {
+  font-size: 10pt;
+  fill: #fff;
+}
+
+[data-widget="ping"] line {
+  stroke: #fff;
+}
+
+[data-widget="ping"] .axis path,
+[data-widget="ping"] .axis line {
+  fill: none;
+  stroke: grey;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}

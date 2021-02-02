@@ -1,0 +1,77 @@
+{% extends 'default.html' %}
+{% set active_page = "setting" %}
+{% block title %}
+  Security Key Setup
+{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='node_modules/qrious/dist/qrious.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/vendors/base64.js') }}"></script>
+  <script src="/static/assets/js/vendors/webauthn.js?v={{ VERSION }}"></script>
+{% endblock %}
+
+{% block default_content %}
+  <div class="card">
+    <div class="card-body">
+      <h1 class="h2 text-center">Register Your Security Key</h1>
+      <p class="text-center">Follow your browser's steps to register your security key with SimpleLogin</p>
+
+      <form id="formRegisterKey" method="post">
+        {{ fido_token_form.csrf_token }}
+        {{ fido_token_form.sk_assertion(class="form-control", placeholder="") }}
+
+        {{ fido_token_form.key_name(id="key-name", class="form-control", placeholder="Name of your key (Required)") }}
+        {{ render_field_errors(fido_token_form.key_name) }}
+
+        <div class="text-center">
+          <span id="btnRegisterKey" class="btn btn-lg btn-primary mt-2" onclick="registerKey();">Register Key</span>
+        </div>
+      </form>
+
+      <script>
+        // disable submit when enter
+        $('form input').keydown(function (e) {
+          if (e.keyCode == 13) {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        async function registerKey() {
+          // make sure key name is not empty
+          if (!$("#key-name").val()) {
+            toastr.error("Key name cannot be empty.");
+            return
+          }
+
+          $("#btnRegisterKey").prop('disabled', true);
+          $("#btnRegisterKey").text('Waiting for Security Key...');
+
+          const pkCredentialCreateOptions = transformCredentialCreateOptions(
+            JSON.parse('{{credential_create_options|tojson|safe}}')
+          )
+
+
+          let credential
+          try {
+            credential = await navigator.credentials.create({
+              publicKey: pkCredentialCreateOptions
+            });
+          } catch (err) {
+            toastr.error("An error occurred when we trying to register your key.");
+            $("#btnRegisterKey").prop('disabled', false);
+            $("#btnRegisterKey").text('Register Key');
+            return console.error("Error when trying to create credential:", err);
+          }
+
+          const skAssertion = transformNewAssertionForServer(credential);
+
+          $('#sk_assertion').val(JSON.stringify(skAssertion));
+          $('#formRegisterKey').submit();
+        }
+
+      </script>
+
+    </div>
+  </div>
+{% endblock %}

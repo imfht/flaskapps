@@ -1,0 +1,31 @@
+[
+  {
+    "body": {
+      "content": "cms-guide-for-research.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "CMS"
+      },
+      {
+        "primary": "education"
+      }
+    ],
+    "experiment": "CMS",
+    "short_description": {
+      "content": "If you are interested in finding hints, tips and guidance for conducting a research-oriented analysis using CMS Open Data, please see our notes on this page."
+    },
+    "slug": "cms-guide-for-research",
+    "tags": [
+      "Getting Started"
+    ],
+    "title": "CMS Guide to research use of CMS Open Data",
+    "type": {
+      "primary": "Documentation",
+      "secondary": [
+        "Guide"
+      ]
+    }
+  }
+]

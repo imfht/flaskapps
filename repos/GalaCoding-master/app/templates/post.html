@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}GalaCoding - 博客页{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script type="text/javascript" src="/static/js/marked.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+        var preview = document.getElementById("flask-pagedown-body-preview");
+        preview.innerHTML = marked(document.getElementById("flask-pagedown-body").value);
+	});
+</script>
+{% endblock %}
+
+{% block page_content %}
+
+<div class="row container-list">
+  <div class="col-lg-offset-2 col-lg-8">
+    <div class="post panel panel-default">
+        <div class="panel-heading">
+          <div class="post-title">
+            <span class=""><img src="{{ post.author.avatar_url_auto(size=40) }}" class="avatar avatar32"/></span>
+            <a href="/post/{{ post.id }}" class="title">{{ post.title }}</a>
+            {% if current_user.can(Permission.MODERATE_USERS) %}
+            <div class="menu btn-group pull-right">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                    <h4><i class="fa fa-toggle-down text-default"></i></h4>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="menu-delete" href="{{ url_for('main.delete', id=post.id) }}">删除</a></li>
+                    <li><a class="menu-update" href="{{ url_for('main.edit', id=post.id) }}">修改</a></li>
+                </ul>
+            </div>
+            {% endif %}
+            <div class="pull-right">
+                <div class="tags">
+                    {% for tag in post.tags.all() %}
+                    <a href="{{ url_for('user.profile', username=post.author.username) }}">{{ tag.content }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+            <!--防止转义-->
+            <textarea id="flask-pagedown-body" style="display: none; ">{{ post.body | safe }}</textarea>
+            <div class="markdown" id="flask-pagedown-body-preview"></div>
+        </div>
+        <div class="panel-footer">
+            <small>
+              <i class="fa fa-clock-o"></i> <span class="post-date">{{ moment(post.timestamp).fromNow() }}</span>
+              <span class="cmdbar pull-right">
+                <i class="fa fa-user"></i> <span class="post-author">{{ post.author.username }}</span>&nbsp;
+                <i class="fa fa-eye"></i> <span class="post-viewed">{{ post.viewed_count }}</span>&nbsp;
+                  {% if post.is_concerned_by(current_user) %}
+                  <a href="{{ url_for('main.concern', id=post.id, action='unconcern') }}">
+                      <button class="stats btn btn-default btn-xs" stats_type="Post" name="like_count" oper="decrease"
+                    title="取消关注"><i class="fa fa-heart-o"></i>{{ post.concern_users.count() }}
+                </button></a>
+                  {% else %}
+                  <a href="{{ url_for('main.concern', id=post.id, action='concern') }}">
+                      <button class="stats btn btn-default btn-xs" stats_type="Post" name="like_count" oper="increase"
+                    title="关注"><i class="fa fa-heart"></i>{{ post.concern_users.count() }}
+                </button></a>
+                  {% endif %}
+                  <a href="{{ url_for('main.remark', id=post.id, attitude=Remark_Attitude.AGREE_WITH) }}">
+                      <button class="stats btn btn-default btn-xs" stats_type="Post" name="like_count" oper="increase"
+                    title="赞同"><i class="fa fa-thumbs-o-up"></i>{{ post.remarkPost_count(Remark_Attitude.AGREE_WITH) }}
+                </button></a>
+                <a href="{{ url_for('main.remark', id=post.id, attitude=Remark_Attitude.DISAGREE_WITH) }}">
+                    <button class="stats btn btn-default btn-xs" stats_type="Post" name="unlike_count" oper="increase"
+                    title="反对"><i class="fa fa-thumbs-o-down"></i>
+                    {{ post.remarkPost_count(Remark_Attitude.DISAGREE_WITH) }}
+                </button></a>
+                <button class="comment btn btn-default btn-xs" title="{{ post.comments.count() }}">
+                    <i class="fa fa-comment-o"></i>{{ post.comments.count() }}
+                </button>
+              </span>
+              <div class="clearfix"></div>
+            </small>
+        </div>
+        <div id="comments" class="">
+            {% include "_comment.html" %}
+        </div>
+        <div class="pagination">
+            {{ macros.pagination_widget(pagination, 'main.index') }}
+        </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

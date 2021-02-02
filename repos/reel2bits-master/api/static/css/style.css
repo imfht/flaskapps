@@ -1,0 +1,136 @@
+/*
+ * Global web page
+ */
+
+body {
+    font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei", Arial, Helvetica, sans-serif !important;
+    padding-top: 120px;
+}
+
+footer {
+    font-family: "PingFang SC", "Helvetica Neue", "Microsoft YaHei", Arial, Helvetica, sans-serif !important;
+    margin-top: 54px !important;
+    padding-top: 10px;
+    border-top: 1px solid #d6d6d6;
+    color: #888888;
+}
+
+footer .left {
+    float: left;
+}
+
+footer .right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+hr{
+    border:0;
+    margin: 2em 1em 2em 1em;
+    height:1px;
+    background: lightgrey;
+}
+/*
+ ** Elements **
+ */
+
+/* "Modal" type content */
+div.page_modal {
+    display: block;
+    background: #fff;
+    border: 1px solid rgba(34, 36, 38, .15);
+    border-radius: .28571429rem;
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15);
+}
+
+div.page_modal .header {
+    background: #f0f0f0;
+    padding: .5em 1em;
+    margin: 0 0 1em;
+}
+
+div.page_modal .content {
+    padding: 1em;
+}
+
+.well-ultra-sm {
+    padding: 2px;
+    margin-bottom: 0px;
+}
+
+.single-note {
+    margin-bottom: 2em;
+}
+
+.summary {
+    white-space: pre-wrap;
+}
+
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    width: 40em;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
+}
+
+.pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
+}
+
+#search-dd {
+    min-width: 310px;
+    padding: 14px 14px 14px;
+    overflow: hidden;
+}
+
+td.si_btn_edit, td.si_btn_delete {
+    text-align: center;
+}
+
+div.sound-description {
+    font-size: 10px;
+    word-wrap: break-word;
+}
+
+div.ss-user-back h3 {
+    margin-top: 0px;
+}
+
+td.log-actions {
+    text-align: center;
+}
+
+tr.song-active {
+    background-color: #a2d4ed;
+}
+
+tr.play-song:hover {
+    background-color: #ebebeb;
+}
+
+td.ast-duration {
+    text-align: right;
+}
+
+.navbar-form .form-control {
+    display: inline-block;
+    width: 15em !important;
+    vertical-align: middle;
+}

@@ -1,0 +1,53 @@
+<view class="navbar">
+  <image class="icon" src="../../images/back-black.png"
+    bindtap="handleBack"></image>
+  公羊阅读
+</view>
+
+<!-- 搜索 -->
+<view class="search">
+  <input type="text" class="input" placeholder="搜索"
+    bindinput="handleInputChange" value="{{inputValue}}"></input>
+  <button class="submit" bindtap="handleGetNovelList">确定</button>
+</view>
+
+<!-- 小说列表 -->
+<view class="novel" wx:if="{{novelList.length > 0}}">
+  <view class="novel-title">找到了这些书📚</view>
+  <view class="novel-list">
+    <view wx:for="{{novelList}}" wx:key="{{item.book_name}}" 
+      class="novel-item">
+        <view class="novel-wrapper" 
+          bindtap="handleGoIntroPage" data-url="{{item.book_url}}">
+          <image src="../../images/cover.png"
+            class="novel-cover"></image>
+          <view class="novel-novelname">{{item.book_name}}</view>
+          <view class="novel-authorname">{{item.author_name}}</view>
+        </view>
+      </view>
+  </view>
+</view>
+
+<!-- 热门搜索 -->
+<view class="hot">
+  <view class="hot-title">热门搜索</view>
+  <view class="hot-list">
+    <view class="hot-item" 
+      bindtap="handleClickKeyword" data-keyword="{{item.keyword}}"
+      wx:for="{{hotList}}" wx:key="{{item.keyword}}">
+      {{item.keyword}}
+    </view>
+  </view>
+</view>
+
+<!-- 搜索历史 -->
+<view class="hist">
+  <view class="hist-title">搜索历史</view>
+  <view class="hist-list">
+    <view class="hist-item" 
+      bindtap="handleClickKeyword" data-keyword="{{item.keyword}}"
+      wx:for="{{histList}}" wx:key="{{item.keyword}}">
+      {{item.keyword}}
+    </view>
+  </view>
+</view>

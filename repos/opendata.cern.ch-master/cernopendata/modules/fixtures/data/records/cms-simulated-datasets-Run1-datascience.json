@@ -1,0 +1,634 @@
+[
+  {
+    "abstract": {
+      "description": "<p>Simulated dataset TTJets_HadronicMGDecays_8TeV-madgraph with boosted jets, enriched with simulated tracks and tracker hit data for tracking algorithm studies in AODSIM format for 2012 collision data.</p><p>See the description of the simulated dataset names in: <a href=\"/about/CMS-Simulated-Dataset-Names\">About CMS simulated dataset names</a>.</p> <p>These simulated data correspond to the collision data collected by the CMS experiment in 2012. They are in the standard CMS AODSIM format plus a series of low-level tracker-related collections that allow the extraction of the tracker hits. They were released in the context of data science sample production.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "categories": {
+      "primary": "Standard Model Physics",
+      "secondary": [
+        "Top physics"
+      ],
+      "source": "CMS Collaboration"
+    },
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Simulated-Datasets"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2019",
+    "date_reprocessed": "2019",
+    "distribution": {
+      "formats": [
+        "aodsim",
+        "root"
+      ],
+      "number_events": 2969109,
+      "number_files": 16217,
+      "size": 10932264112116
+    },
+    "doi": "10.7483/OPENDATA.CMS.OPKY.OJMJ",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2031f3d9",
+        "size": 870939,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_01_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:44dc434c",
+        "size": 458561,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_01_root_file_index.txt"
+      },
+      {
+        "checksum": "adler32:6ea4cc1a",
+        "size": 817083,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_02_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:4134eaa2",
+        "size": 430205,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_02_root_file_index.txt"
+      },
+      {
+        "checksum": "adler32:168977d6",
+        "size": 877803,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_03_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:c24682ec",
+        "size": 462175,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_03_root_file_index.txt"
+      },
+      {
+        "checksum": "adler32:f1e2bcae",
+        "size": 864075,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_04_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:5d404345",
+        "size": 454947,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_04_root_file_index.txt"
+      },
+      {
+        "checksum": "adler32:5fbcf729",
+        "size": 851403,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_05_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:c249ce18",
+        "size": 448275,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/ttbar_RunI_8TeV/file-indexes/ttbar_RunI_8TeV_step2_ttbarOD_05_root_file_index.txt"
+      }
+    ],
+    "methodology": {
+      "description": "<p>These data were generated in several steps (see also <a href=\"/docs/cms-mc-production-overview\">CMS Monte Carlo production overview</a>):</p>\n",
+      "steps": [
+        {
+          "configuration_files": [
+            {
+              "process": "SIM",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step0_ttbar.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "SIM"
+        },
+        {
+          "configuration_files": [
+            {
+              "process": "HLT",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step1.py"
+            },
+            {
+              "process": "RECO",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step2.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "HLT RECO"
+        }
+      ]
+    },
+    "pileup": {
+      "description": "<p>To make these simulated data comparable with the collision data, <a href=\"/docs/cms-guide-pileup-simulation\">pile-up events</a> are added to the simulated event in this step.</p>",
+      "links": [
+        {
+          "recid": "37",
+          "title": "/MinBias_TuneZ2star_8TeV-pythia6/Summer12-START50_V13-v3/GEN-SIM"
+        }
+      ]
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12200",
+    "relations": [
+      {
+        "description": "This ttbar dataset has boosted jet production enhanced in the generation step, and simulated tracks and reconstructed tracker hits included, and it is a modified version of: ",
+        "recid": "9582",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2012A",
+      "Run2012B",
+      "Run2012C",
+      "Run2012D"
+    ],
+    "system_details": {
+      "global_tag": "START53_V27",
+      "release": "CMSSW_5_3_32"
+    },
+    "title": "Tracker-hit-enriched TTJets_HadronicMGDecays_8TeV-madgraph",
+    "title_additional": "Simulated dataset TTJets_HadronicMGDecays_8TeV-madgraph enriched with tracker hits in AODSIM format for 2012 collision data",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Simulated"
+      ]
+    },
+    "usage": {
+      "description": "You can access these data through the CMS Virtual Machine. See the instructions below for setting up the Virtual Machine and getting started. The dataset can also be used as an input to the final step of the workflow to produce ROOT ntuples with full event information for ML studies.",
+      "links": [
+        {
+          "description": "How to install the CMS Virtual Machine",
+          "url": "/docs/cms-virtual-machine-2011"
+        },
+        {
+          "description": "Getting started with CMS open data",
+          "url": "/docs/cms-getting-started-2011"
+        },
+        {
+          "recid": "12210"
+        }
+      ]
+    },
+    "validation": {
+      "description": "The generation and simulation of this dataset was done in the context of data science sample production and has not been validated through general CMS validation procedures."
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>Simulated dataset for the 300 to 600 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6 enriched with simulated tracks and tracker hit data for tracking algorithm studies in AODSIM format for 2012 collision data.</p><p>See the description of the simulated dataset names in: <a href=\"/about/CMS-Simulated-Dataset-Names\">About CMS simulated dataset names</a>.</p> <p>These simulated data correspond to the collision data collected by the CMS experiment in 2012. They are in the standard CMS AODSIM format plus a series of low-level tracker-related collections that allow the extraction of the tracker hits. They were released in the context of data science sample production.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "categories": {
+      "primary": "Standard Model Physics",
+      "secondary": [
+        "QCD"
+      ],
+      "source": "CMS Collaboration"
+    },
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Simulated-Datasets"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2019",
+    "date_reprocessed": "2019",
+    "distribution": {
+      "formats": [
+        "aodsim",
+        "root"
+      ],
+      "number_events": 1498800,
+      "number_files": 4996,
+      "size": 5139966009955
+    },
+    "doi": "10.7483/OPENDATA.CMS.HUED.7R3E",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:086d958e",
+        "size": 1358722,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD300to600_RunI_8TeV/file-indexes/QCD300to600_RunI_8TeV_step2_QCD300to600_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:038de28f",
+        "size": 729416,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD300to600_RunI_8TeV/file-indexes/QCD300to600_RunI_8TeV_step2_QCD300to600_root_file_index.txt"
+      }
+    ],
+    "methodology": {
+      "description": "<p>These data were generated in several steps (see also <a href=\"/docs/cms-mc-production-overview\">CMS Monte Carlo production overview</a>):</p>\n",
+      "steps": [
+        {
+          "configuration_files": [
+            {
+              "process": "SIM",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step0_QCD300to600.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "SIM"
+        },
+        {
+          "configuration_files": [
+            {
+              "process": "HLT",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step1.py"
+            },
+            {
+              "process": "RECO",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step2.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "HLT RECO"
+        }
+      ]
+    },
+    "pileup": {
+      "description": "<p>To make these simulated data comparable with the collision data, <a href=\"/docs/cms-guide-pileup-simulation\">pile-up events</a> are added to the simulated event in this step.</p>",
+      "links": [
+        {
+          "recid": "37",
+          "title": "/MinBias_TuneZ2star_8TeV-pythia6/Summer12-START50_V13-v3/GEN-SIM"
+        }
+      ]
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12201",
+    "relations": [
+      {
+        "description": "This QCD dataset contains pTHat bin 300-600 GeV, and has simulated tracks and reconstructed tracker hits included, and it is a modified version of: ",
+        "recid": "8882",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2012A",
+      "Run2012B",
+      "Run2012C",
+      "Run2012D"
+    ],
+    "system_details": {
+      "global_tag": "START53_V27",
+      "release": "CMSSW_5_3_32"
+    },
+    "title": "Tracker-hit-enriched 300 to 600 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6",
+    "title_additional": "Simulated dataset for the 300 to 600 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6 enriched with tracker hits in AODSIM format for 2012 collision data",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Simulated"
+      ]
+    },
+    "usage": {
+      "description": "You can access these data through the CMS Virtual Machine. See the instructions below for setting up the Virtual Machine and getting started. The dataset can also be used as an input to the final step of the workflow to produce ROOT ntuples with full event information for ML studies.",
+      "links": [
+        {
+          "description": "How to install the CMS Virtual Machine",
+          "url": "/docs/cms-virtual-machine-2011"
+        },
+        {
+          "description": "Getting started with CMS open data",
+          "url": "/docs/cms-getting-started-2011"
+        },
+        {
+          "recid": "12210"
+        }
+      ]
+    },
+    "validation": {
+      "description": "The generation and simulation of this dataset was done in the context of data science sample production and has not been validated through general CMS validation procedures."
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>Simulated dataset for the 400 to 600 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6 enriched with simulated tracks and tracker hit data for tracking algorithm studies in AODSIM format for 2012 collision data.</p><p>See the description of the simulated dataset names in: <a href=\"/about/CMS-Simulated-Dataset-Names\">About CMS simulated dataset names</a>.</p> <p>These simulated data correspond to the collision data collected by the CMS experiment in 2012. They are in the standard CMS AODSIM format plus a series of low-level tracker-related collections that allow the extraction of the tracker hits. They were released in the context of data science sample production.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "categories": {
+      "primary": "Standard Model Physics",
+      "secondary": [
+        "QCD"
+      ],
+      "source": "CMS Collaboration"
+    },
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Simulated-Datasets"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2019",
+    "date_reprocessed": "2019",
+    "distribution": {
+      "formats": [
+        "aodsim",
+        "root"
+      ],
+      "number_events": 1989000,
+      "number_files": 3315,
+      "size": 6918537867180
+    },
+    "doi": "10.7483/OPENDATA.CMS.YWDZ.KSLK",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:9a1b6a98",
+        "size": 901683,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD400to600_RunI_8TeV/file-indexes/QCD400to600_RunI_8TeV_step2_QCD400to600_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:eb1f842e",
+        "size": 483990,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD400to600_RunI_8TeV/file-indexes/QCD400to600_RunI_8TeV_step2_QCD400to600_root_file_index.txt"
+      }
+    ],
+    "methodology": {
+      "description": "<p>These data were generated in several steps (see also <a href=\"/docs/cms-mc-production-overview\">CMS Monte Carlo production overview</a>):</p>\n",
+      "steps": [
+        {
+          "configuration_files": [
+            {
+              "process": "SIM",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step0_QCD400to600.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "SIM"
+        },
+        {
+          "configuration_files": [
+            {
+              "process": "HLT",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step1.py"
+            },
+            {
+              "process": "RECO",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step2.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "HLT RECO"
+        }
+      ]
+    },
+    "pileup": {
+      "description": "<p>To make these simulated data comparable with the collision data, <a href=\"/docs/cms-guide-pileup-simulation\">pile-up events</a> are added to the simulated event in this step.</p>",
+      "links": [
+        {
+          "recid": "37",
+          "title": "/MinBias_TuneZ2star_8TeV-pythia6/Summer12-START50_V13-v3/GEN-SIM"
+        }
+      ]
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12202",
+    "relations": [
+      {
+        "description": "This QCD dataset contains pTHat bin 400-600 GeV, and has simulated tracks and reconstructed tracker hits included, and it is a modified version of: ",
+        "recid": "8882",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2012A",
+      "Run2012B",
+      "Run2012C",
+      "Run2012D"
+    ],
+    "system_details": {
+      "global_tag": "START53_V27",
+      "release": "CMSSW_5_3_32"
+    },
+    "title": "Tracker-hit-enriched 400 to 600 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6",
+    "title_additional": "Simulated dataset for the 400 to 600 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6 enriched with tracker hits in AODSIM format for 2012 collision data",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Simulated"
+      ]
+    },
+    "usage": {
+      "description": "You can access these data through the CMS Virtual Machine. See the instructions below for setting up the Virtual Machine and getting started. The dataset can also be used as an input to the final step of the workflow to produce ROOT ntuples with full event information for ML studies.",
+      "links": [
+        {
+          "description": "How to install the CMS Virtual Machine",
+          "url": "/docs/cms-virtual-machine-2011"
+        },
+        {
+          "description": "Getting started with CMS open data",
+          "url": "/docs/cms-getting-started-2011"
+        },
+        {
+          "recid": "12210"
+        }
+      ]
+    },
+    "validation": {
+      "description": "The generation and simulation of this dataset was done in the context of data science sample production and has not been validated through general CMS validation procedures."
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>Simulated dataset for the 600 to 3000 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6 enriched with simulated tracks and tracker hit data for tracking algorithm studies in AODSIM format for 2012 collision data.</p><p>See the description of the simulated dataset names in: <a href=\"/about/CMS-Simulated-Dataset-Names\">About CMS simulated dataset names</a>.</p> <p>These simulated data correspond to the collision data collected by the CMS experiment in 2012. They are in the standard CMS AODSIM format plus a series of low-level tracker-related collections that allow the extraction of the tracker hits. They were released in the context of data science sample production.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "categories": {
+      "primary": "Standard Model Physics",
+      "secondary": [
+        "QCD"
+      ],
+      "source": "CMS Collaboration"
+    },
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Simulated-Datasets"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2019",
+    "date_reprocessed": "2019",
+    "distribution": {
+      "formats": [
+        "aodsim",
+        "root"
+      ],
+      "number_events": 2975400,
+      "number_files": 9908,
+      "size": 10688374357454
+    },
+    "doi": "10.7483/OPENDATA.CMS.CWTT.8Q3E",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:08d12639",
+        "size": 1519817,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD600to3000_RunI_8TeV/file-indexes/QCD600to3000_RunI_8TeV_step2_QCD600to3000_01_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:245ff6d4",
+        "size": 822195,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD600to3000_RunI_8TeV/file-indexes/QCD600to3000_RunI_8TeV_step2_QCD600to3000_01_root_file_index.txt"
+      },
+      {
+        "checksum": "adler32:06b372a9",
+        "size": 1502127,
+        "type": "index.json",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD600to3000_RunI_8TeV/file-indexes/QCD600to3000_RunI_8TeV_step2_QCD600to3000_02_root_file_index.json"
+      },
+      {
+        "checksum": "adler32:01b472e5",
+        "size": 812625,
+        "type": "index.txt",
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/datascience/TrackerRecHitProducerTool/QCD600to3000_RunI_8TeV/file-indexes/QCD600to3000_RunI_8TeV_step2_QCD600to3000_02_root_file_index.txt"
+      }
+    ],
+    "methodology": {
+      "description": "<p>These data were generated in several steps (see also <a href=\"/docs/cms-mc-production-overview\">CMS Monte Carlo production overview</a>):</p>\n",
+      "steps": [
+        {
+          "configuration_files": [
+            {
+              "process": "SIM",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step0_QCD600to3000.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "SIM"
+        },
+        {
+          "configuration_files": [
+            {
+              "process": "HLT",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step1.py"
+            },
+            {
+              "process": "RECO",
+              "title": "Configuration file",
+              "url": "https://raw.githubusercontent.com/cms-opendata-analyses/TrackerRecHitProducerTool/v12.0.0/configs/step2.py"
+            }
+          ],
+          "global_tag": "START53_V27",
+          "release": "CMSSW_5_3_32",
+          "type": "HLT RECO"
+        }
+      ]
+    },
+    "pileup": {
+      "description": "<p>To make these simulated data comparable with the collision data, <a href=\"/docs/cms-guide-pileup-simulation\">pile-up events</a> are added to the simulated event in this step.</p>",
+      "links": [
+        {
+          "recid": "37",
+          "title": "/MinBias_TuneZ2star_8TeV-pythia6/Summer12-START50_V13-v3/GEN-SIM"
+        }
+      ]
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "12203",
+    "relations": [
+      {
+        "description": "This QCD dataset contains pTHat bin 600-3000 GeV, and has simulated tracks and reconstructed tracker hits included, and it is a modified version of:",
+        "recid": "8882",
+        "type": "isRelatedTo"
+      }
+    ],
+    "run_period": [
+      "Run2012A",
+      "Run2012B",
+      "Run2012C",
+      "Run2012D"
+    ],
+    "system_details": {
+      "global_tag": "START53_V27",
+      "release": "CMSSW_5_3_32"
+    },
+    "title": "Tracker-hit-enriched 600 to 3000 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6",
+    "title_additional": "Simulated dataset for the 600 to 3000 bin of QCD_Pt-15to3000_TuneZ2star_Flat_8TeV_pythia6 enriched with tracker hits in AODSIM format for 2012 collision data",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Simulated"
+      ]
+    },
+    "usage": {
+      "description": "You can access these data through the CMS Virtual Machine. See the instructions below for setting up the Virtual Machine and getting started. The dataset can also be used as an input to the final step of the workflow to produce ROOT ntuples with full event information for ML studies.",
+      "links": [
+        {
+          "description": "How to install the CMS Virtual Machine",
+          "url": "/docs/cms-virtual-machine-2011"
+        },
+        {
+          "description": "Getting started with CMS open data",
+          "url": "/docs/cms-getting-started-2011"
+        },
+        {
+          "recid": "12210"
+        }
+      ]
+    },
+    "validation": {
+      "description": "The generation and simulation of this dataset was done in the context of data science sample production and has not been validated through general CMS validation procedures."
+    }
+  }
+]

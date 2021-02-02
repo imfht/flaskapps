@@ -1,0 +1,80 @@
+bandit exec-used https://bandit.readthedocs.io/en/latest/plugins/b102_exec_used.html
+     > src/flask/_compat.py:52
+     ╷
+   52│   exec("def reraise(tp, value, tb=None):\n raise tp, value, tb")
+     ╵
+     = Use of exec detected.
+
+bandit eval-used https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b307-eval
+     > src/flask/cli.py:892
+     ╷
+  892│   eval(compile(f.read(), startup, "exec"), ctx)
+     ╵
+     = Use of possibly insecure function - consider using safer
+       ast.literal_eval.
+
+bandit exec-used https://bandit.readthedocs.io/en/latest/plugins/b102_exec_used.html
+     > src/flask/config.py:132
+     ╷
+  132│   exec(compile(config_file.read(), filename, "exec"), d.__dict__)
+     ╵
+     = Use of exec detected.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > tests/test_appctx.py:74
+     ╷
+   74│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > tests/test_appctx.py:93
+     ╷
+   93│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > tests/test_basic.py:784
+     ╷
+  784│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > tests/test_basic.py:796
+     ╷
+  796│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+bandit flask-debug-true https://bandit.readthedocs.io/en/latest/plugins/b201_flask_debug_true.html
+     > tests/test_basic.py:1912
+     ╷
+ 1912│   app.run(hostname, port, debug=True)
+     ╵
+     = A Flask app appears to be run with debug=True, which exposes the Werkzeug
+       debugger and allows the execution of arbitrary code.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > tests/test_reqctx.py:45
+     ╷
+   45│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > tests/test_reqctx.py:64
+     ╷
+   64│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+bandit flask-debug-true https://bandit.readthedocs.io/en/latest/plugins/b201_flask_debug_true.html
+     > tests/test_templating.py:404
+     ╷
+  404│   app.run(debug=True)
+     ╵
+     = A Flask app appears to be run with debug=True, which exposes the Werkzeug
+       debugger and allows the execution of arbitrary code.
+

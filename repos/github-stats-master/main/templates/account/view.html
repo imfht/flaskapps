@@ -1,0 +1,71 @@
+# extends 'base.html'
+# import 'macro/forms.html' as forms
+# import 'macro/utils.html' as utils
+
+
+# block content
+  <div class="row">
+    <div class="col-sm-4">
+      <p>
+        <img class="avatar" src="{{account_db.avatar_url}}?size=512" alt="Avatar of {{account_db.name}}">
+      </p>
+      <h1>
+        # if account_db.rank
+          <small title="Global rank">#{{account_db.rank}}</small>
+        # endif
+        {{account_db.name}}
+      </h1>
+      <h3 class="ellipsis">
+        <a href="https://github.com/{{account_db.username}}" target="_blank">
+          github.com/{{account_db.username}}
+        </a>
+      </h3>
+      <hr>
+      <h3 title="Stars"><span class="fa-fw octicon octicon-star"></span> {{account_db.stars_hu}}</h3>
+      <h3 title="Forks"><span class="fa-fw octicon octicon-repo-forked"></span> {{account_db.forks_hu}}</h3>
+      # if not account_db.organization
+        <h3 title="Followers"><span class="fa fa-fw fa-users"></span> {{account_db.followers_hu}}</h3>
+      # endif
+      # if account_db.language
+        <h3 title="Primary language"><span class="fa-fw octicon octicon-file-code"></span> {{account_db.language}}</h3>
+      # endif
+      # if account_db.joined
+        <hr>
+        <h4 title="Joined"><span class="fa-fw octicon octicon-clock "></span> {{account_db.joined.strftime('%b %d, %Y')}}</h4>
+      # endif
+      <hr>
+      <h4 class="text-muted" title="Last Sync / Status">
+        <span class="fa fa-fw fa-refresh {{'fa-spin text-success' if account_db.status == 'syncing'}}"></span>
+        <time datetime="{{account_db.synced}}">
+          {{account_db.synced.strftime('%Y-%m-%d')}}
+        </time>
+        <small id="status" data-status="{{account_db.status}}">({{account_db.status}})</small>
+      </h4>
+    </div>
+    <div class="col-sm-8">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="text-center h3" colspan="4">
+              {{account_db.public_repos_hu}} Repositories
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          # for repo_db in repo_dbs
+            <tr class="row-link {{'lead' if loop.index < 9 and repo_db.stars > 0}}" data-target="_blank" data-href="{{repo_db.url}}">
+              <td class="col-xs-12 ellipsis">
+                <span class="octicon {{'octicon-repo-forked' if repo_db.fork else 'octicon-repo'}}"></span>
+                {{repo_db.name}}
+              </td>
+              <td class="text-nowrap text-right"><span class="number">{{repo_db.stars_hu}}</span> <span class="octicon octicon-star"></span></td>
+              <td class="text-nowrap text-right text-muted hidden-xs"><span class="number">{{repo_db.forks_hu}}</span> <span class="octicon octicon-repo-forked"></span></td>
+              <td class="text-nowrap text-muted hidden-xs">{{repo_db.language}}</td>
+            </tr>
+          # endfor
+        </tbody>
+      </table>
+      {{utils.next_link(next_url, prev_url)}}
+    </div>
+  </div>
+# endblock

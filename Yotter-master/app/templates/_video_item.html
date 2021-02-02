@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="image">
+        <img src="{{video.videoThumb}}">
+    </div>
+    <div class="content">
+        <a class="video-title" href="{{url_for('video', id=video.id)}}">{{video.videoTitle}}</a>
+        <div class="meta">
+            <a href="{{video.channelUrl}}">{{video.channelName}}</a>
+        </div>
+        <div class="description">
+            {{video.description}}
+        </div>
+    </div>
+    <div class="extra content">
+        <span class="right floated">
+            <i class="eye icon"></i>
+            ‎‎{{video.views}}
+        </span>
+        <span class="right floated">
+            <i class="clock icon"></i>
+            {{video.timeStamp}}‎‎‎‎            ‎‎‎
+        </span>
+        <span>
+        <a href="{{video.videoUrl}}">
+            <i class="share square outline icon"></i>
+            Open
+        </a>
+        </span>
+    </div>
+</div>

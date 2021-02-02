@@ -1,0 +1,84 @@
+{% from 'attachments/_management_info_column.html' import render_attachment_info %}
+{% from 'events/timetable/balloons/_balloon_utils.html' import render_time_and_location, render_palette_picker %}
+
+<div class="balloon {{ 'event-locked' if event_locked }}">
+    <div class="title-container session-block">
+        <div class="title">
+            {{- block.session.title }}
+            {%- if block.title %}
+                <span class="balloon-subtitle">({{ block.title }})</span>
+            {%- endif -%}
+        </div>
+    </div>
+    <div class="description" data-display-href="{{ url_for('sessions.display_session', block.session) }}">
+        {{ block.session.description }}
+    </div>
+    <span class="hr"></span>
+    <div class="section-title-container">
+        <div class="title-header">
+            <div class="title-caption">{% trans %}Block{% endtrans %}</div>
+            {% if editable and can_manage_blocks %}
+                {% set title="'%s'" | format(block.title) if block.title else '' %}
+                <div class="group right entry-action-buttons hide-if-locked">
+                    <a class="i-link icon-edit js-dialog-action js-edit js-hide-balloon"
+                       title="{% trans %}Edit session block{% endtrans %}"
+                       data-title="{% trans %}Edit session block {{ title }}{% endtrans %}"></a>
+                    <a href="#" class="i-link icon-remove js-delete js-hide-balloon"
+                       title="{% trans %}Delete session block{% endtrans %}"
+                       data-title="{% trans %}Delete session block {{ title }}?{% endtrans %}"
+                       data-confirm="{% trans %}Are you sure you want to delete the session block {{ title }}?{% endtrans %}"></a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="title">{{ block.title }}</div>
+    </div>
+    {{ render_time_and_location(block, editable=(editable and can_manage_blocks), use_event_tz=editable) }}
+    <span class="hr"></span>
+    <div class="section-title-container">
+        <div class="title-header">
+            <div class="title-caption">{% trans %}Session{% endtrans %}</div>
+            <div class="group right entry-action-buttons">
+                {% if editable and not block.event.is_locked %}
+                    {% if can_manage_session %}
+                        {{ render_palette_picker(block.session, 'timetable.session_rest', color_list, is_session_timetable) }}
+                        <a class="i-link icon-edit js-dialog-action js-edit js-hide-balloon"
+                           title="{% trans %}Edit session{% endtrans %}"
+                           data-extra-params='{"edit_session": 1}'
+                           data-title="{% trans title=block.session.title %}Edit session '{{ title }}'{% endtrans %}"></a>
+                        <a class="i-link icon-shield js-hide-balloon"
+                           title="{% trans %}Manage session protection{% endtrans %}"
+                           data-href="{{ url_for('sessions.session_protection', block.session) }}"
+                           data-title="{% trans %}Manage session protection{% endtrans %}"
+                           data-ajax-dialog></a>
+                    {% endif %}
+                {% else %}
+                    <a class="icon-list i-link" title="{% trans %}View session details{% endtrans %}"
+                       href="{{ url_for('sessions.display_session', block.session,
+                                        _anchor=block.start_dt.astimezone(block.event.tzinfo).strftime('%Y%m%d')) }}"></a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="title">{{ block.session.title }}</div>
+        {% if editable and can_manage_session %}
+            <dl class="i-data-list thirty-seventy">
+                <dt>{% trans %}Material{% endtrans %}</dt>
+                <dd>{{ render_attachment_info(block.session) }}</dd>
+            </dl>
+        {% endif %}
+    </div>
+    <span class="hr"></span>
+    <div class="attribute">
+        <div class="attribute-title">
+            {%- trans %}Contributions{% endtrans %}
+            <span class="badge">{{ block.contribution_count -}}</span>
+        </div>
+    </div>
+    {% if editable %}
+        <div class="bottom-link">
+            <a class="right js-switch-to-interval js-hide-balloon">
+                {% trans %}Go to session block timetable{% endtrans %}
+                <i class="icon-arrow-right-sparse"></i>
+            </a>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+# {{{ application.name }}} (c) {{{ author.name }}}
+
+from nose.plugins.attrib import attr
+from flask_diamond import db
+from .mixins import DiamondTestCase
+from ..models import User
+
+
+class CRUDMixinTestCase(DiamondTestCase):
+    "Coverage for CRUD Mixin"
+
+    def test_create(self):
+        # "test CRUDMixin Create and Read"
+        user = User.create(email="user@example.com", password="password")
+        self.assertIsNotNone(user)
+
+    def test_find(self):
+        # "test CRUDMixin find"
+        User.create(email="user@example.com", password="password")
+        user = User.find(email="user@example.com")
+        self.assertIsNotNone(user)
+        self.assertEqual(user.email, "user@example.com")
+
+    def test_get_by_id(self):
+        # "test CRUDMixin get_by_id"
+        User.create(email="user@example.com", password="password")
+        user = User.get_by_id(1)
+        self.assertIsNotNone(user)
+        self.assertEqual(user.email, "user@example.com")
+
+    def test_update(self):
+        # "test CRUDMixin Update"
+        user = User.create(email="user@example.com", password="password")
+
+        # set the mass of Earth
+        user.update(confirmed=True)
+
+        # retrieve it from the db again
+        user = User.find(email="user@example.com")
+        self.assertEqual(user.confirmed, True)
+
+    def test_delete(self):
+        # "test CRUDMixin Delete"
+        # create and immediately delete the object
+        user = User.create(email="user@example.com", password="password")
+        user.delete()
+
+        # attempt to retrieve it and verify that it fails
+        user = User.find(email="user@example.com")
+        self.assertIsNone(user)
+
+    @attr("skip")
+    def test_create_commit_false(self):
+        # "ensure database commits can be deferred"
+        User.create(email="user@example.com", password="password", _commit=False)
+
+        user = User.get_by_id(1)
+        print(user)
+        print(user.email)
+        # assert user is None
+
+        db.session.commit()
+
+        user = User.find(email="user@example.com")
+        self.assertIsNotNone(user)

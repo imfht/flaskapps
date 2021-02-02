@@ -1,0 +1,31 @@
+<table class="table table-striped table-bordered table-hover gh-list">
+  # if order
+    <thead>
+      <tr class="text-nowrap">
+        <th class="text-center">Rank</th>
+        <th class="text-center col-xs-12">Name</th>
+        <th class="text-center">
+          # if 'star' in order
+            Stars
+          # else
+            <a href="{{url_for('organization')}}">Stars</a>
+          # endif
+        </th>
+        <th class="text-center hidden-xs">
+          # if 'repo' in order
+            Repos
+          # else
+            <a href="{{url_for('organization', order='repos')}}">Repos</a>
+          # endif
+        </th>
+        <th class="text-center hidden-xs">Language</th>
+      </tr>
+    </thead>
+  # endif
+  <tbody>
+    # for account_db in organization_dbs
+      # set index = loop.index
+      # include 'account/item_account_bit.html'
+    # endfor
+  </tbody>
+</table>

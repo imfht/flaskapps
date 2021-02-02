@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="container">
+        <div class="card-deck">
+            <div class="card dark-card text-center">
+                <div class="card-body welcome-msg">
+                    <h4 class="card-title">Submissions</h4>
+                    <i class="fa fa-viruses"></i>
+                    <p id="sub-count">{{ sub_count }}</p>
+                </div>
+            </div>
+            <div class="card dark-card welcome-msg cpointer" onclick="window.open('/api','api');">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Explore the API</h4>
+                    <i class="fa fa-cogs"></i>
+                    <p>Create an account and query our API in your projects.</p>
+                </div>
+            </div>
+            <div class="card dark-card welcome-msg cpointer" onclick="window.open('https://github.com/crhenr/freki', 'source');">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Run your own instance</h4>
+                    <i class="fa fa-server"></i>
+                    <p>Get Freki's source code and run it on your server.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card dark-card">
+            <div class="card-body">
+                <span class="zippasswd float-right">ZIP password: <b>infected</b></span>
+                <h3>Latest submissions</h3>
+
+                <form action="/analysis" method="GET" class="row search-form">
+                    <div class="input-group col-md-8">
+                        <input class="form-control py-2" type="search" placeholder="SHA-1" name="sha1" id="search-bar" required/>
+                        <span class="input-group-append">
+                            <button class="btn btn-outline search-btn" type="submit"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+
+                <div class="row">
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <p class="custom-warning notfound-msg">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                    <table class="table table-borderless custom-table table-hover table-responsive-lg">
+                        <thead>
+                            <tr>
+                                <th>SHA1</th>
+                                <th>File name</th>
+                                <th>User</th>
+                                <th>Submit date</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in last_submissions %}
+                            <tr>
+                                <td><a href="/analysis?sha1={{ i.submission.sha1 }}&name={{ i.name }}">{{ i.submission.sha1 }}</a></td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.user.username }}</td>
+                                <td>{{ i.sub_date }}</td>
+                                <td align="center"><a href="/file/{{ i.submission.sha1 }}/{{ i.submission.sha1 }}.zip" class="custom-link" data-toggle="tooltip" data-placement="bottom" title="Download sample"><i class="fa fa-download"></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

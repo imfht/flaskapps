@@ -1,0 +1,49 @@
+{% extends theme('mobile/layout.html') %}
+
+{% block title %}{{ article.seotitle or article.title }}{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ article.link }}" />
+  {% if article.get_prev %}<link rel="prev" title="{{ article.get_prev.title }}" href="{{ article.get_prev.link }}" />{% endif %}
+  {% if article.get_next %}<link rel="next" title="{{ article.get_next.title}}" href="{{ article.get_next.link }}" />{% endif %}
+{%- endblock %}
+
+{% block main %}
+
+<h2 class="t1">{{ article.title }}</h2>
+<p class="a"> {{ article.created|date('%Y-%m-%d') }} | <a  href="{{ article.category.link }}">{{ article.category.name }}</a></p>
+<div class="content">
+{{ article.body_html|safe }}
+
+{% if article.tags %}
+<p>标签: &nbsp; {% for tag in article.tags %}<a href="{{ tag.link }}">{{ tag.name }}</a>{%if not loop.last %},&nbsp;{% endif %}{% endfor %}. </p>
+{% endif %}
+{% if article.topic %}
+<p>专题: &nbsp; <a href="{{ article.topic.link }}">{{ article.topic.name }}</a></p>
+{% endif %}
+
+</div>
+
+<div id="m">
+{% if article.get_prev or article.get_next %}
+  <h3>相邻文章:</h3>
+  <ul>
+  {% if article.get_prev %}<li>上一篇: <a href="{{ article.get_prev.link }}">{{ article.get_prev.title }}</a></li>{% endif %}
+  {% if article.get_next %}<li>下一篇: <a href="{{ article.get_next.link }}">{{ article.get_next.title }}</a></li>{% endif %}
+  </ul>
+{% endif %}
+
+  {% with related = get_related_articles(article.id, 15) %}
+    {% if related %}
+    <h3>相关文章:</h3>
+    <ul>
+      {% for article in related %}<li><a href="{{ article.link }}" title="{{ article.title }}">{{ article.title }}</a> ({{ article.created|date('%Y-%m-%d') }})</li>{% endfor %}
+    </ul>
+    {% endif %}
+  {% endwith %}
+</div>
+
+{% endblock %}
+
+{% block nav %}{{ nav_by_category(article.category) }}<b>&#187;</b>正文{% endblock %}
+

@@ -1,0 +1,17 @@
+# System
+.DS_Store
+
+# Python
+.ipynb_checkpoints/
+__pycache__/
+*.ipynb
+*.py[cod]
+
+# Env
+.vscode/
+.venv/
+.python-version
+
+# Misc
+*.sqlite
+rpi_camera_webstream.py

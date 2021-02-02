@@ -1,0 +1,73 @@
+{% extends "admin/models/base_filters.html" %}
+
+{% block tab_index_class %}active{% endblock %}
+
+{% block extra_tabs %}
+    <li class="dropdown" style="float:right">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">With selected... <span class="caret" /></a>
+      <ul class="dropdown-menu pull-right">
+        <li><a href="#" onclick="Admin.index_submit('export');">Export</a></li>
+        <li><a href="#" onclick="Admin.index_submit('delete');">Delete</a></li>
+        {% if model_admin.actions %}{% for action in model_admin.actions %}
+          <li><a href="#" onclick="Admin.index_submit('{{ action.name }}');">{{ action.name }}</a></li>
+        {% endfor %}{% endif %}
+      </ul>
+    </li>
+    {% include "admin/includes/filter_dropdown.html" %}
+{% endblock %}
+
+{% block content %}
+  {% include "admin/includes/filter_widgets.html" %}
+
+  <form action="." class="form-horizontal" id="model-list" method="post"><input type="hidden" name="action" value="" />
+  {% if csrf_token %}{# Support for flask-seasurf #}<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">{% endif %}
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th class="check first shrink"><input type="checkbox" name="xxx" onchange="javascript:$('td input[type=checkbox]').attr('checked', this.checked);" /></th>
+        {% if model_admin.columns %}
+          {% for column in model_admin.columns %}
+            {% if ordering == column %}
+              {% set sort_by = '-'+column %}
+            {% else %}
+              {% set sort_by = column %}
+            {% endif %}
+            <th>{% if model_admin.column_is_sortable(column) %}<a href="./?{{ update_querystring(request.query_string, 'ordering', sort_by)|safe() }}">{% endif %}{{ get_verbose_name(model_admin.model, column) }}{% if model_admin.column_is_sortable(column) %}</a>{% endif %}</th>
+          {% endfor %}
+        {% else %}
+          <th>{{ model_admin.get_display_name() }}</th>
+        {% endif %}
+        <th class="last shrink"></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for object in query.get_list() %}
+      <tr>
+        <td class="check"><input type="checkbox" name="id" value="{{ object._pk }}" /></td>
+        {% if model_admin.columns %}
+          {% for column in model_admin.columns %}
+            {% if loop.index == 1 %}
+              <td><a href="{{ url_for(model_admin.get_url_name('edit'), pk=object._pk) }}">{{ get_model_field(object, column) }}</a></td>
+            {% else %}
+              <td>{{ get_model_field(object, column) }}</td>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <td><a href="{{ url_for(model_admin.get_url_name('edit'), pk=object._pk) }}">{{ object }}</a></td>
+        {% endif %}
+        <td class="last links">
+          {% block object_actions scoped %}
+          <ul class="inline">
+            {% block object_action_links %}{% endblock %}
+            <li><a href="{{ url_for(model_admin.get_url_name('edit'), pk=object._pk) }}">Edit</a></li>
+            <li><a href="{{ url_for(model_admin.get_url_name('delete'), id=object._pk) }}">Delete</a></li>
+          </ul>
+          {% endblock %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </form>
+  {% include "admin/includes/pagination.html" %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+{% raw %}
+
+<div class="">
+  <div class="">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- tab headers -->
+        <div id="tab-headers" class="float-left">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <span>
+              <a href="#" alt="Toggle sidebar" @click="showSidebar = !showSidebar"
+                style="font-size: 20px; font-style: bold; padding-right:15px;"> 
+                <span v-if="showSidebar" style="font-size: small;">« Tree</span>
+                <span v-else>»</span>
+              </a>
+            </span>
+            <li class="nav-item" v-for="openTabHeader in openTabHeaders">
+              <button class="close closeTab" type="button" @click="closeTab(openTabHeader)">×</button>
+              <router-link v-bind:class="{'nav-link': true, 'active': openTabPath == openTabHeader}" 
+                :to="'/n/' + encodeURIComponent(openTabHeader)" :title="openTabHeader">
+                {{ openTabHeader|shortenTabName }}
+              </router-link>
+            </li>
+
+            <li class="nav-item">
+              <button class="close closeTab" type="button" @click="addItem({path: '/'})">+</button>
+            </li>
+          </ul> <!-- /tab headers -->
+        </div> <!-- /tab headers -->
+
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade" id="profile" role="tabpanel" 
+               aria-labelledby="profile-tab">...</div>
+          <div class="tab-pane fade show active" id="home" role="tabpanel" 
+               aria-labelledby="home-tab">
+            <div id="div-editor">
+              <p id="message"></p>
+              <router-view></router-view>
+            </div>
+          </div>
+        </div> <!-- myTabContent -->
+      </div> <!-- /col-md-12 -->
+
+    </div>
+  </div>  
+</div>
+
+{% endraw %}
+{% endblock %}

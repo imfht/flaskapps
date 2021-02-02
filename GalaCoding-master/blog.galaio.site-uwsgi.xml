@@ -1,0 +1,12 @@
+<uwsgi>
+    <pythonpath>C:\Users\GalaIO\Desktop\GalaIO\GalaCoding</pythonpath>
+    <module>manage</module>
+    <callable>app</callable>
+    <socket>127.0.0.1:8080</socket>
+    <master/>
+    <processes>4</processes>
+    <memory-report/>
+    <daemonize>logs/uwsgi.log</daemonize>
+    <buffer-size>16384</buffer-size>
+    <pidfile>pids/uwsgi.pid</pidfile>
+</uwsgi>

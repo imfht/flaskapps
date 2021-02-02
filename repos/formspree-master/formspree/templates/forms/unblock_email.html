@@ -1,0 +1,45 @@
+{% extends 'layouts/message.html' %}
+
+{% block head_scripts %}
+  <script type="text/javascript">
+    var onloadCallback = function() {
+      grecaptcha.render('recaptcha', {
+        'sitekey' : {{ config.RECAPTCHA_KEY|tojson|safe }},
+        'callback' : function () {
+          document.querySelector('form').submit()
+        },
+        'size': window.innerWidth < 400 ? 'compact' : 'normal'        
+      });
+    }
+  </script>
+{% endblock head_scripts %}
+
+{% block base %}
+  <div class="container narrow card">
+    <div class="container" id="header">
+      <div class="col-1-1 header info">
+        <i class="ion ion-hammer"></i>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="col-1-1">
+
+        <h1>Unblock address</h1>
+        <p>Unblock <i>{{ email }}</i> so it can receive email from Formspree?</h1>
+
+        <form 
+          action="{{ url_for('unblock_email', email=email) }}"
+          method="POST"
+        >
+          <div id="recaptcha" style="text-align:center; display:inline-block"></div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+{% endblock base %}
+
+{% block tail_scripts %}
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+{% endblock tail_scripts %}

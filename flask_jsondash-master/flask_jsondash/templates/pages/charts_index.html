@@ -1,0 +1,135 @@
+{% extends "layouts/charts_base.html" %}
+
+{% block chart_body %}
+{%- macro item(view) %}
+<li class="list-group-item chart-list-item clearfix">
+    <span class="fa fa-bar-chart"></span>
+    <a href="{{ url_for('jsondash.view', c_id=view.id) }}">
+        <strong>{{ view.name }}</strong> - Created {{ view.date }}
+        {% if view.created_by %} by {{ view.created_by }}{% endif %}
+        ({{ view.modules|length }} modules)
+    </a>
+    <div class="pull-right">
+        <form class="form-inline" action="{{ url_for('jsondash.clone', c_id=view.id) }}" method="POST">
+            <button class="btn btn-success btn-xs">
+                <span class="fa fa-clone"></span> Clone
+            </button>
+        </form>
+        <form class="form-inline delete-dashboard" action="{{ url_for('jsondash.delete', c_id=view.id) }}" method="POST">
+            <button class="btn btn-danger btn-xs">
+                <span class="fa fa-times"></span> Delete
+            </button>
+        </form>
+    </div>
+</li>
+{% endmacro -%}
+
+<div class="row">
+    <div class="col-md-12">
+        {% if total > 0 %}
+            <div class="row">
+                <div class="col-md-6 text-right">
+                    <h1 class="lead">Showing <strong>{{ "{:,}".format(total) }}</strong> {{ 'dashboards' if total > 1 else 'dashboard' }} with <strong>{{ "{:,}".format(total_modules) }}</strong> charts.
+                        <p>
+                            <small>
+                                {% if filter_dashboards and username %}
+                                    Only showing <strong>your</strong> dashboards ({{ username }})
+                                    {% if global_dashboards %}
+                                        and all <strong>global</strong> dashboards
+                                    {% endif %}
+                                {% else %}
+                                    Not filtering any dashboards.
+                                {% endif %}
+                            </small>
+                        </p>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <h1>
+                        <a href="#new-view-form" class="btn btn-md btn-success" id="add" data-toggle="collapse">
+                            <span class="fa fa-plus"></span> Create new dashboard
+                        </a>
+                    </h1>
+                </div>
+            </div>
+        {% endif %}
+        <div id="new-view-form" class="{{ 'collapse' if views else ''}} row">
+            <div class="col-md-12">
+                {% if total == 0 %}
+                    <div class="alert alert-warning text-center">
+                        <p>No dashboards exist. Create one below to get started.</p>
+                    </div>
+                {% endif %}
+                <h3>Create dashboard</h3>
+                <div class="well text-center">
+                    {% include "partials/dashboard-global-form.html" %}
+                </div>
+            </div>
+        </div>
+
+        {% for cat, subviews in views.items() %}
+            {% if subviews %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ cat }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group chart-list">
+                            {% for view in subviews %}
+                                {% set is_user_view = username == view.created_by %}
+                                {% set show_global_dash = global_dashboards and view.created_by == global_dashuser %}
+                                {% if filter_dashboards %}
+                                    {% if show_global_dash or is_user_view %}
+                                        {{ item(view) }}
+                                    {% endif %}
+                                {% else %}
+                                    {{ item(view) }}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% if paginator %}
+            {% if paginator.count > paginator.limit %}
+                <div class="text-center">
+                    <ul class="pagination pagination-small">
+                        {% if paginator.curr_page > 0 %}
+                            <li>
+                                <a href="{{ url_for('jsondash.dashboard') }}?page={{ paginator.curr_page }}&amp;per_page={{ paginator.limit }}">
+                                    <span class="fa fa-angle-left"></span>
+                                    Previous
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% for page in paginator.num_pages %}
+                            <li class="{{ 'active' if page == paginator.curr_page + 1 else '' }}">
+                                <a href="{{ url_for('jsondash.dashboard') }}?page={{ page }}&amp;per_page={{ paginator.limit }}">{{ page }}</a>
+                            </li>
+                        {% endfor %}
+                        {% if paginator.curr_page < paginator.num_pages|length - 1 %}
+                            <li>
+                                <a href="{{ url_for('jsondash.dashboard') }}?page={{ paginator.curr_page + 2 }}&amp;per_page={{ paginator.limit }}">
+                                    Next
+                                    <span class="fa fa-angle-right"></span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <p>
+                        <small class="paginator-status">
+                            Showing
+                            <strong>
+                                {{ paginator.skip }}-{{ paginator.next }}
+                            </strong>
+                            of <strong>{{ paginator.count }}</strong> results
+                        </small>
+                    </p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

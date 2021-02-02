@@ -1,0 +1,5 @@
+.DS_Store
+*.pyc
+*.pyo
+docs/_build
+dist

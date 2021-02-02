@@ -1,0 +1,24 @@
+[data-widget="atb"] {
+  height: 100%;
+  padding: 5px;
+  background: #90ca77;
+  text-align: center;
+}
+[data-widget="atb"] h1 {
+  font-size: 55px;
+  margin: 0;
+}
+[data-widget="atb"] h2 {
+  font-size: 20px;
+}
+[data-widget="atb"] table {
+  margin: 0 10px 0 10px;
+}
+[data-widget="atb"] .time {
+  text-align: right;
+  white-space: nowrap;
+}
+[data-widget="atb"] .destination {
+  text-align: left;
+  width: 100%;
+}

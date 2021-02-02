@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-lg-9 col-md-9 col-sm-7 col-xs-5 left-bar">
+  {% block left %}
+      {% if num_searches is defined %}
+        <h4 class="highlight">We have found {{ num_searches }} search results </h4>
+        <br>
+      {% endif %}
+      <div class="spacer"></div>
+      {% for thread in thread_paginator.items %}
+        <div name="{{ thread.id }}" class="row listing-row">
+          <div class="col-lg-1 listing-vote-box">  
+              <div class="">
+                  {% if user is defined and user != None and thread.has_voted(user.id) %}
+                      <a data-voted="true" style="color:#eb6864;" href="javascript:void(0)" 
+                          class="listing-vote-button">▲</a>
+                  {% else %}
+                      <a data-voted="false" style="color:#000;" href="javascript:void(0)" 
+                          class="listing-vote-button">▲</a>
+                  {% endif %}
+              </div>
+              <div class="listing-votes-number">
+                  {{ thread.votes }}
+              </div>
+          </div>
+          <div class="col-lg-1 listing-thumbnail-box">
+              <img class="listing-image" src="{{ thread.thumbnail|replace("http://", "https://") }}"/>
+          </div>
+          <div class="col-lg-8 listing-text">  
+              {% if thread.link %}
+              <a href="{{ thread.link }}" class="listing-title">
+              {% else %}
+              <a href="{{ config.ROOT_URL }}/threads/{{ thread.subreddit.name }}/{{ thread.id }}/{{ thread.title|truncate(100)|replace(' ', '_') }}" class="listing-title">
+              {% endif %}
+                <h4 class="listing-title-text">{{ thread.title }}</h4>
+              </a>
+
+              <div class="post-listing-meta">
+                  <a href="{{ config.ROOT_URL }}/threads/{{ thread.subreddit.name }}/{{ thread.id }}/{{ thread.title|truncate(100)|replace(' ', '_') }}">
+                  {{ thread.comments.all()|length() }} comments</a>,
+                  {{ thread.pretty_date() }}, by 
+                  <a href="{{ url_for('users.home_page', 
+                        username=thread.user.username) }}">
+                        {{ thread.user.username }}</a> 
+                    in
+                    <a href="{{ url_for('subreddits.permalink', 
+                        subreddit_name=thread.subreddit.name) }}">
+                        {{ thread.subreddit.name }}
+                    </a>
+              </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <ul class="pager pull-left">
+        {% if thread_paginator.has_prev %}
+            <li><a href="?page={{ thread_paginator.prev_num }}">prev</a></li>
+        {% else %}
+            <li style="opacity:0.3;"><a>prev</a></li>
+        {% endif %}
+        {% if thread_paginator.has_next %}
+            <li><a href="?page={{ thread_paginator.next_num }}">next</a></li>
+        {% else %}
+            <li style="opacity:0.3;"><a>next</a></li>
+        {% endif %}
+      </ul>
+  {% endblock %}
+</div>
+
+<div class="col-lg-3 right-bar">
+  {% block right %}
+    {% if user is defined and user != None %}
+        <!-- -->
+    {% else %}
+        <!-- <h4 class="pre-reg-info">Please register or login to post!</h4>-->
+    {% endif %}
+    {% block create_buttons %}
+    <div class="row">
+        {% block user_dashboard %}
+        {% endblock %}
+        <form method="GET" action="/search/" class="" role="search">
+            <div class="form-group">
+                <input type="text" name="query" class="reddit-search form-control" 
+                    placeholder="Search reddit!">
+            </div>
+            <!--<button type="submit" class="btn btn-default">Submit</button>-->
+        </form> 
+        {% if cur_subreddit is defined %}
+            <a href="{{ url_for('threads.submit', subreddit_name=cur_subreddit.name) }}">
+                <button class="btn btn-primary submit-post-button">
+                    submit to {{ cur_subreddit.name }}</button>
+            </a>
+        {% else %}
+            <a href="{{ url_for('threads.submit', subreddit_name='frontpage') }}">
+                <button class="btn btn-primary submit-post-button">submit post</button></a>
+        {% endif %} 
+        </div>
+        <div class="row">
+            <a href="{{ url_for('subreddits.submit') }}">
+                <button type="button" class="btn btn-primary 
+            inverse-white-button add-subreddit-button">create community +</button></a>
+    </div>
+
+    {% if cur_subreddit is defined %}
+    <p class="subreddit-desc">
+        {{ cur_subreddit.desc }}
+    </p>
+    {% endif %}
+
+    {% endblock %}
+
+    <h4 class="subreddit-desc">Subreddits</h4>
+    <ul id="subreddit-list">
+        {% for subreddit in subreddits[:10] %}
+        <li><a href="/r/{{ subreddit.name }}">{{ subreddit.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a class="align-right-col" href="{{ url_for('subreddits.view_all') }}">view all</a>
+    <i>
+    <div class="align-right-col byline-lucas">Built by: <a href="https://codelucas.com">Lucas Ou-Yang</a>.
+        <br>
+        <a href="https://github.com/codelucas/flask_reddit">
+            View code on Github</a>.</div>
+    </i>
+  {% endblock %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $(document).on('click', 'a.listing-vote-button', function() {
+        var $vote_button = $(this); // cache this! can't access in callback!
+        var thread_id = $vote_button.parent().parent().parent().attr('name');
+        var post_to = '/apis/threads/vote/'; 
+        if ($vote_button.attr("data-voted") === "true") {
+            $vote_button.css("color", "#000");
+            $vote_button.attr("data-voted", "false");
+        } else {
+            $vote_button.css("color", "rgb(235, 104, 100)");
+            $vote_button.attr("data-voted", "true");
+        }
+        {% if user is defined and user != None %}
+            $.post(post_to, { thread_id: thread_id },
+                function(response) {
+                    var new_vote_count = response.new_votes.toString();
+                    var vote_status = response.vote_status;
+                    $vote_button.parent().parent().
+                        children('div.listing-votes-number').html(new_vote_count);
+                }, 'json'
+            );
+        {% else %}
+            alert("You must be logged in to do that!");
+        {% endif %}
+    });
+    //
+    //
+});
+</script>
+{% endblock %}

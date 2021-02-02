@@ -1,0 +1,24 @@
+{% extends 'forms/base_widget.html' %}
+
+
+{% block html %}
+    <div class="i-form-field-fixed-width">
+        <div id="category-title-{{ field.id }}" class="text-holder-box flexrow f-a-center" data-tooltip-anchor></div>
+        <a class="i-button" id="categorynav-button-{{ field.id }}"
+           data-title='{% trans %}Choose category{% endtrans %}'>
+            {%- trans %}Choose category{% endtrans -%}
+        </a>
+        <input type="hidden" id="{{ field.id }}" name="{{ field.name }}" value="{{ field._value() | tojson | forceescape }}">
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        setupCategoryPickerWidget({
+            fieldId: {{ field.id | tojson }},
+            navigatorCategoryId: {{ field.navigator_category_id | tojson }},
+            requireEventCreationRights: {{ field.require_event_creation_rights | tojson }},
+        });
+    </script>
+{% endblock %}

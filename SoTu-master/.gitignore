@@ -1,0 +1,15 @@
+# ignore images and extracted features
+data
+uploads
+
+# ignore virtualenv
+venv
+
+# ignore pycache
+__pycache__
+
+# ignore pickle files
+*.pkl
+
+# ignore vscode
+.vscode

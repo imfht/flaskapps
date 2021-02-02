@@ -1,0 +1,116 @@
+{% extends 'layout/admin_page.html' %}
+{% from 'forms/_form.html' import form_header, form_rows, form_footer, simple_form %}
+{% from 'users/_labels.html' import labels %}
+
+{% block title %}{% trans %}Users{% endtrans %}{% endblock %}
+
+{% block title_actions %}
+    <a class="i-button borderless icon-settings arrow js-dropdown" data-toggle="dropdown"></a>
+    <ul class="i-dropdown">
+        <li>
+            <a href="#"
+               data-title="{% trans %}User settings{% endtrans %}"
+               data-href="{{ url_for('.users_admin_settings') }}"
+               data-qtip-position="right"
+               data-ajax-dialog>
+                {% trans %}User settings{% endtrans %}
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{%- block content %}
+    <div class="i-box-group vert">
+        <div class="i-box">
+            <div class="i-box-header">
+                <div class="i-box-title">
+                    {%- trans %}Manage users{% endtrans -%}
+                </div>
+                <div class="i-box-buttons toolbar right">
+                    <div class="group">
+                        <a class="i-button icon-users"
+                           href="{{ url_for('.users_merge') }}">
+                            {% trans %}Merge users{% endtrans %}
+                        </a>
+                    </div>
+                    <div class="group">
+                        <a href="#"
+                           class="i-button icon-plus"
+                           data-href="{{ url_for('.users_create') }}"
+                           data-title="{% trans %}Create new account{% endtrans %}"
+                           data-ajax-dialog>
+                            {% trans %}Create new account{% endtrans %}
+                        </a>
+                    </div>
+                    {% if num_reg_requests or indico_config.LOCAL_MODERATION %}
+                        <div class="group">
+                            <a class="i-button icon-info" href="{{ url_for('.registration_request_list') }}">
+                                {% trans %}Registration requests{% endtrans %}
+                                <span class="badge">{{ num_reg_requests }}</span>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <span class="i-box-content">
+                <div class="info-message-box">
+                    <div class="message-text">
+                        {%- trans -%}
+                            There are {{ num_of_users }} users, {{ num_deleted_users }} of which are deleted
+                        {%- endtrans -%}
+                    </div>
+                </div>
+                <h2>{% trans %}Search users{% endtrans %}</h2>
+                {{ form_header(form) }}
+                {{ form_rows(form) }}
+                {% call form_footer(form) %}
+                    <input class="i-button big highlight" type="submit" value="{% trans %}Search{% endtrans %}">
+                {% endcall %}
+                {% if search_results is not none %}
+                    {% if not search_results %}
+                        <h3>{% trans %}No users could be found.{% endtrans %}</h3>
+                    {% else %}
+                        <h3>
+                            {% trans count=search_results|count -%}
+                                There is one user matching your search criteria.
+                            {%- pluralize -%}
+                                There are {{ count }} users matching your search criteria.
+                            {%- endtrans %}
+                        </h3>
+                        <ul class="group-list">
+                            {% for user_entry in search_results -%}
+                                <li class="flexrow f-a-center">
+                                    <img src="{{ user_entry.avatar_url }}" class="ui image circular profile-picture" alt="">
+                                    <span>
+                                        {%- if user_entry.profile_url -%}
+                                            <a href="{{ user_entry.profile_url }}">{{ user_entry.full_name }}</a>
+                                        {%- else -%}
+                                            {{ user_entry.full_name }}
+                                        {%- endif -%}
+                                    </span>
+                                    {% if user_entry.user %}
+                                        <span>
+                                            {{ labels(user_entry.user) }}
+                                        </span>
+                                    {% endif %}
+                                    <span class="right text-right">
+                                        {% if user_entry.user and user_entry.user.is_system %}
+                                            <span class="ui tiny label">
+                                                {%- trans %}System{% endtrans -%}
+                                            </span>
+                                        {% else %}
+                                            {{ user_entry.email }}
+                                        {% endif %}
+                                        {% if user_entry.affiliation -%}
+                                            ({{ user_entry.affiliation }})
+                                        {%- endif -%}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{%- endblock %}

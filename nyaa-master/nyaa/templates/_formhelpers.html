@@ -1,0 +1,145 @@
+{% macro render_field(field, render_label=True) %}
+{% if field.errors %}
+	<div class="form-group has-error">
+{% else %}
+	<div class="form-group">
+{% endif %}
+		{% if render_label %}
+		{{ field.label(class='control-label') }}
+		{% endif %}
+		{{ field(title=field.description,**kwargs) | safe }}
+		{% if field.errors %}
+			<div class="help-block">
+				{% if field.errors|length < 2 %}
+					{% for error in field.errors %}
+						{{ error }}
+					{% endfor %}
+				{% else %}
+					<ul>
+						{% for error in field.errors %}
+							<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+{% endmacro %}
+
+
+{% macro render_markdown_editor(field, field_name='') %}
+{% if field.errors %}
+	<div class="form-group has-error">
+{% else %}
+	<div class="form-group">
+{% endif %}
+	<div class="markdown-editor" id="{{ field_name }}-markdown-editor" data-field-name="{{ field_name }}">
+		{{ field.label(class='control-label') }}
+		<a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" class="small" target="_blank">Markdown supported</a>
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#{{ field_name }}-tab" role="tab" data-toggle="tab">
+					Write
+				</a>
+			</li>
+			<li role="presentation">
+				<a href="#{{ field_name }}-preview" id="{{ field_name }}-preview-tab" role="tab" data-toggle="tab">
+					Preview
+				</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="{{ field_name }}-tab" data-markdown-target="#{{ field_name }}-markdown-target">
+				{# Render this field manually, because we need to escape the inner text #}
+				<textarea class="form-control markdown-source" id="{{ field.id }}" name="{{ field.name }}">
+				{{- (field.data or "") | escape | replace('\r\n', '\n') | replace('\n', '&#10;'|safe) -}}
+				</textarea>
+				{% if field.errors %}
+					<div class="help-block">
+						{% if field.errors|length < 2 %}
+							{% for error in field.errors %}
+								{{ error }}
+							{% endfor %}
+						{% else %}
+							<ul>
+								{% for error in field.errors %}
+									<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+			<div role="tabpanel" class="tab-pane" id="{{ field_name }}-preview">
+				<div class="well" id="{{ field_name }}-markdown-target"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endmacro %}
+
+
+{% macro render_upload(field) %}
+{% if field.errors %}
+	<div class="form-group has-error">
+{% else %}
+	<div class="form-group">
+{% endif %}
+		<label class="control-label" for="torrent_file">Torrent file</label>
+		<div class="input-group">
+			<label for="{{ field.id }}" class="input-group-btn">
+				<span class="btn btn-default">Browse&hellip;</span>
+			</label>
+			<input type="text" class="form-control" readonly>
+		</div>
+		<div class="sr-only">
+			{{ field(title=field.description,**kwargs) | safe }}
+		</div>
+		{% if field.errors %}
+			<div class="help-block">
+				{% if field.errors|length < 2 %}
+					{% for error in field.errors %}
+						{{ error }}
+					{% endfor %}
+				{% else %}
+					<ul>
+						{% for error in field.errors %}
+							<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+{% endmacro %}
+
+{% macro render_menu_with_button(field, button_label='Apply') %}
+{% if field.errors %}
+	<div class="form-group has-error">
+{% else %}
+	<div class="form-group">
+{% endif %}
+		{{ field.label(class='control-label') }}
+		<div class="input-group input-group-sm">
+			{{ field(title=field.description, class_="form-control",**kwargs) | safe }}
+			<div class="input-group-btn">
+				<button type="submit" class="btn btn-primary">{{ button_label }}</button>
+			</div>
+		</div>
+		{% if field.errors %}
+			<div class="help-block">
+				{% if field.errors|length < 2 %}
+					{% for error in field.errors %}
+						{{ error }}
+					{% endfor %}
+				{% else %}
+					<ul>
+						{% for error in field.errors %}
+							<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+{% endmacro %}

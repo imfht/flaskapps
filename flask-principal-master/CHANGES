@@ -1,0 +1,72 @@
+Flask-Principal Changelog
+=========================
+
+Here you can see the full list of changes between each Flask-Principal release.
+
+Version 0.4.0
+-------------
+
+Not released yet
+
+- Added Python 3 support
+- Dropped support for Python 2.5
+
+Version 0.3.5
+-------------
+
+Released April 3rd 2013
+
+- Fixed possible bug with ``AnonymousIdentity`` supplying "anon" as the username
+- Changed Indentity ``name`` property to ``id`` to be more generic
+
+
+Version 0.3.4
+-------------
+
+Released February 1st 2013
+
+- Add ``__repr__`` method to Identity and Permission classes
+- Optimized ``_is_static_resource`` method
+
+
+Version 0.3.3
+-------------
+
+Released September 4th 2012
+
+- Add ``init_app`` method to accomodate usage with a factory pattern.
+
+
+Version 0.3.2
+-------------
+
+Released August 25th 2012
+
+- Update to check for ``static_url_path`` in Flask 0.9
+
+
+Version 0.3.1
+-------------
+
+Released August 16th 2012
+
+- Fixed bug with re-raising exceptions/tracebacks
+
+
+Version 0.3
+-----------
+
+Released June 20th 2012
+
+- Python 2.5/GAE support
+- New extension structure
+- Added ignore_static option
+- Updated docs
+
+
+Version 0.2
+-----------
+
+Initial development by Ali Asfshar. `Original repository <https://bitbucket.org/aafshar/flask-principal-main>`_
+
+

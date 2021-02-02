@@ -1,0 +1,10 @@
+[program:tangerinebot]
+command=/home/ubuntu/.virtualenvs/tangerine/bin/python /home/ubuntu/tangerine/tangerine.py
+autostart=true
+autorestart=true
+stopsignal=QUIT
+stopasgroup=true
+killasgroup=true
+stdout_logfile=/var/log/tangerinebot/tangerinebot.log
+exitcodes=0
+stopwaitsecs = 60

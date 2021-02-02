@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+<h1>Search</h1>
+
+{% if q == "%" %}
+    <p>Your search for the answer to life the universe and everything returned 42 results.</p>
+{% else %}
+    <p>Your search for <b>{{ q }}</b> had {% if jams or games or users %}the following{% else %}no{% endif %} results.</p>
+{% endif %}
+
+<div class="row-fluid">
+    <div class="span4">
+        <h2>{{ jams | length }} Jam{{ "" if jams | length == 1 else "s" }}</h2>
+        {% if jams %}
+        <ul>
+            {% for jam in jams %}
+            <li>
+                {{ jam.get_link() }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No jams matched.</p>
+        {% endif %}
+
+    </div>
+    <div class="span4">
+
+        <h2>{{ games | length }} Game{{ "s" if games | length >= 1 else "" }}</h2>
+        {% if games %}
+            <ul>
+                {% for game in games %}
+                    <li>
+                        <a href="{{ game.url() }}"><span>{{ game.title }}</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+        <p>No games matched.</p>
+        {% endif %}
+
+    </div>
+    <div class="span4">
+
+        <h2>{{ users | length }} User{{ "" if users | length == 1 else "s" }}</h2>
+        {% if users %}
+        <ul class="users">
+            {% for user in users %}
+            <li>{{ user.get_link() }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No users matched.</p>
+        {% endif %}
+
+{% endblock %}

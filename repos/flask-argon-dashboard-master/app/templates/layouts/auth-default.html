@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Argon Dashboard - Coded in Flask</title>
+    <meta name="description" content="Open-Source Admin Dashboard coded in Flask Microfremwork.">
+
+    {% include 'includes/header.html' %}
+
+  </head>
+
+<body class="bg-default">
+
+  <div class="main-content">
+
+    {% include 'includes/auth-navigation.html' %}
+
+    {% include 'includes/auth-header.html' %}
+
+    {{ content | safe }}
+
+  </div>
+  
+  {% include 'includes/auth-footer.html' %}
+  
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="/static/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Argon JS -->
+  <script src="/static/assets/js/argon.js?v=1.0.0"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+[bumpr]
+file = flask_restx/__about__.py
+vcs = git
+commit = true
+tag = true
+push = true
+tests = tox -e py38
+clean =
+    inv clean
+files =
+    README.rst
+    package.json
+
+[bump]
+unsuffix = true
+
+[prepare]
+part = patch
+suffix = dev
+
+[readthedoc]
+id = flask-restx
+
+[replace]
+dev = ?branch=master
+stable = ?tag={version}

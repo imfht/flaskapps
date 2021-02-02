@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        {% block head_css %}
+        {{ ckeditor.load() }}
+        {{ ckeditor.load_code_theme() }}
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
+        {{ moment.lang('zh-CN')}}
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.lgstatic.com/www/static/pkg/search-result/page/index/main.html_aio_2_3c98000.css">
+        <link rel="stylesheet" href="https://www.lgstatic.com/www/static/pkg/widgets_4e04063.css">
+        <link rel="stylesheet" href="https://www.lgstatic.com/www/static/pkg/job-detail/page/index/main.html_aio_2_1410e60.css">
+        <link rel="stylesheet" href="/static/main.css">
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">切换导航</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">JobWeb</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="{% if active == 'index' %}active{% endif %}">
+                            <a href="/">首页<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="{% if active == 'job' %}active{% endif %}">
+                            <a href="{{ url_for('job.index') }}">职位</a>
+                        </li>
+                        <li class="{% if active == 'company' %}active{% endif %}">
+                            <a href="{{ url_for('company.index') }}">企业</a>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" action="{{ url_for('front.search') }}">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <select class="btn btn-default form-control" name="type" id="type">
+                                    <option value='job'>职位</option>
+                                    <option value='company'>企业</option>
+                                </select>
+                                <script>
+                                {% if 'company' in request.url %}
+                                    $("#type").val('company');
+                                {% else %}
+                                    $("#type").val('job');
+                                {% endif %}
+                                </script>
+                            </div>
+                            <input type="text" class="form-control" name="kw" id="kw"
+                                   value="{{ request.args.get('kw', '') }}" placeholder="搜索">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                          </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if not current_user.is_authenticated %}
+                            <li class="{% if active == 'company_register' %}active{% endif %}">
+                            	<a href="{{ url_for('company.register') }}">企业注册</a>
+                            </li>
+                            <li class="{% if active == 'user_register' %}active{% endif %}">
+                            	<a href="{{ url_for('user.register') }}">个人注册</a>
+                            </li>
+                            <li class="{% if active == 'login' %}active{% endif %}">
+                                <a href="{{ url_for('front.login', next=request.path) }}">登录</a>
+                            </li>
+                        {% else %}
+                            {% if current_user.is_user() %}
+                                <li class="{% if active == 'manage' %}active{% endif %}">
+                                    <a href="{{ url_for('user.resume') }}">信息管理</a>
+                                </li>
+                            {% endif %}
+                            {% if current_user.is_company() %}
+                                <li class="{% if active == 'detail' %}active{% endif %}">
+                                    <a href="{{ url_for('company.detail', company_id=current_user.id)}}">企业主页</a>
+                                </li>
+                                <li class="{% if active == 'manage' %}active{% endif %}">
+                                    <a href="{{ url_for('company.resumes') }}">招聘管理</a>
+                                </li>
+                            {% endif %}
+                            {% if current_user.is_admin() %}
+                                <li class="{% if active == 'manage' %}active{% endif %}">
+                                    <a href="{{ url_for('admin.index') }}">管理后台</a>
+                                </li>
+                            {% endif %}
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span id="username">{{ current_user.name }}</span>
+                                    <span class="caret navbar-btn"></span>
+                                </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
+                                    </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid header">
+            {% block head %}{% endblock %}
+        </div>
+
+        <div class="container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block body %}{% endblock %}
+
+            <!--{% block footer %}-->
+              <!--<div class="footer">-->
+                  <!--Copyright &copy; 2014-2018 By Zkqiang-->
+              <!--</div>-->
+            <!--{% endblock %}-->
+        </div>
+        {% block tail_js %}
+        <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </body>
+</html>

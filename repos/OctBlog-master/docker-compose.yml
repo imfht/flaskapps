@@ -1,0 +1,29 @@
+version: "3"
+services:
+  octblog:
+    image: gevin/octblog
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 100M
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    env_file: .env
+    networks:
+      - webnet
+  mongo:
+    image: mongo:3.2
+    volumes:
+      - /Users/gevin/projects/data/mongodb:/data/db
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+
+networks:
+  webnet:

@@ -1,0 +1,4 @@
+include pyxley/assets/bundle.js
+include pyxley/assets/index.html
+include pyxley/assets/main.css
+include LICENSE.txt

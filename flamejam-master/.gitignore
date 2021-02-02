@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+venv/
+flamejam.db
+*.psd
+*.swp
+flamejam.cfg
+recaptcha.cfg
+.DS_Store
+build/
+dist/
+*.egg-info/

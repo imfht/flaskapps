@@ -1,0 +1,37 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.code {
+  @extend %default-border-radius;
+  border: 1px solid $gray;
+  background: $light-gray;
+  padding: 1em 1.5em;
+}
+
+.merge-info {
+  padding: 0;
+  margin: 0;
+  float: right;
+  list-style-type: none;
+
+  span.caption {
+    font-weight: bold;
+  }
+}
+
+.tasks .i-label {
+  width: 100%;
+}
+
+table.ip-network-group .actions {
+  width: 3em;
+  text-align: right;
+}
+
+#event-labels .event-label {
+  text-transform: uppercase;
+}

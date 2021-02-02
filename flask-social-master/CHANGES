@@ -1,0 +1,86 @@
+Flask-Social Changelog
+======================
+
+Here you can see the full list of changes between each Flask-Social release.
+
+Version 1.6.2
+------------
+
+Released October 14 2013
+
+- Changed provider.get_connection_values() to also return Full Name (if avaliable)
+- Fixed bug in the connect_callback() fuction to redirect upon OAuth failure
+
+
+Version 1.6.1
+-------------
+
+Released July 25 2013
+
+- Changed google provider to use oauth2 service instead of plus service
+- Fixed MongoEngine datastore to support multiple versions
+- Fixed bug when a user denies access from OAuth provider
+- Fixed foursquare provider image_url bug
+
+
+Version 1.6.0
+-------------
+
+Released April 04 2013
+
+- Added Peewee support
+- Refactored tests
+- Code cleanup
+
+
+Version 1.5.5
+-------------
+
+Released March 03 2013
+
+- Fixed configuration bug concerning deeper dictionary values
+- Fixed facebook display name bug
+
+Version 1.5.4
+-------------
+
+Released December 23 2012
+
+- Change dependency requirement
+
+Version 1.5.3
+-------------
+
+Released December 12 2012
+
+- Fix small bug with default configuration
+
+Version 1.5.2
+-------------
+
+Released December 11 2012
+
+- Fix small bug with provider modules
+
+Version 1.5.1
+-------------
+
+Released October 12 2012
+
+- Change default blueprint name to 'social' to match up with 'security'
+- Ensure commit is called after social login
+- Abstract a bit of the connection callback for more flexibility. See the example app
+
+Version 1.5.0
+-------------
+
+Released October 11 2012
+
+- Updated to sync up with latest release of Flask-Security
+
+Version 0.1.0
+-------------
+
+Released March 2012
+
+- Initial release

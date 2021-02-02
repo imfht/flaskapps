@@ -1,0 +1,12 @@
+include AUTHORS
+include README.rst
+include MANIFEST.in
+include LICENSE
+include setup.cfg
+include flask_celery.py
+recursive-include tests *.py
+recursive-include example *.py
+recursive-include requirements *.txt
+prune tox.ini
+prune example/*.pyc
+prune tests/*.pyc

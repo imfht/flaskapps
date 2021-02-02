@@ -1,0 +1,13 @@
+{% extends "html/notebook/base.html" %}
+
+{% block page_id %}print-page{% endblock %}
+
+{% block body %}
+<h1>{{ worksheet.name() }}</h1>
+{{ worksheet.html(do_print=true) | safe }}
+<!--    <script>
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    </script>-->
+{% endblock %}
+
+ 

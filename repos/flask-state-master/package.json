@@ -1,0 +1,49 @@
+{
+  "name": "flask-state",
+  "version": "1.0.6",
+  "description": "Flask-States is a visual plug-in based on flask. It can record the local state every minute and read the status of redis if you have configured redis，and generate data chart to show to users through Echarts.",
+  "main": "./packages/index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^4.3.0",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^1.0.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^4.2.3",
+    "webpack": "^4.44.2",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-cli": "^4.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python examples/app.py",
+    "build:dev": "NODE_ENV=development node examples/build/build.js",
+    "compress": "webpack --config examples/build/compress.js && python examples/script/modify_compress_files.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoobool/flask-state.git"
+  },
+  "keywords": [
+    "flask-state",
+    "flask-monitor",
+    "plug-in"
+  ],
+  "author": "yoobool",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/yoobool/flask-state/issues"
+  },
+  "homepage": "https://github.com/yoobool/flask-state",
+  "dependencies": {
+    "echarts": "^4.9.0"
+  }
+}

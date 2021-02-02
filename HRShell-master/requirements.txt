@@ -1,0 +1,8 @@
+flask
+flask_talisman
+colorama
+tornado
+pyopenssl
+pillow==7.1.0
+inquirer
+tabulate

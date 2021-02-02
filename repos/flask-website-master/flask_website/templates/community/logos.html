@@ -1,0 +1,24 @@
+{% extends "community/layout.html" %}
+{% block title %}Logos{% endblock %}
+{% macro logo(format) -%}
+  <a href="{{ url_for('static', filename='logo/flask.' ~ format)
+    }}">{{ format|upper }} format</a>
+{%- endmacro %}
+{% block body %}
+  <h2>Logos</h2>
+  <p>
+    The Flask logo is available for download and use in the formats
+    below.  You can use the logo to promote Flask like you want.
+    The image is licensed under the “Flask Artwork License”.
+    <a href="{{ url_for('docs.show', page='license')
+      }}#flask-artwork-license">Read license text</a>.
+  <ul>
+    <li>{{ logo('png') }}: for online and screen usage
+    <li>{{ logo('svg') }}: for online and screen usage
+    <li>{{ logo('eps') }}: for print use
+    <li>{{ logo('pdf') }}: for print use
+  </ul>
+  <p>
+    The font used in the logo is “<a href="https://en.wikipedia.org/wiki/Hightower_Text">Hightower
+    Text roman</a>” from the Font Bureau foundry.
+{% endblock %}

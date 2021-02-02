@@ -1,0 +1,58 @@
+<communities-select class="form-group form-communities">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="input-group">
+        <ui-select
+          theme="bootstrap"
+          ng-model="selection"
+          on-select="communityOnSelect($item); selection = undefined;">
+          <ui-select-match placeholder="{{form.placeholder}}"></ui-select-match>
+          <ui-select-choices
+            refresh="searchCommunities($select.search)"
+            repeat="item in communityResults">
+            <div class="community-results-item">
+              <div class="community-logo col-xs-1">
+                <img ng-src="{{item.logo_url}}" ng-if="item.logo_url"/>
+              </div>
+              <div class="col-sm-10 col-xs-8">
+                <span ng-bind-html="(item.title|limitToEllipsis:80|highlight:$select.search)"></span>
+                <div ng-if="item.description">
+                  <span class="muted" ng-bind-html="'<small>' + (item.description|striptags|limitToEllipsis:180|highlight:$select.search) + '</small>'"></span>
+                </div>
+                <div ng-if="!item.description" class="no-description">
+                  <span class="muted"><small><em>No description</em></small></span>
+                </div>
+                <div ng-if="openAIRECommunitiesMapping[item.id]" class="openaire-community">
+                  <span ng-bind-html="('<small>' + 'Indexed in OpenAIRE ' + (openAIRECommunitiesMapping[item.id] | formatOpenAIRECommunities:openAIRECommunities)|limitToEllipsis:150|highlight:$select.search + '</small>')"></span>
+                </div>
+              </div>
+            </div>
+          </ui-select-choices>
+        </ui-select>
+        <span class="input-group-btn">
+          <button type="button" ng-click="" class="btn btn-default">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <!-- List of community selections -->
+    <div class="row communities-list">
+      <div ng-repeat="comm in communities" class="col-sm-3 communities-list-item">
+        <div class="panel panel-default">
+          <div class="panel-body communities-card">
+            <button type="button" ng-click="removeCommunity(comm.id)" class="pull-right close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="community-logo">
+              <a ng-href="{{comm.links.html}}" target="_blank" rel="noopener noreferrer">
+                <img ng-if="comm.logo_url" ng-src="{{ comm.logo_url }}"/>
+                <span class="text-muted" ng-if="!comm.logo_url"><i class="fa fa-4x fa-group"></i></span>
+              </a>
+            </div>
+            <div class="communities-title"><strong ng-bind-html="comm.title|limitToEllipsis:65"></strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</communities-select>

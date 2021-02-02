@@ -1,0 +1,1 @@
+const user: int = 'Mom'

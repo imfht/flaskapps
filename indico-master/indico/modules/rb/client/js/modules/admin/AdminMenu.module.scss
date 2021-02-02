@@ -1,0 +1,23 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.admin-menu {
+  .locations-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  :global(.item a) {
+    color: rgba(0, 0, 0, 0.87) !important;
+
+    &:global(.active) {
+      background-color: rgba(0, 0, 0, 0) !important;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.95) !important;
+    }
+  }
+}

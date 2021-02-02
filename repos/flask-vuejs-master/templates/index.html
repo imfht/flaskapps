@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block style %}
+<style>
+#links {
+  margin-top: 30px;
+}
+#links ul {
+  list-style-type: none;
+  padding: 0;
+}
+#links li {
+  display: inline-block;
+  margin: 0 10px;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div id="links">
+  <h1>Examples & Tips - Flask with Vue.js</h1>
+  <a href="https://github.com/yymm/flask-vuejs">README</a>
+  <ul>
+    <li><a href="(( url_for('example') ))">Jinja2 & Vue.js</a></li>
+    <li><a href="(( url_for('sqlalchemy') ))">with SQLAlchemy</a></li>
+    <li><a href="(( url_for('more') ))">more...</a></li>
+  </ul>
+  <h2>Single Page Application</h2>
+  <h3>using CDN</h3>
+  <ul>
+    <li><a href="(( url_for('router') ))">vue-router</a></li>
+  </ul>
+  <h3>using Node.js</h3>
+  <ul>
+    <li><a href="(( url_for('sfc') ))">Single File Component</a></li>
+    <li><a href="(( url_for('typescript') ))">TypeScript</a></li>
+    <li><a href="(( url_for('vuex') ))">Vuex</a></li>
+  </ul>
+  <h2>Ruins...</h2>
+  <ul>
+    <li><a href="(( url_for('v0_10_3') ))">vue.js v0.10.3</a></li>
+  </ul>
+</div>
+{% endblock %}

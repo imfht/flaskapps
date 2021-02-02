@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Route 53 Manager</title>
+    <link href="{{ url_for('.static', filename='css/screen.css') }}" media="screen, projection" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('.static', filename='css/print.css') }}" media="print" rel="stylesheet" type="text/css" />
+    <!--[if IE]>
+      <link href="{{ url_for('.static', filename='css/ie.css') }}" media="screen, projection" rel="stylesheet" type="text/css" />
+    <![endif]-->
+  </head>
+  <body class="bp">
+    <div class="container">
+      <div class="heading">
+        <h1><a href="{{ url_for('main.index') }}">Route 53 Manager</a></h1>
+        <div class="toolbar">
+        <ul>
+          {% if request.authorization.username %}
+          <li>Welcome, {{ request.authorization.username }}</li>
+          {% endif %}
+          {% block toolbar %}
+          <li><a href="{{ url_for('slicehost.index') }}">Import from Slicehost</a></li>
+          {% endblock %}
+        </ul>
+      </div>
+      </div>
+      <div class="breadcrumbs">
+        <ul>
+        {% block breadcrumbs %}
+        {% endblock %}
+        </ul>
+      </div>
+      <div class="messages">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      </div>
+
+      <div class="body">
+      {% block body %}
+      {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

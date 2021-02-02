@@ -1,0 +1,49 @@
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+// SKELETON VARIABLES
+// https://github.com/WhatsNewSaes/Skeleton-Sass/blob/master/scss/base/_variables.scss
+// https://github.com/briancappello/super-skeleton/blob/master/scss/base/_variables.scss
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// FONTS
+$font-size-1rem: 16px;
+$line-height: 1.5;
+
+$font-size-godzilla: 5rem;
+$font-size-monster: 4rem;
+$font-size-large: 3rem;
+$font-size-medium-large: 2.5rem;
+$font-size-medium: 2rem;
+$font-size-medium-small: 1.5rem;
+$font-size-normal: $font-size-1rem;
+$font-size-small: .75rem;
+
+
+// NAVBAR
+$navbar-breakpoint: 830px;
+
+
+// COLORS
+$rebecca: #663399;
+$oracle: #02ac1e;
+
+$off-white: #eee;
+
+// green
+$flash-success-text:             #3c763d !default;
+$flash-success-bg:               #dff0d8 !default;
+$flash-success-border:           darken($flash-success-bg, 5%) !default;
+
+// blue
+$flash-info-text:                #31708f !default;
+$flash-info-bg:                  #d9edf7 !default;
+$flash-info-border:              darken($flash-info-bg, 7%) !default;
+
+// yellow
+$flash-warning-text:             #8a6d3b !default;
+$flash-warning-bg:               #fcf8e3 !default;
+$flash-warning-border:           darken($flash-warning-bg, 5%) !default;
+
+// red
+$flash-danger-text:              #a94442 !default;
+$flash-danger-bg:                #f2dede !default;
+$flash-danger-border:            darken($flash-danger-bg, 5%) !default;

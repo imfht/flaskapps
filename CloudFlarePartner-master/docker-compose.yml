@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: luodaoyi/cloudflarepartner
+    environment:
+      - CF_KEY=your_code
+      - SECRET=your_secret
+    ports:
+      - "3000:80"

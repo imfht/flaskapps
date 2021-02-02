@@ -1,0 +1,9 @@
+ custom:
+  - name:string
+  - city:string
+  - devices:string
+  - created:datetime
+  - createdBy:string
+  - updated:datetime
+  - updatedBy:string
+ 

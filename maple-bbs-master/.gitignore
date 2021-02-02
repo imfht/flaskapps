@@ -1,0 +1,12 @@
+venv/
+**/config/
+migrations/
+backup/
+fabfile.py
+**/__pycache__/
+**/avatar/
+*.swp
+*.log
+*.db
+*.pyc
+**/.webassets-cache/

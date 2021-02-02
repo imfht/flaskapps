@@ -1,0 +1,16 @@
+*.o
+main.exe
+main
+*.db
+*.sqlite
+picotest/
+example/upload/files
+clask_test.exe
+clask_test
+.idea/
+build/
+cmake-build-debug/
+public/
+tmp/
+.vs
+vc

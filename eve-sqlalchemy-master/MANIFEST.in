@@ -1,0 +1,6 @@
+include AUTHORS CHANGES CONTRIBUTING.rst LICENSE
+include requirements.txt tox.ini
+graft docs
+prune docs/_build
+
+global-exclude __pycache__ *.pyc *.pyo

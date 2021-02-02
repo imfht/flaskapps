@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% if af_mode_enabled %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.af.rainbow.css') }}">
+    {% endif %}
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>{{ title|e }} - Titan Embeds for Discord</title>
+    
+    <!--Provide default mobile metadata-->
+    <meta name="apple-mobile-web-app-title" content="Titan Embeds">
+    <meta name="application-name" content="Titan Embeds">
+    
+    {% include 'seo_meta.html.j2' %}
+    
+    {% with title=title, description="Embed your Discord server in any website. Titan is hassle free and designed as easy to setup." %}
+      {% include "opengraph_tags.html.j2" %}
+    {% endwith %}
+    
+    {% block additional_head_elements %}{% endblock %}
+
+    {% include 'google_analytics.html.j2' %}
+  </head>
+  <body>
+    {% if random.randrange(100) < 50 %}
+    <div id="dblbanner">
+      <span>
+        <strong>Hey!</strong> Upvote us on <a href="{{ url_for("vote") }}">Discord Bots List</a> to show your
+        appreciation of the Titan Embeds project! (We'll provide you with a <em>royal
+        <span class="yellow-text">golden name</span></em> and rewards in return for your vote)
+      </span>
+    </div>
+    {% else %}
+    <div id="donbanner">
+      <span>
+        <strong>Hey! We need your help!</strong> Support the Titan Embeds project on <a href="http://patreon.com/TitanEmbeds" target="_blank">Patreon</a> to help us cover the cost of server hosting!
+        {% if application_settings.donation_goal_total %}
+        <br>
+        <strong>Goal: <span class="yellow-text">${{ application_settings.donation_goal_progress }} raised out of ${{ application_settings.donation_goal_total }}</span>{% if application_settings.donation_goal_end %} by {{ application_settings.donation_goal_end }}{% endif %}</strong>
+        {% endif %}
+      </span>
+    </div>
+    {% endif %}
+    <main>
+      {% if session['unauthenticated'] is defined and not session['unauthenticated'] %}
+      <ul id="menu_dropdown" class="dropdown-content">
+        <li><a href="{{ url_for('user.dashboard') }}">Dashboard</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ url_for('user.donate_get') }}"><i class="material-icons">monetization_on</i></nbr>{{ session["tokens"] }}</a></li>
+        {% if session['user_id'] is defined and session['user_id']|string in devs %}
+          <li class="divider"></li>
+          <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+        {% endif %}
+        <li class="divider"></li>
+        <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+      </ul>
+      {% endif %}
+
+      <ul id="visitus_dropdown" class="dropdown-content">
+        <li><a href="{{url_for("embed.guild_embed", guild_id="295085744249110529")}}">Launch Embed Page</a></li>
+        <li class="divider"></li>
+        <li><a href="https://discord.io/Titan">Open in Discord</a></li>
+      </ul>
+
+      <nav>
+        <div class="nav-wrapper container">
+          <a href="/" class="brand-logo"><img src="{{ url_for('static', filename='img/titanembeds_shield.png') }}" /><span class="hide-on-med-and-down"><strong class="align-top">Titan</strong><span class="align-top">Embeds</span> <span class="betatag align-top">BETA</span></span></a>
+          <ul id="nav-mobile" class="right">
+            <li><a href="https://docs.titanembeds.com/" target="_blank" class="waves-effect hide-on-large-only">Docs</a></li>
+            <li><a href="https://docs.titanembeds.com/" target="_blank" class="waves-effect btn z-depth-3 hide-on-med-and-down">Docs</a></li>
+            
+            <li><a data-activates="visitus_dropdown" class="waves-effect hide-on-large-only dropdown-button">Visit Us!</a></li>
+            <li><a data-activates="visitus_dropdown" class="waves-effect btn z-depth-3 hide-on-med-and-down dropdown-button">Visit Us!</a></li>
+            {% if session['unauthenticated'] is defined and not session['unauthenticated'] %}
+            <li><a id="menu_drop" data-activates="menu_dropdown" class="waves-effect btn z-depth-3 btn-floating dropdown-button avatar_menu" style='background-image: url("  {{ session['avatar'] }}  ")'></a></li>
+            {% else %}
+            <li><a href="{{ url_for('user.login_authenticated') }}" class="waves-effect btn z-depth-3">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container">
+        A project by EndenDragon
+        <span class="right">
+          <a class="grey-text text-lighten-4" href="https://github.com/TitanEmbeds/Titan">GitHub <span class="hide-on-small-only">Repo</span></a>&nbsp;
+          <a class="grey-text text-lighten-4" href="{{ url_for('terms') }}">Terms <span class="hide-on-small-only">and Conditions</span></a>&nbsp;
+          <a class="grey-text text-lighten-4" href="{{ url_for('privacy') }}">Privacy <span class="hide-on-small-only">Policy</span></a>
+        </span>
+        </div>
+      </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" integrity="sha256-uWtSXRErwH9kdJTIr1swfHFJn/d/WQ6s72gELOHXQGM=" crossorigin="anonymous"></script>
+    
+    {% include 'sentry_js_init.html.j2' %}
+    
+    {% if not dbl_voted or (dbl_voted and request.path == "/") %}
+    <script>
+      $(document).ready(function () {
+          $('#dblbanner').delay(1000).slideDown("slow");
+      });
+    </script>
+    {% endif %}
+    <script>
+      $('#donbanner').delay(1000).slideDown("slow");
+    </script>
+    
+    {% if af_mode_enabled %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/site.af.sausage.js') }}"></script>
+    {% endif %}
+    
+    {% block script %}{% endblock %}
+  </body>
+</html>

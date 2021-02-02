@@ -1,0 +1,24 @@
+<ul class="nav navbar-nav navbar-right">
+  {%- if current_user.is_authenticated() -%}
+  <li><a href="{{ url_for('users.profile') }}">Hello {{ current_user.email }} (Profile)</a></li>
+  {%- endif %}
+
+  {% if current_user.has_role('admin') -%}
+  <li><a href="{{ url_for('admin.admin_page') }}">Admin</a></li>
+  {% endif -%}
+  
+  {% if current_user.has_role('admin') or current_user.has_role('editor') -%}
+  <li><a href="{{ url_for('admin.admin_or_editor') }}">Admin or Editor</a></li>
+  {% endif -%}
+  
+    {%- if current_user.is_authenticated() -%}
+      <li><a href="{{ url_for('security.logout') }}">Logout</a></li>
+    {%- else -%}
+      {% if security.registerable %}
+          <li><a href="{{ url_for('security.register') }}">Register</a></li>
+      {% endif %}
+      <li>
+          <a href="{{ url_for('security.login') }}">Login</a>
+      </li>
+    {%- endif -%}
+</ul>

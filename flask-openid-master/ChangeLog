@@ -1,0 +1,86 @@
+1.2.5 (2015-09-14)
+------------------
+
+New
+~~~
+
+- Added support for immediate mode requests. [Patrick Uiterwijk]
+- Fixed grammar error in docs. [Yuval Langer]
+- Fixed import path to url_quote. [Bluevalor]
+- Base64 encoding and decoding internal data. [Patrick Steele]
+
+
+1.2.4 (2014-10-24)
+------------------
+
+New
+~~~
+
+- Support using the url_root as trust_root. [Patrick Uiterwijk]
+
+
+
+1.2.3 (2014-10-08)
+------------------
+
+New
+~~~
+
+- Added shebang to example to make it easier to run. [Patrick Uiterwijk]
+
+Fix
+~~~
+
+- Fix compatibility issue with python<2.7 introduced in 1.2.2. [Patrick Uiterwijk]
+
+
+1.2.2 (2014-10-07)
+------------------
+
+New
+~~~
+
+- Make it easier to start the example by removing init_db. [Patrick Uiterwijk]
+- Make OpenID errors more descriptive. [Patrick Uiterwijk]
+
+Fix
+~~~
+
+- First try to utf8 encode, but skip for python3. [evgen]
+- Make the checks for string type work. [Patrick Uiterwijk, Sergey]
+
+
+1.2.1 (2014-01-26)
+------------------
+
+Fix
+~~~
+
+- Using print() for python 3 compatibility. [Jon Chen]
+
+- Make ask_for_optional optional in debug if ask_for is specified. [Samuel Miller]
+
+
+1.2 (2014-01-22)
+----------------
+
+New
+~~~
+
+- Added support for python 3. [Dennis Glindhart, Patrick Uiterwijk]
+
+- Added support for python-openid extensions. [Pierre-Yves Chibon, Jeff Miller, Patrick Uiterwijk]
+
+- Added support for optional sreg keys. [Shay Erlichmen, Patrick Uiterwijk]
+
+- Added the option to declare which URL roots are safe to redirect to [Patrick Uiterwijk]
+
+
+Fix
+~~~
+
+- Small typo fix in documentation. [David Vincelli]
+
+- Fix the import name in the documentation. [William Ting, Amanjeev Sethi]
+
+- Fix pickle.loads crashing on non-ASCII chars. [Shay Erlichmen]

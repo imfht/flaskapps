@@ -1,0 +1,211 @@
+version: '3'
+
+# NGINX
+# FLASK
+# MONGODB
+# MONGO-ADMINPANEL
+# REDIS
+# WORKERS
+# TOR + HA PROXY
+# [-] MONGOCLIENT
+# SPLASH
+# SPACY
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+
+
+  #data bus
+  redis:
+    image: 'bitnami/redis:latest'
+    hostname: redis
+    container_name: redis
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-tier
+
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    hostname: mongodb
+    user: root
+    volumes:
+      - .:/bitnami
+    ports:
+      - "27017:27017"
+    environment:
+        - MONGODB_ROOT_PASSWORD=123qwe
+        - MONGODB_USERNAME=admin
+        - MONGODB_PASSWORD=123qwe
+        - MONGODB_DATABASE=crawler
+    networks:
+      - app-tier
+
+  torpool:
+    image: 'zeta0/alpine-tor'
+    hostname: torpool
+    ports:
+      - "5566:5566"
+      - "2090:2090"
+    environment:
+      - tors=5
+#      - privoxy=1
+    networks:
+#      - default
+      - app-tier
+
+  server:
+    restart: always
+    image: nginx
+    volumes:
+      - ./web-server/conf.d:/etc/nginx/conf.d
+      - ./application/web/static:/application/static
+    links:
+      - web-app:web-app
+    ports:
+      - "80:80"
+    networks:
+      - app-tier
+
+  #screenshot
+  splash:
+    image: scrapinghub/splash
+    restart: always
+    networks:
+      - app-tier
+    ports:
+      - 5023:8050
+
+
+  #subject detector
+  spacy:
+    image: jgontrum/spacyapi
+    restart: always
+    networks:
+      - app-tier
+    ports:
+      - 8080:80
+
+  web-app:
+    restart: always
+    build: ./application
+    image: web-app
+    container_name: web-app
+#    command: python app.py
+    command: bash -c "/wait && gunicorn manage:app -b :8000 --name app --log-level=debug --log-file=-"
+    volumes:
+       - ./application:/application
+#    ports:
+#      - "5050:5050"
+    expose:
+       - "8000"
+    depends_on:
+       - mongodb
+    links:
+       - mongodb
+       - torpool
+       - redis
+       - crawler-worker
+       - detector-worker
+       - app-worker
+    networks:
+       - app-tier
+    environment:
+      WAIT_HOSTS: mongodb:27017
+      WAIT_BEFORE_HOSTS: 25
+
+
+
+  crawler-worker:
+     restart: always
+     build: ./application
+     container_name: crawler-worker
+     command: bash -c "/wait && python manage.py run_crawler_worker"
+     networks:
+      - app-tier
+     volumes:
+      - ./application:/application
+     depends_on:
+      - redis
+     links:
+      - torpool
+      - redis
+      - mongodb
+     environment:
+      WAIT_HOSTS: redis:6379
+      WAIT_BEFORE_HOSTS: 5
+
+
+
+  detector-worker:
+     restart: always
+     build: ./application
+     container_name: detector-worker
+     command: bash -c "/wait && python manage.py run_detector_worker"
+     networks:
+      - app-tier
+     volumes:
+      - ./application:/application
+     depends_on:
+      - redis
+     links:
+      - torpool
+      - redis
+      - mongodb
+     environment:
+      WAIT_HOSTS: redis:6379
+      WAIT_BEFORE_HOSTS: 5
+
+  app-worker:
+     restart: always
+     build: ./application
+     container_name: app-worker
+     command: bash -c "/wait && python manage.py run_app_worker"
+     networks:
+      - app-tier
+     volumes:
+      - ./application:/application
+     depends_on:
+      - redis
+     links:
+      - torpool
+      - redis
+      - mongodb
+     environment:
+      WAIT_HOSTS: redis:6379
+      WAIT_BEFORE_HOSTS: 5
+
+
+  panel-worker:
+     restart: always
+     build: ./application
+     container_name: panel-worker
+     command: bash -c "/wait && python manage.py run_panel_worker"
+     networks:
+      - app-tier
+     volumes:
+      - ./application:/application
+     depends_on:
+      - redis
+     links:
+      - torpool
+      - redis
+      - mongodb
+     environment:
+      WAIT_HOSTS: redis:6379
+      WAIT_BEFORE_HOSTS: 5
+
+
+  mongoclient:
+    image: mongoclient/mongoclient
+    ports:
+      - 3000:3000
+    links:
+      - mongodb:mongo
+    networks:
+      - app-tier

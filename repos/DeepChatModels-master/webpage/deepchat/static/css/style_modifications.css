@@ -1,0 +1,78 @@
+/* Various style tweaks for chat boxes and bootstrap css. */
+
+
+.jumbotron {
+  background-color: whitesmoke;
+}
+
+.jumbotron > h1 {
+  font-size: 39px;
+}
+
+.chat-form-submit {
+  background-color: rgb(20, 150, 220);
+  border-color: rgb(20, 130, 200);
+}
+
+/*.chat-box, */.carousel-inner {
+  /* color, image, repeat */
+  background: rgba(176, 196, 222, 0.6) none no-repeat;
+  border-radius: 10px;
+}
+
+.carousel-control {
+  width: 15px;
+  border-radius: 10px;
+}
+
+.chat-log {
+  position: relative;
+  height: 245px;
+  margin-bottom: 0.5em;
+  /* top - (left&right) - bottom */
+  padding: 0.25em 3em 0.25em;
+  /* So we can actually see the words. */
+  background-color: transparent;
+  font-weight: bolder;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+.chat-form {
+  padding: 0.25em 3em 0.3em;
+}
+
+.bot-name {
+  color: rgba(70, 130, 180, 0.6);
+}
+
+.user-name {
+  color: SeaGreen;
+}
+
+.message {
+  margin-left: 0.1em;
+  margin-right: 0.1em;
+}
+
+.chat-log hr {
+  display: block;
+  border: none;
+  height: 1px;
+  background-color: rgb(140, 140, 140);
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+
+::-webkit-scrollbar {
+  width: 12px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+}

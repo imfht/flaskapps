@@ -1,0 +1,46 @@
+version: 2
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - test-2.7
+      - test-3.5
+      - test-3.6
+
+defaults: &defaults
+  working_directory: ~/code
+  steps:
+  - checkout
+  - run:
+      name: Install dependencies
+      command: pip install --user -r $REQUIREMENTS_FILE nose
+  - run:
+      name: Lint
+      command: flake8 flask_mongorest
+  - run:
+      name: Test
+      command: nosetests
+
+jobs:
+  test-2.7:
+    <<: *defaults
+    docker:
+    - image: circleci/python:2.7
+      environment:
+        REQUIREMENTS_FILE: requirements.txt
+    - image: mongo:3.2.19
+  test-3.5:
+    <<: *defaults
+    docker:
+    - image: circleci/python:3.5
+      environment:
+        REQUIREMENTS_FILE: requirements3.txt
+    - image: mongo:3.2.19
+  test-3.6:
+    <<: *defaults
+    docker:
+    - image: circleci/python:3.6
+      environment:
+        REQUIREMENTS_FILE: requirements3.txt
+    - image: mongo:3.2.19

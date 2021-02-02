@@ -1,0 +1,25 @@
+#invenio-search {
+    .pagination-sm {
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+    .no-margin-top {
+        margin-top: 0px;
+    }
+    .titlecase {
+        text-transform: capitalize;
+    }
+
+    a.version-toggle {
+        text-decoration: none;
+
+        &.active {
+            font-weight: bold;
+
+            i.fa {
+                color: #5cb85c;
+            }
+        }
+    }
+}
+

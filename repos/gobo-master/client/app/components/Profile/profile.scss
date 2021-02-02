@@ -1,0 +1,58 @@
+.profile-content {
+  $large-buffer: $spacer-large;
+
+  max-width: 900px;
+  margin: 0 auto;
+
+  .registration-screen {
+    margin-bottom: 0px;
+  }
+
+  .header {
+    padding-top: $spacer-large;
+    width: 450px;
+    max-width: 100%;
+  }
+
+  .profile-img {
+    display: inline-block;
+    max-height: 140px;
+    vertical-align: top;
+  }
+
+  .profile-info {
+    display: inline-block;
+    padding-top: $large-buffer;
+    padding-bottom: $large-buffer;
+
+    h3 {
+      margin-top: 0;
+      padding: 0;
+    }
+  }
+
+  .social-media-profiles {
+    margin-bottom: $spacer-large;
+
+    .sm-description {
+      margin-top: $spacer-small;
+    }
+
+    .sm-platform {
+      padding-bottom: $spacer-medium;
+
+      &.input_group {
+        padding-top: $spacer-large;
+      }
+    }
+  }
+
+  .profile-privacy-description {
+    margin-top: $large-buffer;
+  }
+
+  .mastodonSelect {
+    font-size: $input-font-size;
+  }
+
+}

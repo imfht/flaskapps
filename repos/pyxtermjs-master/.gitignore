@@ -1,0 +1,6 @@
+dist
+.DS_Store
+venv
+.vscode
+*egg-info*
+build

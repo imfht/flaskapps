@@ -1,0 +1,118 @@
+# macro order_by_link(property, title, ignore='cursor', hash=None)
+  # if request.args.get('order') == property
+    <a href="{{update_query_argument('order', '-' + property, ignore)}}{{'#%s' % hash if hash}}" rel="nofollow">{{title}}</a>
+    <span class="fa fa-sort-up text-muted"></span>
+  # elif request.args.get('order') == '-' + property
+    <a href="{{update_query_argument('order', property, ignore)}}{{'#%s' % hash if hash}}" rel="nofollow">{{title}}</a>
+    <span class="fa fa-sort-down text-muted"></span>
+  #else
+    <a href="{{update_query_argument('order', property, ignore)}}{{'#%s' % hash if hash}}" rel="nofollow">{{title}}</a>
+  #endif
+# endmacro
+
+
+# macro filter_by_link(property, value, icon=None, ignore='cursor', is_list=False, hash=None, label=None)
+  # set value = '%s' % value
+  <a href="{{update_query_argument(property, None if request.args.get(property) == value else value, ignore, is_list)}}{{'#%s' % hash if hash}}"
+     class="btn btn-default {{'active' if value in request.args.get(property, '').split(',')}}" rel="nofollow">
+    # if icon
+      <span class="fa fa-fw fa-{{icon}}"></span>
+    # elif label
+      {{label|safe}}
+    # else
+      {{value}}
+    # endif
+  </a>
+# endmacro
+
+
+# macro back_link(title, route)
+  <small>
+    <a href="{{url_for(route, **kwargs)}}" class="text-muted" title="{{title}}"><span class="fa fa-fw fa-chevron-left"></span></a>
+  </small>
+# endmacro
+
+
+# macro next_link(next_url, prev_url=None, next_caption='', prev_caption='')
+  # if next_url or prev_url
+    <ul class="pager">
+      # if prev_url
+        <li><a href="{{prev_url}}" rel="nofollow"><span class="fa fa-long-arrow-left"></span> {{prev_caption|safe if prev_caption else 'Prev Page'}}</a></li>
+      # endif
+      # if next_url
+        <li><a href="{{next_url}}" rel="nofollow">{{next_caption|safe if next_caption else 'Next Page'}} <span class="fa fa-long-arrow-right"></span> </a></li>
+      # endif
+    </ul>
+  # endif
+# endmacro
+
+
+# macro prefetch_link(url)
+  # if url
+    <link rel="prerender" href="{{url}}" />
+    <link rel="prefetch" href="{{url}}" />
+  # endif
+# endmacro
+
+
+# macro signin_button(brand, class_btn, class_icon, url, is_icon=False)
+  # set caption = 'Sign in with %s' % brand
+  <a class="btn btn-lg {{'btn-social-icon' if is_icon else 'btn-block btn-social'}} {{class_btn}}" href="{{url}}" title="{{caption if is_icon}}" rel="nofollow">
+    <span class="fa {{class_icon}}"></span>
+    {{caption if not is_icon}}
+  </a>
+# endmacro
+
+
+# macro auth_icon(auth_id)
+  # if auth_id == 'email_auth'
+    <span class="fa fa-fw fa-lock" title="Password"></span>
+  # elif auth_id.startswith('bitbucket')
+    <span class="fa fa-fw fa-bitbucket" title="Bitbucket"></span>
+  # elif auth_id.startswith('facebook')
+    <span class="fa fa-fw fa-facebook" title="Facebook"></span>
+  # elif auth_id.startswith('github')
+    <span class="fa fa-fw fa-github" title="GitHub"></span>
+  # elif auth_id.startswith('google')
+    <span class="fa fa-fw fa-google" title="Google"></span>
+  # elif auth_id.startswith('federated')
+    <span class="fa fa-fw fa-google" title="Google App Engine"></span>
+  # elif auth_id.startswith('microsoft')
+    <span class="fa fa-fw fa-windows" title="Microsoft"></span>
+  # elif auth_id.startswith('twitter')
+    <span class="fa fa-fw fa-twitter" title="Twitter"></span>
+  # else
+    <span class="fa fa-fw fa-question" title="Unknown"></span>
+  # endif
+# endmacro
+
+
+# macro auth_icons(user_db, max=0)
+  # set count = user_db.auth_ids|length
+  # set max = 3 if max > 0 and max < 3 else max
+  # if user_db.password_hash
+    # set max = max - 1 if max else max
+    {{auth_icon('email_auth')}}
+  # endif
+  # set max = max - 1 if max and count > max else max
+  # set more = count - max if max else 0
+  # for auth_id in user_db.auth_ids
+    # if not max or loop.index0 < max
+      {{auth_icon(auth_id)}}
+    # elif max and loop.index0 == max
+      <span class="fa fa-fw fa-ellipsis-h" title="{{'%d more' % more}}"></span>
+    # endif
+  # endfor
+# endmacro
+
+
+# macro html_element(name, content)
+  <{{name}}
+    #- for arg in kwargs
+      {{arg}}="{{kwargs[arg]}}"
+    #- endfor
+  >
+  #- if content
+    {{content}}</{{name}}>
+  #- endif
+# endmacro

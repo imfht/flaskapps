@@ -1,0 +1,14 @@
+language: python
+sudo: false
+
+install:
+  - pip install -U tox
+  - pip install -U codecov
+
+matrix:
+  include:
+    - python: "3.7-dev"
+
+script:
+  - tox -v -e py
+  - codecov

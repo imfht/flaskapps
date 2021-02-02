@@ -1,0 +1,7 @@
+recursive-include flask_monitoringdashboard/static *
+recursive-include flask_monitoringdashboard/templates *
+include requirements.txt
+include README.md
+include docs/changelog.rst
+include docs/README.rst
+include flask_monitoringdashboard/constants.json

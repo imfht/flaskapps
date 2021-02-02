@@ -1,0 +1,20 @@
+*.pyc
+.idea/
+build/
+dist/
+env/
+setup.cfg
+*.egg-info
+*.iml
+*.sql
+.eggs
+.coverage
+/site
+/secrets/*.env
+/secrets/*.yaml
+!/secrets/default.yaml
+!/secrets/test.yaml
+pytype_output/
+
+# ansible inventory files
+inv-*

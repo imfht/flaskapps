@@ -1,0 +1,349 @@
+/*@import './awesome.css'*/
+/*body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+*/
+
+
+/* growing anim */
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+/*这个Body会重写index.css里面的body*/
+body {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Cutive Mono", monospace;
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: normal;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-image: url('../public/images/luffy_naruto.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
+  /*background-color: #3498db;*/
+  /*background-color: black;*/
+
+}
+
+/*要重写bootstrap的p标签，他默认是0, 0, 10px。日你哥*/
+p{
+  margin: 0;
+}
+
+.sep {
+  border: 0;
+  /*width: 3em;*/
+  height: 1px;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mast {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /*width: 50%;*/
+  /*height: 100vh; hikaru*/
+  height: 5rem; /*和search-bar一样高 还要和.mast>div值一样*/
+  /*color: #fff;*/
+  float: left;
+  /*background-color: #111;*/
+  top: .3rem;
+}
+.mast:after {
+  z-index: 0;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /*background: rgba(17, 17, 17, 0.9);*/
+}
+.mast > div {
+  z-index: 2;
+  position: relative;
+  margin: 0 auto; /*hikaru*/
+  height: 5rem; /*和mast值一样*/
+
+  /*single line center*/
+  display: flex;
+  align-items: center;
+}
+.mast__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /*height: 100vh;hikaru*/
+  height: 8rem;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: 50%;
+}
+.mast__header {
+  /*padding: 5%; hikaru*/
+}
+.mast__title {
+  font-family: "Cutive Mono", monospace;
+  font-size: 1.3em;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+
+.mast__text {
+  font-family: "Cutive Mono", monospace;
+  font-size: 1.3em;
+  margin: 0 0 0.5em;
+  line-height: 1.5;
+  white-space: pre;
+  letter-spacing: .6rem
+}
+
+.mast__title span {
+  -webkit-animation: letter-glow 0.7s 0s ease both;
+          animation: letter-glow 0.7s 0s ease both;
+  /*-webkit-animation-iteration-count: 10;*/
+}
+.mast__title span:nth-child(1) {
+  -webkit-animation-delay: 1.05s;
+          animation-delay: 1.05s;
+}
+.mast__title span:nth-child(2) {
+  -webkit-animation-delay: 1.15s;
+          animation-delay: 1.15s;
+}
+.mast__title span:nth-child(3) {
+  -webkit-animation-delay: 1.25s;
+          animation-delay: 1.25s;
+}
+.mast__title span:nth-child(4) {
+  -webkit-animation-delay: 1.4s;
+          animation-delay: 1.4s;
+}
+.mast__title span:nth-child(5) {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+.mast__title span:nth-child(6) {
+  -webkit-animation-delay: 1.63s;
+          animation-delay: 1.63s;
+}
+.mast__title span:nth-child(7) {
+  -webkit-animation-delay: 1.75s;
+          animation-delay: 1.75s;
+}
+/*next */
+.mast__title span:nth-child(8) {
+  -webkit-animation-delay: 2.4s;
+          animation-delay: 2.4s;
+}
+.mast__title span:nth-child(9) {
+  -webkit-animation-delay: 2.5s;
+          animation-delay: 2.5s;
+}
+.mast__title span:nth-child(10) {
+  -webkit-animation-delay: 2.65s;
+          animation-delay: 2.65s;
+}
+.mast__title span:nth-child(11) {
+  -webkit-animation-delay: 2.85s;
+          animation-delay: 2.85s;
+}
+
+
+.mast__text span {
+  -webkit-animation: letter-glow 0.7s 0s ease both;
+          animation: letter-glow 0.7s 0s ease both;
+}
+.mast__text span:nth-child(1) {
+  -webkit-animation-delay: 1.05s;
+          animation-delay: 1.05s;
+}
+.mast__text span:nth-child(2) {
+  -webkit-animation-delay: 1.15s;
+          animation-delay: 1.15s;
+}
+.mast__text span:nth-child(3) {
+  -webkit-animation-delay: 1.25s;
+          animation-delay: 1.25s;
+}
+.mast__text span:nth-child(4) {
+  -webkit-animation-delay: 1.4s;
+          animation-delay: 1.4s;
+}
+.mast__text span:nth-child(5) {
+  -webkit-animation-delay: 1.45s;
+          animation-delay: 1.45s;
+}
+.mast__text span:nth-child(6) {
+  -webkit-animation-delay: 1.50s;
+          animation-delay: 1.50s;
+}
+.mast__text span:nth-child(7) {
+  -webkit-animation-delay: 1.55s;
+          animation-delay: 1.55s;
+}
+
+/*next*/
+.mast__text span:nth-child(8) {
+  -webkit-animation-delay: 2.4s;
+          animation-delay: 2.4s;
+}
+.mast__text span:nth-child(9) {
+  -webkit-animation-delay: 2.45s;
+          animation-delay: 2.45s;
+}
+.mast__text span:nth-child(10) {
+  -webkit-animation-delay: 2.55s;
+          animation-delay: 2.55s;
+}
+.mast__text span:nth-child(11) {
+  -webkit-animation-delay: 2.62s;
+          animation-delay: 2.62s;
+}
+.mast__text span:nth-child(12) {
+  -webkit-animation-delay: 2.7s;
+          animation-delay: 2.7s;
+}
+.mast__text span:nth-child(13) {
+  -webkit-animation-delay: 2.75s;
+          animation-delay: 2.75s;
+}
+.mast__text span:nth-child(14) {
+  -webkit-animation-delay: 2.87s;
+          animation-delay: 2.87s;
+}
+.mast__text span:nth-child(15) {
+  -webkit-animation-delay: 2.95s;
+          animation-delay: 2.95s;
+}
+
+
+@-webkit-keyframes letter-glow {
+  0% {
+    opacity: 0;
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.1);
+  }
+  66% {
+    opacity: 1;
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.9);
+  }
+  77% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes letter-glow {
+  0% {
+    opacity: 0;
+    text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.1);
+  }
+  66% {
+    opacity: 1;
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.9);
+  }
+  77% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0);
+  }
+}
+
+/*流水效果: logotext1 */
+/*body,html{margin:0;padding:0;height:100%;}
+body{
+  background-size:cover;
+  font-family: 'Cabin Condensed', sans-serif;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+*/
+
+
+/* auto type:; search tips */
+/*修改css之后网页自动应用了。。。真尼玛6，都不要刷新..*/
+/*.search-tips{
+  width: flex;
+  font-size: 2rem;
+  position: absolute;
+  top: 11.5rem;
+  left: 35rem;
+  color: #55A4E9;;
+}
+.search-tips > p{
+  margin: auto;
+  text-shadow: longshadow(10,darken($key,10%));
+  font-size: 10rem
+}
+*/
+
+
+/*冒泡效果，主要依赖individual-bubble，bubbles我在Bubble Comp里面换成了category-nav了*/
+.bubbles {
+  display: inline-block;
+  font-family: arial;
+  position: relative;
+}
+
+/*css 选择器 空格，表示是找所有的子孙节点， >是找第一代子节点而已，*/
+.bubbles h1 {
+  position: relative;
+  margin: 1em 0 0;
+  font-family: 'Luckiest Guy', cursive;
+  z-index: 2;
+}
+
+.individual-bubble {
+  position: absolute;
+  border-radius: 100%;
+  bottom: 10px;
+  background-color: #fff;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

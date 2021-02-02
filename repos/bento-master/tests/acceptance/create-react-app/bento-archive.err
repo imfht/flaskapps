@@ -1,0 +1,5 @@
+Running Bento archive on all tracked files...
+
+251 finding(s) in this project were archived, and will be hidden in future Bento runs.
+
+◦ To view archived results, run $ cat .bento/archive.json

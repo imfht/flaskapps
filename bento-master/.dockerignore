@@ -1,0 +1,9 @@
+**/.bento/
+.circleci/
+.git/
+.idea/
+.mypy_cache/
+.pyre/
+__pycache__/
+*.egg-info/
+**/node_modules/

@@ -1,0 +1,45 @@
+{% from 'message_box.html' import message_box %}
+{% from 'events/sessions/management/_types_table.html' import types_table_row %}
+
+<div class="manage-types">
+    <div class="toolbar space-after hide-if-locked">
+        <button class="i-button js-new-type icon-plus highlight"
+                data-href="{{ url_for('.create_type', event) }}"
+                data-title="{% trans %}Add new session type{% endtrans %}"
+                data-ajax-dialog>
+            {%- trans %}New session type{% endtrans %}
+        </button>
+    </div>
+
+    {% if types %}
+        <table class="i-table">
+            <thead>
+                <tr class="i-table">
+                    <th class="i-table">
+                        {%- trans %}Name{% endtrans %}
+                    </th>
+                    <th class="i-table">
+                        {%- trans %}Poster{% endtrans %}
+                    </th>
+                    <th class="i-table action-column hide-if-locked"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%- for session_type in types %}
+                    {{ types_table_row(session_type) }}
+                {%- endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {%- call message_box('info') %}
+            {%- trans %}There are no session types yet.{% endtrans %}
+        {%- endcall %}
+    {% endif %}
+
+    <div class="toolbar f-j-end">
+        <button class="i-button big" data-button-back>{% trans %}Close{% endtrans %}</button>
+    </div>
+</div>
+<script>
+    setupTypesDialog();
+</script>

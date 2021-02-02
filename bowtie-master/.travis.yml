@@ -1,0 +1,69 @@
+dist: trusty
+# https://github.com/travis-ci/travis-ci/issues/4895
+language: bash
+cache:
+  pip: true
+  yarn: true
+  directories:
+    - ~/miniconda
+addons:
+  chrome:
+    stable
+  apt:
+    packages:
+      - libenchant-dev
+      - libnss3
+
+# keep these aligned with `bowtie._app.MIN_NODE_VERSION`
+env:
+  - PYTHON_VERSION=3.6 NODE_VERSION=10
+  - PYTHON_VERSION=3.7 NODE_VERSION=12
+  - PYTHON_VERSION=3.7 NODE_VERSION=10
+  - PYTHON_VERSION=3.7 NODE_VERSION=8
+
+before_install:
+  - docker pull lukasmartinelli/hadolint
+  - nvm install $NODE_VERSION
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
+install:
+  - google-chrome-stable --version
+  - node --version
+  - yarn --version
+  - yarn add eslint babel-eslint eslint-plugin-react prettier eslint-plugin-prettier eslint-config-prettier
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - if ! hash conda 2>/dev/null; then
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    rm -r ~/miniconda;
+    bash miniconda.sh -b -p $HOME/miniconda;
+    fi
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+    # Useful for debugging any issues with conda
+  - conda info -a
+  - if [ ! -d "$HOME/miniconda/envs/test-environment" ]; then
+    conda create -q -n test-environment python=$PYTHON_VERSION;
+    fi
+  - source activate test-environment
+  - pip install --upgrade pip
+  - pip install -r test-requirements.txt --progress-bar=off
+  - wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip
+  - chmod +x chromedriver
+  - mv -f chromedriver $HOME/.yarn/bin
+  - wget https://github.com/errata-ai/vale/releases/download/v1.7.0/vale_1.7.0_Linux_64-bit.tar.gz
+  - tar xvf vale_1.7.0_Linux_64-bit.tar.gz
+
+script:
+  - docker run --rm -i lukasmartinelli/hadolint hadolint --ignore DL3008 --ignore DL3013 - < Dockerfile
+  - make eslint
+  - cd doc && make spelling && cd ..
+  - ./vale --glob='*.rst' doc
+  - black --check -S -l 100 -t py36 bowtie
+  - make static
+  - make test
+
+after_success:
+  - codecov

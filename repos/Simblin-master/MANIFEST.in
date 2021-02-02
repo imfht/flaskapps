@@ -1,0 +1,7 @@
+recursive-include simblin/templates *
+recursive-include simblin/static *
+prune test
+exclude initdb.py
+exclude run.py
+exclude settings.py
+exclude simblin.wsgi

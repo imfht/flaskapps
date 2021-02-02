@@ -1,0 +1,3 @@
+This is not a shell script but contains a shebang somewhere in the file
+
+#!/bin/bash

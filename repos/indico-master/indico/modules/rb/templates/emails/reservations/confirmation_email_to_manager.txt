@@ -1,0 +1,11 @@
+{% extends 'rb/emails/reservations/base_email_to_manager.txt' %}
+
+{% block body -%}
+A booking in your room '{{ reservation.room.full_name }}' has been CONFIRMED by a room manager.
+
+{%- if reason %}
+
+The following message was provided by the room manager:
+{{ reason }}
+{%- endif -%}
+{%- endblock %}

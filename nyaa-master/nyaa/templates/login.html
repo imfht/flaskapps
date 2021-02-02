@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}Login :: {{ config.SITE_NAME }}{% endblock %}
+{% block metatags %}
+<meta property="og:description" content="Log in to {{ config.SITE_NAME }}!">
+{% endblock %}
+{% block body %}
+{% from "_formhelpers.html" import render_field %}
+
+<h1>Login</h1>
+	<form method="POST">
+		{{ form.csrf_token }}
+
+		<div class="row">
+			<div class="form-group col-md-4">
+				{{ render_field(form.username, class_='form-control', placeholder='Username', autofocus='', tabindex='1') }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-4">
+				{# This is just render_field() exploded so that we can add the password link after the label #}
+				{% if form.password.errors %}
+					<div class="form-group has-error">
+				{% else %}
+					<div class="form-group">
+				{% endif %}
+						{{ form.password.label(class='control-label') }}
+
+						{% if config.ALLOW_PASSWORD_RESET: %}
+						<small>
+							<a href="{{ url_for('account.password_reset') }}">Forgot your password?</a>
+						</small>
+						{% endif%}
+
+						{{ form.password(title=form.password.description, class_='form-control', tabindex='2') | safe }}
+						{% if form.password.errors %}
+							<div class="help-block">
+								{% if form.password.errors|length < 2 %}
+									{% for error in form.password.errors %}
+										{{ error }}
+									{% endfor %}
+								{% else %}
+									<ul>
+										{% for error in form.password.errors %}
+											<li>{{ error }}</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+						{% endif %}
+					</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">
+				<input type="submit" value="Login" class="btn btn-primary" tabindex="3">
+			</div>
+		</div>
+	</form>
+{% endblock %}

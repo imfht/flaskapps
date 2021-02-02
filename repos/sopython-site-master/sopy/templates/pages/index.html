@@ -1,0 +1,15 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+    <div class="row"><div class="col-md-12">
+        <div class="page-header"><h2>{% block title %}Pages{% endblock %}</h2></div>
+
+        <table class="table table-striped table-hover">
+            <tbody>{% for name in names %}
+                <tr>
+                    <td><a href="{{ url_for('pages.page', name=name) }}"><strong>{{ name }}</strong></a></td>
+                </tr>
+            {% endfor %}</tbody>
+        </table>
+    </div></div>
+{% endblock %}

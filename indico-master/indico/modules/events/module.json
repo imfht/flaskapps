@@ -1,0 +1,12 @@
+{
+    "name": "events",
+    "produceBundle": false,
+    "partials": {
+        "cloning": "./cloning",
+        "creation": "./creation",
+        "display": "./display",
+        "importing": "./importing",
+        "layout": "./layout",
+        "roles": "./roles"
+    }
+}

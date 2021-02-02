@@ -1,0 +1,34 @@
+---
+- include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+      - '{{ os_family }}.yaml'
+      skip: yes
+  tags: always
+
+- name: install python dependencies
+  package: name={{ item }} state=present
+  with_items: '{{ dependencies }}'
+
+- include: install_virtualenv.yaml
+
+- include: deploy_app.yaml
+  tags: flask.deploy
+
+- name: Ensure that the application file permissions are set properly
+  file: path={{ project_virtualenv_dir }}
+        recurse=yes
+        owner={{ nginx_user }}
+        group={{ nginx_user }}
+        state=directory
+  tags: flask.deploy
+  notify: restart application
+
+- include: uwsgi.yaml
+  tags: uwsgi
+
+- include: supervisor.yaml
+  tags: supervisor
+
+- include: celery.yaml
+  tags: celery

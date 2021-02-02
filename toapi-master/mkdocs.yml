@@ -1,0 +1,56 @@
+site_name: Toapi
+site_url: http://www.toapi.org
+site_description: Every web site provides APIs.
+site_author: Jiuli Gao
+
+repo_url: https://github.com/gaojiuli/toapi/
+repo_name: 'gaojiuli/toapi'
+
+pages:
+    - Toapi:
+        - Introduce: index.md
+        - Installation: about/installation.md
+        - Release Notes: about/release-notes.md
+        - Contributing: about/contributing.md
+        - License: about/license.md
+    - Tutorials:
+        - Introducing Aim: tutorials/introducing.md
+        - Step 0 Creating New Project: tutorials/step0-creating-new-project.md
+        - Step 1 Global Settings: tutorials/step1-global-settings.md
+        - Step 2 Using Redis: tutorials/step2-redis.md
+        - Step 3 Using Sqlite: tutorials/step3-sqlite3.md
+        - Step 4 Defining Items: tutorials/step4-defining-items.md
+        - Step 5 Deploy: tutorials/step5-deploy.md
+    - Topics:
+        - Api: topics/api.md
+        - Item: topics/item.md
+        - Selector: topics/selector.md
+        - Settings: topics/settings.md
+        - Cache: topics/cache.md
+        - Storage: topics/storage.md
+    - Articles:
+        - Toapi released: articles/release.md
+
+markdown_extensions:
+    - toc:
+        permalink: 
+    - admonition
+    - def_list
+    - codehilite
+
+copyright: Copyright &copy; 2017 <a href="https://github.com/gaojiuli">Jiuli Gao</a>.
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'blue'
+    accent: 'blue'
+  font:
+    text: 'Ubuntu'
+    code: 'Ubuntu Mono'
+  logo: './logo.png'
+  social:
+    - type: 'github'
+      link: 'https://github.com/gaojiuli'
+plugins:
+    - search

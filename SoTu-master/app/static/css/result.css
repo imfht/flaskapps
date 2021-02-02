@@ -1,0 +1,81 @@
+html, body, .wrapper {
+    min-height: 100vh;
+    height: auto;
+}
+
+body {
+    display: none;
+}
+
+.image-wrapper {
+    margin: 20px;
+    min-width: 400px;
+}
+
+.image-target img {
+    height: 100px;
+}
+
+.image-target .image-info {
+    display: inline-block;
+    margin-left: 20px;
+    color: white;
+    vertical-align: top;
+    font-size: 16px;
+}
+
+.image-tip {
+    color: white;
+    font-size: 20px;
+    line-height: 40px;
+}
+.image-tip span {
+    border-bottom: 2px solid white;
+}
+
+.image-grid {
+    display: flex;
+    display: -webkit-flex;
+    overflow: hidden;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    max-height: 100%;
+}
+
+.image-grid img {
+    flex: 1 1 auto;
+    min-width: 100%;
+    max-width: 100%;
+    height: 150px;
+    vertical-align: middle;
+
+    object-fit: cover;
+}
+/* ugly but useful */
+.image-grid::after {
+    flex-grow: 1000;
+    content: '';
+}
+
+.image-grid .image-item {
+    position: relative;
+    flex-grow: 1;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.image-item .image-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: white;
+    text-align: center;
+    font-size: small;
+    opacity:0;
+    transition: .5s ease;
+}
+
+.image-item:hover .image-overlay {
+    opacity: 1;
+}

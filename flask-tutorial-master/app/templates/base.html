@@ -1,0 +1,41 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Just for fun{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-inverse" id="top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Just for fun</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="container">
+        <div class="col-sm-8">
+            {% block page_content %}{% endblock %}
+        </div>
+        <div class="col-sm-3 col-sm-offset-1">
+            {% block slider %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

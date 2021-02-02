@@ -1,0 +1,89 @@
+.shelf_header {
+  height: 160px;
+  width: 100%;
+  background-color: rgb(244, 243, 249);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  .shelf_btn-user {
+    background: transparent;
+    border: none;
+    width: 80%;
+    font-size: 30px;
+  }
+}
+
+.shelf_signin {
+  font-size: 30px;
+  color: #333;
+  background: #ccc;
+  padding-left: 20px;
+}
+
+.shelf_list {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+
+  .shelf_item {
+    width: 50%;
+    box-sizing: border-box;
+    height: 400px;
+    padding: 30px 40px;
+    float: left;
+    position: relative;
+
+    .icon_del {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+
+    .shelf_wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+      .shelf_cover {
+        width: 100%;
+        height: 100%;
+        box-shadow: 6px 10px 6px #ccc;
+        border-radius: 16px;
+      }
+
+      .shelf_novelname {
+        font-size: 34px;
+        position: absolute;
+        left: 10%;
+        top: 20%;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:2;
+      }
+      .shelf_authorname {
+        font-size: 26px;
+        position: absolute;
+        top: 70%;
+        right: 10%;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:2;
+      }
+    }
+
+  }
+}
+
+

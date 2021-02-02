@@ -1,0 +1,26 @@
+<!doctype html>
+{% block head %}
+<title>{% block title %}Welcome{% endblock %} | Flask (A Python Microframework)</title>
+<meta charset=utf-8>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<script type=text/javascript
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+{% endblock %}
+<div class=box>
+  {% block body_title %}
+    <h1><span>{{ self.title() }}</span></h1>
+  {% endblock %}
+  <p class=nav>
+    <a href="{{ url_for('general.index') }}">overview</a> //
+    <a href="{{ url_for('docs.index') }}">docs</a> //
+    <a href="{{ url_for('community.index') }}">community</a> //
+    <a href="{{ url_for('extensions.index') }}">extensions</a> //
+    <a href="https://psfmember.org/civicrm/contribute/transact?reset=1&id=20">donate</a>
+  {% for message in get_flashed_messages() %}
+    <p class=message>{{ message }}
+  {% endfor %}
+  {% block body %}{% endblock %}
+  <p class=footer>
+    &copy; Copyright 2010 - {{ current_year }} by <a href=http://lucumr.pocoo.org/>Armin Ronacher</a>
+</div>

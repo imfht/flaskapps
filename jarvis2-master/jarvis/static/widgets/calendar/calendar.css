@@ -1,0 +1,24 @@
+[data-widget="calendar"] {
+  height: 100%;
+  padding: 5px;
+  background: #3D3242;
+  text-align: center;
+}
+[data-widget="calendar"] h1 {
+  font-size: 55px;
+  margin: 0 0 10px 0;
+}
+[data-widget="calendar"] h2 {
+  font-size: 25px;
+}
+[data-widget="calendar"] table {
+  margin: 0 10px 0 10px;
+}
+[data-widget="calendar"] .summary {
+  text-align: left;
+  width: 100%;
+}
+[data-widget="calendar"] .start {
+  text-align: right;
+  white-space: nowrap;
+}

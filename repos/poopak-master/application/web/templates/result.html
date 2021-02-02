@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+    <div class="col-md-12">
+      <h5 class="text-center">
+
+        Total found {{all_count}}
+      </h5>
+        <br/>
+        {%if results %}
+        <hr />
+        <ul class="list-unstyled">
+            {% for item in results: %}
+            <li>
+                {% if item.status == 200 %}
+                <a href="{{ url_for('screenshots_path', filename=item.capture_id)}}" target="_blank">
+                    <img src="{{ url_for('screenshots_path', filename=item.capture_id)}}" class="pull-left img-thumbnail col-md-2" style="margin: 10px;">
+                </a>
+                {% endif %}
+
+                <a target="_blank" href="http://{{item.url}}">
+                    <span class="highlight">{{item.title}}</span>
+                </a>
+                {{item.capture_id}}
+                <cite style="display: block;" class="text-success">{{item.url}}</cite>
+                <cite style="display: inline-block;" class="badge badge-info">{{item.status}}</cite>
+                <cite style="display: inline-block;" class="badge badge-success">{{item.seen_time | datetimeformat}}</cite>
+                <a style="display: inline-block;" class="btn badge badge-danger" href="{{url_for('search.report', id=item._id) }}" >report</a>
+                <p style="word-wrap: break-word;">
+                    {{item.body | limitbody}}
+                </p>
+                <div class="clearfix"></div>
+                <hr>
+            </li>
+            {% endfor %}
+        </ul>
+
+  <ul class=pagination>
+  {%- for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <li><a href="{{url_for('search.search', phrase=phrase,page_number=page)}}">{{ page }}</a></li>
+      {% else %}
+        <li><a href="{{url_for('search.search', phrase=phrase,page_number=page)}}"><strong>{{ page }}</strong></a></li>
+      {% endif %}
+    {% else %}
+
+    {% endif %}
+  {%- endfor %}
+  {% if pagination.has_next %}
+      <li><a href="{{url_for('search.search', phrase=phrase, page_number=pagination.page + 1)}}">Next &raquo;</a></li>
+  {% endif %}
+  </ul>
+
+
+        {%endif %}
+    </div>
+
+{% endblock %}

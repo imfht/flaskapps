@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/ico/favicon.ico">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- General custom styles for entire site -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    {% if css_file %}
+      <link href="{{ css_file }}" rel="stylesheet">
+    {% endif %}
+
+    <script src="/static/js/vendor/modernizr-2.8.3.min.js"></script>
+
+  </head>
+
+  <body>
+
+    {% include 'common/topnav.html' %}
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+           <div class="container">
+             <div class="alert alert-warning alert-dismissable">
+                <a class="close" data-dismiss="alert" href="#">X</a>
+                <span class="flashdata">{{ message }}</span>
+            </div>
+           </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="primary container">
+
+      <!-- Main component -->
+
+      <div id="main" role="main">
+          {% block main %}{% endblock %}
+      </div>
+
+      {% include 'common/footer.html' %}
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+		<script
+			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+			crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-3.4.1.slim.min.js"><\/script>')</script>
+    <script src="/static/js/vendor/bootstrap.min.js"></script>
+    {% assets "js_all" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+  </body>
+</html>

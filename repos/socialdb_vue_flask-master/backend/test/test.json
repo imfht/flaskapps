@@ -1,0 +1,18 @@
+{
+    "split": "----",
+    "strip_csv_tilte": false,
+    "id": {
+        "id_1": "email",
+        "id_2": "password"
+    },
+    "regex": {
+        "user": {
+            "re": "(.*?)@(.*?)",
+            "target": "email"
+        }
+    },
+    "custom_field":{
+        "source": "wangyi52G",
+        "xtime": "201604"
+    }
+}

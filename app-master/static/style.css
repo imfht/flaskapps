@@ -1,0 +1,89 @@
+.profile-picture {
+    /* make a square container */
+    width: 150px;
+    height: 150px;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+
+    margin-top: 10px;
+}
+
+.client-icon {
+    /* make a square container */
+    width: 150px;
+    height: 150px;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 10%;
+
+    margin-top: 10px;
+}
+
+.small-client-icon {
+    /* make a square container */
+    width: 40px;
+    height: 40px;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 10%;
+
+    margin-top: 10px;
+}
+
+.small-profile-picture {
+    /* make a square container */
+    width: 60px;
+    height: 60px;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+
+    margin-top: 10px;
+}
+
+/* highlighted table row */
+.highlight-row {
+    border: solid #5675E2;
+}
+
+.arrow {
+    width: 20px;
+}
+
+em {
+    font-style: normal;
+    background-color: #FFFF00;
+}
+
+.small-text {
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 0px;
+}
+
+.copy-btn {
+    font-size: 0.6rem;
+    line-height: 0.75;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+/*Left border for alert zone*/
+.alert-primary {
+    border-left: 5px #467fcf solid;
+}
+
+.alert-danger {
+    border-left: 5px #6b1110 solid;
+}
+
+.alert-danger::before {
+    content: "⚠️";
+}
+
+.dns-record {
+    border: 1px dotted #E3156A;
+}

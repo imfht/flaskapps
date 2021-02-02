@@ -1,0 +1,33 @@
+{% extends "snippets/layout.html" %}
+{% block title %}{{ snippet.title }}{% endblock %}
+{% block body %}
+  {{ super() }}
+  <h2>{{ snippet.title }}</h2>
+  <p class=snippet-author>Posted by {{ snippet.author.name }}
+    on {{ snippet.pub_date|datetimeformat }}
+    and filed in <a href="{{ snippet.category.url }}">{{ snippet.category.name }}</a>
+    {% if g.user.is_admin %}
+      (<a href="{{ url_for('.edit', id=snippet.id) }}">edit</a>)
+    {% endif %}
+  {{ snippet.rendered_body }}
+  <p><small>This snippet by {{ snippet.author.name }} can be used freely for
+    anything you like. Consider it public domain.</small>
+  {% if snippet.comments %}
+  <div id=comment-box>
+    <h2>Comments</h2>
+    <ul class=comments>
+      {% for comment in snippet.comments %}
+      <li>
+        <p class=title>
+          {{ comment.title or "Comment" }}
+          by {{ comment.author.name }}
+          on {{ comment.pub_date|datetimeformat }}
+          {% if g.user.is_admin %}
+          (<a href="{{ url_for('.edit_comment', id=comment.id) }}">edit</a>)
+          {% endif %}
+        <div class=body>{{ comment.rendered_text }}</div></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}

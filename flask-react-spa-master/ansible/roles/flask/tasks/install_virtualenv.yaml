@@ -1,0 +1,18 @@
+---
+- name: create virtualenv {{ project_virtualenv_dir }}
+  command: virtualenv-3.6 -p {{ python3_path }} {{ project_virtualenv_dir }}
+           creates={{ project_virtualenv_dir }}/bin/activate
+
+- name: create virtualenv postactivate script
+  template: src=virtualenv_postactivate.sh.j2
+            dest={{ project_virtualenv_dir }}/bin/postactivate
+            owner={{ nginx_user }}
+            group={{ nginx_user }}
+            mode=0640
+            backup=yes
+
+- name: create virtualenv exec script
+  template:
+    src: venv_exec.sh.j2
+    dest: '{{ venv_exec }}'
+    mode: 0755

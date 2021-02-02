@@ -1,0 +1,22 @@
+{% extends "admin.html" %}
+{% block tab %}专栏文章{% endblock %}
+{% block content %}
+<div class="admin-post">
+    <ul>
+        {% for column in columns %}
+        <li>
+            {{ column.timestamp }}
+            <a class="article-title" href="{{url_for('admin.edit_column',id=column.id)}}">
+                {{ column.column }}
+            </a>
+
+            <button onclick="firm('{{url_for('admin.delete_column', id=column.id)}}')" class="delete-btn">删除</button>
+
+            <a href="{{url_for('admin.admin_column', id=column.id)}}">
+                <button class="edit-btn">管理</button>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+Flask
+Flask-Script
+WTForms
+Flask-WTF
+SQLAlchemy
+Flask-SQLAlchemy
+Flask-Login
+Flask-Assets
+Flask-Bcrypt
+jsmin
+psycopg2
+beautifulsoup4

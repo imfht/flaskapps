@@ -1,0 +1,170 @@
+version: 2.1
+
+jobs:
+  installDependencies:
+    executor: python-build
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "poetry.lock" }}
+      - run:
+          name: "Install dependencies"
+          command: poetry install --no-interaction
+      - save_cache:
+          key: deps-v1-{{ checksum "poetry.lock" }}
+          paths:
+            - /home/circleci/.cache/pypoetry/virtualenvs
+
+  runPytest:
+    executor: python-build
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "poetry.lock" }}
+      - run:
+          name: "Pytest"
+          command: |
+            poetry run coverage run --source . -m pytest -vv
+            poetry run coverage report
+            poetry run coverage html
+      - store_test_results:
+          path: test-reports
+          prefix: tests
+      - store_artifacts:
+          path: htmlcov
+
+  runPrecommit:
+    executor: python-build
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "poetry.lock" }}
+      - run:
+          name: "Pre-commit install"
+          command: poetry run pre-commit install --overwrite
+      - run:
+          name: "Pre-commit run"
+          command: poetry run pre-commit run --all-files
+
+  runQATest:
+    executor: python-build
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "poetry.lock" }}
+      - run:
+          name: "QA test"
+          command: make qa-test
+
+  runEnvTest:
+    executor: python-build
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: "Env test"
+          command: make env-test
+
+  runBento:
+    executor: python-build
+    steps:
+      - checkout
+      - setup_remote_docker
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "poetry.lock" }}
+      - run:
+          name: "Make bento"
+          command: poetry run bento --agree --version
+      - run:
+          name: "Install react"
+          command: (cd tests/integration/react && npm install)
+      - run:
+          name: "Running bento check"
+          command: poetry run bento --agree --email test@returntocorp.com check --no-pager --all 2>&1 | cat
+          environment:
+            R2C_USE_REMOTE_DOCKER: "1"
+      - store_artifacts:
+          path: "/home/circleci/.bento/last.log"
+
+  validateMessage:
+    executor: python-build
+    steps:
+      - checkout
+      - run:
+          name: "Validating commit message presence"
+          command: bash validate-message.sh
+
+  deploy:
+    executor: python-build
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps-v1-{{ checksum "poetry.lock" }}
+      - run:
+          name: "Deploying to PyPI"
+          command: make release
+
+workflows:
+  install-test-deploy:
+    jobs:
+      - installDependencies
+      - runPytest:
+          requires:
+            - installDependencies
+          filters:
+            tags:
+              only: /.*/
+      - runPrecommit:
+          requires:
+            - installDependencies
+          filters:
+            tags:
+              only: /.*/
+      - runQATest:
+          requires:
+            - installDependencies
+          filters:
+            tags:
+              only: /.*/
+      - runEnvTest:
+          filters:
+            tags:
+              only: /.*/
+      - runBento:
+          requires:
+            - installDependencies
+          filters:
+            tags:
+              only: /.*/
+      - validateMessage:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - installDependencies
+            - runPytest
+            - runPrecommit
+            - runQATest
+            - runEnvTest
+            - runBento
+            - validateMessage
+          filters:
+            tags:
+              only: /^RELEASE-\d+.\d+.\d+(b\d+)?/
+            branches:
+              ignore: /.*/
+
+executors:
+  python-build:
+    working_directory: ~/circleci
+    docker:
+      - image: circleci/python:3.7.7-stretch-node

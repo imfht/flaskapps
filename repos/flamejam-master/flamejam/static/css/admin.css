@@ -1,0 +1,202 @@
+@import url("flags.css");
+@import url("bootstrap.min.css");
+
+body {
+    color: #000;
+    background: #777;
+    font-family: sans-serif;
+    font-size: 8pt;
+}
+
+#wrapper {
+    margin: 0 20px 20px 20px;
+    padding: 0;
+    border: 1px solid #555;
+    border-top: 0;
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+#header {
+    background: #EEE;
+    border-bottom: 1px solid #CCC;
+}
+
+#header ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#header ul li {
+    display: inline-block;
+}
+
+#header ul li a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 10pt;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #FFF;
+}
+
+#header ul li a:hover {
+    color: #000;
+    background: #F7F7F7;
+}
+
+#content {
+    padding: 20px;
+    background: #FFF;
+    min-height: 400px;
+}
+
+h1 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin: 0;
+    padding: 0px 20px;
+    color: #000;
+    background: #DEF;
+    border-bottom: 1px solid #BCD;
+}
+
+h2 {
+    font-size: 17pt;
+    font-weight: normal;
+}
+
+a {
+    color: #00F;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #008;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid #eee;
+}
+
+th {
+    background: #eee;
+    text-align: left;
+    padding: 6px;
+}
+
+td {
+    padding: 2px 6px;
+}
+
+th.actions {
+    padding: 5px;
+}
+
+tr:nth-child(2n) td {
+    background: #F7F7F7;
+}
+
+.on td {
+    background: #FFFFAA !important;
+}
+
+textarea,
+input[type="text"],
+input[type="number"] {
+    border: 1px solid #CCC;
+    padding: 2px 5px;
+    border-radius: 0;
+}
+
+:focus {
+    outline: 0;
+}
+
+#flashes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#flashes li {
+    display: block;
+    background: #222;
+    padding: 5px 10px;
+    margin: 10px 0;
+    box-shadow: 0 0  #000;
+    font-weight: normal;
+    border: 1px solid #CCC;
+}
+
+p.error, p.info, p.success, p.warning {
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px;
+}
+
+.error {
+    border-color: #F00 !important;
+    color: #F00 !important;
+    background: #FAA !important;
+}
+
+.info {
+    border-color: #00A !important;
+    color: #00A !important;
+    background: #ACF !important;
+}
+
+.success {
+    border-color: #080 !important;
+    color: #080 !important;
+    background: #AF8 !important;
+}
+
+.warning {
+    border-color: #F90 !important;
+    color: #A60 !important;
+    background: #FF8 !important;
+}
+
+form .field {
+}
+
+form .field label {
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: inherit;
+    vertical-align: top;
+    padding-top: 3px;
+}
+
+.alert label {
+    display: inline;
+    font: inherit;
+}
+
+span.form-info {
+    color: #888;
+    margin-left: 5px;
+}
+
+#announcement-preview {
+    border: 2px solid #CCC;
+    padding: 20px;
+    background: #FFF;
+}
+
+span.flags {
+    font-weight: bold;
+    font-size: 8pt;
+    color: gray;
+}
+
+span.red { color: red; }
+span.green { color: green; }
+span.orange { color: orange; }

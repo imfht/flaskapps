@@ -1,0 +1,31 @@
+{% extends 'forms/base_widget.html' %}
+{% from 'forms/_form.html' import form_field %}
+
+
+{% block html %}
+    <div id="{{ field.id }}">
+        {% for subfield in field %}
+            <div class="i-radio i-linking form-subfield flexrow f-a-center
+                        {{ 'has-error' if has_error[subfield.data] }}">
+                {% set dropdown = form[subfield.data] if subfield.data in form.conditional_fields %}
+                {% set disabled = dropdown is defined and dropdown.choices|length <= 1 %}
+                {{ subfield(disabled=disabled) }}
+                {{ subfield.label }}
+                {% if dropdown %}
+                    {{ form_field(dropdown, "i-linking-dropdown form-subfield") }}
+                {% elif subfield.data == 'event' %}
+                    <span class='static-text'>{{ form.event.title }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        setupLinkingWidget({
+            fieldId: {{ field.id | tojson }}
+        });
+    </script>
+{% endblock %}

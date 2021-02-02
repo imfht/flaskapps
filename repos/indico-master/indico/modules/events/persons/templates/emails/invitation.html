@@ -1,0 +1,21 @@
+{% macro get_subject() -%}
+    Please register
+{%- endmacro %}
+
+{% macro get_html_body() -%}
+    Dear {first_name},<br>
+    <br>
+    You have been added with some submission privileges to the event <strong>{event_title}</strong>.<br>
+    <br>
+    <br>
+    To use those privileges, you need to create a new Indico profile.<br>
+    You can do so at the following URL:<br>
+    {register_link}<br>
+    <br>
+    When creating the profile, please make sure to use the email address <strong>{email}</strong>.<br>
+    If you already have an Indico profile, simply add the email address <strong>{email}</strong> to your profile.
+    <br>
+    <br>
+    Best regards<br>
+    {{ session.user.full_name }}
+{%- endmacro %}

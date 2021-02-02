@@ -1,0 +1,44 @@
+// This file is part of Zenodo.
+// Copyright (C) 2016 CERN.
+//
+// Zenodo is free software; you can redistribute it
+// and/or modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of the
+// License, or (at your option) any later version.
+//
+// Zenodo is distributed in the hope that it will be
+// useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Zenodo; if not, write to the
+// Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+// MA 02111-1307, USA.
+//
+// In applying this license, CERN does not
+// waive the privileges and immunities granted to it by virtue of its status
+// as an Intergovernmental Organization or submit itself to any jurisdiction.
+
+define([
+  'js/zenodo/filters/citations',
+  'js/zenodo/filters/striptags',
+  'js/zenodo/filters/safe',
+  'js/zenodo/filters/titlecase',
+  'js/zenodo/filters/journal'
+], function(citationFilters, striptagsFilter, safeFilter, titlecaseFilter, formatJournalFilter){
+  var app = angular.module('zenodo.filters', ['ngSanitize'])
+    .filter('striptags', striptagsFilter)
+    .filter('titlecase', titlecaseFilter)
+    .filter('formatJournal', formatJournalFilter)
+    .filter('safe', ['$sce', safeFilter])
+    .filter('providerNames', citationFilters.providerNamesFilter)
+    .filter('creatorNames', citationFilters.creatorNamesFilter)
+    .filter('doiUrl', citationFilters.doiUrlFilter)
+    .filter('citationTitle', citationFilters.citationTitleFilter)
+    .filter('doi', citationFilters.doiFilter)
+    .filter('logoType', citationFilters.logoTypeFilter)
+    .filter('uniqueBadge', citationFilters.uniqueBadgeFilter)
+    .filter('missingTypes', citationFilters.missingTypesFilter);
+  return app;
+});

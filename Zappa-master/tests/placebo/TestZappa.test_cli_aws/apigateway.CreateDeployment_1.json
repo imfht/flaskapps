@@ -1,0 +1,20 @@
+{
+    "status_code": 201, 
+    "data": {
+        "id": "cahz60", 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 201, 
+            "RequestId": "8689874e-28f4-11e6-805d-312f5a261f21"
+        }, 
+        "createdDate": {
+            "hour": 15, 
+            "__class__": "datetime", 
+            "month": 6, 
+            "second": 20, 
+            "microsecond": 0, 
+            "year": 2016, 
+            "day": 2, 
+            "minute": 2
+        }
+    }
+}

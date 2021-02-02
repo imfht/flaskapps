@@ -1,0 +1,11 @@
+@import 'variables';
+
+.grid-docs {
+    .col,
+    .cols {
+        text-align: center;
+        background-color: $off-white;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}

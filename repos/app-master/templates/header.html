@@ -1,0 +1,116 @@
+<div class="header">
+  <div class="container">
+    <div class="d-flex">
+      <a class="header-brand" href="{{ url_for('dashboard.index') }}">
+        <img src="/static/logo.svg" class="header-brand-img" style="max-width: 8rem" alt="logo">
+      </a>
+
+      <div class="d-flex order-lg-2 ml-auto">
+        <div class="nav-item" data-toggle="dark-mode" title='Toggle bright/dark mode'>
+          <i class="fe fe-moon"></i>
+        </div>
+        {% if current_user.should_show_upgrade_button() %}
+          <div class="nav-item">
+            <a href="{{ url_for('dashboard.pricing') }}" class="btn btn-sm btn-outline-primary">Upgrade</a>
+          </div>
+        {% endif %}
+
+
+        <div id="notification-app" class="dropdown d-none d-md-flex" v-if="showNotification">
+          <a class="nav-link icon" data-toggle="collapse" href="#notifications" style="height: 100%">
+            <i class="fe fe-bell"></i>
+            <span v-if="has_non_read_notification" class="nav-unread"></span>
+            <span v-else class="nav-read"></span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow collapse" id="notifications">
+            <div v-if="loading">Loading ...</div>
+            <div class="dropdown-item d-flex" v-for="notification in notifications">
+              <div class="flex-grow-1">
+                <div v-html="notification.message"
+                     style="width: 40em; word-wrap:break-word; white-space: normal"></div>
+                <div class="small text-muted">
+                  [[notification.created_at]]
+                </div>
+              </div>
+              <div v-if="!notification.read">
+                <i class="fe fe-check"
+                   @click="markAsRead(notification)"
+                   data-toggle="tooltip" title="mark as read"></i>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button v-if="canLoadMore" @click="loadMore()" class="btn btn-link">Load more</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="dropdown">
+          <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+            {% if current_user.profile_picture_id %}
+              <span class="avatar" style="background-image: url('{{ current_user.profile_picture_url() }}')"></span>
+            {% else %}
+              <span class="avatar avatar-blue">{{ current_user.get_name_initial() or "👻" }}</span>
+            {% endif %}
+
+            <span class="ml-2 d-none d-lg-block">
+							<span class="text-default">
+                {{ current_user.name }}
+              </span>
+
+              {% if current_user.in_trial() %}
+                <small class="text-success d-block mt-1">Premium expires {{ current_user.trial_end|dt }}
+                <i class="fe fe-info" data-toggle="tooltip"
+                   title="After you signed up you were given a free 7 day Premium trial, after this period your account will automatically be downgraded to the Free plan."></i>
+                </small>
+              {% elif current_user.is_premium() %}
+
+                <small class="text-success d-block mt-1">Premium
+                  {% set sub = current_user.get_subscription() %}
+                  {% if sub and sub.cancelled and not current_user.lifetime %}
+                    until {{ sub.next_bill_date.strftime("%Y-%m-%d") }}
+                  {% endif %}
+                </small>
+              {% endif %}
+
+						</span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            <a class="dropdown-item" href="{{ url_for('dashboard.api_key') }}">
+              <i class="dropdown-icon"><img src="/static/key.svg"></i> API Keys
+            </a>
+
+            <hr class="my-2">
+
+            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+              <i class="dropdown-icon fe fe-log-out"></i> Sign out
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+
+      <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse"
+         data-target="#headerMenuCollapse">
+        <span class="header-toggler-icon"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg order-lg-first">
+        {% include "menu.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+
+

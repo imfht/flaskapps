@@ -1,0 +1,37 @@
+[build]
+  command = "npm run build"
+  publish = "out"
+  functions = "functions"
+
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+
+[[redirects]]
+  from = "/up"
+  to = "/.netlify/functions/up"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+
+[[redirects]]
+  from = "/d/*"
+  to = "/.netlify/functions/d/:splat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"
+
+[[redirects]]
+  from = "/stat"
+  to = "/.netlify/functions/stat"
+  status = 200
+  force = true
+  [redirects.headers]
+    X-From = "Netlify"

@@ -1,0 +1,11 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div id="alert-wrapper" class="alert-wrapper offset-top">
+            {% for category, message in messages %}
+                <div class="alert alert-{{category}} alert-dismissible master-alert" role="alert">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div id="alert-wrapper" class="alert-wrapper offset-top"></div>
+    {% endif %}
+{% endwith %}

@@ -1,0 +1,295 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 30em) {
+  .popup-content {
+    width: 66% !important;
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+  .video-popup-content {
+    width: 90% !important;
+  }
+  .user-popup-content {
+    width: 70% !important;
+    left: 15% !important;
+  }
+  .user-popup-overlay {
+    background-color: $blue-dark;
+    opacity: 0.8;
+  }
+}
+
+@media screen and (min-width: 30em) {
+  #jumbotron {
+    video,
+    img {
+      object-position: 0 0;
+    }
+  }
+  .vh-minus-200-ns {
+    height: calc(100vh - 200px);
+  }
+  .vh-minus-185-ns {
+    height: calc(100vh - 185px);
+  }
+  .vh-minus-122-ns {
+    height: calc(100vh - 122px);
+  }
+  .vh-minus-77-ns {
+    height: calc(100vh - 77px);
+  }
+  .popup-content {
+    width: 44% !important;
+  }
+  .video-popup-content {
+    width: 66% !important;
+  }
+  .user-popup-content {
+    width: 13% !important;
+  }
+}
+
+@media screen and (min-width: 66rem) {
+  .dib-66rem {
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 90em) {
+  .pl6-xl {
+    padding-left: 8rem;
+  }
+}
+
+@media screen and (min-width: 60em) {
+  .bg-split-blue-white {
+    background: linear-gradient(to right, $blue-dark, $blue-dark 80%, $white 20%, $white);
+  }
+  .f-4rem-l {
+    font-size: 4rem;
+  }
+  .mw-36rem-l {
+    max-width: 36rem;
+  }
+}
+
+@media screen and (max-width: 60em) {
+  .mw-20rem {
+    max-width: 20rem;
+  }
+  .bg-split-blue-white {
+    background: linear-gradient(to bottom, $blue-dark, $blue-dark 80%, $white 20%, $white);
+  }
+}
+
+.bg-split-white-grey-light {
+  background: linear-gradient(to right, $white, $white 20%, $grey-light 20%, $grey-light);
+}
+
+.bg-sec-jumbotron {
+  background: rgba(0, 0, 0, 0.5) url('../img/footer.jpg') left;
+  background-blend-mode: darken;
+}
+
+/* used for project progress bar */
+.hhalf {
+  height: 0.5rem;
+}
+.whalf {
+  width: 0.5rem;
+}
+
+/*
+   Add shadow on hover, building on what is already in Tachyons
+   adjust for the lighter shadow from design
+*/
+.shadow-hover::after {
+  box-shadow: 0 7px 20px 0 rgba(0, 0, 0, 0.08);
+  z-index: 0;
+}
+
+button:focus,
+button:active,
+a:focus,
+a:active {
+  outline: 0;
+}
+/* TOGGLE for Show Map*/
+.t-cb {
+  transition: all 0.3s cubic-bezier(0.33, 1, 0.66, 1);
+} // Custom class
+
+.checkbox:checked + .checkbox-wrapper {
+  background-color: $red; // @extend .bg-green;
+
+  .checkbox-toggle {
+    left: 2rem; // @extend .left-2;
+    background-color: $white; // @extend .bg-moon-gray;
+    border-color: $red;
+  }
+}
+.checkbox-toggle:hover {
+  border: dashed red !important;
+}
+
+.radio-input {
+  background-color: $white;
+}
+.radio-input:checked {
+  background-color: $red;
+  border: none;
+}
+
+/* mapping type by RADIO BUTTONs
+https://codepen.io/nielsenramon/pen/mLMeLY
+ */
+.radiobutton:checked + .radiobutton-wrapper {
+  background-color: $red; // @extend .bg-white;
+  div {
+    border-color: $white; // @extend .b--white;
+  }
+}
+
+.markdown-content {
+  h1 {
+    font-size: 1.25rem;
+  }
+  h2 {
+    font-size: 1.125rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  a {
+    color: $red;
+    text-decoration: none;
+  }
+}
+
+.bottom-3 {
+  bottom: 3rem;
+}
+
+input:disabled,
+textarea:disabled {
+  background-color: $tan;
+}
+
+.redicon {
+  position: absolute;
+  top: -1px;
+  right: 0px;
+  background: $red;
+  box-sizing: border-box;
+  border-radius: 100%;
+  width: 0.6rem;
+  height: 0.6rem;
+}
+
+div.messageSubjectLinks,
+strong.messageSubjectLinks {
+  & > a {
+    color: $blue-dark;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  & > a:hover {
+    & > a {
+      color: $red;
+    }
+    color: $red;
+  }
+  color: $blue-grey;
+  &.bodycard > a {
+    text-decoration: underline;
+  }
+}
+
+div.messageBodyLinks {
+  & > a {
+    color: $red;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  color: $blue-grey;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    border-bottom: solid;
+    border-top: solid;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-left: solid;
+    border-right: solid;
+  }
+}
+
+.w-100-minus-4rem {
+  width: calc(100% - 4rem);
+}
+
+.mapbox-improve-map {
+  display: none;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.object-fit-contain {
+  object-fit: contain;
+}
+
+#shareProject {
+  background-color: $white;
+  color: $blue-dark;
+  border-color: $blue-dark;
+}
+
+.overflow-empty {
+  text-overflow: "";
+}
+
+.react-select {
+  &__control {
+    border-color: $grey-light !important;
+    min-height: 1.5rem !important;
+    border-radius: .125rem !important;
+
+    &--is-focused {
+      box-shadow: 0 0 1px $grey-light !important;
+    }
+
+    &:hover {
+      border-color: $grey-light !important;
+    }
+  }
+
+  &__placeholder {
+    color: $blue-dark !important;
+  }
+
+  &__option {
+    color: $blue-dark !important;
+
+    &:hover, &:active, &--is-focused {
+      background-color: $tan !important;
+      cursor: pointer;
+    }
+
+    &--is-selected {
+      background-color: $white !important;
+    }
+  }
+}
+
+#project-creation-map {
+  .mapboxgl-ctrl-top-right {
+    top: 2.5rem;
+  }
+}

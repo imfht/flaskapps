@@ -1,0 +1,15 @@
+model: DynamicBot
+dataset: Reddit
+model_params:
+  base_cell: GRUCell
+  batch_size: 128
+  embed_size: 128
+  num_layers: 1
+  reset_model: true
+  steps_per_ckpt: 200
+  ckpt_dir: out/reddit/basicReddit
+dataset_params:
+  data_dir: /home/brandon/Datasets/reddit
+  max_seq_len: 15
+  vocab_size: 80000  # HUGE dataset = huge vocabulary.
+

@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,900" rel="stylesheet">
+<meta name="google-site-verification" content="{{ g.site.google_site_verification }}" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+<!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+<![endif]-->
+{% assets filters="cssmin", output="dist/reflux.css", "css/reflux.css", "css/highlight.css", "iconfont/iconfont.css" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}">
+{% endassets %}
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" crossorgin="anonymous"></script>
+{{ moment.include_moment(local_js='https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js') }}
+{% if g.site.locale.startswith("zh") %}
+{{ moment.lang('zh-cn') }}
+{% endif %}
+{% if integration.google_analytics and integration.google_analytics.enabled %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ g.site.google_analytics_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', '{{ integration.google_analytics.id }}');
+
+</script>
+{% endif %}
+{% if integration.baidu_analytics and integration.baidu_analytics.enabled %}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?{{ integration.baidu_analytics.id }}";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+{% endif %}

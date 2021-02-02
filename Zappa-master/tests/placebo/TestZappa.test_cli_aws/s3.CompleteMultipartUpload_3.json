@@ -1,0 +1,14 @@
+{
+    "status_code": 200, 
+    "data": {
+        "ETag": "\"a9e494dfe3c5246750e78bd42f90c4a5-7\"", 
+        "Bucket": "lmbda", 
+        "Location": "https://lmbda.s3.amazonaws.com/zappa-ttt777-1464894741.zip", 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 200, 
+            "HostId": "I1HS36v8H6pvz1LSPYQGmckWapvyYjcBW7/7oWMvbj7oCw04Rmvixg09EPhmS0D50TrIN5yCMHw=", 
+            "RequestId": "9B6AF42A93970E25"
+        }, 
+        "Key": "zappa-ttt777-1464894741.zip"
+    }
+}

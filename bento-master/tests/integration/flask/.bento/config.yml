@@ -1,0 +1,39 @@
+formatter:
+  - stylish: {}
+  - histo: {}
+tools:
+  bandit:
+    ignore:
+    - B101
+    - B104
+    - B105
+    - B106
+    - B107
+    - B108
+    - B112
+    - B303
+    - B310
+    - B311
+    - B403
+    - B404
+    - B405
+    - B406
+    - B407
+    - B408
+    - B409
+    - B410
+    - B603
+    - B604
+    - B606
+    - B607
+    - B608
+  flake8:
+    ignore:
+    - bad-wildcard-import
+    - bare-except-bugbear
+    - no-getattr
+    - no-setattr
+    - unused-module
+    - unused-variable
+  r2c.flask:
+    ignore: []

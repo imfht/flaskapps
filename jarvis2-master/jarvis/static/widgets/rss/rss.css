@@ -1,0 +1,18 @@
+[data-widget="rss"] {
+    height: 100%;
+    padding: 5px;
+    background: #875BA6;
+}
+
+[data-widget="rss"] p {
+    text-align: center;
+}
+
+[data-widget="rss"] ul {
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+[data-widget="rss"] .age {
+    font-size: 10px;
+}

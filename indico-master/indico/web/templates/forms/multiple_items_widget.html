@@ -1,0 +1,41 @@
+{% extends 'forms/base_widget.html' %}
+
+
+{% block html %}
+    {% set value_json = field._value() | tojson %}
+    <input type="hidden" id="{{ field.id }}" name="{{ field.name }}" value="{{ value_json | forceescape }}">
+    <div id="{{ field.id }}-widget" class="multiple-items-widget">
+        <table class="i-table-widget">
+            <thead data-tooltip-anchor>
+                <tr>
+                    {% if field.sortable %}
+                        <th class="small-column"></th>
+                    {% endif %}
+                    {% for item in field.fields -%}
+                        <th class="{% if item.type == 'checkbox' %}thin-column{% endif %}">
+                            {{ item.caption }}
+                        </th>
+                    {% endfor -%}
+                    <th class="action-column">{% trans %}Action{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button type="button" id="{{ field.id }}-add-button" class="js-add-row i-button icon-plus">
+            {%- trans %}Add{% endtrans -%}
+        </button>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        setupMultipleItemsWidget({
+            fieldId: {{ field.id | tojson }},
+            uuidField: {{ field.uuid_field | tojson }},
+            columns: {{ field._field_spec | tojson }},
+            sortable: {{ field.sortable | tojson }},
+            columnChoices: {{ field.choices | tojson }}
+        });
+    </script>
+{% endblock %}

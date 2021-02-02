@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<div class="container offset-top">
+    {% include "alert.html" %}
+    
+    <div class="row">
+
+        <div class="col-lg-6 offset-lg-3"> 
+            <h1>Contact</h1>
+
+            <p class="lead">Got a question or suggestion?</p>
+            
+            <hr>
+            
+            <form class="form-horizontal" method="post">
+                {{ form.hidden_tag() }}
+
+                {% if form.email.errors %}
+                    <div class="form-group has-danger">
+                        {{ form.email(class_="form-control form-control-danger", placeholder="Email") }}
+
+                        {% for e in form.email.errors %}
+                            <div class="form-control-feedback">{{e}}</div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{current_user.email}}">
+                    </div>
+                {% endif %}
+
+                {% if form.message.errors %}
+                    <div class="form-group has-danger">
+                        {{ form.message(class_="form-control form-control-danger", rows="5", placeholder="message") }}
+
+                        {% for e in form.message.errors %}
+                            <div class="form-control-feedback">{{e}}</div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="form-group">
+                        {{ form.message(class_="form-control", rows="5", placeholder="Message") }}
+                    </div>
+                {% endif %}
+
+                {% if current_user.is_anonymous() %}
+                    {% if form.checksum.errors %}
+                        <div class="form-group has-danger">
+                            {{ form.checksum(class_="form-control form-control-danger", placeholder="2 + 2 = ?") }}
+
+                            {% for e in form.checksum.errors %}
+                                <div class="form-control-feedback">{{e}}</div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            {{ form.checksum(class_="form-control", placeholder="2 + 2 = ?") }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                <input id="submit" name="submit" type="submit" class="btn btn-primary" value="Send">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

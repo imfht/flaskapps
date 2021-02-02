@@ -1,0 +1,177 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+app/ch05_jinja_templates/final/.idea/final.iml
+app/ch05_jinja_templates/final/.idea/misc.xml
+app/ch05_jinja_templates/final/.idea/modules.xml
+app/ch05_jinja_templates/final/.idea/workspace.xml
+workspace.xml
+app/ch07_bootstrap/start/.idea/misc.xml
+app/ch07_bootstrap/start/.idea/modules.xml
+app/ch07_bootstrap/start/.idea/start.iml
+app/ch07_bootstrap/start/.idea/vcs.xml
+app/ch08_adding_our_design/final/.idea/design.iml
+app/ch08_adding_our_design/final/.idea/misc.xml
+app/ch08_adding_our_design/starter/.idea/misc.xml
+app/ch08_adding_our_design/starter/.idea/modules.xml
+app/ch09_sqlalchmey/final/.idea/misc.xml
+app/ch09_sqlalchmey/final/.idea/modules.xml
+app/ch09_sqlalchmey/starter/.idea/misc.xml
+app/ch09_sqlalchmey/starter/.idea/modules.xml
+app/ch09_sqlalchmey/final/.idea/dataSources.local.xml
+app/ch09_sqlalchmey/final/.idea/dataSources/583a04da-ae18-4c33-bbf0-6a3e12d3db43.xml
+app/ch09_sqlalchmey/final/.idea/dataSources/8589e457-43bb-4280-ba68-787968d5cb61.xml
+app/ch09_sqlalchmey/final/pypi_org/db/pypi.sqlite
+app/ch09_sqlalchemy/final/.idea/dataSources.local.xml
+app/ch09_sqlalchemy/final/.idea/misc.xml
+app/ch09_sqlalchemy/final/.idea/modules.xml
+app/ch09_sqlalchemy/final/.idea/dataSources/583a04da-ae18-4c33-bbf0-6a3e12d3db43.xml
+app/ch09_sqlalchemy/final/.idea/dataSources/8589e457-43bb-4280-ba68-787968d5cb61.xml
+app/ch09_sqlalchemy/starter/.idea/misc.xml
+app/ch09_sqlalchemy/starter/.idea/modules.xml
+pypi.sqlite
+app/ch10_using_sqlachemy/final/.idea/dataSources.local.xml
+app/ch10_using_sqlachemy/final/.idea/dataSources/cfaa71de-14c4-40a6-abf7-fc59c06c9b0b.xml
+app/ch11_migrations/final/.idea/dataSources.local.xml
+app/ch11_migrations/final/.idea/dataSources/bb882f32-bdb3-45cb-adce-c46711dd125e.xml
+.idea/$CACHE_FILE$
+.idea/flask-demos.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vagrant.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+app/ch09_sqlalchemy/final/.idea/inspectionProfiles/profiles_settings.xml
+app/ch09_sqlalchemy/final/.idea/inspectionProfiles/Project_Default.xml
+app/ch10_using_sqlachemy/starter/.idea/$CACHE_FILE$
+app/ch10_using_sqlachemy/starter/.idea/.gitignore
+app/ch10_using_sqlachemy/starter/.idea/.name
+app/ch10_using_sqlachemy/starter/.idea/misc.xml
+app/ch10_using_sqlachemy/starter/.idea/modules.xml
+app/ch10_using_sqlachemy/starter/.idea/vagrant.xml
+app/ch10_using_sqlachemy/starter/.idea/vcs.xml
+app/ch10_using_sqlachemy/starter/.idea/inspectionProfiles/profiles_settings.xml
+app/ch10_using_sqlachemy/starter/.idea/inspectionProfiles/Project_Default.xml
+app/ch11_migrations/starter/.idea/$CACHE_FILE$
+app/ch11_migrations/starter/.idea/.gitignore
+app/ch11_migrations/starter/.idea/.name
+app/ch11_migrations/starter/.idea/misc.xml
+app/ch11_migrations/starter/.idea/modules.xml
+app/ch11_migrations/starter/.idea/vagrant.xml
+app/ch11_migrations/starter/.idea/vcs.xml
+app/ch11_migrations/starter/.idea/inspectionProfiles/profiles_settings.xml
+app/ch11_migrations/starter/.idea/inspectionProfiles/Project_Default.xml
+app/ch12-forms/starter/.idea/$CACHE_FILE$
+app/ch12-forms/starter/.idea/.gitignore
+app/ch12-forms/starter/.idea/.name
+app/ch12-forms/starter/.idea/misc.xml
+app/ch12-forms/starter/.idea/modules.xml
+app/ch12-forms/starter/.idea/vagrant.xml
+app/ch12-forms/starter/.idea/vcs.xml
+app/ch12-forms/starter/.idea/inspectionProfiles/profiles_settings.xml
+app/ch12-forms/starter/.idea/inspectionProfiles/Project_Default.xml
+app/ch13-validation/starter/.idea/inspectionProfiles/Project_Default.xml
+app/ch14_testing/final/.idea/inspectionProfiles/Project_Default.xml
+app/ch14_testing/starter/.idea/inspectionProfiles/Project_Default.xml
+app/ch15_deploy/final/.idea/inspectionProfiles/Project_Default.xml

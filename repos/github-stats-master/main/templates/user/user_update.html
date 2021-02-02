@@ -1,0 +1,86 @@
+# extends 'base.html'
+# import 'macro/forms.html' as forms
+# import 'macro/utils.html' as utils
+
+# block content
+  <div class="page-header">
+    <h1>
+      {{utils.back_link('Back to user list', 'user_list', order='-modified', active=user_db.active)}}
+      {{title}}
+      # if current_user.user_db.key == user_db.key
+        <small><span class="fa fa-hand-o-left" title="You"></span></small>
+      # endif
+    </h1>
+  </div>
+  <form method="POST" action="." novalidate>
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        {{form.csrf_token}}
+        {{forms.text_field(form.name, autofocus=True)}}
+        {{forms.text_field(form.username, autocomplete='off')}}
+        # include 'user/user_email_field.html'
+        {{forms.checkbox_field(form.verified)}}
+        # if current_user.user_db.key != user_db.key
+          {{forms.checkbox_field(form.admin)}}
+          {{forms.checkbox_field(form.active)}}
+        # else
+          {{forms.checkbox_field(form.admin, disabled=True, checked=user_db.admin)}}
+          {{forms.checkbox_field(form.active, disabled=True, checked=user_db.active)}}
+        # endif
+        # if form.permissions.choices
+          {{forms.multiple_checkbox_field(form.permissions)}}
+        # endif
+      </div>
+      <div class="col-md-2 col-sm-6">
+        <div class="form-group">
+          <label class="control-label">Avatar</label>
+          <div>
+            <img class="img-thumbnail" src="{{user_db.avatar_url_size(170)}}" alt="Avatar of {{user_db.name}}">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label class="control-label">Accounts</label>
+          <div class="alert alert-warning {{'hide' if user_db.password_hash or user_db.auth_ids}}">
+            No associated accounts
+          </div>
+          <table class="table table-bordered table-hover {{'hide' if not (user_db.password_hash or user_db.auth_ids)}}">
+            <thead>
+              <tr>
+                <th><span class="fa fa-key"></span></th>
+                <th class="col-xs-12">Auth ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              # if user_db.password_hash
+                <tr>
+                  <td>{{utils.auth_icon('email_auth')}}</td>
+                  <td>{{'Email Authentication'}}</td>
+                </tr>
+              # endif
+              # for auth_id in user_db.auth_ids
+                <tr>
+                  <td>{{utils.auth_icon(auth_id)}}</td>
+                  <td>{{auth_id}}</td>
+                </tr>
+              # endfor
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <button type="submit" class="btn btn-primary btn-lg btn-block btn-loading" {{forms.data_loading_text()}}>
+          # if user_db.key
+            Update
+          # else
+            Create
+          # endif
+        </button>
+      </div>
+    </div>
+  </form>
+# endblock

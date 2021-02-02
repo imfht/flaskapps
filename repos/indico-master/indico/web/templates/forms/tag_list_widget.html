@@ -1,0 +1,44 @@
+{% extends 'forms/base_widget.html' %}
+
+{% set field_value = field._value() or [] %}
+{% block html -%}
+    <div id="{{ field.id }}" class="i-taglist-field i-form-field-fixed-width"></div>
+    {# Due to the fact that ajaxifyForms function is called before we apply Taggle widget on the element
+       the form at that point has not access to the hidden inputs which are created by taggle.js library, thus
+       we need to create input below (which is then removed) to make sure that changes applied to this widget
+       trigger correct events #}
+    {% if field_value %}
+        {% for value in field_value %}
+            <input type="hidden" name="{{ field.name }}" value="{{ value }}">
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        (function() {
+            'use strict';
+
+            var field = $('#{{ field.id }}');
+
+            $(document).ready(function() {
+                $('#{{ field.id }}').nextAll('input[name="{{ field.name }}"]').remove();
+
+                new Taggle('{{ field.id }}', {
+                    allowDuplicates: false,
+                    preserveCase: true,
+                    saveOnBlur: true,
+                    hiddenInputName: {{ field.name|tojson }},
+                    placeholder: $T.gettext('Add new keyword'),
+                    tags: {{ field_value|tojson }},
+                    onTagRemove: function() {
+                        field.trigger('change');
+                    },
+                    onTagAdd: function() {
+                        field.trigger('change');
+                    }
+                });
+            });
+        })();
+    </script>
+{%- endblock %}

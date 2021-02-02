@@ -1,0 +1,16 @@
+course:
+  code: NI-PYT
+  altCodes: [ MI-PYT ]
+  name: Pokročilý Python
+language: cs
+repository:
+  webUrl: https://github.com/cvut/NI-PYT
+  openIssueUrl: https://github.com/cvut/NI-PYT/issues/new?title={srcPath}:%20
+navigation:
+  hiddenFiles:
+    - README.*
+    - LICENSE
+    - stats/
+    - _*/
+excludedFiles:
+  - _build

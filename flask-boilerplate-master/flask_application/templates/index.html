@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block header %}
+<h1>Welcome to {{ config['SITE_NAME'] }}</h1>
+{% endblock %}
+
+{% block body %}
+<p>
+Hello World, at {{ now() }}
+</p>
+{% endblock %}
+
+{% block footer %}
+Copyright {{ now().strftime("%Y") }}, {{ config['SITE_NAME'] }}
+{% endblock %}

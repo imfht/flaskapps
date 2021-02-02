@@ -1,0 +1,125 @@
+{% extends "base/layout.html" %}
+{% block title %}Mange{% endblock %}
+{% block content %}
+    {% include 'base/navbar.html' %}
+    {% include 'base/msg.html' %}
+    <div class="card-deck mt-3">
+        <div class="card text-center mdui-card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">{{ comic_count }} <span class="text-muted">Comics</span></h3>
+            </div>
+        </div>
+        <div class="card text-center mdui-card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">{{ chapter_count }} <span class="text-muted">Chapters</span></h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mt-3">
+        <div class="card text-center mdui-card mb-3">
+            <div class="card-body">
+                <h4 class="card-title">Refresh Comics</h4>
+                <p class="card-text">Refresh all comics to keep update.</p>
+                <button class="btn btn-primary" onclick="request('{{ url_for("admin.refresh_comics") }}', $(this), 'comics')">Refresh</button>
+            </div>
+        </div>
+        <div class="card text-center mdui-card mb-3">
+            {% if enable_celery %}
+                <div class="progress d-none" id="progress-bar-wrapper" style="height: 3px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" id="progress-bar" role="progressbar" style="width: 0;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            {% endif %}
+            <div class="card-body">
+                <h4 class="card-title">Refresh Chapters</h4>
+                <p class="card-text">Refresh all chapters to keep update.<span id="state" class="badge badge-secondary"></span></p>
+                {% if enable_celery %}
+                    <button class="btn btn-primary" id="btn_refresh_chapters" onclick="refreshChapters('{{ url_for("admin.refresh_chapters") }}', $(this))">Refresh</button>
+                {% else %}
+                    <button class="btn btn-primary" onclick="request('{{ url_for("admin.refresh_chapters") }}', $(this), 'chapters')">Refresh</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <ul class="list-group">
+        {% for comic in comics %}
+            <a class="list-group-item list-group-item-action" href="{{ url_for('comic.chapters', comic_id=comic.id) }}">
+                <img src="{{ comic.front_cover }}" height="20" class="pr-2">
+                {{ comic.title }}
+                <span class="badge badge-secondary badge-pill float-right">{{ comic.chapters_count }}</span>
+            </a>
+        {% endfor %}
+    </ul>
+{% endblock %}
+{% block footer %}
+    {{ super() }}
+    <script>
+        {% if enable_celery and running %}
+            setToRunningState($('#btn_refresh_chapters'), "{{ task_id }}");
+        {% endif %}
+        function setToRunningState(loader, task_id) {
+            var progressBar = $('#progress-bar-wrapper');
+            loader.text('Refreshing...').addClass('disabled').prop('disabled', true);
+            progressBar.removeClass('d-none');
+            update_progress("/admin/tasks/status/" + task_id, loader)
+        }
+
+        function refreshChapters(url, loader) {
+            var progressBar = $('#progress-bar-wrapper');
+            loader.text('Refreshing...').addClass('disabled').prop('disabled', true);
+            progressBar.removeClass('d-none');
+            $.get(url, function (res) {
+                //res : task_id
+                update_progress("/admin/tasks/status/" + res, loader)
+            }).fail(function () {
+                messge('Refresh failed', 'error');
+                loader.text('Refresh').removeClass('disabled').prop('disabled', false);
+            });
+        }
+
+        function setProgress(progress) {
+            var progressBar = $('#progress-bar');
+            progressBar.css('width', parseInt(100 * progress) + '%');
+            progressBar.attr('aria-valuenow', parseInt(100 * progress));
+        }
+
+        function update_progress(url, loader) {
+            $.get(url, function (res) {
+                var progress = res['progress'];
+                var state = res['state'];
+                $('#state').text(state);
+                setProgress(progress);
+                if (state !== 'PENDING' && state !== 'PROGRESS') {
+                    if (state === 'SUCCESS') {
+                        messge('Refresh succeed.');
+                    } else {
+                        messge('Refresh failed, ' + res['status']);
+                    }
+                    setProgress(0);
+                    $('#progress-bar-wrapper').addClass('d-none');
+                    loader.text('Refresh').removeClass('disabled').prop('disabled', false);
+                }
+                else {
+                    // rerun every second
+                    setTimeout(function () {
+                        update_progress(url, loader);
+                    }, 5000);
+                }
+            }).fail(function () {
+                setTimeout(function () {
+                    update_progress(url, loader);
+                }, 1000);
+            });
+        }
+
+        function request(url, loader, resource) {
+            loader.text('Refreshing...').addClass('disabled').prop('disabled', true);
+            $.get(url, function (res) {
+                messge('Refresh succeed, refreshed ' + res.length + ' ' + resource);
+            }).fail(function () {
+                messge('Refresh failed', 'error');
+            }).always(function () {
+                loader.text('Refresh').removeClass('disabled').prop('disabled', false);
+            });
+        }
+    </script>
+{% endblock %}

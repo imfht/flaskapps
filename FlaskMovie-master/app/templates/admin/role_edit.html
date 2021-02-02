@@ -1,0 +1,69 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+    <section class="content-header">
+        <h1>微电影管理系统</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 角色管理</a></li>
+            <li class="active">
+                {% if request.path == url_for('admin.role_add') %}
+                    添加角色
+                {% else %}
+                    更新角色
+                {% endif %}
+            </li>
+        </ol>
+    </section>
+    <section class="content" id="showcontent">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            {% if request.path == url_for('admin.role_add') %}
+                                添加角色
+                            {% else %}
+                                更新角色
+                            {% endif %}
+                        </h3>
+                    </div>
+                    <form role="form" method="post">
+                        <div class="box-body">
+                            {% include 'admin/alert_info.html' %}
+                            <div class="form-group">
+                                <label for="input_name">{{ form.name.label }}</label>
+                                {{ form.name }}
+                                {% for err in form.name.errors %}
+                                    <div class="col-md-12" style="color: red">{{ err }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group" id="auth_list">
+                                <div class="col-md-12">
+                                    <label>{{ form.auths.label }}</label>
+                                </div>
+                                {{ form.auths }}
+                                {% for err in form.auths.errors %}
+                                    <div class="col-md-12" style="color: red">{{ err }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {{ form.csrf_token }}
+                        <div class="box-footer">
+                            {{ form.submit }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        // 激活菜单栏
+        $(document).ready(function () {
+            $("#g-10").addClass('active');
+            $("#g-10-1").addClass('active');
+        })
+    </script>
+{% endblock %}

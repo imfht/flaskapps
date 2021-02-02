@@ -1,0 +1,15 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.filter-bar-button-label:global(.ui.label) {
+  // this is not very pretty but seems to be the only
+  // way to center the label without making the button
+  // expand
+  margin-left: 0.5em;
+  position: absolute;
+  top: calc(50% - 1em);
+}

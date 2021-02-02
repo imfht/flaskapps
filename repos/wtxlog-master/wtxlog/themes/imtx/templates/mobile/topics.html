@@ -1,0 +1,24 @@
+{% extends theme('mobile/layout.html') %}
+
+{% block title %}专题{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ url_for('main.topics', _external=True) }}" />
+{%- endblock %}
+
+{% block main %}
+  <h2 class="t1"><b>专题</b></h2>
+  <div class="entry">
+    {% with topics = topic_lists() %}
+    {% if topics %}
+    <ul class="taglist clearfix">
+      {%- for topic in topics %}
+      <li><a href="{{ topic.link }}">{{ topic.name }}</a></li>
+      {%- endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}
+
+{% block nav %} <b>&#187;</b> <a href="{{ url_for('main.topics') }}">专题</a>{% endblock %}

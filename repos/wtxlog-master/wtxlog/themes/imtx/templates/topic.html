@@ -1,0 +1,19 @@
+{% extends theme('layout.html') %}
+{% set active_page = "topics" %}
+
+{% block title %}{{ topic.seotitle or topic.name }}{% if pagination.page>1 %}_第{{ pagination.page }}页{% endif %}{% endblock %}
+{% block keywords %}{{ topic.seokey }}{% endblock %}
+{% block description %}{{ topic.seodesc }}{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ request.base_url }}" />
+  <meta name="mobile-agent" content="format=html5;url={{ request.base_url }}"/>
+  <meta name="mobile-agent" content="format=xhtml;url={{ request.base_url }}"/>
+{%- endblock %}
+
+{% block crumb %}<a href="{{ url_for('main.topics') }}">专题</a><b>&#187;</b>{{ topic.name }}{% endblock %}
+
+{% block main %}
+  {% include theme('article_lists.html') %}
+{% endblock %}
+

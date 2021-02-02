@@ -1,0 +1,15 @@
+include LICENSE
+include README.rst
+include CHANGELOG.rst
+include MANIFEST.in
+include CONTRIBUTORS
+include burpui/VERSION
+include burpui/RELEASE
+include requirements.txt
+include share/burpui/etc/burpui.sample.cfg
+include share/burpui/etc/buimonitor.sample.cfg
+include babel.cfg
+graft contrib
+graft burpui
+graft migrations
+global-exclude *.pyc

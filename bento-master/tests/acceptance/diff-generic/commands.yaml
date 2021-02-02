@@ -1,0 +1,88 @@
+steps:
+  - include: generic.yaml
+  #
+  # CHANGES TO INDEX ONLY
+  #
+  # diff addition, no staged
+  # fails check, commits nothing
+  - name: diff add
+    description: create a new file with findings
+    command:
+      - bash
+      - -c
+      - echo "y = z" > bar.py
+  - name: check diff add
+    description: bento check with a new file with findings
+    command: bento check
+    returncode: 0
+    expected_out: check-diff-add.out
+    expected_err: check-diff-add.err
+  - name: commit diff add
+    description: attempt to commit nothing
+    command: git commit -m foo -uno
+    returncode: 1
+    expected_out: commit-diff-add.out
+    expected_err: commit-diff-add.err
+  - name: status diff add
+    description: ensure git status shows untracked file
+    command: git status --porcelain -uno
+    returncode: 0
+    expected_out: null
+  - name: reset diff add
+    description: restore filesystem
+    command: rm bar.py
+  #
+  # diff modification, no staged
+  # fails check, commits nothing
+  - name: diff modify
+    description: modify file
+    command:
+      - bash
+      - -c
+      - echo "x = z" > foo.py
+  - name: check diff modify
+    description: bento check with a modified file with findings
+    command: bento check
+    returncode: 0
+    expected_out: check-diff-modify.out
+    expected_err: check-diff-modify.err
+  - name: commit diff modify
+    description: attempt to commit nothing
+    command: git commit -m foo -uno
+    returncode: 1
+    expected_out: commit-diff-modify.out
+    expected_err: commit-diff-modify.err
+  - name: status diff modify
+    description: ensure git status shows modified file
+    command: git status --porcelain -uno
+    returncode: 0
+    expected_out: status-diff-modify.out
+  - name: reset diff modify
+    description: restore git index
+    command: git reset --hard
+    #
+    # diff deletion, no staged
+    # passes check, commits nothing
+  - name: diff delete
+    description: delete file
+    command: rm foo.py
+  - name: check diff delete
+    description: bento check with a deleted file with findings
+    command: bento check
+    returncode: 0
+    expected_out: null
+    expected_err: check-diff-delete.err
+  - name: status diff delete
+    description: ensure git status shows deleted file
+    command: git status --porcelain -uno
+    returncode: 0
+    expected_out: status-diff-delete.out
+  - name: commit diff delete
+    description: attempt to commit a deletion with findings
+    command: git commit -m foo -uno
+    returncode: 1
+    expected_out: commit-diff-delete.out
+    expected_err: commit-diff-delete.err
+  - name: reset diff delete
+    description: restore git index
+    command: git reset --hard

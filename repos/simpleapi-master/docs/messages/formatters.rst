@@ -1,0 +1,5 @@
+.. _formatters:
+
+==========
+Formatters
+==========

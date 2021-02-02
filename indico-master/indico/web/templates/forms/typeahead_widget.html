@@ -1,0 +1,22 @@
+{% extends 'forms/base_widget.html' %}
+
+{% block html %}
+    <div class="typeahead__container i-form-field-fixed-width" data-tooltip-anchor>
+        <div class="typeahead__field">
+            <input id="{{ field.id }}" autocomplete="off" class="typeahead" type="text" name="{{ field.name }}"
+                   {%- if field.data is not none -%}value="{{ field._value() }}"{%- endif -%}>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        setupTypeaheadWidget({
+            fieldId: {{ field.id | tojson }},
+            minTriggerLength: {{ min_trigger_length | tojson }},
+            data: {{ choices | tojson }},
+            typeaheadOptions: {{ options | tojson }},
+            searchUrl: {{ search_url | tojson }}
+        });
+    </script>
+{% endblock %}

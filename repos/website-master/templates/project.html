@@ -1,0 +1,39 @@
+{% extends "project-layout.html" %}
+
+{% block title %}{{ this.name }}{% endblock %}
+
+{% block project_body %}
+  <div class="row">
+    <div class="col-sm-9">
+      <h1>{{ this.name }}</h1>
+    </div>
+    <div class="col-sm-3">
+      <div class="github-button">
+        <a class="github-button"
+          href="https://github.com/pallets/{{ this._id }}"
+          data-size="large"
+          data-show-count="true"
+          aria-label="Star pallets/{{ this._id }} on GitHub"
+        >Star</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+      {{ this.body }}
+    </div>
+    <div class="col-sm-3">
+      <div class="infobox">
+        <p><span class="fa fa-fw fa-github"></span>
+          <a href="https://github.com/pallets/{{ this._id }}">pallets/{{ this._id }}</a>
+        {% if this.website %}
+        <p><span class="fa fa-fw fa-external-link"></span> <a href="{{ this.website }}">{{ this.website.host }}</a>
+        {% endif %}
+        <p><span class="fa fa-fw fa-list"></span> <a href="https://pypi.python.org/pypi/{{ this.pypi_name }}">Releases on PyPI</a>
+        <p><span class="fa fa-fw fa-cogs"></span> <a href="https://dev.azure.com/pallets/{{ this._id }}/_build">Test status</a>
+        <p><span class="fa fa-fw fa-book"></span> <a href="{{ this.documentation }}">Documentation</a>
+        <div class="pypi-box" data-pypi="{{ this.pypi_name }}"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

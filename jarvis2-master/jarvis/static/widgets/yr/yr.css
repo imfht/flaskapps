@@ -1,0 +1,20 @@
+[data-widget="yr"] {
+  height: 100%;
+  padding: 5px;
+  background: #81c6dd;
+  text-align: center;
+}
+[data-widget="yr"] h1 {
+  font-size: 55px;
+  margin: 0;
+}
+[data-widget="yr"] h2 {
+  font-size: 30px;
+}
+[data-widget="yr"] .wind {
+  margin-bottom: 10px;
+}
+[data-widget="yr"] .tomorrow {
+  font-size: 16px;
+  margin: 0;
+}

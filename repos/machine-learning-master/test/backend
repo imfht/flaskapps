@@ -1,0 +1,153 @@
+#!/bin/bash
+
+## local variables
+DOCKER_VERSION='18.03.0~ce-0~ubuntu'
+CONTAINER_VERSION='0.8'
+PROJECT_ROOT=$(pwd)
+
+## local variables: reusable unit tests
+if [ "$1" = '--recycle' ]; then
+    RECYCLE='true'
+else
+    RECYCLE='false'
+fi
+
+## local variables: perform verbose 'docker build', or just 'docker run'
+if [ "$2" = '--verbose' ] || [ "$2" = '-v' ] || [ "$2" = '-V' ]; then
+    BUILD_SPEED='verbose'
+else
+    BUILD_SPEED='fast'
+fi
+
+## re-runnable: the following allows this script to be re-runnable within the
+##              vagrant environment:
+##
+##   - stop all docker containers
+##   - remove all docker containers
+##   - remove all docker images
+##   - remove all docker volumes
+##   - delete all docker networks
+##
+if [ "$RECYCLE" = 'true' ] && which docker >/dev/null 2>&1; then
+    sudo docker ps -q | xargs -r docker kill
+    sudo docker ps -a -q | xargs -r docker rm
+    sudo docker images -q -f dangling=true | xargs -r docker rmi
+    sudo docker volume ls -qf dangling=true | xargs -r docker volume rm
+    sudo docker network ls -q | xargs -r docker network rm
+fi
+
+## install docker to specific version
+##
+## Note: we install docker per dockers official documentation:
+##
+##       https://docs.docker.com/engine/installation/linux/ubuntu/
+##
+if ! sudo apt-cache policy docker-ce | grep -q "$DOCKER_VERSION"; then
+    sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository\
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get -y update
+    sudo apt-get -y install docker-ce="$DOCKER_VERSION"
+fi
+
+## run directly from dockerhub
+if [ "$BUILD_SPEED" = 'fast' ]; then
+    ## run unit test(s)
+    ##
+    ## @docker run:
+    ##     -d, run container in background and print container ID
+    ##     -t, allocate pseudo-tty instead of default tty to running container
+    ##
+    sudo docker network create -d bridge app_nw &&
+    sudo docker run\
+        --name redis\
+        --net=app_nw\
+        -d "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
+    sudo docker run\
+        --name mongodb\
+        --net=app_nw\
+        -d "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
+    sudo docker run\
+        --name mariadb\
+        --net=app_nw\
+        -d "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}" &&
+    sudo docker run\
+        --name webserver\
+        --net=app_nw\
+        -v "${PROJECT_ROOT}/app.py:/var/machine-learning/app.py"\
+        -v "${PROJECT_ROOT}/factory.py:/var/machine-learning/factory.py"\
+        -v "${PROJECT_ROOT}/__init__.py:/var/machine-learning/__init__.py"\
+        -v "${PROJECT_ROOT}/log:/var/machine-learning/log"\
+        -v "${PROJECT_ROOT}/interface:/var/machine-learning/interface"\
+        -v "${PROJECT_ROOT}/hiera:/var/machine-learning/hiera"\
+        -v "${PROJECT_ROOT}/brain:/var/machine-learning/brain"\
+        -v "${PROJECT_ROOT}/test:/var/machine-learning/test"\
+        -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" test | sudo tee pytest.log
+
+## build from local dockerfiles
+else
+    ## build docker container(s)
+    sudo docker build -f dockerfile/redis.dockerfile -t ml-redis .
+    sudo docker build -f dockerfile/mongodb.dockerfile -t ml-mongodb .
+    sudo docker build -f dockerfile/mariadb.dockerfile -t ml-mariadb .
+    sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
+
+    ## run unit test(s)
+    ##
+    ## @docker run:
+    ##     -d, run container in background and print container ID
+    ##     -t, allocate pseudo-tty instead of default tty to running container
+    ##
+    sudo docker network create -d bridge app_nw &&
+    sudo docker run --name redis --net=app_nw -d ml-redis &&
+    sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
+    sudo docker run --name mariadb --net=app_nw -d ml-mariadb &&
+    sudo docker run\
+        --name webserver\
+        --net=app_nw\
+        -v "${PROJECT_ROOT}/app.py:/var/machine-learning/app.py"\
+        -v "${PROJECT_ROOT}/factory.py:/var/machine-learning/factory.py"\
+        -v "${PROJECT_ROOT}/__init__.py:/var/machine-learning/__init__.py"\
+        -v "${PROJECT_ROOT}/log:/var/machine-learning/log"\
+        -v "${PROJECT_ROOT}/interface:/var/machine-learning/interface"\
+        -v "${PROJECT_ROOT}/hiera:/var/machine-learning/hiera"\
+        -v "${PROJECT_ROOT}/brain:/var/machine-learning/brain"\
+        -v "${PROJECT_ROOT}/test:/var/machine-learning/test"\
+        -it ml-webserver test | sudo tee pytest.log
+fi
+
+## check unit test results
+PYTEST_ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)
+
+if [ -n "$PYTEST_ERRORS" ]; then
+    echo 'Error: pytest failed.'
+    exit 1
+fi
+
+## acquire coverage results
+##
+## Note: more information regarding the '.coverage.docker' naming convention:
+##
+##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
+##
+sudo docker cp webserver:/var/machine-learning/.coverage "${PROJECT_ROOT}"/.coverage.docker
+if [ ! -f "${PROJECT_ROOT}"/.coverage.docker ]; then
+    exit 1
+fi
+
+## clean up vagrant environment: harddisk space is limited
+##
+##   - stop all docker containers
+##   - remove all docker containers
+##   - remove all docker images
+##   - remove all docker volumes
+##   - delete all docker networks
+##
+if [ "$RECYCLE" = 'true' ]; then
+    sudo docker ps -q | xargs -r docker kill
+    sudo docker ps -a -q | xargs -r docker rm
+    sudo docker images -q -f dangling=true | xargs -r docker rmi
+    sudo docker volume ls -qf dangling=true | xargs -r docker volume rm
+    sudo docker network ls -q | xargs -r docker network rm
+fi

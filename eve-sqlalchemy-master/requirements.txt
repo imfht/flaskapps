@@ -1,0 +1,8 @@
+# This file includes all dependencies required for contributing to the
+# development of Eve-SQLAlchemy. If you just wish to install and use
+# Eve-SQLAlchemy, run `pip install .`.
+
+.
+Sphinx>=1.2.3
+alabaster
+zest.releaser[recommended]

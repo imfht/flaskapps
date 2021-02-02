@@ -1,0 +1,12 @@
+{
+  "./bad.py": [
+    {
+      "code": "r2c-flask-send-file-open",
+      "filename": "./bad.py",
+      "line_number": 4,
+      "column_number": 1,
+      "text": "Passing a file-like object to flask.send_file without the mimetype or attachment_filename keyword arg will raise a ValueError. If you are sending a static file, pass in a string path to the file instead. Otherwise, specify a mimetype or attachment_filename in flask.send_file.",
+      "physical_line": "flask.send_file(open(\"file.txt\"))\n"
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{% extends "base_templates/base.html" %}
+
+{% block header %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Login</title>
+
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+<link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+<link href="css/creative.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block body_attributes %}
+id="page-top"
+{% endblock %}
+
+{% block content %}
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light py-3" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand js-scroll-trigger text-dark" href="/">ML SaaS Tutorial</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          {% if is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/dashboard">Back To Dashboard</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="/login_page">Login</a>
+          </li>
+          {% endif %}
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+
+    <div class="col-xl-10 col-lg-12 col-md-9">
+
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row mx-auto">
+            <div class="col-xl-8 p-5 mx-auto">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+              </div>
+              <form id="login-form" class="user" role="form">
+                <input type="email" name="email" required class="form-control form-control-user mb-2" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                <input type="password" name="password" required class="form-control form-control-user mb-2" id="exampleInputPassword" placeholder="Password">
+                <div id="output" class="pb-2 row align-items-center justify-content-center text-danger">{{ message }}</div>
+                <button type="submit" class="btn btn-primary btn-lg btn-user btn-block d-inline">
+                  <div id="login-text">Login</div>
+                  {% include 'partials/spinner.html' %}
+                </button>
+              </form>
+              <hr>
+              <div class="text-center">
+                <a class="small" href="/">Home / Register</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+<!-- Footer -->
+<footer class="footer bg-light py-5">
+  <div class="container">
+    <div class="small text-center text-muted">
+      <div class="row">
+        <div class="col">
+          <hr>
+          Contact Us: <!-- REPLACE HREF AND TEXT -->
+          <a class="d-inline" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
+        </div>
+        <div class="col"><hr>
+          Copyright © 2019 - ML SaaS Tutorial
+        </div>
+        <div class="col"><hr>
+          <a class="d-inline" href="/tos">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin-2.min.js"></script>
+
+<script>
+$(function(){
+  $("#login-form").submit(function(e) {
+    e.preventDefault();
+  });
+
+  $('#login-form').keypress(function(e){
+      if(e.which == 13) {
+        if(this.checkValidity() === true) {
+          userLogin(this[0], true);
+          e.preventDefault();
+        }
+      }
+    });
+
+  // On button click, get data and make AJAX call
+  $('.btn.btn-primary.btn-user.btn-block').click(function(){
+    userLogin($('#login-form')[0]);
+  });
+
+  function userLogin(element, valid = false) {
+    if(valid == true || element.checkValidity() === true) {
+      $('#login-text').css("display", "none");
+      $('#spinner').css("display", "flex")
+
+      data = JSON.stringify({
+        email: $('#exampleInputEmail').val(), 
+        password: $('#exampleInputPassword').val()
+      });
+      
+      ajax('/login', 'POST', data,
+        function(response){
+          json_obj = JSON.parse(response);
+          url = json_obj.message;
+          window.location.replace(url);
+        },
+        function(error){
+          $('#spinner').css("display", "none")
+          $('#login-text').css("display", "block");
+          json_obj = JSON.parse(error.responseText);
+          $('#output').html(json_obj.message);
+        }
+      )
+    }
+  }
+});
+</script>
+{% endblock %}

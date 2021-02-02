@@ -1,0 +1,329 @@
+{% extends 'site_layout.html.j2' %}
+{% set title="Administrate Guild: " + guild['name'] %}
+
+{% block additional_head_elements %}
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/administrate_guild.css') }}">
+{% endblock %}
+
+{% block content %}
+<h1>Administrating: {{ guild['name']|e }}</h1>
+<p class="flow-text">For this server, you are allowed the following actions:
+  {% for permission in permissions %}
+    {{ permission }}
+    {% if not loop.last %}
+      ,
+    {% endif %}
+  {% endfor %}
+  .</p>
+
+  <div class="row">
+    
+    {% if disabled %}
+    <div class="col s12">
+      <div class="card horizontal red-text red lighten-5 z-depth-3 hoverable">
+        <div class="card-stacked">
+          <div class="card-content">
+            <strong class="flow-text">This server is currently disabled on the platform.</strong>
+            <p>You will not be able to embed the server for the time being. To have this action lifted, <em>please see an administrator</em>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="col s12">
+      <h2 class="header">Embed URLs</h2>
+      <div class="card horizontal black-text indigo lighten-5 z-depth-3 hoverable">
+        <div class="card-stacked">
+          <div class="card-content">
+            <p class="flow-text">Direct Link</p>
+            <input readonly value="{{ url_for("embed.guild_embed", guild_id=guild['id'], _external=True) }}" id="disabled" type="text" onClick="this.setSelectionRange(0, this.value.length)">
+            <p class="flow-text">iFrame Embed</p>
+            <input readonly value="&lt;iframe src=&quot;{{ url_for("embed.guild_embed", guild_id=guild['id'], _external=True) }}&quot; height=&quot;600&quot; width=&quot;800&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;" id="disabled" type="text" onClick="this.setSelectionRange(0, this.value.length)">
+            <p>For client side customization (such as setting the Default Channel or a Prefilled Guest Username), see Query Parameters section at the bottom of this page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if "Manage Embed Settings" in permissions %}
+    <div class="col s12">
+      <h2 class="header">Embed Settings</h2>
+      <div class="card horizontal black-text indigo lighten-5 z-depth-3 hoverable">
+        <div class="card-stacked">
+          <div class="card-content">
+
+            <p class="flow-text">Unauthenticated (Guest) Users</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="unauth_users" name="unauth_users" {% if guild['unauth_users'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+            
+            <br>
+
+            <p class="flow-text">Toggle Visitor Mode</p>
+            <p>Visitors are able to view the channels that @everyone has access to. However, they are not able to send messages until they login using the usual methods.</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="visitor_view" name="visitor_view" {% if guild['visitor_view'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+
+            <br>
+            
+            <p class="flow-text">Toggle Webhooks Messages</p>
+            <p>Instead of sending user messages directly from the Titan bot, webhook messages allows Titan to take advantage of the built-in webhooks to create messages that looks more real. Reading messages in Discord can be <a href="{{ url_for('static', filename='img/webhook_comparison.png') }}" target="_blank" title="A quick comparison between having webhook messages enabled vs disabled for a text channel">20% more cooler</a>!</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="webhook_messages" name="webhook_messages" {% if guild['webhook_messages'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+
+            <br>
+
+            <p class="flow-text">Chat Links</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="chat_links" name="chat_links" {% if guild['chat_links'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+
+            <br>
+
+            <p class="flow-text">Render Links as an Embed</p>
+            <p>(if possible)</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="bracket_links" name="bracket_links" {% if guild['bracket_links'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+
+            <br>
+            
+            <p class="flow-text">Toggle Guest Captcha</p>
+            <p>Prevent bots from logging into your embed</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="unauth_captcha" name="unauth_captcha" {% if guild['unauth_captcha'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+            
+            <br>
+
+            <p class="flow-text">Message mentions limit</p>
+            <p>(-1 to have no limit - enter to submit)</p>
+            <input id="mentions_limit" type="number" value="{{ guild['mentions_limit'] }}">
+            
+            <br>
+            
+            <p class="flow-text">Send Message Timeout</p>
+            <p>(0 seconds to have no limit - enter to submit)</p>
+            <input id="post_timeout" type="number" value="{{ guild['post_timeout'] }}">
+            
+            <br>
+            
+            <p class="flow-text">Maximum Message Length</p>
+            <p>(No more than 2000 characters - enter to submit)</p>
+            <input id="max_message_length" type="number" value="{{ guild['max_message_length'] }}">
+            
+            <br>
+            
+            <p class="flow-text">Custom Invite Link</p>
+            <p>Have a permanent invite that you really want to use? Something like discord.io on your mind? Enter your custom invite link here to replace the default one on the embed!</p>
+            <p>(Leave blank if none - enter to submit)</p>
+            <input id="invite_link" value="{{ guild['invite_link'] }}">
+
+            <br>
+            
+            <p class="flow-text">Guest User Avatar URL</p>
+            <p>Guest users may have a custom avatar instead of the Titan logo. Source must be the permanent URL location to the image file (try imgur and get direct link to image).</p>
+            <p>(Leave blank if none - enter to submit)</p>
+            {% if not cosmetics.guest_icon %}
+            <p class="red lighten-4"><strong>Your user account does not have access to change guest avatar url. Please visit the Titan Tokens shop to activate this cosmetic item.</strong></p>
+            {% endif %}
+            <input id="guest_icon" value="{{ guild['guest_icon'] }}" {% if not cosmetics.guest_icon %}disabled{% endif %}>
+          
+            <br>
+            
+            <p class="flow-text">Banned Words
+              <span class="switch">
+                <label>
+                  Disable
+                  <input type="checkbox" id="banned_words_enabled" name="banned_words_enabled" {% if guild['banned_words_enabled'] %}checked{% endif %}  >
+                  <span class="lever"></span>
+                  Enable
+                </label>
+              </span>
+            </p>
+            <p>Prevent users from sending messages from the embed containing these words.</p>
+            <div class="switch">
+              <span>Include <a href="{{ url_for("global_banned_words") }}" target="_blank">Global Banned Words</a> to the list</span>
+              <label>
+                Disable
+                <input type="checkbox" id="banned_words_global_included" name="banned_words_global_included" {% if guild['banned_words_global_included'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+            <p>(Hit enter after each word to add to list)</p>
+            <div id="banned_words" class="chips"></div>
+            
+            <p class="flow-text">AutoRole Embed Users</p>
+            <p>A "hidden" role may be applied and inherited to users using the embed. Enabling this will allow the user to have different permission on the embed than in Discord. May be used so that the embed users see different channels for example.</p>
+            <div class="col s12">
+              <div class="input-field col m6 s12">
+                <select id="autorole_unauth">
+                  <option value="0" {% if not guild["autorole_unauth"] %}selected{% endif %}>No Role</option>
+                  {% for role in guild["roles"]|sort(attribute="position", reverse=True) %}
+                  {% if role.id|int != guild.id|int %}
+                  <option value="{{ role.id }}" {% if role.color %}style="color: #{{ '{0:0{1}x}'.format(role.color, 6) }};"{% endif %} {% if role.id|int == guild["autorole_unauth"]|int %}selected{% endif %}>{{ role.name }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+                <label>Guests/Visitors Auto Role</label>
+              </div>
+              <div class="input-field col m6 s12">
+                <select id="autorole_discord">
+                  <option value="0" {% if not guild["autorole_unauth"] %}selected{% endif %}>No Role</option>
+                  {% for role in guild["roles"]|sort(attribute="position", reverse=True) %}
+                  {% if role.id|int != guild.id|int %}
+                  <option value="{{ role.id }}" {% if role.color %}style="color: #{{ '{0:0{1}x}'.format(role.color, 6) }};"{% endif %} {% if role.id|int == guild["autorole_discord"]|int %}selected{% endif %}>{{ role.name }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+                <label>Discord Users Auto Role</label>
+              </div>
+            </div>
+
+            <br>
+            
+            <p class="flow-text">Toggle File Attachments</p>
+            <p>Allow embed users to attach files to your Discord server in messages</p>
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="file_upload" name="file_upload" {% if guild['file_upload'] %}checked{% endif %}  >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+
+            <br>
+
+            <p class="flow-text">Send Rich Embed</p>
+            <p>Allow users to send rich embedded messages (both the bot & user need "embed links" permission)</p>
+            {% if not cosmetics.send_rich_embed %}
+            <p class="red lighten-4"><strong>Your user account does not have access to change send rich embed. Please visit the Titan Tokens shop to activate this cosmetic item.</strong></p>
+            {% endif %}
+            <div class="switch">
+              <label>
+                Disable
+                <input type="checkbox" id="send_rich_embed" name="send_rich_embed" {% if guild['send_rich_embed'] %}checked{% endif %}  {% if not cosmetics.send_rich_embed %}disabled{% endif %} >
+                <span class="lever"></span>
+                Enable
+              </label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if "Ban Members" in permissions or "Kick Members" in permissions %}
+    <div class="col s12">
+      <h2 class="header">Moderate Unauthenticated Members</h2>
+      <div class="card horizontal black-text indigo lighten-5 z-depth-3 hoverable">
+        <div class="card-stacked" style="overflow-x: hidden;">
+          <div class="card-content">
+            <div class="row">
+              <div class="col s12">
+
+                <p class="flow-text">Select Action</p>
+                <table class="striped responsive-table">
+                  <thead>
+                    <tr>
+                        <th>Kick User</th>
+                        <th>Ban User</th>
+                        <th>Username</th>
+                        <th>Discrim</th>
+                        <th>IP Address Hash</th>
+                        <th>Banned Timestamp</th>
+                        <th>Banned by</th>
+                        <th>Banned Reason</th>
+                        <th>Ban Lifted by</th>
+                        <th>Recent Aliases</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for member in members %}
+                      <tr>
+                        <td><a class="waves-effect waves-light btn orange"  {% if "Kick Members" not in permissions or member["kicked"] %}disabled{% endif %} onclick='revoke_user( "{{ guild['id'] }}" , {{ member['id'] }} )'  >Kick</a></td>
+                        {% if not member["banned"] %}
+                        <td><a class="waves-effect waves-light btn red"   {% if "Ban Members" not in permissions %}disabled{% endif %}  {% if "Ban Members" in permissions %}  onclick='initiate_ban( "{{ guild['id'] }}" , {{ member['id'] }} )'  {% endif %}  >Ban</a></td>
+                        {% else %}
+                        <td><a class="waves-effect waves-light btn red lighten-2"   {% if "Ban Members" not in permissions %}disabled{% endif %}  {% if "Ban Members" in permissions %}  onclick='remove_ban( "{{ guild['id'] }}" , {{ member['id'] }} )'  {% endif %}  >Lift</a></td>
+                        {% endif %}
+                        <td>{{ member['username'] }}</td>
+                        <td>{{ member['discrim'] }}</td>
+                        <td>{{ member['ip'] }}</td>
+                        <td>{{ member['banned_timestamp'] }}</td>
+                        <td>{{ member['banned_by'] }}</td>
+                        <td>{{ member['banned_reason'] }}</td>
+                        <td>{{ member['ban_lifted_by'] }}</td>
+                        <td>
+                          <ul>
+                            {% if member['aliases']|length > 0 %}
+                              {% for alias in member['aliases'] %}
+                              <li>{{ alias }}</li>
+                              {% endfor %}
+                            {% else %}
+                              <li>None</li>
+                            {% endif %}
+                          </ul>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <p>Note that all bans are by IP. Seeing duplicates? It is because users are generated a unique session on each browser load. (Though we try to remove/concat any duplicates IP hashes)</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    </div>
+<br><hr>
+{% include 'card_commands.html.j2' %}
+
+{% include 'card_queryparams.html.j2' %}
+
+{% endblock %}
+{% block script %}
+<script>
+  const BANNED_WORDS = {{ guild["banned_words"]|tojson|safe }};
+</script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/administrate_guild.js') }}"></script>
+{% endblock %}

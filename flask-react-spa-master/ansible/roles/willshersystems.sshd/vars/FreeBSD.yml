@@ -1,0 +1,5 @@
+---
+__sshd_config_group: wheel
+__sshd_config_mode: "0644"
+__sshd_sftp_server: /usr/libexec/sftp-server
+__sshd_os_supported: yes

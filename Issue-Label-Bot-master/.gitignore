@@ -1,0 +1,10 @@
+!.build
+.*
+*.pem
+*.hdf5
+*.pkl
+!.gitignore
+!.dockerignore
+**/flask_session
+build/**
+fairing/__pycache__/**

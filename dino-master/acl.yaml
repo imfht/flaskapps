@@ -1,0 +1,138 @@
+available: &AVAILABLE
+  acls:
+    - age
+    - gender
+    - membership
+    - group
+    - country
+    - city
+    - image
+    - has_webcam
+    - fake_checked
+    - owner
+    - admin
+    - room_owner
+    - moderator
+    - superuser
+    - crossroom
+    - samechannel
+    - sameroom
+    - disallow
+    - custom
+
+validation:
+    gender:
+        type: "str_in_csv"
+        value: "##db##"
+        default: "m,w,p,tv,ts,ftm,mtf"
+    membership:
+        type: "str_in_csv"
+        value: "##db##"
+        default: "normal,premium,vip,tg,tg_p"
+    samechannel:
+        type: "samechannel"
+    sameroom:
+        type: "sameroom"
+    disallow:
+        type: "disallow"
+    age:
+        type: "range"
+    group:
+        type: "str_in_csv"
+    country:
+        type: "str_in_csv"
+    city:
+        type: "str_in_csv"
+    image:
+        type: "str_in_csv"
+        value: "y,n"
+    has_webcam:
+        type: "str_in_csv"
+        value: "y,n"
+    fake_checked:
+        type: "str_in_csv"
+        value: "y,n"
+    owner:
+        type: "str_in_csv"  # TODO: change to room_owner and channel_owner, doesn't work as expected now
+        value: "y,n"
+    room_owner:
+        type: "is_room_owner"
+    admin:
+        type: "is_admin"
+    moderator:
+        type: "str_in_csv"  # TODO: how?
+        value: "y,n"
+    superuser:
+        type: "is_super_user"
+    custom:
+        type: "custom"
+
+channel:
+    list:
+        <<: *AVAILABLE
+    create:
+        <<: *AVAILABLE
+    message:
+        <<: *AVAILABLE
+        exclude:
+            - crossroom
+            - samechannel
+    crossroom:
+        <<: *AVAILABLE
+    whisper:
+        acls:
+           - disallow
+    setacl:
+        acls:
+            - owner
+            - admin
+            - superuser
+    ban:
+        acls:
+            - owner
+            - admin
+            - superuser
+
+room:
+    join:
+        <<: *AVAILABLE
+        exclude:
+            - crossroom
+            - samechannel
+    autojoin:
+        <<: *AVAILABLE
+        exclude:
+          - crossroom
+          - samechannel
+    list:
+        <<: *AVAILABLE
+        exclude:
+            - crossroom
+            - samechannel
+    history:
+        <<: *AVAILABLE
+        exclude:
+            - crossroom
+    message:
+        <<: *AVAILABLE
+        exclude:
+            - crossroom
+            - samechannel
+    crossroom:
+        <<: *AVAILABLE
+    setacl:
+        acls:
+            - owner
+            - admin
+            - superuser
+    kick:
+        acls:
+            - owner
+            - moderator
+            - admin
+            - superuser
+    ban:
+        acls:
+            - owner
+            - admin
+            - superuser

@@ -1,0 +1,66 @@
+ul.list-group,li.list-group-item,nav.navbar,ul.dropdown-menu {
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3f000000',endColorstr='#3f000000');
+    background-color: #fff;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #555;
+}
+.navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #555;
+    /* background-color: #fff; */
+}
+.panel-default > .panel-heading{
+    background-color: #fff;
+}
+.navbar-default .navbar-nav {
+    margin-left:-15px;
+}
+.navbar-default .navbar-nav > li > a {
+    font-weight:bold;
+}
+.navbar-default .navbar-header {
+    float:none;
+}
+.navbar-default .navbar-brand {
+    font-size: 1.8em;
+    font-family: 'Lobster', cursive;
+}
+.navbar-default .navbar-text {
+    padding-top:0.2em;
+}
+.panel-body-border {
+    border-bottom:1px solid #eea;
+    padding-left:30px;padding-right:30px;
+}
+.label-tag {
+    background-color: #ab5424;
+}
+.col-center{
+    max-width:1024px;
+    float: none;
+    margin: 0 auto;
+    padding:0;
+}
+.collapsing {
+    opacity: 0.3;
+    -webkit-transition: opacity .25s ease, height .35s ease;
+    -o-transition: opacity .25s ease, height .35s ease;
+    transition: opacity .25s ease, height .35s ease;
+}
+.label {
+    padding-top:.2em;
+    padding-bottom: 0.18em;
+}
+.label-times {
+    padding-top: .15em;
+    padding-bottom: 0.1em;
+    border:1px solid #ccc;
+    color:#999;
+}
+.netease-music {
+    height:100px;
+    width:100%;
+    max-width:320px;
+    display:block;
+    margin:0 auto;
+}

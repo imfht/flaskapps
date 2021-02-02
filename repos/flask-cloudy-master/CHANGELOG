@@ -1,0 +1,73 @@
+1.1.0
+    - fixed dependencies
+1.0.0
+    - Storage.upload now accepts a url, that will first download the file on local then upload it to storage
+    - Added args random_name(bool) in Storage.upload. If True and Name is None, it will create a uuid4 name.
+      `name` always takes precedence
+    - Added Object.info which returns a dict of the data. Which can be saved in a database
+    - Removed shortuuid in favor of uuid4
+    - (backwards compatible) rename 'allowed_extensions' to `extensions`,
+        but will still try to fall back to allowed extensions if None
+0.15
+    - Added Object.full_path to return the full path of the local storage object
+    - remove Object.short_url which was deprecated
+
+0.14.0
+    - Added the context manager 'use' to temporarily use a different container on the same driver
+
+0.13.2
+    - Flask required version 0.10.1 +
+
+0.13.1
+    - Set default storage to True
+    - Thanks to https://github.com/wassname for the contributions]
+
+0.13.0
+    - Upgrade apache-libcloud to 0.20.0
+    - Fixed object being False
+    - Thanks to https://github.com/alexa-infra for the contributions
+
+0.12.0
+    - Fixed prefix in Storage.upload that assumed the prefix is a directory
+        Add a slash / at the end of prefix  to make it a directory, or it will
+        just append it to the name
+
+0.11.0
+    - Removed flask_cloudy.Object.short_url now use flask_cloudy.Object.url
+    - Added flask_cloudy.Object.full_url to have the domain for local storage
+
+0.10.0
+    - Removed LOCAL_PATH configuration. Use CONTAINER as the LOCAL_PATH
+    - Change config prefix to STORAGE_*
+
+0.6.0
+    - More pythonic
+    - implement __contains__ to look for an item in the storage. `if object_name in storage`
+    - rename Storage:objet to Storage:get().
+
+0.5.1
+    - Fixed typo
+
+0.5.0
+    - object_path return the full path of the object when on local
+    - get_url() can return short url for local file instead of the full domain one
+    - rename Storage:get_object to Storage:object
+
+0.4.0
+    - Added: provider_name, container_name, and local_path, object_path to object
+
+0.3.1
+    - Added the config 'CLOUDSTORAGE_SERVE_FILES_URL_SECURE' in flask to serve
+      files over https
+
+0.3.0
+    - Serve local files through Python
+    - When flask FileStorage type is being uploaded, use the stream method
+    - Object:get_url() will now return the appropriate url
+
+0.2.0
+    - Add extension of original file on upload if object_name doesn't have an extension
+    - Use the original file name as object name, if object name is None
+
+0.1.0
+    - First

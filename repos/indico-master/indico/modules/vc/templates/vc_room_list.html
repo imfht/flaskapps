@@ -1,0 +1,75 @@
+{% extends 'overview/base.html' %}
+{% block title %}Videoconference{% endblock %}
+
+{% macro result_group_title(key) %}
+    {{ key | format_human_date(format='full') | title }}
+{% endmacro %}
+
+{% macro result_group_entries(items) %}
+    <tr class="result-group-header">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <div class="title">
+                {% trans %}Event{% endtrans %}
+            </div>
+        </td>
+        <td>
+            <div class="title">
+                {% trans %}VC room{% endtrans %}
+            </div>
+        </td>
+    </tr>
+    {% for event_vc_room in items %}
+        {{ vc_room_entry(event_vc_room) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro vc_room_entry(event_vc_room) %}
+    {% set event = event_vc_room.event %}
+    <tr class="result-group-entry">
+        <td class="entry-time">
+            <a class="discreet-link" href="{{ url_for('.manage_vc_rooms_modify', event_vc_room) }}">
+                {{ event.start_dt.time() | format_time('HH:mm') }}
+            </a>
+        </td>
+        <td class="entry-type">
+            {% if event_vc_room.vc_room.plugin %}
+                <img src="{{ event_vc_room.vc_room.plugin.icon_url }}" title="{{ event_vc_room.vc_room.plugin.friendly_name }}">
+            {% else %}
+                <i class="icon-camera" title="{{ event_vc_room.vc_room.plugin.friendly_name }}"></i>
+            {% endif %}
+        </td>
+        <td class="entry-location">
+            {% if event.has_location_info %}
+                {% if event.room_name %}
+                    <span class="room">
+                        {{ event.room_name }}
+                    </span>
+                {% endif %}
+                {% if event.venue_name %}
+                    <span class="location">
+                        ({{ event.venue_name }})
+                    </span>
+                {% endif %}
+            {% else %}
+                <span class="no-location">
+                    {% trans -%}
+                        No location
+                    {%- endtrans %}
+                </span>
+            {% endif %}
+        </td>
+        <td class="entry-event">
+            <a class="discreet-link" href="{{ event.url }}">
+                {{ event.title }}
+            </a>
+        </td>
+        <td>
+            <a class="discreet-link" href="{{ url_for('.manage_vc_rooms_modify', event_vc_room) }}">
+                {{ event_vc_room.vc_room.name }}
+            </a>
+        </td>
+    </tr>
+{% endmacro %}

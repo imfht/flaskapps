@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "bento-cli"
+version = "0.11.1"
+description = "Free program analysis focused on bugs that matter to you."
+authors = ["Return To Corporation <hello@r2c.dev>"]
+license = "Proprietary"
+homepage = "http://bento.dev"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+]
+packages = [
+  { include = "bento" },
+]
+include = [
+    "bento/extra/eslint/*.yml",
+    "bento/extra/eslint/package.json",
+    "bento/configs/**",
+    "bento/resources/*.template",
+    "bento/resources/*.yml"
+]
+[tool.poetry.urls]
+"Source Code" = "https://github.com/returntocorp/bento"
+"Bug Tracker" = "https://github.com/returntocorp/bento/issues"
+"Code Checks" = "https://bento.dev/checks/"
+"Blog" = "https://bento.dev/blog/"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+attrs = ">=18.2.0,<=19.3.0"
+click = "~=7.0"
+docker = "~=3.7"
+frozendict = "~=1.2"
+gitpython = "~=2.1"
+packaging = ">=14.0"
+pre-commit = ">=1.0.0,<=1.18.3"
+psutil = "~=5.6.3"
+pymmh3 = "~=0.0.5"
+PyYAML = ">=5.1.2"
+semantic-version = "~=2.8.0"
+tqdm = "~=4.36.1"
+validate-email = "~=1.3"
+
+[tool.poetry.dev-dependencies]
+coverage = "~=4.5.4"
+lxml = "~=4.2"
+pytest = "~=3.9"
+mypy = "~=0.670"
+black = "==18.9b0"
+
+[tool.poetry.scripts]
+bento = "bento.__main__:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

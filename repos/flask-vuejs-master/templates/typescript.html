@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block script %}
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block body %}
+<div id="ts"></div>
+<script src="(( url_for('static', filename='ts/dist/build.js') ))"></script>
+{% endblock %}

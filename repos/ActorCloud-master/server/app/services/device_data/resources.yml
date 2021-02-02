@@ -1,0 +1,12 @@
+devices_capability_data-view:
+  code: 'devices_capability_data-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 12
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/device_capability_data'
+  service: product_develop
+

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block header %}
+{% endblock %}
+
+{% block title %}
+GalaCoding - 广场
+{% endblock %}
+
+{% block page_content %}
+{% set template = "_timeline.html" %}
+{% include template %}
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, 'main.index') }}
+    </div>
+{% endblock %}

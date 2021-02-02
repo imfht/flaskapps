@@ -1,0 +1,113 @@
+target_repo: https://github.com/instagrambot/instabot
+target_hash: a6847d624cad44f9bb3ab40963842289e2fc5c6f
+steps:
+  - name: noconfig
+    description: bento check fails when no configuration file is found
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: noconfig.err
+    expected_out: null
+    returncode: 3
+  - name: bento-init
+    description: bento init detects python and install bandit and flake8
+    command:
+      - bento
+      - --agree
+      - init
+    expected_err: bento-init.err
+    expected_out: null
+    returncode: 0
+  - name: enable-click
+    description: enable click tool (Hack for now so no need to rewrite tests)
+    command:
+      - bento
+      - --agree
+      - enable
+      - tool
+      - r2c.click
+    expected_err: enable-click.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-with-init
+    description: bento check after init has findings
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-with-init.err
+    expected_out: bento-check-with-init.out
+    returncode: 2
+  - name: disable-finding
+    description: try disabling a finding
+    command:
+      - bento
+      - --agree
+      - disable
+      - check
+      - bandit
+      - python2-input
+    expected_err: disable-finding.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-with-disable
+    description: bento check should hide disabled finding
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-with-disable.err
+    expected_out: bento-check-with-disable.out
+    returncode: 2
+  - name: reenable-check
+    description: enable a finding that was previously disabled
+    command:
+      - bento
+      - --agree
+      - enable
+      - check
+      - bandit
+      - python2-input
+    expected_err: reenable-check.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-reenable
+    description: bento check should show finding that was reenabled
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-reenable.err
+    expected_out: bento-check-with-init.out
+    returncode: 2
+  - name: bento-archive
+    description: should archive all existing findings
+    command:
+      - bento
+      - --agree
+      - archive
+      - --all
+      - .
+    expected_err: bento-archive.err
+    expected_out: null
+    returncode: 0
+  - name: bento-check-with-archive
+    description: should have no findings after archiving
+    command:
+      - bento
+      - --agree
+      - check
+      - --all
+      - .
+    expected_err: bento-check-with-archive.err
+    expected_out: bento-check-with-archive.out
+    returncode: 0

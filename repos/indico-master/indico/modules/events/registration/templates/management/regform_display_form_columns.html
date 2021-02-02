@@ -1,0 +1,36 @@
+{% from 'forms/_form.html' import form_header, form_footer, form_rows %}
+{% from '_sortable_list.html' import sortable_lists %}
+
+{{ form_header(form, id="js-registration-form-columns") }}
+{{ form_rows(form) }}
+
+<div id="participant-list-form-columns" class="disable-if-locked">
+    {{ sortable_lists(_("Shown columns"), enabled_columns,
+                      _("Hidden columns"), disabled_columns,
+                      classes="i-box titled two-columns disable-if-locked") }}
+</div>
+<button class="i-button big highlight" type="submit">{% trans %}Save{% endtrans %}</button>
+<button class="i-button big" data-button-back>{% trans %}Cancel{% endtrans %}</button>
+
+{{ form_footer(form) }}
+
+<script>
+    (function () {
+        'use strict';
+
+        setupSortableList($('#participant-list-form-columns .js-sortable-list-widget'));
+
+        function updateHiddenField() {
+            var data = {'columns': []};
+            var $form = $('#js-registration-form-columns');
+            $form.find('ul.enabled li').each(function() {
+                data.columns.push($(this).data('item-id'));
+            });
+            $form.find('#json').val(JSON.stringify(data));
+        }
+
+        $('#js-registration-form-columns').on('submit', function() {
+            updateHiddenField();
+        });
+    })();
+</script>

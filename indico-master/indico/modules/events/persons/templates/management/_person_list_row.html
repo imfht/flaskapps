@@ -1,0 +1,96 @@
+{% macro render_person_row(person_data, event_has_registration_forms) %}
+    {% set person = person_data.person %}
+    <td class="i-table thin-column hide-if-locked">
+        <input type="checkbox" value="{{ person.id }}" class="select-row id-field"
+               name="{{ person_data.id_field_name }}"
+               {{ 'disabled' if not person.email }}>
+    </td>
+    {% if event_has_registration_forms %}
+        <td class="i-table registration-column thin-column">
+            {% set tooltip %}
+                {% if person_data.registrations %}
+                    {%- trans %}The person has registered in:{% endtrans -%}
+                    {% for reg in person_data.registrations %}
+                        <div>
+                            <a href='{{ url_for('event_registration.registration_details', reg) }}'>
+                                {{ reg.registration_form.title }}
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {%- trans %}The person has not registered yet{% endtrans -%}
+                {% endif %}
+            {% endset %}
+            <i class="icon-ticket js-show-regforms {{ 'exists' if person_data.registrations }}" data-title="{{ tooltip }}"></i>
+        </td>
+    {% endif %}
+    <td class="i-table name-column" data-searchable="{{ person.display_full_name|lower }}">
+        {{ person.display_full_name }}
+        {% if person.is_untrusted %}
+            {% set untrusted_tooltip -%}
+                {%- trans -%}
+                    This person is currently just an author of an abstract with no other ties to the event.
+                    Their data may have been provided by the submitter of the abstract.
+                {%- endtrans -%}
+            {%- endset %}
+            <span class="icon-question" title="{{ untrusted_tooltip }}"></span>
+        {% endif %}
+    </td>
+    <td class="i-table email-column">
+        {{ person.email }}
+    </td>
+    <td class="i-table affiliation-column">
+        {{ person.affiliation }}
+    </td>
+    <td class="i-table roles-column">
+        {% for role, role_data in person_data.roles.items() %}
+            {%- if role != 'no_account' %}
+                {%- if role_data.elements -%}
+                    <span class="i-tag outline contrast js-count-label" style="{{ role_data.css }};"
+                          data-role-name="{{ role_data.name }}"
+                          data-items="{{ role_data.elements | tojson | forceescape }}">
+                        {{- role_data.code -}}
+                        <span class="badge" style="color: #{{ role_data.color }}">{{ role_data.elements | length }}</span>
+                    </span>
+                {% else %}
+                    <span class="i-tag outline contrast {{ 'custom' if role.startswith('custom_') }}"
+                          style="{{ role_data.css }};"
+                          data-role-name="{{ role_data.name }}">
+                        {{- role_data.code -}}
+                    </span>
+                {%- endif %}
+            {%- endif -%}
+        {% endfor %}
+    </td>
+    <td class="i-table">
+        {% if person_data.roles.no_account %}
+            <span class="i-label warning icon-warning"
+                  title="{% trans email=person.email %}This user seems to have no Indico
+                  account. If they do have an account, they should add {{ email }} to their profile{%- endtrans %}">
+                {% trans %}No account{% endtrans %}
+            </span>
+        {% endif %}
+    </td>
+    <td class="i-table">
+        {% if person.invited_dt %}
+            <span class="i-label icon-mail"
+                  title="This person has been invited to create an Indico account">
+                {{ person.invited_dt | format_date(timezone=person_data.person.event.tzinfo) }}
+            </span>
+        {% endif %}
+    </td>
+    <td class="i-table edit-column thin-column">
+        {% if person_data.has_event_person %}
+            <a class="i-link icon-edit"
+               title="{%- trans %}Edit information{% endtrans -%}"
+               data-href="{{ url_for('persons.edit_person', person) }}"
+               data-title="{%- trans %}Edit information{% endtrans -%}"
+               data-update="#person-{{ person.id }}"
+               data-highlight-update
+               data-ajax-dialog></a>
+        {% else %}
+            <a class="i-link icon-edit disabled"
+               title="{%- trans %}This user does not play any public role{% endtrans -%}"></a>
+        {% endif %}
+    </td>
+{% endmacro %}

@@ -1,0 +1,415 @@
+$handle-color: lighten($text-color, 10%);
+$sidebar-color: #fff;
+$sidebar-text-color: #8e8e8e;
+
+.sidebar {
+  top: $navbar-height;
+  bottom: 0;
+  right: 0;
+  z-index: 1000;
+  display: block;
+  padding: 0;
+  background-color: $sidebar-color;
+  color: $sidebar-text-color;
+
+  position: fixed;
+  right: 0;
+
+  height: $rules-mobile-height;
+
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.175);
+
+  @include media-breakpoint-up(lg) {
+    min-height: 100%;
+    box-shadow: unset;
+  }
+
+  .filter-toggle-btn {
+    background-color: $nav-color;
+    height: unset;
+    padding: 0;
+    padding-left: $spacer-small;
+    border-radius: 0;  // keeps the text from getting chopped off in safari
+    margin: 0;
+  }
+
+  *:focus{
+    outline:none;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+$spacing-heading-top: 25px;
+.settings-content {
+  overflow-x: hidden;
+  border-style: solid;
+  border-width: 0 0 0 1px;
+  border-color: $nav-border-color;
+
+  @include media-breakpoint-up(lg) {
+    height: 100%;
+  }
+}
+
+.settings-menu {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 3em;
+  }
+}
+
+.settings-menu > li > div > a {
+  overflow: hidden;
+  font-weight: 700;
+}
+
+@media (min-width: 1281px) {
+  .sb-menu-icon {
+    display: none;
+  }
+}
+
+.sb-menu-icon {
+  float: right;
+  line-height: 28px;
+  text-align: center;
+}
+
+.settings-menu li > div> a.menu-open + .setting-controls {
+  display: block;
+}
+.settings-menu > li > div >  ul {
+  clear: both;
+  display: none;
+  height: auto;
+}
+
+.filter-title-text {
+  @extend .tk-futura-pt-bold;
+  vertical-align: top;
+  font-size: 14px;
+  color: $sidebar-text-color;
+  height: 45px;
+  display: inline-flex;
+
+  @mixin wide() {
+    vertical-align: middle;
+    font-size: 20px;
+    height: unset;
+  }
+
+  &.wide {
+    @include wide();
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include wide();
+  }
+}
+
+.filter-title-icon {
+  $font-size: 35px;
+  font-size: $font-size;
+  line-height: $font-size + 10px;
+  :before {
+    margin-left: 0px;
+  }
+
+  @mixin wide() {
+    font-size: 40px;
+    line-height: 40px;
+    margin-right: 0.5em;
+  }
+
+  &.wide {
+    @include wide();
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include wide();
+  }
+}
+
+.my-gender-ratio {
+  margin-bottom: 10px;
+  font-style: italic;
+  .stat {
+    color: $primary-color;
+  }
+}
+
+// react-slider
+
+@mixin shadow($shadow-size, $shadow-blur, $shadow-color) {
+  box-shadow: $shadow-size $shadow-size $shadow-blur $shadow-color, 0 0 $shadow-size lighten($shadow-color, 5%);
+}
+$thumb-shadow-size: 2px !default;
+$thumb-shadow-blur: 2px !default;
+$thumb-shadow-color: rgba(0, 0, 0, .2) !default;
+
+$handle-height: 24px;
+.slider {
+  width: 100%;
+  max-width: 500px;
+  height: $handle-height + 2;
+  margin-bottom: 2px;
+}
+
+.handle {
+  font-size: 0.9em;
+  text-align: center;
+  background-color: $handle-color;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.handle.active {
+  background-color: grey;
+}
+
+.bar {
+  position: relative;
+  background: lighten($text-color, 10%);
+}
+
+.rule-setting .bar-1 {
+  background-color: $filter-color;
+}
+
+.bar-gender .bar {
+  background: $filter-color;
+}
+
+.bar-gender .bar.bar-1 {
+  background: lighten($text-color, 10%);
+}
+
+.slider .bar {
+  top: 20px;
+  height: 3px;
+}
+
+.slider .handle {
+  top: 10px;
+  width: 20px;
+  height: $handle-height;
+  @include shadow($thumb-shadow-size, $thumb-shadow-blur, $thumb-shadow-color);
+
+  @include media-breakpoint-up(lg) {
+    width: 10px;
+  }
+}
+
+.slider.disabled {
+  .bar , .bar.bar-1, .handle {
+    background: $background-color;
+  }
+  .handle {
+    @include shadow(0, 0, #fff);
+  }
+}
+
+.slider-labels {
+  padding-top: 10px;
+  height: 30px;
+
+  .toggle-label {
+    vertical-align: super;
+    font-weight: normal;
+    padding-left: $spacer-small;
+  }
+
+  .react-toggle-track {
+    background-color: $handle-color;
+  }
+
+  &.mute-men-wrapper {
+    margin-top: 40px;
+  }
+
+}
+
+.additive-toggles {
+
+  height: unset;
+  display: grid;
+
+  &.additive-labels {
+    height: 35px;
+  }
+
+}
+
+.rule-toggle {
+  &.react-toggle--checked .react-toggle-track {
+    background-color: $green;
+  }
+
+  .react-toggle-thumb {
+    border: 0;
+  }
+}
+
+.rule-setting {
+  .filter-icon {
+    color: $filter-color;
+    cursor: pointer;
+
+    @include media-breakpoint-up(lg) {
+      cursor: auto;
+    }
+  }
+  &.filter-icon {
+    color: $filter-color;
+  }
+}
+
+$control-width: 314px; // manually determind
+.filter {
+  @include media-breakpoint-up(lg) {
+    width: 100%;
+    border-style: solid;
+    border-width: 1px 0 0;
+    border-color: $nav-border-color;
+    height: auto;
+    border-left: 0;
+    margin-top: 0;
+  }
+}
+
+.setting-item {
+  padding: 0;
+  display: inline-flex;
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+  }
+}
+
+.filter-inner {
+  width: $control-width - 30px;
+
+  @include media-breakpoint-up(lg) {
+    width: 100%;
+  }
+}
+
+.settings-menu {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  @include media-breakpoint-up(lg) {
+      overflow: auto;
+      white-space: inherit;
+  }
+
+  button {
+    color: #000;
+  }
+}
+
+.filter-controls {
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    padding: 1em 0;
+  }
+}
+
+.filter-content {
+  background-color: inherit;
+  padding-right: $spacer-small * 0.25;
+  display: flex;
+  border-left: 1px solid $light-gray;
+
+  @include media-breakpoint-up(lg) {
+    padding: 30px 50px 30px 30px;
+    border-left: 0;
+  }
+}
+
+.settings-header {
+  display: none;
+
+  @include media-breakpoint-up(lg) {
+    display: block;
+    height: 80px;
+    background-color: $nav-color;
+
+    h1 {
+      margin: 0px;
+      padding: 0px;
+      padding-top: $spacing-heading-top;
+      margin-left: 150px;
+      color: $inverse-text-color;
+    }
+  }
+}
+
+.filter-description {
+  margin-top: $spacer-small;
+  a {
+    border-bottom: 1px dotted $text-color;
+    cursor: pointer;
+  }
+}
+
+.checkbox-label {
+  a {
+    border-bottom: 1px dotted $text-color;
+    cursor: pointer;
+  }
+}
+
+.modal-close-button {
+  position:absolute;
+  top:0;
+  right:0;
+
+  button {
+    background-color: unset;
+    color: $light-gray;
+    padding: 0;
+    padding-right: $spacer-large;
+  }
+}
+
+.ReactModalPortal {
+  .filter-title-icon {
+    vertical-align: middle;
+  }
+
+  .filter-modal-description {
+    padding-top: $spacer-small;
+    padding-bottom: $spacer-small;
+  }
+}
+
+$rule-height: 40px;
+.rule-sparklines {
+  float: left;
+  width: $control-width - 37px; // found manually
+  height: $rule-height;
+}
+
+.setting-with-sparklines {
+  position: relative;
+  top: $rule-height / 2 - 6px;
+}
+
+.settings-rule-description-title {
+  @extend .tk-futura-pt-bold;
+}
+
+.filter-subtitle {
+  font-style: italic;
+  font-size: 13px;
+}

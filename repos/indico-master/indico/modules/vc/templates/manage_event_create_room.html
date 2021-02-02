@@ -1,0 +1,15 @@
+{% from 'forms/_form.html' import form_header, form_fieldset, form_footer, form_row, form_rows %}
+
+{{ form_header(form, id='vc-room-form', extra_attrs={'data-vc-type': plugin.service_name}) }}
+
+{{ form_row(form._fields.name) }}
+{{ form_rows(form, skip=skip_fields) }}
+
+{% call form_fieldset(legend='Advanced settings', collapsible=true) %}
+    {{ form_rows(form, fields=form.advanced_fields) }}
+{% endcall %}
+
+{% call form_footer(form) %}
+    <input class="i-button big highlight" type="submit" value="{% trans %}Save{% endtrans %}">
+    <a href="{{ url_for('vc.manage_vc_rooms', event) }}" class="i-button big" data-button-back>{% trans %}Cancel{% endtrans %}</a>
+{% endcall %}

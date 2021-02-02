@@ -1,0 +1,100 @@
+{% extends base or 'layout.html' %}
+{% macro make_parent_path(names) %}
+    {% for name in names -%}
+        {{ name }}
+        {%- if not loop.last and not name == '' -%}
+            /
+        {%- endif -%}
+    {%- endfor %}
+{% endmacro %}
+{% macro get_parent_link() %}
+    {% set name = make_parent_path(request.args.get('item_name','/').split('/')[:-1]).strip() %}
+        {% if name == 'files' %}
+            {% set name = '' %}
+        {% endif %}
+        {% if name != '' %}
+        <a class="btn btn-success" href="{{ url_for('fileviewer.view_files',item_name=name) }}">back</a>
+        {% else %}
+        <a class="btn btn-success" href="{{ url_for('fileviewer.view_files') }}">back</a>
+        {% endif %}
+{% endmacro %}
+{% block body %}
+{% if codemirror %}
+    {{ codemirror.include_codemirror() }}
+{% endif %}
+<style>
+    .list-group-item {
+        width:20%;
+        padding:0px 20px;
+    }
+    div.CodeMirror { height:600px; overflow:hidden;}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+    {% if file_content %}
+        <div class="text" style="display:none;">
+            {{ file_content }}
+        </div>
+        <form method="post" action="{{ url_for('.view_files') }}">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 class="panel-title">{{file_name}}</h3></div>
+                <div class="panel-body">
+            {{ form.content(value=file_content) }}
+                </div>
+                <div class="panel-footer">
+            {{ form.submit(class_='btn btn-default')}}
+            {{ form.hidden_tag() }}
+            {{ get_parent_link()|safe }}
+                </div>
+            </div>
+        </form>
+    {% else %}
+        {{ get_parent_link()|safe }}
+    {% endif %}
+        </div>
+    </div>
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Save Action</h4>
+                </div>
+                <div class="modal-body">
+                    Do You Really Want To Save This File?!?!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="save-btn">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block footer_js %}
+<script>
+    editor_for_content.setValue($(".text").text().trim());
+    editor_for_content.setOption("mode","{{editor_mode}}");
+    $(document).on("click","input[type=submit]",function(e){
+            e.preventDefault();
+            $("#myModal").modal('show').data("event",e);
+    });
+    $(document).on("click","#save-btn",function(e){
+            //document.forms[0].submit();
+            $.getJSON(
+                '/view_files/json',{
+                                    data:{
+                                        content : editor_for_content.getValue(),
+                                        file_name:"{{file_name}}"
+                                    }
+                                    }).success(function(data){
+                                        if(data['success']){
+                                            window.location = $(".btn-success").attr("href");        
+                                    ;}                                    
+        });
+    });
+</script>
+{% endblock %}

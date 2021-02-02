@@ -1,0 +1,41 @@
+.. _specs/rfc7517:
+
+RFC7517: JSON Web Key
+=====================
+
+.. meta::
+    :description: API references on RFC7517 JSON Web Key (JWK) Authlib implementation.
+
+This section contains the generic implementation of RFC7517_. Find how to use
+it in :ref:`JWK Guide <jwk_guide>`.
+
+.. _RFC7517: https://tools.ietf.org/html/rfc7517
+
+
+API Reference
+-------------
+
+.. autoclass:: authlib.jose.JsonWebKey
+   :member-order: bysource
+   :members:
+
+
+.. autoclass:: authlib.jose.Key
+   :member-order: bysource
+   :members:
+
+.. autoclass:: authlib.jose.KeySet
+   :member-order: bysource
+   :members:
+
+.. autoclass:: authlib.jose.OctKey
+   :member-order: bysource
+   :members:
+
+.. autoclass:: authlib.jose.RSAKey
+   :member-order: bysource
+   :members:
+
+.. autoclass:: authlib.jose.ECKey
+   :member-order: bysource
+   :members:

@@ -1,0 +1,46 @@
+{% extends "admin.html" %}
+{% block tab %}编辑专栏文章{% endblock %}
+{% block content %}
+<div class="admin-write">
+    <form action="{%if title== '编辑文章'%}{{url_for('admin.write_column_article',url=column.url_name)}}{%else%}{{url_for('admin.edit_column_article',url=column.url_name,id=article.id)}}{%endif%}" method="post">
+        {{form.hidden_tag()}}
+        <div class="aticle-data">
+            <div class="data-ipt">
+                <p>日期：{{form.date(placeholder="使用-连接年月日")}}</p>
+                <p>保密：{{form.secrecy()}}</p>
+            </div>
+        </div>
+        <div class="aticle-body">
+            <div class="write-body">
+                <p>{{form.title(class="aticle-title",placeholder="标题")}}</p>
+                <div>
+                    {{form.body(id="editormd",style="display:block;",rows="5",cols="80")}}<br>
+                </div>
+                {% if title == '编辑文章' %}
+                <p>{{ form.submit(class="write-btn",value="发布") }}</p>
+                {% else %}
+                <p>{{ form.submit(class="write-btn",value="更新") }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block script %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.css">
+    <script src="https://cdn.bootcss.com/simplemde/1.11.2/simplemde.min.js"></script>
+    <script>
+         new SimpleMDE({
+         element: document.getElementById("editormd"),
+         spellChecker: false,
+         autosave: {
+            enabled: false
+         }
+      });
+    </script>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% import "bootstrap/flash.html" as bf %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        {% block title %}{% if pcfg and pcfg['title'] %}
+            {{ pcfg['title'] }} - {{ g.cfg['app_name'] }}
+        {% else %}
+            {{ g.cfg['app_name'] }}
+        {% endif %}{% endblock %}
+    </title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/fork-awesome.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    {% block styles %}{% endblock %}
+
+    {% block opengraph %}
+        <meta content="{{ g.cfg['app_name'] }}" property="og:site_name"/>
+        <meta property="og:title" content="{{ g.cfg['app_name'] }} - Upload and share sound tracks">
+        <meta property="og:description" content="{{ g.cfg['app_description'] }}">
+    {% endblock %}
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <a class="navbar-brand" href="{{ url_for('bp_main.home') }}">{{ g.cfg['app_name'] }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            {% if current_user.is_authenticated %}
+            {% endif %}
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if request.endpoint %}
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">Logged as {{ current_user.name }}</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_user">
+                            <h6 class="dropdown-header"><i class="fa fa-user" aria-hidden="true"></i> {{ gettext("User") }}</h6>
+                            {% if is_admin() %}
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header"><i class="fa fa-cogs" aria-hidden="true"></i> {{ gettext('Admin') }}</h6>
+                                <a class="dropdown-item"
+                                   href="{{ url_for('bp_admin.config') }}">{{ gettext('App config') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{ url_for('bp_admin.logs') }}">{{ gettext('App logs') }}</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item"
+                               href="{{ url_for_security('change_password') }}">{{ gettext('Change password') }}</a>
+                            <a class="dropdown-item" href="{{ url_for_security('logout') }}">{{ gettext('Logout') }}</a>
+                        </div>
+                    </li>
+                {% else %}
+                    {% if security.registerable %}
+                        <li class="nav-item {% if request.endpoint.startswith('security.register') %}active{% endif %}">
+                            <a class="nav-link" href="{{ url_for_security('register') }}">{{ gettext('Register') }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item {% if request.endpoint.startswith('security.login') %}active{% endif %}"><a
+                            class="nav-link" href="{{ url_for_security('login') }}">{{ gettext('Login') }}</a></li>
+
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">{{ bf.flashed_messages(container=False, dismissible=True) }}</div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div>
+            <div class="left">
+                &copy; 2017-2018 reel2bits - {{ gettext("version: %(version)s", version=g.cfg['REEL2BITS_VERSION']) }}
+                    {% if current_user.is_authenticated %} -
+                        {{ gettext('Logged as %(username)s', username=current_user.name) }}{% endif %}
+            </div>
+            <div class="right">
+                <a target="_blank" href="https://github.com/rhaamo/reel2bits">{{ gettext("Sources") }}</a>
+                -
+                <a href="#">{{ gettext('Back to top') }}</a>
+            </div>
+        </div>
+    </footer>
+
+</main><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.bootstrap-growl.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/global.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

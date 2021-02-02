@@ -1,0 +1,28 @@
+env
+env/*
+*.swp
+*.pyc
+config.json
+
+# setup.py related.
+build
+dist
+pervane.egg-info
+bin
+bin/*
+
+# Test content.
+Screenshot_*
+
+# Login db.
+*.sqlite
+*.db
+.fuse_*
+pervane/haku*
+
+# Intellij.
+.idea
+
+# Old jinja templates.
+index_vue.jinja
+index.jinja

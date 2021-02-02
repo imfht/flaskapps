@@ -1,0 +1,37 @@
+    <ul class="posts">
+        {% for user in users %}
+        <li class="post">
+            <div class="profile-thumbnail"  width="40px" height="40px">
+                <a href="{{ url_for('user.profile', username=user.username) }}">
+                    <img class="img-rounded profile-thumbnail" src="{{ user.avatar_url_auto(size=40) }}">
+                </a>
+            </div>
+            <div class="post-content">
+                <div class="post-date">{{ moment(user.last_seen).fromNow() }}</div>
+                <div class="post-author">
+                    <a href="{{ url_for('user.profile', username=user.username) }}">
+                    {{ user.username }}
+                    </a>
+                </div>
+                <div class="post-body">
+                    <p>
+                    <a href="#{# {{ url_for('user.followers', username=user.username) }} #}">
+                        博客数量： <span class="badge">{{ user.posts.count() }}</span>
+                    </a>|
+                    <a href="#{# {{ url_for('user.followers', username=user.username) }} #}">
+                        被关注：<span class="badge">{{ user.followers.count() }}</span>
+                    </a>|
+                    <a href="#{# {{ url_for('user.followed_by', username=user.username) }} #}">
+                        关注人数：<span class="badge">{{ user.followed.count() }}</span>
+                    </a>
+                    </p>
+                </div>
+                <div class="post-footer">
+                    <a href="{{ url_for('user.delete', username=user.username) }}">
+                        <span class="label label-danger">删除该用户</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>

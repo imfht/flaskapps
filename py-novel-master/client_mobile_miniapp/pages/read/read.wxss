@@ -1,0 +1,175 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  padding: 20rpx 30rpx 10rpx;
+}
+
+.content-text {
+  color: #666;
+}
+
+.footer {
+  height: 60rpx;
+  line-height: 60rpx;
+  box-shadow: 0 -2rpx 10rpx #cccccc;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+.footer-right {
+  width: 33%;
+  text-align: center;
+}
+
+/* 功能菜单 */
+.menus-mask {
+  position: fixed;
+  height: 90vh;
+  width: 100vw;
+  top: 13vh;
+  left: 0;
+  z-index: 5;
+  opacity: 0.2;
+}
+.menus-wrapper {
+  position: fixed;
+  height: 10vh;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background: rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.menus-tab {
+  width: 33.33%;
+  text-align: center;
+  font-size: 30rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 设置功能 */
+.setting-mask {
+  position: fixed;
+  height: 80vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  opacity: 0.2;
+}
+.setting-wrapper {
+  position: fixed;
+  height: 20vh;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background: rgb(15, 15, 15);
+  padding: 10rpx 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.setting-font {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.setting-font-label {
+  width: 60rpx;
+  color: rgb(107, 115, 117);
+  font-size: 30rpx;  
+}
+.btn-font {
+  width: 25%;
+  border: 2px solid rgb(107, 115, 117);
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.setting-bg {
+  width: 100%;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+.setting-bg-box {
+  width: 155rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  display: inline-block;
+}
+
+/* 目录 */
+.chapter-wrapper {
+  position: fixed;
+  height: 100vh;
+  width: 80vw;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: rgb(249, 249, 249);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.chapter-bookname {
+  height: 8vh;
+  line-height: 8vh;
+  color: rgb(81, 81, 81);
+  font-size: 42rpx;
+  padding-left: 30rpx;
+}
+.chapter-label {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  box-sizing: border-box;
+  font-size: 34rpx;
+  color: rgb(52, 52, 52);
+}
+.chapter-list {
+  flex: 1;
+  font-size: 32rpx;
+  color: rgb(92, 92, 92);
+  box-sizing: border-box;
+  border-top: 2px solid rgb(234, 234, 234);
+}
+.chapter-item {
+  padding: 18rpx 40rpx;
+}
+.chapter-current {
+  color: rgb(171, 34, 39);
+}
+.chapter-mask {
+  position: fixed;
+  height: 95vh;
+  width: 20vw;
+  top: 5vh;
+  right: 0;
+  z-index: 10;
+  background: rgb(155, 155, 155);
+  opacity: 0.7;
+}
+.icon70{
+  width: 70rpx;
+  height: 70rpx;
+}

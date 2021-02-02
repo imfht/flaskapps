@@ -1,0 +1,85 @@
+2.0 (2019-12-20)
+    - Compatibility with webassets 2.0.
+
+0.12 (2016-08-18)
+    - Added registration of Flask CLI commands using `flask.commands`
+      entrypoint group. (Jiri Kuncar)
+    - Added an optional support for FlaskAzureStorage when
+      `FLASK_ASSETS_USE_AZURE` is set.  (Alejo Arias)
+    - Updated Flask extension imports for compatibility with Flask 0.11.
+      (Andy Driver) (fixes #102)
+    - Fixed generation of absolute urls using //. (fixes #73)
+    - Fixed Flask-Script assets build command. (Frank Tackitt)
+
+0.11 (2015-08-21)
+    - Match webassets 0.11.
+    - Option to use Flask-CDN (James Elkins).
+
+0.10 (2014-07-03)
+    This release is compatible with webassets 0.10.
+
+0.9 (2014-02-20)
+    This release is compatible with webassets 0.9.
+    flask-assets now support Python 3, and drops support for Python 2.5.
+
+    - Support for Flask-S3 (Erik Taubeneck).
+    - Support latest Flask-Script (Chris Hacken).
+
+0.8 (2012-11-23)
+    This release is compatible with webassets 0.8.
+
+    - Flask-Script's ``build`` command now has ``--parse-templates`` option.
+    - ``Environment`` class now has ``from_yaml`` and ``from_module``
+      shortcuts (Sean Lynch).
+    - Jinja2 filter uses the Flask template environment.
+    - Fixed PySscss filter.
+
+0.7 (2012-04-11)
+    This release is compatible with webassets 0.7.
+
+    - Now officially requires at least Flask 0.8, so it can use the new
+      extension import system, but using the compatibility module, older
+      Flask versions should work fine as well:
+      http://flask.pocoo.org/docs/extensions/
+    - Support Python 2.5.
+    - Allow customizing the backend of ``ManageAssets`` command.
+    - Due to webassets 0.7, the cssrewrite filter now works with Blueprints.
+
+0.6.2 (2011-10-12)
+    - Fixed Blueprint/Module resolving in output path.
+
+0.6.1 (2011-10-10)
+    - Building in 0.6 was very much broken (thanks Oliver Tonnhofer).
+    - A custom "static_folder" for a Flask app or Blueprint/Module is now
+      supported.
+
+0.6 (2011-10-03)
+    - Support webassets 0.6.
+    - Fixed use of wrong Flask app in some cases.
+    - Fixed init_app() usage (Oliver Tonnhofer)
+    - Python 2.5 compatibility (Ron DuPlain)
+
+0.5.1 (2011-08-12)
+    - New version numbering scheme. The major and minor
+      version numbers will now follow along with the version
+      of webassets the Flask-Assets release was written
+      against, and is guaranteed to be compatible with.
+    - Support for Blueprints (Flask 0.7).
+    - Fixed usage for incorrect request context during URL
+      generation (thank you, julen).
+
+0.2.2 (2011-05-27)
+    - Really fix the ManageAssets command.
+
+0.2.1 (2011-04-28)
+    - Fixed the ManageAssets command to work with the current
+      Flask-Script version.
+
+0.2 (2011-03-30)
+    - Support for init_app() protocol, multiple applications.
+    - Integrate with Flask-Script, provide management command.
+    - Properly support Flask modules, with the ability to reference
+      the module's static files in bundles (Olivier Poitrey).
+
+0.1 (2010-09-24)
+    Initial release.

@@ -1,0 +1,11 @@
+[Unit]
+Description=Burp-UI celery service
+After=network.target
+
+[Service]
+User=burpui
+Group=burpui
+ExecStart=/usr/bin/bui-celery -c /etc/burp/burpui.cfg
+
+[Install]
+WantedBy=multi-user.target

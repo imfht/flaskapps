@@ -1,0 +1,25 @@
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                             Bento Initialization                             │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Bento configures itself for personal use by default. This means that it:
+
+1. Automatically checks for issues introduced by your code, as you commit it
+2. Only affects you; it won’t change anything for other project contributors
+
+Learn more about personal and team use at bento.dev/workflows.
+
+Creating default ignore file at .bentoignore․․․․․․․․․․․․․․․․․․․․․ 🍜 Setting up🍱 Done
+Creating default configuration at .bento/config.yml․․․․․․․․․․․․․․ 🍜 Setting up🍱 Done
+Enabling autorun (see $ bento enable autorun --help)․․․․․․․․․․․․․ 🍜 Setting up🍱 Done
+Creating GitHub Action configuration at .github/․․․․․․․․․․․․․․․․․ 👋 Skipped
+
+⚠ Bento can't automatically identify this project. Please manually configure
+this project:
+  configure a tool manually․․․․․․․․․․․․․․․ $ bento enable tool TOOL
+  list available tools․․․․․․․․․․․․․․․․․․․․ $ bento enable tool --help
+
+Installing tools:
+
+✘ No tools are configured in this project's config.yml.
+Please contact support@r2c.dev if this is incorrect.

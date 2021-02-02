@@ -1,0 +1,14 @@
+apscheduler
+beautifulsoup4
+cfscrape
+Flask
+Flask-Script
+gunicorn
+js2py
+numpy
+pillow
+pycryptodome
+pysocks
+regex
+requests
+zbar-py

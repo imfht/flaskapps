@@ -1,0 +1,41 @@
+{% extends 'forms/base_widget.html' %}
+{% from 'forms/_form.html' import form_field %}
+
+{% block html %}
+    <div class="datetime-widget i-form-field-fixed-width">
+        {# the hidden field has autofocus on purpose to prevent our JS from focusing the date picker #}
+        <input type="hidden" name="{{ field.name }}" id="{{ field.id }}-datestorage" autofocus
+               {% if field.data and not field.date_missing %}value="{{ field.data | format_date('code', timezone=field.timezone) }}"{% endif %}
+               {{ input_args | html_params }}>{#--#}
+        <input type="hidden" name="{{ field.name }}" id="{{ field.id }}-timestorage"
+                {% if field.data and not field.time_missing %}value="{{ field.data | format_time('code', timezone=field.timezone) }}"{% endif %}
+                {% if input_args.disabled %}disabled{% endif %}>
+        <span id="{{ field.id }}"></span>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        setupDateTimeWidget({
+            fieldId: {{ field.id | tojson }},
+            timezoneFieldId: {{ (field.timezone_field.id if field.timezone_field else none) | tojson }},
+            timezone: {{ field.timezone | tojson }},
+            defaultTime: {{ field.default_time | format_time('code', timezone=field.timezone) | tojson }},
+            locale: {{ session.moment_lang | tojson }},
+            required: {{ input_args.required | default(false) | tojson }},
+            disabled: {{ input_args.disabled | default(false) | tojson }},
+            allowClear: {{ (field.allow_clear if field.allow_clear else false) | tojson }},
+            earliest: {{ (field.earliest_dt.astimezone(field.tzinfo).replace(tzinfo=none).isoformat() if field.earliest_dt else none) | tojson }},
+            latest: {{ (field.latest_dt.astimezone(field.tzinfo).replace(tzinfo=none).isoformat() if field.latest_dt else none) | tojson }},
+            {% if field.flags.linked_datetime %}
+                linkedField: {
+                    id: {{ field.get_form()[field.linked_field].id | tojson }},
+                    notBefore: {{ field.linked_datetime_validator.not_before | tojson }},
+                    notAfter: {{ field.linked_datetime_validator.not_after | tojson }}
+                }
+            {% else %}
+                linkedField: null
+            {% endif %}
+        });
+    </script>
+{% endblock %}

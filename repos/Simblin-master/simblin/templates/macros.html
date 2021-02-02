@@ -1,0 +1,132 @@
+{% macro render_post(post, is_preview=False) %}
+<div class="post">
+  <h1 class="post-title {% if not post.visible %}invisible{% endif %}">
+  {% if not is_preview %}
+    <a href="{{ url_for('main.show_post', slug=post.slug) }}">
+  {% else %}
+    <a href=#>
+  {% endif %}
+    {{ post.title }}
+    </a>
+  </h1>
+  <div class="info">
+  
+  {% if session.logged_in and not is_preview %}
+    <div class="admin">
+      <a class="edit-post-link" href="{{ url_for('admin.create_post', slug=post.slug, next=request.url) }}">Edit</a>
+      <a class="delete-post-link" href="{{ url_for('admin.delete_post', slug=post.slug, next=request.url) }}">Delete</a>
+      {% if not post.visible %}(invisible){% endif %}
+    </div>
+    {% endif %}
+  
+  <span class="date">{{ post.datetime.strftime("%A %d. %B %Y") }}</span>
+    
+    {% if post.categories %}
+      in
+      <span class="categories">
+      {% for category in post.categories %}
+          <a href="{% if not is_preview %}{{ url_for('main.show_category', category=category.name) }}{% else %}#{% endif %}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+      </span>
+    {% endif %}
+    
+    
+  </div>
+  <div class="body">{{ post.html|safe }}</div>
+  <div class="info">
+    
+    
+    {% if post.tags %}
+      <div class="tags">Tags: 
+      {% for tag in post.tags %}
+        <a href="{% if not is_preview %}{{ url_for('main.show_tag', tag=tag.name) }}{% else %}#{% endif %}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+      </div>
+    {% endif %}
+    
+  </div>
+  
+  {% if post.comments_allowed and not is_preview %}
+    <div style="margin-top: 5em"></div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      //var disqus_identifier = {{ post.id }}; 
+      (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://{{ config["DISQUS_SHORTNAME"] }}.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript={{ config['DISQUS_SHORTNAME'] }}">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+  {% endif %}
+  
+</div>
+{% endmacro %}
+
+{% macro render_post_minimal(post) %}
+<div class="post">
+  <h1 class="post-title {% if not post.visible %}invisible{% endif %}">
+  <a class="post-title {% if not post.visible %}invisible{% endif %}" href="{{ url_for('main.show_post', slug=post.slug) }}">{{ post.title }}</a>
+  </h1>
+
+  <div class="info">
+  
+  {% if session.logged_in and not is_preview %}
+    <div class="admin">
+      <a class="edit-post-link" href="{{ url_for('admin.create_post', slug=post.slug, next=request.url) }}">Edit</a>
+      <a class="delete-post-link" href="{{ url_for('admin.delete_post', slug=post.slug, next=request.url) }}">Delete</a>
+      {% if not post.visible %}(invisible){% endif %}
+    </div>
+    {% endif %}
+  
+  <span class="date">{{ post.datetime.strftime("%A %d. %B %Y") }}</span>
+  {% if post.categories %}
+    in
+    <span class="categories">
+    {% for category in post.categories %}
+        <a href="{% if not is_preview %}{{ url_for('main.show_category', category=category.name) }}{% else %}#{% endif %}">{{ category.name }}</a>{% if not loop.last %}, {% endif %}
+    {% endfor %}
+    </span>
+  {% endif %}
+  
+  
+  </div>
+
+  <div class="body">{{ post.html|safe }}</div>
+
+  <div class="info">
+    {% if post.tags %}
+      Tags: 
+      {% for tag in post.tags %}
+        <a href="{% if not is_preview %}{{ url_for('main.show_tag', tag=tag.name) }}{% else %}#{% endif %}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    {% endif %}
+  
+    {% if post.comments_allowed %}
+    <div class="comments-link">
+      <a href="{{ url_for('main.show_post', slug=post.slug) }}#disqus_thread">Comments</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro render_pagination(pagination, endpoint_func) %}
+  {% if pagination.pages > 1 %}
+  <div class=pagination>
+  {%- for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <a href="{{ endpoint_func(page) }}">{{ page }}</a>
+      {% else %}
+        <strong>{{ page }}</strong>
+      {% endif %}
+    {% else %}
+      <span class=ellipsis>…</span>
+    {% endif %}
+  {%- endfor %}
+  </div>
+  {% endif %}
+{% endmacro %}
+<!-- kate: tab-width 2; -->

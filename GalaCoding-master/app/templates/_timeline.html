@@ -1,0 +1,83 @@
+
+{% block body %}
+<div class="timeline-page">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-9 col-xs-12">
+            <table class="col-xs-11">
+                <tr>
+                    <td class="timeline"></td>
+                    <td>
+                        <div class="container-timeline">
+                            {% for post in posts %}
+                            <div class="post dis-none sticky" style="display: block;" >
+                                <div class="post-date" style="font-size: 12pt">
+                                    <span>{{ moment(post.timestamp).fromNow() }}</span>
+                                </div>
+                                {% if current_user.can(Permission.MODERATE_USERS) %}
+                                <div class="menu btn-group pull-right">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                                        <h4><i class="fa fa-toggle-down text-default"></i></h4>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="menu-delete" href="{{ url_for('main.delete', id=post.id) }}">删除</a></li>
+                                        <li><a class="menu-update" href="{{ url_for('main.edit', id=post.id) }}">修改</a></li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                <span class=""><a href="{{ url_for('user.profile', username=post.author.username) }}"><img src="{{ post.author.avatar_url_auto(size=40) }}" class="avatar avatar32"/></a></span>
+                                <span class="label label-default pull-left post-hide dis-none"></span>
+                                <span class="post-sticky dis-none" title="置顶"></span>
+                                <span class="post-title"><a class="title" href="{{ url_for('main.post', id=post.id) }}">{{ post.title }}</a></span>
+                                <ul class="tags">
+                                    {% for tag in post.tags %}
+                                    <a href="{{ url_for('main.tags', tagname=tag.content) }}">{{ tag.content }}</a>
+                                    {% endfor %}
+                                </ul>
+                                <!--防止转义-->
+                                <div id="repeat-item">
+                                <textarea id="flask-pagedown-body" rows="3" cols="20" style="display: none; ">{{ post.abstarct | safe }}</textarea>
+                                <div class="markdown" id="flask-pagedown-body-preview"></div>
+                                </div>
+                                <div class="thumbnails dis-none"></div>
+                                <div class="clearfix"></div>
+                                <a class="post-category" href="{{ url_for('user.profile', username=post.author.username) }}"><i class="icon-th-large icon-white"></i>{{ post.author.username }}</a>
+                                <div class="cmdbar">
+                                    <i class="fa fa-eye"></i> <span class="post-viewed">{{ post.viewed_count }}</span>
+                                    &nbsp;<a class="share" href="" title="分享"><i class="fa fa-share"></i></a>
+                                    &nbsp;<a class="stats" stats_type="Post" name="like_count" oper="increase"
+                                       href="" title="关注"><i class="fa fa-heart"></i>{{ post.concern_users.count() }}</a>
+                                    &nbsp;<a class="stats" stats_type="Post" name="like_count" oper="increase"
+                                       href="" title="赞同"><i class="fa fa-thumbs-o-up"></i>{{ post.remarkPost_count(Remark_Attitude.AGREE_WITH) }}</a>
+                                    &nbsp;<a class="stats" stats_type="Post" name="unlike_count" oper="increase"
+                                       href="" title="反对"><i class="fa fa-thumbs-o-down"></i>{{ post.remarkPost_count(Remark_Attitude.DISAGREE_WITH) }}</a>
+                                    &nbsp;<a class="comment" href="" title="评论"><i class="fa fa-comment-o"></i>{{ post.comments.count() }}</a>
+                                </div>
+                                <div class="comments_panel dis-none"></div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/js/marked.min.js"></script>
+<script type="text/javascript">
+	/*$(document).ready(function() {
+        $('[id=repeat-item]').each(function(index){
+            alert($(this));
+            alert($(this).children("#flask-pagedown-body"));
+            alert($(this).children('#flask-pagedown-body-preview'));
+            $(this).children('#flask-pagedown-body-preview').innerHTML = marked( $(this).children("#flask-pagedown-body").value);
+        });
+        //var preview = document.getElementById("flask-pagedown-body-preview");
+        //preview.innerHTML = marked(document.getElementById("flask-pagedown-body").value);
+	});*/
+    $(document).ready(function(){
+        $("div[id=repeat-item]").each(function(){
+            $(this).children('#flask-pagedown-body-preview').get(0).innerHTML = marked( $(this).children("#flask-pagedown-body").get(0).value);
+        });
+    });
+</script>
+{% endblock %}

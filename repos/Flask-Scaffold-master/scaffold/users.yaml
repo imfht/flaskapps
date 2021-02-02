@@ -1,0 +1,11 @@
+users:
+ - email:email
+ - password:string
+ - name:string
+ - active:boolean
+ - creation_time:datetime
+ - modification_time:datetime
+ - role:string
+role:
+ - name:string
+ 

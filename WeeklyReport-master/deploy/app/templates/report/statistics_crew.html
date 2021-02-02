@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head_script %}
+    <script src="{{ url_for('static', filename='chartkick/Chart.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='chartkick/chartkick.js') }}"></script>
+{% endblock %}
+
+
+{% block page_content %}
+<div class="post-preview">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-bar-chart aria-hidden=true"></i>
+            第{{ week_count }}周 ({{start_at}}至{{end_at}}) 各部门未交周报人数统计
+            {% if get_this_week_count() == week_count %}
+                <a href="{{url_for('report.statistics_crew_last_week')}}">
+                    (查看上周)
+                </a>
+            {% endif %}
+        </div>
+        <div class="panel-body">
+            {% for key, value in contrast.iteritems() %}
+            <a>{{ key }}:</a>{{value}}
+            <br/>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% for dept in stash %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                {{ dept.dept_name }}
+            </div>
+
+            <div class="panel-body">
+
+                <a>已交:</a>
+                    {% for name in dept['names']['has_submitted'] %}
+                        <a rel="tag" class="post-tag">{{ name }}</a>
+                    {% endfor %}
+
+                <hr style="height:2pt; visibility:hidden;" />
+
+                <a>未交:</a>
+                    {% for name in dept['names']['not_yet'] %}
+                        <a rel="tag" class="post-red-tag">{{ name }}</a>
+                    {% endfor %}
+                <br>
+            </div>
+
+        </div>
+    {% endfor %}
+
+</div>
+
+{#
+{{ wtf.quick_form(form) }}
+#}
+
+{% endblock %}

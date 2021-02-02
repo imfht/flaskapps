@@ -1,0 +1,71 @@
+{% if config['BODY_FORMAT'] == 'html' %}
+<script src="{{ url_for('static', filename='admin/ckeditor/ckeditor.js') }}"></script>
+{% else %}
+{% if Setting.get('mdeditor') != 'markitup' %}
+<!-- image upload modal -->
+<div id="upload" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header"><h2>{{ _('Upload Image') }}</h2></div>
+
+        <div id="upload-drop" class="uk-placeholder uk-text-center">
+            <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i> <a class="uk-form-file">{{ _('Attach Images by dropping them here or selecting one') }}<input id="upload-select" type="file"></a>.
+        </div>
+        <div id="progressbar" class="uk-progress uk-hidden">
+            <div class="uk-progress-bar" style="width: 0%;">0%</div>
+        </div>
+
+        <div id="preview" class="uk-text-center uk-margin-small-top"></div>
+        <div class="uk-modal-footer">
+            <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="uk-button uk-modal-close">{{ _('Cancel') }}</button>
+            <button type="button" class="uk-button uk-button-primary" id="btn_upload_submit">{{ _('Submit') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/uikit/css/uikit.min.css') }}" />
+<script type="text/javascript" src="{{ url_for('static', filename='admin/uikit/js/uikit.min.js') }}"></script>
+
+<!-- Codemirror and marked dependencies -->
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/cmeditor/lib/codemirror.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/lib/codemirror.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/mode/markdown/markdown.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/mode/xml/xml.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/mode/gfm/gfm.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/addon/mode/overlay.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/addon/selection/active-line.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/marked/marked.min.js') }}"></script>
+
+<!-- HTML editor and Upload component CSS and JavaScript -->
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/uikit/css/components/htmleditor.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='admin/uikit/css/components/upload.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='admin/uikit/js/components/htmleditor.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/uikit/js/components/upload.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='admin/cmeditor/markitup.js') }}"></script>
+
+<style>
+#upload-drop{margin-top:30px}
+.uk-htmleditor .CodeMirror{padding:0;}
+.uk-placeholder{border:2px dashed #ccc; padding:20px 0;}
+.uk-dragover{border: 2px dashed #0c0;}
+.uk-form-file{display:inline-block;vertical-align:middle;position:relative;overflow:hidden}
+.uk-form-file input[type=file]{position:absolute;top:0;z-index:1;width:100%;opacity:0;cursor:pointer;left:0;font-size:500px}
+</style>
+{% else %}
+<link rel="stylesheet" type="text/css" href="/static/admin/markitup/skins/markdown/style.css">
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="/static/admin/markitup/sets/markdown/style.css" />
+<!-- markItUp! -->
+<script type="text/javascript" src="/static/admin/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="/static/admin/markitup/sets/markdown/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/static/admin/markitup/sets/markdown/set.js"></script>
+<script language="javascript">
+$(document).ready(function()	{
+    $('.markitup').markItUp(myMarkdownSettings);
+    });
+</script>
+{% endif %}
+{% endif %}

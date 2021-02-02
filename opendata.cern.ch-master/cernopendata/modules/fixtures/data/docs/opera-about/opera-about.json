@@ -1,0 +1,28 @@
+[
+  {
+    "body": {
+      "content": "opera-about.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "OPERA"
+      }
+    ],
+    "experiment": "OPERA",
+    "short_description": {
+      "content": "The OPERA experiment (Oscillation Project with Emulsion-tRacking Apparatus) has been taking data from 2008 to 2012 at the Gran Sasso INFN Laboratory on the CNGS muon neutrino beam produced at CERN."
+    },
+    "slug": "about-opera",
+    "tags": [
+      "Getting Started"
+    ],
+    "title": "About OPERA",
+    "type": {
+      "primary": "Documentation",
+      "secondary": [
+        "About"
+      ]
+    }
+  }
+]

@@ -1,0 +1,16 @@
+[data-widget="time"] {
+  height: 100%;
+  padding: 5px;
+  background: #9e3b33;
+  text-align: center;
+}
+[data-widget="time"] h1 {
+  font-size: 60px;
+}
+[data-widget="time"] h2 {
+  font-size: 30px;
+}
+[data-widget="time"] h3 {
+  font-size: 18px;
+  font-weight: normal;
+}

@@ -1,0 +1,33 @@
+{% extends 'layout/dialog_base.html' %}
+{% from 'events/papers/management/_templates.html' import render_template_list %}
+{% from 'forms/_form.html' import form_header, form_field, form_footer %}
+
+{% block dialog_id %}templates-dialog{% endblock %}
+
+{% block description %}
+    {%- trans -%}
+        Uploading paper templates makes it easier for authors to write papers that
+        conform to the conference's layout standards.
+    {%- endtrans -%}
+{%- endblock %}
+
+{% block content -%}
+    <div class="toolbar space-after hide-if-locked">
+        <button class="i-button icon-plus highlight"
+                data-href="{{ url_for('.upload_template', event) }}"
+                data-title="{% trans %}Upload new paper template{% endtrans %}"
+                data-update="#templates-dialog .template-list"
+                data-ajax-dialog>
+            {% trans %}Upload paper template{% endtrans %}
+        </button>
+    </div>
+
+    <div class="template-list">
+        {{ render_template_list(event) }}
+    </div>
+{%- endblock %}
+
+{% block page %}
+    <div class="flashed-messages"></div>
+    {{ super() }}
+{% endblock %}

@@ -1,0 +1,222 @@
+variables:
+  GIT_DEPTH: 1
+  GIT_SUBMODULE_STRATEGY: recursive
+  BURP_VERSION: 2.2.18
+  PG_VERSION: 10
+  SRC_DIR: burpui
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://docker:2375
+  # docker TLS issue. see: https://gitlab.com/gitlab-org/gitlab-runner/issues/4501
+  DOCKER_TLS_CERTDIR: ""
+
+image: docker:git
+
+services:
+  - docker:dind
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:lint:3.6:
+  stage: test
+  image: python:3.6
+  script:
+  - pip install tox
+  - tox -e pep8
+  tags:
+  - lint
+  except:
+  - tags
+  - rc
+  - demo
+
+test:lint:3.7:
+  stage: test
+  image: python:3.7
+  script:
+  - pip install tox
+  - tox -e pep8
+  tags:
+  - lint
+  except:
+  - tags
+
+test:lint:3.8:
+  stage: test
+  image: python:3.8-rc
+  script:
+  - pip install tox
+  - tox -e pep8
+  tags:
+  - lint
+  except:
+  - tags
+  - rc
+  - demo
+
+test:py:3.6:
+  stage: test
+  image: python:3.6
+  script:
+  - pip install tox
+  - mkdir .reports
+  - tox -e py36
+  tags:
+  - docker
+  except:
+  - tags
+  - rc
+  - demo
+  artifacts:
+    reports:
+      junit: .reports/burpui.junit.xml
+
+test:py:3.7:
+  stage: test
+  image: python:3.7
+  script:
+  - pip install tox
+  - mkdir .reports
+  - tox -e py37
+  tags:
+  - docker
+  except:
+  - tags
+  artifacts:
+    reports:
+      junit: .reports/burpui.junit.xml
+
+# This test is temporarily disabled because werkzeug doesn't run yet on 3.8
+test:py:3.8:
+  stage: test
+  image: python:3.8-rc
+  script:
+  - pip install tox
+  - mkdir .reports
+  - tox -e py38
+  tags:
+  - docker
+  except:
+  - tags
+  - rc
+  - demo
+  artifacts:
+    reports:
+      junit: .reports/burpui.junit.xml
+
+build:py3:
+  stage: build
+  image: python:3.7
+  script:
+  - tests/build.sh
+  tags:
+  - build
+  only:
+  - master@ziirish/burp-ui
+  - demo@ziirish/burp-ui
+  - stable@ziirish/burp-ui
+  artifacts:
+    paths:
+    - dist/
+    - meta/
+    expire_in: 2 mos
+
+build:doc:
+  stage: build
+  image: python:3.7
+  script:
+  - pip install -U .[rtd]
+  - cd docs && make html
+  tags:
+  - build
+  only:
+  - master@ziirish/burp-ui
+  artifacts:
+    paths:
+    - docs/_build/html
+    expire_in: 2 mos
+  allow_failure: true
+
+build:docker:latest:
+  stage: build
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest -f docker/Dockerfile .
+  - (cd docker/demo/docker-pg && docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/pgsql:$PG_VERSION .)
+  - (cd docker/components/docker-burp && docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/burp:$BURP_VERSION .)
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:latest
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/pgsql:$PG_VERSION
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/burp:$BURP_VERSION
+  tags:
+  - registry
+  only:
+  - rc@ziirish/burp-ui
+
+build:docker:release:
+  stage: build
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_TAG -f docker/Dockerfile .
+  - (cd docker/demo/docker-pg && docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/pgsql:$PG_VERSION .)
+  - (cd docker/components/docker-burp && docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/burp:$BURP_VERSION .)
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_TAG
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/pgsql:$PG_VERSION
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/burp:$BURP_VERSION
+  only:
+  - tags
+  tags:
+  - registry
+
+build:docker:stable:
+  stage: build
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:stable -f docker/Dockerfile .
+  - (cd docker/demo/docker-pg && docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/pgsql:$PG_VERSION .)
+  - (cd docker/components/docker-burp && docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/burp:$BURP_VERSION .)
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:stable
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/pgsql:$PG_VERSION
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/burp:$BURP_VERSION
+  only:
+  - stable@ziirish/burp-ui
+  tags:
+  - registry
+
+build:docker:demo:
+  stage: build
+  script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker build --pull -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:demo -f docker/Dockerfile .
+  - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:demo
+  - apk add --no-cache curl
+  - "curl $SENTRY_WEBHOOK -X POST -H 'Content-Type: application/json' -d '{\"version\": \"'$CI_COMMIT_REF_NAME'_'$CI_COMMIT_SHA'\"}'"
+  only:
+  - demo@ziirish/burp-ui
+  tags:
+  - registry
+
+deploy:demo:
+  stage: deploy
+  script:
+  - find docker/demo/ -name "install" -o -name "init" | xargs sed -i "s/@build@/$CI_COMMIT_SHA/"
+  - cd docker/demo/ && find . -maxdepth 1 -type d -a ! -name dist -exec cp -r ../../dist "{}/" \; -exec cp -r ../../meta "{}/" \; && cd ../..
+  - find docker/demo/ -name "Dockerfile" | xargs sed -i "s,^.*@ARTIFACTS@.*$,COPY dist/*.tar.gz /tmp/burpui.dev.tar.gz,;s,^.*@BUIAGENT_ARTIFACTS@.*$,COPY meta/burp-ui-agent*.tar.gz /tmp/burp-ui-agent.dev.tar.gz,;s,^.*@BUIMONITOR_ARTIFACTS@.*$,COPY meta/burp-ui-monitor*.tar.gz /tmp/burp-ui-monitor.dev.tar.gz,"
+  - test -d /srv/demo/docker && rm -rf /srv/demo/docker
+  - cp -r docker/demo/ /srv/demo/docker
+  - cd /srv/demo/docker/
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  - docker-compose build --pull
+  - docker-compose stop
+  - docker-compose rm -f
+  - docker-compose up -d
+  tags:
+  - deploy
+  only:
+  - demo@ziirish/burp-ui
+  environment:
+    name: demo
+    url: https://demo.burp-ui.org/
+  variables:
+    DOCKER_HOST: unix:///var/run/docker.sock

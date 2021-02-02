@@ -1,0 +1,2258 @@
+[
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 202970 - 203002, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_6_onlpatch3\">CMSSW_5_2_6_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2084149
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:e50150bd",
+        "size": 2084149,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v4.2_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6100",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v4.2/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 206744 - 206745, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7_onlpatch2\">CMSSW_5_2_7_onlpatch2</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2308868
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:90279805",
+        "size": 2308868,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v2.0_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6101",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v2.0/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 204100 - 205238, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7\">CMSSW_5_2_7</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2192031
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:9bcc6c73",
+        "size": 2192031,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v1.1_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6102",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v1.1/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 194735 - 194778, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2071786
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:72a79bab",
+        "size": 2071786,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.3_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6103",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.3/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 194424 - 194712, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2067575
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:6f889f87",
+        "size": 2067575,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.2_HLT_V3.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6104",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.2/HLT/V3",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 207779 - 207886, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7_onlpatch3\">CMSSW_5_2_7_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2321436
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a0d44ff8",
+        "size": 2321436,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v2.1_HLT_V6.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6105",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v2.1/HLT/V6",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 198050 - 198063, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch5\">CMSSW_5_2_4_onlpatch5</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2064310
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:066bafb0",
+        "size": 2064310,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v3.0_HLT_V4.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6106",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v3.0/HLT/V4",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 198249 - 199021, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch5\">CMSSW_5_2_4_onlpatch5</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2064311
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:7112b02f",
+        "size": 2064311,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v3.1_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6107",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v3.1/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 193834 - 193836, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2059043
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:7b6ef66c",
+        "size": 2059043,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.1_HLT_V11.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6108",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.1/HLT/V11",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 193541 - 193621, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch1\">CMSSW_5_2_4_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2079227
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:3ebf27de",
+        "size": 2079227,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.16_HLT_V21.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6109",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.16/HLT/V21",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 198116 - 198230, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch5\">CMSSW_5_2_4_onlpatch5</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2064311
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:84b1affd",
+        "size": 2064311,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v3.0_HLT_V5.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6110",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v3.0/HLT/V5",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 198023 - 198049, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch5\">CMSSW_5_2_4_onlpatch5</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2064310
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:80fdafc6",
+        "size": 2064310,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v3.0_HLT_V3.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6111",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v3.0/HLT/V3",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190645 - 190659, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2042796
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:40a672d2",
+        "size": 2042796,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.6_HLT_V5.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6112",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.6/HLT/V5",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190688 - 190738, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2042914
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:ac909220",
+        "size": 2042914,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.8_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6113",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.8/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 198022, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch5\">CMSSW_5_2_4_onlpatch5</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2064310
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:52fcafcc",
+        "size": 2064310,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v3.0_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6114",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v3.0/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 191800 - 191859, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch1\">CMSSW_5_2_4_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2078704
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:55b6cec4",
+        "size": 2078704,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.16_HLT_V3.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6115",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.16/HLT/V3",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 193192 - 193207, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch1\">CMSSW_5_2_4_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2079765
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:d593d070",
+        "size": 2079765,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.16_HLT_V15.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6116",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.16/HLT/V15",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 194896 - 195970, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2071454
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a3eb4b64",
+        "size": 2071454,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.3_HLT_V3.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6117",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.3/HLT/V3",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 205303 - 205834, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7_onlpatch1\">CMSSW_5_2_7_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2193391
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:3039150a",
+        "size": 2193391,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v1.2_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6118",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v1.2/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190782, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2045673
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:db00df7c",
+        "size": 2045673,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.10_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6119",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.10/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 194788 - 194825, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2071455
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:9b2a4b8f",
+        "size": 2071455,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.3_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6120",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.3/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 199698 - 199877, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_6_onlpatch2\">CMSSW_5_2_6_onlpatch2</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2051896
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:256d8bab",
+        "size": 2051896,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v4.0_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6121",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v4.0/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 194223 - 194225, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2059590
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:18f5a0db",
+        "size": 2059590,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.1_HLT_V13.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6122",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.1/HLT/V13",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190456 - 190465, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2052178
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:224b9309",
+        "size": 2052178,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.4_HLT_V5.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6123",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.4/HLT/V5",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 191201 - 191411, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch4\">CMSSW_5_2_3_patch4</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2078889
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:66d7975b",
+        "size": 2078889,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.14_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6124",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.14/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 191691 - 191726, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch1\">CMSSW_5_2_4_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2078704
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:8bafcebd",
+        "size": 2078704,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.16_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6125",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.16/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 207887 - 208686, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7_onlpatch3\">CMSSW_5_2_7_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2321436
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:8c805003",
+        "size": 2321436,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v2.1_HLT_V7.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6126",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v2.1/HLT/V7",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 191043 - 191090, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch4\">CMSSW_5_2_3_patch4</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2078401
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:e60a0a5b",
+        "size": 2078401,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.13_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6127",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.13/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 203777 - 203994, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7\">CMSSW_5_2_7</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2189925
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:6895f268",
+        "size": 2189925,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v1.0_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6128",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v1.0/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 202792, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_6_onlpatch3\">CMSSW_5_2_6_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 383104
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:4a1addbb",
+        "size": 383104,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012PI_PilotRun_PIHLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6129",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012PI/PilotRun/PIHLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 196046 - 196531, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch4\">CMSSW_5_2_4_onlpatch4</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2047845
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:1dd7ca49",
+        "size": 2047845,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.5_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6130",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.5/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190945 - 190949, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch4\">CMSSW_5_2_3_patch4</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2078617
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:b0564c50",
+        "size": 2078617,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.12_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6131",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.12/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 202793 - 202794, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_6_onlpatch3\">CMSSW_5_2_6_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 383184
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:90fff32a",
+        "size": 383184,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012PI_PilotRun_PIHLT_V4.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6132",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012PI/PilotRun/PIHLT/V4",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190895 - 190906, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2046545
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2dd1fca9",
+        "size": 2046545,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.11_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6133",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.11/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190482 - 190539, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2049751
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:2cf592ea",
+        "size": 2049751,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.4_HLT_V7.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6134",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.4/HLT/V7",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190661 - 190679, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2043235
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:287903fe",
+        "size": 2043235,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.7_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6135",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.7/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 194270 - 194317, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2067597
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:0514a739",
+        "size": 2067597,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.2_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6136",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.2/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 195868 - 195950, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2103381
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:1eab4f0d",
+        "size": 2103381,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.4_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6137",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.4/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 193334 - 193336, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch1\">CMSSW_5_2_4_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2079765
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:1893d072",
+        "size": 2079765,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.16_HLT_V18.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6138",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.16/HLT/V18",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 193998 - 194210, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch3\">CMSSW_5_2_4_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2059046
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:dd13f710",
+        "size": 2059046,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v2.1_HLT_V12.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6139",
+    "run_period": [
+      "Run2012B"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v2.1/HLT/V12",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 190591 - 190595, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_3_patch1\">CMSSW_5_2_3_patch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2048137
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:bbfbcc3f",
+        "size": 2048137,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.5_HLT_V3.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6140",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.5/HLT/V3",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 206859 - 207100, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7_onlpatch2\">CMSSW_5_2_7_onlpatch2</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2308871
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:67339890",
+        "size": 2308871,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v2.0_HLT_V3.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6141",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v2.0/HLT/V3",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 199960 - 200381, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_6_onlpatch2\">CMSSW_5_2_6_onlpatch2</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2051070
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:ff04780c",
+        "size": 2051070,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v4.0_HLT_V4.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6142",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v4.0/HLT/V4",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 207214 - 207518, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_7_onlpatch3\">CMSSW_5_2_7_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2321428
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:000c4e94",
+        "size": 2321428,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_8e33_v2.1_HLT_V5.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6143",
+    "run_period": [
+      "Run2012D"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/8e33/v2.1/HLT/V5",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 193093 - 193124, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch1\">CMSSW_5_2_4_onlpatch1</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2079718
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:9e99c0c9",
+        "size": 2079718,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_5e33_v4.16_HLT_V14.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6144",
+    "run_period": [
+      "Run2012A"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/5e33/v4.16/HLT/V14",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 199318 - 199608, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_4_onlpatch5\">CMSSW_5_2_4_onlpatch5</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2064311
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:be29b01c",
+        "size": 2064311,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v3.1_HLT_V2.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6145",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v3.1/HLT/V2",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p> The configuration file used in data taking and HLT data processing step.<p>Run number 200466 - 202504, software version <a href=\"https://github.com/cms-sw/cmssw-cvs/tree/CMSSW_5_2_6_onlpatch3\">CMSSW_5_2_6_onlpatch3</a>.</p></p> <p>This file describes the exact setup for the CMS software executable which was used in a data-processing step. It is provided only <i>for information purposes</i>. Although all the components required to <i>analyse</i> the public primary datasets - such as corresponding input data, condition data, software version - are provided on this portal, it is not necessarily possible to <i>reproduce</i> all the described data-processing steps.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "8TeV",
+      "type": "pp"
+    },
+    "date_created": [
+      "2012"
+    ],
+    "date_published": "2017",
+    "distribution": {
+      "formats": [
+        "py"
+      ],
+      "number_files": 1,
+      "size": 2051652
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:66d77b2d",
+        "size": 2051652,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2012/cdaq_physics_Run2012_7e33_v4.1_HLT_V1.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "6146",
+    "run_period": [
+      "Run2012C"
+    ],
+    "title": "Configuration file for HLT step /cdaq/physics/Run2012/7e33/v4.1/HLT/V1",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  }
+]

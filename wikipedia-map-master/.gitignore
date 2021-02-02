@@ -1,0 +1,14 @@
+# Don't include compiled files
+*.py[cod]
+# Don't include fuse-hidden files
+.fuse_hidden*
+# Don't include .DS_Store files
+*.DS_Store
+# Don't include textastic iCloud stuff
+*.icloud
+# Don't include symlink to dev directory
+dev
+# Don't include shared user graphs
+# graphs/*.json
+
+node_modules

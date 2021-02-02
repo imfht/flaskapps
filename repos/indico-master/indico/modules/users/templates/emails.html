@@ -1,0 +1,66 @@
+{% extends 'users/base.html' %}
+{% from 'forms/_form.html' import form_header, form_rows, form_footer  %}
+
+{% block user_content %}
+    <div class="i-box-group vert">
+        <div class="i-box">
+            <div class="i-box-header">
+                <div class="i-box-title">
+                    {%- trans %}Emails{% endtrans -%}
+                </div>
+            </div>
+            <div class="i-box-content">
+                <p>
+                    {%- trans -%}
+                        Your <strong>primary email</strong> will be used for account-related notifications (e.g. registration emails and billing information).
+                    {%- endtrans -%}
+                </p>
+                <ul class="group-list with-buttons content-after">
+                    <li>
+                        <span><strong>{{ user.email }}</strong></span>
+                        <span class="ui label">{% trans %}Primary{% endtrans %}</span>
+                    </li>
+                    {% for email in user.secondary_emails|sort %}
+                        <li class="flexrow f-a-center js-email-row">
+                            <span>{{ email }}</span>
+                            <span class="right">
+                                <button type="button"
+                                        class="ui primary small button"
+                                        data-href="{{ url_for('.user_emails_set_primary') }}"
+                                        data-method="POST"
+                                        data-params="{{ {'email': email} | tojson | forceescape }}">
+                                    {%- trans %}Set as primary{% endtrans -%}
+                                </button>
+                                <button class="ui icon small button js-delete-email"
+                                        data-href="{{ url_for('.user_emails_delete', email=email) }}">
+                                    <i class="trash alternate icon"></i>
+                                </button>
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ form_header(form, orientation='vertical', classes='no-block-padding') }}
+                {{ form_rows(form) }}
+                {% call form_footer(form) %}
+                    <input class="ui primary button" type="submit" value="{% trans %}Add{% endtrans %}" data-disabled-until-change>
+                {% endcall %}
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.js-delete-email').on('click', function(e){
+            e.preventDefault();
+            var $this = $(this);
+            $.ajax({
+                url: $this.data('href'),
+                method: 'DELETE',
+                error: handleAjaxError,
+                success: function() {
+                    $this.closest('.js-email-row').fadeOut(function() {
+                        $(this).remove();
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends theme('layout.html') %}
+{% set active_page = "topics" %}
+
+{% block title %}专题{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ url_for('main.topics', _external=True) }}" />
+  <meta name="mobile-agent" content="format=html5;url={{ url_for('main.topics', _external=True) }}"/>
+  <meta name="mobile-agent" content="format=xhtml;url={{ url_for('main.topics', _external=True) }}"/>
+{%- endblock %}
+
+{% block crumb %}专题{% endblock %}
+
+{% block main %}
+<div class="post">
+  <h2 class="">专题</h2>
+  <div class="entry">
+    {% with topics = topic_lists() %}
+    <ul class="clearfix">
+    {% for topic in topics -%}
+    <li><a href="{{ topic.link }}">{{ topic.name }}</a></li>
+    {%- endfor %}
+    </ul>
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}
+

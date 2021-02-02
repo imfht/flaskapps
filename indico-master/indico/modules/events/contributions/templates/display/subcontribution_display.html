@@ -1,0 +1,50 @@
+{% extends 'events/display/conference/base.html' %}
+
+{% from 'events/display/common/_conferences.html' import render_attachments %}
+{% from 'events/display/indico/_common.html' import render_location, render_speakers %}
+
+{% block page_class %}conference-page item-summary{% endblock %}
+
+{% block title -%}
+    <span class="js-mathjax">{{ subcontrib.title }}</span>
+{%- endblock %}
+
+{% block subtitle -%}
+    <a href="{{ url_for('contributions.display_contribution', subcontrib.contribution) }}">
+        {{ subcontrib.contribution.title }}
+    </a>
+{%- endblock %}
+
+{% block description %}
+    <div class="time-data">
+        <i class="icon-time header-data"></i>
+        <span class="time-info">
+            {% if subcontrib.timetable_entry -%}
+                {{ subcontrib.timetable_entry.start_dt|format_datetime(timezone=subcontrib.event.display_tzinfo) }}
+            {%- else -%}
+                {% trans %}Not scheduled{% endtrans %}
+            {%- endif %}
+        </span>
+    </div>
+{% endblock %}
+
+{% block page_actions -%}
+    <div class="toolbar">
+        {% if subcontrib.can_manage(session.user) -%}
+            <a href="#" class="i-button icon-edit"
+               data-title="{% trans title=subcontrib.title %}Edit subcontribution '{{ title }}'{% endtrans %}"
+               data-href="{{ url_for('.manage_edit_subcontrib', subcontrib) }}"
+               data-ajax-dialog
+               data-reload-after></a>
+        {%- endif %}
+    </div>
+{%- endblock %}
+
+{% block content -%}
+    {{ render_speakers(subcontrib) }}
+    {{ render_attachments(subcontrib) }}
+
+    <script>
+        setupAttachmentTreeView();
+    </script>
+{%- endblock %}

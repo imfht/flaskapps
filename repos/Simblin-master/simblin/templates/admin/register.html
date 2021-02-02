@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+<h3>Register</h3>
+<p>
+Congratulations! You, sir, are the first to find this blog. It is therefore your 
+duty to choose a username and a password.
+</p>
+<p> 
+Since you will be the sole author of this blog these credentials' only purpose 
+is to keep away other, potentially sinister people from submitting here.
+</p>
+<p>
+You can enter your e-mail adress if you want to be notified about certain events.
+</p>
+<form action="{{ url_for('admin.register') }}" method="post">
+  <div style="margin: 0 auto;">
+    <label for=username>Username:</label> 
+    <input type="text" name="username">
+    <div style="margin-top: 1em"></div>
+    <label for=email>Email:</label> 
+    <input type="text" name="email">
+    <div style="margin-top: 1em"></div>
+    <label for=password>Password:</label> 
+    <input type="password" name="password">
+    <div style="margin-top: 1em"></div>
+    <label for=password2>Again:</label> 
+    <input type="password" name="password2">
+    <div style="margin-top: 1em"></div>
+    <input style="text-align:right;" class=submit type="submit" value="Register">
+  </div>
+</form>
+{% endblock %}
+{% block search %}{% endblock %}

@@ -1,0 +1,60 @@
+{% macro render_timetable(timetable_data, event_info, timetable_layout=none, management=false, is_session=false,
+                          can_manage_session=false, can_manage_blocks=false, can_manage_contributions=false,
+                          can_manage_event=false, custom_links={}) %}
+    <div id="timetable" style="position: relative;">
+        <div class="timetablePreLoading" style="height: 300px;">
+            <div class="text" style="padding-top: 200px;">
+                {% trans %}Building timetable...{% endtrans %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <script>
+        $(window).on('load', function() {
+            'use strict';
+
+            var extraArgs;
+
+            {% if management %}
+                var timetableClass = TopLevelManagementTimeTable;
+                var width = document.body.clientWidth - 300;
+                var detailLevel = false;
+                var isSession = {{ is_session|tojson }};
+                var customLinks = null;
+                var canManageEvent = !isSession || {{ can_manage_event|tojson }};
+                var canManageSession = !isSession || {{ can_manage_session|tojson }};
+                var canManageBlocks = !isSession || {{ can_manage_blocks|tojson }};
+                var canManageContribs = !isSession || {{ can_manage_contributions|tojson }};
+                extraArgs = [
+                    isSession, {{ custom_links|tojson }}, canManageSession, canManageBlocks, canManageContribs,
+                    canManageEvent
+                ];
+            {% else %}
+                var timetableClass = TopLevelDisplayTimeTable;
+                var width = 710;
+                var detailLevel = 'session';
+                var layout = {{ timetable_layout|tojson }};
+                extraArgs = [layout];
+            {% endif %}
+
+            var timetableArgs = [
+                null,
+                {{ timetable_data|tojson }},
+                {{ event_info|tojson }},
+                width,
+                $E('timetable'),
+                detailLevel,
+                new BrowserHistoryBroker()
+            ].concat(extraArgs);
+
+            if (Object.getOwnPropertyNames(timetableArgs[1]).length > 0) {
+                var timetable = new (Function.prototype.bind.apply(timetableClass, timetableArgs));
+                $('#timetable').html(timetable.draw());
+                timetable.postDraw();
+            } else {
+                $('#timetable').html($T("The timetable has not been filled yet."));
+            }
+        });
+    </script>
+{% endmacro %}

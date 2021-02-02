@@ -1,0 +1,37 @@
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                             Bento Initialization                             │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Bento configures itself for personal use by default. This means that it:
+
+1. Automatically checks for issues introduced by your code, as you commit it
+2. Only affects you; it won’t change anything for other project contributors
+
+Learn more about personal and team use at bento.dev/workflows.
+
+Creating default ignore file at .bentoignore․․․․․․․․․․․․․․․․․․․․․ 🍜 Setting up🍱 Done
+Creating default configuration at .bento/config.yml․․․․․․․․․․․․․․ 🍜 Setting up🍱 Done
+Enabling autorun (see $ bento enable autorun --help)․․․․․․․․․․․․․ 🍜 Setting up🍱 Done
+Creating GitHub Action configuration at .github/․․․․․․․․․․․․․․․․․ 👋 Skipped
+
+Bento initialized for Python
+
+Installing tools:
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                  Thank You                                   │
+╰──────────────────────────────────────────────────────────────────────────────╯
+From all of us at r2c, thank you for trying Bento! We can’t wait to hear what
+you think.
+
+Help and feedback: Reach out to us at support@r2c.dev or file an issue on
+GitHub. We’d love to hear from you!
+
+Community: Join #bento on our community Slack. Get support, talk with other
+users, and share feedback.
+
+Go forth and write great code! To use Bento:
+  commit code․․․․․․․․․․․․․․․․․․․․․․․․․․․․․ $ git commit
+  get help for a command․․․․․․․․․․․․․․․․․․ $ bento [COMMAND] --help
+

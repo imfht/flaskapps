@@ -1,0 +1,11 @@
+#DEBUG: true
+
+MONGO:
+  host: localhost
+  port: 27017
+
+MONGO_DATABASE: pb
+
+#VARNISH_BASE: 'http://[::1]:8080/'
+
+#CDN_PREFIX: '//d34zelngniy2d8.cloudfront.net'

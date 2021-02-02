@@ -1,0 +1,29 @@
+<view class="navbar">
+  <image class="icon" src="../../images/back-black.png"
+    bindtap="handleBack"></image>
+  公羊阅读
+</view>
+
+<view class="info">
+  <image src="../../images/cover.png" class="cover"></image>
+  <view class="info-right">
+    <view class="bookname">{{bookName}}</view>
+    <view class="authorname">作者：{{authorName}}</view>
+  </view>
+</view>
+
+<view class="classify">
+  <view>最后更新时间：{{lastUpdateAt}}</view>
+  <view>分类：{{classifyName}}</view>
+</view>
+
+<view class="desc">
+  <view class="desc-title">小说简介</view>
+  <view class="desc-content">{{bookDesc}}</view>
+</view>
+
+<view class="btn-groups">
+  <view class="btn-item btn-shelf"
+    bindtap="handleJoinShelf">加入书架</view>
+</view>
+

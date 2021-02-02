@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+
+    <form class="form form-inline" method="GET" role="form">
+        {{ wtf.form_errors(form, hiddens="only") }}
+
+        <i class="fa fa-calendar-minus-o" aria-hidden="true"></i>{{ wtf.form_field(form.start_at) }}
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>{{ wtf.form_field(form.end_at) }}
+
+        <i class="fa fa-user" aria-hidden="true"></i>{{ wtf.form_field(form.user) }}
+        <i class="fa fa-search" aria-hidden="true"></i>{{ wtf.form_field(form.submit) }}
+    </form>
+    <hr>
+
+    {% for report in pagination.items %}
+    <div class="post-preview">
+
+        <a rel="tag" class="post-tag">{{_('Employee')}}:{{ report.author.username }}</a>
+        <a rel="tag" class="post-tag">{{_('Department')}}:{{ report.department.name }}</a>
+        <a rel="tag" class="post-tag">{{_('Week Count')}}:{{ report.week_count }}</a>
+        <a rel="tag" class="post-tag">{{_('Year')}}:{{ report.year }}</a>
+
+        {{report.content|safe}}
+        <hr>
+    </div>
+    {% endfor %}
+
+    <ul class="pager">
+        {% if pagination.has_prev %}
+            <li class="previous">
+                <a href="{{ url_for('report.read_department',
+                page=pagination.page-1,
+                start_at=form.start_at.data,
+                end_at=form.end_at.data,
+                user=form.user.data,
+                )}}">
+                    &larr; Newer
+                </a>
+            </li>
+        {% else %}
+            <li class="previous disabled"><a href="#">&larr; Newer </a></li>
+        {% endif %}
+
+        {% if pagination.has_next %}
+            <li class="next">
+                <a href="{{ url_for('report.read_department',
+                page=pagination.page+1,
+                start_at=form.start_at.data,
+                end_at=form.end_at.data,
+                user=form.user.data,
+                )}}">
+                    Older &rarr;
+                </a>
+            </li>        {% else %}
+            <li class="next disabled"><a href="#">Older &rarr;</a></li>
+        {% endif %}
+    </ul>
+
+{% endblock %}

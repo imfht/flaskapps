@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+graphene = "*"
+py2neo = "*"
+flask-graphql = "*"
+maya = "*"
+environs = "*"
+
+[dev-packages]
+ipdb = "*"
+"flake8" = "*"
+"autopep8" = "*"
+
+[requires]
+python_version = "3.7"

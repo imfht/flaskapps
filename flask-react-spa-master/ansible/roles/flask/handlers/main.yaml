@@ -1,0 +1,6 @@
+---
+- name: restart application
+  supervisorctl: name={{ project_name }} state=restarted supervisorctl_path={{ supervisorctl }}
+
+- name: reload nginx
+  service: name={{ nginx_svc }} state=reloaded enabled=yes

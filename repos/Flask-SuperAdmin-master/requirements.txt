@@ -1,0 +1,6 @@
+Flask>=0.7
+Flask-WTF>=0.9
+Flask-SQLAlchemy>=0.15
+mongoengine
+flask-mongoengine>=0.7
+Django>=1.3

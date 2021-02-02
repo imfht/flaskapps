@@ -1,0 +1,201 @@
+$stale-color: #f0a53c;
+
+.stale-opening {
+  min-height: 300px;
+  color: white;
+
+  h1 {
+    font-size: 50px;
+    @include media-breakpoint-up(md) {
+      font-size: 60px;
+    }
+
+    text-align: center;
+  }
+
+  p {
+    font-size: 24px;
+    @include media-breakpoint-up(md) {
+      font-size: 30px;
+    }
+
+    text-align: center;
+
+    &.stale-credits {
+      font-style: italic;
+      font-size: 16px;
+      @include media-breakpoint-up(md) {
+        font-size: 20px;
+      }
+      margin-bottom: 0;
+    }
+
+    .stale-link {
+      color: white;
+      border-bottom: 2px dotted rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+.carousel-inner {
+  .active {
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+  }
+
+  .inactive {
+    animation: fadeout 2s;
+    -moz-animation: fadeout 2s; /* Firefox */
+    -webkit-animation: fadeout 2s; /* Safari and Chrome */
+    -o-animation: fadeout 2s; /* Opera */
+  }
+}
+
+.carousel-item {
+  .more-transparent {
+    opacity: 0.2;
+  }
+
+  .less-transparent {
+    opacity: 0.5;
+  }
+}
+
+.stale-background {
+  background-color: $purple;
+}
+
+.orange-background {
+  transition: background-color 1.0s ease;
+  background-color: $orange;
+}
+
+.red-background {
+  transition: background-color 1.0s ease;
+  background-color: $red;
+}
+
+.green-background {
+  transition: background-color 1.0s ease;
+  background-color: $green;
+}
+
+.purple-background {
+  transition: background-color 1.0s ease;
+  background-color: $purple;
+}
+
+.inherit-background {
+  transition: background-color 1.0s ease;
+}
+
+.stale-container {
+  max-width: 600px;
+  margin: auto;
+
+  p {
+    font-size: 20px;
+  }
+
+  ul {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+}
+
+.card {
+  padding: 1.5rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 2.8rem;
+  }
+
+  background-color: rgba(255, 255, 255, 1);
+  color: black;
+  font-size: 24px;
+  font-weight: 400;
+  max-width: 320px;
+  line-height: normal;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.35);
+}
+
+.stale-text {
+  color: $stale-color;
+  font-weight: bold;
+}
+
+@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { /* Opera */
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+      opacity:1;
+  }
+  to {
+      opacity:0;
+  }
+}
+@-moz-keyframes fadeout { /* Firefox */
+  from {
+      opacity:1;
+  }
+  to {
+      opacity:0;
+  }
+}
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+  from {
+      opacity:1;
+  }
+  to {
+      opacity:0;
+  }
+}
+@-o-keyframes fadeout { /* Opera */
+  from {
+      opacity:1;
+  }
+  to {
+      opacity:0;
+  }
+}

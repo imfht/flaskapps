@@ -1,0 +1,2 @@
+-r common.txt
+pylint==2.3.1

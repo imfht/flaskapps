@@ -1,0 +1,307 @@
+// This file is part of Zenodo.
+// Copyright (C) 2015, 2016 CERN.
+//
+// Zenodo is free software; you can redistribute it
+// and/or modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of the
+// License, or (at your option) any later version.
+//
+// Zenodo is distributed in the hope that it will be
+// useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Zenodo; if not, write to the
+// Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+// MA 02111-1307, USA.
+//
+// In applying this license, CERN does not
+// waive the privileges and immunities granted to it by virtue of its status
+// as an Intergovernmental Organization or submit itself to any jurisdiction.
+
+.record-detail .col-right .btn-block {
+  margin-bottom: 10px;
+}
+
+.record-detail{
+  p, h1 {
+    word-wrap: break-word;
+  }
+  .metadata{
+    table {
+          table-layout: fixed;
+    }
+  }
+}
+
+.well {
+  word-wrap: break-word;
+
+  .pid-versions-dropdown {
+
+    // Dropdown Scrollbar
+    .dropdown-menu {
+      height: auto;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .dropdown-head {
+      color: black;
+      font-weight: 500;
+    }
+
+    .dropdown-item.current a {
+      font-weight: bold;
+    }
+  }
+
+  dl {
+    margin-bottom: 0;
+  }
+  dd {
+    padding-left: 10px;
+    margin-bottom: 4px;
+
+    .label {
+      display: inline-block;
+      margin-top: 2px;
+      line-height: inherit;
+      text-align: left;
+      white-space: normal;
+
+    }
+
+    a.label-link {
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+
+    }
+
+    a.label-external-link {
+      color: #fff;
+
+      &:hover {
+        color: $brand-primary;
+      }
+    }
+
+    &.custom-keywords, &.dates, &.locations {
+      li {
+        padding-bottom: 5px;
+        div {
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+.inline-orcid {
+    height: $font-size-base;
+}
+
+.preview-iframe {
+    border: none
+}
+
+.files-box {
+    .table {
+        margin-bottom: 0px;
+    }
+
+    a.filename {
+        word-break: break-all;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        display: block;
+    }
+}
+
+
+.record-elem {
+    h4 {
+        a {
+            color: black;
+        }
+        a:hover {
+            color: #777;
+        }
+    }
+    p {
+        a {
+            color: black;
+        }
+        a:hover {
+            color: #777;
+            text-decoration: none;
+        }
+    }
+    h4 ,p {
+      word-wrap: break-word;
+    }
+}
+
+.get-badge {
+    cursor: pointer;
+}
+
+#invenio-csl {
+  .twitter-typeahead .tt-menu {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .twitter-typeahead .tt-suggestion {
+    white-space: normal;
+  }
+
+  .empty-results {
+    padding-left: 10px;
+    margin-bottom: 0px;
+  }
+}
+
+
+#citations {
+  .citationBadge {
+    background-color: #777777 !important;
+  }
+
+  .citationsPagination {
+      margin: 0;
+      margin-bottom: 15px;
+  }
+
+  .doi-displayed {
+      font-size: 12px;
+  }
+
+  .titlecase {
+      text-transform: capitalize;
+  }
+
+   .facets {
+        margin-top:15px;
+        margin-bottom:15px;
+        border-bottom: 2px;
+   }
+
+   .logo {
+     padding-top: 16px;
+   }
+
+   .identifier-badge:hover {
+        text-decoration: none;
+   }
+
+    .filter {
+        margin-right: 5px;
+        padding-bottom: -5px;
+        label {
+          font-weight: 300;
+        }
+        input[type=checkbox][disabled] + label{
+          cursor: not-allowed;
+        }
+    }
+
+    .navbar-form {
+      margin: 0;
+      padding: 0;
+    }
+
+    .ribbon-wrapper-green {
+        overflow: hidden;
+        width: 50px;
+        height: 53px;
+        margin-top: -10px;
+        margin-left: -15px;
+
+        a {
+          text-decoration: none;
+        }
+    }
+
+    .corner-ribbon {
+        width: 150px;
+        position: relative;
+        top: 15px;
+        left: -60px;
+        text-align: center;
+        letter-spacing: 1px;
+        font: 11px Sans-Serif;
+        padding: 2px 0;
+        padding-left: 13px;
+        color: #f0f0f0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+    }
+
+    .corner-ribbon.top-left {
+        top: 15px;
+        left: -60px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+    }
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .corner-ribbon.ribbon-green {
+        color: #fff;
+        background-color: #28a745;
+        -webkit-box-shadow: 0 0 3px rgba(0,0,0,.3);
+        -moz-box-shadow: 0 0 3px rgba(0,0,0,.3);
+        box-shadow: 0 0 3px rgba(0,0,0,.3);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .no-results {
+        margin-bottom:15px;
+        font-size: 16px;
+    }
+}
+
+.stats-box {
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  table.stats-table {
+    td:nth-child(1) {
+      text-align: left;
+    }
+  }
+
+  #toggle-stats {
+    margin-top: 10px
+  }
+
+  #collapse-stats {
+    margin-top: 15px;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+
+  .stats-data {
+    font-size: 36px;
+  }
+}

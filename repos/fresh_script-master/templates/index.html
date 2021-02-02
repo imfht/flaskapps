@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Fresh Flask {% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+  {% if Name %}
+  <div class="row justify-content-md-left pl-5 card-custom">
+    <div class="column-sm-12">
+      <div class="jumbotron card-custom">
+        <h1 class="display-4">Hello, {{Name}}!</h1>
+        <p class="lead">Welcome to the Fresh Flask! From here you can easily find and add music from reddit subs</p>
+        <hr class="my-4">
+        <p>Use the search button above!</p>
+        <!--<ul>
+          <li><a href="/tracks">Add Tracks</a></li>
+          <li><a href="/manage-playlists">Manage Playlists</a></li>
+        </ul>-->
+        <a class="btn btn-primary btn-lg" href="https://github.com/amcquade/fresh_script" role="button">Learn more</a>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <p>Hello friend! Click here to setup the Fresh Flask!</p>
+  {% endif %}
+{% endblock %}

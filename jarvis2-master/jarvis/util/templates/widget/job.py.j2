@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+
+from jobs import AbstractJob
+
+
+class {{ name|capitalize }}(AbstractJob):
+
+    def __init__(self, conf):
+        self.interval = conf['interval']
+
+    def get(self):
+        return {'foo': 'bar'}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="vcenter">Pygmy</h1>
+<div class="col-lg-12 url-form">
+    <div class="has-success">
+        <div class="input-group">
+            <input type="text" class="form-control input-lg" placeholder="XXX"
+                value="{{short_url}}" readonly autofocus id="short_url_blocked" onclick="input.focus();input.select();">
+            <span class="input-group-btn">
+            <button class="btn btn-info btn-lg copyButton" id="copyButtonId" onclick="copyToClipboard('copyButton')"
+                data-clipboard-action="copy" data-clipboard-target="input#short_url_blocked">
+            Copy To Clipboard <span class="glyphicon glyphicon-copy"></span>
+            </button>
+            </span>
+        </div>
+        <br><br><br>
+    </div>
+</div>
+<div class="text-center">
+<a class="btn btn-lg btn-danger" href="/">
+    Shorten Another Link
+</a>
+<div style="margin-top:20%;" class="big-text">
+    <p class="horizontal-center" style="font-size: 14px">Check link stats by adding + to the URL</p>
+    <a href="{{short_url}}+" target="_blank" style="font-size: 14px">{{short_url}}+</a><br><br>
+</div>
+</div>
+<script>
+    var input = document.getElementById('short_url_blocked');
+    input.focus();
+    input.select();
+</script>
+
+{% endblock content %}

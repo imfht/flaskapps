@@ -1,0 +1,8 @@
+[run]
+include=
+    *pyms/*
+    *tests/*
+omit =
+    *examples/*
+    .tox/*
+    venv/*

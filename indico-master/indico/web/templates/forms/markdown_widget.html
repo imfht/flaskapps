@@ -1,0 +1,90 @@
+{% extends 'forms/base_widget.html' %}
+
+{% set max_length = input_args.get('data-max-length', 0) %}
+{% set max_words = input_args.get('data-max-words', 0) %}
+
+{% block html %}
+    {% if field.use_editor %}
+        <div data-field-id="{{ field.orig_id }}">
+            <div class="wmd-panel">
+                <div id="wmd-button-bar-f_{{ field.orig_id }}" class="wmd-button-bar"></div>
+                {% if max_length or max_words %}
+                    <div class="max-length-info" id="{{ field.id }}-max-length-info"></div>
+                {% endif %}
+                <textarea id="{{ field.id }}"
+                          name="{{ field.name }}"
+                          rows="{{ rows }}"
+                          class="wmd-input {{ 'has-length-info' if max_length or max_words }}"
+                          style="width: 100%;"
+                          {% if not field.use_mathjax %}data-no-mathjax{% endif %}
+                          {{ input_args|html_params }}>
+                    {{- field._value() -}}
+                </textarea>
+            </div>
+            <div class="md-preview-wrapper edit">
+                <div id="wmd-preview-f_{{ field.orig_id }}" class="wmd-preview"></div>
+                <div class="icon-arrow-up instructions">
+                    {% if field.use_mathjax %}
+                        {% trans markdown='<a href="#" class="markdown-info">Markdown</a>'|safe,
+                                 latex='<a href="#" class="latex-info">LaTeX</a>'|safe -%}
+                            You can use {{ markdown }} and {{ latex }} math formulae.
+                        {%- endtrans %}
+                    {% else %}
+                        {% trans markdown='<a href="#" class="markdown-info">Markdown</a>'|safe -%}
+                            You can use {{ markdown }}.
+                        {%- endtrans %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <script type="text/html" class="markdown-info-text">
+                <p>
+                    {%- trans link_start='<a href="http://commonmark.org/help/">'|safe, link_end='</a>'|safe -%}
+                        Markdown is a lightweight markup language that makes it easier to write rich text content.
+                        Check the {{ link_start }}language reference{{ link_end }} for more information.
+                    {%- endtrans -%}
+                </p>
+            </script>
+
+            <script type="text/html" class="latex-info-text">
+                <p>
+                    {%- trans link_start='<a href="https://docs.mathjax.org/en/latest/tex.html#supported-latex-commands">'|safe,
+                             link_end='</a>'|safe -%}
+                        You may write formulae using {{ link_start }}LaTeX{{ link_end }} (math mode only) by surrounding
+                        them in <code>$...$</code>.
+                    {%- endtrans -%}
+                </p>
+            </script>
+
+            <script type="text/html" class="wmd-help-button-text">
+                <p>
+                    {%- if field.use_mathjax %}
+                        {%- trans markdown='<a href="http://commonmark.org/help/">Markdown</a>'|safe,
+                                  latex='<a href="https://docs.mathjax.org/en/latest/tex.html#supported-latex-commands">LaTeX</a>'|safe -%}
+                            You can use {{ markdown }} and {{ latex }} formulae.
+                        {%- endtrans -%}
+                    {% else %}
+                        {%- trans markdown='<a href="http://commonmark.org/help/">Markdown</a>'|safe -%}
+                            You can use {{ markdown }}.
+                        {%- endtrans -%}
+                    {% endif -%}
+                </p>
+            </script>
+        </div>
+    {% else %}
+        <textarea id="{{ field.id }}" name="{{ field.name }}" rows="{{ rows }}" {{ input_args|html_params }}>
+            {{- field._value() -}}
+        </textarea>
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        setupMarkdownWidget({
+            fieldId: {{ field.id | tojson }},
+            useMarkdownEditor: {{ field.use_editor | tojson }},
+            maxLength: {{ max_length | tojson }},
+            maxWords: {{ max_words | tojson }}
+        });
+    </script>
+{% endblock %}

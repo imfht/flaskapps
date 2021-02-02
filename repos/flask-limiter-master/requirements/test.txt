@@ -1,0 +1,10 @@
+-r main.txt
+pytest
+pytest-cov
+mock
+coverage
+hiro>0.1.6
+ordereddict
+flask-restful
+redis
+pymemcache

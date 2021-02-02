@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>Flask Google Maps Full Map Example</title>
+            <link rel="stylesheet" href="">
+            {{fullmap.js}}
+    </head>
+    <body>
+        <h1>Flask Google Maps Full Map Example</h1>
+        Provide your Google Maps API Key to test it.
+        Get you APIKEY in <a href="https://cloud.google.com/maps-platform/?apis=maps">https://cloud.google.com/maps-platform/?apis=maps</a>
+        <form action="." method="GET">
+            <input type="text" name="apikey" id="apikey"/><input type="submit" value="load"/>
+        </form>
+        <hr>
+        {{ fullmap.html }}
+
+    </body>
+</html>
+

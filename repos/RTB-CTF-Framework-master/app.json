@@ -1,0 +1,42 @@
+{
+  "name": "RootTheBox CTF Framework",
+  "description": "A lightweight, easy to deploy CTF framework (in Flask) for HackTheBox style machines.",
+  "repository": "https://github.com/abs0lut3pwn4g3/RTB-CTF-Framework",
+  "addons": [
+    {
+      "plan": "heroku-postgresql"
+    },
+    {
+      "plan": "heroku-redis"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Flask app instance's SECRET_KEY",
+      "generator": "secret"
+    },
+    "ADMIN_PASS": {
+      "description": "Administrator password",
+      "generator": "secret"
+    },
+    "ADMIN_EMAIL": {
+      "description": "Administrator email"
+    },
+    "MAIL_USER": {
+      "description": "Username for mail service",
+      "required": false
+    },
+    "MAIL_PASS": {
+      "description": "Password for mail service",
+      "required": false
+    }
+  },
+  "scripts": {
+    "postdeploy": "cd /app/src && export FLASK_APP='FlaskRTBCTF:create_app()' && sh init_db.sh"
+  }
+}

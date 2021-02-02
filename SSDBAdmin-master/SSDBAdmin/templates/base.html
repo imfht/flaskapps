@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SSDBAdmin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('index') }}">SSDBAdmin</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li id="kv"><a href="{{ url_for('kvScan') }}">kv</a></li>
+                <li id="hash"><a href="{{ url_for('hashLists') }}">hash</a></li>
+                <li id="zset"><a href="{{ url_for('zsetLists') }}">zset</a></li>
+                <li id="queue"><a href="{{ url_for('queueLists') }}">queue</a></li>
+                <li>
+                    <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <select name="SSDBADMIN_SERVER" class="form-control">
+                                {% for server in server_list %}
+                                <option value="{{ server }}"{% if current_server == server %} selected {% endif %}>{{ server }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://ssdb.io/zh_cn/" target="_blank">ssdb.io</a></li>
+                <li><a href="https://github.com/jhao104/SSDBAdmin" target="_blank">GitHub</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div><!-- /.container -->
+
+<footer>
+    <!--底部导航-->
+    <div class="foot">
+        <div class="copy-right center-block"><span>CopyRight &#169; 2015-2018 By <a href="https://github.com/jhao104" target="_blank">j_hao104</a> &#160;&#160;&#160;</span></div>
+    </div>
+</footer>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src={{ url_for("static", filename='js/function.js') }}></script>
+<script>
+    /* 导航栏active */
+    try {
+        $('li#{{active}}').addClass('active');
+    } catch (err) {
+    }
+</script>
+</body>
+</html>

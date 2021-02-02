@@ -1,0 +1,221 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of CERN Open Data Portal.
+# Copyright (C) 2015, 2016, 2017, 2020 CERN.
+#
+# CERN Open Data Portal is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# CERN Open Data Portal is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with CERN Open Data Portal; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+
+version: "2"
+
+services:
+  web:
+    restart: "always"
+    build:
+      context: .
+    image: cernopendata/web
+    depends_on:
+      - elasticsearch
+      - postgresql
+      - rabbitmq
+      - redis
+    environment:
+      - DEBUG=False
+      - INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://cernopendata:dbpass123@postgresql:5432/cernopendata
+      - INVENIO_CACHE_REDIS_HOST=redis
+      - INVENIO_CACHE_REDIS_URL=redis://redis:6379/0
+      - INVENIO_ACCOUNTS_SESSION_REDIS_URL=redis://redis:6379/1
+      - INVENIO_BROKER_URL=amqp://guest:guest@rabbitmq:5672/ # Celery 3
+      - INVENIO_CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/ # Celery 4
+      - INVENIO_CELERY_RESULT_BACKEND=redis://redis:6379/2
+      - INVENIO_PIDSTORE_DATACITE_TESTMODE=False
+      - INVENIO_PIDSTORE_DATACITE_DOI_PREFIX=10.5072
+      - INVENIO_PIDSTORE_DATACITE_USERNAME=CERN.OPENDATA
+      - INVENIO_PIDSTORE_DATACITE_PASSWORD=CHANGE_ME
+      - INVENIO_PIDSTORE_LANDING_BASE_URL=http://opendata.cern.ch/record/
+      - ELASTICSEARCH_HOST=elasticsearch-proxy
+      - ELASTICSEARCH_PORT=443
+      - ELASTICSEARCH_USER=esuser
+      - ELASTICSEARCH_PASSWORD=espass
+      - ELASTICSEARCH_USE_SSL=true
+      - ELASTICSEARCH_VERIFY_CERTS=false
+#      - SENTRY_DSN=https://<INPUT_CORRECT_DSN_FOR_YOUR_SENTRY_INSTANCE>@<INPUT_YOUR_SENTRY_URL>
+#      - LOGGING_SENTRY_CELERY=True
+    volumes:
+      - web_data:/opt/invenio/var/instance/static
+    links:
+      - postgresql
+      - redis
+      - elasticsearch
+      - rabbitmq
+    ports:
+      - "5000"
+
+  worker:
+    image: cernopendata/web # Use this to make sure that COD3 Python-code image is built only once.
+    depends_on:
+      - elasticsearch
+      - postgresql
+      - rabbitmq
+      - redis
+      - web # Added to make sure that cernopendata/web -image is build before starting this one.
+    restart: "always"
+    command: bash -c "celery -A cernopendata.celery worker --loglevel=INFO"
+    environment:
+      - DEBUG=False
+      - INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://cernopendata:dbpass123@postgresql:5432/cernopendata
+      - INVENIO_CACHE_REDIS_HOST=redis
+      - INVENIO_CACHE_REDIS_URL=redis://redis:6379/0
+      - INVENIO_ACCOUNTS_SESSION_REDIS_URL=redis://redis:6379/1
+      - INVENIO_BROKER_URL=amqp://guest:guest@rabbitmq:5672/ # Celery 3
+      - INVENIO_CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/ # Celery 4
+      - INVENIO_CELERY_RESULT_BACKEND=redis://redis:6379/2
+      - ELASTICSEARCH_HOST=elasticsearch-proxy
+      - ELASTICSEARCH_PORT=443
+      - ELASTICSEARCH_USER=esuser
+      - ELASTICSEARCH_PASSWORD=espass
+      - ELASTICSEARCH_USE_SSL=true
+      - ELASTICSEARCH_VERIFY_CERTS=false
+#      - SENTRY_DSN=https://<INPUT_CORRECT_DSN_FOR_YOUR_SENTRY_INSTANCE>@<INPUT_YOUR_SENTRY_URL>
+#      - LOGGING_SENTRY_CELERY=True
+    volumes:
+      - web_data:/opt/invenio/var/instance/static
+    links:
+      - postgresql
+      - redis
+      - elasticsearch
+      - rabbitmq
+
+  web-files:
+    restart: "always"
+    build:
+      context: .
+    image: cernopendata/web
+    depends_on:
+      - elasticsearch
+      - postgresql
+      - rabbitmq
+      - redis
+    environment:
+      - DEBUG=False
+      - INVENIO_SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://cernopendata:dbpass123@postgresql:5432/cernopendata
+      - INVENIO_CACHE_REDIS_HOST=redis
+      - INVENIO_CACHE_REDIS_URL=redis://redis:6379/0
+      - INVENIO_ACCOUNTS_SESSION_REDIS_URL=redis://redis:6379/1
+      - INVENIO_BROKER_URL=amqp://guest:guest@rabbitmq:5672/ # Celery 3
+      - INVENIO_CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672/ # Celery 4
+      - INVENIO_CELERY_RESULT_BACKEND=redis://redis:6379/2
+      - INVENIO_PIDSTORE_DATACITE_TESTMODE=False
+      - INVENIO_PIDSTORE_DATACITE_DOI_PREFIX=10.5072
+      - INVENIO_PIDSTORE_DATACITE_USERNAME=CERN.OPENDATA
+      - INVENIO_PIDSTORE_DATACITE_PASSWORD=CHANGE_ME
+      - INVENIO_PIDSTORE_LANDING_BASE_URL=http://opendata.cern.ch/record/
+      - ELASTICSEARCH_HOST=elasticsearch-proxy
+      - ELASTICSEARCH_PORT=443
+      - ELASTICSEARCH_USER=esuser
+      - ELASTICSEARCH_PASSWORD=espass
+      - ELASTICSEARCH_USE_SSL=true
+      - ELASTICSEARCH_VERIFY_CERTS=false
+#      - SENTRY_DSN=https://<INPUT_CORRECT_DSN_FOR_YOUR_SENTRY_INSTANCE>@<INPUT_YOUR_SENTRY_URL>
+#      - LOGGING_SENTRY_CELERY=True
+    volumes:
+      - web_data:/opt/invenio/var/instance/static
+    links:
+      - postgresql
+      - redis
+      - elasticsearch
+      - rabbitmq
+    ports:
+      - "5000"
+
+  postgresql:
+    restart: "always"
+    image: postgres
+    environment:
+      - POSTGRES_USER=cernopendata
+      - POSTGRES_DB=cernopendata
+      - POSTGRES_PASSWORD=dbpass123
+    ports:
+      - "5432"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+  redis:
+    restart: "always"
+    image: redis
+    ports:
+      - "6379"
+
+  elasticsearch:
+    restart: "always"
+    image: elasticsearch:7.9.3
+    command: ["elasticsearch", "-E", "logger.org.elasticsearch.deprecation=error"]
+    restart: "unless-stopped"
+    environment:
+      - bootstrap.memory_lock=true
+      # set to reasonable values on production
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data/elasticsearch
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    ports:
+      - "9200"
+      - "9300"
+
+  elasticsearch-proxy:
+    restart: "always"
+    depends_on:
+      - elasticsearch
+    build: ./elasticsearch-proxy
+    ports:
+      - "443"
+    links:
+      - elasticsearch
+
+  rabbitmq:
+    restart: "always"
+    image: rabbitmq
+    depends_on:
+     - redis
+    ports:
+      - "4369"
+      - "5672"
+
+  nginx:
+    restart: "always"
+    build: ./nginx
+    image: cernopendata/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - web_data:/opt/invenio/var/instance/static
+    links:
+      - web
+      - web-files
+
+volumes:
+  web_data:
+  postgresql_data:
+  elasticsearch_data:

@@ -1,0 +1,22 @@
+{
+  "name": "integration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react": "^16.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "foo"
+  },
+  "keywords": [
+    "foo"
+  ],
+  "author": "foo",
+  "license": "ISC"
+}

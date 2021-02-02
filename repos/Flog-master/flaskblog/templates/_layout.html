@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="{% block lang %}{{g.site.locale}}{% endblock %}" prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    {%-if request.endpoint == 'home'-%}
+      {{ g.site.name }}
+    {%-else-%}
+      {% block title %}{{page.title}}{% endblock %} | {{g.site.name}}
+    {%-endif-%}
+  </title>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <link rel="alternate" type="application/atom+xml" title="{{g.site.name}} atom feed" href="{{ url_for('feed') }}">
+  <meta name="description" content="{% block description %}{{ g.site.description }}{% endblock %}">
+  <meta property="og:site_name" content="{{ g.site.name }}">
+  <meta property="og:type" content="{% block ogtype %}website{% endblock %}">
+  <meta property="og:title" content="{{self.title()}}">
+  <meta property="og:description" content="{{self.description()}}">
+  <meta property="og:url" content="{{ request.url }}">
+  <meta property="og:image" content="{% block ogimg %}{{ url_for('static', filename='images/favicon.png', _external=True) }}{% endblock %}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="{{ self.ogimg() }}">
+  {% for item in g.site.sociallinks if item.name|lower == 'twitter' %}
+    <meta name="twitter:creator" content="@{{ item.link.split('/')|last }}">
+    <meta name="twitter:site" content="@{{ item.link.split('/')|last }}">
+  {% endfor %}
+  <link rel="canonical" href="{{ request.url }}">
+  {% include 'partials/head.html' %}
+  {% block extracss %}
+  {% endblock %}
+  <style>:root {--primary-color: {{ g.site.primary_color|default('black') }};}</style>
+</head>
+
+<body data-spy="scroll" data-target="#contents">
+  <div id="page-wraper">
+    <!-- Sidebar Menu -->
+    {% include 'partials/sidebar.html' %}
+
+    <section class="section">
+      {% block mainbody %}{% endblock %}
+    </section>
+  </div>
+  {% block additional %}{% endblock %}
+  <script>
+    window.searchApiUrl = "{{url_for('api.search')}}"
+  </script>
+  {% block scripts %}
+    {% include 'partials/scripts.html' %}
+  {% endblock %}
+  {% block extrajs %}{% endblock %}
+</body>

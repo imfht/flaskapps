@@ -1,0 +1,150 @@
+{% extends 'events/management/base.html' %}
+{% from '_switch.html' import switch %}
+{% from 'message_box.html' import message_box %}
+{% from 'forms/_form.html' import form_header, form_footer, form_rows %}
+{% from '_sortable_list.html' import sortable_lists %}
+
+{% block title %}
+    {%- trans %}Participants display{% endtrans -%}
+{% endblock %}
+
+{% block description %}
+    {% trans -%}
+        Customize how the registrations are shown on the participant list page.
+    {%- endtrans %}
+{% endblock %}
+
+{% block content %}
+    {{ form_header(form, id='js-participant-display-form') }}
+    {{ form_rows(form) }}
+
+    {% if not regforms %}
+        <div class="action-box highlight">
+            <div class="section">
+                <div class="text">
+                    <div class="label">
+                        {% trans %}There are no registration forms for this event.{% endtrans %}
+                    </div>
+                    {% trans %}Start by creating a registration form.{% endtrans %}
+                </div>
+                <div class="toolbar">
+                    <a href="{{ url_for('.create_regform', event) }}" class="i-button icon-plus highlight">
+                        {% trans %}Create form{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        <div class="form-label">
+            <label for="merge-forms">{% trans %}Merge forms{% endtrans %}</label>
+        </div>
+        <div class="form-field">
+            {{ switch(id='merge-forms', name='merge-forms', checked=merge_forms) }}
+            <div class="form-field-description">
+                {% trans %}Show all the registrations together, regardless of which form they came from.{% endtrans %}
+            </div>
+        </div>
+    </div>
+
+    <div id="participant-list-columns">
+        <p>
+            {% trans -%}
+                Select which registration form will have its entries published in the participant list.
+            {%- endtrans %}
+        </p>
+        <div id="publish-registrations">
+            {{ sortable_lists(_("Shown registration forms"), enabled_forms|sort(attribute='title'),
+                              _("Hidden registration forms"), disabled_forms|sort(attribute='title'),
+                              classes="i-box titled disable-if-locked",
+                              draggable=false) }}
+        </div>
+        <p>
+            {% trans -%}
+                By dragging the column titles, you can choose which fields to
+                display and reorder them. Custom fields added to registration
+                forms can only be shown if the registration forms are not
+                merged.
+            {%- endtrans %}
+        </p>
+        {{ sortable_lists(_("Shown columns"), enabled_columns,
+                          _("Hidden columns"), disabled_columns,
+                          classes="i-box titled two-columns js-participant-list-columns disable-if-locked") }}
+    </div>
+
+    <div id="registration-forms">
+        <p>
+            {% trans -%}
+                By dragging the form titles, you can choose which to display and reorder them.
+            {%- endtrans %}
+        </p>
+        {% call(form) sortable_lists(_("Shown registration forms"), enabled_forms,
+                                     _("Hidden registration forms"), disabled_forms,
+                                     classes="i-box titled disable-if-locked") %}
+            <a class="icon-settings js-settings-dialog"
+               data-href="{{ url_for('.manage_regform_display', event, form) }}"
+               data-title="{% trans title=form.title %}Customize columns for {{title}}{% endtrans %}"
+               title="{% trans %}Choose which columns of this form are displayed{% endtrans %}"
+               data-qtip-position="right"></a>
+        {% endcall %}
+    </div>
+
+    {% call form_footer(form, align_right=true) %}
+        <input class="i-button big highlight" type="submit" value="{% trans %}Save{% endtrans %}">
+        <a class="i-button big" href="{{ url_for('.manage_regform_list', event) }}">{% trans %}Back{% endtrans %}</a>
+    {% endcall %}
+
+    <script>
+        (function () {
+            'use strict';
+
+            $(document).ready(function() {
+                $('.js-sortable-list-widget').each(function() {
+                    setupSortableList($(this));
+                });
+            });
+
+            function update() {
+                var mergeForms = $('#merge-forms').prop('checked');
+                $('#participant-list-columns').toggle(mergeForms);
+                $('#registration-forms').toggle(!mergeForms);
+            }
+
+            $('#merge-forms').on('change', update).trigger('change');
+
+            var $form = $('#js-participant-display-form');
+            $form.on('submit', function() {
+                var mergeForms = $('#merge-forms').prop('checked');
+                var data = {
+                    participant_list_columns: [],
+                    participant_list_forms: [],
+                    merge_forms: mergeForms
+                };
+                if (mergeForms) {
+                    data.participant_list_forms = $form.find('#publish-registrations ul.enabled li').map(function() {
+                        return $(this).data('item-id');
+                    }).toArray();
+                } else {
+                    data.participant_list_forms = $form.find('#registration-forms ul.enabled li').map(function() {
+                        return $(this).data('item-id');
+                    }).toArray();
+                }
+                data.participant_list_columns = $form.find('.js-participant-list-columns ul.enabled li').map(function() {
+                    return $(this).data('item-id');
+                }).toArray();
+                $form.find('#json').val(JSON.stringify(data));
+            });
+
+            $('#registration-forms .js-settings-dialog').on('click', function(evt) {
+                evt.preventDefault();
+                var $this = $(this);
+                ajaxDialog({
+                    trigger: this,
+                    url: $this.data('href'),
+                    title: $this.data('title')
+                });
+            });
+        })();
+    </script>
+{% endblock %}

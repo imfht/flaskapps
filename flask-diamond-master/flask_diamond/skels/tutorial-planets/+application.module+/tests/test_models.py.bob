@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+# {{{ application.name }}} (c) {{{ author.name }}}
+
+from nose.plugins.attrib import attr
+from ..models import User, Planet, Satellite
+from .mixins import DiamondTestCase
+from .fixtures import typical_workflow
+
+
+class ModelTestCase(DiamondTestCase):
+    "Coverage for Models"
+
+    def setUp(self):
+        super(ModelTestCase, self).setUp()
+        typical_workflow()
+
+    @attr("single")
+    def test_relationship(self):
+        "test relationship: child belongs to parent"
+        moon = Satellite.find(name="Moon")
+        self.assertEqual(moon.planet.name, "Earth")
+
+    def test_relationship_security(self):
+        "test relationship: flask-security model"
+        guest_user = User.find(email="guest@example.com")
+        self.assertEqual(guest_user.email, "guest@example.com")
+
+    def test_backref(self):
+        "test relationship: parent has one or more children"
+        earth = Planet.find(name="Earth")
+        self.assertEqual(earth.satellites[0].name, "Moon")
+
+    def test_create_user(self):
+        "ensure User model object can be created"
+        User.create(email='an_account@example.com', password='a_password')
+        an_account = User.find(email='an_account@example.com')
+        self.assertIsNotNone(an_account)
+        self.assertEqual(an_account.email, 'an_account@example.com')

@@ -1,0 +1,27 @@
+{
+  "name": "codenames",
+  "short_name": "codenames",
+  "description": "Realtime Codenames game that you can play on your phone, TV, or laptop.",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#303030",
+  "background_color": "#e0e0e0",
+  "icons": [
+    {
+      "src": "img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

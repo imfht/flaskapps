@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /sign
+Disallow: /logout
+Disallow: /login
+Disallow: /question

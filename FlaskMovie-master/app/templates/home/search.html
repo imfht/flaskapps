@@ -1,0 +1,26 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb" style="margin-top:6px;">
+                <li>与"{{ keyword }}"有关的电影，共{{ search_count }}部</li>
+            </ol>
+        </div>
+        <div class="col-md-12">
+            {% for search_movie in search_movies %}
+                <div class="media">
+                    <div class="media-left">
+                        <a href="play.html">
+                            <img class="media-object" src="{{ url_for('static', filename='media/' + search_movie.logo) }}" alt="{{ search_movie.title }}" style="width: 150px">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ search_movie.title }}<a href="play.html" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>播放影片</a></h4>
+                        {{ search_movie.info }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

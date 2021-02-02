@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{{ config['BLOG_TITLE'] }}</title>
+    <link rel="stylesheet" href="{{ static(filename='blog.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ static(filename='codehilite.css') }}" type="text/css"/>
+    <script type=text/javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    {# Login'n'stuff #}
+    <div id="metanav">
+    {% if not session.logged_in %}
+      <a href="{{ url_for('admin.login', next=request.url) }}">log in</a>
+    {% else %}
+      <a href="{{ url_for('admin.create_post') }}">compose</a>
+      <a href="{{ url_for('admin.logout', next=request.url) }}">log out</a>
+    {% endif %}
+    </div>
+    {# Navigation #}
+    <div id="navigation">
+      <ul>
+        {#<li><a href="{{ url_for('main.show_posts') }}">Home</a></li>#}
+        <li><a href="{{ url_for('main.show_archives') }}">Archives</a></li>
+        <li><a href="{{ url_for('main.show_post', slug='projects') }}">Projects</a></li>
+        <li><a href="{{ url_for('main.show_post', slug='about') }}">About</a></li>
+        <li><a href="{{ url_for('main.show_post', slug='contact') }}">Contact</a></li>
+        <li><a href="{{ url_for('main.atom_feed') }}">Feed</a></li>
+      </ul>
+    </div>
+    {# Header #}
+    <div id="header">
+      <h1><a href="{{ url_for('main.show_posts') }}">{{ config['BLOG_TITLE'] }}</a></h1>
+    </div>
+    {# Message Flashing #}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class=flashes>
+          {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+          {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    <div id="wrapper">
+      {# Main Content #}
+      <div id="content">
+        {% block body %}{% endblock %}
+      </div>
+  </div>
+  {# For Javascript #}
+  <script type=text/javascript>
+      $(function() {
+        // Show login etc. only on mouseover
+        $("#metanav").fadeTo(0, 0);
+        $("#metanav").mouseenter(function() {
+          $(this).fadeTo('normal', 1);
+        });
+        $("#metanav").mouseleave(function() {
+          $(this).fadeTo('normal', 0);
+        });
+        
+        // Show javascript confirmation dialog when deleting post
+        $(".delete-post-link").bind('click', function(e) {
+          e.preventDefault();
+          if (confirm("Really delete this post?")) {
+            $.ajax({
+              type: "POST",
+              url: $(this).attr('href'),
+              data: '',
+              success: function(redirect) {
+                location.reload();
+              }
+            });
+          }
+          return false;
+        });
+      });
+
+    // For Disqus
+    {% if config['DEBUG'] %}
+    var disqus_developer = 1;
+    {% endif %}
+    var disqus_shortname = '{{ config["DISQUS_SHORTNAME"] }}';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.src = 'http://disqus.com/forums/{{ config["DISQUS_SHORTNAME"] }}/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+  </script>
+  {% block bottom %}{% endblock %}
+  </body>
+</html>
+<!-- kate: tab-width 2; -->

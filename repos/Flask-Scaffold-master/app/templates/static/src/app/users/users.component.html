@@ -1,0 +1,69 @@
+<div [@routerTransition]>
+        <a class="btn rounded-btn" [routerLink]="['/user-add']"> Add User </a>&nbsp;
+
+    <app-page-header [heading]="'Users'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                
+                <div class="card-body table-responsive">
+                    <table class="table table-hover" cellspacing="0">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>ID</th>
+                            
+                         <th>Email</th>
+                     
+                         <th>Name</th>
+                         <th>Createddate</th>
+                         <th>Createdby</th>
+                         <th>Updateddate</th>
+                         <th>Updatedby</th>
+                         <th>Edit</th>
+                         <th>Delete</th>
+
+                      </tr>
+
+
+                        </thead>
+
+
+                        
+                            <tbody>
+                              <tr *ngFor="let user of users">
+                                <td>{{ user.id
+                                }}</td>
+
+                                
+                         <td>{{ user.attributes.email }}</td>
+                         <td>{{ user.attributes.name }}</td>
+                         <td>{{ user.attributes.createddate | date:'long'  }}</td>
+                         <td>{{ user.attributes.createdby }}</td>
+                         <td>{{ user.attributes.updateddate | date:'long' }}</td>
+                         <td>{{ user.attributes.updatedby }}</td>
+                         <td><a [routerLink]= "['/users',  user.id ]" class="btn btn-default btn-warning" 
+                            role="button"  id="editButton"><i class="fa fa-edit"></i></a></td>
+                        <td> <button class="btn btn-default btn-danger" (click)="deleteUser(user.id)" 
+                        id="deleteButton"><i class="fa fa-trash-o"></i></button> </td>
+
+
+                                
+                              </tr>
+                            </tbody>
+                         
+                        
+                    
+                </table>
+
+                &nbsp;
+            
+                <div class="alert alert-danger"   *ngIf="http_errors" role="alert">
+                    <p [innerHTML]=" error_message " ></p>
+    
+                </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>

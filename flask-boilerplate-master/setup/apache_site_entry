@@ -1,0 +1,39 @@
+<VirtualHost *:80>
+    ServerName {SITE_NAME}
+    ServerAlias www.{SITE_NAME}
+    ServerAdmin {ADMIN_EMAIL}
+
+    # Because of these lines, errors will go into the vhost-specific ErrorLog file.
+    WSGIDaemonProcess {SITE_NAME} user={USER} group={USER} processes=2 threads=25
+    WSGIProcessGroup {SITE_NAME}
+
+    Alias /static {HOME}/web/{SITE_NAME}/public/static
+    <Directory {HOME}/web/{SITE_NAME}/public>
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    WSGIScriptAlias / {HOME}/web/{SITE_NAME}/private/{SITE_NAME}/setup/{APP_NAME}.wsgi
+
+    <Directory {HOME}/web/{SITE_NAME}/private/{SITE_NAME}>
+        # Change this to On in development mode
+        WSGIScriptReloading Off
+
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    DocumentRoot {HOME}/web/{SITE_NAME}/public
+
+    ErrorLog "{HOME}/web/{SITE_NAME}/log/error.log"
+    LogLevel warn
+    CustomLog "{HOME}/web/{SITE_NAME}/log/access.log" combined
+    # NOTE You can run $(sort -s -k 2 -n -r time.*.log) to get the slow pages
+    CustomLog "{HOME}/web/{SITE_NAME}/log/time.log" "%h %D %r"
+
+    Alias /favicon.ico {HOME}/web/{SITE_NAME}/public/static/favicon.ico
+    Alias /apple-touch-icon.png {HOME}/web/{SITE_NAME}/public/static/apple-touch-icon.png
+
+</VirtualHost>
+
+# vim: ft=apache

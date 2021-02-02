@@ -1,0 +1,26 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'base/palette';
+
+.menu-bar {
+  color: $white;
+  padding: 20px 30px;
+  margin-right: 25px;
+
+  .header {
+    border-radius: 3px;
+    background-color: $dark-blue;
+    text-align: center;
+    padding: 0.5rem;
+    color: $white;
+  }
+}
+
+.capitalized {
+  text-transform: uppercase;
+}

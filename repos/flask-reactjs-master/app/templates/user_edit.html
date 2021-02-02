@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Edit your profile{% endblock %}
+
+{% block body %}
+    <div class="container offset-top">
+        
+        {% include "alert.html" %}
+        
+        <div class="row">
+            
+            <div class="col-lg-6 offset-lg-3">
+                <h1>Edit profile</h1>
+                
+                <hr>
+
+                <form role="form" method="post" class="cf">
+                    {{ form.hidden_tag() }}
+
+                    {% if form.username.errors %}
+                        <div class="form-group has-danger">
+                            {{ form.username(class_="form-control form-control-danger", placeholder="Username") }}
+
+                            {% for e in form.username.errors %}
+                                <div class="form-control-feedback">{{e}}</div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            {{ form.username(class_="form-control", placeholder="Username") }}
+                        </div>
+                    {% endif %}
+
+                    {% if form.email.errors %}
+                        <div class="form-group has-danger">
+                            {{ form.email(class_="form-control form-control-danger", placeholder="Email") }}
+
+                            {% for e in form.email.errors %}
+                                <div class="form-control-feedback">{{e}}</div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            {{ form.email(class_="form-control", placeholder="Email") }}
+                        </div>
+                    {% endif %}
+
+                    {% if form.phone.errors %}
+                        <div class="form-group has-danger">
+                            {{ form.phone(class_="form-control form-control-danger", placeholder="Phone") }}
+
+                            {% for e in form.phone.errors %}
+                                <div class="form-control-feedback">{{e}}</div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="form-group">
+                            {{ form.phone(class_="form-control", placeholder="Phone") }}
+                        </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-primary">Update</button>
+
+                    <a class="btn btn-secondary pull-xs-right" href="/user">Cancel</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

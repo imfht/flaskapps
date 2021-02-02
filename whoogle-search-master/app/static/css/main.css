@@ -1,0 +1,137 @@
+body {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+}
+
+.logo {
+    width: 80%;
+    display: block;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.search-container {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    z-index: 15;
+}
+
+.search-items {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+#search-bar {
+    width: 100%;
+    border: 3px solid #685e79;
+    padding: 5px;
+    height: 40px;
+    outline: none;
+    font-size: 24px;
+    color: #685e79;
+    border-radius: 10px 10px 0 0;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0);
+}
+
+#search-bar:focus {
+    color: #685e79;
+}
+
+#search-submit {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #685e79;
+    background: #685e79 !important;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    align-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 0 0 10px 10px;
+    max-width: 600px;
+    -webkit-appearance: none;
+}
+
+.config-div {
+    padding: 5px;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+.collapsible {
+    outline: 0;
+    background-color: rgba(0, 0, 0, 0);
+    color: #685e79;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    border-radius: 10px 10px 0 0;
+}
+
+.active {
+    background-color: #685e79;
+    color: white;
+}
+
+.collapsible:after {
+    content: '\002B';
+    color: #685e79;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+    color: white;
+}
+
+.content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #685e79;
+    color: white;
+    border-radius: 0 0 10px 10px;
+}
+
+.open {
+    padding-bottom: 20px;
+}
+
+.ua-span {
+    color: white;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
+.hidden {
+    display: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0%;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+}
+
+.info-text {
+    font-style: italic;
+    font-size: 12px;
+}

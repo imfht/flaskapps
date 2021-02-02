@@ -1,0 +1,52 @@
+{%- macro render_title() -%}{% block title %}{% endblock %}{%- endmacro -%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{{ render_title() }} -- Sage</title>
+        {% block more_meta %}{% endblock %}
+	{% block published_link_rel %}{% endblock %}
+        {% block pre_main_css %}{% endblock %}
+        <link type="text/css" rel="stylesheet" href="/css/{% block css %}main{% endblock %}.css" />
+        {% block more_css %}{% endblock %}
+        {# jQuery and other universally used libraries #}
+        <script type="text/javascript" src="/javascript/jquery/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="/javascript/dynamic/localization.js"></script>
+        <script type="text/javascript" src="/javascript/json/json2.min.js"></script>
+        {% block javascript %}
+        {# Page-specific libraries #}
+        <script type="text/javascript" src="/javascript/sage/js/ws_list.js"></script>
+        {% endblock %}
+        {% block more_javascript %}
+        {% endblock %}
+        {# Behavior #}
+        <script type="text/javascript" src="/javascript/sage/js/master.js"></script>
+    </head>
+    <body id="{% block page_id %}{% endblock %}"
+          class="{% block body_classes %}{% endblock %}">
+        {% block body %}
+        <div id="header">
+            {% block header %}
+            <div id="top-bar">
+                <div id="banner">
+                    <a class="banner" href="/">
+                        <img align="top" src="/images/sagenb.png" alt="Sage" /><span>{{ gettext('The Sage Notebook') }}</span>
+                    </a>
+                    <span class="ping" id="ping">{{ gettext('Searching for Sage server...') }}</span>
+                    <div class="version">
+                        {{ gettext('Version') }} {{ sage_version }}
+                    </div>
+                </div>
+                {% block controls %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+        </div>
+        <div id="main">
+            {% block main %}
+
+            {% endblock %}
+        </div>
+        {% endblock %}
+    </body>
+</html>

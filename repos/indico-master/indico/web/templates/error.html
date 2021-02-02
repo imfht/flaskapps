@@ -1,0 +1,21 @@
+<div class="error-box">
+    <h1>{{ error_message }}</h1>
+    <p>{{ error_description }}</p>
+    {% if g.saved_error_uuid and not standalone %}
+        <button id="report-error" class="i-button big">
+            {%- trans %}Report Error{% endtrans -%}
+        </button>
+        <script>
+            document.querySelector('#report-error').addEventListener('click', () => {
+                showErrorDialog({
+                    title: {{ error_message | tojson }},
+                    message: {{ error_description | tojson }},
+                    error_uuid: {{ g.saved_error_uuid | tojson }},
+                }, true);
+            });
+        </script>
+    {% endif %}
+    <div class="error-box-small">
+        <a href="{{ url_for_index() }}">{% trans %}Go to the main page{% endtrans %}</a>
+    </div>
+</div>

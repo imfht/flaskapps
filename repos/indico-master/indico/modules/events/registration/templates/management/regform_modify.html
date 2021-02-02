@@ -1,0 +1,27 @@
+{% extends 'events/registration/management/_regform_base.html' %}
+
+{% block subtitle %}
+    {% trans title=regform.title -%}
+        Configure questions in form "{{ title }}"
+    {%- endtrans %}
+{% endblock %}
+
+{% block content %}
+    <div ng-app="nd" ng-controller="AppCtrl">
+        {% block regform %}
+            <div nd-reg-form
+                 conf-id="{{ event.id }}"
+                 conf-form-id="{{ regform.id }}"
+                 conf-sections="{{ sections | tojson | forceescape }}"
+                 conf-currency="{{ regform.currency }}"
+                 event-start-date="{{ event.start_dt }}"
+                 event-end-date="{{ event.end_dt }}"
+                 edit-mode="true"></div>
+        {% endblock %}
+    </div>
+    <div class="toolbar right">
+        <a href="{{ url_for('.manage_regform', regform) }}" class="i-button big">
+            {% trans %}Back{% endtrans %}
+        </a>
+    </div>
+{% endblock %}

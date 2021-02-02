@@ -1,0 +1,86 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'base/palette';
+@import 'base/defaults';
+@import 'base/borders';
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.event-role {
+  width: 3.5em;
+  text-align: center;
+
+  & > span {
+    /* from the role-code mixin */
+    @extend %default-border-radius;
+    @include border-all();
+    padding: 0.3em 0.1em;
+    font-size: 0.9em;
+    font-weight: bold;
+
+    /* from the SUI icon */
+    display: inline-block;
+    margin: 0 0.25rem 0 0;
+
+    width: 3.25em;
+    text-align: center;
+  }
+}
+
+.icon {
+  width: 3.5em;
+  text-align: center;
+  color: $light-black;
+  flex-shrink: 0;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.loader {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+.button {
+  cursor: pointer;
+  opacity: 0.5 !important;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  &.delete {
+    color: $red;
+  }
+
+  &.favorite {
+    color: $gray;
+
+    &.active,
+    &:hover {
+      color: $yellow;
+    }
+  }
+}
+
+.favorite:global(.disabled) {
+  opacity: 1 !important;
+
+  .content {
+    opacity: 0.45;
+  }
+}

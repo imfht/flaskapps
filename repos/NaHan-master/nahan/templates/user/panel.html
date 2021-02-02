@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        {% if current_user.is_authenticated %}
+        <div class="row">
+            <a class="col-xs-4"><img title="{{current_user.username}}" class="avatar-large" src="{{current_user.avatar_url}}"></a>
+            <div class="col-xs-8">
+            <p class="list-post-title"><strong>{{current_user.username}}</strong></p>
+            <p class="list-meta" style="margin-top: 1em">
+            {{ _('The ')}}{{ current_user.id }}{{ _('th users') }}
+            </p>
+        </div>
+        </div>
+        <div class="row" style="margin-top: 1em">
+            <div class="col-xs-4">
+                <a href="{{ url_for('user.info', uid=current_user.id) }}" class="btn btn-block"> <span class="glyphicon glyphicon-home"></span> {{ _('info') }} </a>
+            </div>
+            <div class="col-xs-4">
+                <a href="{{ url_for('user.setting_info') }}" class="btn btn-block"> <span class="glyphicon glyphicon-cog"></span> {{ _('settings') }} </a>
+            </div>
+            <div class="col-xs-4">
+                <a href="{{ url_for('user.signout') }}" class="btn btn-block"> <span class="glyphicon glyphicon-log-out"></span> {{ _('log out') }} </a>
+            </div>
+        </div>
+        {% else %}
+        <p class="list-post-title text-center"><strong>{{  _('Speaker for children') }}</strong></p>
+        <div class="row" style="margin: 1em 0 0 1em">
+        <p class="list-meta">{{ _(' Do you ever SEE what children play.') }}</p>
+        <p class="list-meta">{{ _(' Do you ever HEAR what children speak.') }}</p>
+        <p class="list-meta">{{ _(' Do you ever Think what children think.') }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% if current_user.is_authenticated %}
+        {% if current_user.extract_unread_notify() %}
+        <div class="panel-footer">
+            <span class="notification"><a href="{{ url_for('user.notify') }}">{{current_user.extract_unread_notify() | length }} {{ _('New Messages') }}</a></span>
+        </div>
+        {% else  %}
+        <div class="panel-footer">
+            <span class="notification"><a href="{{ url_for('user.notify') }}">{{ _('Site Messages') }}</a></span>
+        </div>
+        {% endif %}
+    {% endif %}
+</div>

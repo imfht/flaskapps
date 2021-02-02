@@ -1,0 +1,85 @@
+{% extends 'events/display/conference/base.html' %}
+
+{% from 'events/display/indico/_common.html' import render_users %}
+{% from 'events/management/_lists.html' import render_displayed_entries_fragment %}
+
+{% block page_class %}conference-page item-summary{% endblock %}
+
+{% macro _render_contribution_list(contribution_links, rendering) %}
+    {% if rendering == 'speakers' %}
+        {% set contribution_links = contribution_links|selectattr('is_speaker') %}
+    {% else %}
+        {% set contribution_links = contribution_links|selectattr('author_type') %}
+    {% endif %}
+    {% set contribution_links = contribution_links|sort(attribute='contribution.title')|sort(attribute='author_type.value') %}
+    <ul class="author-links">
+        {% for link in contribution_links if not link.contribution.is_deleted %}
+            {% set contribution = link.contribution %}
+            <li>
+                <span class="contrib-role">
+                    {% if rendering == 'speakers' %}
+                        {% trans %}Speaker at{% endtrans %}
+                    {% elif link.author_type.name == 'primary' -%}
+                        {% trans %}Author in{% endtrans %}
+                    {%- else -%}
+                        {% trans %}Co-author in{% endtrans %}
+                    {%- endif %}
+                </span>
+                <a href="{{ url_for('contributions.display_contribution', contribution) }}"
+                   class="contrib-title js-mathjax"
+                   data-searchable="{{ contribution.title | lower }}">
+                    {{ contribution.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% macro _render_person_list(authors, rendering) %}
+    {% call(user_data) render_users(authors, separator='') %}
+        <li class="speaker-list-item">
+            <span class="speaker-item" data-searchable="{{ user_data.display_full_name | lower }}">
+                <span class="name">
+                    {{ user_data.display_full_name }}
+                </span>
+                {% if user_data.affiliation -%}
+                    <span class="affiliation" data-searchable="{{ user_data.affiliation | lower }}">
+                        <span class="text">{{ user_data.affiliation }}</span>
+                    </span>
+                {% endif %}
+            </span>
+            {{ _render_contribution_list(user_data.contribution_links, rendering) }}
+        </li>
+    {% endcall %}
+{% endmacro %}
+
+{% macro render_person_list(persons, rendering) %}
+    {% set person_list = persons|list %}
+    <div class="toolbar f-j-end">
+        <div id="counter" class="group">
+            {{- render_displayed_entries_fragment(person_list|length, person_list|length) -}}
+        </div>
+        <div class="group">
+            <span class="i-button label icon-search"></span>
+            <input type="text" id="search-input" placeholder="{% trans %}Enter search string{% endtrans %}">
+        </div>
+    </div>
+    <ul class="author-list speaker-list">
+        {{ _render_person_list(person_list, rendering) }}
+    </ul>
+{% endmacro %}
+
+{% block content -%}
+    {% block list %}
+    {% endblock %}
+    <script>
+        setupEventDisplayAuthorList();
+    </script>
+    {% if event.type != 'conference' -%}
+        <p>
+            <a href="{{ event.url }}" class="i-button">
+                {%- trans %}Back to the event{% endtrans -%}
+            </a>
+        </p>
+    {%- endif %}
+{%- endblock %}

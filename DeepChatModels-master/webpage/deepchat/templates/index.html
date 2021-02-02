@@ -1,0 +1,170 @@
+{%  extends  "base.html" %}
+{% set active_page = "index" %}
+{% from "macros/forms.html" import render_chat_form, render_user_form %}
+
+<!-- Chat Section -->
+{% block page_content %}
+
+  <div class="jumbotron">
+    <h1>Conversation Models in TensorFlow</h1>
+    <p>Have a chat with a deep neural network.</p>
+  </div>
+
+
+  <h2>Give Yourself a Nickname &nbsp;
+    <button type="button" class="btn btn-xs btn-info"
+            data-toggle="popover"
+            title="&quot;Data&quot;"
+            data-content="I'm slowly building a
+              database of conversations, and it helps to
+              have an identifier for the user (defaults to 'Anon').
+              It can be anything!">
+      Why?
+    </button>
+  </h2>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <p>
+        The bot would like to know who it is talking to.
+        Feel free to enter a nickname for yourself below:
+      </p>
+
+      <div class="row">
+        {{ render_user_form(user_form, "user-form") }}
+      </div>
+
+    </div>
+  </div>
+  <br>
+
+  <hr>
+  <h2>Chat with a Bot</h2>
+
+  <div class="row">
+  <div class="col-xs-12 col-sm-10">
+  <p>
+  I've uploaded two simple models here that you can chat with. One was trained on
+  the Cornell Movie Dialogs, the other on a subset (2007-2009) of the Reddit comments
+  dataset. They both have the same model architecture. I'll upload the full configurations
+  soon, but their key components are as follows:
+  <ul>
+  <li>Max sentence length: 10</li>
+    <li>Vocabulary size: 40000</li>
+    <li>BasicEncoder to BasicDecoder; single-layer each</li>
+  </ul>
+  The rest of the parameters (and some of the above) are the default values. They represent
+  the simplest model(s) the project supports.
+  </p>
+  </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="nav nav-tabs">
+        {% for i, dataset_name in enumerate(['cornell', 'reddit', 'ubuntu']) %}
+          <li role="presentation"
+              data-target="#{{ dataset_name }}-chat-box"
+              data-slide-to="{{ i }}">
+            <a href="#"><span>{{ dataset_name | capitalize }}</span></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+
+  <div id="chat-carousel" class="carousel slide">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      {% for dataset_name in ['cornell', 'reddit', 'ubuntu'] %}
+        <div id="{{ dataset_name }}-chat-box" class="chat-box item">
+          <!-- chat box injected here -->
+          <div id='{{ dataset_name }}-chat-log'
+               class="chat-log col-xs-12 col-sm-10 col-sm-offset-1">
+          </div>
+          <!-- User input injected here -->
+          {{ render_chat_form(chat_form, dataset_name+"-chat-form", dataset_name) }}
+        </div>
+      {% endfor %}
+    </div> <!-- end: .carousel-inner -->
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#chat-carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#chat-carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <hr>
+  <br><br>
+
+{%  endblock page_content %}
+
+{% block scripts %}
+  {{ super() }}
+
+  <script type="text/javascript">
+      var csrf_token = "{{ csrf_token() }}";
+      $.ajaxSetup({
+          beforeSend: function(xhr, settings) {
+              console.log('this.crossDomain:', this.crossDomain);
+              if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader("X-CSRFToken", csrf_token);
+              }
+          }
+      });
+  </script>
+
+  <script>
+      $(function() {
+          $('[data-toggle="popover"]').popover();
+
+          // Activate the carousel.
+          //$('.carousel').carousel();
+          $('#chat-carousel').carousel({interval: false});
+
+          $('#cornell-chat-box').addClass('active');
+          $('.nav-tabs li[data-target="#cornell-chat-box"]')
+                  .addClass('active')
+                  .find('span').addClass('text-primary');
+          $('#chat-carousel').carousel({interval: 9999});
+
+          // From carousel to nav-pills . . .
+          $('#chat-carousel').on('slide.bs.carousel', function(event) {
+              $('.nav-tabs li').removeClass('active');
+              $('.nav-tabs li span').removeClass('text-primary');
+              let activeTab = $('[data-target="#' + event.relatedTarget.id + '"]');
+              activeTab.addClass('active');
+              activeTab.find('span').addClass('text-primary');
+
+              // TODO: Send a POST request to activate the chatbot, so we can
+              // initialize/destroy them dynamically instead of all at once.
+              });
+
+              // From nav-pills to carousel . . .
+              // Just simulates moving the carousel to the right index,
+              // so we can put most of the behavior in that handler instead.
+              $('.nav-tabs li').click(function(event) {
+                  let index = $(this).data('slide-to');
+                  $('#chat-carousel').carousel(index);
+                  event.preventDefault();
+              });
+
+          });
+      </script>
+
+    <!-- Chat Processing JavaScript -->
+  <script src="{{ url_for('static', filename='js/chat_processing.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/user_form.js') }}"></script>
+
+
+
+    {% endblock scripts %}
+

@@ -1,0 +1,307 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<input type="hidden" id="workflowDetail_id" name="workflowid" value="{{ work.id }}">
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Inception
+            <small>MySQL</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('main.dashboard') }}"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('dev.dev_work') }}"> Work Sheet</a></li>
+            <li class="active">Work Detail</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">WorkName：{{ work.name }}</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-hover" style="width: 100%">
+                            <thead>
+                            <tr>
+                                <th>DB</th>
+                                <th>Auditor</th>
+                                <th>Shard</th>
+                                <th>Backup</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ work.db_name }}</td>
+                                <td>{{ work.audit_name }}</td>
+                                <td>{{ work.shard }}</td>
+                                <td>
+                                    {% if work.backup == true %}
+                                        True
+                                    {% else %}
+                                        False
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if work.status == 0 %}
+                                    <span style="color: green; ">
+                                    {% else %}
+                                        <span style="color: red; ">
+                                    {% endif %}
+                                        <B id="workflowDetail_status">{% if work.status == 0 %}Success{% elif work.status == 1 %}Pending{% elif work.status == 2 %}Check Failed{% elif work.status == 3 %}Executing{% elif work.status == 4 %}Error{% elif work.status == 5 %}Dev Cancelled{% elif work.status == 6 %}Audit Cancelled{% elif work.status == 7 %}Audit Rejected{% elif work.status == 8 %}Timing{% endif %}</B>
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">In Time Executing</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Sql</td>
+                                <td>Check Result</td>
+                                <td>Row Affected</td>
+                                <td>Time</td>
+                                <td>IStatus</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in list_content %}
+                                <tr>
+                                    <td>
+                                        {% if loop.last %}
+                                        <input type="hidden" id="sqlMaxRowNumber" value="{{ loop.index }}">
+                                        {% endif %}
+                                        {{ loop.index }}
+                                    </td>
+                                    <td>
+                                        {% for sql in row.5 %}
+                                        {{ sql }}
+                                            {% if not loop.last %}
+                                            <br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>
+                                        {% for statement in row.4 %}
+                                        {{ statement }}
+                                            {% if not loop.last %}
+                                            <br>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ row.6 }}</td>
+                                    <td>{{ row.9 }}</td>
+                                    <td id="td_{{ loop.index }}">
+                                        {% if work.status == 3 %}
+                                        <div class="progress active">
+                                            <div id="div_{{ loop.index }}" class="progress-bar">
+                                                <span id="span_{{ loop.index }}"></span>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                            {{ row.3 }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block js %}
+    <!-- DataTables -->
+    <script src="{{ url_for('static',filename='vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='vendor/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ url_for('static',filename='vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+{% endblock %}
+
+{% block custom %}
+    <script>
+        $(function () {
+            $('#example1').DataTable({
+                scrollX: true
+            });
+        })
+    </script>
+{% endblock %}
+
+{% block ajax %}
+<script>
+    var workflowid = $("#workflowDetail_id").val();
+    var sqlMaxRowNumber = parseInt($("#sqlMaxRowNumber").val());
+    console.log('sqlMaxRowNumber: ' + sqlMaxRowNumber);
+    var wfStatus = -1;
+    var itemIndex = 1;
+    var key;
+    var retryCnt = 1;
+
+    $(document).ready(function () {
+        var status = $("#workflowDetail_status").text();
+        console.log(status);
+        var isDetail = window.location.pathname.indexOf("detail");
+        if (isDetail !== -1 && status === 'Executing'){
+            console.log('第一次执行get_pct');
+            get_pct(workflowid, itemIndex);
+        }
+    });
+
+    function get_pct(wid, sqlNum) {
+        if (sqlNum > sqlMaxRowNumber){
+            console.log('sqlNum > sqlMaxRowNumber');
+            getWorkflowStatus(wid); //最后一条SQL的进度刷新完后，请求后端接口获取整个工单的状态，如果不为“执行中”状态，则提示刷新当前页面；如果是“执行中”，则每隔1秒查询工单的状态，共重试120次
+            if (wfStatus !== -1 && wfStatus !== 3) {
+                window.location.reload(true);
+            }
+            else {
+                document.getElementById("workflowDetail_status").innerHTML = "确认中...";
+                if (retryCnt <= 120){
+                    clearTimeout(key);
+                    key = setTimeout(function () {
+                        get_pct(wid, itemIndex);
+                    }, 1000);
+                    retryCnt++;
+                }
+                else{
+                    retryCnt = 1;
+                    swal('Oops...', '该工单2分钟仍然未执行完毕，请稍后尝试手动刷新本页面', 'error');
+                }
+            }
+
+        }
+        else{
+            console.log('开始执行getOscPercent');
+
+            var pct;
+            $.ajax({
+                type: "post",
+                url: "{{ url_for('audit.osc_percent') }}",
+                dataType: "json",
+                data: {
+                    workflowid: wid,
+                    sqlID: sqlNum
+                },
+                success: function (data) {
+                    console.log("sqlNum: " + sqlNum);
+                    console.log(data);
+                    if (sqlNum <= sqlMaxRowNumber) {
+                        if (data.status === -2) {
+                            // 整个工单不由pt-OSC执行
+                            document.getElementById("td_" + sqlNum).innerHTML = data.msg;
+                            itemIndex ++;
+                            get_pct(wid, itemIndex);
+                            return;
+                        }
+                        else if (data.status === 4) {
+                            // 不由pt-OSC执行的，比如DML语句
+                            document.getElementById("td_" + sqlNum).innerHTML = data.msg;
+                            itemIndex++;
+                            clearTimeout(key); //1秒后查询一下进度值
+                            key = setTimeout(function () {
+                                get_pct(wid, itemIndex);
+                            }, 1000)
+                        }
+                        else if (data.status === -3) {
+                            // J进度未知，2秒重试一次，直到工单状态改变
+                            getWorkflowStatus(wid);
+                            console.log('wfStatus t ' + wfStatus);
+                            if (wfStatus !== -1 && wfStatus === 3) {
+                                document.getElementById("div_" + sqlNum).className = "progress";
+                                document.getElementById("div_" + sqlNum).style.width = "100%";
+                                document.getElementById("span_" + sqlNum).innerHTML = "查询中...";
+                                clearTimeout(key);
+                                key = setTimeout(function () {
+                                    get_pct(wid, itemIndex);
+                                }, 2000);
+                            }else {
+                                // 如果工单状态改变，不是执行中，则退出重试
+                                console.log('indeed here');
+                                document.getElementById("div_" + sqlNum).className = "progress";
+                                document.getElementById("div_" + sqlNum).style.width = "100%";
+                                document.getElementById("span_" + sqlNum).innerHTML = "未查询到进度";
+                                return false;
+                            }
+                        }
+                        else if (data.status === 0) {
+                            // 在inception能查询到它的进度信息，说明正在执行
+                            pct = data.data.percent;
+                            console.log('per:' + pct);
+                            document.getElementById("div_" + sqlNum).style.width = pct + "%";
+                            document.getElementById("div_" + sqlNum).className = "progress-bar progress-bar-success progress-bar-striped";
+                            document.getElementById("span_" + sqlNum).innerHTML = pct + "%";
+                            if (pct === 100) {
+                                itemIndex++;
+                                get_pct(wid, itemIndex);
+                            } else {
+                                clearTimeout(key);
+                                key = setTimeout(function () {
+                                    get_pct(wid, itemIndex);
+                                }, 800)
+                            }
+                        }
+                        else {
+                            swal('Oops...', data.msg, 'error');
+                            return;
+                        }
+                    }
+                }
+            });
+        }
+
+    }
+
+    function getWorkflowStatus(wid) {
+        if (wid > 0) {
+            console.log('get workflow status');
+            $.ajax({
+                type: "post",
+                async: false,
+                url: "{{ url_for('audit.work_flow_status') }}",
+                dataType: "json",
+                data: {
+                    workflowid: wid
+                },
+                success: function (data) {
+                    wfStatus = data.status;
+                    console.log(typeof(wfStatus));
+                    console.log('WfStatus ' + wfStatus);
+                }
+            })
+        } else {
+            swal('Oops...', 'argument not correct !', 'error');
+        }
+    }
+
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+Flask
+Flask-WTF>=0.14.0
+Flask-Login
+Flask-Principal
+flask-caching
+Flask-FileUpload
+SQLAlchemy>=0.9.1
+Markdown
+Werkzeug
+blinker
+python-slugify
+shortuuid

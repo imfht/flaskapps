@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+
+{% if view %}
+    {% block jsondash_title %}
+        Dashboards > {{ view.name }}
+    {% endblock %}
+{% endif %}
+
+{% block jsondash_css %}
+{{ super() }}
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{{ url_for('jsondash._static', filename='css/vendor/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('jsondash._static', filename='css/vendor/font-awesome.css') }}">
+
+{% if view %}
+    <!-- CHART SPECIFIC CSS -->
+    {% for url in assets['css'] %}
+        <link rel="stylesheet" href="{{ url }}">
+    {% endfor %}
+{% endif %}
+
+<!-- APP CSS -->
+<link rel="stylesheet" href="{{ url_for('jsondash._static', filename='css/app.css') }}">
+<link rel="stylesheet" href="{{ url_for('jsondash._static', filename='css/overrides.css') }}">
+{% endblock %}
+
+{% block jsondash_body %}
+{{ super() }}
+<div id="charts-builder" class="dashboard-charts">
+    {% block chart_body %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block jsondash_scripts %}
+{{ super() }}
+{% if view %}
+    <!-- CORE VENDOR JS -->
+    <script src="{{ url_for('jsondash._static', filename='js/vendor/packery.pkgd.min.js') }}"></script>
+    <script src="{{ url_for('jsondash._static', filename='js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('jsondash._static', filename='js/vendor/jRespond.min.js') }}"></script>
+
+    <!-- CHART SPECIFIC SCRIPTS -->
+    {% for url in assets['js'] %}
+        <script src="{{ url }}"></script>
+    {% endfor %}
+ {% endif %}
+
+<!-- APP JS -->
+<script src="{{ url_for('jsondash._static', filename='js/app.js') }}"></script>
+<script src="{{ url_for('jsondash._static', filename='js/api.js') }}"></script>
+<script src="{{ url_for('jsondash._static', filename='js/handlers.js') }}"></script>
+<script src="{{ url_for('jsondash._static', filename='js/utils.js') }}"></script>
+{% endblock %}
+
+{% block jsondash_api_scripts %}{{ super() }}{% endblock %}
+
+{% block jsondash_init %}
+<script>
+    document.addEventListener('DOMContentLoaded', function(e) {
+        jsondash.addDomEvents();
+        {% if view %}
+        jsondash.loadDashboard({{ view|jsonstring|safe }});
+        {% endif %}
+    });
+</script>
+{% endblock %}

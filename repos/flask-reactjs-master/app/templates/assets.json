@@ -1,0 +1,14 @@
+{
+    "manifest": {
+        "js": "/js/manifest.js"
+    },
+    "vendor": {
+        "js": "/js/vendor.js"
+    },
+    "app": {
+        "js": "/js/app.js"
+    },
+    "style": {
+        "css": "/style/style.css"
+    }
+}

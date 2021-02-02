@@ -1,0 +1,1 @@
+from flamejam import app

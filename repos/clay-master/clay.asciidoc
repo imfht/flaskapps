@@ -1,0 +1,960 @@
+Clay Framework
+==============
+Jeremy Grosser <jeremy@uber.com>
+v2.1.5, 2014-01-30
+:toc:
+
+Get the code from https://github.com/uber/clay[Github]
+
+Clay is a framework for building RESTful backend services using best practices. It's a wrapper around Flask (http://flask.pocoo.org) along with several convenient, standardized, performance enhanced ways of performing common tasks like sending email and connecting to a database. Clay is available under the MIT License.
+
+== Getting Started
+
+=== Writing a new service
+If you're developing a new service, you've come to the right place. Let's start with the obligatory Hello World. You'll notice that this is very similar to http://flask.pocoo.org/docs/quickstart/#a-minimal-application[Flask's Hello World example].
+
+[source,python]
+--------------------------------------------------------------------------------
+include::docs/helloworld.py[]
+--------------------------------------------------------------------------------
+
+A few noteworthy things here that begin our list of best practices...
+
+- Every module starts with `from __future__ import absolute_import`, this is to prevent large projects from ending up with cyclical imports.
+- Along those same lines, wildcard imports like `from foo import *` should *never* be used. *Always* explicitly list the things you're importing from a module.
+- `from` imports should be avoided when practical. In the middle of a thousand-line file, it might not be obvious that `mail.send(...)` is really `clay.mail.send(...)` and not an instance of a local object.
+- Keep reasonably close to PEP8 recommendations. Four space tabs, two newlines between top-level definitions in a module, etc. If you like keeping things to 80 columns, that's fine, but if a line needs to be longer, nobody's going to complain.
+- Explicitly list the methods that a route responds to. We know that `app.route()` defaults to GET methods only, but this is not guaranteed to be the same in future versions of Flask/Clay.
+
+Every Clay application needs a config. Clay configs are JSON files. The clay framework itself looks for a few config variables (TODO: see below). By default, we look for files listed in `$CLAY_CONFIG` delimited by colons `:` relative to the directory the development server runs from. Here's a simple example.
+
+[source,javascript]
+--------------------------------------------------------------------------------
+include::docs/simple-clay.conf[]
+--------------------------------------------------------------------------------
+
+This is the minimum configuration necessary to run the clay devserver. The first flask init section is the module name passed to the Flask app constructor. This is only used for uniquely identifying this application internally and has no bearing on anything important. It should follow the http://www.python.org/dev/peps/pep-0008/#package-and-module-names[naming rules] for Python modules. Here we use `helloworldapp` just to differentiate it from the name of our view module.
+
+The debug server section provides a host and port for the clay devserver to listen on. No magic here, just an IP and port. Use "0.0.0.0" for the host to listen on all interfaces.
+
+`views` is a list of modules to be loaded when the server starts up. This allows you to run multiple view modules simultaneously without having to manage a file with a list of routes or prefixes.
+
+Now that we've got a view module and a config, we can run the clay devserver...
+
+=== Running the development server
+[source,shell]
+--------------------------------------------------------------------------------
+export CLAY_CONFIG=./simple-clay.conf
+clay-devserver
+--------------------------------------------------------------------------------
+
+`CLAY_CONFIG` is a colon delimited list of config files to be loaded, in order of precedence. For example, if `CLAY_CONFIG=./common.conf:./janky.conf`, the configuration dictionary from common.conf is loaded first, then update()'d with the dictionary from janky.conf.
+
+=== Running a clay service in production
+Clay exposes itself as a standard WSGI application in the module
+clay.wsgi. The `CLAY_CONFIG` environment variable needs to be set.
+All view modules listed in the config will be imported at startup.
+
+.Running a production clay service with gunicorn
+[source,shell]
+--------------------------------------------------------------------------------
+export CLAY_CONFIG=./simple-clay.conf
+gunicorn clay.wsgi:application
+--------------------------------------------------------------------------------
+
+== API Reference
+
+=== clay.config
+The `clay.config` module provides a simple API for accessing
+configuration information. Internally, all Clay modules use this
+module to configure themselves.
+
+Upon import, clay.config attempts to load it's configuration from
+files listed in the `CLAY_CONFIG` environment variable, delimited by
+colons. Each file's name is examined for a known file extension and
+parsed by the appropriate deserializer. Currently json is supported
+using the standard library and yaml is supported if PyYAML is
+installed. As each file is parsed, it is applied to the global config
+with `dict.update()`.
+
+This module registers itself as a handler for SIGHUP and will attempt to reload it's configuration upon receiving that signal. The configuration may also be reloaded on demand by calling `config.load()`.
+
+Several methods are exposed at the top level of the clay.config module and are intended to provide the config's public API.
+
+==== clay.config.get(key, default=None)
+`key` is a period `.` delimited string that is recursively searched for a configuration option with that name. If this lookup fails at any level of the config hierarchy, the value of `default` is returned. For example, you can expect the following behavior for the given config.
+
+.Example configuration
+[source,javascript]
+--------------------------------------------------------------------------------
+{
+    "users": {
+        "admins": ["synack", "bigo"]
+    }
+}
+--------------------------------------------------------------------------------
+
+[source,python]
+--------------------------------------------------------------------------------
+>>> from clay import config
+>>> config.get('users.admins')
+[u"synack", u"bigo"]
+>>> config.get('users.players')
+None
+>>> config.get('dogs')
+None
+>>> config.get('dogs', default=True)
+True
+--------------------------------------------------------------------------------
+
+==== clay.config.get_logger(name)
+Returns a pre-configured `logging.Logger` instance identified by the given name. Depending on the framework's environment, this logger may format and emit messages in different ways. In development, messages will be routed to the console whereas in production they might be routed to an aggregate endpoint or archive.
+
+[source,python]
+--------------------------------------------------------------------------------
+>>> from clay.config import config
+>>> log = config.get_logger('myservice')
+>>> log.debug('Now we know what\'s happening!')
+myservice DEBUG Now we know what's happening!
+--------------------------------------------------------------------------------
+
+==== clay.config.debug()
+DEPRECATED, will be removed in a future release. Use
+`clay.config.get('debug.enabled', False)` instead.
+
+==== clay.config.feature_flag(name)
+Similar to `clay.config.get`, feature_flag is specific to things with boolean values that enable or disable functionality within your service. This method returns True if the given feature is enabled, False otherwise.
+
+.Example configuration
+[source,javascript]
+--------------------------------------------------------------------------------
+{
+    "features": {
+        "new_shiny_bits": {
+            "enabled": true
+        },
+        "new_scary_thing": {
+            "enabled": true,
+            "percent": 10.0
+        }
+    }
+}
+--------------------------------------------------------------------------------
+
+In the example above, `feature_flag('new_shiny_bits')` would return True and `feature_flag('new_scary_thing')` will only return True 10% of the time. The percent option is useful for A/B testing new features or slowly rolling out a feature for a subset of requests to gauge performance.
+
+==== clay.config.load()
+This method will cause the configuration to be reloaded from it's source on demand. *WARNING* if a syntax error or otherwise unreadable configuration is loaded, the process calling this method will be aborted immediately via sys.exit(), this is often not desirable.
+
+=== clay.mail
+
+==== clay.mail.sendmail(mailto, subject, message, subtype='html', charset='utf-8', **headers)
+Sends an email to the given address using the server/credentials specified in the config under `smtp`.
+
+Additional SMTP headers may be set as keyword arguments, the values of which are expected to be either a subclass of basestring or an iterable of basestrings.
+
+By default the From address is populated by the `smtp.from` config option. This may be overridden by passing a `From` kwarg.
+
+.Mail configuration
+[source,javascript]
+--------------------------------------------------------------------------------
+{
+    "smtp": {
+        "host": "smtp.example.com",
+        "port": 25,
+        "username": "myname",
+        "password": "superseekrit",
+        "from": "test@example.com"
+    }
+}
+--------------------------------------------------------------------------------
+
+.Sending email
+[source,python]
+--------------------------------------------------------------------------------
+from clay import mail
+
+# Simple example
+mail.sendmail('user@example.com', 'Not spam I promise!', 'A simple example')
+
+# Complex example
+mail.sendmail('user@example.com', 'Definitely not spam', CC=[
+  'otheruser@example.com',
+  'somedude@otherexample.com'
+], BCC='outbound@example.com', From='noreply@example.com', subtype='html',
+  message='<marquee><blink>YOU OBVIOUSLY LOVE OWLS</blink></marquee>')
+--------------------------------------------------------------------------------
+
+=== clay.http
+
+==== clay.http.request(method, uri, headers, data)
+Performs an HTTP request and returns a Response object (which is just
+a namedtuple) with status, headers, and data attributes. This module
+is just a wrapper around urllib2 so any installed openers or redirect
+handlers will be used. See the urllib2 docs for more information
+(http://docs.python.org/2/library/urllib2.html).
+
+[source,python]
+--------------------------------------------------------------------------------
+from clay import http
+
+response = http.request('GET', 'http://httpbin.org/ip')
+if response.status != 200:
+  print 'Something bad happened: ', response.data
+--------------------------------------------------------------------------------
+
+==== clay.http.cache_control(...)
+Decorator that adds a Cache-Control header to the response of a view
+function. Each keyword argument to this decorator is appended to the
+Cache-Control value, delimited by a comma. The key of each argument
+has any underscore `_` characters replaced with dash `-`.
+
+[source,python]
+--------------------------------------------------------------------------------
+from clay import app, http
+
+@app.route('/hello_cache', methods=['GET']
+@http.cache_control(max_age=3600, public=True)
+def hello_cache():
+  return 'Hi!'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+HTTP/1.1 200 OK
+Cache-Control: max-age=3600, public
+--------------------------------------------------------------------------------
+
+=== clay.database
+
+A lightweight context manager around DB-API (PEP 249) to provide
+access to SQL databases with read/write splitting. sqlite3, psycopg2,
+and MySQLdb modules are supported, although SQL syntax may vary.
+
+In the configuration, lists of read and write servers are configured.
+You must configure at least one of each, even if both sections only
+point to a single server. If multiple servers are specified, a random
+one will be chosen every time the context manager is entered.
+
+Connections to the database are opened upon entering the context
+manager and closed upon exiting. There is no support for connection
+pooling.
+
+==== clay.database.read and clay.database.write
+These are instances of a context manager with __enter__ and __exit__
+functions that open a new database connection upon enter and close
+that connection upon exit.
+
+[source,python]
+--------------------------------------------------------------------------------
+from flask import request
+from clay import app, database
+
+@app.route('/user/create', methods=['POST'])
+def user_create():
+  with database.write as db:
+    cur = db.cursor()
+    cur.execute('INSERT INTO users(email) VALUES(%s)', request.form['email'])
+    cur.close()
+    db.commit()
+
+@app.route('/user/<int:userid>', methods=['GET'])
+def user_show(userid):
+  with database.read as db:
+    cur = db.cursor()
+    cur.execute('SELECT email FROM users WHERE id=?', userid)
+    result = cur.fetchone()
+    cur.close()
+    return result
+--------------------------------------------------------------------------------
+
+Config example::
+[source,javascript]
+--------------------------------------------------------------------------------
+{
+  "database": {
+    "module": "psycopg2",
+    "read": [
+      {
+        "host": "readslave1.example.com",
+        "port": 5432,
+        "user": "readuser",
+        "password": "1234"
+      },
+      {
+        "host": "readslave2.example.com",
+        "port": 5432,
+        "user": "readuser",
+        "password": "1234"
+      }
+    ],
+    "write": [
+      {
+        "host": "writemaster1.example.com",
+        "port": 5432,
+        "user": "writeuser",
+        "password": "4321"
+      }
+    ]
+  }
+}
+--------------------------------------------------------------------------------
+
+
+=== clay.docs
+
+This module is not meant to be imported by an application, rather it
+can be added to the views list in your app's configuration to provide
+a `GET /_docs` endpoint that parses the docstrings of all registered
+routes and returns a JSON representation of your API's documentation.
+
+==== Docstring Format
+In order to provide enough metadata to generate documentation from
+a route, a machine readable format must be defined for writing
+docstrings. This module uses a format loosely based on Sphinx
+httpdomain (http://pythonhosted.org/sphinxcontrib-httpdomain/).
+
+The first non-whitespace line of the docstring is assumed to be a
+"short doc" or "summary" of the endpoint's behavior. This SHOULD be
+a human readable description of the endpoint less than 72 characters
+long. Lines following the short doc are a longer human readable
+description of the endpoint's behavior.
+
+Any line beginning with a `:` character is split on `:` and assumed to
+expand to a tuple of (directive, key, value).
+
+Within the value of a directive, if an opening `{` and closing `}`
+brace are detected, the substring within the braces is parsed as a
+JSON hash with additional metadata about this parameter. Currently
+this is only used for specifying which parameters are required.
+
+The `:rtype:` directive is special, it does not require a key but
+references a dict object by import name. This dict defines the fields
+of a JSON response body in a format defined in JSON-Schema format
+utilized by swagger.  (http://json-schema.org/)
+(https://github.com/wordnik/swagger-core/wiki/datatypes)
+
+[source,python]
+--------------------------------------------------------------------------------
+@app.route('/things/search', methods=['GET'])
+def hello():
+  '''
+  Search for things
+
+  This is an example of a search endpoint that takes query string
+  parameters to limit the scope of the search.
+
+  :query keywords: A whitespace delimited list of keywords to be included in the search. The implicit boolean AND is applied to all terms. {"required": true}
+  :query limit: The number of results to return, if not specified 100 is assumed
+  :status 200: Search completed, results are included in the response
+  :status 400: Required parameter keywords was not specified or limit was not an integer
+  :status 404: Search completed, but no results matched
+  :rtype: things.protocol.SearchResults
+  '''
+  # TODO: implement searching things
+  pass
+
+
+SearchResults = {
+  "id": "SearchResults",
+  "required": ["count", "results"],
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "$ref": "SearchResult"
+      }
+    }
+  }
+}
+
+SearchResult = {
+  "id": "SearchResult",
+  "required": ["name", "rank", "link"],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "rank": {
+      "type": "integer"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}
+--------------------------------------------------------------------------------
+
+==== Supported docstring directives
+
+===== query
+Defines a query string argument.
+
+--------------------------------------------------------------------------------
+:query <argname>: <description>
+
+Example:
+GET /foo?bar=baz
+
+:query bar: You might specify something like baz
+--------------------------------------------------------------------------------
+
+===== form
+Defines a POST application/x-www-form-urlencoded field
+
+--------------------------------------------------------------------------------
+:form <argname>: <description>
+
+Example:
+POST /foo
+Content-type: application/x-www-form-urlencoded
+
+bar=baz
+
+:form bar: You might specify something like baz
+--------------------------------------------------------------------------------
+
+===== body
+Defines a field of a structured HTTP request body. The semantics of
+the body structure are not defined. In most cases, this will provide a
+reference to a JSON hash key.
+
+--------------------------------------------------------------------------------
+:body <argname>: <description>
+
+Example:
+POST /foo
+Content-type: application/json
+
+{"bar": "baz"}
+
+:body bar: You might specify something like baz
+--------------------------------------------------------------------------------
+
+===== path
+Defines a URL path part in reference to the view's route.
+
+--------------------------------------------------------------------------------
+:path <argname>: <description>
+
+Example:
+@app.route('/foo/<bar>', methods=['GET'])
+def foo(bar):
+  pass
+
+GET /foo/baz
+
+:path bar: You might specify something like baz
+--------------------------------------------------------------------------------
+
+===== reqheader
+Defines an HTTP request header.
+
+--------------------------------------------------------------------------------
+:reqheader <header>: <description>
+
+Example:
+POST /foo
+Authorization: OAuth token="123456"
+
+:reqheader Authorization: Contains the authorization method, followed by a space delimited list of arguments identifying the requester
+--------------------------------------------------------------------------------
+
+==== Required arguments
+(https://github.com/wordnik/swagger-core/wiki/Parameters)
+
+--------------------------------------------------------------------------------
+:query <argname>: <description>
+
+Example:
+:query foo: Does foo like things {"required": true}
+--------------------------------------------------------------------------------
+
+== Useful Patterns
+
+=== Testing with Clay: Letting tests change clay's configuration
+
+Sometimes when unittesting, it may make sense to test various configuration settings. Using
+a base unittest like so:
+
+.Base Unittest
+[source, python]
+--------------------------------------------------------------------------------
+class CerebroTestCase(unittest.TestCase):
+
+    def __call__(self):
+
+        #Do pre-test stuff
+        self._pre_setup()
+
+        unittest.TestCase.__call__(self, result)
+
+        #Do post-test stuff
+        self._post_teardown()
+
+    def _pre_setup(self):
+        pass
+
+    def _post_teardown(self):
+        pass
+
+--------------------------------------------------------------------------------
+
+Since clay's configuration is stored as a dictionary, the trick is to use mock's
+http://www.voidspace.org.uk/python/mock/patch.html#patch-dict[patch dictionary]
+to replace the read-only dictionary with a malleable one:
+
+.Patched Unittest
+[source, python]
+--------------------------------------------------------------------------------
+class CerebroTestCase(unittest.TestCase):
+
+    def __call__(self):
+        # Copy configuration dictionary
+        self.config_copy = clay.config.CONFIG.config.copy()
+
+        # Do pre-test stuff
+        self._pre_setup()
+
+        # Patch config dictionary so tests can customize in setUp but also
+        # in the test function itself.
+        with mock.patch.object(clay.config.CONFIG, "config", self.config_copy):
+            unittest.TestCase.__call__(self, result)
+
+        # Do post-test stuff
+        self._post_teardown()
+
+    def _pre_setup(self):
+        pass
+
+    def _post_teardown(self):
+        pass
+
+--------------------------------------------------------------------------------
+
+Finally, you can specify an attribute on a test with a dictionary of clay.config keys
+and values to be applied to each test (in the example below, it's `test_config`), as
+well as a utility function so that the configuration can be manipulated for a single test:
+
+.Customizable Unittest
+[source, python]
+--------------------------------------------------------------------------------
+class CerebroTestCase(unittest.TestCase):
+
+    ...
+
+    def _pre_setup(self):
+        if hasattr(self, 'test_config'):
+            # Support ability for tests to have their own test settings
+            for attr, value in self.test_config.items():
+                self.set_config(attr, value)
+
+    def set_config(self, key, value):
+        """Set a clay configuration option."""
+
+        val = self.config_copy
+        keys = key.split('.')
+
+        for k in keys[:-1]:
+            val.setdefault(k, {})
+            val = val[k]
+
+        val[keys[-1]] = value
+
+--------------------------------------------------------------------------------
+
+An example test using the above patterns:
+
+.Customizable Unittest
+[source, python]
+--------------------------------------------------------------------------------
+class TestToast(CerebroTestCase):
+
+    # These values will apply to all tests in this class
+    test_config = {
+        'toast.one_sided': False,
+        'toast.two_sided': True
+    }
+
+    def test_burnt_toast(self):
+        # These values will apply for only this test
+        self.set_config('toast.one_sided', True)
+        self.set_config('toast.two_sided', False)
+
+        self.toast = Toast()
+        #...test continues...
+--------------------------------------------------------------------------------
+
+=== Testing with Clay: Using Charlatan to manage fixtures
+
+http://uber.github.com/charlatan/[Charlatan] is another open sourced library from Uber for managing fixtures.
+The following patterns provide a way to integrate the charlatan fixture model into a unittesting framework.
+
+First add a filepath to your fixtures to your configuration file:
+.Fixture configuration
+[source,javascript]
+--------------------------------------------------------------------------------
+{
+    "testing": {
+        "fixture_filepath":  "cerebro/tests/fixtures.yaml"
+    }
+}
+--------------------------------------------------------------------------------
+
+Charlatan only needs to load the fixtures once, so it makes sense to do it when the package is setup.
+Adding this to the setup_package() method in the project's test/__init__.py accomplishes this when using nosetests.
+The following is an example from Uber's Cerebro project:
+
+.`test/__init__.py`
+[source, python]
+--------------------------------------------------------------------------------
+from __future__ import absolute_import
+import charlatan
+import os
+import clay
+
+#Get project path
+if os.environ.get("CEREBRO_HOME"):
+    #Get absolute project path from environmental variables
+    CEREBRO_PATH = os.path.join(os.environ["CEREBRO_HOME"], "cerebro")
+else:
+    #Get project path from relative path
+    CEREBRO_PATH = os.path.normpath(os.path.abspath(__file__) + "../../../..")
+
+
+def setup_package():
+    """Set up the environment for the whole test package.
+
+    Put here all the configuration that needs to be run only once.
+    """
+
+    #Import fixtures
+    if clay.config.get('testing.fixture_filepath'):
+
+        #Get fixture filepath
+        if str(CEREBRO_PATH) not in str(clay.config.get('testing.fixture_filepath')):
+            fixtures_filepath = os.path.join(CEREBRO_PATH, clay.config.get('testing.fixture_filepath'))
+        else:
+            fixtures_filepath = clay.config.get('testing.fixture_filepath')
+
+        #Load fixtures
+        charlatan.load(fixtures_filepath,
+                models_package="cerebro.model",
+                db_session=db_session)  # db_session is a sqlalchemy Session object, for saving fixtures
+
+def teardown_package():
+    pass
+--------------------------------------------------------------------------------
+
+Once the fixtures have been loaded, add charlatan's FixturesManagerMixin to your testcase to allow each test to access and manipulate fixtures. Generally, it saves time if each test can optionally specify a list of fixtures to be installed before each test; adding a few lines to `_pre_setup` takes care of the installation.
+
+.Fixture Test
+[source, python]
+--------------------------------------------------------------------------------
+class CerebroTestCase(unittest.TestCase, charlatan.FixturesManagerMixin):
+
+    def __call__(self):
+
+        #Do pre-test stuff
+
+        self.config_copy = clay.config.CONFIG.config.copy()
+
+        self._pre_setup()
+
+        #Patch config dictionary so tests can customize
+        with mock.patch.dict(clay.config.CONFIG.config, self.config_copy, clear=True):
+            unittest.TestCase.__call__(self, result)
+
+        #Do post-test stuff
+        self._post_teardown()
+
+    def _pre_setup(self):
+
+        self.clean_fixtures_cache()
+
+        if hasattr(self, 'test_config'):
+            #Support ability for tests to have their own test settings
+            for attr, value in self.test_config.items():
+                self.set_config(attr, value)
+
+        #install class fixtures
+        if hasattr(self, 'fixtures'):
+            self.install_fixtures(self.fixtures)
+
+
+    def _post_teardown(self):
+        self.clean_fixtures_cache()
+
+
+    def set_config(self, key, value):
+        """Helper function that tests can call to set config values."""
+
+        val = self.config_copy
+        keys = key.split('.')
+
+        for k in keys[:-1]:
+            val = val[k]
+
+        val[keys[-1]] = value
+--------------------------------------------------------------------------------
+
+Additionally, the full charlatan functionality is available in each unit test:
+
+.Fixture Unittest
+[source, python]
+--------------------------------------------------------------------------------
+class TestToast(CerebroTestCase):
+
+    #These fixtures will be installed with all tests
+    fixtures = ('toast', 'burnt_toast', 'bread')
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_toastiness(self):
+        is_burnt = self.toast.burnt  # installed fixtures can be accessed
+
+        self.install_fixture('wheat_bread')  # installs wheat_bread fixture for just this test.
+
+        toaster = self.get_fixture('toaster')  # can get fixtures manipulate them
+
+        toaster.num_slots = 4
+        toaster.save()
+
+        #...test continues
+
+--------------------------------------------------------------------------------
+
+=== Testing with Clay: Providing a clean test database for each test
+
+When testing, its wise to provide each test with a database containing the correct schema, but no actual data, allowing each test to manipulate the database as necessary. This pattern involves leveraging the transaction capability of sqlalchemy's http://docs.sqlalchemy.org/en/latest/orm/session.html#sqlalchemy.orm.scoping.scoped_session[`scoped_session`] to accopmlish this goal.
+
+First, add a sqlalchemy configuration for your test database to clay's configuration file:
+
+.Test database configuration
+[source,javascript]
+--------------------------------------------------------------------------------
+{
+    "testing": {
+        "fixture_filepath":  "cerebro/tests/fixtures.yaml",
+        "database": {
+            "sqlalchemy.url": "postgresql://user:password@localhost:1234/test_database",
+            "echo": True
+        }
+    }
+}
+--------------------------------------------------------------------------------
+
+Then, have the engine start when the test package is started by adding to the setup_package() function started here. The following is an example from Uber's Cerebro project:
+
+.`test/__init__.py` with Test Database Engine
+[source, python]
+--------------------------------------------------------------------------------
+from __future__ import absolute_import
+import charlatan
+import os
+import clay
+
+from sqlalchemy import engine_from_config
+
+#db_session is a sqlalchemy scoped_session object
+#initialize_sql is a function to import Cerebro's models and initialize the sqlalchemy mappers
+from cerebro.model.basics import db_session, initialize_sql
+
+
+test_engine = None
+
+#Get project path
+if os.environ.get("CEREBRO_HOME"):
+    #Get absolute project path from environmental variables
+    CEREBRO_PATH = os.path.join(os.environ["CEREBRO_HOME"], "cerebro")
+else:
+    #Get project path from relative path
+    CEREBRO_PATH = os.path.normpath(os.path.abspath(__file__) + "../../../..")
+
+
+def setup_package():
+    """Set up the environment for the whole test package.
+
+    Put here all the configuration that needs to be run only once.
+    """
+
+    #Start test engine
+    global test_engine
+
+    test_engine = engine_from_config(clay.config.get('testing.database'))
+
+    #Import fixtures
+    if clay.config.get('testing.fixture_filepath'):
+
+        #Get fixture filepath
+        if str(CEREBRO_PATH) not in str(clay.config.get('testing.fixture_filepath')):
+            fixtures_filepath = os.path.join(CEREBRO_PATH, clay.config.get('testing.fixture_filepath'))
+        else:
+            fixtures_filepath = clay.config.get('testing.fixture_filepath')
+
+        #Load fixtures
+        charlatan.load(fixtures_filepath,
+                models_package="cerebro.model",
+                db_session=db_session)  # db_session is a sqlalchemy Session object, for saving fixtures
+
+    #Initialize SQLalchemy mappers with test engine
+    initialize_sql(test_engine)
+
+def teardown_package():
+    pass
+
+--------------------------------------------------------------------------------
+
+Each test will open its own connection and transaction with the database, and as part of the teardown the entire transaction will be rolled back, effectively giving each test its own copy of the database to interact with. Continuing to add to our base CerebroTestCase class, we add this logic in the `_pre_setup` and `post_teardown` methods:
+
+.Test Database Test
+[source, python]
+--------------------------------------------------------------------------------
+class CerebroTestCase(unittest.TestCase, charlatan.FixturesManagerMixin):
+
+    def __call__(self):
+
+        #Do pre-test stuff
+
+        self.config_copy = clay.config.CONFIG.config.copy()
+
+        self._pre_setup()
+
+        #Patch config dictionary so tests can customize
+        with mock.patch.dict(clay.config.CONFIG.config, self.config_copy, clear=True):
+            unittest.TestCase.__call__(self, result)
+
+        #Do post-test stuff
+        self._post_teardown()
+
+    def _pre_setup(self):
+        from cerebro.tests import test_engine as engine
+
+        # Start a new connection
+        self.connection = engine.connect()
+
+        # Begin a non-ORM transaction
+        self.trans = self.connection.begin()
+        # Bind the session to the connection
+        db_session.configure(bind=self.connection)
+
+        self.clean_fixtures_cache()
+
+        if hasattr(self, 'test_config'):
+            #Support ability for tests to have their own test settings
+            for attr, value in self.test_config.items():
+                self.set_config(attr, value)
+
+        #install class fixtures
+        if hasattr(self, 'fixtures'):
+            self.install_fixtures(self.fixtures)
+
+
+    def _post_teardown(self):
+        # Teardown the transaction
+        if hasattr(self, "connection"):
+            # Rollback database
+            self.trans.rollback()
+            db_session.remove()
+            # We have to explicitely close the connection
+            self.connection.close()
+            del self.connection
+
+        self.clean_fixtures_cache()
+
+
+    def set_config(self, key, value):
+        """Helper function that tests can call to set config values."""
+
+        val = self.config_copy
+        keys = key.split('.')
+
+        for k in keys[:-1]:
+            val = val[k]
+
+        val[keys[-1]] = value
+--------------------------------------------------------------------------------
+
+Important Note: This pattern can not be used for any methods with explicitly roll back a sqlalchemy session, as it will cascade downward and rollback the test's transaction.
+
+== Changes in 2.0.0
+
+=== Package version is now semantic
+
+This release, and all future releases of Clay, will adhere to the
+versioning scheme described at http://semver.org/
+
+In summary, the major version will be incremented for backwards
+incompatible changes, the minor version will be incremented for feature
+releases containing backwards compatible changes, and the patch
+version will be incremented for bugfix releases.
+
+=== CLAY_ENVIRONMENT is deprecated
+
+The `CLAY_ENVIRONMENT` variable should no longer be used to
+differentiate production and development environments, but you should
+rather use separate files passed to `CLAY_CONFIG` for this purpose.
+
+=== Debug flags are no longer environment based
+
+In previous releases, if `CLAY_ENVIRONMENT=development` was specified,
+logging and devserver configuration behaved differently. This check
+has been replaced with the `debug.enabled` boolean flag, which
+defaults to false. You will generally want this enabled in your
+development configuration.
+
+An additional `debug.logging` boolean has been added that sets the
+default log level of logger instances returned from
+`clay.config.get_logger()` to DEBUG, rather than INFO.
+
+=== Default logging configuration
+
+Clay now supports arbitrary logging configuration by setting a
+`logging` key in your configuration, with contents adhering to the
+http://docs.python.org/2/library/logging.config.html#logging-config-dictschema[dictConfig
+schema] specified by the Python standard library.
+
+If no `logging` element is found in your configuration, Clay will
+default to logging all messages to stderr at the WARNING level or
+above.
+
+=== Remote logging is not automatic
+
+In previous releases, if `logging.host` were specified in the config,
+a `clay.logger.UDPHandler` was initialized and all log messages were
+directed to that host. This option is no longer available, and the
+UDPHandler must be initialized using a dictConfig.
+
+--------------------------------------------------------------------------------
+logging:
+  version: 1
+  handlers:
+    remote:
+      class: clay.logger.UDPHandler
+      level: DEBUG
+      host: logs.example.com
+      port: 22000
+  loggers:
+    root:
+      level: DEBUG
+      handlers: remote
+--------------------------------------------------------------------------------
+
+=== flask.init is no longer required
+
+The `flask.init.import_name` configuration option is now optional. If
+not specified, the import_name defaults to `clayapp`.
+
+=== Clay now includes unit tests
+
+The clay framework now has internal tests that may be run with
+`python setup.py test`. These tests are contained in the tests/
+directory at the top level of the project and utilize the
+(http://webtest.pythonpaste.org/en/latest/index.html)[webtest
+library].

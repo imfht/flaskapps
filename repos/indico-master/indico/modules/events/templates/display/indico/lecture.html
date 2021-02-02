@@ -1,0 +1,66 @@
+{% from 'events/display/_event_header_message.html' import render_event_header_msg %}
+{% from 'events/display/common/_manage_button.html' import render_manage_button %}
+{% from 'events/display/indico/_common.html' import render_location, render_users, render_event_time %}
+{% from 'events/notes/_note.html' import render_note %}
+
+{{ render_event_header_msg(event) }}
+
+{% set hook_event_header = template_hook('event-header', event=event) | trim %}
+{% set has_subheader = event.description or files or folders or lectures or event.organizer_info
+                       or event.contact_emails or event.contact_phones
+                       or (event.references and event.type == 'meeting') or hook_event_header %}
+
+<div class="event-wrapper">
+    {% block header %}
+        <div class="event-header event-header-lecture {%- if not has_subheader %} round-bottom-corners{% endif %}">
+            {% if not g.static_site %}
+                <a class="lecture-category" href="{{ url_for('categories.display', event.category) }}">
+                    {{ category }}
+                </a>
+            {% else %}
+                <div>{{ category }}</div>
+            {% endif %}
+            {% set show_button = not event.is_locked and event.can_manage_attachments(session.user) %}
+            <div class="event-manage-button">
+                {{ render_manage_button(event, 'EVENT', show_button=show_button, toggle_notes=false) }}
+            </div>
+
+            <h1>
+                {{- event.get_verbose_title(show_series_pos=true) -}}
+                {{- event.get_label_markup() -}}
+            </h1>
+            {% set chairpersons = event.person_links %}
+            {% if chairpersons %}
+                <h2>
+                    {% trans %}by{% endtrans %}
+                    {{ render_users(chairpersons|sort(attribute='display_order_key'), span_class='author', title=true) }}
+                </h2>
+            {% endif %}
+            <div class="details">
+                <div class="event-date">
+                    {{ render_event_time(event, timezone) }}
+                </div>
+                {% block location_info %}
+                    {% if event.has_location_info or event.address %}
+                        <div class="event-location">
+                            {{ render_location(event, class='header-data') }}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block body %}
+        {% if has_subheader %}
+            <div class="event-sub-header">
+                {# https://github.com/pallets/jinja/issues/603 #}
+                {% set hook_event_header = hook_event_header %}
+                {% include 'events/display/indico/_details.html' %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+</div>

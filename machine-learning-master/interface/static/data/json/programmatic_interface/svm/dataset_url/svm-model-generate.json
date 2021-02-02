@@ -1,0 +1,8 @@
+{
+    "properties": {
+        "collection": "svm-1",
+        "session_type": "model_generate",
+        "model_type": "svm",
+        "sv_kernel_type": "rbf"
+    }
+}

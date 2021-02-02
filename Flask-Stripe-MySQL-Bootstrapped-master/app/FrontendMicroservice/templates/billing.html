@@ -1,0 +1,114 @@
+{% extends "base_templates/dashboard_base.html" %}
+
+{% block title %}
+Billing
+{% endblock %}
+{% block content %}
+<h1 class="h3 mt-3 mb-4 text-gray-800">Billing Page</h1>
+
+{% if subscription_active %}
+
+<p>This page shows your subscriptions, whether they are active and when you have been billed.</p>
+
+<h3>Your Subscriptions</h3>
+<p>If you cancel a subscription, it can be reactivated until the end of the period. The subscription remains active for the period that you paid for.</p>
+<div id="output" class="text-success"></div>
+<div class="card row mt-3">
+    <div class="col-sm-12">
+        <div id="billing_info" class="table-responsive">
+            <table class="table">
+                <!-- table header -->
+                {% if subscription_data %}
+                <tr>
+                    {% for key in subscription_data[0] %}
+                    <th> {{ key if (key != 'subscription_id') and (key != 'cancel_in_progress') }} </th>
+                    {% endfor %}
+                </tr>
+                {% endif %}
+
+                <!-- table rows -->
+                {% for dict_item in subscription_data %}
+                <tr>
+                    {% set outer_loop = loop %}
+                    {% for key, value in dict_item.items() %}
+
+                        {% if (key != 'subscription_id') and (key != 'cancel_in_progress') %}
+                        <td id="123" class="align-middle"> 
+                            {{ value }} 
+                        </td>
+                        {% endif %}
+
+                        {% if key == 'subscription_id' %} 
+                        <td class="align-middle">
+                        {% if dict_item['cancel_in_progress'] == None %}
+                            <button data_sub_id="{{value}}" type="submit" class="cancel_subscription btn btn-danger btn-default">
+                                Cancel
+                            </button>
+                        {% elif dict_item['cancel_in_progress'] == True %}
+                            <button data_sub_id="{{value}}" type="submit" class="reactivate_subscription btn btn-success btn-default">
+                                Reactivate
+                            </button>
+                        {% elif key == 'subscription_id' and dict_item['cancel_in_progress'] == False %}
+                            This subscription has ended.
+                        {% endif %}
+                        </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<p>You do not have an active subscription.</p>
+{% endif %}
+
+{% endblock %}
+
+{% if subscription_active %}
+{% block scripts %}
+<script>
+    $( ".cancel_subscription" ).click(function() {
+        unsubscribe($(this).attr("data_sub_id"));
+        $(this).hide();
+    });
+
+    $( ".reactivate_subscription" ).click(function() {
+        resubscribe($(this).attr("data_sub_id"));
+        $(this).hide();
+    });
+
+    function successfn(response) {
+        json_obj = JSON.parse(response);
+        msg = json_obj.message;
+        $('#output').html(msg);
+    }
+
+    function errorfn(error) {
+        json_obj = JSON.parse(error.responseText);
+        msg = json_obj.message;
+        $('#output').html(msg);
+    }
+
+    function unsubscribe(sub_id) {
+        data = JSON.stringify({
+            sub_id: sub_id
+        });
+
+        ajax('/cancel_subscription', 'PUT', data, successfn, errorfn)
+    }
+
+    function resubscribe(sub_id) {
+        data = JSON.stringify({
+            sub_id: sub_id
+        });
+
+        ajax('/reactivate_subscription', 'PUT', data, successfn, errorfn)
+    }
+
+    
+</script>
+{% endblock %}
+{% endif %}

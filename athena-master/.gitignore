@@ -1,0 +1,9 @@
+venv/
+env/
+build/
+static/sdist
+*.pyc
+*.log
+config.py
+pages/all.bib
+.DS_Store

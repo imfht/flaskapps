@@ -1,0 +1,43 @@
+# Travis config file
+# ==================
+
+language: python
+
+# Supported Python versions.
+# Please keep this list in sync with `tox.ini`.
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+services: mongodb
+
+# Install test dependencies
+before_install:
+  - python --version
+  - pip install pytest pytest-cov
+  - pip install codecov
+
+# Install project depencies
+install:
+  - pip install -r requirements.txt --quiet
+
+# Run automated tests
+script:
+  - pytest --cov flask_user --cov-report term-missing --cov-config flask_user/tests/.coveragerc flask_user/tests
+
+# Submit coverage report to coveralls
+after_success:
+  - codecov
+
+# Upload a package to PyPI when new tag appears
+deploy:
+  provider: pypi
+  skip_existing: true
+  user: "__token__"
+  on:
+    tags: true
+    repo: lingthio/Flask-User

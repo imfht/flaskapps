@@ -1,0 +1,207 @@
+{% from "_formhelpers.html" import render_field, render_field_errors %}
+
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="{% if request.cookies.get('dark-mode') == 'true' %}dark{% endif %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Language" content="en"/>
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#4188c9">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="referrer" content="no-referrer">
+
+  <!-- Bing -->
+  <meta name="msvalidate.01" content="2A313A69CBFD1A378C3B91734DC221A8" />
+
+  <!-- Yandex -->
+  <meta name="yandex-verification" content="c9e5d4d68bc983a1" />
+
+  <meta name="description" content="Protect your email address with email ALIAS. Create a different email alias for each website. No more phishing, spams.">
+
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico"/>
+
+  <title>
+    {% block title %}{% endblock %} | SimpleLogin
+  </title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/font-awesome/css/font-awesome.css') }}">
+
+  <!-- Dashboard Core -->
+  <link href="/static/assets/css/dashboard.css" rel="stylesheet"/>
+
+
+  <!-- Tabler JS -->
+  <script src="/static/assets/js/vendors/jquery-3.2.1.min.js"></script>
+  <script src="/static/assets/js/vendors/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/js/vendors/jquery.sparkline.min.js"></script>
+  <script src="/static/assets/js/vendors/selectize.min.js"></script>
+  <script src="/static/assets/js/vendors/jquery.tablesorter.min.js"></script>
+  <script src="/static/assets/js/vendors/jquery-jvectormap-2.0.3.min.js"></script>
+  <script src="/static/assets/js/vendors/jquery-jvectormap-de-merc.js"></script>
+  <script src="/static/assets/js/vendors/jquery-jvectormap-world-mill.js"></script>
+  <script src="/static/assets/js/vendors/circle-progress.min.js"></script>
+  <script src="/static/assets/js/core.js"></script>
+
+  <!-- ClipboardJS -->
+  <script src="/static/vendor/clipboard.min.js"></script>
+
+  <!-- IntroJS -->
+  <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='node_modules/intro.js/minified/introjs.min.css') }}">
+  <script src="{{ url_for('static', filename='node_modules/intro.js/minified/intro.min.js') }}"></script>
+
+  <!-- Sentry -->
+  <script src="{{ url_for('static', filename='node_modules/@sentry/browser/build/bundle.min.js') }}">
+  </script>
+
+  <link rel="stylesheet" href="/static/vendor/bootstrap-social.min.css">
+
+  <!-- Toastr library -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.css') }}">
+  <script src="{{ url_for('static', filename='node_modules/toastr/build/toastr.min.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='node_modules/bootbox/dist/bootbox.min.js') }}"></script>
+
+  <!-- Multiple-select library -->
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='node_modules/multiple-select/dist/multiple-select.min.css') }}">
+  <script
+      src="{{ url_for('static', filename='node_modules/multiple-select/dist/multiple-select.min.js') }}"></script>
+
+
+  {% if PLAUSIBLE_HOST and PLAUSIBLE_DOMAIN %}
+  <!-- Plausible Analytics library -->
+  <script async defer data-domain=”{{PLAUSIBLE_DOMAIN}}” src=”{{PLAUSIBLE_HOST}}/js/plausible.js”></script>
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='darkmode.css') }}?v={{ VERSION }}">
+  <link rel="stylesheet" type="text/css" href="/static/style.css?v={{ VERSION }}">
+
+  <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+  <script>
+    toastr.options.closeButton = true;
+  </script>
+
+  <!-- For additional head -->
+  {% block head %}
+  {% endblock %}
+</head>
+<body class="">
+<div class="page">
+  {% block announcement %}
+  {% endblock %}
+
+  <div class="container">
+    <!-- For flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+      {% if messages %}
+        {% for category, message in messages %}
+          <script>
+            toastr.{{category}}("{{ message }}");
+          </script>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  {% block content %}
+  {% endblock %}
+</div>
+
+<script>
+  {% if SENTRY_DSN %}
+    console.log("Init sentry");
+    try {
+      Sentry.init({
+        dsn: '{{SENTRY_DSN}}',
+        // https://docs.sentry.io/platforms/javascript/#filter-events--custom-logic
+        // Original gist https://gist.github.com/impressiver/5092952
+        ignoreErrors: [
+          // Random plugins/extensions
+          'top.GLOBALS',
+          // See: http://blog.errorception.com/2012/03/tale-of-unfindable-js-error.html
+          'originalCreateNotification',
+          'canvas.contentDocument',
+          'MyApp_RemoveAllHighlights',
+          'http://tt.epicplay.com',
+          'Can\'t find variable: ZiteReader',
+          'jigsaw is not defined',
+          'ComboSearch is not defined',
+          'http://loading.retry.widdit.com/',
+          'atomicFindClose',
+          // Facebook borked
+          'fb_xd_fragment',
+          // ISP "optimizing" proxy - `Cache-Control: no-transform` seems to
+          // reduce this. (thanks @acdha)
+          // See http://stackoverflow.com/questions/4113268
+          'bmi_SafeAddOnload',
+          'EBCallBackMessageReceived',
+          // See http://toolbar.conduit.com/Developer/HtmlAndGadget/Methods/JSInjection.aspx
+          'conduitPage'
+        ],
+        blacklistUrls: [
+          // Facebook flakiness
+          /graph\.facebook\.com/i,
+          // Facebook blocked
+          /connect\.facebook\.net\/en_US\/all\.js/i,
+          // Woopra flakiness
+          /eatdifferent\.com\.woopra-ns\.com/i,
+          /static\.woopra\.com\/js\/woopra\.js/i,
+          // Chrome extensions
+          /extensions\//i,
+          /^chrome:\/\//i,
+          // Other plugins
+          /127\.0\.0\.1:4001\/isrunning/i,  // Cacaoweb
+          /webappstoolbarba\.texthelp\.com\//i,
+          /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
+        ]
+      });
+    } catch (error) {
+      console.log("Sentry error, probably due to AdBlocker ...")
+    }
+  {% endif %}
+
+  // default options for bootbox
+  bootbox.setDefaults({
+    closeButton: false,
+    backdrop: true
+  })
+
+  var clipboard = new ClipboardJS('.clipboard');
+
+  clipboard.on('success', function (e) {
+    toastr.success("Copied to clipboard");
+    e.clearSelection();
+  });
+
+  // Handle back or close button
+  $('.back-or-close').on("click", function () {
+    // the window is actually a popup, in this case just close it
+    if (history.length == 1) {
+      window.close();
+    } else {
+      history.back();
+    }
+  });
+
+</script>
+
+<script src="{{ url_for('static', filename='local-storage-polyfill.js') }}"></script>
+
+<!-- For additional script -->
+{% block script %}
+{% endblock %}
+
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+</body>
+</html>

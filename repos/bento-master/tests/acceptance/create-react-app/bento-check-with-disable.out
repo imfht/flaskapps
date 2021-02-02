@@ -1,0 +1,1713 @@
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > docusaurus/website/src/pages/index.js:9
+     ╷
+    9│   import Link from '@docusaurus/Link';
+     ╵
+     = Unable to resolve path to module '@docusaurus/Link'.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > docusaurus/website/src/pages/index.js:10
+     ╷
+   10│   import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+     ╵
+     = Unable to resolve path to module '@docusaurus/useDocusaurusContext'.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > docusaurus/website/src/pages/index.js:11
+     ╷
+   11│   import withBaseUrl from '@docusaurus/withBaseUrl';
+     ╵
+     = Unable to resolve path to module '@docusaurus/withBaseUrl'.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > docusaurus/website/src/pages/index.js:13
+     ╷
+   13│   import Layout from '@theme/Layout';
+     ╵
+     = Unable to resolve path to module '@theme/Layout'.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > docusaurus/website/src/pages/index.js:14
+     ╷
+   14│   import CodeBlock from '@theme/CodeBlock';
+     ╵
+     = Unable to resolve path to module '@theme/CodeBlock'.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > docusaurus/website/src/pages/index.js:16
+     ╷
+   16│   import classnames from 'classnames';
+     ╵
+     = Unable to resolve path to module 'classnames'.
+
+eslint react/no-array-index-key https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+     > docusaurus/website/src/pages/index.js:71
+     ╷
+   71│   key={idx}
+     ╵
+     = Do not use Array index in keys
+
+eslint no-undef-init https://eslint.org/docs/rules/no-undef-init
+     > packages/babel-preset-react-app/create.js:50
+     ╷
+   50│   var absoluteRuntimePath = undefined;
+     ╵
+     = It's not necessary to initialize 'absoluteRuntimePath' to undefined.
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:71
+     ╷
+   71│   require('@babel/preset-env').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:80
+     ╷
+   80│   require('@babel/preset-env').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:94
+     ╷
+   94│   require('@babel/preset-react').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:104
+     ╷
+  104│   isTypeScriptEnabled && [require('@babel/preset-typescript').default],
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:114
+     ╷
+  114│   require('@babel/plugin-transform-flow-strip-types').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:119
+     ╷
+  119│   require('babel-plugin-macros'),
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:124
+     ╷
+  124│   require('@babel/plugin-transform-destructuring').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:145
+     ╷
+  145│   require('@babel/plugin-proposal-decorators').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:152
+     ╷
+  152│   require('@babel/plugin-proposal-class-properties').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:161
+     ╷
+  161│   require('@babel/plugin-proposal-object-rest-spread').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:169
+     ╷
+  169│   require('@babel/plugin-transform-runtime').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:176
+     ╷
+  176│   version: require('@babel/runtime/package.json').version,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:190
+     ╷
+  190│   require('babel-plugin-transform-react-remove-prop-types').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:196
+     ╷
+  196│   require('@babel/plugin-syntax-dynamic-import').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:199
+     ╷
+  199│   require('babel-plugin-dynamic-import-node'),
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:204
+     ╷
+  204│   plugins: [require('@babel/plugin-transform-flow-strip-types').default],
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/create.js:210
+     ╷
+  210│   require('@babel/plugin-proposal-decorators').default,
+     ╵
+     = Unexpected require().
+
+eslint no-undef-init https://eslint.org/docs/rules/no-undef-init
+     > packages/babel-preset-react-app/dependencies.js:46
+     ╷
+   46│   var absoluteRuntimePath = undefined;
+     ╵
+     = It's not necessary to initialize 'absoluteRuntimePath' to undefined.
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/dependencies.js:72
+     ╷
+   72│   require('@babel/preset-env').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/dependencies.js:85
+     ╷
+   85│   require('@babel/preset-env').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/dependencies.js:104
+     ╷
+  104│   require('@babel/plugin-transform-destructuring').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/dependencies.js:126
+     ╷
+  126│   require('@babel/plugin-transform-runtime').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/dependencies.js:142
+     ╷
+  142│   require('@babel/plugin-syntax-dynamic-import').default,
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/babel-preset-react-app/dependencies.js:145
+     ╷
+  145│   require('babel-plugin-dynamic-import-node'),
+     ╵
+     = Unexpected require().
+
+eslint error
+     > packages/create-react-app/createReactApp.js:129
+     ╷
+  129│   return envinfo
+     ╵
+     = Parsing error: 'return' outside of function
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-app-polyfill/ie11.js:13
+     ╷
+   13│   require('promise/lib/rejection-tracking').enable();
+     ╵
+     = Unexpected require().
+
+eslint no-restricted-globals https://eslint.org/docs/rules/no-restricted-globals
+     > packages/react-app-polyfill/ie11.js:14
+     ╷
+   14│   self.Promise = require('promise/lib/es6-extensions.js');
+     ╵
+     = Unexpected use of 'self'.
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-app-polyfill/ie11.js:14
+     ╷
+   14│   self.Promise = require('promise/lib/es6-extensions.js');
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-app-polyfill/ie11.js:21
+     ╷
+   21│   require('whatwg-fetch');
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-app-polyfill/jsdom.js:13
+     ╷
+   13│   require('whatwg-fetch');
+     ╵
+     = Unexpected require().
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/FileSizeReporter.js:52
+     ╷
+   52│   size: size,
+     ╵
+     = Expected property shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/FileSizeReporter.js:154
+     ╷
+  154│   measureFileSizesBeforeBuild: measureFileSizesBeforeBuild,
+     ╵
+     = Expected property shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/FileSizeReporter.js:155
+     ╷
+  155│   printFileSizesAfterBuild: printFileSizesAfterBuild,
+     ╵
+     = Expected property shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/WebpackDevServerUtils.js:416
+     ╷
+  416│   context: function(pathname, req) {
+  417│     return (
+  418│       req.method !== 'GET' ||
+  419│       (mayProxy(pathname) &&
+  420│         req.headers.accept &&
+  421│         req.headers.accept.indexOf('text/html') === -1)
+  422│     );
+  423│   },
+     ╵
+     = Expected method shorthand.
+
+eslint no-shadow https://eslint.org/docs/rules/no-shadow
+     > packages/react-dev-utils/browsersHelper.js:64
+     ╷
+   64│   return shouldSetBrowsers(isInteractive).then(shouldSetBrowsers => {
+     ╵
+     = 'shouldSetBrowsers' is already declared in the upper scope.
+
+eslint eqeqeq https://eslint.org/docs/rules/eqeqeq
+     > packages/react-dev-utils/evalSourceMapMiddleware.js:17
+     ╷
+   17│   const module = server._stats.compilation.modules.find(m => m.id == id);
+     ╵
+     = Expected '===' and instead saw '=='.
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-dev-utils/getCacheIdentifier.js:15
+     ╷
+   15│   cacheIdentifier += require(`${packageName}/package.json`).version;
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-dev-utils/getCacheIdentifier.js:15
+     ╷
+   15│   cacheIdentifier += require(`${packageName}/package.json`).version;
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-dev-utils/getProcessForPort.js:37
+     ╷
+   37│   return require(packagePath).name;
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-dev-utils/getProcessForPort.js:37
+     ╷
+   37│   return require(packagePath).name;
+     ╵
+     = Unexpected require().
+
+eslint default-case https://eslint.org/docs/rules/default-case
+     > packages/react-dev-utils/launchEditor.js:17
+     ╷
+   17│   switch (editor) {
+   18│     case 'vim':
+   19│     case 'emacs':
+   20│     case 'nano':
+   21│       return true;
+   22│   }
+     ╵
+     = Expected a default case.
+
+eslint default-case https://eslint.org/docs/rules/default-case
+     > packages/react-dev-utils/launchEditor.js:127
+     ╷
+  127│   switch (editorBasename) {
+  128│     case 'atom':
+  129│     case 'Atom':
+  130│     case 'Atom Beta':
+  131│     case 'subl':
+  132│     case 'sublime':
+  133│     case 'sublime_text':
+  134│       return [fileName + ':' + lineNumber + ':' + colNumber];
+  135│     case 'wstorm':
+  136│     case 'charm':
+  137│       return [fileName + ':' + lineNumber];
+  138│     case 'notepad++':
+  139│       return ['-n' + lineNumber, '-c' + colNumber, fileName];
+  140│     case 'vim':
+  141│     case 'mvim':
+  142│     case 'joe':
+  143│     case 'gvim':
+  144│       return ['+' + lineNumber, fileName];
+  145│     case 'emacs':
+  146│     case 'emacsclient':
+  147│       return ['+' + lineNumber + ':' + colNumber, fileName];
+  148│     case 'rmate':
+  149│     case 'mate':
+  150│     case 'mine':
+  151│       return ['--line', lineNumber, fileName];
+  152│     case 'code':
+  153│     case 'Code':
+  154│     case 'code-insiders':
+  155│     case 'Code - Insiders':
+  156│     case 'vscodium':
+  157│     case 'VSCodium':
+  158│       return addWorkspaceToArgumentsIfExists(
+  159│         ['-g', fileName + ':' + lineNumber + ':' + colNumber],
+  160│         workspace
+  161│       );
+  162│     case 'appcode':
+  163│     case 'clion':
+  164│     case 'clion64':
+  165│     case 'idea':
+  166│     case 'idea64':
+  167│     case 'phpstorm':
+  168│     case 'phpstorm64':
+  169│     case 'pycharm':
+  170│     case 'pycharm64':
+  171│     case 'rubymine':
+  172│     case 'rubymine64':
+  173│     case 'webstorm':
+  174│     case 'webstorm64':
+  175│     case 'goland':
+  176│     case 'goland64':
+  177│       return addWorkspaceToArgumentsIfExists(
+  178│         ['--line', lineNumber, fileName],
+  179│         workspace
+  180│       );
+  181│   }
+     ╵
+     = Expected a default case.
+
+eslint no-useless-return https://eslint.org/docs/rules/no-useless-return
+     > packages/react-dev-utils/openBrowser.js:61
+     ╷
+   61│   return;
+     ╵
+     = Unnecessary return statement.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/typescriptFormatter.js:39
+     ╷
+   39│   { start: { line: line, column: character } },
+     ╵
+     = Expected property shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/webpackHotDevClient.js:47
+     ╷
+   47│   onError: function() {
+   48│     hadRuntimeError = true;
+   49│   },
+     ╵
+     = Expected method shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/webpackHotDevClient.js:125
+     ╷
+  125│   warnings: warnings,
+     ╵
+     = Expected property shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-dev-utils/webpackHotDevClient.js:164
+     ╷
+  164│   errors: errors,
+     ╵
+     = Expected property shorthand.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/build.js:7
+     ╷
+    7│   const webpack = require('webpack');
+     ╵
+     = 'webpack' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/build.js:8
+     ╷
+    8│   const chalk = require('chalk');
+     ╵
+     = 'chalk' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/build.js:11
+     ╷
+   11│   const rimraf = require('rimraf');
+     ╵
+     = 'rimraf' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/build.js:12
+     ╷
+   12│   const chokidar = require('chokidar');
+     ╵
+     = 'chokidar' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint no-unused-expressions https://eslint.org/docs/rules/no-unused-expressions
+     > packages/react-error-overlay/build.js:47
+     ╷
+   47│   isCI && process.exit(1);
+     ╵
+     = Expected an assignment or function call and instead saw an expression.
+
+eslint no-unused-expressions https://eslint.org/docs/rules/no-unused-expressions
+     > packages/react-error-overlay/build.js:94
+     ╷
+   94│   watchMode ? setupWatch() : runBuildSteps();
+     ╵
+     = Expected an assignment or function call and instead saw an expression.
+
+eslint error
+     > packages/react-error-overlay/flow/env.js:1
+     ╷
+    1│   declare module 'anser' {
+     ╵
+     = Parsing error: Unexpected token module
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/extract-source-map.js:8
+     ╷
+    8│   import { extractSourceMapUrl } from '../utils/getSourceMap';
+     ╵
+     = Parse errors in imported module '../utils/getSourceMap': Unexpected token
+       : (17:15)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/get-source-map.js:8
+     ╷
+    8│   import { getSourceMap } from '../utils/getSourceMap';
+     ╵
+     = Parse errors in imported module '../utils/getSourceMap': Unexpected token
+       : (17:15)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/lines-around.js:8
+     ╷
+    8│   import { getLinesAround } from '../utils/getLinesAround';
+     ╵
+     = Parse errors in imported module '../utils/getLinesAround': Unexpected
+       token : (18:7)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/mapper.js:8
+     ╷
+    8│   import { map } from '../utils/mapper';
+     ╵
+     = Parse errors in imported module '../utils/mapper': Unexpected token :
+       (20:9)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/mapper.js:9
+     ╷
+    9│   import { parse } from '../utils/parser';
+     ╵
+     = Parse errors in imported module '../utils/parser': Unexpected token :
+       (13:31)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/parser/chrome.js:8
+     ╷
+    8│   import { parse } from '../../utils/parser';
+     ╵
+     = Parse errors in imported module '../../utils/parser': Unexpected token :
+       (13:31)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/parser/firefox.js:8
+     ╷
+    8│   import { parse } from '../../utils/parser';
+     ╵
+     = Parse errors in imported module '../../utils/parser': Unexpected token :
+       (13:31)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/parser/generic.js:8
+     ╷
+    8│   import { parse } from '../../utils/parser';
+     ╵
+     = Parse errors in imported module '../../utils/parser': Unexpected token :
+       (13:31)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/parser/react.js:8
+     ╷
+    8│   import { parse } from '../../utils/parser';
+     ╵
+     = Parse errors in imported module '../../utils/parser': Unexpected token :
+       (13:31)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/parser/safari.js:8
+     ╷
+    8│   import { parse } from '../../utils/parser';
+     ╵
+     = Parse errors in imported module '../../utils/parser': Unexpected token :
+       (13:31)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/script-lines.js:8
+     ╷
+    8│   import { ScriptLine } from '../utils/stack-frame';
+     ╵
+     = Parse errors in imported module '../utils/stack-frame': Unexpected token
+       : (13:13)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/stack-frame.js:8
+     ╷
+    8│   import { StackFrame } from '../utils/stack-frame';
+     ╵
+     = Parse errors in imported module '../utils/stack-frame': Unexpected token
+       : (13:13)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/unmapper.js:8
+     ╷
+    8│   import { unmap } from '../utils/unmapper';
+     ╵
+     = Parse errors in imported module '../utils/unmapper': Unexpected token :
+       (14:22)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/__tests__/unmapper.js:9
+     ╷
+    9│   import { parse } from '../utils/parser';
+     ╵
+     = Parse errors in imported module '../utils/parser': Unexpected token :
+       (13:31)
+
+eslint error
+     > packages/react-error-overlay/src/components/CloseButton.js:23
+     ╷
+   23│   type CloseCallback = () => void;
+     ╵
+     = Parsing error: Unexpected token CloseCallback
+
+eslint error
+     > packages/react-error-overlay/src/components/CodeBlock.js:37
+     ╷
+   37│   type CodeBlockPropsType = {|
+     ╵
+     = Parsing error: Unexpected token CodeBlockPropsType
+
+eslint error
+     > packages/react-error-overlay/src/components/Collapsible.js:12
+     ╷
+   12│   import type { Element as ReactElement } from 'react';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/components/ErrorOverlay.js:12
+     ╷
+   12│   import type { Node as ReactNode } from 'react';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/components/Footer.js:19
+     ╷
+   19│   type FooterPropsType = {|
+     ╵
+     = Parsing error: Unexpected token FooterPropsType
+
+eslint error
+     > packages/react-error-overlay/src/components/Header.js:25
+     ╷
+   25│   type HeaderPropType = {|
+     ╵
+     = Parsing error: Unexpected token HeaderPropType
+
+eslint error
+     > packages/react-error-overlay/src/components/NavigationBar.js:42
+     ╷
+   42│   type Callback = () => void;
+     ╵
+     = Parsing error: Unexpected token Callback
+
+eslint error
+     > packages/react-error-overlay/src/containers/CompileErrorContainer.js:16
+     ╷
+   16│   import type { ErrorLocation } from '../utils/parseCompileError';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/containers/RuntimeError.js:13
+     ╷
+   13│   import type { StackFrame } from '../utils/stack-frame';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/containers/RuntimeErrorContainer.js:16
+     ╷
+   16│   import type { ErrorRecord } from './RuntimeError';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/containers/StackFrame.js:14
+     ╷
+   14│   import type { StackFrame as StackFrameType } from '../utils/stack-frame';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/containers/StackFrameCodeBlock.js:13
+     ╷
+   13│   import type { ScriptLine } from '../utils/stack-frame';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/containers/StackTrace.js:15
+     ╷
+   15│   import type { StackFrame as StackFrameType } from '../utils/stack-frame';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/effects/proxyConsole.js:10
+     ╷
+   10│   type ReactFrame = {
+     ╵
+     = Parsing error: Unexpected token ReactFrame
+
+eslint error
+     > packages/react-error-overlay/src/effects/stackTraceLimit.js:9
+     ╷
+    9│   let stackTraceRegistered: boolean = false;
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/effects/unhandledError.js:11
+     ╷
+   11│   type ErrorCallback = (error: Error) => void;
+     ╵
+     = Parsing error: Unexpected token ErrorCallback
+
+eslint error
+     > packages/react-error-overlay/src/effects/unhandledRejection.js:11
+     ╷
+   11│   type ErrorCallback = (error: Error) => void;
+     ╵
+     = Parsing error: Unexpected token ErrorCallback
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/src/iframeScript.js:8
+     ╷
+    8│   import 'react-app-polyfill/ie9';
+     ╵
+     = 'react-app-polyfill' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/src/iframeScript.js:9
+     ╷
+    9│   import React from 'react';
+     ╵
+     = 'react' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-error-overlay/src/iframeScript.js:10
+     ╷
+   10│   import ReactDOM from 'react-dom';
+     ╵
+     = 'react-dom' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-named-as-default https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default.md
+     > packages/react-error-overlay/src/iframeScript.js:11
+     ╷
+   11│   import CompileErrorContainer from './containers/CompileErrorContainer';
+     ╵
+     = Parse errors in imported module './containers/CompileErrorContainer':
+       Unexpected token { (16:13)
+
+eslint import/no-named-as-default-member https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default-member.md
+     > packages/react-error-overlay/src/iframeScript.js:11
+     ╷
+   11│   import CompileErrorContainer from './containers/CompileErrorContainer';
+     ╵
+     = Parse errors in imported module './containers/CompileErrorContainer':
+       Unexpected token { (16:13)
+
+eslint import/no-named-as-default https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default.md
+     > packages/react-error-overlay/src/iframeScript.js:12
+     ╷
+   12│   import RuntimeErrorContainer from './containers/RuntimeErrorContainer';
+     ╵
+     = Parse errors in imported module './containers/RuntimeErrorContainer':
+       Unexpected token { (16:13)
+
+eslint import/no-named-as-default-member https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-named-as-default-member.md
+     > packages/react-error-overlay/src/iframeScript.js:12
+     ╷
+   12│   import RuntimeErrorContainer from './containers/RuntimeErrorContainer';
+     ╵
+     = Parse errors in imported module './containers/RuntimeErrorContainer':
+       Unexpected token { (16:13)
+
+eslint import/named https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/named.md
+     > packages/react-error-overlay/src/iframeScript.js:14
+     ╷
+   14│   import { applyStyles } from './utils/dom/css';
+     ╵
+     = Parse errors in imported module './utils/dom/css': Unexpected token :
+       (12:26)
+
+eslint error
+     > packages/react-error-overlay/src/index.js:20
+     ╷
+   20│   import type { ErrorRecord } from './listenToRuntimeErrors';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/listenToRuntimeErrors.js:28
+     ╷
+   28│   import type { StackFrame } from './utils/stack-frame';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/utils/dom/absolutifyCaret.js:9
+     ╷
+    9│   function removeNextBr(parent, component: ?Element) {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/dom/css.js:12
+     ╷
+   12│   function getHead(document: Document) {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/generateAnsiHTML.js:64
+     ╷
+   64│   function generateAnsiHTML(txt: string): string {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/getLinesAround.js:18
+     ╷
+   18│   line: number,
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/getPrettyURL.js:10
+     ╷
+   10│   sourceFileName: ?string,
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/getSourceMap.js:17
+     ╷
+   17│   __source_map: SourceMapConsumer;
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/getStackFrames.js:9
+     ╷
+    9│   import type { StackFrame } from './stack-frame';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint error
+     > packages/react-error-overlay/src/utils/isBultinErrorName.js:9
+     ╷
+    9│   function isBultinErrorName(errorName: ?string) {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/isInternalFile.js:9
+     ╷
+    9│   function isInternalFile(sourceFileName: ?string, fileName: ?string) {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/mapper.js:20
+     ╷
+   20│   frames: StackFrame[],
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/parseCompileError.js:4
+     ╷
+    4│   export type ErrorLocation = {|
+     ╵
+     = Parsing error: Unexpected token type
+
+eslint error
+     > packages/react-error-overlay/src/utils/parser.js:13
+     ╷
+   13│   function extractLocation(token: string): [string, number, number] {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/stack-frame.js:13
+     ╷
+   13│   lineNumber: number;
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/unmapper.js:14
+     ╷
+   14│   function count(search: string, string: string): number {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint error
+     > packages/react-error-overlay/src/utils/warnings.js:9
+     ╷
+    9│   import type { ReactFrame } from '../effects/proxyConsole';
+     ╵
+     = Parsing error: Unexpected token {
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/env.js:43
+     ╷
+   43│   require('dotenv-expand')(
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/env.js:44
+     ╷
+   44│   require('dotenv').config({
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/config/modules.js:126
+     ╷
+  126│   const ts = require(resolve.sync('typescript', {
+  127│     basedir: paths.appNodeModules,
+  128│   }));
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/modules.js:126
+     ╷
+  126│   const ts = require(resolve.sync('typescript', {
+  127│     basedir: paths.appNodeModules,
+  128│   }));
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/config/modules.js:133
+     ╷
+  133│   config = require(paths.appJsConfig);
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/modules.js:133
+     ╷
+  133│   config = require(paths.appJsConfig);
+     ╵
+     = Unexpected require().
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-scripts/config/modules.js:142
+     ╷
+  142│   additionalModulePaths: additionalModulePaths,
+     ╵
+     = Expected property shorthand.
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/config/paths.js:34
+     ╷
+   34│   envPublicUrl || require(appPackageJson).homepage;
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/paths.js:34
+     ╷
+   34│   envPublicUrl || require(appPackageJson).homepage;
+     ╵
+     = Unexpected require().
+
+eslint no-shadow https://eslint.org/docs/rules/no-shadow
+     > packages/react-scripts/config/paths.js:65
+     ╷
+   65│   const extension = moduleFileExtensions.find(extension =>
+     ╵
+     = 'extension' is already declared in the upper scope.
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/config/webpack.config.js:42
+     ╷
+   42│   const appPackageJson = require(paths.appPackageJson);
+     ╵
+     = Calls to require() should use string literals
+
+eslint radix https://eslint.org/docs/rules/radix
+     > packages/react-scripts/config/webpack.config.js:50
+     ╷
+   50│   const imageInlineSizeLimit = parseInt(
+   51│     process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
+   52│   );
+     ╵
+     = Missing radix parameter.
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/webpack.config.js:115
+     ╷
+  115│   require('postcss-flexbugs-fixes'),
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/webpack.config.js:116
+     ╷
+  116│   require('postcss-preset-env')({
+     ╵
+     = Unexpected require().
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-scripts/config/webpack.config.js:198
+     ╷
+  198│   publicPath: publicPath,
+     ╵
+     = Expected property shorthand.
+
+eslint object-shorthand https://eslint.org/docs/rules/object-shorthand
+     > packages/react-scripts/config/webpack.config.js:661
+     ╷
+  661│   publicPath: publicPath,
+     ╵
+     = Expected property shorthand.
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/config/webpackDevServer.config.js:96
+     ╷
+   96│   require(paths.proxySetup)(app);
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/config/webpackDevServer.config.js:96
+     ╷
+   96│   require(paths.proxySetup)(app);
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/build.js:112
+     ╷
+  112│   const appPackage = require(paths.appPackageJson);
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/build.js:112
+     ╷
+  112│   const appPackage = require(paths.appPackageJson);
+     ╵
+     = Unexpected require().
+
+eslint no-shadow https://eslint.org/docs/rules/no-shadow
+     > packages/react-scripts/scripts/eject.js:117
+     ╷
+  117│   const files = folders.reduce((files, folder) => {
+     ╵
+     = 'files' is already declared in the upper scope.
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/eject.js:171
+     ╷
+  171│   const ownPackage = require(path.join(ownPath, 'package.json'));
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/eject.js:171
+     ╷
+  171│   const ownPackage = require(path.join(ownPath, 'package.json'));
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/eject.js:172
+     ╷
+  172│   const appPackage = require(path.join(appPath, 'package.json'));
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/eject.js:172
+     ╷
+  172│   const appPackage = require(path.join(appPath, 'package.json'));
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/init.js:88
+     ╷
+   88│   const appPackage = require(path.join(appPath, 'package.json'));
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/init.js:88
+     ╷
+   88│   const appPackage = require(path.join(appPath, 'package.json'));
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/init.js:193
+     ╷
+  193│   const templateDependencies = require(templateDependenciesPath).dependencies;
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/init.js:193
+     ╷
+  193│   const templateDependencies = require(templateDependenciesPath).dependencies;
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/start.js:96
+     ╷
+   96│   const appName = require(paths.appPackageJson).name;
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/start.js:96
+     ╷
+   96│   const appName = require(paths.appPackageJson).name;
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/start.js:118
+     ╷
+  118│   const proxySetting = require(paths.appPackageJson).proxy;
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/start.js:118
+     ╷
+  118│   const proxySetting = require(paths.appPackageJson).proxy;
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/utils/createJestConfig.js:72
+     ╷
+   72│   const overrides = Object.assign({}, require(paths.appPackageJson).jest);
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/utils/createJestConfig.js:72
+     ╷
+   72│   const overrides = Object.assign({}, require(paths.appPackageJson).jest);
+     ╵
+     = Unexpected require().
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/utils/verifyPackageTree.js:36
+     ╷
+   36│   const ownPackageJson = require('../../package.json');
+     ╵
+     = Unexpected require().
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > packages/react-scripts/scripts/utils/verifyTypeScriptSetup.js:62
+     ╷
+   62│   ts = require(resolve.sync('typescript', {
+   63│     basedir: paths.appNodeModules,
+   64│   }));
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > packages/react-scripts/scripts/utils/verifyTypeScriptSetup.js:62
+     ╷
+   62│   ts = require(resolve.sync('typescript', {
+   63│     basedir: paths.appNodeModules,
+   64│   }));
+     ╵
+     = Unexpected require().
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-scripts/template-typescript/src/App.test.tsx:1
+     ╷
+    1│   import React from 'react';
+     ╵
+     = 'react' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-scripts/template-typescript/src/App.test.tsx:2
+     ╷
+    2│   import ReactDOM from 'react-dom';
+     ╵
+     = 'react-dom' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > packages/react-scripts/template-typescript/src/App.test.tsx:3
+     ╷
+    3│   import App from './App';
+     ╵
+     = Unable to resolve path to module './App'.
+
+eslint error
+     > packages/react-scripts/template-typescript/src/App.tsx:5
+     ╷
+    5│   const App: React.FC = () => {
+     ╵
+     = Parsing error: Unexpected token :
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-scripts/template-typescript/src/index.tsx:1
+     ╷
+    1│   import React from 'react';
+     ╵
+     = 'react' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > packages/react-scripts/template-typescript/src/index.tsx:2
+     ╷
+    2│   import ReactDOM from 'react-dom';
+     ╵
+     = 'react-dom' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > packages/react-scripts/template-typescript/src/index.tsx:4
+     ╷
+    4│   import App from './App';
+     ╵
+     = Unable to resolve path to module './App'.
+
+eslint import/no-unresolved https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-unresolved.md
+     > packages/react-scripts/template-typescript/src/index.tsx:5
+     ╷
+    5│   import * as serviceWorker from './serviceWorker';
+     ╵
+     = Unable to resolve path to module './serviceWorker'.
+
+eslint error
+     > packages/react-scripts/template-typescript/src/serviceWorker.ts:23
+     ╷
+   23│   type Config = {
+     ╵
+     = Parsing error: Unexpected token Config
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/compile-lockfile.js:12
+     ╷
+   12│   const fse = require('fs-extra');
+     ╵
+     = 'fs-extra' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/compile-lockfile.js:27
+     ╷
+   27│   const dependencies = require('react-scripts/package.json').dependencies;
+     ╵
+     = 'react-scripts' should be listed in the project's dependencies. Run 'npm
+       i -S react-scripts' to add it
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > tasks/compile-lockfile.js:27
+     ╷
+   27│   const dependencies = require('react-scripts/package.json').dependencies;
+     ╵
+     = Unexpected require().
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-behavior.sh:32
+     ╷
+   32│   echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2;
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2048 https://github.com/koalaman/shellcheck/wiki/SC2048
+     > tasks/e2e-behavior.sh:46
+     ╷
+   46│   for f in $*; do
+     ╵
+     = Use "$@" (with quotes) to prevent whitespace problems.
+
+shellcheck SC2173 https://github.com/koalaman/shellcheck/wiki/SC2173
+     > tasks/e2e-behavior.sh:55
+     ╷
+   55│   trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+     ╵
+     = SIGKILL/SIGSTOP can not be trapped.
+
+shellcheck SC2103 https://github.com/koalaman/shellcheck/wiki/SC2103
+     > tasks/e2e-behavior.sh:61
+     ╷
+   61│   cd ..
+     ╵
+     = Use a ( subshell ) to avoid having to cd back.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-installs.sh:32
+     ╷
+   32│   echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2;
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2048 https://github.com/koalaman/shellcheck/wiki/SC2048
+     > tasks/e2e-installs.sh:46
+     ╷
+   46│   for f in $*; do
+     ╵
+     = Use "$@" (with quotes) to prevent whitespace problems.
+
+shellcheck SC2173 https://github.com/koalaman/shellcheck/wiki/SC2173
+     > tasks/e2e-installs.sh:77
+     ╷
+   77│   trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+     ╵
+     = SIGKILL/SIGSTOP can not be trapped.
+
+shellcheck SC2103 https://github.com/koalaman/shellcheck/wiki/SC2103
+     > tasks/e2e-installs.sh:83
+     ╷
+   83│   cd ..
+     ╵
+     = Use a ( subshell ) to avoid having to cd back.
+
+shellcheck SC2046 https://github.com/koalaman/shellcheck/wiki/SC2046
+     > tasks/e2e-installs.sh:217
+     ╷
+  217│   npx create-react-app test-app-should-not-exist --scripts-version=`date +%s` || true
+     ╵
+     = Quote this to prevent word splitting.
+
+shellcheck SC2046 https://github.com/koalaman/shellcheck/wiki/SC2046
+     > tasks/e2e-installs.sh:230
+     ╷
+  230│   npx create-react-app test-app-should-remain --scripts-version=`date +%s` || true
+     ╵
+     = Quote this to prevent word splitting.
+
+shellcheck SC2012 https://github.com/koalaman/shellcheck/wiki/SC2012
+     > tasks/e2e-installs.sh:234
+     ╷
+  234│   if [ "$(ls -1 ./test-app-should-remain | wc -l | tr -d '[:space:]')" != "2" ]; then
+     ╵
+     = Use find instead of ls to better handle non-alphanumeric filenames.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-installs.sh:242
+     ╷
+  242│   cd $temp_app_path
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-installs.sh:244
+     ╷
+  244│   npx create-react-app test-app-scoped-fork-tgz --scripts-version=$temp_app_path/enoah-scripts-0.9.0.tgz
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink-eject.sh:36
+     ╷
+   36│   echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2;
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2048 https://github.com/koalaman/shellcheck/wiki/SC2048
+     > tasks/e2e-kitchensink-eject.sh:50
+     ╷
+   50│   for f in $*; do
+     ╵
+     = Use "$@" (with quotes) to prevent whitespace problems.
+
+shellcheck SC2173 https://github.com/koalaman/shellcheck/wiki/SC2173
+     > tasks/e2e-kitchensink-eject.sh:59
+     ╷
+   59│   trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+     ╵
+     = SIGKILL/SIGSTOP can not be trapped.
+
+shellcheck SC2103 https://github.com/koalaman/shellcheck/wiki/SC2103
+     > tasks/e2e-kitchensink-eject.sh:65
+     ╷
+   65│   cd ..
+     ╵
+     = Use a ( subshell ) to avoid having to cd back.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink-eject.sh:91
+     ╷
+   91│   cd $temp_app_path
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink-eject.sh:148
+     ╷
+  148│   nohup yarn start &>$tmp_server_log &
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink-eject.sh:149
+     ╷
+  149│   grep -q 'You can now view' <(tail -f $tmp_server_log)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink.sh:36
+     ╷
+   36│   echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2;
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2048 https://github.com/koalaman/shellcheck/wiki/SC2048
+     > tasks/e2e-kitchensink.sh:50
+     ╷
+   50│   for f in $*; do
+     ╵
+     = Use "$@" (with quotes) to prevent whitespace problems.
+
+shellcheck SC2173 https://github.com/koalaman/shellcheck/wiki/SC2173
+     > tasks/e2e-kitchensink.sh:59
+     ╷
+   59│   trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+     ╵
+     = SIGKILL/SIGSTOP can not be trapped.
+
+shellcheck SC2103 https://github.com/koalaman/shellcheck/wiki/SC2103
+     > tasks/e2e-kitchensink.sh:65
+     ╷
+   65│   cd ..
+     ╵
+     = Use a ( subshell ) to avoid having to cd back.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink.sh:91
+     ╷
+   91│   cd $temp_app_path
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink.sh:133
+     ╷
+  133│   nohup yarn start &>$tmp_server_log &
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-kitchensink.sh:134
+     ╷
+  134│   grep -q 'You can now view' <(tail -f $tmp_server_log)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-old-node.sh:20
+     ╷
+   20│   rm -rf $temp_app_path
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-old-node.sh:25
+     ╷
+   25│   echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2;
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2173 https://github.com/koalaman/shellcheck/wiki/SC2173
+     > tasks/e2e-old-node.sh:41
+     ╷
+   41│   trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+     ╵
+     = SIGKILL/SIGSTOP can not be trapped.
+
+shellcheck SC2103 https://github.com/koalaman/shellcheck/wiki/SC2103
+     > tasks/e2e-old-node.sh:47
+     ╷
+   47│   cd ..
+     ╵
+     = Use a ( subshell ) to avoid having to cd back.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-old-node.sh:56
+     ╷
+   56│   cd $temp_app_path
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-simple.sh:34
+     ╷
+   34│   echo "$(basename $0): ERROR! An error was encountered executing line $1." 1>&2;
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2048 https://github.com/koalaman/shellcheck/wiki/SC2048
+     > tasks/e2e-simple.sh:48
+     ╷
+   48│   for f in $*; do
+     ╵
+     = Use "$@" (with quotes) to prevent whitespace problems.
+
+shellcheck SC2173 https://github.com/koalaman/shellcheck/wiki/SC2173
+     > tasks/e2e-simple.sh:57
+     ╷
+   57│   trap 'set +x; handle_exit' SIGQUIT SIGTERM SIGINT SIGKILL SIGHUP
+     ╵
+     = SIGKILL/SIGSTOP can not be trapped.
+
+shellcheck SC2103 https://github.com/koalaman/shellcheck/wiki/SC2103
+     > tasks/e2e-simple.sh:63
+     ╷
+   63│   cd ..
+     ╵
+     = Use a ( subshell ) to avoid having to cd back.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-simple.sh:101
+     ╷
+  101│   if [ $AGENT_OS != 'Windows_NT' ]; then
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/e2e-simple.sh:149
+     ╷
+  149│   cd $temp_app_path
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-registry.sh:12
+     ╷
+   12│   (cd && nohup npx ${VERDACCIO_PACKAGE:-$default_verdaccio_package} -c $1 &>$tmp_registry_log &)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-registry.sh:12
+     ╷
+   12│   (cd && nohup npx ${VERDACCIO_PACKAGE:-$default_verdaccio_package} -c $1 &>$tmp_registry_log &)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-registry.sh:12
+     ╷
+   12│   (cd && nohup npx ${VERDACCIO_PACKAGE:-$default_verdaccio_package} -c $1 &>$tmp_registry_log &)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-registry.sh:14
+     ╷
+   14│   grep -q 'http address' <(tail -f $tmp_registry_log)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2046 https://github.com/koalaman/shellcheck/wiki/SC2046
+     > tasks/local-test.sh:19
+     ╷
+   19│   cd $(dirname $0)
+     ╵
+     = Quote this to prevent word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-test.sh:19
+     ╷
+   19│   cd $(dirname $0)
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-test.sh:89
+     ╷
+   89│   if [ ${git_branch} != ${current_git_branch} ]; then
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-test.sh:89
+     ╷
+   89│   if [ ${git_branch} != ${current_git_branch} ]; then
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-test.sh:122
+     ╷
+  122│   --volume ${PWD}/..:/var/create-react-app \
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2046 https://github.com/koalaman/shellcheck/wiki/SC2046
+     > tasks/local-test.sh:124
+     ╷
+  124│   $([[ ${interactive} == 'true' ]] && echo '--interactive') \
+     ╵
+     = Quote this to prevent word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/local-test.sh:125
+     ╷
+  125│   node:${node_version} \
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/publish.sh:29
+     ╷
+   29│   if [ -z $CI ]; then
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > tasks/publish.sh:45
+     ╷
+   45│   if [ -z $CI ]; then
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2162 https://github.com/koalaman/shellcheck/wiki/SC2162
+     > tasks/publish.sh:47
+     ╷
+   47│   read otp
+     ╵
+     = read without -r will mangle backslashes.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/screencast-start.js:12
+     ╷
+   12│   const execa = require('execa');
+     ╵
+     = 'execa' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/screencast-start.js:13
+     ╷
+   13│   const meow = require('meow');
+     ╵
+     = 'meow' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/screencast-start.js:14
+     ╷
+   14│   const multimatch = require('multimatch');
+     ╵
+     = 'multimatch' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/screencast.js:14
+     ╷
+   14│   const execa = require('execa');
+     ╵
+     = 'execa' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-extraneous-dependencies https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-extraneous-dependencies.md
+     > tasks/screencast.js:15
+     ╷
+   15│   const tempy = require('tempy');
+     ╵
+     = 'tempy' should be listed in the project's dependencies, not
+       devDependencies.
+
+eslint import/no-dynamic-require https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
+     > tasks/screencast.js:41
+     ╷
+   41│   const data = require(cast);
+     ╵
+     = Calls to require() should use string literals
+
+eslint global-require https://eslint.org/docs/rules/global-require
+     > tasks/screencast.js:41
+     ╷
+   41│   const data = require(cast);
+     ╵
+     = Unexpected require().
+
+eslint no-useless-catch https://eslint.org/docs/rules/no-useless-catch
+     > tasks/screencast.js:54
+     ╷
+   54│   } catch (err) {
+   55│     throw err;
+   56│   } finally {
+     ╵
+     = Unnecessary catch clause.
+

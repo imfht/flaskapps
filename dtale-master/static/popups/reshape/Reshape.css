@@ -1,0 +1,25 @@
+input.numeric-input::-webkit-outer-spin-button,
+input.numeric-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'].numeric-input {
+  -moz-appearance: textfield;
+}
+
+.btn-group.agg-types .btn {
+  white-space: normal;
+  padding: 0.35rem 0.3rem;
+  font-size: 10px;
+}
+
+div.col-agg-col-input div.Select {
+  width: 13em;
+  min-width: 13em;
+}
+
+div.col-agg-col-input div.is-clearable.Select--single .Select__value-container--has-value > .Select__single-value {
+  padding-right: 5px;
+}

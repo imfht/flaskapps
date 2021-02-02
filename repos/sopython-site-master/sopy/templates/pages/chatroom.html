@@ -1,0 +1,56 @@
+{% extends 'pages/base.html' %}
+
+{% block nav_chatroom %}active{% endblock %}
+
+{% block content %}
+  <div class="row"><div class="col-md-12">
+    <h2 class="page-header">{% block title %}Chat Room{% endblock %}</h2>
+
+    <p class="lead">The heart of the <b>so</b>python community is the <a href="https://chat.stackoverflow.com/rooms/6/python">Python chat room</a> on Stack Overflow. We are an active and friendly room full of Python professionals and enthusiasts who all share a common love for the language.</p>
+
+    <p><em>If you've been greeted with the word "cbg" or "cabbage", you may want to <a href="{{ url_for('salad.index') }}">have a look here</a>.</em></p>
+
+    <p>Use our <a href="{{ url_for('spoiler.encode') }}">spoiler obfuscator</a> to link to spoilers in chat.</p>
+    
+    <h3>Rules</h3>
+
+    <p>As with any community, we have our own set of rules and etiquette. Please be considerate and take the time to read and follow them. If you are disruptive, users may not want to interact with you in the future. Room owners will use their <a href="https://meta.stackexchange.com/questions/271267/a-guide-to-moderating-chat">moderation tools</a> to keep the room on track.</p>
+
+    <ul>
+      <li><a href="https://stackoverflow.com/help/be-nice">Be nice.</a></li>
+      <li>No swearing or crude language. It is <a href="https://meta.stackexchange.com/a/22233/162650">not acceptable</a> on Stack Overflow.</li>
+      <li>If nobody responds to you, that means no one is able to right now. Don't spam the room with further requests.</li>
+      <li>Don't ping (<code>@username</code>) users unsolicited. Use pings when they assist the flow of existing conversations.</li>
+      <li><a href="https://meta.stackexchange.com/questions/57286/which-links-and-sites-are-handled-specially-in-chat">Inlined links</a>, images, and animations may be removed if they are too big or distracting. Use them sparingly.</li>
+      <li>Wait to post until you've written a complete sentence. Avoid rapid, short "stream of conciousness" messages. Avoid using abbreviated "txt spk".</li>
+      <li>Use the menu to the left of your message to edit or remove it within the two minute edit period.</li>
+      <li>We can provide help with community moderation, but continued heated or negative discussion is not healthy for the room.</li>
+      <li>Cute fluffy animals are cool, okay!?</li>
+    </ul>
+
+    <h4>Asking a Question</h4>
+
+    <ul>
+      <li>Don't ask for answers to your recent Stack Overflow questions. Those who can answer are already watching the queue on the main site.</li>
+      <li>If your question is <a href="https://stackoverflow.com/help/bounty">eligible for a bounty</a> (>= 48 hours old) and hasn't received a useful response, then you may link to it.</li>
+      <li>Ask your question directly. Avoid asking if it's okay to ask, or if anyone knows about a topic. Users may want to see your question before speaking up, and users who join later can see it.</li>
+      <li>If your code is longer than about 12 lines, use an external paste tool such as <a href="http://dpaste.com">dpaste.com</a>.</li>
+      <li><a href="{{ url_for('wiki.detail', title='An Illustrated Guide To Formatting Code In Chat') }}">Format your code.</a> Inline code should be enclosed in backticks (<code>`code`</code>). For multi-line posts, every line including empty ones must be indented by 4 spaces. Paste your code and press <code>Ctrl + K</code> or the <em>"fixed font"</em> button. Use <code>Shift + Enter</code> to insert new lines.</li>
+      <li>Ask about Python. Go to a relevant room to ask about other languages or topics, even if that room is less active.</li>
+      <li>Follow the same guidance as the main site. Accurately and concisely describe the problem. Provide a <a href="https://stackoverflow.com/help/mcve">Minimal, Complete, and Verifiable Example</a>.</li>
+      <li>Search and research before asking. Try running your code. Try using a debugger.</li>
+      <li>Chat is not a substitute for reading a tutorial or taking a class.</li>
+      <li>Don't star posts to reward users for answering your question. Your gratitude is reward enough. If your question meets Stack Overflow's standards, you may post your question there and invite the user to post an answer which you may accept.</li>
+    </ul>
+
+    <h4>cv-pls</h4>
+
+    <p>You may see messages starting with <code>cv-pls</code> or similar tags. These are used to assist in community moderation. If you wish to participate, please read our <a href="{{ url_for('wiki.detail', title='cv-pls') }}">cv-pls policy</a>.</p>
+
+    <h3>Contact Us</h3>
+
+    <p>If any behaviour in the room makes you feel uncomfortable, you may ping (<code>@username</code>) one of the <a href="https://chat.stackoverflow.com/rooms/info/6/python">room owners</a> and we'll do our best to sort it out.</p>
+    <p>If you wish to contact the room owners privately, <a href="mailto:chatroom@sopython.com">email us</a>.</p>
+    <p>Want to contribute to sopython? Visit our [Github](https://github.com/sopython)!
+  </div></div>
+{% endblock %}

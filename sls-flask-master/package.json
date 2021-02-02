@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "sls-package": "sls package"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "husky": "latest",
+        "serverless": "latest",
+        "serverless-pseudo-parameters": "latest",
+        "serverless-python-requirements": "latest",
+        "serverless-wsgi": "latest"
+    }
+}

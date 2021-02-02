@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block body %}
+        {% include "notifications.html" %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {% include "small_topbar.html" %}
+          <ul class="breadcrumb" style="margin-bottom: 5px;">
+            {% if server -%}
+            <li><a href="{{ url_for('view.home') }}">{{ _('Home') }}</a></li>
+            <li><a href="{{ url_for('view.clients', server=server) }}">{{ _('%(server)s clients', server=server) }}</a></li>
+            <li><a href="{{ url_for('view.client', name=cname, server=server) }}">{{ _('%(client)s overview', client=cname) }}</a></li>
+            <li class="active">{{ _('Backup n°%(number)s overview', number=mypad(nbackup)) }}</li>
+            {% else -%}
+            <li><a href="{{ url_for('view.home') }}">{{ _('Home') }}</a></li>
+            <li><a href="{{ url_for('view.client', name=cname) }}">{{ _('%(client)s overview', client=cname) }}</a></li>
+            <li class="active">{{  _('Backup n°%(number)s overview', number=mypad(nbackup)) }}</li>
+            {% endif -%}
+          </ul>
+          <br />
+          <h1 class="page-header">{{ _('Backup n°%(number)s of %(client)s', number=mypad(nbackup), client=cname) }}</h1>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('New') }}</h4>
+                <div class="mycharts" id="chart_new" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Changed') }}</h4>
+                <div class="mycharts" id="chart_changed" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Unchanged') }}</h4>
+                <div class="mycharts" id="chart_unchanged" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Deleted') }}</h4>
+                <div class="mycharts" id="chart_deleted" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Total') }}</h4>
+                <div class="mycharts" id="chart_total" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div class="well">
+                <h4>{{ _('Scanned') }}</h4>
+                <div class="mycharts" id="chart_scanned" style="height: 350px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+            <!--
+            <div class="col-xs-12 col-sm-12 placeholder">
+              <table class="table table-striped table-hover" id="table-backup">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>New</th>
+                    <th>Changed</th>
+                    <th>Unchanged</th>
+                    <th>Deleted</th>
+                    <th>Total</th>
+                    <th>Scanned</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+            -->
+          <div class="row placeholders">
+            <div class="col-xs-12 col-sm-12 placeholder">
+              <div class="well">
+                <div class="mycharts" id="chart_combined" style="height: 450px;">
+                  <svg></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

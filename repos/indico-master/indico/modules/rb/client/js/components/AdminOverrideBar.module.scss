@@ -1,0 +1,23 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'rb:styles/palette';
+
+.admin-override-bar {
+  display: flex;
+  padding: 0 20px 0 10px;
+  margin: 0;
+  height: 30px;
+  line-height: 30px;
+  background-color: $orange;
+  color: $white;
+
+  .disable {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}

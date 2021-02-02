@@ -1,0 +1,55 @@
+{% set classify_id = request.args.get('classify_id') %}
+<nav class="font-weight-bold navbar navbar-expand-lg {% if transparent is defined %}navbar-dark bg-half-transparent{% else %}bg-light navbar-light{% endif %}">
+    <a class="navbar-brand" href="/">
+        <img src="https://i.loli.net/2017/08/26/59a15ddf9c36f.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        鼠绘漫画
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item{% if request.path=="/" %} active{% endif %}">
+                <a class="nav-link" href="/">Latest <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item{% if not classify_id and request.path=="/comics" %} active{% endif %}">
+                <a class="nav-link" href="{{ url_for('comic.comics') }}">All Comics</a>
+            </li>
+            <li class="nav-item dropdown{% if classify_id %} active{% endif %}">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                </a>
+                {% set comics_url = url_for('comic.comics') %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item{% if classify_id == '2' %} active{% endif %}" href="{{ comics_url+'?classify_id=2' }}">国产</a>
+                    <a class="dropdown-item{% if classify_id == '3' %} active{% endif %}" href="{{ comics_url+'?classify_id=3' }}">鼠绘</a>
+                    <a class="dropdown-item{% if classify_id == '4' %} active{% endif %}" href="{{ comics_url+'?classify_id=4' }}">热血</a>
+                </div>
+            </li>
+            {% if current_user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ current_user.name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                        <a class="dropdown-item{% if request.path==url_for('admin.mange') %} active{% endif %}" href="{{ url_for('admin.mange') }}">Mange</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+        <ul class="nav navbar-nav ml-auto justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="https://lufficc.com/">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://github.com/lufficc/flask_ishuhui.git">GitHub</a>
+            </li>
+        </ul>
+    </div>
+</nav>

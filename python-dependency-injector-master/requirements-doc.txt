@@ -1,0 +1,4 @@
+sphinx
+-e git://github.com/rmk135/sphinxcontrib-disqus.git#egg=sphinxcontrib-disqus
+
+-r requirements-ext.txt

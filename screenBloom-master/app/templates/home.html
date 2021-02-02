@@ -1,0 +1,359 @@
+{% extends "/base.html" %}
+{% block content %}
+
+<div id="current-settings">
+    <div id="settings-title" class="color-animate">Settings</div>
+
+    <div class="setting setting-md">
+        <div id="bri-setting-circle" class="setting-circle">
+            <div class="bri-circle-value">
+                <span class="bri-circle-label">Max</span>
+                <span id="circle-max" class="setting-value">{{ max_bri }}</span>
+            </div>
+
+            <div class="bri-circle-value">
+                <span class="bri-circle-label">Min</span>
+                <span id="circle-min" class="setting-value">{{ min_bri }}</span>
+            </div>
+        </div>
+
+        <div class="setting-label">Global<br>Brightness</div>
+
+        <div class="setting-input hidden">
+            <div class="setting-input-label">
+                <div>Global Brightness</div>
+                <i class="fa fa-question-circle-o simple-tooltip" title="These sliders determine the global range of brightness ScreenBloom will be able to send to your bulbs.  Set them equal to each other for a static setting."></i>
+            </div>
+            <i class="fa fa-close setting-input-close"></i>
+            <div class="setting-input-spacer"></div>
+
+            <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                <div class="setting-wrapper-title">Max</div>
+
+                <div class="bri-slider-output">
+                    <output id="max-bri-slider-output">{{ max_bri }}</output>
+                    <div class="slider-max">/ 254</div>
+                </div>
+                <input id="max-bri-slider" class="slider" type="range" min="{{ min_bri }}" max="254" value="{{ max_bri }}" style="max-width: 90%;">
+            </div>
+
+            <div class="setting-input-spacer"></div>
+
+            <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                <div class="setting-wrapper-title">Min</div>
+
+                <div class="bri-slider-output">
+                    <output id="min-bri-slider-output">{{ min_bri }}</output>
+                    <div class="slider-max">/ 254</div>
+                </div>
+                <input id="min-bri-slider" class="slider" type="range" min="1" max="{{ max_bri }}" value="{{ min_bri }}" style="max-width: 90%;">
+            </div>
+
+            <div class="setting-input-spacer"></div>
+
+            <div class="setting-input-submit" data-url="briUrl">
+                <i class="fa fa-gear fa-spin loader hidden"></i>
+                <span class="setting-input-text"><i class="fa fa-floppy-o"></i> Save</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="setting setting-md">
+        <div class="setting-circle"><span id="update-speed-circle" class="setting-value">{{ update }}</span><span class="seconds">seconds</span></div>
+        <div class="setting-label">Update<br>Speed</div>
+
+        <div class="setting-input hidden">
+            <div class="setting-input-label">
+                <div>Update Speed</div>
+            </div>
+            <i class="fa fa-close setting-input-close"></i>
+            <div class="setting-input-spacer"></div>
+
+            <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                <div class="setting-wrapper-title">Update Buffer
+                    <i class="fa fa-question-circle-o simple-tooltip" title="An update buffer can help with large delays between light updates by reducing Hue bridge congestion.  In general this setting should be set as low as possible, but you'll probably need to set this value if using more than 2 Hues at once."></i>
+                </div>
+
+                <output id="update-buffer-slider-output">{{ update_buffer }}</output>
+                <div class="slider-max"><span style="font-size: 1.25vh;"><br>(seconds)</span></div>
+                <input id="update-buffer-slider" style="width: 90%;" class="slider" type="range" min="0.0" max="0.5" step="0.1" value="{{ update_buffer }}">
+            </div>
+
+            <div class="setting-input-spacer"></div>
+
+            <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                <div class="setting-wrapper-title">Transition Speed
+                    <i class="fa fa-question-circle-o simple-tooltip" title="Set the speed of each Hue color transition.  Higher values will be smoother while lower values can seem more responsive."></i>
+                </div>
+
+                <output id="update-speed-slider-output">{{ update }}</output>
+                <div class="slider-max"><span style="font-size: 1.25vh;"><br>(seconds)</span></div>
+                <input id="update-speed-slider" style="width: 90%;" class="slider" type="range" min="0.0" max="8" step="0.10" value="{{ update }}">
+            </div>
+
+            <div class="setting-input-spacer"></div>
+
+            <div class="setting-input-submit" data-url="updateSpeedUrl">
+                <i class="fa fa-gear fa-spin loader hidden"></i>
+                <span class="setting-input-text"><i class="fa fa-floppy-o"></i> Save</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Only Win version supports multiple displays -->
+    {% if build == 'win' %}
+    <div class="setting setting-md">
+        <div class="setting-circle"><img class="setting-img" src="data:image/png;base64,{{ multi_monitor_screens[display_index] }}"></div>
+        <div class="setting-label">Choose<br>Display</div>
+
+        <div class="setting-input hidden" style="max-width: 25em;">
+            <div class="setting-input-label">
+                <div>Choose Display</div>
+                <i class="fa fa-question-circle-o simple-tooltip" aria-hidden="true" title="Choose which display ScreenBloom will parse."></i>
+            </div>
+            <i class="fa fa-close setting-input-close"></i>
+            <div class="setting-input-spacer"></div>
+
+            <div class="display-container">
+                {% for screen in multi_monitor_screens %}
+                <div class="display-icon" data-index="{{ loop.index0 }}">
+                    <img src="data:image/png;base64,{{ screen }}">
+                    {% if display_index == loop.index0 %}
+                    <div class="display-icon-selected">Selected</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="setting-input-submit" data-url="displayUrl">
+                <i class="fa fa-gear fa-spin loader hidden"></i>
+                <span class="setting-input-text"><i class="fa fa-floppy-o"></i> Save</span>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="setting party-mode-btn">
+        <div class="setting-circle {{ 'setting-clicked' if party_mode }} party-mode-circle simple-tooltip" title="Sends a random color to each active bulb using your selected transition speed.">
+            <i class="fa fa-gear fa-spin loader hidden"></i>
+            <span class="setting-input-text">{{ 'On' if party_mode else 'Off' }}</span>
+        </div>
+        <div class="setting-label">Party<br>Mode</div>
+
+        <div class="setting-input hidden">
+            <input type="text" value="{{ 1 if party_mode else 0 }}">
+        </div>
+    </div>
+
+    <div class="setting" id="zone-btn">
+        <div class="setting-circle">
+            <i class="fa fa-gear fa-spin loader hidden"></i>
+            <span class="setting-input-text" id="zone-state">{{ 'On' if zone_state else 'Off' }}</span>
+        </div>
+        <div class="setting-label">Screen<br>Zones</div>
+
+        <div id="zone-grid-input" class="setting-input hidden">
+            <div class="setting-input-label">
+                <div>Screen Zones</div>
+                <i class="fa fa-question-circle-o simple-tooltip" aria-hidden="true" title="Zone mode allows you to extract colors from sections of your screen.  Each active bulb can be assigned to a zone."></i>
+            </div>
+            <i class="fa fa-close setting-input-close"></i>
+            <div id="toggle-zone-mode" class="{{ 'toggle-zone-mode-selected' if zone_state }}">
+                <i class="fa fa-{{ 'stop' if zone_state else 'play' }}" aria-hidden="true"></i><span>Turn Zone Mode {{ 'Off' if zone_state else 'On' }}</span>
+            </div>
+
+            <!-- Zones -->
+            <div id="zone-select">
+                <p class="info-text">Click on a cell to start creating a zone</p>
+
+                <div class="grid-wrapper animate">
+                    <img id="grid-image" src="data:image/png;base64,{{ screenshot }}">
+                    <div id="grid"></div>
+                </div>
+
+                <div id="refresh-grid-image" class="zone-grid-control simple-tooltip" title="Take a new screenshot for the grid"><i class="fa fa-camera"></i></div>
+                <div id="refresh-grid-colors" class="zone-grid-control simple-tooltip" title="Refresh grid colors"><i class="fa fa-refresh"></i></div>
+
+                <div id="zone-bulbs"></div>
+
+                <div class="add-bulbs-to-zone-wrapper hidden">
+                    <div class="setting-input-label"><div>Available Bulbs</div></div>
+                    <i class="fa fa-times close-add-bulbs-to-zone-wrapper"></i>
+                    <div class="setting-input-spacer"></div>
+
+                    <div class="available-bulbs-wrapper"></div>
+                    <div class="add-bulbs-to-zone-confirm"><i class="fa fa-plus"></i> Add Bulbs</div>
+                </div>
+
+                <div class="zone-select-buttons">
+                    <div id="revert" class="zone-grid-control simple-tooltip" title="Undo changes since last save"><i class="fa fa-undo"></i><span>Revert Changes</span></div>
+                    <div id="save-zones" class="zone-grid-control"><i class="fa fa-floppy-o"></i><span>Save Changes</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Presets -->
+    <div class="presets-wrapper">
+        <div id="settings-preset-icon">
+            <i class="fa fa-bookmark-o simple-tooltip" aria-hidden="true" title="Presets"></i>
+        </div>
+
+        <div class="setting-input hidden">
+            <div class="setting-input-label">
+                <div>Setting Presets</div>
+                <i class="fa fa-question-circle-o simple-tooltip" aria-hidden="true" title="Create presets based on the currently active settings.  Useful for quickly configuring ScreenBloom for use in different rooms, games vs. movies, party mode, etc."></i>
+            </div>
+            <i class="fa fa-close setting-input-close"></i>
+
+            <div id="presets-container">
+                <div id="saved-preset-container">
+                    <div id="base-saved-preset" class="saved-preset" data-preset-number="poop" style="display: none;">
+                        <div class="saved-preset-wrapper">
+                            <i class="fa fa-bars edit-preset simple-tooltip" title="Edit Preset"></i>
+                            <i class="fa fa-gear preset-icon"></i>
+                            <p class="preset-label">Name</p>
+
+                            <div class="edit-preset-container hidden">
+                                <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                                    <i class="fa fa-times close-edit-preset-container"></i>
+
+                                    <div class="setting-wrapper-title">Preset Icon</div>
+                                    <div class="select-preset-icon-container">
+                                        {% for class in fa_class_names %}
+                                        <div class="preset-icon-select" data-class="{{ class }}">
+                                            <i class="fa {{ class }}"></i>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                                    <div class="setting-wrapper-title">Preset Name</div>
+                                    <input type="text" placeholder="Preset Label" value="name">
+                                </div>
+                                <div class="preset-button save-preset">Update</div>
+                                <div class="preset-button delete-preset">Delete</div>
+                            </div>
+                        </div>
+
+                        <div class="fa fa-gear fa-spin preset-loading hidden"></div>
+                    </div>
+
+                    {% if presets %}
+                    {% for key, preset in presets.items() recursive %}
+                    <div class="saved-preset {{ 'active' if current_preset == preset.preset_name }}" data-preset-number="{{ preset.preset_number }}">
+                        <div class="saved-preset-wrapper">
+                            <i class="fa fa-bars edit-preset simple-tooltip" title="Edit Preset"></i>
+                            <i class="fa {{ preset.icon_class }} preset-icon"></i>
+                            <p class="preset-label">{{ preset.preset_name }}</p>
+
+                            <div class="edit-preset-container hidden">
+                                <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                                    <i class="fa fa-times close-edit-preset-container"></i>
+
+                                    <div class="setting-wrapper-title">Preset Icon</div>
+                                    <div class="select-preset-icon-container">
+                                        {% for class in fa_class_names %}
+                                        <div class="preset-icon-select {{ 'active' if class == preset.icon_class }}" data-class="{{ class }}">
+                                            <i class="fa {{ class }}"></i>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                                    <div class="setting-wrapper-title">Preset Name</div>
+                                    <input type="text" placeholder="Preset Label" value="{{ preset.preset_name }}">
+                                </div>
+                                <div class="preset-button save-preset simple-tooltip" title="Update preset with current settings, icon, and name.">Update</div>
+                                <div class="preset-button delete-preset">Delete</div>
+                            </div>
+                        </div>
+
+                        <div class="fa fa-gear fa-spin preset-loading hidden"></div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div id="save-preset" class="preset-button simple-tooltip" title="Save the current settings as a new preset.">Save New Preset</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="bulbs">
+    <div id="bulbs-title" class="color-animate">Bulbs <i class="fa fa-question-circle-o simple-tooltip" aria-hidden="true" title="Select bulbs for ScreenBloom to address.  Each bulb can add ~10ms of delay to the update loop.  The fewer bulbs being addressed the more responsive ScreenBloom will be."></i></div>
+    {% for light in lights %}
+    <div id="bulb-{{ light[0] }}" class="bulb-container {{ 'bulb-inactive' if not light[3] else '' }}" data-light="{{ light[0] }}">
+        <i class="fa fa-lightbulb-o" style="font-size: {{ icon_size }}vh;"></i>
+        <span>{{ light[2]}}</span>
+
+        <div class="bulb-settings-button"><i class="fa fa-gear"></i></div>
+        <div class="bulb-settings-wrapper hidden" data-bulb="{{ light[0] }}">
+            <!-- Min Brightness -->
+            <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                <div class="setting-wrapper-title">Min Brightness</div>
+
+                <div class="bulb-bri-slider-output">
+                    <output id="bulb-{{ light[0] }}-min-bri-slider-output">{{ light[9] }}</output>
+                    <div class="bulb-slider-max">/ 254</div>
+                </div>
+                <input id="bulb-{{ light[0] }}-min-bri-slider" class="slider sli-min" type="range" min="1" max="{{ light[8] }}" value="{{ light[9] }}" style="max-width: 90%;">
+            </div>
+
+            <!-- Max Brightness -->
+            <div class="setting-wrapper-container" style="max-width: 100%; padding-bottom: 1em;">
+                <div class="setting-wrapper-title">Max Brightness</div>
+
+                <div class="bulb-bri-slider-output">
+                    <output id="bulb-{{ light[0] }}-max-bri-slider-output">{{ light[8] }}</output>
+                    <div class="bulb-slider-max">/ 254</div>
+                </div>
+                <input id="bulb-{{ light[0] }}-max-bri-slider" class="slider sli-max" type="range" min="{{ light[9] }}" max="254" value="{{ light[8] }}" style="max-width: 90%;">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="update-bulbs hidden">
+    <i class="fa fa-gear fa-spin loader hidden"></i>
+    <span class="setting-input-text">Update Bulbs</span>
+</div>
+
+<div id="start-stop">
+    <div id="start-stop-title"><span class="raleway">Screen</span><span class="lobster bloom color-animate">Bloom</span></div>
+
+    <div class="sat-slider-container">
+        <input id="sat-slider" class="slider" type="range" min="1.0" max="4.0" step="0.5" value="{{ sat}}" style="max-width: 20em;">
+
+        <div class="sat-title">
+            Saturation
+            <i class="fa fa-question-circle-o simple-tooltip" aria-hidden="true" title="Manually over saturate the color that ScreenBloom parses, like turning a TV saturation dial.  Can make colors more vibrant but might produce weird results at times."></i>
+        </div>
+
+        <div class="update-sat-btn hidden">Update Saturation</div>
+    </div>
+
+    <br>
+
+    <div id="start" class="main-button {{ 'button-selected' if state }}">
+        <span class="setting-input-text">{{ 'Start' if not state else 'Running...' }}</span>
+    </div>
+
+    <div id="stop" class="main-button">
+        <i class="fa fa-gear fa-spin loader hidden"></i>
+        <span class="setting-input-text">Stop</span>
+    </div>
+
+    <div class="auto-start-btn simple-tooltip {{ 'activated' if auto_start_state }}" data-state="{{ 1 if auto_start_state else 0 }}" title="Automatically start the ScreenBloom process when this page is loaded.">
+        Auto Start
+    </div>
+</div>
+{% endblock %}

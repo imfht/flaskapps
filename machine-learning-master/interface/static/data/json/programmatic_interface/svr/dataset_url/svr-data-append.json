@@ -1,0 +1,14 @@
+{
+    "properties": {
+            "session_name": "sample_svr_title_append",
+            "collection": "svr-1",
+            "dataset_type": "dataset_url",
+            "session_type": "data_append",
+            "model_type": "svr",
+            "stream": "True"
+    },
+    "dataset": [
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/svr.json",
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/svr-1.json"
+    ]
+}

@@ -1,0 +1,10 @@
+*.pyc
+/build
+dist
+Flask_Dashed.egg-info
+temp
+*.swp
+mixup
+docs/build
+.sass*
+.env

@@ -1,0 +1,7 @@
+autorun:
+  block: false
+formatter:
+- clippy: {}
+tools:
+  sgrep:
+    ignore: []

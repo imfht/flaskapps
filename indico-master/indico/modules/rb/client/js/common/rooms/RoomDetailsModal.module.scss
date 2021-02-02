@@ -1,0 +1,26 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+:global(.ui.modal .header).room-details-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.room-details {
+  :global(.ui.icon.message).message-icon :global(.icon) {
+    font-size: 2em;
+  }
+
+  .attribute-title {
+    padding-right: 1em;
+  }
+}
+
+:global(.ui.basic.blue.button).all-bookings {
+  margin-left: auto;
+  box-shadow: none !important;
+}

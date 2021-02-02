@@ -1,0 +1,27 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'base/palette';
+
+.sticky-content {
+  margin-bottom: 10px;
+
+  > :nth-child(2) {
+    z-index: 15;
+    background-color: white;
+  }
+
+  &:global(.ui.stuck-container + div) {
+    padding-top: 130px;
+  }
+
+  :global(.ui.sticky.fixed.top) {
+    padding-top: 30px;
+    box-shadow: rgba($black, 0.2) 0 25px 30px -20px;
+    transition: all, 0.25s ease-in;
+  }
+}

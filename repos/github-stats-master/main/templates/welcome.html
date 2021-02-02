@@ -1,0 +1,28 @@
+# extends 'base.html'
+# import 'macro/utils.html' as utils
+
+# block content
+  <div class="row">
+    <div class="col-sm-4">
+      <h2 class="text-center"><a href="{{url_for('person')}}">People</a></h2>
+      # include 'account/list_person_bit.html'
+      <ul class="pager">
+        <li><a href="{{url_for('person')}}">More people..</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <h2 class="text-center"><a href="{{url_for('organization')}}">Organizations</a></h2>
+      # include 'account/list_organization_bit.html'
+      <ul class="pager">
+        <li><a href="{{url_for('organization')}}">More organizations..</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-4">
+      <h2 class="text-center"><a href="{{url_for('repo')}}">Repositories</a></h2>
+      # include 'account/list_repo_bit.html'
+      <ul class="pager">
+        <li><a href="{{url_for('repo')}}">More repositories..</a></li>
+      </ul>
+    </div>
+  </div>
+# endblock

@@ -1,0 +1,28 @@
+[data-widget="nsb"] {
+  padding: 5px;
+  background: #6e8243;
+  text-align: center;
+}
+
+[data-widget="nsb"] h1 {
+  font-size: 55px;
+  margin: 0;
+}
+
+[data-widget="nsb"] h2 {
+  font-size: 20px;
+}
+
+[data-widget="nsb"] table {
+  margin: 0 10px 0 10px;
+}
+
+[data-widget="nsb"] .time {
+  text-align: right;
+  white-space: nowrap;
+}
+
+[data-widget="nsb"] .destination {
+  text-align: left;
+  width: 100%;
+}

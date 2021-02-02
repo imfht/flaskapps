@@ -1,0 +1,7 @@
+flake8 undefined-name https://lintlyci.github.io/Flake8Rules/rules/F821.html
+     > foo.py:1
+     ╷
+    1│   x = z
+     ╵
+     = undefined name 'z'
+

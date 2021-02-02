@@ -1,0 +1,62 @@
+<h3>Query Parameters</h3>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+          <div class="row">
+            <div class="col s12 black-text">
+                <p class="flow-text">Use query parameters to customize your individual embeds out of this world!</p>
+                <p>Query parameters are in the format of key-value pairs. They are appended after your embed url such that it would look like so: <br><em>https://titanembeds.com/embed/1234567890<strong>?css=1&defaultchannel=81387914189078528&theme=DiscordDark</strong></em></p>
+                <p>Below is the reference of all the avaliable query parameters that may be used.</p>
+                {% if "administrate_guild" in request.url %}<p><strong>Modify the input fields to change your query parameters for your embed. Leave a box empty to not use the parameter.</strong></p>{% endif %}
+                <ul class="collection">
+                    {% for param in constants.QUERY_PARAMETERS %}
+                    <li class="collection-item">
+                      <strong>{{ param.name }}=&lt;{{ param.type }}&gt;</strong> <br>
+                      {{ param.description }}
+                      {% if param.options %}
+                      <hr>
+                      <strong>Avaliable Options:</strong>
+                      <ul class="browser-default">
+                        {% for option in param.options %}
+                        <li><strong>{{ option.name }}</strong> {% if option.default %}(default){% endif %}</li>
+                        {% endfor %}
+                      </ul>
+                      <hr>
+                      {% else %}
+                      <br>
+                      {% endif %}
+                      <em>Eg: {{ param.name }}={{ param.example }}</em>
+                      {% if "administrate_guild" in request.url %}
+                      <br>
+                      <input class="queryparam" name="{{ param.name }}" type="text" style="background-color: #F9F8F6;" placeholder="{{ param.example }}">
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if "administrate_guild" in request.url %}
+            <div class="col s12 black-text">
+              <p class="flow-text">Copy these URL/iframe code after entering the parameters in the form.</p>
+              <ul class="collection">
+                <li class="collection-item">
+                  <strong>Embed/Server ID</strong>
+                  <input id="queryparam_guildid" type="text" style="background-color: #F9F8F6;" value="{{ guild['id'] }}">
+                </li>
+                <li class="collection-item">
+                  Embed URL after query parameters appled
+                  <input id="queryparam_url" readonly value="{{ url_for("embed.guild_embed", guild_id=guild['id'], _external=True) }}" type="text" onclick="this.setSelectionRange(0, this.value.length)">
+                </li>
+                <li class="collection-item">
+                  Embed iFrame after query parameters appled
+                  <input id="queryparam_iframe" readonly type="text" onclick="this.setSelectionRange(0, this.value.length)">
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+</div>
+{% if "administrate_guild" in request.url %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/query_parameters.js') }}" defer></script>
+{% endif %}

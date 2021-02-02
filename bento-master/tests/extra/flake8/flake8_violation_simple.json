@@ -1,0 +1,12 @@
+{
+  "./foo.py": [
+    {
+      "code": "E124",
+      "filename": "./foo.py",
+      "line_number": 2,
+      "column_number": 9,
+      "text": "closing bracket does not match visual indentation",
+      "physical_line": "        )\n"
+    }
+  ]
+}

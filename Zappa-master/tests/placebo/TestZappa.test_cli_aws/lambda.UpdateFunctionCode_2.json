@@ -1,0 +1,13 @@
+{
+    "status_code": 413, 
+    "data": {
+        "ResponseMetadata": {
+            "HTTPStatusCode": 413, 
+            "RequestId": "191e8dbc-28f5-11e6-b71d-85d581e5b915"
+        }, 
+        "Error": {
+            "Message": "Request must be smaller than 69905067 bytes for the UpdateFunctionCode operation", 
+            "Code": "RequestEntityTooLargeException"
+        }
+    }
+}

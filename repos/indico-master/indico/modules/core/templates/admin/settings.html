@@ -1,0 +1,116 @@
+{% extends 'layout/admin_page.html' %}
+{% from 'message_box.html' import message_box %}
+{% from 'forms/_form.html' import simple_form, form_rows, form_fieldset %}
+
+{% block title %}
+    {% trans %}General Settings{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    {% if show_migration_message and not cephalopod_data.enabled %}
+        <div class="action-box highlight">
+            <div class="section">
+                <span class="icon icon-lamp"></span>
+                <div class="text">
+                    <div class="label">
+                        {% trans %}Upgrade to Indico v2 successful!{% endtrans %}
+                    </div>
+                    <div>
+                        {% trans %}Please consider registering your server with the Community Hub.{% endtrans %}
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <a href="{{ url_for('cephalopod.index') }}" class="i-button highlight">
+                        {% trans %}Details{% endtrans %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if config.DEBUG %}
+        {% call message_box('warning') -%}
+            {% trans %}Debug mode is enabled.{% endtrans %}
+        {%- endcall %}
+    {% endif %}
+
+    {% call message_box('highlight', classes='js-indico-version-message', style='display: none;') -%}
+        {% trans -%}
+            A new Indico version (<strong id="new-indico-version"></strong>) is available!
+            Your current version is <strong id="cur-indico-version"></strong>.
+        {%- endtrans %}
+    {%- endcall %}
+
+    {% call message_box('highlight', classes='js-indico-plugins-version-message', style='display: none;') -%}
+        {% trans -%}
+            A new version (<strong id="new-indico-plugins-version"></strong>) of the official
+            Indico plugin package is available!
+            Your current version is <strong id="cur-indico-plugins-version"></strong>.
+        {%- endtrans %}
+    {%- endcall %}
+
+    {% call simple_form(form, back_button=false) %}
+        {% set legend %}
+            {% trans %}System{% endtrans %}
+            <small>
+                <i class="icon-info"
+                   title="{%- trans -%}These settings can be changed in the indico.conf file on the server.{%- endtrans -%}"></i>
+            </small>
+        {% endset %}
+        {% call form_fieldset(legend) %}
+            <dl class="i-data-list">
+                <dt>{% trans %}Default language{% endtrans %}</dt>
+                <dd>{{ indico_config.DEFAULT_LOCALE }}</dd>
+                <dt>{% trans %}Default timezone{% endtrans %}</dt>
+                <dd>{{ indico_config.DEFAULT_TIMEZONE }}</dd>
+                <dt>{% trans %}Admin email{% endtrans %}</dt>
+                <dd>{{ indico_config.SUPPORT_EMAIL }}</dd>
+                <dt>{% trans %}Support email{% endtrans %}</dt>
+                <dd>{{ indico_config.PUBLIC_SUPPORT_EMAIL }}</dd>
+                <dt>{% trans %}No-reply email{% endtrans %}</dt>
+                <dd>{{ indico_config.NO_REPLY_EMAIL }}</dd>
+            </dl>
+        {% endcall %}
+
+        {% for legend, fields in form._fieldsets %}
+            {% call form_fieldset(legend) %}
+                {{ form_rows(form, fields=fields) }}
+            {% endcall %}
+        {% endfor %}
+    {% endcall %}
+
+
+    {# TODO: move this to some kind of admin dashboard once we have one #}
+    {% if cephalopod_data.enabled %}
+        <script>
+            checkCephalopodSynced(
+                {{ cephalopod_url | tojson }},
+                {{ cephalopod_data | tojson }},
+                {{ url_for('cephalopod.index') | tojson }}
+            );
+        </script>
+    {% endif %}
+
+    <script>
+        (function() {
+            'use strict';
+
+            $.ajax({
+                url: {{ url_for('.version_check')|tojson }},
+                cache: false,
+                success: function(data) {
+                    if (data.indico && data.indico.outdated) {
+                        $('#cur-indico-version').text(data.indico.current_version);
+                        $('#new-indico-version').text(data.indico.latest_version);
+                        $('.js-indico-version-message').show();
+                    }
+                    if (data.plugins && data.plugins.outdated) {
+                        $('#cur-indico-plugins-version').text(data.plugins.current_version);
+                        $('#new-indico-plugins-version').text(data.plugins.latest_version);
+                        $('.js-indico-plugins-version-message').show();
+                    }
+                }
+            });
+        })();
+    </script>
+{% endblock %}

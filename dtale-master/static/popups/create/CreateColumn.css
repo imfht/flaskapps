@@ -1,0 +1,31 @@
+input.numeric-input::-webkit-outer-spin-button,
+input.numeric-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'].numeric-input {
+  -moz-appearance: textfield;
+}
+
+.btn-group .btn.btn-primary.datetime-conversions {
+  white-space: normal;
+  padding: 0.35rem 0.3rem;
+}
+
+div.builders > .btn-group.row:first-child > .btn:first-child {
+  border-radius: 0.25rem 0 0 0;
+}
+
+div.builders > .btn-group.row:last-of-type > .btn {
+  border-top-width: 0;
+}
+
+div.builders > .btn-group.row:last-of-type > .btn:first-of-type {
+  border-radius: 0 0 0 0.25rem;
+}
+
+div.builders > .btn-group.row:last-of-type > .btn:last-of-type {
+  border-radius: 0 0 0.25rem 0;
+}

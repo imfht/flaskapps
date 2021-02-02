@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.cache
+vendor/
+*.log
+.vscode
+.coverage
+coverage/

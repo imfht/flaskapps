@@ -1,0 +1,26 @@
+{% from 'events/timetable/balloons/_balloon_utils.html' import render_time_and_location, render_palette_picker %}
+
+<div class="balloon {{ 'event-locked' if event_locked }}">
+    <div class="title-container">
+        <div class="title">{{ break_.title }}</div>
+        {% if editable %}
+            <div class="group right entry-action-buttons hide-if-locked">
+                {{ render_palette_picker(break_, 'timetable.legacy_break_rest', color_list, is_session_timetable) }}
+                <a class="i-link icon-edit js-dialog-action js-edit js-hide-balloon"
+                   title="{% trans %}Edit break{% endtrans %}"
+                   data-title="{% trans title=break_.title %}Edit break '{{ title }}'{% endtrans %}"></a>
+                {% if can_manage_event %}
+                    <a class="i-link icon-transmission js-move js-hide-balloon"
+                       title="{% trans %}Move break{% endtrans %}"
+                       data-subtitle="{% trans %}Break{% endtrans %}: {{ break_.title }}"></a>
+                {% endif %}
+                <a class="i-link icon-remove js-delete js-hide-balloon"
+                   title="{% trans %}Delete break{% endtrans %}"
+                   data-title="{% trans title=break_.title %}Delete break '{{ title }}'?{% endtrans %}"
+                   data-confirm="{% trans title=break_.title %}Are you sure you want to delete the break '{{ title }}'?{% endtrans %}"></a>
+            </div>
+        {% endif %}
+    </div>
+    <div class="description">{{ break_.description }}</div>
+    {{ render_time_and_location(break_, editable=editable, use_event_tz=editable) }}
+</div>

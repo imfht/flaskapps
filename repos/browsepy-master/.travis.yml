@@ -1,0 +1,55 @@
+language: python
+
+addon:
+  apt:
+    nodejs
+
+matrix:
+  include:
+  - python: "2.7"
+  - python: "pypy"
+  # pypy3 disabled until fixed
+  #- python: "pypy3"
+  - python: "3.3"
+  - python: "3.4"
+  - python: "3.5"
+  - python: "3.6"
+    env:
+    - eslint=yes
+    - sphinx=yes
+
+install:
+  - pip install --upgrade pip
+  - pip install travis-sphinx flake8 pep8 codecov coveralls .
+  - |
+    if [ "$eslint" = "yes" ]; then
+      nvm install stable
+      nvm use stable
+      npm install eslint
+      export PATH="$PWD/node_modules/.bin:$PATH"
+    fi
+
+script:
+  - make travis-script
+  - |
+    if [ "$eslint" = "yes" ]; then
+      make eslint
+    fi
+  - |
+    if [ "$sphinx" = "yes" ]; then
+      make travis-script-sphinx
+    fi
+
+after_success:
+  - make travis-success
+  - |
+    if [ "$sphinx" = "yes" ]; then
+      make travis-success-sphinx
+    fi
+
+notifications:
+  email: false
+
+cache:
+  directories:
+    - $HOME/.cache/pip

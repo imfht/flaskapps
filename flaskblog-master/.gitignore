@@ -1,0 +1,9 @@
+*.pyc
+*.orig
+.idea/*
+**/*.log
+*idea*
+*.iml
+flaskblog.egg-info/*
+venv/
+

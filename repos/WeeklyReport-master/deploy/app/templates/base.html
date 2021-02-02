@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+    <title>WeeklyReport</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{url_for('static',filename='css/bootstrap.css')}}" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="{{url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <!-- Custom Fonts
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">  -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="{{url_for('static',filename='js/html5shiv.min.js')}}"></script>
+    <script src="{{url_for('static',filename='js/respond.min.js')}}"></script>
+    <![endif]-->
+
+    {% block head_script %}
+    {% endblock %}
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <a class="navbar-brand" href="{{url_for('main.index')}}">WeeklyReport</a>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                {% if current_user.is_authenticated %}
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{url_for('report.write')}}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>{{_('Write')}}
+                        </a></li>
+
+                        <li><a href="{{url_for('report.read')}}">
+                            <i class="fa fa-book" aria-hidden="true"></i>{{_('My Reports')}}
+                        </a></li>
+
+                        {% if current_user.is_manager %}
+                            <li><a href="{{url_for('report.read_department')}}">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>{{_('Department')}}
+                            </a></li>
+
+                            <li><a href="{{url_for('report.statistics_department')}}">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>{{_('Statistics')}}
+                            </a></li>
+                        {% endif %}
+
+                        {% if current_user.is_hr or current_user.is_admin%}
+                            <li><a href="{{url_for('report.read_crew')}}">
+                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>{{_('Employee')}}
+                            </a></li>
+
+                            <li><a href="{{url_for('report.statistics_crew')}}">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>{{_('Statistics')}}
+                            </a></li>
+                        {% endif %}
+
+                        {% if current_user.is_admin %}
+                            <li><a href="/admin/">
+                                <i class="fa fa-cog" aria-hidden="true"></i>{{_('Admin')}}
+                            </a></li>
+                        {% endif %}
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>{{_('Account')}}<b class="caret"></b>
+                        </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('auth.change_password') }}">
+                                    <i class="fa fa-key" aria-hidden="true"></i>{{_('Change Password')}}</a>
+                                </li>
+
+                                <li><a href="{{ url_for('auth.change_username') }}">
+                                    <i class="fa fa-id-card" aria-hidden="true"></i>{{_('Change Username')}}</a>
+                                </li>
+
+                                <li><a href="{{ url_for('auth.logout') }}">
+                                    <i class="fa fa-sign-in" aria-hidden="true"></i>{{_('Exit')}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('auth.login')}}">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>{{_('Login')}}
+                        </a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- empty box -->
+    <div class="page-header">
+    </div>
+
+    <div class="container main-container">
+        <div class="row">
+            {% block container %}
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+
+                {% block page_content %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.1.0.min.js')}}"></script>
+    <!-- Bootstrap -->
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

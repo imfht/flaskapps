@@ -1,0 +1,116 @@
+{% extends "jam/base.html" %}
+
+{% block title %}{{ jam.title }}{% endblock %}
+
+{% block content %}
+<h1>
+    {{ jam.title }}
+
+    <small>{{ ("Theme: \"" + jam.theme + "\"") if jam.show_theme else "Theme not announced" }}</small>
+
+    {% if jam.get_status().code >= 1 %}
+        {% set r = current_user.get_participation(jam) if current_user.is_authenticated else None %}
+        <div class="pull-right">
+            {% if r %}
+                <span style="font-size: 8pt; vertical-align: middle; margin-right: 10px;">
+                    {% if r.team and r.team.members|length > 1 %}
+                        You already have a team, not marked as "Looking for a team"
+                    {% else %}
+                        You are {% if not r.show_in_finder %}<b>not</b>{% endif %} marked as "Looking for a team"
+                        &ndash;
+                        <a href="{{ url_for('jam_toggle_show_in_finder', jam_slug = jam.slug) }}" class="link">Toggle</a>
+                    {% endif %}
+                </span>
+                <a class="btn btn-danger" href="{{ url_for('jam_cancel_participation', jam_slug = jam.slug) }}">Cancel participation</a>
+            {% else %}
+            <a class="btn btn-success" href="{{ url_for('jam_participate', jam_slug = jam.slug) }}">Participate</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</h1>
+
+<div class="row-fluid">
+    <div class="span4">
+        <h2>Jam Details</h2>
+        <table class="details full">
+            <tr><th>Announced</th><td>{{ jam.announced | humantime }}</a></td></tr>
+            <tr><th>Time of jam</th><td>{{ jam.start_time | humantime }}</td></tr>
+            <tr><th>Duration</th><td>{{ jam.duration }} hours</td></tr>
+            <tr><th>Max team size</th><td>{{ jam.team_limit or "Unlimited" }}</td></tr>
+            {% if status.code == 2 %}
+            <tr><th>Time left</th><td>
+                <span class="mini-countdown" time="{{ jam.end_time }}">
+                    <span class="time">{{ (jam.end_time - current_datetime) | countdowndelta }}</span>
+                </span>
+
+                <a href="{{ url_for('countdown', jam_slug = jam.slug) }}" class="pull-right">
+                    Countdown
+                </a>
+            </td></tr>
+            {% endif %}
+            {% if status.code == 3 or status.code == 4 %}
+            <tr><th>Rating deadline</th><td>{{ jam.rating_end | humantime(short = False) }}</td></tr>
+            {% endif %}
+
+            <tr>
+                <th>Participants</th>
+                <td>{{ jam.participations | length }} users
+                    <a class="pull-right" href="{{ url_for('map', mode = 'jam', id = jam.id) }}">Show map</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Teams</th>
+                <td>{{ jam.teams | length }} teams</td>
+            </tr>
+            <tr>
+                <th>Games</th>
+                <td>{{ jam.games | length }} games</td>
+            </tr>
+        </table>
+
+        {% if jam.get_status().code <= 3 %}
+        {% set teams = jam.livestream_teams %}
+        {% if teams %}
+            <h2>Livestreams</h2>
+            <ul>
+            {% for team in teams %}
+                {% for line in team.livestreams.splitlines() %}
+                    <li><a href="{{ line }}">{{ team.game.name if team.game and team.game.name else team.name }}
+                        {% if team.livestreams.splitlines() | length > 1 %}
+                            ({{ loop.index }})
+                        {% endif %}
+                    </a></li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% elif jam.get_status().code == 5 %}
+        <h2>Winners</h2>
+        {% if jam.games %}
+            <ol>
+                {% for game in jam.games_by_score()[:3] %}
+                    <li>
+                        <a href="{{ game.team.url() }}">{{ game.team.name }}</a> with
+                        <b><a href="{{ game.url() }}">{{ game.title }}</a></b>
+                        ({{ "%.1f" | format(game.score) }})
+                    </li>
+                {% endfor %}
+            </ol>
+            <p><a class="btn btn-small" href="{{ url_for('jam_games', jam_slug = jam.slug) }}">Show ALL THE GAMES!</a></p>
+        {% else %}
+            <p>There were no games :(</p>
+        {% endif %}
+        {% endif %}
+
+    </div>
+    <div class="span8">
+        <h2>Description</h2>
+        {{ (jam.description or "*This jam has no description.*") | markdown }}
+
+        {% if jam.restrictions %}
+            <h2>Restriction</h2>
+            {{ jam.restrictions | markdown }}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

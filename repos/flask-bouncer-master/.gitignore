@@ -1,0 +1,48 @@
+*.py[cod]
+
+# PyCharm
+.idea/*
+.idea/libraries/sass_stdlib.xml
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+.eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+__pycache__
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+.DS_Store
+
+docs/_build
+
+# PyCharm defaults to this directory for virtualenv installations on windows
+venv

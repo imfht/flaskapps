@@ -1,0 +1,71 @@
+{% extends 'layout/base.html' %}
+{% from 'forms/_form.html' import form_header, form_rows, form_footer  %}
+
+{# Implement this macro in child templates
+    {% macro result_group_entries(items) %}
+        {% for item in items %}
+            <tr class="result-group-entry">
+                <td>{{ item }}</td>
+            </tr>
+        {% endfor %}
+    {% endmacro %}
+#}
+
+{% block page_class %}fixed-width-standalone-page{% endblock %}
+{% block content %}
+    <div class="i-box-group vert">
+        <div class="i-box">
+            {{ form_header(form, method='get', action=action) }}
+            {{ form_rows(form) }}
+            {% call form_footer(form) %}
+                <input class="i-button big highlight" type="submit" value="{% trans %}Search{% endtrans %}">
+            {% endcall %}
+        </div>
+
+        {% if results is not none %}
+            <div class="i-box overview-results">
+                {% if not results %}
+                <table>
+                    <tr class="no-results-title">
+                        <td>
+                            {% trans %}No results found{% endtrans %}
+                        </td>
+                    </tr>
+                </table>
+                {% else %}
+                    {% block result_list %}
+                        <table>
+                            {% for key, items in results.items() %}
+                                <tr class="result-group-title">
+                                    <td colspan="100%">
+                                        {{ result_group_title(key) if result_group_title is defined else key }}
+                                    </td>
+                                </tr>
+                                {{ result_group_entries(items) }}
+                            {% endfor %}
+                        </table>
+                    {% endblock %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            var mapping = {
+                '#abs_start_date': '#rel_start_date',
+                '#rel_start_date': '#abs_start_date',
+                '#abs_end_date': '#rel_end_date',
+                '#rel_end_date': '#abs_end_date'
+            };
+
+            $(Object.keys(mapping).join(', ')).on('input change', function() {
+                if ($(this).val()) {
+                    $(mapping['#' + this.id]).val('');
+                }
+            });
+        })();
+    </script>
+{% endblock %}

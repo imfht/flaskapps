@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.search {
+  padding: 12rpx 18rpx;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 74rpx;
+  background-color: #f7f7f7;
+  border-radius: 40rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  font-size: 34rpx;
+}
+
+.body {
+  flex: 1;
+  position: relative;
+}
+
+.classify {
+  height: 100%;
+  width: 180rpx;
+  background: #fff;
+  float: left;
+}
+
+.classify-item {
+  padding: 24rpx;
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.classify-active {
+  background: #0068c4;
+  color: #fff;
+}
+
+.novel {
+  height: 100%;
+  width: calc(100vw - 180rpx);
+  box-sizing: border-box;
+  position: absolute;
+  left: 180rpx;
+  padding: 20rpx;
+}
+
+.novel-item {
+  width: 50%;
+  box-sizing: border-box;
+  height: 300rpx;
+  padding: 20rpx 30rpx;
+  float: left;
+}
+
+.novel-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.novel-cover {
+  width: 100%;
+  height: 100%;
+  box-shadow: 6rpx 10rpx 6rpx #ccc;
+  border-radius: 16px;
+}
+
+.novel-novelname {
+  font-size: 34rpx;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+.novel-authorname {
+  font-size: 26rpx;
+  position: absolute;
+  top: 70%;
+  right: 10%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}

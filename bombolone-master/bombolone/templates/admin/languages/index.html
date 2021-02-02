@@ -1,0 +1,32 @@
+{% extends "admin/index.html" %}
+
+{% block title %} {{ g.languages.title }} {% endblock %}
+
+{% block nav_active_4 %}class="active"{% endblock %}
+{% block ng_section %}ng-controller="LanguagesCtrl"{% endblock %}
+
+{% block admin %}
+<h2>{{ g.languages.name }}</h2>
+{% include "error/message_old.html" %}
+
+{% if my.rank < 15 %}
+<a href="/admin/languages/new/" title="" class="btn btn-primary">{{ g.languages.create }}</a>
+{% endif %}
+
+<table table-admin table-type="languages" table-list="items_list" on-remove="remove"></table>
+
+{% if my.rank < 15 %}
+<div>
+  <button tabindex="20" type="submit" class="btn btn-primary" 
+  on-click="">{{ g.admin['save'] }}</button>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js_module_names %}
+  'bombolone.controllers.languages',
+{% endblock %}
+
+{% block js_module_files %}
+  "{{ '/static/js/%s' % js_version['admin/languages'] }}",
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends '_layout.html' %}
+{% import 'partials/helper.html' as helper with context %}
+
+{% block mainbody %}
+<div class="container" data-aos="fade-in">
+  {% block pagehead %}
+  <div class="section-heading">
+    {% block pagetitle %}
+    {% if cat %}
+      <h2>{{_('Category')}}: {{cat.text}}</h2>
+    {% elif tag %}
+      <h2>{{_('Tag')}}: {{tag.text}}</h2>
+    {% else %}
+      <h2>{{_('Articles')}}</h2>
+    {% endif %}
+    {% endblock %}
+    <div class="line-dec"></div>
+  </div>
+  {% endblock %}
+  {% block content %}
+  {% for post in posts|sort(True, attribute='date') %}
+    {% if loop.index0 is even %}
+      {{ helper.render_left_post(post) }}
+    {% else %}
+      {{ helper.render_right_post(post) }}
+    {% endif %}
+  {% endfor %}
+
+  {% if paginate %}
+  <div class="post-item d-flex justify-content-between">
+    <div class="white-button" {% if not paginate.has_prev %}style="visibility: hidden;"{% endif %}>
+      <a href="{{url_for('home', page=paginate.prev_num)}}" rel="prev">
+        <i class="fa fa-fw fa-angle-left"></i> {{_('Newer Posts')}}
+      </a>
+    </div>
+    <div class="white-button" {% if not paginate.has_next %}style="visibility: hidden;"{% endif %}>
+      <a href="{{url_for('home', page=paginate.next_num)}}" rel="next">
+        {{_('Older Posts')}} <i class="fa fa-fw fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {% endblock %}
+</div>
+<div class="right-panel" data-aos="fade-left">
+  <div class="segment">
+    <h4>{{_('Categories')}}</h4>
+    <div>
+      {% for cat in categories %}
+      <div class="py-1">
+        <a href="{{ url_for('category', cat_id=cat.id) }}"><i class="fa fa-folder-open"></i> {{ cat.text }}</a>
+        <span class="badge badge-light">{{ cat.posts.count() }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="segment">
+    <h4>{{_('Tags')}}</h4>
+    <div class="tags">
+      {% for tag in tags %}
+      <a href="{{ tag.url }}" class="button"><i class="fa fa-tag"></i> {{ tag.text }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% block right_extra %}{% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,2 @@
+graft {{{ application.module }}}
+include *.cfg *.rst *.in *.txt *.ini *.mako *.html *.js *.css *.jpg *.gif

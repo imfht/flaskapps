@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% from "utils.html" import pager %}
+
+{% block content %}
+<div class="ui feed gossip-list">
+    {% for gossip in gossip_list %}
+    <div id="gossip-{{ gossip.id }}" class="event gossip-item{% if gossip.gift %} gossip-with-gift{% endif %}">
+        <div class="label">
+            <a href="http://www.renren.com/profile.do?id={{ gossip.guestId }}" target="_blank">
+                <img src="{{ gossip.headPic }}">
+            </a>
+        </div>
+        <div class="content">
+            <div class="summary">
+                <a href="http://www.renren.com/profile.do?id={{ gossip.guestId }}" target="_blank">{{ gossip.guestName }}</a>
+                <div class="date">
+                    {{ gossip.t.strftime("%Y-%m-%d %H:%M") }}
+                {% if gossip.wap %}
+                    <img class="mobile-tag" src="{{ url_for('static', filename='mobile.gif') }}" title="手机发送">
+                {% endif %}
+                {% if gossip.whisper %}
+                    <img class="whisper-tag" src="{{ url_for('static', filename='lock_red.gif') }}"> 悄悄话
+                {% endif %}
+                </div>
+            </div>
+            <div class="extra text">
+                {{ gossip.content|safe }}
+                {% if gossip.attachPic %}
+                <div class="gossip-attach">
+                    <img src="{{ gossip.attachPic }}">
+                </div>
+                {% endif %}
+                {% if gossip.gift %}
+                <img class="gossip-gift" src="{{ gossip.gift }}">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{{ pager('gossip_list_page', page, total_page) }}
+
+{% endblock %}

@@ -1,0 +1,31 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.i-tag {
+  @extend %semantic-background;
+  @extend %default-border-radius;
+  padding: 0.3em 0.6em;
+  font-weight: bold;
+  box-sizing: initial;
+
+  &.outline {
+    @extend %semantic-outline;
+    background: transparent;
+
+    @include _semantic-versions() {
+      background: transparent;
+    }
+
+    &.dashed {
+      border-style: dashed;
+    }
+
+    &.contrast {
+      background: white;
+    }
+  }
+}

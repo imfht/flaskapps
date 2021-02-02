@@ -1,0 +1,37 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'rb:styles/palette';
+@import 'rb:styles/util';
+
+.map-dimmer:global(.ui.dimmer) {
+  @include remaining-screen-height();
+}
+
+.areas-dropdown:global(.dropdown) {
+  min-width: 10em;
+
+  :global(.menu .item) {
+    font-size: 1em;
+  }
+}
+
+.map-control-content {
+  background-color: $white;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  font-size: 0.85em;
+}
+
+.show-all-button:global(.ui.button) {
+  background-color: #fff;
+  margin: 0;
+}
+
+.map-context {
+  height: 100%;
+}

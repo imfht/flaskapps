@@ -1,0 +1,22 @@
+pyms:
+  services:
+    requests:
+      data: ""
+    swagger:
+      path: "project/swagger"
+      file: "swagger.yaml"
+      url: "/ui/"
+      project_dir: "project.views"
+    tracer:
+      client: "jaeger"
+      host: "localhost"
+      component_name: "Python Microservice"
+  config:
+    DEBUG: true
+    TESTING: false
+    APP_NAME: Films&Actors
+    APPLICATION_ROOT : "/"
+    SQLALCHEMY_TRACK_MODIFICATIONS: true
+    SECRET_KEY: "gjr39dkjn344_!67#"
+    DATABASE: db.sqlite3
+    SQLALCHEMY_DATABASE_URI: sqlite:///project/db.sqlite3

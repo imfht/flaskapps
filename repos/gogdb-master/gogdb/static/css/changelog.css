@@ -1,0 +1,51 @@
+.col-change-id {
+  width: 0px;
+  text-align: right;
+  padding-right: 0px;
+}
+
+.col-change-name {
+  width: 100%;
+  text-align: left;
+}
+
+.col-change-icon {
+  width: 0px;
+}
+
+.col-change-desc {
+  width: 100%;
+  padding-left: 0px;
+}
+
+.col-change-date {
+  width: 0px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.color-add {
+  color: #00522a;
+}
+
+.color-del {
+  color: #b00005;
+}
+
+.color-change {
+  color: #004272;
+}
+
+.changelog-title {
+  line-height: 2.3rem;
+  font-size: 1.2rem;
+  padding: 0 0.6rem;
+  padding-top: 3px;
+  background-color: #e1e1e1;
+  border: 1px solid #c5c5c5;
+  border-bottom: 3px solid #f18e00;
+}
+
+.changelog-table tr:first-child {
+  border-top: none;
+}

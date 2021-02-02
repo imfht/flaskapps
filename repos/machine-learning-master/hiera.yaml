@@ -1,0 +1,37 @@
+---
+version: 5
+defaults:
+  datadir: /etc/puppetlabs/puppet
+  data_hash: yaml_data
+
+hierarchy:
+  - name: 'Puppetserver configurations'
+    path: hiera/puppetserver.yaml
+
+  - name: 'General build packages'
+    path: hiera/packages.yaml
+
+  - name: 'Dynamic reverse proxy configurations'
+    path: "hiera/reverse-proxy/%{::hostname}.yaml"
+
+  - name: 'General proxy configurations'
+    path: "hiera/reverse-proxy/nginx.yaml"
+
+  - name: 'Webserver configurations'
+    path: "hiera/webserver/%{::hostname}.yaml"
+
+  - name: 'Database configurations'
+    path: hiera/database.yaml
+
+  - name: 'Caching configurations'
+    path: hiera/cache.yaml
+
+  - name: 'General application configurations'
+    path: hiera/application.yaml
+
+  - name: 'General configurations'
+    path: hiera/common.yaml
+
+  - name: 'NodeJS build'
+    path: hiera/package.json
+    data_hash: json_data

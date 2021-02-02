@@ -1,0 +1,9 @@
+codecov
+flake8
+mypy
+pre-commit
+pytest
+pytest-cov
+pytest-mock
+sphinx
+sphinx_rtd_theme

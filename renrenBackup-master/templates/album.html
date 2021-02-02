@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% from "utils.html" import pager, like_list, comments_list %}
+
+{% block content %}
+<h2 class="ui dividing header">
+    {{ album.name }}
+    {% if album.desc %}
+    <div class="sub header">{{ album.desc }}</div>
+    {% endif %}
+</h2>
+
+<div class="ui cards photo-list">
+    {% for p in photos %}
+    <div id="photo-{{ p.id }}" class="card">
+        <div class="content">
+            <div class="header">{{ p.title|safe }}</div>
+            <div class="meta">
+                {{ p.t.strftime("%Y-%m-%d") }}
+            </div>
+        </div>
+        <a class="image" href="{{ url_for('photo_detail_page', photo_id=p.id) }}">
+            <img class="photo-snapshot" src="{{ p.src }}">
+        </a>
+        <div class="content entry-info">
+            {{ p.like }} 赞 / {{ p.share }} 分享 / {{ p.comment }} 评论 / {{ p.view }} 浏览
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{{ pager('album_detail_page', page, total_page, album.id) }}
+
+<div class="ui divider"></div>
+<div class="entry-info">
+    <span class="entry-stat">
+        {{ like_list(likes) }}
+        {% if album.like > 0 %}等{% endif %}
+        {{ album.like }} 赞 / {{ album.share }} 转 / {{ album.comment }} 评
+    </span>
+</div>
+<div class="ui divider"></div>
+{{ comments_list(comments) }}
+{% endblock %}

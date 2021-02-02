@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "TEMPLATE"
+version = "0.1.0"
+description = "Project description."
+authors = ["My Name <me@myself.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8.0"
+apispec = "*"
+aws-xray-sdk = "*"
+boto3 = "*"
+factory-boy = "*"
+faker = "*"
+flask = "*"
+flask-cors = "*"
+flask-jwt-extended = "*"
+flask-migrate = "*"
+flask-script = "*"
+flask-smorest = "*"
+flask-sqlalchemy = "*"
+jetkit-flask = "==8.0.0"
+marshmallow = "*"
+marshmallow-enum = "*"
+marshmallow-sqlalchemy = "*"
+nplusone = "*"
+psycopg2-binary = "*"
+aurora-data-api = "*"
+sqlalchemy-aurora-data-api = "*"
+sqlalchemy = "*"
+python-dateutil = "==2.8.0"
+requests = "*"
+
+[tool.poetry.dev-dependencies]
+bento-cli = "*"
+black = "^19.3b0"
+cfn-lint = "*"
+flake8 = "*"
+flake8-docstrings = "^1.5.0"
+mypy = "^0.770"
+pre-commit = "1.18.3"
+pytest = "*"
+pytest-factoryboy = "*"
+pytest-flask-sqlalchemy = "*"
+pytest-postgresql = "*"
+pytest-xdist = "*"
+
+[tool.poetry.extras]
+doc = ["sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme"]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

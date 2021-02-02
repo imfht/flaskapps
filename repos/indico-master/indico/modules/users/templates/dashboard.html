@@ -1,0 +1,237 @@
+{% extends 'layout/management_page.html' %}
+{% from 'users/_category.html' import suggested_category, user_category %}
+{% from 'users/_labels.html' import labels %}
+
+{% macro _format_event_times(event) %}
+    {% if event.start_dt.astimezone(session.tzinfo).date() != event.end_dt.astimezone(session.tzinfo).date() %}
+        {{ event.start_dt|format_datetime }} - {{ event.end_dt|format_datetime }}
+    {% else %}
+        {{ event.start_dt|format_time }} - {{ event.end_dt|format_time }}
+    {% endif %}
+    ({{ session.tzinfo.zone }})
+{% endmacro %}
+
+{% macro _format_event_time(event) %}
+    {% if event.start_dt <= now() < event.end_dt %}
+        {% trans %}Now{% endtrans %}
+    {% else %}
+        {{ event.start_dt | format_pretty_date(tzinfo=session.tzinfo) }}
+    {% endif %}
+{% endmacro %}
+
+{% block page_class %}user-dashboard{% endblock %}
+{% block banner_class %}user-dashboard{% endblock %}
+
+
+{% block banner_title -%}
+    {% trans %}Dashboard{% endtrans %}
+{%- endblock %}
+
+{% block banner_actions -%}
+    <div id="dashboard-calendar-link" class="calendar-ics-link"></div>
+{% endblock %}
+
+{% block content %}
+    <div class="dashboard-tab">
+        <div class="quick-access-pane">
+            <div class="dashboard-col">
+                <div class="your-details">
+                    <div class="avatar-image">
+                        <img src="{{ user.avatar_url }}" alt="" class="ui large circular label">
+                    </div>
+                    <div class="your-details-wrapper">
+                        <h3>{{ user.full_name }}</h3>
+                        <div class="your-labels">
+                            {% if config.DEBUG %}
+                                <div class="ui small label">
+                                    ID
+                                    <div class="detail">{{ user.id }}</div>
+                                </div>
+                            {% endif %}
+                            {{ labels(user) }}
+                            <br>
+                            <div class="ui small label">
+                                {% trans %}Last login{% endtrans %}
+                                <div class="detail">
+                                    {% if user.last_login_dt %}
+                                        {{ user.last_login_dt | format_datetime }}
+                                    {% else %}
+                                        {% trans %}Never{% endtrans %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if user.affiliation %}
+                            <div>
+                                <i class="icon-users"></i><span>{{ user.affiliation }}</span>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <i class="icon-mail"></i><span>{{ user.email }}</span>
+                        </div>
+                        {% if user.phone %}
+                            <div>
+                                <i class="icon-phone"></i><span>{{ user.phone }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="actions">
+                        <a class="ui icon button" href="{{ url_for('users.user_profile') }}">
+                            <i aria-hidden="true" class="cog icon"></i>
+                            {% trans %}Settings{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+                <div class="dashboard-box">
+                    <h3>
+                        {% trans %}Your events at hand{% endtrans %}
+                    </h3>
+                    <ol>
+                        {% for event, roles in linked_events %}
+                            <li id="event-{{ event.id }}" class="flexrow">
+                                <span class="event-date" title="{{ _format_event_times(event) }}">
+                                    {{ _format_event_time(event) }}
+                                </span>
+                                <span class="event-title ellipsis f-self-stretch">
+                                    <a href="{{ event.url }}">
+                                        {{ event.get_verbose_title(show_series_pos=true) }}
+                                    </a>
+                                    {{ event.get_label_markup('mini') }}
+                                </span>
+                                <span class="item-legend">
+                                    <span {% if roles.management %}title="{% trans %}You have management rights{% endtrans %}"{% endif %}
+                                            class="icon-medal contextHelp {% if roles.management %}active{% endif %}"></span>
+                                    <span {% if roles.reviewing %}title="{% trans %}You are a reviewer{% endtrans %}"{% endif %}
+                                            class="icon-user-reading contextHelp {% if roles.reviewing %}active{% endif %}"></span>
+                                    <span {% if roles.attendance %}title="{% trans %}You are an attendee{% endtrans %}"{% endif %}
+                                            class="icon-ticket contextHelp {% if roles.attendance %}active{% endif %}"></span>
+                                </span>
+                            </li>
+                        {% else %}
+                            <li class="no-event">
+                                <span class="event-title italic text-superfluous">
+                                    {% trans %}You have no events.{% endtrans %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                {% if suggested_categories %}
+                    <div id="suggestedCategories" class="dashboard-box suggestions">
+                        <h3>{% trans %}You might be interested in the following categories...{% endtrans %}</h3>
+                        <ol>
+                            {% for category in suggested_categories %}
+                                {{ suggested_category(category.categ, category.path) }}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="dashboard-col">
+                <div id="yourCategories" class="dashboard-box">
+                    <h3>{% trans %}Your categories{% endtrans %}</h3>
+                    <ol>
+                        {% if not categories %}
+                            <li class="no-event">
+                                <span class="event-title italic text-superfluous">
+                                    {% trans %}You have no categories.{% endtrans %}
+                                </span>
+                            </li>
+                        {% else %}
+                            {% for category in categories.values() %}
+                                {{ user_category(category.categ, category.path, category.managed) }}
+                            {% endfor %}
+                        {% endif %}
+                    </ol>
+                </div>
+                <div id="happeningCategories" class="dashboard-box">
+                    <h3>{% trans %}Happening in your categories{% endtrans %}</h3>
+                    <ol>
+                        {% if not categories %}
+                            <li class="no-event">
+                                <span class="event-title italic text-superfluous">
+                                    {% trans %}You have no categories.{% endtrans %}
+                                </span>
+                            </li>
+                        {% elif not categories_events %}
+                            <li class="no-event">
+                                <span class="event-title italic text-superfluous">
+                                    {% trans %}Nothing happening in your categories.{% endtrans %}
+                                </span>
+                            </li>
+                        {% else %}
+                            {% for event in categories_events %}
+                                <li class="flexrow">
+                                    <span class="event-date f-self-no-shrink"
+                                          title="{{ _format_event_times(event) }}">
+                                        {{ _format_event_time(event) }}
+                                    </span>
+                                    <div class="flexcol ellipsis">
+                                        <span class="event-title ellipsis">
+                                            <a href="{{ event.url }}">
+                                                {{ event.get_verbose_title(show_series_pos=true) }}
+                                            </a>
+                                            {{ event.get_label_markup('mini') }}
+                                        </span>
+                                        <span class="event-category">
+                                            {{ event.category.title }}
+                                        </span>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            {% if suggested_categories %}
+                $('.suggestion-favorite').on('click', function(e) {
+                    var container = $(this).closest('li.category-box');
+                    var $this = $(this);
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: $this.data('href'),
+                        method: 'PUT',
+                        error: handleAjaxError,
+                        success: function() {
+                            container.find('.category-action-extra').remove();
+                            container
+                                .find('.category-action')
+                                .replaceWith($('<span>', {
+                                    'class': 'category-action icon-star active',
+                                    'title': $T('You have favourited this category')
+                                }));
+                            container.appendTo('#yourCategories ol');
+                            if(!$('#suggestedCategories ol > li').length) {
+                                $('#suggestedCategories').remove();
+                            }
+                        }
+                    });
+                });
+
+                $('.suggestion-remove').on('click', function(e) {
+                    var container = $(this).closest('li.category-box');
+                    var $this = $(this);
+                    e.preventDefault();
+
+                    $.ajax({
+                        url: $this.data('href'),
+                        method: 'DELETE',
+                        error: handleAjaxError,
+                        success: function() {
+                            container.remove();
+                            if (!$('#suggestedCategories ol > li').length) {
+                                $('#suggestedCategories').remove();
+                            }
+                        }
+                    });
+                });
+            {% endif %}
+        });
+    </script>
+{% endblock %}

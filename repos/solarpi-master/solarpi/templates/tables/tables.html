@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block page_title %}
+
+    Tables - Solar Pi
+
+{% endblock %}
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tables</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Last 30 days summary
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="text-right">Date</th>
+                                    <th class="text-right">Daily kWh yielded</th>
+                                    <th class="text-right">Imported kWh</th>
+                                    <th class="text-right">Exported kWh</th>
+                                    <th class="text-right">Consumed kWh</th>
+                                    <th class="text-right">Total kWh yielded</th>
+                                    <th class="text-right">Max. Output in kW</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for d in data %}
+                                    <tr>
+                                        <td class="text-right">{{ d.created_at }}</td>
+                                        <td class="text-right">{{ '%0.2f'| format(d.daily_energy|float) }}</td>
+                                        <td class="text-right">{{ '%0.2f'| format(d.daily_import) }}</td>
+                                        <td class="text-right">{{ '%0.2f'| format(d.daily_export) }}</td>
+                                        <td class="text-right">{{ '%0.2f'| format(d.daily_energy + d.daily_import - d.daily_export) }}</td>
+                                        <td class="text-right">{{ '%d'| format(d.total_energy) }}</td>
+                                        <td class="text-right">{{ '%d'| format(d.max_output) }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        $('#side-menu').find('a').each(function (i) {
+            $(this).removeClass('active');
+        });
+        $('#tables').addClass("active");
+    </script>
+{% endblock %}

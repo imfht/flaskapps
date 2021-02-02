@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=360, initial-scale=0.75 user-scalable=no">
+        {% block header_ext%}
+        {% endblock %}
+        <title>
+            {% block title %}{% if title %}{{ title }}{% endif %}-{{_('Speaker for children')}}{% endblock %}
+        </title>
+
+        <!-- Bootstrap -->
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url_for('voice.index') }}">{{_('Index')}}</a>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url_for('voice.hot') }}">{{ _('Hottest Topics') }}</a></li>
+                        <li><a href="{{ url_for('voice.all_nodes') }}">{{ _('All Nodes') }}</a></li>
+                    </ul>
+
+                    {% if current_user.is_authenticated %}
+                    <div class="navbar-form navbar-right">
+                        <a class="btn btn-info" id="new-btn" href=" {{url_for('voice.create')}}">
+                            {{ _('New Topic') }}
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="navbar-form navbar-right">
+                        <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                          <button type="button" class="btn btn-info btn-primary dropdown-toggle" data-toggle="dropdown">
+                            {{ _('Sign In?') }}  <b class="caret"></b>
+                          </button>
+                            <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('user.signin') }}">{{ _('Sign In?') }} </a></li>
+                            <li><a href="{{ url_for('user.reg') }}">{{_('Register Account') }}?</a></li>
+                            <li><a href="{{ url_for('user.password_reset_request') }}">{{ _('Forget Password?') }}</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <div class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input onkeydown="if(event.keyCode==13){search();}" type="text" id="search" class="form-control" name="search" placeholder="{{ _('Enter Key Words') }}">
+                        </div>
+                        <a class="btn btn-default" id="search-btn">
+                            {{ _('Search') }}
+                        </a>
+                    </div>
+                </div>
+            </div><!--end nav container-->
+        </nav><!--end nav-->
+
+        <div id="wrap">
+            <div class="container" id="main">
+                <div class="row">
+                    {% block inside_row %}
+                    {% endblock %}
+                </div><!--end outter row-->
+            </div><!--end main-->
+        </div><!--end wrap-->
+
+        <footer id="footer">
+            <div class="container clearfix">
+                <p class="muted credit pull-right"> {{ _('copyright by xuezaigds@gmail.com') }}
+                </p>
+            </div>
+        </footer>
+
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+        {% block footer_ext %}{% endblock %}
+    </body>
+</html>

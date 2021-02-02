@@ -1,0 +1,7 @@
+formatter:
+  - clippy: {}
+  - histo: {}
+tools:
+  hadolint:
+    ignores: []
+    run: true

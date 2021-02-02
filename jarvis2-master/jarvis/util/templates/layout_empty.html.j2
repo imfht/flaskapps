@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <!-- the following divs can be removed -->
+    <div class="col-6">
+      <h1>Oh hai!</h1>
+      <p>
+        Your dashboard template has been created. Here's some example markup for
+        the <span style="color: #e7ad52">yr</span> widget:
+      </p>
+      <pre>
+<code style="color: #90ca77">
+{% if is_job_enabled('yr') %}
+&lt;div class="col-3"&gt;
+  &lt;div data-widget="yr"&gt;&lt;/div&gt;
+&lt;/div&gt;
+{% endif %}
+</code>
+      </pre>
+      <p>
+        See <code style="color: #e7ad52">jarvis/templates/layout.html</code>
+        for more examples.
+      </p>
+    </div>
+    <div class="col-3">
+      <p>Resulting widget:</p>
+      <div data-widget="yr"></div>
+    </div>    
+  </div>
+  <!-- end -->
+  <!-- put widget elements here -->
+</div>

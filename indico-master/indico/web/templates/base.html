@@ -1,0 +1,37 @@
+{#- Base template for standalone pages (no "indico look") -#}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Indico{% if self.title() %} - {% endif %}{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" id="csrf-token" content="{{ session.csrf_token }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ indico_config.IMAGES_BASE_URL }}/indico.ico">
+
+    <script type="text/javascript" src="{{ url_for('assets.i18n_locale', locale_name=session.lang) }}"></script>
+    <script type="text/javascript" src="{{ url_for('assets.i18n_locale_react', locale_name=session.lang) }}"></script>
+    <script type="text/javascript" src="{{ url_for('assets.js_vars_global') }}"></script>
+
+    <script>
+        window.CKEDITOR_BASEPATH = {{ url_for('assets.dist', filename='js/ckeditor/')|tojson() }};
+    </script>
+
+    {{ webpack['common.css'] }}
+    {{ webpack['common.js'] }}
+    {{ webpack['react.js'] }}
+    {{ webpack['semantic-ui.js'] }}
+    {{ webpack['semantic-ui.css'] }}
+    {{ webpack['jquery.css'] }}
+    {{ webpack['jquery.js'] }}
+    {{ webpack['main.css'] }}
+    {{ webpack['main.js'] }}
+    {{ webpack['outdatedbrowser.js'] }}
+    {{ webpack['outdatedbrowser.css'] }}
+    {{ webpack['__custom.js'] }}
+    {{ webpack['__custom.css'] }}
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+</body>
+</html>

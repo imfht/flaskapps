@@ -1,0 +1,9 @@
+
+include README.md
+include example.py
+include example.html
+
+include flask_googlemaps/templates/googlemaps/gmapjs.html
+include flask_googlemaps/templates/googlemaps/gmap.html
+
+recursive-include flask_googlemaps/templates/googlemaps  *

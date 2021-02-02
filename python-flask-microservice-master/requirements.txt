@@ -1,0 +1,6 @@
+Flask
+connexion
+Flask-Injector
+fastavro
+elasticsearch
+boto

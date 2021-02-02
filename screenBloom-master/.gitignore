@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+
+app/static/images/*
+app/backup/*
+app/tests/*
+website/*
+
+config.cfg
+
+randomColor.js
+*.txt
+color_converter.py
+rgb_cie.py
+ssdp.py
+setup.py
+__init__.py

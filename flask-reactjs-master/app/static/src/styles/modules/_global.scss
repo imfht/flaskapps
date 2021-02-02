@@ -1,0 +1,26 @@
+.offset-top {
+    margin-top:30px;
+}
+
+.social-links a {
+    width:100%;
+    margin:5px 0;
+}
+    @media (min-width: 768px) {
+        .social-links a {
+            width:49%;
+            margin:0;
+        }
+    }
+
+.cf:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.cf { display: inline-block; }
+* html .cf { height: 1%; }
+.cf { display: block; }

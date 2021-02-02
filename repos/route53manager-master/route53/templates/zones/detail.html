@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block breadcrumbs %}
+  <li><a href="{{ url_for('zones.zones_list') }}">Zones</a></li>
+  <li>{{ zone['Name'] }}</li>
+{% endblock %}
+
+{% block body %}
+<h2>Hosted Zone "{{ zone['Name'] }}"</h2>
+<dl>
+  <dt>Id:</dt>
+  <dd>{{ zone['Id']|shortid }}</dd>
+  <dt>Nameservers:</dt>
+  {% for ns in nameservers %}
+  <dd>{{ ns }}</dd>
+  {% endfor %}
+</dl>
+{% endblock %}

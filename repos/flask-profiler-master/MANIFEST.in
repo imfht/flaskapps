@@ -1,0 +1,7 @@
+include *.txt
+include *.md
+include setup.py
+include LICENSE
+graft flask_profiler/static/
+recursive-include flask_profiler/static *
+global-exclude *.pyc

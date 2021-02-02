@@ -1,0 +1,52 @@
+Simblin v0.4
+------------
+* major redesign
+    * removed next/prev links
+    * show_posts view now lists post in a minimal fashion
+* atom feed
+
+
+Simblin v0.3
+------------
+
+* decide if comments should be allowed for a blog post
+* disqus comments support
+* tab key works like an editor in textarea
+* static content versioning
+* post visibility (for drafts)
+* major redesign
+
+
+Simblin v0.2
+------------
+
+* major site redesign
+* category support
+* archives
+    * create categories on archives page
+    * tag cloud
+* ajax post deletion
+* reregistration
+
+
+Simblin v0.1
+------------
+
+* registering (only one user)
+* login/logout
+* blog post creation
+* view all blog posts
+* view one blog post
+* update a blog post
+* delete a blog post
+* associate tags with blogpost
+    * automatically delete unused tags
+    * ensured uniqueness of tags
+* message flashing (feedback)
+* simple design
+* redirection to last visited page after login/logout/...
+* built on sqlalchemy
+* pagination
+* view all posts of a tag
+* ajax preview
+* markdown support

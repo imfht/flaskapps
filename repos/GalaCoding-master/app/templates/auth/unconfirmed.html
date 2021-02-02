@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}GalaCoding - 未确认{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>
+        {% if current_user.is_authenticated %}
+            {{ current_user.username }}
+        {% endif %}
+    </h1>
+</div>
+<div class="text-left">
+    <p>
+        您好，您还没有确认邮件，如果您没有收到邮件或者认证过期，请<a href="{{ url_for('auth.resend_confirm') }}">点击此</a>，来重发邮件。
+    </p>
+</div>
+{% endblock %}

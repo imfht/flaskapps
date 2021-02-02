@@ -1,0 +1,9 @@
+{% extends 'layouts/master.html' %}
+{% block title %}New contact{% endblock %}
+{% block body %}
+<h1>New contact</h1>
+<form action="{{ url_for('new_contact') }}" method="post">
+	{{ generate_fields(form) }}
+	<input type="submit" class="btn btn-success" value="Add">
+</form>
+{% endblock %}

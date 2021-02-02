@@ -1,0 +1,18 @@
+<div ng-show="recordsVM.invenioRecordsAlert" class="alert alert-{{recordsVM.invenioRecordsAlert.type || 'info'}} alert-dismissible fixed">
+  <div class="container">
+    <button type="button" class="close" ng-click="recordsVM.invenioRecordsAlert = null" aria-hidden="true">&times;</button>
+    <div ng-show="recordsVM.invenioRecordsAlert.data.message">
+      {{recordsVM.invenioRecordsAlert.data.message}}
+      <ul ng-show="recordsVM.invenioRecordsAlert.data.errors">
+        <li ng-repeat="err in recordsVM.invenioRecordsAlert.data.errors">
+          <span ng-show="err.field|fieldtitle:recordsVM.invenioRecordsForm">{{err.field|fieldtitle:recordsVM.invenioRecordsForm}}: </span>
+          {{err.message}}
+        </li>
+      </ul>
+      <small ng-if="recordsVM.invenioRecordsAlert.data.error_id">Error ID: {{recordsVM.invenioRecordsAlert.data.error_id}}</small>
+    </div>
+    <div ng-show='!recordsVM.invenioRecordsAlert.data.message && recordsVM.invenioRecordsAlert.type == "success"'>
+      <span ng-repeat="action in recordsVM.invenioRecordsAlert.action">{{ recordsVM.invenioRecordsArgs.templateParams.messages[action[0]].message }}</span>
+    </div>
+  </div>
+</div>

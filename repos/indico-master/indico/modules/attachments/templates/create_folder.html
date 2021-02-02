@@ -1,0 +1,28 @@
+{% from 'forms/_form.html' import form_header, form_footer, form_rows %}
+
+{% block content -%}
+    {{ form_header(form, id='attachment-folder-form')}}
+    {{ form_rows(form, skip=('protected', 'acl')) }}
+    {{ form_rows(form, fields=('protected',)) }}
+    {{ form_rows(form, fields=('acl',)) }}
+    {{ protection_message | safe }}
+    {% call form_footer(attach_form) %}
+        <input class="i-button big highlight" data-disabled-until-change type="submit" value="{% trans %}Submit{% endtrans %}">
+        <button class="i-button big" data-button-back>{% trans %}Cancel{% endtrans %}</button>
+    {% endcall %}
+    <script>
+        (function() {
+            'use strict';
+
+            var form = $('#attachment-folder-form');
+            aclIfProtected(
+                $('#{{ form.protected.id }}'),
+                $('#{{ form.acl.id }}'),
+                form.find('.protected-protection-message'),
+                form.find('.inheriting-protection-message'),
+                null,
+                form.find('.folder-protection-message')
+            );
+        })();
+    </script>
+{%- endblock %}

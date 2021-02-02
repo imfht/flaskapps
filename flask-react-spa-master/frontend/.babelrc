@@ -1,0 +1,40 @@
+{
+  "presets": [
+    ["env", { "modules": false, "loose": true }],
+    "react",
+    "stage-0"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-async-to-generator",
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "syntax-export-extensions",
+        "transform-export-extensions",
+        "react-hot-loader/babel"
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-async-to-generator",
+        "transform-class-properties",
+        "transform-object-rest-spread",
+        "syntax-export-extensions",
+        "transform-export-extensions"
+      ]
+    },
+    "test": {
+      "presets": [
+        ["env"],
+        "react",
+        "stage-0"
+      ],
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "transform-object-rest-spread",
+        "dynamic-import-node"
+      ]
+    }
+  }
+}

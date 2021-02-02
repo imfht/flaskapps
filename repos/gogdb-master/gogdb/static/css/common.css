@@ -1,0 +1,198 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  color: #212121;
+  background-color: #ccc;
+  font-family: 'Lato Latin', sans-serif;
+  min-height: 100%;
+}
+
+#page, #footer-content, #header-content {
+  width: 100%;
+  min-width: 640px;
+  max-width: 1000px;
+  margin: 0px auto;
+}
+
+#page {
+  margin: 20px auto;
+  flex-grow: 1;
+}
+
+header {
+  background-color: #212121;
+  border-bottom: 1px solid black;
+  color: #e4e4e4;
+}
+
+#header-content {
+  height: 48px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.header-item {
+  margin: 0 10px;
+}
+
+.header-item:first-child {
+  margin-left: 0;
+}
+
+.header-item:last-child {
+  margin-right: 0;
+}
+
+.header-spacer {
+  flex-grow: 1;
+}
+
+#header-logo {
+  width: 40px;
+  height: 40px;
+}
+
+#header-search {
+  display: inline-flex;
+  height: 32px;
+  width: 30%;
+  background-color: #333;
+  border-radius: 3px;
+}
+
+footer {
+  background-color: #212121;
+  color: #e4e4e4;
+  border-top: 1px solid black;
+}
+
+#footer-content {
+  height: 48px;
+  line-height: 48px;
+  position: relative;
+}
+
+.footer-right {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  text-align: right;
+}
+
+.footer-center {
+  position: absolute;
+  width: 100%;
+  height: 48px;
+  text-align: center;
+}
+
+th {
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  background-color: #e1e1e1;
+  width: 100%;
+}
+
+.shadow {
+  box-shadow: 0 1px 5px rgba(0,0,0,.15);
+}
+
+a, a:hover, a:focus {
+  text-decoration: underline;
+  color: inherit;
+}
+
+a.no-underline, a.no-underline:hover, a.no-underline:focus {
+  text-decoration: none;
+}
+
+a.hoveronly, a.hoveronly:focus {
+  text-decoration: none;
+}
+
+a.hoveronly:hover {
+  text-decoration: underline
+}
+
+a.hoverlight:hover {
+  color: white;
+}
+
+.rowborder tr {
+  border: 1px solid #c5c5c5;
+}
+
+.cellborder th, .cellborder td {
+  border: 1px solid #c5c5c5;
+}
+
+.textbox {
+  background-color: #e1e1e1;
+  padding: 10px;
+}
+
+.textbox p:first-child {
+  margin-top: 0px;
+}
+
+.textbox p:last-child {
+  margin-bottom: 0px;
+}
+
+.nobreak {
+  white-space: nowrap;
+}
+
+.nocss {
+  display: none;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-input, .search-button {
+  height: 100%;
+  font-size: inherit;
+  border-style: none;
+  background-color: inherit;
+  box-shadow: none;
+  color: inherit;
+}
+
+.search-input {
+  flex-grow: 1;
+  padding: 0 .4em;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-button {
+  cursor: pointer;
+}
+
+.pagination-container {
+  text-align: center;
+  margin: 20px 0;
+  color: #888888;
+}

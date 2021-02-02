@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-CN">
+    <title>人人网备份显示</title>
+    <meta charset="utf8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+
+    <link href="{{ url_for('static', filename='semantic.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='semantic.js') }}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}" media="all" />
+</head>
+
+<body class="body">
+    <div class="main-wrapper">
+    <div class="ui top fixed menu nav">
+        <nav class="ui container">
+            <a class="item{% if not request.path.split('/')[1] %} active{% endif %}" href="{{ url_for('index_page') }}">首页</a>
+            {% if g.user %}
+            <a
+                class="item{% if request.path.split('/')[2] == 'status' %} active{% endif %}"
+                href="{{ url_for('status_list_page', uid=g.user.uid, page=1) }}"
+            >状态</a>
+            <a
+                class="item{% if request.path.split('/')[1] == 'blog' or request.path.split('/')[2] == 'blog' %} active{% endif %}"
+                href="{{ url_for('blog_list_page', uid=g.user.uid, page=1) }}"
+            >日志</a>
+            <a
+                class="item{% if request.path.split('/')[1] in ['album', 'photo'] or request.path.split('/')[2] == 'album'  %} active{% endif %}"
+                href="{{ url_for('album_list_page', uid=g.user.uid, page=1) }}"
+            >相册</a>
+            <a
+                class="item{% if request.path.split('/')[2] == 'gossip' %} active{% endif %}"
+                href="{{ url_for('gossip_list_page', uid=g.user.uid, page=1) }}"
+            >留言板</a>
+            <div class="right item">
+                <img src="{{ g.user.headPic }}">
+                <span class="nav-name">{{ g.user.name }}</span>
+            </div>
+            {% endif %}
+        </nav>
+    </div>
+    <div class="main-container">
+        <div class="ui container">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui container">
+            <div class="entry-info">
+                generate by
+                <a href="https://github.com/whusnoopy/renrenBackup" target="_blank">
+                    <i class="github icon"></i>renrenBackup</a>
+                <span class="entry-stat">
+                    <i class="code icon"></i> with
+                    <i class="heart icon"></i> by whusnoopy
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

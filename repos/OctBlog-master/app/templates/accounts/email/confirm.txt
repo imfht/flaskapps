@@ -1,0 +1,13 @@
+Dear {{ user.username }},
+
+Welcome to OctBlog!
+
+To confirm your email please click on the following link:
+
+{{ url_for('accounts.confirm_email', token=token, _external=True) }}
+
+Sincerely,
+
+OctBlog Developer
+
+Note: replies to this email address are not monitored.

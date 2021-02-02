@@ -1,0 +1,8 @@
+.vscode
+build
+.python-version
+dist/
+.idea/
+__pycache__/
+podcats.egg-info/
+podcats.pyc

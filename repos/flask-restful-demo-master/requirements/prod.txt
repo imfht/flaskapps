@@ -1,0 +1,25 @@
+# Everything needed in production
+
+wheel
+
+# Flask
+Flask
+Flask-RESTful
+blinker
+
+# Database
+Flask-SQLAlchemy
+psycopg2
+
+# Migrations
+Flask-Migrate
+
+# Deployment
+gunicorn>=17.5
+gevent
+
+# Auth
+Flask-HTTPAuth
+
+# Monitoring
+opbeat[flask]==3.1.1

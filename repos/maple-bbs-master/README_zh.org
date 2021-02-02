@@ -1,0 +1,81 @@
+* maple-bbs
+
+  [[LICENSE][https://img.shields.io/badge/license-GPL3.0-blue.svg]]
+  [[https://www.python.org][https://img.shields.io/badge/python-3.4-brightgreen.svg]]
+
+  [[https://raw.githubusercontent.com/honmaple/maple-bbs/master/screenshooter/index.png]]
+  [[https://raw.githubusercontent.com/honmaple/maple-bbs/master/screenshooter/board.png]]
+  [[https://raw.githubusercontent.com/honmaple/maple-bbs/master/screenshooter/ask.png]]
+
+   *如果你在4月1日之前部署过，请使用升级脚本升级你的数据*
+
+   *重要!*,请修改升级脚本为你自己的数据库
+   #+BEGIN_SRC sh
+    # session1:old database
+    # session2:new database
+    python upgrade.py
+    python upgrade_count.py
+   #+END_SRC
+
+** 功能
+   + 注册，登陆,忘记密码
+   + 版块及节点分类
+   + 主题收藏
+   + 回复点赞
+   + 关注用户，节点，主题
+   + 隐私设置
+   + 可选markdown提问
+   + 节点rss
+   + 头像...
+   + 全文搜索(基于whoosh)
+
+** 安装
+   创建虚拟环境
+
+   #+BEGIN_SRC sh
+    mkvirtualenv forums
+   #+END_SRC
+
+*** 安装需要的包
+    #+BEGIN_SRC python
+    pip install -r requirements.txt
+    #+END_SRC
+
+*** 配置
+    #+BEGIN_SRC shell
+    mv config.example config.py
+    #+END_SRC
+    *记得修改配置文件*
+
+*** 初始化数据库
+    #+BEGIN_SRC python
+    python runserver.py db init
+    python runserver.py db migrate -m "first migrate"
+    python runserver.py db upgrade
+    #+END_SRC
+    或者
+    #+BEGIN_SRC sh
+    python runserver.py initdb
+    #+END_SRC
+
+*** 创建全文搜索索引
+    #+BEGIN_SRC sh
+    python runserver.py create_index
+    #+END_SRC
+
+*** 创建管理员账户
+    #+BEGIN_SRC shell
+    python runserver.py create_user
+    #+END_SRC
+
+*** 登陆并访问后台
+    #+BEGIN_SRC sh
+    python runserver.py
+    #+END_SRC
+    然后访问*forums.localhost:8000/admin*去增加一些东西
+
+** 演示
+   请访问 [[https://forums.honmaple.org][forums.honmaple.org]]
+
+** License
+   maple-bbs is open-sourced software licensed under the GPL3 license

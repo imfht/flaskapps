@@ -1,0 +1,160 @@
+
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Tiny Google{% endblock %}
+
+{% block head %}
+  {{super()}}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/images/branding/google_shortcut.ico" rel="shortcut icon">
+  <link href="/static/css/index.css" type="text/css" rel="stylesheet" >
+  <!-- <script src="http://cdn.rawgit.com/phi-jp/phina.js/v0.2.0/build/phina.js"></script> -->
+{% endblock %}
+
+{% block navbar %}
+<div id="navbar" class="navbar navbar-fixed-top nav" role="navigation">
+  <a href="https://github.com/yrq110/TinyGoogle" target="_blank" style="positon:fixed"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand nav_a" href="/">
+          Tiny Google
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav" id="nav_ul">
+          <li style="background:#4285f4;"><a class="nav_a">G</a></li>
+          <li style="background:#ea4335;"><a class="nav_a">o</a></li>
+          <li style="background:#fbbd0b;"><a class="nav_a">o</a></li>
+          <li style="background:#4285f4;"><a class="nav_a">g</a></li>
+          <li style="background:#34a853;"><a class="nav_a">l</a></li>
+          <li style="background:#ea4335;"><a class="nav_a">e</a></li>
+        </ul>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<br><br><br>
+<div class="container" id="content">
+
+  <div class="page-header">
+
+    <p style="text-align:center">
+      <img src="/static/images/branding/google_logo.png" alt="Google_logo" width=20%>
+    </p>
+
+    {% if engine_name %}
+    <div style="display: inline;">current engine: <span class="label label-success">{{ engine_name }}</span></div>
+
+    <button class="btn btn-success" id="thumb-btn" type="button" style="float:right;">
+       Display thumbnail : On
+    </button>
+    {% endif %}
+
+  </div>
+
+  <div class="row" id="inputBar" style="margin:0 20%;">
+    <div class="input-group" style="text-align:center" >
+      {% if q %}
+        <input id="inputField" type="text" class="form-control" value = {{ q }}>
+      {% else %}
+        <input id="inputField" type="text" class="form-control">
+      {% endif %}
+        <span class="input-group-btn">
+          <button id="searchBtn" class="btn btn-default" type="button">Go!</button>
+        </span>
+    </div>
+  </div>
+
+  <br><br>
+
+  {% if error %}
+
+    <div class="alert alert-warning" role="alert">sorry dude, today's search times was used up, pls try tomorrow</div>
+    <div class="alert alert-danger" role="alert">{{ error_msg }}</div>
+
+  {% else %}
+
+    {% if search_info %}
+      <div class="alert alert-success" role="alert">{{ search_info }}</div>
+    {% endif %}
+
+    {% for result in results %}
+      <!-- xs-only -->
+      <div class="panel container visible-xs-block">
+        <a href = {{ result.link }} target="_blank" ><h3>{{ result.title|safe }}</h3></a>
+        <p id="r_link">{{ result.displayLink|safe }}</p>
+        <p id="r_snippet">{{ result.snippet|safe }}</p>
+      </div>
+      <!-- md&lg-only -->
+      <div class="panel container visible-lg-block visible-md-block">
+        <h3><a href = {{ result.link }} target="_blank" >{{ result.title|safe }}</a></h3>
+        {% if result.snippet %}
+          {% if result.thumbnail %}
+            <div>
+              <div id="{{ result.title }}_tn" style="float:left; width:{{ result.thumbnail.width}}px;">
+                  <a href="{{ result.link }}" target="_blank"><img style="" src={{ result.thumbnail.src }} alt="thumbnail"/></a>
+              </div>
+              <div id="{{ result.title }}_content" style="float:left;height:{{ result.thumbnail.height }}px;position:relative;">
+                <div id="r_snippet" style="margin-left:20px;margin-top:20px;font-size:20px;">{{ result.snippet|safe }}</div>
+                <div id="r_link" style="margin-left:20px;bottom:0;font-size:13px;position:absolute;">{{ result.displayLink|safe }}</div>
+              </div>
+            </div>
+          {% else %}
+            <div id="r_snippet" style="font-size:18px;text">{{ result.snippet|safe }}</div>
+            <div id="r_link" style="font-size:13px;color:#008000">{{ result.displayLink|safe }}</div>
+          {% endif %}
+        {% else %}
+          <div id="r_link" style="font-size:13px;color:#008000">{{ result.displayLink|safe }}</div>
+          <div id="r_tn" style="width:{{ result.thumbnail.width}}px;">
+              <a href="{{ result.link }}" target="_blank"><img src = {{ result.thumbnail.src }} alt="thumbnail"/></a>
+          </div>
+        {% endif%}
+      </div>
+    {% endfor %}
+
+  {% endif %}
+</div>
+
+{% if results %}
+<div class="navcnt">
+  <table style="border-collapse:collapse;text-align:left;margin:30px auto 30px" id="pager" role="presentation">
+    <tbody>
+      <tr valign="top">
+        {% if has_previous %}
+          <td class="previous"><a href="/query?q={{ q }}&start={{ current_start_index-10 }}"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:0 0;width:53px;float:right"></span><span style="display:block;clear:right;">previous</span></a></td>
+        {% else %}
+          <td class="previous"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-24px 0;width:28px;float:right;"></span><span style="display:block;clear:right"></span></td>
+        {% endif %}
+        <td><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-53px 0;width:20px;"></span></td>
+        <td><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-74px 0;width:20px;"></span>Page {{ page_index }}</td>
+        <td class="next"><a href="/query?q={{ q }}&start={{ current_start_index+10 }}"><span style="height:40px;display:block;background:url(/static/images/branding/nav_logo.png) no-repeat;background-position:-96px 0;width:71px;float:right;"></span><span style="display:block;clear:right;margin-left:50px;">next</span></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
+<!-- <script src='/static/js/piko.js'></script> -->
+
+<div class="footer" id="footer">
+  <div class="container">
+    <br>
+    <p>Designed and built by <a href="https://github.com/yrq110" target="_blank">@yrq110</a></p>
+    <p>Powered by  <a href="https://cse.google.com/cse/" target="_blank">Google CSE </a> , <a href="http://flask.pocoo.org/" target="_blank">Flask</a> and <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script type="text/javascript" src="/static/js/index.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    // $("#content").empty();
+  });
+  </script>
+
+{% endblock %}

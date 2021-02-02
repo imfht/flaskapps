@@ -1,0 +1,138 @@
+{% extends 'events/management/base.html' %}
+
+{% from 'forms/_form.html' import form_header, form_footer, form_rows, form_row, form_fieldset, simple_form %}
+
+{% block title %}
+    {%- trans %}Layout{% endtrans -%}
+{% endblock %}
+
+{%- block content %}
+    {% call simple_form(form, save_reminder=true, back_button=false) %}
+        {% call form_fieldset(_('General')) %}
+            {{ form_rows(form, fields=('is_searchable', 'show_nav_bar', 'show_banner', 'show_social_badges',
+                                       'name_format')) }}
+        {% endcall %}
+        {% call form_fieldset(_('Header Style')) %}
+            {{ form_rows(form, fields=('header_text_color', 'header_background_color')) }}
+        {% endcall %}
+        {% call form_fieldset(_('Announcement')) %}
+            {{ form_rows(form, fields=('announcement', 'show_announcement')) }}
+        {% endcall %}
+        {% call form_fieldset(_('Timetable')) %}
+            {{ form_rows(form, fields=('timetable_theme', 'timetable_by_room', 'timetable_detailed')) }}
+            {% if timetable_theme_settings_form %}
+                {{ form_rows(timetable_theme_settings_form) }}
+            {% endif %}
+        {% endcall %}
+        {% call form_fieldset(_('Theme')) %}
+            {{ form_row(form.use_custom_css) }}
+            {% call form_row(form.theme) %}
+                <a href="{{ url_for('event_layout.css_preview', event) }}" target="_blank"
+                   class="i-button js-theme-preview-btn icon-eye hide-if-locked">
+                    {%- trans %}Preview{% endtrans -%}
+                </a>
+            {% endcall %}
+        {% endcall %}
+    {% endcall %}
+
+    <h2>{% trans %}Stylesheet{% endtrans %}</h2>
+    {{ form_header(css_form, classes='css-form', action=url_for('event_layout.upload_css', event)) }}
+    <div class="flashed-messages"></div>
+    {% call form_row(css_form.css_file, skip_label=true) %}
+        <a href="{{ url_for('event_layout.css_preview', event, theme='_custom') }}" target="_blank"
+           class="i-button i-form-field-fixed-width icon-eye js-preview-button
+                  {%- if not css_form.css_file.data %} hidden{% endif %}">
+            {%- trans %}Preview{% endtrans -%}
+        </a>
+    {% endcall %}
+    {% call form_footer(css_form, skip_label=true) %}
+        <button class="i-button js-dropzone-upload highlight icon-upload" data-disabled-until-change>
+            {% trans %}Upload CSS file{% endtrans %}
+        </button>
+        <button class="i-button js-remove-button danger icon-remove{% if not css_form.css_file._value() %} hidden{% endif %}"
+                data-href="{{ url_for('event_layout.delete_css', event) }}" data-method="DELETE">
+            {% trans %}Delete{% endtrans %}
+        </button>
+    {% endcall %}
+
+    <h2>{% trans %}Event Logo{% endtrans %}</h2>
+    {{ form_header(logo_form, classes='logo-form', action=url_for('event_layout.upload_logo', event)) }}
+    <div class="flashed-messages"></div>
+    {{ form_rows(logo_form, skip_labels=true) }}
+    {% call form_footer(css_form, skip_label=true) %}
+        <button class="i-button js-dropzone-upload highlight icon-upload" data-disabled-until-change>
+            {% trans %}Upload logo{% endtrans %}
+        </button>
+        <button class="i-button js-remove-button danger icon-remove{% if not logo_form.logo._value() %} hidden{% endif %}"
+                data-href="{{ url_for('event_layout.delete_logo', event) }}" data-method="DELETE">
+            {% trans %}Delete{% endtrans %}
+        </button>
+    {% endcall %}
+
+    {% block after_forms %}{% endblock %}
+
+    <script>
+        $(document).ready(function() {
+            'use strict';
+
+            $('#theme').nullableselector({nullvalue: ''}).on('change', function() {
+                var previewURL = build_url({{ url_for('event_layout.css_preview', event) | tojson }}, {
+                    theme: $(this).val()
+                });
+                $(this).nextAll('.js-theme-preview-btn').attr('href', previewURL);
+            }).trigger('change');
+
+            function updateCustomCSS(hasFile) {
+                var useCustomCSS = $('#use_custom_css');
+                useCustomCSS.prop('disabled', !hasFile);
+                if (!hasFile) {
+                    var form = $('#use_custom_css').closest('form');
+                    var formData = form.data('initialData');
+                    useCustomCSS.prop('checked', false).trigger('change');
+                    // we need to inform the change tracking system about the new server-side value
+                    formData = formData.replace(/&use_custom_css=y/, '');
+                    // also add the theme field (it's enabled now so it's empty instead of not present)
+                    if (!~formData.indexOf('&theme=')) {
+                        formData += '&theme=' + encodeURIComponent($('#theme').val());
+                    }
+                    form.data('initialData', formData).trigger('change');
+                }
+            }
+
+            updateCustomCSS({{ (css_form.css_file.data is not none) | tojson }});
+
+            $('.css-form, .logo-form').on('indico:fieldsSaved', function(e, response) {
+                var hidden = !response.content;
+                var $this = $(this);
+                $this.find('.js-remove-button, .js-preview-button').toggleClass('hidden', hidden).prop('disabled', hidden);
+                if ($this.is('.css-form')) {
+                    updateCustomCSS(!hidden);
+                }
+            }).on('click', '.js-remove-button', function(e) {
+                var $this = $(this);
+                var $form = $this.closest('form');
+                var dropzone = $form.get(0).dropzone;
+
+                $this.prop('disabled', true);
+                e.preventDefault();
+
+                $.ajax({
+                    url: $this.data('href'),
+                    method: $this.data('method'),
+                    complete: IndicoUI.Dialogs.Util.progress(),
+                    error: handleAjaxError,
+                    success: function(data) {
+                        handleFlashes(data, true, $form.find('.flashed-messages'));
+                        dropzone.removeAllFiles();
+                        $form.trigger('indico:fieldsSaved', data);
+                    }
+                });
+            });
+            showThemeSettingsForm({
+                formUrl: {{ url_for('.timetable_theme_form', event) | tojson }},
+                themeFieldId: '{{ form.timetable_theme.id }}',
+                lastFieldId: 'form-group-timetable_detailed'
+            });
+        });
+    </script>
+{%- endblock %}

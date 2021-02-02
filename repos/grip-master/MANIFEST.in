@@ -1,0 +1,5 @@
+include LICENSE
+include *.txt
+include *.md
+recursive-include static *
+recursive-include templates *

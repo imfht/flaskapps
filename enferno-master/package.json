@@ -1,0 +1,45 @@
+{
+  "name": "Enferno",
+  "version": "2.0.0",
+  "description": "Project Enferno - a framework for the next decade",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "watch": "parcel watch enferno/src/*.js -d enferno/static/dist --public-url /static/dist/",
+    "build": "parcel build enferno/src/*.js -d enferno/static/dist --public-url /static/dist/",
+    "favicons": "node favicons.js"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/level09/enferno"
+  },
+  "keywords": [
+    "enferno",
+    "python",
+    "nginx",
+    "flask",
+    "postgresql",
+    "redis"
+  ],
+  "author": "level09 <nidal@level09.com>",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^10.2.1",
+    "favicons": "^4.8.2",
+    "modern-normalize": "^1.0.0",
+    "parcel-bundler": "^1.12.4",
+    "postcss-modules": "^4.0.0",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.2.0",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "resolutions": {
+    "node-forge": "0.10.0"
+  }
+}

@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ meta_description }}">
+  <meta name="author" content="{{ meta_author }}">
+
+  <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  {% assets filters="cssmin", output="gen/packed.css", "css/style.css", "css/text.css", "css/960.css", "css/site.css" %}
+      <link rel="stylesheet" href="{{ ASSET_URL }}"/>
+  {% endassets %}
+
+  {#
+  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+  <script src="/static/js/libs/modernizr-1.7.min.js"></script>
+  #}
+
+</head>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+
+<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+
+  <div id="container" class="container_12">
+    <header class="grid_12">
+
+        {% block header %}
+        Header goes here
+        {% endblock %}
+
+    </header>
+
+    <div class="clear"></div>
+
+    <div id="main" role="main" class="grid_12">
+
+        <div class="flash_messages">
+            {% for message in get_flashed_messages() %}
+            <div class="flash">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+
+        {% block body %}
+        Body goes here.
+        {% endblock %}
+
+    </div>
+
+    <div class="clear"></div>
+
+    <footer class="grid_4 prefix_4 suffix_4">
+
+        {% block footer %}
+        Footer goes here
+        {% endblock %}
+
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- Javascript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+  <script>window.jQuery || document.write("<script src='/static/js/libs/jquery-1.6.min.js'>\x3C/script>")</script>
+
+  {% assets filters="jsmin", output="gen/packed.js", "js/plugins.js", "js/script.js" %}
+      <script src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+
+  {#
+  <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
+  <script>
+    var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"],["_trackPageLoadTime"]];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+    s.parentNode.insertBefore(g,s)}(document,"script"));
+  </script>
+  #}
+
+</body>
+</html>

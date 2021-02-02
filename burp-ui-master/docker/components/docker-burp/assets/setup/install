@@ -1,0 +1,62 @@
+#!/bin/ash
+# Build: @build@
+set -e
+
+SETUP_DIR="/app/setup"
+CONFIG_DIR="${SETUP_DIR}/config"
+
+mkdir -p /var/log/supervisor
+
+# configure supervisord log rotation
+cat > /etc/logrotate.d/supervisord <<EOF
+/var/log/supervisor/*.log {
+  weekly
+  missingok
+  rotate 52
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+EOF
+
+mkdir /etc/supervisor.d
+# configure supervisord to start crond
+cat > /etc/supervisor.d/cron.ini <<EOF
+[program:cron]
+priority=20
+directory=/tmp
+command=/usr/sbin/crond -f
+user=root
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure supervisord API
+cat > /etc/supervisor.d/api.ini <<EOF
+[inet_http_server]
+port = 0.0.0.0:9001
+EOF
+
+# configure burp
+cat >/etc/supervisor.d/burp-server.ini <<EOF
+[program:burp-server]
+command=/usr/sbin/burp -c /etc/burp/burp-server.conf -F
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+cp $CONFIG_DIR/burp-server.conf /etc/burp/burp-server.conf
+cp $CONFIG_DIR/CA-2.1.cnf /etc/burp/CA-2.1.cnf
+
+# the following file is checked by the burp-ui image
+touch /etc/burp/this_is_a_decoy_file_to_know_if_we_can_chown
+cp -a /etc/burp /etc/ori.burp
+
+# cleanup
+delgroup ping
+rm -rf ~/.cache

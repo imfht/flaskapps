@@ -1,0 +1,132 @@
+#!/bin/bash
+# Build: @build@
+set -e
+
+SETUP_DIR="/app/setup"
+CONFIG_DIR="${SETUP_DIR}/config"
+BURPUI="/tmp/burp-ui-agent.dev.tar.gz"
+BURPUIMON="/tmp/burp-ui-monitor.dev.tar.gz"
+
+echo "deb http://ziirish.info/repos/debian/buster zi-stable main" >/etc/apt/sources.list.d/ziirish.list
+wget https://ziirish.info/repos/debian.gpg -O- | apt-key add -
+
+apt-get update
+apt-get install -y burp-server burp-client
+
+cd
+
+# Install burp-ui
+pip3 install --upgrade setuptools
+pip3 install --upgrade $BURPUI
+pip3 install --upgrade $BURPUIMON
+
+# Create burp-ui User
+useradd -m -s /bin/bash -d /var/lib/burpui -c 'Burp-UI daemon user' -u 5337 burpui
+
+mkdir -p /var/log/gunicorn
+chown -R burpui: /var/log/gunicorn
+
+# configure supervisord log rotation
+cat > /etc/logrotate.d/supervisord <<EOF
+/var/log/supervisor/*.log {
+  weekly
+  missingok
+  rotate 52
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+EOF
+
+# configure gunicorn log rotation
+cat > /etc/logrotate.d/gunicorn <<EOF
+/var/log/gunicorn/*.log {
+  daily
+  missingok
+  rotate 14
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+EOF
+
+# configure supervisord to start crond
+cat > /etc/supervisor/conf.d/cron.conf <<EOF
+[program:cron]
+priority=20
+directory=/tmp
+command=/usr/sbin/cron -f
+user=root
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure supervisord to start bui-agent
+cat > /etc/supervisor/conf.d/buiagent.conf <<EOF
+[program:buiagent]
+priority=20
+directory=/tmp
+command=/usr/local/bin/bui-agent -v
+user=burpui
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure supervisord to start bui-monitor
+cat > /etc/supervisor/conf.d/buimonitor.conf <<EOF
+[program:buimonitor]
+priority=20
+directory=/tmp
+command=/usr/local/bin/bui-monitor -v
+user=burpui
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+# configure supervisord to start burp
+cat > /etc/supervisor/conf.d/burp.conf <<EOF
+[program:burp]
+priority=20
+directory=/tmp
+command=/usr/sbin/burp -F -c /etc/burp/burp-server.conf
+user=root
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+cat ${CONFIG_DIR}/burp/burp.conf >/tmp/burp.conf
+chown burpui: /tmp/burp.conf
+
+cat ${CONFIG_DIR}/burp/CA.cnf >/etc/burp/CA-2.1.cnf
+
+sed -i "s/^max_status_children.*$/max_status_children = 15/" /etc/burp/burp-server.conf
+echo "restore_client = agent" >>/etc/burp/burp-server.conf
+echo "monitor_browse_cache = 1" >>/etc/burp/burp-server.conf
+
+cp ${CONFIG_DIR}/burp-ui/buiagent.cfg /etc/burp/buiagent.cfg
+cp ${CONFIG_DIR}/burp-ui/buimonitor.cfg /etc/burp/buimonitor.cfg
+
+rm -rf /etc/burp/clientconfdir
+cp -r ${CONFIG_DIR}/burp/clientconfdir/ /etc/burp/
+
+mkdir -p /tmp/burp2/CA-client
+chown -R burp /tmp/burp2
+chgrp -R burpui /tmp/burp2
+chmod -R g+w /tmp/burp2
+
+/usr/sbin/burp -g -c /etc/burp/burp-server.conf
+
+chown -R burp: /var/spool/burp/
+
+# cleanup
+rm -rf /var/lib/apt/lists/*

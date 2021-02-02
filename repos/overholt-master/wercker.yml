@@ -1,0 +1,15 @@
+box: wercker-labs/docker
+
+build:
+  steps:
+    - script:
+        name: Build the image
+        code: docker build -t mattupstate/overholt:$WERCKER_GIT_COMMIT .
+
+  after-steps:
+    - script:
+        name: Set the Docker config
+        code: echo $DOCKER_CFG > ~/.dockercfg
+    - script:
+        name: Push the image up to the Docker hub
+        code: docker push mattupstate/overholt:$WERCKER_GIT_COMMIT

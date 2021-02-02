@@ -1,0 +1,8 @@
+{% macro switch(value='1', id=none, name=none) -%}
+    <div class="ui toggle checkbox">
+        <input type="checkbox" value="{{ value }}" {{ kwargs | html_params }}
+               {%- if id %} id="{{ id }}"{% endif -%}
+               {%- if name %} name="{{ name }}"{% endif -%}>
+        <label></label> {# ui toggle always requires a label #}
+    </div>
+{%- endmacro %}

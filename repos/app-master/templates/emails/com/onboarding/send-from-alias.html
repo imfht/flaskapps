@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% call text() %}
+    <h1>
+      Send emails from your alias.
+    </h1>
+  {% endcall %}
+
+  {% call text() %}
+    If you want to reply to an email, just hit "Reply"
+    and the response will come from your alias. Your personal email address stays hidden.
+
+  {% endcall %}
+
+  {% call text() %}
+    To send an email to a <b>new contact</b>, please follow the steps below.
+    You can also watch this <a href="https://youtu.be/VsypF-DBaow">Youtube video</a>
+    that quickly walks you through the steps.
+  {% endcall %}
+
+  {% call text() %}
+    1. First click <b>Send Email</b> on the alias you want to send emails from. <br>
+    <img src="https://static.simplelogin.io/send-from-alias/1.png" style="max-width: 500px">
+  {% endcall %}
+
+  {% call text() %}
+    2. Enter your contact email, this will create a <b>reverse-alias</b> for the contact. <br>
+    <img src="https://static.simplelogin.io/send-from-alias/2.png" style="max-width: 500px">
+  {% endcall %}
+
+  {% call text() %}
+    3. Send the email to this reverse-alias <b>instead of the contact email</b>. <br>
+    <img src="https://static.simplelogin.io/send-from-alias/3.png" style="max-width: 500px">
+  {% endcall %}
+
+  {% call text() %}
+    And voilà, your contact will receive this email sent from your alias! <br>
+    <img src="https://static.simplelogin.io/send-from-alias/4.png" style="max-width: 500px">
+  {% endcall %}
+
+{% endblock %}
+
+{% block footer %}
+  This email is sent to {{ to_email }} and is part of our onboarding series. Unsubscribe on
+  <a href="{{ URL }}/dashboard/setting#notification">Settings</a>
+{% endblock %}

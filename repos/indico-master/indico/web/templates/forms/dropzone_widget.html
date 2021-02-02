@@ -1,0 +1,31 @@
+{% extends 'forms/base_widget.html' %}
+{% from 'forms/_dropzone_themes.html' import thin_preview_template %}
+
+{% block html %}
+    <div id="dz-{{ field.id }}"
+         class="dropzone {% if field.lightweight %}thin{% endif %}"
+         data-options="{{ field.widget_options|tojson|forceescape }}"
+         data-value="{{ field._value()|tojson|forceescape }}">
+        <div class="dropzone-inner">
+            <div class="dropzone-previews"></div>
+            <div class="select-files-btn">
+                <div class="dz-message">
+                    {% trans %}Drag file here{% endtrans %}
+                    <span class="message-separator">- or -</span>
+                </div>
+                <button type="button" class="i-button">
+                    {%- trans %}Choose from your computer{% endtrans -%}
+                </button>
+            </div>
+        </div>
+    </div>
+    <input class="change-trigger" type="hidden" value="{{ 'initial-file' if field.data else 'no-file' }}" name="__file_change_trigger">
+    {% if editable %}
+        <input class="deleted-files" type="hidden" value="[]" name="{{ field.name }}">
+    {% endif %}
+    <script>
+        $(document).ready(function() {
+            setupDropzone('#dz-{{ field.id }}');
+        });
+    </script>
+{% endblock %}

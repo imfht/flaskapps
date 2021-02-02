@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %} Playlists {% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+  {% if track_info %}
+    <p>Hello {{Name}}!</p>
+    <br>
+    <div class="accordion" id="accordionExample">
+      <!-- print tracks -->
+      {%set count = [1]%}
+      {% for title, link, media in track_info %}
+        <div class="card">
+          <div class="card-header" id="heading{{count[0]}}">
+
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{count[0]}}" aria-expanded="true" aria-controls="collapse{{count[0]}}">
+            <h5 class="mb-0">{{ title }}
+            </button>
+            </h5>
+          </div>
+          <div id="collapse{{count[0]}}" class="collapse" aria-labelledby="heading{{count[0]}}" data-parent="#accordionExample">
+            <div class="card-body">
+              {{ media|safe }}
+              <a href="{{ link }}">{{ link }}</a>
+            </div>
+          </div>
+        </div>
+      {% if count.append(count.pop() + 1) %}{% endif %} 
+      {% endfor %}
+    </div>
+  {% else %}
+  <br />
+  <div class="alert alert-warning" role="alert">
+    {% if subreddit %}
+    Hello friend! We could not find any tracks with the entered subreddit "{{ subreddit }}"
+    {% else %}
+    Please provide a subreddit!
+    {% endif %}
+  </div>
+  {% endif %}
+{% endblock %}

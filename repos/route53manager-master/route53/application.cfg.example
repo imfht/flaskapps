@@ -1,0 +1,9 @@
+SECRET_KEY = '\xb3\x8b\xdc\xc4;\xa2I.\x16\x93\xbb"\xc3\xf8]\xaa^a\xed\xad\xb2\xd9wj'
+SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
+SQLALCHEMY_ECHO = False
+DEBUG = True
+AWS_ACCESS_KEY_ID=""
+AWS_SECRET_ACCESS_KEY=""
+AUTH_USERS = [
+   ('admin', 'admin'),
+]

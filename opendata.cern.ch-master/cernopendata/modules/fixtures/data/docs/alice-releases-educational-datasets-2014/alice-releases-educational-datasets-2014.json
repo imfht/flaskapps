@@ -1,0 +1,27 @@
+[
+  {
+    "author": "ALICE Collaboration",
+    "body": {
+      "content": "alice-releases-educational-datasets-2014.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "ALICE"
+      },
+      {
+        "primary": "News"
+      }
+    ],
+    "created": "2014-11-20",
+    "experiment": "ALICE",
+    "short_description": {
+      "content": "ALICE is making a public release of a number of datasets customised for demonstration and educational purpose. A number of reconstructed data files which are not statistically representative are included to allow plotting transverse momentum and pseudorapidity distributions."
+    },
+    "slug": "alice-releases-educational-datasets",
+    "title": "ALICE releases educational datasets",
+    "type": {
+      "primary": "News"
+    }
+  }
+]

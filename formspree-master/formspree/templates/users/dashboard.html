@@ -1,0 +1,53 @@
+{% extends 'static_pages/index.html' %}
+
+{% block bodyclass %}dashboard{% endblock%}
+
+{% block base %}
+  <div class="row section" id="header">
+    <div class="container center">
+      {% block sectiontitle %}{% endblock %}
+    </div>
+  </div>
+
+  <div class="row section">
+    <div class="container block">
+      {% block section %}
+      {% endblock %}
+    </div>
+  </div>
+
+  <div class="row section grey">
+    <div class="container narrow block">
+      {% if current_user.has_feature('dashboard') %}
+        <div class="col-1-2">
+          <p>{{config.SERVICE_NAME}} is a tool <a href="https://github.com/formspree/formspree">managed on GitHub</a>. For fastest support check out our <a href="https://help.formspree.io">knowledge base</a> or use the form on the right.</p>
+        </div>
+        <div class="col-1-2">
+          <form method="POST" action="{{config.API_ROOT}}/{{config.CONTACT_FORM_HASHID}}">
+            <input type="email" name="_replyto" placeholder="Your email" value="{{current_user.email}}"
+                   required/>
+            <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+            <input type="text" name="_gotcha" style="display:none">
+            <input type="hidden" name="_format" value="plain" style="display:none">
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      {% else %}
+        <div class="col-1-2">
+          <p>If you have a problem, please look <a href="http://help.formspree.io/">here</a> first. To sign up for our newsletter, use the form on the right.</p>
+          <p>For a quick demo of Formspree, <a href="http://testformspree.com/" target="_blank">click here</a>.</p>
+        </div>
+        <div class="col-1-2">
+          <form method="POST" action="{{config.API_ROOT}}/{{config.NEWSLETTER_EMAIL}}">
+            <input type="text" name="name" placeholder="Your name" required />
+            <input type="email" name="_replyto" placeholder="Your email" required />
+            <input type="text" name="_gotcha" style="display:none">
+            <input type="hidden" name="_format" value="plain" style="display:none">
+            <button style="width: 100%" type="submit">Get Our Newsletter</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock base %}

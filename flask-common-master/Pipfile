@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+whitenoise = "*"
+gunicorn = "*"
+Flask = "*"
+crayons = "*"
+maya = "*"
+Flask-Compress = "*"
+Flask-Caching = "*"
+meinheld = "*"

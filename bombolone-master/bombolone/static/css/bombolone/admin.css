@@ -1,0 +1,350 @@
+/* =============================================================================
+Main layout style
+============================================================================= */
+body {
+  background-color: #efefef;
+  color: #424242;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: left;
+}
+
+.content {
+  margin: 54px auto 5px;
+  min-height: 500px;
+  padding: 15px 0;
+  width: 940px;
+}
+
+.hidden {
+  display: none;
+  visibility: none;
+}
+
+/* Header ================================================================================== */
+header {
+  overflow: visible;
+  margin-bottom: 18px;
+  background-color: #584838;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#5a493f), to(#584838));
+  background-image: -webkit-linear-gradient(top, #5a493f, #584838);
+  background-image: -moz-linear-gradient(top, #5a493f, #584838);
+  background-image: -ms-linear-gradient(top, #5a493f, #584838);
+  background-image: -o-linear-gradient(top, #5a493f, #584838);
+  background-image: linear-gradient(top, #5a493f, #584838);
+  border-bottom: 1px solid #dedede;
+  border-top: 2px solid #E7A86B;
+  height: 35px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+header nav {
+  margin: 0 auto;
+  width: 940px;
+}
+header nav img {
+  padding: 2px 0;
+}
+header .navbar-text {
+  margin-bottom: 0;
+  line-height: 40px;
+  color: #999999;
+}
+header .navbar-text a:hover {
+  color: #ffffff;
+  background-color: transparent;
+}
+header .btn {
+  margin-top: 5px;
+}
+header .btn-group {
+  margin-top: 5px;
+}
+header .btn-group .btn {
+  margin-top: 0;
+}
+header .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+}
+header .nav > li {
+  display: block;
+  float: left;
+}
+header .nav > li > a {
+  color: #FFFFFF;
+  float: none;
+  line-height: 23px;
+  padding: 4px 10px;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+header .nav > li > a:hover {
+  background-color: transparent;
+  color: #ffffff;
+  text-decoration: none;
+}
+header .nav .active > a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #222222;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+header .header-tabs li {
+  background-color: #EC943C;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ec943c), to(#e68b2b));
+  background-image: -webkit-linear-gradient(top, #ec943c, #e68b2b);
+  background-image: -moz-linear-gradient(top, #ec943c, #e68b2b);
+  background-image: -ms-linear-gradient(top, #ec943c, #e68b2b);
+  background-image: -o-linear-gradient(top, #ec943c, #e68b2b);
+  background-image: linear-gradient(top, #ec943c, #e68b2b);
+  border-bottom: 1px solid #cf7d2b;
+  border-left: 1px solid #cf7d2b;
+  border-right: 1px solid #cf7d2b;
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  font-weight: normal;
+  margin: 0;
+  text-align: right;
+}
+header .header-tabs li:hover {
+  background-color: #AF7223;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ec943c), to(#d47e26));
+  background-image: -webkit-linear-gradient(top, #ec943c, #d47e26);
+  background-image: -moz-linear-gradient(top, #ec943c, #d47e26);
+  background-image: -ms-linear-gradient(top, #ec943c, #d47e26);
+  background-image: -o-linear-gradient(top, #ec943c, #d47e26);
+  background-image: linear-gradient(top, #ec943c, #d47e26);
+  border-color: #AF7223;
+}
+
+/* Thumbnails ============================================================================== */
+.thumbnails {
+  margin-left: -20px;
+  list-style: none;
+  *zoom: 1;
+}
+.thumbnails:before {
+  display: table;
+  content: "";
+}
+.thumbnails:after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
+.thumbnail {
+  display: block;
+  padding: 3px;
+  line-height: 1;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+a.thumbnail:hover {
+  border-color: #0088cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+  box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+.thumbnail > img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Content ================================================================================= */
+.box {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: 1px solid #DDDDDD;
+  font-weight: normal;
+  padding: 0;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/* Hash Table ============================================================================== */
+.hash_table_tools .legend {
+  border-bottom: 1px solid #dedede;
+}
+.hash_table_tools .legend span {
+  display: inline-block;
+}
+.hash_table_tools .legend span:first-child {
+  display: inline-block;
+  margin: 0 4px 0 0;
+}
+.hash_table_tools .form-actions {
+  background-color: #F5F5F5;
+  border-top: 1px solid #DDDDDD;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  padding: 17px 20px 18px;
+}
+.hash_table_tools .help-block {
+  margin-top: 49px;
+  margin-left: 187px;
+  margin-bottom: 0;
+  width: 49%;
+}
+
+.hash_add_label {
+  margin-left: 20px;
+}
+
+.hash_remove_label {
+  float: right !important;
+  padding: 0;
+}
+
+/* Pages =================================================================================== */
+.pages_table_tools .legend {
+  border-bottom: 1px solid #dedede;
+}
+.pages_table_tools .legend span {
+  display: inline-block;
+}
+.pages_table_tools .legend span:first-child {
+  display: inline-block;
+  margin: 0 4px 0 0;
+}
+.pages_table_tools .input-little {
+  margin: 0 18px 0 2px;
+}
+
+.pages_add_label {
+  margin-left: 20px;
+}
+
+.pages_table_tools .pages_remove_label {
+  float: right;
+  margin: 0 21px 0 0;
+  padding: 0;
+}
+.pages_table_tools .form-actions {
+  background-color: #F5F5F5;
+  border-top: 1px solid #DDDDDD;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  padding: 17px 20px 18px;
+}
+.pages_table_tools .pages_tool {
+  margin: 10px 0 0 0;
+  display: none;
+}
+.pages_table_tools .pages_tool.show {
+  display: inherit;
+}
+.pages_table_tools .pages_field select {
+  float: right;
+  margin: 10px 21px 0 0;
+  width: 14.8936%;
+}
+.pages_table_tools .pages_field .control-group {
+  border-right: 3px solid #DDDDDD;
+  padding: 0 0 0 2px;
+  width: 99.9%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.pages_table_tools .pages_field .help-block {
+  margin-top: 0;
+  margin-left: 2px;
+  margin-bottom: 0;
+  width: 75%;
+  display: inline-block;
+}
+
+.label_pages {
+  margin-bottom: 20px;
+}
+
+.pages_table_tools .control-group input {
+  margin-bottom: 0;
+}
+
+/* Settings ================================================================================ */
+.settings, .content_right {
+  background-color: #FCFCFC;
+  border: 1px solid #DEDEDE;
+  padding: 5px 10px;
+  width: 97%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.settings .form-actions {
+  background-color: #F5F5F5;
+  border-top: 1px solid #DDDDDD;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  padding: 17px 20px 18px 130px;
+}
+
+/* Footer ================================================================================== */
+footer {
+  border-top: 4px double #DEDEDE;
+  margin: 30px auto 0;
+  padding: 20px;
+  text-align: center;
+  width: 940px;
+}
+footer p {
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+}
+
+/* =============================================================================
+Login style
+============================================================================= */
+.login {
+  min-height: 260px;
+  padding: 5px 0 28px;
+  text-align: center;
+}
+.login h1 {
+  color: #363636;
+  font-size: 2em;
+  margin: 4px 0 8px 0;
+}
+.login section.login_social {
+  text-align: left;
+  float: left;
+  height: 160px;
+  margin: 0 0 0 100px;
+  padding: 0 30px;
+  width: 290px;
+}
+.login section.login_classic {
+  text-align: left;
+  float: left;
+  height: 160px;
+  margin: 0 0 0 100px;
+  padding: 0 30px;
+  width: 290px;
+  border-left: 4px double rgba(0, 0, 0, 0.1);
+  margin: 0 0 0 0;
+}
+.login .submit {
+  float: right;
+}

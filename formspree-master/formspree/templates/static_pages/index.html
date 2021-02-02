@@ -1,0 +1,338 @@
+{% extends 'layouts/base.html' %}
+
+{% block bodyid %}{% endblock %}
+
+{% block title %}A Contact Form to Email Service | {{config.SERVICE_NAME}}{% endblock %}
+{% block meta %}<meta name="description" content="Formspree is a form backend, API and email service for HTML forms. It’s the simplest way to embed custom contact us forms, order forms, or email capture forms on your static site."/>
+{% endblock %}
+
+{% block base %}
+  <div class="row section" id="header">
+        <div class="container" id="title">
+            <div class="col-1-1">
+                <img src="/static/img/logo.png" alt="" class="center animate dropIn">
+                <p class="h1-seo-hack center"><span class="caps">{{config.SERVICE_NAME}}</span></p>
+            </div>
+        </div>
+      <div class="container">
+          <div class="col-1-2">
+            <h1 style="font-weight: 900;">Carefree Contact Forms</h1>
+            <h2 class="h3-seo-hack light">Connect your forms to our endpoint and we’ll email you the submissions. No PHP, Javascript or sign up required &mdash; <em>perfect for static sites!</em></h2>
+            </div>
+            <div class="col-1-2">
+                <p>Example:</p>
+                <p class="card code" style="font-size: small">
+                    &lt;form <span class="tooltip hint--top" data-hint="Use our URL as form's action">action="<span class="attr">{{config.API_ROOT}}/your@email.com</span>"</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip hint--top" data-hint="Forms must POST">method="<span class="attr">POST</span>"</span>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="<span class="attr">text</span>" name="<span class="attr">name</span>"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="<span class="attr">email</span>" <span class="tooltip hint--top" data-hint="Use advanced attributes">name="<span class="attr">_replyto</span>"</span>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip hint--bottom" data-hint="When user submits, we'll email data to you">&lt;input type="<span class="attr">submit</span>" value="<span class="attr">Send</span>"&gt;</span><br />
+                    &lt;/form&gt;
+                </p>
+                <a href="http://testformspree.com/" target="_blank">Test it out now with your email!</a>
+            </div>
+      </div>
+  </div>
+
+  <div class="row section" id="getstarted">
+
+      <div class="container narrow block">
+          <div class="col-1-1">
+              <p class="h2-seo-hack">Setting it up is easy and free. Here's how:</p>
+              <p class="h3-seo-hack light">You don't even have to register.</p>
+          </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>1. Setup the HTML form</h3>
+                <p>Change your form's <span class="code">action</span>-attribute to this and replace your@email.com with your own email.</p>
+                <p><input type="text" class="code" value="{{config.API_ROOT}}/your@email.com" /></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>2. Add a <span class="code">name</span> attribute to every field</h3>
+                <p>Ensure all <span class="code">&lt;input&gt;</span>, <span class="code">&lt;select&gt;</span> and <span class="code">&lt;textarea&gt;</span> elements inside your form have a <span class="code">name</span> attribute, otherwise you will not receive the data filled in these fields.</p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>3. Submit the form and confirm your email address</h3>
+                <p>Go to your website and submit the form once. This will send you an email asking to confirm your email address.</p>
+                <p><em>Remember that if you display the same form in multiple URLs of your site you'll have to confirm it multiple times!</em></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>4. All set, receive emails</h3>
+                <p>From now on, when someone submits that form, we'll forward you the data as email.</p>
+
+            </div>
+      </div>
+
+  </div>
+
+  <div class="row section grey">
+
+      <div class="container block">
+          <div class="col-1-1"><p class="h2-seo-hack">Some questions you might have:</p></div>
+      </div>
+
+      <div class="container block">
+            <div class="col-1-2">
+                <div class="card">
+                    <h4>Who are you people?</h4>
+                    <p>We're a community of developers that work together to create products. You can contribute on <a href="https://github.com/formspree/formspree">GitHub</a>. {{config.SERVICE_NAME}} is a project that solves a problem many of us have faced: easily adding forms to otherwise static HTML pages.</p>
+            	</div>
+            </div>
+            <div class="col-1-2">
+                <div class="card">
+                    <h4>What about privacy?</h4>
+                    <p>We only store up to {{ config.ARCHIVED_SUBMISSIONS_LIMIT }} form submissions per month. For details on our privacy practices, please see our <a href="http://docs.formspree.io/files/privacy.pdf">privacy policy</a>.</p>
+                </div>
+            </div>
+      </div>
+
+      <div class="container block">
+            <div class="col-1-2">
+                <div class="card">
+                    <h4>How much does it cost?</h4>
+                    <p>{{config.SERVICE_NAME}} is free for {{ config.MONTHLY_SUBMISSIONS_LIMIT }} submissions per form each month. If you need more, there's a <a href="#plans">{{ config.UPGRADED_PLAN_NAME }} Plan</a></p>
+                </div>
+            </div>
+            <div class="col-1-2">
+                <div class="card">
+                    <h4>Can I have X?</h4>
+                    <p>We have various interesting features enabled for our <a href="#plans">{{ config.UPGRADED_PLAN_NAME }} Accounts</a> and we are adding more. Please reach out to <a href="mailto:{{config.CONTACT_EMAIL}}">{{config.CONTACT_EMAIL}}</a> if you need something we don't have.</p>
+                </div>
+            </div>
+      </div>
+
+  </div>
+
+  <div class="row section grey">
+
+      <div class="container narrow block">
+          <div class="col-1-1">
+            <p class="h2-seo-hack">Advanced features:</p>
+            <h4 class="light">Form inputs can have specially named <span class="code">name</span>-attributes, which alter functionality. They are all prefixed with an underscore.</h4>
+          </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_replyto</span> or <span class="code">email</span></h4>
+                <p>This value is used for the email's Reply-To field. This way you can directly "Reply" to the email to respond to the person who originally submitted the form.</p>
+                <p><input type="text" class="code" value='<input type="text" name="_replyto" placeholder="Your email" />'></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_next</span></h4>
+                <p>By default, after submitting a form the user is shown the {{config.SERVICE_NAME}} "Thank You" page. You can provide an alternative URL for that page.</p>
+                <p><input type="text" class="code" value='<input type="hidden" name="_next" value="https://site.io/thanks.html" />'></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_subject</span></h4>
+                <p>This value is used for the email's subject, so that you can quickly reply to submissions without having to edit the subject line each time.</p>
+                <p><input type="text" class="code" value='<input type="hidden" name="_subject" value="New submission!" />'></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_cc</span></h4>
+                <p>This value is used for the email's CC Field. This lets you send a copy of each submission to another email address.</p>
+                <p><input type="text" class="code" value='<input type="hidden" name="_cc" value="another@email.com" />'></p>
+				<p>If you want to CC multiple email addresses, then just make it a list of email addresses separate by commas.</p>
+                <p><input type="text" class="code" value='<input type="hidden" name="_cc" value="another@email.com,yetanother@email.com" />'></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_format</span></h4>
+                <p>Adding this to your form will allow for you to receive plain text versions of emails for form submissions.</p>
+                <p><input type="text" class="code" value='<input type="hidden" name="_format" value="plain" />'></p>
+            </div>
+      </div>
+
+    <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_language</span></h4>
+              <p>We've gone global! If you want to display the reCAPTCHA page in a language other than English you can. We currently support
+                <span class="code">ar</span>,
+                <span class="code">bg</span>,
+                <span class="code">ca</span>,
+                <span class="code">cs</span>,
+                <span class="code">da</span>,
+                <span class="code">de</span>,
+                <span class="code">en</span>,
+                <span class="code">es</span>,
+                <span class="code">fi</span>,
+                <span class="code">fr</span>,
+                <span class="code">hu</span>,
+                <span class="code">id</span>,
+                <span class="code">is</span>,
+                <span class="code">it</span>,
+                <span class="code">ja</span>,
+                <span class="code">ko</span>,
+                <span class="code">lt</span>,
+                <span class="code">nl</span>,
+                <span class="code">no</span>,
+                <span class="code">pl</span>,
+                <span class="code">pt-BR</span>,
+                <span class="code">pt-PT</span>.
+                <span class="code">ru</span>,
+                <span class="code">sk</span>,
+                <span class="code">sr</span>,
+                <span class="code">sv</span>,
+                <span class="code">th</span>,
+                <span class="code">tr</span>,
+                <span class="code">uk</span>,
+                <span class="code">zh-CN</span> and
+                <span class="code">zh-TW</span>.
+              </p>
+              <p>We love adding new languages! We're no language experts, but if you want your language added, please <a href="https://help.formspree.io/contact">let us know</a>.</p>
+                <p><input type="text" class="code" value='<input type="hidden" name="_language" value="es" />'></p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h4><span class="code">_gotcha</span></h4>
+                <p>Add this "honeypot" field to avoid spam by fooling scrapers. If a value is provided, the submission will be silently ignored. The input should be hidden with CSS.</p>
+                <p>All forms come with <a href="https://www.google.com/recaptcha/intro/">reCAPTCHA</a>, which uses advanced machine learning techniques to distinguish between humans and bots, so for most forms this isn't necessary.</p>
+                <p><input type="text" class="code" value='<input type="text" name="_gotcha" style="display:none" />'></p>
+            </div>
+      </div>
+
+<!--
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3 class="light">More to come...</h3>
+            </div>
+      </div>
+
+ -->
+
+  </div>
+
+  <div class="row section" id="plans">
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <p class="h2-seo-hack">For {{ config.SERVICE_NAME }} power users, we present <strong>{{ config.SERVICE_NAME }} {{ config.UPGRADED_PLAN_NAME }}</strong></p>
+                <p class="center">{{ config.SERVICE_NAME }} {{ config.UPGRADED_PLAN_NAME }} costs</p>
+                <p class="h1-seo-hack center"><a class="button emphasis" href="{{ url_for('account') }}">$ 9.99</a></p>
+                <p class="center">each month</p>
+                <p>Each {{ config.UPGRADED_PLAN_NAME }} account can have unlimited forms and unlimited verified emails, and all them get the <a href="#features">features listed below</a>.</p>
+                <a style="display: block" class="button center emphasis" href="{{ url_for('account') }}">Upgrade now</a>
+            </div>
+      </div>
+  </div>
+
+  <div class="row section grey" id="features">
+      <div class="container narrow block">
+          <div class="col-1-1">
+            <p class="h2-seo-hack">{{ config.UPGRADED_PLAN_NAME }} features:</p>
+            <h3 class="light">Extra limits and functionality for power users</h3>
+          </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>Invisible emails</h3>
+                <p>Get a random-like string to replace your naked email address in the <span class="code">action</span> attribute of your form. Your email address will remain unknown to spam-bots and human visitors.</p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>Unlimited form submissions</h3>
+                <p>Getting more than {{ config.MONTHLY_SUBMISSIONS_LIMIT }} submissions each month? No problem, upgrading will cover that.</p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>Access to submissions archive</h3>
+                <p>If you ever missed a submission email, for any reason, you can just login and read your last {{ config.ARCHIVED_SUBMISSIONS_LIMIT }} submissions, all listed and timestamped with full data. Also, the submissions can be exported to CSV or JSON!</p>
+                <p>It even works for submissions made while you were not a {{ config.UPGRADED_PLAN_NAME }} user.</p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>AJAX Forms</h3>
+                <p>{{config.SERVICE_NAME}} {{ config.UPGRADED_PLAN_NAME }} users can use AJAX to submit forms. This even works cross-origin. First create a new form in your account dashboard. Then set the <span class="code">Accept</span> header on your form to <span class="code">application/json</span>. If you're using jQuery this can be done like so:
+                <p class="card code">
+                  $.ajax({<br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;url: "{{config.API_ROOT}}/FORM_ID", <br/>
+                  &nbsp;&nbsp;&nbsp;&nbsp;method: "POST",<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;data: {message: "hello!"},<br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tooltip hint--top" data-hint="Required to set the Accept header">dataType: "json"</span><br />
+                  });
+                </p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>Same form on multiple pages</h3>
+                <p>Showing the same form on many different pages? Generate a form verified site-wide and don't worry about having to track multiple confirmation emails.</p>
+            </div>
+      </div>
+
+      <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>Auto-confirmed forms</h3>
+                <p>Pre-verify email addresses on your account and you'll be able to create forms targetting them without having to submit the form and click on confirmation links.</p>
+            </div>
+      </div>
+
+        <div class="container narrow block">
+            <div class="col-1-1">
+                <h3>Disable reCAPTCHA</h3>
+                <p>Don't want your users to complete a reCAPTCHA? Each form now comes with the option to disable the reCAPTCHA, so you can maintain complete control over your form. You can even keep reCAPTCHA on a few forms that might be suceptible to spam, while disabling it on others.</p>
+            </div>
+        </div>
+
+  </div>
+
+  <div class="row section">
+      <div class="container narrow block">
+          <div class="col-1-2">
+            <p>If you have a problem, please look <a href="http://help.formspree.io/">here</a> first. To sign up for our newsletter, use the form on the right.</p>
+            <p>For a quick demo of Formspree, <a href="http://testformspree.com/" target="_blank">click here</a>.</p>
+          </div>
+          <div class="col-1-2">
+            <form method="POST" action="{{config.API_ROOT}}/{{config.NEWSLETTER_EMAIL}}">
+              <input type="text" name="name" placeholder="Your name" required />
+              <input type="email" name="_replyto" placeholder="Your email" required />
+              <input type="text" name="_gotcha" style="display:none">
+              <input type="hidden" name="_format" value="plain" style="display:none">
+              <button style="width: 100%" type="submit">Get Our Newsletter</button>
+            </form>
+          </div>
+      </div>
+	  <div class="container block">
+      	<div class="col-1-1 center">
+          <a href="//facebook.com/formspree"><i class="fa fa-facebook-official fa-2x"></i></a>
+          <a href="//twitter.com/formspree"><i class="fa fa-twitter fa-2x"></i></a>
+          <a href="//github.com/formspree/formspree"><i class="fa fa-github fa-2x"></i></a>
+        </div>
+        <p class="col-1-1 center">{{config.SERVICE_NAME}} is a tool <a href="https://github.com/formspree/formspree">managed on GitHub</a>.<br>Please check out our <a href="http://docs.formspree.io/files/terms.pdf">Terms of Use</a> and <a href="http://docs.formspree.io/files/privacy.pdf">Privacy Policy</a>.</p>
+      </div>
+
+  </div>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}

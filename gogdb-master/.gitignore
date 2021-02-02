@@ -1,0 +1,22 @@
+# Config files
+config-development.py
+config-production.py
+
+# Root level scripts
+/*.sh
+
+# Python files
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info
+
+# Environment
+env/
+venv/
+
+# Generated assets
+gogdb/generated/
+
+# OS files
+.DS_Store

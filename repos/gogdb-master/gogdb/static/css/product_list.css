@@ -1,0 +1,54 @@
+.col-thumb {
+  width: 1%;
+  height: 60px;
+  padding: 0px;
+  font-size: 0px;
+}
+
+.col-id {
+  width: 1%;
+  text-align: right;
+}
+
+.col-type {
+  width: 100px;
+  text-align: center;
+}
+
+.col-os {
+  width: 100px;
+  text-align: center;
+}
+
+.img-thumb {
+  height: 60px;
+}
+
+.prod-unlisted {
+  font-style: italic;
+}
+
+.page-link {
+  padding: 10px;
+}
+
+.deactivated {
+  opacity: 0.5;
+}
+
+#product-search {
+  height: 40px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  border-radius: 2px;
+  border: 1px solid #c5c5c5;
+  background-color: white;
+}
+
+#product-search:focus-within {
+  box-shadow: 0 1px 5px rgba(46,23,143,.5);
+}
+
+#product-search-button {
+  width: 38px;
+}

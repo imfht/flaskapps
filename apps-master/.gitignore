@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+README.gfm*
+shinyproxy.log
+shinyproxy-*.jar
+*/shinyapps/
+pitchRx/interactiveFX/
+pitchRx/strikeFX/
+pitchRx-db/postgres-notes.R

@@ -1,0 +1,210 @@
+{% macro get_attachment_icon(attachment) -%}
+    {%- if attachment.type.name == 'link' -%}
+        icon-link
+    {%- else -%}
+        {{ icon_from_mimetype(attachment.file.content_type, 'icon-file-filled') }}
+    {%- endif -%}
+{%- endmacro %}
+
+{% macro render_attachment(attachment, has_label=false, classes='') %}
+    {% set previewable = (attachment.file.is_previewable and not g.static_site) or false %}
+    {% set visible_link = attachment.type.name == 'link' and (not attachment.is_protected or attachment.can_access(session.user)) %}
+    <a class="attachment {{ get_attachment_icon(attachment) }} {% if attachment.is_self_protected %}is-protected{% endif %} {% if has_label %}has-label{% endif %} {%- if previewable %} js-preview-dialog{% endif %} {{ classes }}"
+       data-previewable="{{ previewable|tojson }}"
+       data-attachment-id="{{ attachment.id }}"
+       href="{{ attachment.link_url if visible_link else attachment.download_url }}" target="_blank"
+       rel="noopener noreferrer"
+       title="{{ attachment.description or attachment.title }}
+              {%- if attachment.is_self_protected %} ({% trans %}Protected{% endtrans %}){% endif %}">
+        {%- if not has_label -%}
+            <span class="title">{{ attachment.title }}</span>
+        {%- endif -%}
+    </a>
+{% endmacro %}
+
+{% macro _attachment_row(attachment, management=true) %}
+    <tr>
+        <td>
+            {{ render_attachment(attachment) }}
+            {%- if attachment.is_self_protected %}
+                <i class="icon-lock-center custom-protection"
+                   title="{% trans %}The access to this material is restricted, regardless of the protection scheme of
+                          the parent.{% endtrans %}"></i>
+            {% endif %}
+        </td>
+        {% if management -%}
+            <td class="actions hide-if-locked">
+                <a class="icon-edit js-dialog-action"
+                   data-href="{{ url_for('.modify_attachment', attachment) }}"
+                   data-title="
+                    {%- if attachment.type.name == 'file' -%}
+                        {% trans name=attachment.title %}Edit file &quot;{{ name }}&quot;{% endtrans %}
+                    {% else %}
+                        {% trans name=attachment.title %}Edit link &quot;{{ name }}&quot;{% endtrans %}
+                    {% endif -%}"></a>
+                <a href="#" class="icon-remove js-delete"
+                   data-method="DELETE"
+                   data-href="{{ url_for('.delete_attachment', attachment) }}"
+                   data-title="{% trans name=attachment.title %}Remove {{ name }}?{% endtrans %}"
+                   data-confirm="{% trans name=attachment.title -%}
+                       Are you sure you want to remove &quot;{{ name }}&quot;?<br>
+                       This will remove the attachment permanently.
+                       {%- endtrans %}">
+                </a>
+            </td>
+            <td class="date">{{ attachment.modified_dt|format_datetime('short') }}</td>
+        {%- endif %}
+    </tr>
+{% endmacro %}
+
+{% macro _folder_row(folder, management=true) -%}
+    <tr class="expandable {%- if not folder.attachments %} collapsed{% endif %}">
+        <td>
+            <span>{{ folder.title }}</span>
+            {%- if folder.is_self_protected %}
+                <i class="icon-lock-center custom-protection"
+                   title="{% trans %}The access to this folder is restricted, regardless of the protection scheme of
+                          the parent.{% endtrans %}"></i>
+            {% endif %}
+            {% if folder.is_hidden and management %}
+                <i class="icon-eye-blocked"
+                   title="{% trans %}This folder is always hidden in the frontend.{% endtrans %}"></i>
+            {% endif %}
+            {% if folder.is_always_visible and management %}
+                <i class="icon-eye"
+                   title="{% trans %}This folder is always visible in the frontend.{% endtrans %}"></i>
+            {% endif %}
+        </td>
+        {% if management -%}
+            <td class="actions hide-if-locked">
+                <a class="icon-edit js-dialog-action"
+                           data-href="{{ url_for('.edit_folder', folder) }}"
+                           data-title="{% trans name=folder.title %}Edit folder: {{ name }}{% endtrans %}"></a>
+                <a href="#" class="icon-remove js-delete"
+                   data-method="DELETE"
+                   data-href="{{ url_for('.delete_folder', folder) }}"
+                   data-title="{% trans name=folder.title %}Remove {{ name }}?{% endtrans %}"
+                   data-confirm="{% trans name=folder.title -%}
+                       Are you sure you want to remove &quot;{{ name }}&quot;?<br>
+                       This will remove the folder and its contents permanently.
+                   {%- endtrans %}">
+                </a>
+            </td>
+            <td class="date"></td>
+        {%- endif %}
+    </tr>
+    <tr class="sub-tree">
+        <td {%- if management %} colspan="3"{% endif %}>
+            {# Div to have a smooth slide up and down of the sub-tree #}
+            <div {%- if not folder.attachments %} style="display: none;"{% endif %}>
+                <table class="tree">
+                {{- _render_tree(folder.attachments, false, management=management) -}}
+                </table>
+            </div>
+        </td>
+    </tr>
+{%- endmacro %}
+
+{% macro _render_tree(nodes, is_folder, management=true) -%}
+    {%- for sub_node in nodes -%}
+        {% if is_folder %}
+            {{ _folder_row(sub_node, management=management) }}
+        {% else %}
+            {{ _attachment_row(sub_node, management=management) }}
+        {% endif %}
+    {%- else -%}
+        <tr class="empty">
+            <td {%- if management %} colspan="3"{% endif %}> {% trans %}empty folder{% endtrans %}</td>
+        </tr>
+    {%- endfor -%}
+{%- endmacro %}
+
+{% macro render_attachments(attachments, linked_object=None, management=true) -%}
+    {%- if attachments -%}
+        <table class="tree">
+            {%- if attachments.files -%}
+                {{ _render_tree(attachments.files, false, management=management) }}
+            {%- endif -%}
+            {%- if attachments.folders -%}
+                {{ _render_tree(attachments.folders, true, management=management) }}
+            {%- endif -%}
+        </table>
+    {%- else -%}
+        <span class="empty">{% trans %}There are no materials yet.{% endtrans %}</span>
+    {%- endif -%}
+    {% if management %}
+        <div class="i-box-footer text-right js-attachment-actions hide-if-locked">
+            <a href="#" class="i-button icon-folder-plus js-dialog-action"
+               data-href="{{ url_for('.create_folder', linked_object) }}"
+               data-title="{% trans %}Create a new folder{% endtrans %}">{% trans %}New folder{% endtrans -%}</a>
+        </div>
+    {% endif %}
+{%- endmacro %}
+
+{% macro attachments_page(linked_object, linked_object_type, attachments) %}
+    <div class="flashed-messages"></div>
+
+    <div class="attachment-editor">
+        <div class="action-box fixed-width hide-if-locked">
+            <div class="section">
+                <span class="icon icon-upload"></span>
+                <div class="text">
+                    <div class="label">
+                        {% if linked_object_type == 'category' %}
+                            {% trans %}Add materials to the category.{% endtrans %}
+                        {% elif linked_object_type == 'event' %}
+                            {% trans %}Add materials to the event.{% endtrans %}
+                        {% elif linked_object_type == 'session' %}
+                            {% trans %}Add materials to the session.{% endtrans %}
+                        {% elif linked_object_type == 'contribution' %}
+                            {% trans %}Add materials to the contribution.{% endtrans %}
+                        {% elif linked_object_type == 'subcontribution' %}
+                            {% trans %}Add materials to the subcontribution.{% endtrans %}
+                        {% endif %}
+                    </div>
+                    <div>{% trans %}You can attach files or links using the buttons on the right.{% endtrans %}</div>
+                </div>
+                <div class="toolbar">
+                    <div class="group">
+                        <a href="#" class="i-button icon-file js-dialog-action"
+                           data-href="{{ url_for('.upload', linked_object) }}"
+                           data-title="{%- trans %}Upload files{% endtrans -%}">
+                            {%- trans %}Upload files{% endtrans -%}
+                        </a>
+                        <a href="#" class="i-button icon-link js-dialog-action"
+                           data-href="{{ url_for('.add_link', linked_object) }}"
+                           data-title="{%- trans %}Add link{% endtrans -%}">
+                            {%- trans %}Add link{% endtrans -%}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if linked_object_type == 'event' and not request.is_xhr and linked_object.can_manage(session.user) %}
+            <div class="action-box fixed-width">
+                <div class="section">
+                    <span class="icon icon-package-download"></span>
+                    <div class="text">
+                        <div class="label">
+                            {% trans %}Generate a material package.{% endtrans %}
+                        </div>
+                        <div>{% trans %}You can generate a ZIP file containing materials from the event.{% endtrans %}</div>
+                    </div>
+                    <div class="toolbar">
+                        <a href="{{ url_for('.package_management', linked_object) }}" class="i-button icon-package-download">
+                            {%- trans %}Material Package{% endtrans -%}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="i-box fixed-width attachments-container" id="attachments-container">
+            {{ render_attachments(attachments, linked_object) }}
+        </div>
+    </div>
+    <script>
+        setupAttachmentEditor();
+    </script>
+{% endmacro  %}

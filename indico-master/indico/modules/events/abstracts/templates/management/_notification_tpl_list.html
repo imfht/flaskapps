@@ -1,0 +1,168 @@
+{% from 'message_box.html' import message_box %}
+
+{% macro render_notification_list(event, tracks, states, contrib_types, email_tpls) -%}
+    {% if not event.abstract_email_templates %}
+        {% call message_box('info', classes='no-rules-placeholder') %}
+            {% trans %}There are currently no e-mail templates{% endtrans %}
+        {% endcall %}
+    {% else %}
+        <div class="email-template-wrapper">
+            <div class="explanation">
+                {%- trans -%}
+                    When an abstract is submitted or its state changes, notifications may be automatically triggered
+                    based on a ruleset. If more than one ruleset applies at the same time, several notifications will
+                    be sent. This can be prevented by reordering the list of notifications and enabling "stop on match".
+                {%- endtrans -%}
+            </div>
+            <div class="email-templates">
+                <ul class="i-box-group vert"
+                    data-url="{{ url_for('.email_tpl_sort', event) }}">
+                    {% for tpl in event.abstract_email_templates|sort(attribute='position') %}
+                        <li class="i-box" data-id="{{ tpl.id }}">
+                            <div class="ui-i-box-sortable-handle hide-if-locked"></div>
+                            <div class="i-box-header">
+                                <span class="i-box-title">{{ tpl.title }}</span>
+                                <div class="i-box-buttons toolbar right">
+                                    <div class="group">
+                                        <a href="#"
+                                           class="i-button icon-stop icon-only js-toggle-stop-on-match
+                                                  {{ 'disabled' if event.is_locked }}
+                                                  {{ 'stop-processing-enabled' if tpl.stop_on_match }}"
+                                           title="{% trans %}Stop processing at this point if triggered{% endtrans %}"
+                                           data-href="{{ url_for('.email_tpl_rest', tpl) }}"
+                                           data-stop-on-match="{{ tpl.stop_on_match|tojson|forceescape }}"
+                                           data-method="PATCH">
+                                        </a>
+                                    </div>
+                                    <div class="group hide-if-locked">
+                                        <a class="i-button icon-edit arrow js-edit-tpl-dropdown"
+                                           data-toggle="dropdown">
+                                            {%- trans %}Edit{% endtrans -%}
+                                        </a>
+                                        <ul class="i-dropdown">
+                                            <li>
+                                                <a data-href="{{ url_for('.email_tpl_rule_edit', tpl) }}"
+                                                   title="{% trans %}Edit ruleset{% endtrans %}"
+                                                   data-title="{% trans %}Edit ruleset{% endtrans %}"
+                                                   data-update="#email-template-manager"
+                                                   data-ajax-dialog>
+                                                   {% trans %}Ruleset{% endtrans %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a data-href="{{ url_for('.email_tpl_text_edit', tpl) }}"
+                                                   title="{% trans %}Edit e-mail text{% endtrans %}"
+                                                   data-title="{% trans %}Edit e-mail text{% endtrans %}"
+                                                   data-update="#email-template-manager"
+                                                   data-ajax-dialog>
+                                                   {% trans %}E-mail text{% endtrans %}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <a href="#" class="i-button js-delete-item icon-remove icon-only"
+                                           title="{% trans %}Delete template{% endtrans %}"
+                                           data-qtip-style="danger"
+                                           data-href="{{ url_for('.email_tpl_delete', tpl) }}"
+                                           data-method="DELETE"
+                                           data-confirm="{% trans %}Are you sure you want to delete this template?{% endtrans %}"
+                                           data-title="{% trans %}Delete template{% endtrans %}"
+                                           data-update="#email-template-manager">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="i-box-content">
+                                <div class="right">
+                                    <a href="#" class="email-preview-btn"
+                                       id="email-preview-btn-{{ tpl.id }}"
+                                       data-id="{{ tpl.id }}">
+                                        {%- trans %}Show preview{% endtrans -%}
+                                    </a>
+                                </div>
+                                <div>
+                                    {%- trans %}This email will be sent when the abstract is:{% endtrans -%}
+                                </div>
+                                <ul>
+                                    {% for rule in tpl.rules if rule %}
+                                        <li class="notification-rule">
+                                            <strong>{{ states[rule.state[0]] }}</strong>
+                                            {% if 'track' in rule %}
+                                                {% if not rule.track %}
+                                                    {%- trans -%}
+                                                       in <strong>no track</strong>
+                                                    {%- endtrans -%}
+                                                {% else %}
+                                                    {%- trans %}in{% endtrans -%}
+                                                    {% set track = tracks[rule.track[0]] %}
+                                                    {% if track %}
+                                                        <strong>{{ track.title }}</strong>
+                                                    {% else %}
+                                                        {% set tooltip %}
+                                                            {%- trans -%}
+                                                                This rule will never match as the track has been deleted.
+                                                            {%- endtrans -%}
+                                                        {% endset %}
+                                                        <span class="semantic-text disabled" title="{{ tooltip }}">
+                                                            {% trans %}deleted{% endtrans %}
+                                                        </span>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                            {% if 'contribution_type' in rule %}
+                                                    {% if not rule.contribution_type %}
+                                                        {%- trans -%}
+                                                            as <strong>no type</strong>
+                                                        {%- endtrans -%}
+                                                    {% else %}
+                                                        {%- trans %}as{% endtrans -%}
+                                                        {% set ctype = contrib_types[rule.contribution_type[0]] %}
+                                                        {% if ctype %}
+                                                            {{ ctype.name }}
+                                                        {% else %}
+                                                            {% set tooltip %}
+                                                                {%- trans -%}
+                                                                    This rule will never match as the contribution type has been deleted.
+                                                                {%- endtrans -%}
+                                                            {% endset %}
+                                                            <span class="semantic-text disabled" title="{{ tooltip }}">
+                                                                {% trans %}deleted{% endtrans %}
+                                                            </span>
+                                                        {% endif %}
+                                                    {% endif %}
+                                            {% endif %}
+                                            {% if not loop.last %}
+                                                {%- trans %}or{% endtrans -%}
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="email-preview" id="email-preview-{{ tpl.id }}" data-id="{{ tpl.id }}">
+                                    <div class="titled-rule">{% trans %}Email preview{% endtrans %}</div>
+                                    <div class="i-box-footer">
+                                        <div class="preformatted email-subject"><strong>{{ email_tpls[tpl.id].get_subject() }}</strong></div>
+                                        <div class="preformatted email-body">{{ email_tpls[tpl.id].get_body() }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="toolbar f-j-end hide-if-locked">
+        <div class="group">
+            <a href="#" class="i-button icon-plus highlight"
+               data-href="{{ url_for('.email_tpl_add', event) }}"
+               data-title="{% trans %}Add a new notification ruleset{% endtrans %}"
+               data-update="#email-template-manager"
+               data-ajax-dialog>
+                {% trans %}Add new one{% endtrans %}
+            </a>
+        </div>
+    </div>
+    <script>
+        setupAbstractEmailTemplatesPage();
+    </script>
+{%- endmacro %}

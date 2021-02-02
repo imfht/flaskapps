@@ -1,0 +1,80 @@
+{
+  "bandit": {
+    "violations": {
+      "b2a5a60fcdcfcf87b385a73ae2a48a83": {
+        "tool_id": "bandit",
+        "check_id": "python2-input",
+        "path": "scripts/post_to_slack.py",
+        "message": "The input method in Python 2 will read from standard input, evaluate and run the resulting string as python source code. This is similar, though in many ways worse, then using eval. On Python 2, use raw_input instead, input is safe in Python 3.",
+        "severity": 2,
+        "syntactic_context": "webhook: URL = input()"
+      },
+      "b8427b15130db96581ea81495e28e658": {
+        "tool_id": "bandit",
+        "check_id": "subprocess-popen-with-shell-equals-true",
+        "path": "bento/extra/hadolint.py",
+        "message": "subprocess call with shell=True identified, security issue.",
+        "severity": 2,
+        "syntactic_context": "f\"docker run --network none --rm -i {self.DOCKER_IMAGE} hadolint --format json - < {file}\",\nshell=True,\ncwd=self.base_path,\nencoding=\"utf8\",\nstdout=subprocess.PIPE,\nstderr=subprocess.PIPE,"
+      }
+    }
+  },
+  "dlint": {
+    "violations": {}
+  },
+  "flake8": {
+    "violations": {}
+  },
+  "hadolint": {
+    "violations": {
+      "31880ca843ddb065cb8e7fa8c0174fa6": {
+        "tool_id": "hadolint",
+        "check_id": "DL3002",
+        "path": "tests/acceptance/environments/python36.Dockerfile",
+        "message": "Last USER should not be root",
+        "severity": 1,
+        "syntactic_context": "USER root\n"
+      },
+      "8228d6515361106e8f40a51d558d6545": {
+        "tool_id": "hadolint",
+        "check_id": "DL3013",
+        "path": "tests/acceptance/environments/python36.Dockerfile",
+        "message": "Pin versions in pip. Instead of `pip install <package>` use `pip install <package>==<version>`",
+        "severity": 1,
+        "syntactic_context": "RUN pip install ./*.whl\n"
+      }
+    }
+  },
+  "r2c.click": {
+    "violations": {}
+  },
+  "r2c.flask": {
+    "violations": {}
+  },
+  "r2c.registry.latest": {
+    "violations": {
+      "2205885a33ae02a639b17a5bc561262e": {
+        "tool_id": "r2c.registry.latest",
+        "check_id": "https:.r2c.dev.useless-if-body",
+        "path": "bento/extra/hadolint.py",
+        "message": "useless if statment; both blocks have the same body",
+        "severity": 2,
+        "syntactic_context": "elif level == \"info\":\n"
+      },
+      "718623f6a3ef5a4ff0ef80cbd18602eb": {
+        "tool_id": "r2c.registry.latest",
+        "check_id": "https:.r2c.dev.useless-if-body",
+        "path": "bento/extra/shellcheck.py",
+        "message": "useless if statment; both blocks have the same body",
+        "severity": 2,
+        "syntactic_context": "elif level == \"info\":\n"
+      }
+    }
+  },
+  "r2c.requests": {
+    "violations": {}
+  },
+  "shellcheck": {
+    "violations": {}
+  }
+}

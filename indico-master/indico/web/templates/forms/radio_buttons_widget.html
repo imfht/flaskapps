@@ -1,0 +1,31 @@
+{% extends 'forms/base_widget.html' %}
+
+{% set vertical_alignment = field.option_orientation == 'vertical' %}
+
+{% block html %}
+    <div id="{{ field.id }}" class="{{ 'i-group' if vertical_alignment else 'group i-selection' }}">
+        {% if field.enum and field.enum.__css_classes__ %}
+            {% set options = field.enum | list %}
+        {% endif %}
+        {% for subfield in field %}
+            <div class="{{ 'i-radio' if vertical_alignment else 'inline-vcentered'}} radio-item-{{ loop.index0 }} {% if options %} {{ options[loop.index0].css_class }} {% endif %}">
+                {{ subfield(**input_args) }}
+                {{ subfield.label(class_=('i-button' if not vertical_alignment)) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        (function() {
+            'use strict';
+
+            $('#{{ field.id }} input').on('invalid', function(evt) {
+                evt.preventDefault();
+
+                $('#{{ field.id }} div:last-child').stickyTooltip('warning', this.validationMessage);
+            });
+        })();
+    </script>
+{% endblock %}

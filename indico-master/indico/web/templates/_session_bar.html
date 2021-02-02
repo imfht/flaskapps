@@ -1,0 +1,234 @@
+{% macro _render_protection_info(obj, disclaimers) %}
+    {% if not obj.is_protected %}
+        {% set mode = 'public' %}
+    {% else %}
+        {% set networks = obj.get_access_list()|selectattr('is_network')|map(attribute='name')|sort %}
+        {% set mode = 'network' if networks else 'restricted' %}
+    {% endif %}
+
+    <div id="protection-details" style="display: none;" class="protectionWidget">
+        <div class="protectionWidgetSection">
+            {% if mode == 'public' %}
+                {% trans %}The information on this page is visible to anyone{% endtrans %}
+            {% elif mode == 'network' %}
+                {% trans count=networks|length, networks=networks|join('/') %}
+                    The information on this page is restricted for display on the {{ networks }} network only.
+                {% pluralize %}
+                    The information on this page is restricted for display on the {{ networks }} networks only.
+                {% endtrans %}
+            {% elif mode == 'restricted' %}
+                {% trans %}
+                    The information on this page is restricted for display to named individuals or specific groups.
+                {% endtrans %}
+            {% endif %}
+        </div>
+        {% set disclaimer = disclaimers[mode]|sanitize_html|trim %}
+        {% if disclaimer %}
+            <div class="protectionWidgetSection">
+                {{ disclaimer }}
+            </div>
+        {% endif %}
+    </div>
+
+    <a id="protection-details-link"
+       class="arrow i-button protection-{{ mode }} {{ 'icon-shield' if mode != 'public' else 'icon-earth' }}">
+        {% if mode == 'public' %}
+            {% trans %}Public{% endtrans %}
+        {% elif mode == 'network' %}
+            {% trans count=networks|length, networks=networks|join('/') %}
+                {{ networks }} network only
+            {% pluralize %}
+                {{ networks }} networks only
+            {% endtrans %}
+        {% elif mode == 'restricted' %}
+            {% trans %}Restricted{% endtrans %}
+        {% endif %}
+    </a>
+{% endmacro %}
+
+
+{% macro _render_timezone_selector(timezone_data) %}
+    {% if timezone_data.disabled %}
+        <a class="i-button icon-time disabled">
+            {{- timezone_data.active_tz -}}
+        </a>
+    {% else %}
+        <div id="tz-selector-widget" style="display: none;" class="tz-selector-widget settingsWidget">
+            <div style="line-height: 17px;">
+                <span class="settingsWidgetHeader">{% trans %}Choose Timezone{% endtrans %}</span><br>
+            </div>
+            <div class="settingsSeparator"></div>
+            <div class="tz-mode-container">
+                <div>
+                    <input type="radio" name="tz_mode" id="tz-mode-local" value="local"
+                           {{ 'checked' if timezone_data.tz_mode == 'local' }}>
+                    <label for="tz-mode-local">{% trans %}Use the event/category timezone{% endtrans %}</label>
+                </div>
+                {% if session.user %}
+                    <div>
+                        <input type="radio" name="tz_mode" id="tz-mode-user" value="user"
+                               {{ 'checked' if timezone_data.tz_mode == 'user' }}>
+                        <label for="tz-mode-user">
+                            {% trans %}Your default timezone{% endtrans %}
+                            <em>({{ timezone_data.user_tz }})</em>
+                        </label>
+                    </div>
+                {% endif %}
+                <div>
+                    <input type="radio" name="tz_mode" id="tz-mode-custom" value="custom"
+                           {{ 'checked' if timezone_data.tz_mode == 'custom' }}>
+                    <label for="tz-mode-custom">{% trans %}Specify a timezone{% endtrans %}</label>
+                </div>
+            </div>
+            <select name="tz" class="tz-select" size="12" {{ 'disabled' if timezone_data.tz_mode != 'custom' }}>
+                {% for tz in timezone_data.timezones -%}
+                    <option value="{{ tz }}" {{ 'selected' if tz == session.tzinfo.zone }}>{{ tz }}</option>
+                {%- endfor %}
+            </select>
+            {% if session.user %}
+                <div class="tz-update-user-container">
+                    <input type="checkbox" name="update_user" id="tz-update-user" value="1">
+                    <label for="tz-update-user">
+                        {%- trans %}Remember these settings{% endtrans -%}
+                    </label>
+                </div>
+            {% endif %}
+            <div class="tz-save-container">
+                <button class="i-button highlight" type="button"
+                        data-href="{{ url_for('core.change_tz') }}"
+                        data-method="POST"
+                        data-params-selector="#tz-selector-widget input[name=tz_mode]:checked,
+                                              #tz-selector-widget select[name=tz]:not(:disabled),
+                                              #tz-update-user:checked"
+                        data-reload-after
+                        data-ajax>
+                    {% trans %}Save{% endtrans %}
+                </button>
+            </div>
+        </div>
+
+        <a id="tz-selector-link" class="i-button icon-time arrow">{{ timezone_data.active_tz }}</a>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro _render_user_settings(languages) %}
+    <div id="user-settings-widget" style="display: none;" class="settingsWidget">
+        <div style="line-height: 17px;">
+            <span class="settingsWidgetHeader">{{ session.user.full_name }}</span><br>
+            <span style="font-size: 12px;">{{ session.user.email }}</span>
+        </div>
+        <div class="settingsSeparator"></div>
+        <div class="settingsWidgetSection">
+            <a href="{{ url_for('users.user_dashboard', session.user) }}">
+                {%- trans %}My profile{% endtrans -%}
+            </a>
+        </div>
+        <div class="settingsWidgetSection">
+            <a href="{{ url_for('users.user_preferences', session.user) }}">
+                {%- trans %}My preferences{% endtrans -%}
+            </a>
+        </div>
+        <div class="settingsWidgetSection">
+            {{ _render_language_selector(languages, lightweight=true) }}
+        </div>
+        {% if session.user.is_admin %}
+            <div class="settingsWidgetSection">
+                <div id="login-as"></div>
+            </div>
+        {% endif %}
+        {% if 'login_as_orig_user' in session %}
+            <div class="settingsWidgetSection">
+                <a class="undo-login-as" data-href="{{ url_for('auth.admin_impersonate') }}">
+                    {%- trans name=session.login_as_orig_user.user_name -%}
+                        Switch back to {{ name }}
+                    {%- endtrans -%}
+                </a>
+            </div>
+        {% endif %}
+        <div style="border-bottom: 1px solid #ddd; margin-bottom: 5px; margin-top: 10px"></div>
+        <div class="settingsWidgetSection">
+            <a href="{{ url_for_logout(request.relative_url) }}">
+                {%- trans %}Logout{% endtrans -%}
+            </a>
+        </div>
+    </div>
+
+    <a id="user-settings-link" class="i-button icon icon-user arrow">
+        {{ session.user.get_full_name(last_name_first=false, last_name_upper=false, abbrev_first_name=true) }}
+    </a>
+{% endmacro %}
+
+
+{% macro _render_language_selector(languages, lightweight=false) %}
+    {% set lang = languages[session.lang][0] if session.lang in languages else 'English' %}
+    {% if lightweight %}
+        <a id="language-selector-link" class="arrow js-dropdown" data-toggle="dropdown">
+            {% trans %}My language ({{ lang }}){% endtrans %}
+        </a>
+    {% else %}
+        <a id="language-selector-link" class="arrow icon-earth i-button js-dropdown" data-toggle="dropdown">
+            {{ lang }}
+        </a>
+    {% endif %}
+    <ul class="i-dropdown">
+        {% for name, (title, territory) in languages|dictsort(by='value') %}
+            <li>
+                {% if name == session.lang %}
+                    <a class="disabled" title="{% trans %}This is your current language.{% endtrans %}">
+                        {{- title -}}
+                        {%- if territory %} ({{ territory }}){% endif -%}
+                    </a>
+                {% else %}
+                    <a data-href="{{ url_for('core.change_lang') }}"
+                       data-method="POST"
+                       data-params='{{ {'lang': name}|tojson|forceescape }}'
+                       data-reload-after
+                       data-ajax>
+                        {{- title -}}
+                        {%- if territory %} ({{ territory }}){% endif -%}
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
+
+
+{% macro render_session_bar(protected_object, protection_disclaimers, timezone_data, languages) %}
+    {% set is_protected = protected_object and protected_object.is_protected %}
+
+    <div id="session-bar" class="session-bar flexrow f-j-end {{ 'ui-follow-scroll' if is_protected }}">
+        <div class="toolbar">
+            <div class="group">
+                {% if protected_object and (session.user or is_protected) %}
+                    {{ _render_protection_info(protected_object, protection_disclaimers) }}
+                    <script>
+                        $.ui.sticky({
+                            sticky: nothing,
+                            normal: nothing
+                        });
+                    </script>
+                {% endif %}
+
+                {{ _render_timezone_selector(timezone_data) }}
+
+                {% if session.user %}
+                    {{ _render_user_settings(languages) }}
+                {% else %}
+                    {{ _render_language_selector(languages) }}
+
+                    {% if not request.values.next and request.endpoint != config.MULTIPASS_LOGIN_ENDPOINT %}
+                        {% set after_login_url = request.relative_url %}
+                    {% else %}
+                        {% set after_login_url = request.values.next %}
+                    {% endif %}
+
+                    <a class="i-button icon-enter" href="{{ url_for_login(after_login_url) }}">
+                        {%- trans %}Login{% endtrans -%}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

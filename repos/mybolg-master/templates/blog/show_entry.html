@@ -1,0 +1,89 @@
+{% extends "blog/layout.html" %}
+
+{% block head %}
+	<title>{{ entry.title }} |NoGameNoLife的博客</title>
+	<meta name="description" content="{{ entry.title }},NoGameNoLife的博客">
+	<meta name="author" content="NoGameNoLife">
+	<meta name="keywords" content="{{ entry.title }}, {{ entry.category.name }}">
+    <link rel="stylesheet" href="/static/css/github-markdown.css"/>
+    <style>
+        .markdown-body {
+            box-sizing: border-box;
+            min-width:200px;
+            max-width:980px;
+            margin:0 auto;
+            padding: 15px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<ol class="breadcrumb">
+    <li><a href="{{ url_for('show_blog') }}">首页</a> </li>
+    <li><a href="{{ url_for('show_categories') }}">分类</a> </li>
+    <li><a href="{{ url_for('show_category', category_id=entry.category_id) }}">{{ entry.category.name }}</a> </li>
+    <li><small>{{ entry.create_time.strftime("%Y-%m-%d") }}</small></li>
+<div class="page-header">
+    <h1 style="text-transform:none;" ><a href="{{ url_for('show_entry', entry_id=entry.id) }}">{{ entry.title }}</a></h1>
+</div>
+
+</ol>
+<link rel="stylesheet" href="/static/highlight/styles/solarized_dark.css">
+<script src="/static/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<div class="markdown-body">
+    {% if entry.content_html %}
+    {{ entry.content_html|safe}}
+    {% else %}
+    {{ entry.content|safe }}
+    {% endif %}
+    <br>
+    <p>本文链接: <a href="http://bugcoding.com/entry/{{entry.id}}">http://www.bugcoding.com/entry/{{ entry.id }}</a></p>
+    <p>版权所有。转载时必须以链接形式注明作者和原始出处及本声明。</p>
+</div>
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="{{ url_for('prev_entry', entry_id=entry.id) }}"><span aria-hidden="true">&larr;</span> 上一篇</a></li>
+    <li class="next"><a href="{{ url_for('next_entry', entry_id=entry.id) }}">下一篇 <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+
+<div class="ds-share flat" data-thread-key="{{ entry.id }}" data-title="{{ entry.title }}" data-images="" data-content="{{ entry.fragment }}" data-url="http://bugcoding.sinaapp.com/entry/{{entry.id}}">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      	
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="{{ entry.id }}" data-title="{{ entry.title }}" data-url="http://bugcoding.sinaapp.com/entry/{{entry.id}}">
+
+</div>
+<!-- 多说评论框 end -->
+
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"nogamenolife"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+
+
+	</script>
+
+{% endblock %}

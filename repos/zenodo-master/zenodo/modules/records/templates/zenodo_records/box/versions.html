@@ -1,0 +1,41 @@
+{%- if record.doi and record.conceptdoi and "doi" in record and (record.doi|doi_locally_managed) %}
+  {%- set pid_versioning = pid | to_versioning_api -%}
+  {# All versions included (published, deleted) #}
+  {%- set all_versions = pid_versioning.get_children(ordered=True, pid_status=None) | list %}
+  {%- set active_versions = pid_versioning.children|list %}
+  {%- set pid_version_index = all_versions.index(pid) %}
+  <div class="well metadata">
+    <h4>{{_('Versions')}}</h4>
+    <table class="table">
+    {%- for pid_version in (active_versions|reverse|list)[:5] %}
+      {%- set version_record = pid_version|record_from_pid %}
+      {%- set current_version_index = all_versions.index(pid_version) %}
+      {%- set version_label = version_record.version or (current_version_index + 1) %}
+      <tr {% if pid_version_index == all_versions.index(pid_version) %}class="info"{% endif %}>
+        <td>
+          <a href="{{ url_for('invenio_records_ui.recid', pid_value=pid_version.pid_value) }}">Version {{ version_label }} </a>
+          <small class="text-muted">{{version_record.doi}}</small>
+        </td>
+        <td align="right"><small class="text-muted">{{ version_record.publication_date|from_isodate|dateformat(format='medium')}}</small></td>
+      </tr>
+    {%- endfor %}
+    {%- if active_versions|length > 5 %}
+      {%- if pid_version_index < active_versions|length - 5 %}
+        {% if pid_version_index < active_versions|length - 6 %}<tr><td colspan="2" align="center">...</tr>{% endif %}
+        <tr class="info">
+          <td>
+            <a href="{{ url_for('invenio_records_ui.recid', pid_value=pid.pid_value) }}">Version {{ record.version or (pid_version_index + 1) }}</a>
+            <small class="text-muted">{{record.doi}}</small>
+          </td>
+          <td align="right"><small class="text-muted">{{ record.publication_date|from_isodate|dateformat(format='medium')}}</small></td>
+        </tr>
+      {% endif %}
+      {% set q = {"conceptrecid": record.conceptrecid}|make_query %}
+      <tr><td colspan="2" align="center"><a href="{{url_for('invenio_search_ui.search', q=q, all_versions=True, sort='-version')}}"><small>View all {{active_versions|length}} versions</small></a></tr>
+    {%- endif %}
+    </table>
+    <small>
+      <strong>Cite all versions?</strong> You can cite all versions by using the DOI <a href="https://doi.org/10.5281/zenodo.{{pid_versioning.parent.pid_value}}">10.5281/zenodo.{{pid_versioning.parent.pid_value}}</a>. This DOI represents all versions, and will always resolve to the latest one. <a href="http://help.zenodo.org/#versioning">Read more</a>.
+    </small>
+  </div>
+{%- endif %}

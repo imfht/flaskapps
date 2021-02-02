@@ -1,0 +1,2418 @@
+[
+  {
+    "abstract": {
+      "description": "<p>This document contains Higgs candidate events (with an invariant mass between 120-130 GeV) that have been released by CMS for use in education and outreach: 10 gamma-gamma events, one 2e2mu event, one 4mu event and one 4e event.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "date_created": [
+      "2011",
+      "2012"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "csv",
+        "ig",
+        "json"
+      ]
+    },
+    "doi": "10.7483/OPENDATA.CMS.N9MJ.QEEC",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:554607ac",
+        "size": 1256,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/4lepton.csv"
+      },
+      {
+        "checksum": "adler32:33171393",
+        "size": 4086175,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/4lepton.ig"
+      },
+      {
+        "checksum": "adler32:7d7f9e7c",
+        "size": 1966,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/4lepton.json"
+      },
+      {
+        "checksum": "adler32:dca4af81",
+        "size": 869,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/diphoton.csv"
+      },
+      {
+        "checksum": "adler32:a1f52007",
+        "size": 1909562,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/diphoton.ig"
+      },
+      {
+        "checksum": "adler32:f2446507",
+        "size": 1619,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/diphoton.json"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "These events were selected by the CMS Higgs Physics Analysis Group"
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "300",
+    "run_period": [
+      "Run2011A"
+    ],
+    "title": "Higgs candidate events for use in education and outreach",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    },
+    "validation": {
+      "description": "These events were validated by the CMS Higgs Physics Analysis Group"
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The collaboration approved 2000 dimuon events around the J/psi for use in education and outreach. This record contains the necessary files for these use-cases.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "Combination of T and G, where T stands for tracker muon and G stands for global muon.",
+        "variable": "Type"
+      },
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the muon GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the muon (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the muon (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the muon.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the muon (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the muon.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two muons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "csv",
+        "ig",
+        "json"
+      ],
+      "number_events": 2000
+    },
+    "doi": "10.7483/OPENDATA.CMS.SW96.PFX3",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a5149946",
+        "size": 374798,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi.csv"
+      },
+      {
+        "checksum": "adler32:8d58d797",
+        "size": 44825530,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_7.ig"
+      },
+      {
+        "checksum": "adler32:1d19467d",
+        "size": 44952775,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_8.ig"
+      },
+      {
+        "checksum": "adler32:81db1266",
+        "size": 45306364,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_9.ig"
+      },
+      {
+        "checksum": "adler32:5f4a7f43",
+        "size": 45547341,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_10.ig"
+      },
+      {
+        "checksum": "adler32:0550a56e",
+        "size": 46411950,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_11.ig"
+      },
+      {
+        "checksum": "adler32:493579fa",
+        "size": 44119119,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_12.ig"
+      },
+      {
+        "checksum": "adler32:c4be9794",
+        "size": 47770858,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_13.ig"
+      },
+      {
+        "checksum": "adler32:35048038",
+        "size": 44945861,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_14.ig"
+      },
+      {
+        "checksum": "adler32:c4ce3155",
+        "size": 44963967,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_15.ig"
+      },
+      {
+        "checksum": "adler32:3004b08f",
+        "size": 47308677,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_16.ig"
+      },
+      {
+        "checksum": "adler32:ad1dc654",
+        "size": 702717,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi.json"
+      },
+      {
+        "checksum": "adler32:6ce4d181",
+        "size": 47491270,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_17.ig"
+      },
+      {
+        "checksum": "adler32:29321d28",
+        "size": 47915241,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_18.ig"
+      },
+      {
+        "checksum": "adler32:358dbcad",
+        "size": 46602078,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_19.ig"
+      },
+      {
+        "checksum": "adler32:dc7a90bd",
+        "size": 45516907,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_0.ig"
+      },
+      {
+        "checksum": "adler32:db505304",
+        "size": 45657377,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_1.ig"
+      },
+      {
+        "checksum": "adler32:87256fb3",
+        "size": 46542194,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_2.ig"
+      },
+      {
+        "checksum": "adler32:3ef51053",
+        "size": 45653180,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_3.ig"
+      },
+      {
+        "checksum": "adler32:b199cf71",
+        "size": 46370345,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_4.ig"
+      },
+      {
+        "checksum": "adler32:4d328cd2",
+        "size": 46211699,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_5.ig"
+      },
+      {
+        "checksum": "adler32:b405219e",
+        "size": 45927075,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon-Jpsi_6.ig"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two muons with invariant mass between 2-5 GeV."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "301",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "muon",
+      "Jpsi"
+    ],
+    "title": "J/psi to two muons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The collaboration approved the release of 2000 dielectron events around the J/psi for use in education and outreach. This record contains the necessary files for these use-cases.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the electron (GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the electron (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the electron (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the electron.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the electron (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the electron.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two electrons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "ig",
+        "csv",
+        "json"
+      ],
+      "number_events": 2000
+    },
+    "doi": "10.7483/OPENDATA.CMS.97YF.C4AH",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:6874cffe",
+        "size": 69927400,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_0.ig"
+      },
+      {
+        "checksum": "adler32:9e157f96",
+        "size": 68038227,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_17.ig"
+      },
+      {
+        "checksum": "adler32:2b0ce9f1",
+        "size": 75784837,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_18.ig"
+      },
+      {
+        "checksum": "adler32:1ab43eeb",
+        "size": 47582226,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_19.ig"
+      },
+      {
+        "checksum": "adler32:c785440d",
+        "size": 73302582,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_2.ig"
+      },
+      {
+        "checksum": "adler32:0732b3b5",
+        "size": 78761389,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_3.ig"
+      },
+      {
+        "checksum": "adler32:6685d6bb",
+        "size": 73108221,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_4.ig"
+      },
+      {
+        "checksum": "adler32:cf4cd09f",
+        "size": 68270656,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_5.ig"
+      },
+      {
+        "checksum": "adler32:7030f850",
+        "size": 69185658,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_6.ig"
+      },
+      {
+        "checksum": "adler32:8c732ad3",
+        "size": 72485687,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_7.ig"
+      },
+      {
+        "checksum": "adler32:68324b4e",
+        "size": 73899071,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_8.ig"
+      },
+      {
+        "checksum": "adler32:8b72850e",
+        "size": 65154346,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_1.ig"
+      },
+      {
+        "checksum": "adler32:e940e112",
+        "size": 75402324,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_9.ig"
+      },
+      {
+        "checksum": "adler32:a4819bf7",
+        "size": 68566933,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_10.ig"
+      },
+      {
+        "checksum": "adler32:1fd819c5",
+        "size": 78080960,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_11.ig"
+      },
+      {
+        "checksum": "adler32:bad59a9f",
+        "size": 77894471,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_12.ig"
+      },
+      {
+        "checksum": "adler32:36bbbfbb",
+        "size": 73451939,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_13.ig"
+      },
+      {
+        "checksum": "adler32:e7e56452",
+        "size": 68881869,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_14.ig"
+      },
+      {
+        "checksum": "adler32:6ca12c5c",
+        "size": 68781154,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_15.ig"
+      },
+      {
+        "checksum": "adler32:de0a3d79",
+        "size": 68839305,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi_16.ig"
+      },
+      {
+        "checksum": "adler32:f59504b3",
+        "size": 295217,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi.csv"
+      },
+      {
+        "checksum": "adler32:cade8512",
+        "size": 605140,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Jpsi.json"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two electrons with invariant mass between 2-5 GeV."
+    },
+    "number_events": 2000,
+    "publisher": "CERN Open Data Portal",
+    "recid": "302",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "electron",
+      "Jpsi"
+    ],
+    "title": "J/psi to two electrons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The CMS collaboration has approved the release of 100k dimuon events in the invariant mass range 2-110 GeV for use in outreach and education. This document contains the files for this release.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "Combination of T and G, where T stands for tracker muon and G stands for global muon.",
+        "variable": "Type"
+      },
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the muon GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the muon (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the muon (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the muon.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the muon (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the muon.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two muons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "json",
+        "ig",
+        "csv"
+      ],
+      "number_events": 100000
+    },
+    "doi": "10.7483/OPENDATA.CMS.4M97.3SQ9",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:b97ceddf",
+        "size": 31475756,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon.json"
+      },
+      {
+        "checksum": "adler32:6ff04f0f",
+        "size": 69359567,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_7.ig"
+      },
+      {
+        "checksum": "adler32:bd7caec8",
+        "size": 68814448,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_8.ig"
+      },
+      {
+        "checksum": "adler32:8a32e225",
+        "size": 72381700,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_9.ig"
+      },
+      {
+        "checksum": "adler32:b47f7436",
+        "size": 15075838,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon.csv"
+      },
+      {
+        "checksum": "adler32:33d04cc9",
+        "size": 66572060,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_0.ig"
+      },
+      {
+        "checksum": "adler32:bab1a742",
+        "size": 69169047,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_1.ig"
+      },
+      {
+        "checksum": "adler32:066ff14c",
+        "size": 67228960,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_2.ig"
+      },
+      {
+        "checksum": "adler32:a627694d",
+        "size": 67368771,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_3.ig"
+      },
+      {
+        "checksum": "adler32:42e9fe46",
+        "size": 67270859,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_4.ig"
+      },
+      {
+        "checksum": "adler32:d659d01b",
+        "size": 65705946,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_5.ig"
+      },
+      {
+        "checksum": "adler32:43c71aa6",
+        "size": 69157089,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dimuon_6.ig"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two muons with invariant mass between 2-110 GeV."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "303",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "muon"
+    ],
+    "title": "Events with two muons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The CMS collaboration has approved the release of 100k dielectron events in the invariant mass range 2-110 GeV for use in outreach and education. This document contains the files for this release.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the electron (GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the electron (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the electron (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the electron.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the electron (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the electron.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two electrons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "ig",
+        "csv",
+        "json"
+      ],
+      "number_events": 100000
+    },
+    "doi": "10.7483/OPENDATA.CMS.PCSW.AHVG",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:622cedce",
+        "size": 73189908,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_0.ig"
+      },
+      {
+        "checksum": "adler32:3abf9720",
+        "size": 14744033,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron.csv"
+      },
+      {
+        "checksum": "adler32:881a0576",
+        "size": 30243957,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron.json"
+      },
+      {
+        "checksum": "adler32:de643407",
+        "size": 74858467,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_1.ig"
+      },
+      {
+        "checksum": "adler32:3a283589",
+        "size": 73117459,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_2.ig"
+      },
+      {
+        "checksum": "adler32:2755f4c4",
+        "size": 74063911,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_3.ig"
+      },
+      {
+        "checksum": "adler32:b7bdf86b",
+        "size": 72334392,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_4.ig"
+      },
+      {
+        "checksum": "adler32:9b2ffef5",
+        "size": 74669334,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_5.ig"
+      },
+      {
+        "checksum": "adler32:964946c7",
+        "size": 75602074,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_6.ig"
+      },
+      {
+        "checksum": "adler32:55ef37d6",
+        "size": 73475769,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_7.ig"
+      },
+      {
+        "checksum": "adler32:e7e491cf",
+        "size": 78400529,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_8.ig"
+      },
+      {
+        "checksum": "adler32:3d8ce124",
+        "size": 75413930,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron_9.ig"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two electrons with invariant mass between 2-110 GeV."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "304",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "electron"
+    ],
+    "title": "Events with two electrons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>The collaboration approved the release of 2000 dielectron events around the Upsilon for use in education and outreach. This document contains the necessary files for these use-cases.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the electron (GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the electron (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the electron (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the electron.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the electron (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the electron.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two electrons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "ig",
+        "csv",
+        "json"
+      ],
+      "number_events": 2000
+    },
+    "doi": "10.7483/OPENDATA.CMS.P95A.KMRE",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:a33f1812",
+        "size": 72589491,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_0.ig"
+      },
+      {
+        "checksum": "adler32:a795b631",
+        "size": 69319492,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_17.ig"
+      },
+      {
+        "checksum": "adler32:70d40dcd",
+        "size": 73371933,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_18.ig"
+      },
+      {
+        "checksum": "adler32:1e417064",
+        "size": 43562000,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_19.ig"
+      },
+      {
+        "checksum": "adler32:8679c1f5",
+        "size": 77272565,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_2.ig"
+      },
+      {
+        "checksum": "adler32:0ef0cb01",
+        "size": 83965754,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_3.ig"
+      },
+      {
+        "checksum": "adler32:8ce51951",
+        "size": 84779897,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_4.ig"
+      },
+      {
+        "checksum": "adler32:e9e32e18",
+        "size": 75488170,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_5.ig"
+      },
+      {
+        "checksum": "adler32:dc5c995f",
+        "size": 70368016,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_6.ig"
+      },
+      {
+        "checksum": "adler32:0dcc11aa",
+        "size": 74599753,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_7.ig"
+      },
+      {
+        "checksum": "adler32:94a8ffc2",
+        "size": 72520073,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_8.ig"
+      },
+      {
+        "checksum": "adler32:2ef42ece",
+        "size": 69478786,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_1.ig"
+      },
+      {
+        "checksum": "adler32:0601efc9",
+        "size": 71570303,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_9.ig"
+      },
+      {
+        "checksum": "adler32:add4f388",
+        "size": 76250474,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_10.ig"
+      },
+      {
+        "checksum": "adler32:a2cb8997",
+        "size": 66170855,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_11.ig"
+      },
+      {
+        "checksum": "adler32:75420a35",
+        "size": 77124049,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_12.ig"
+      },
+      {
+        "checksum": "adler32:19168288",
+        "size": 80943646,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_13.ig"
+      },
+      {
+        "checksum": "adler32:9b91d371",
+        "size": 78726695,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_14.ig"
+      },
+      {
+        "checksum": "adler32:eae84b2d",
+        "size": 71798975,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_15.ig"
+      },
+      {
+        "checksum": "adler32:ca97996b",
+        "size": 67679915,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon_16.ig"
+      },
+      {
+        "checksum": "adler32:4705fac3",
+        "size": 295203,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon.csv"
+      },
+      {
+        "checksum": "adler32:bd627b31",
+        "size": 605126,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/dielectron-Upsilon.json"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two electrons with invariant mass between 8-12 GeV."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "305",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "electron",
+      "Y"
+    ],
+    "title": "Y to two electrons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>500 Z ee candidate events from real data (2010, 7 TeV) approved for public outreach and education usage at Dec 2010 Collaboration Board meeting.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "Electron track reconstruction type.",
+        "variable": "Type"
+      },
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the electron (GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the electron (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the electron (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the electron.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the electron (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the electron.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two electrons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "csv",
+        "json",
+        "ig"
+      ],
+      "number_events": 663
+    },
+    "doi": "10.7483/OPENDATA.CMS.A6A3.43X5",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:51f77643",
+        "size": 138564,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee.csv"
+      },
+      {
+        "checksum": "adler32:4cfa94a7",
+        "size": 247216,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee.json"
+      },
+      {
+        "checksum": "adler32:4674f52e",
+        "size": 49249411,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee_0.ig"
+      },
+      {
+        "checksum": "adler32:c1f00c07",
+        "size": 47756345,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee_1.ig"
+      },
+      {
+        "checksum": "adler32:1267ca13",
+        "size": 49727895,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee_2.ig"
+      },
+      {
+        "checksum": "adler32:b90632e4",
+        "size": 47413375,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee_3.ig"
+      },
+      {
+        "checksum": "adler32:979a64d7",
+        "size": 50992971,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zee_4.ig"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two electrons with invariant mass around that of the Z."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "306",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "electron",
+      "Z"
+    ],
+    "title": "Z to two electrons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>500 Z mu mu candidate events from real data (2010, 7 TeV) approved for public outreach and education usage at Dec 2010 Collaboration Board meeting.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "Combination of T and G, where T stands for tracker muon and G stands for global muon.",
+        "variable": "Type"
+      },
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the muon GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the muon (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the muon (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the muon.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the muon (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the muon.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of two muons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "ig",
+        "csv",
+        "json"
+      ],
+      "number_events": 2304
+    },
+    "doi": "10.7483/OPENDATA.CMS.XBN9.HFGT",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:b7d1c926",
+        "size": 43191302,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu_0.ig"
+      },
+      {
+        "checksum": "adler32:a7bfc822",
+        "size": 42453798,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu_1.ig"
+      },
+      {
+        "checksum": "adler32:965dae3d",
+        "size": 44167394,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu_2.ig"
+      },
+      {
+        "checksum": "adler32:92efe6eb",
+        "size": 44768415,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu_3.ig"
+      },
+      {
+        "checksum": "adler32:52b8112b",
+        "size": 45457088,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu_4.ig"
+      },
+      {
+        "checksum": "adler32:dbec436d",
+        "size": 470360,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu.csv"
+      },
+      {
+        "checksum": "adler32:e4edb7de",
+        "size": 848381,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Zmumu.json"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "The events in this derived dataset were selected because of the presence of two muons with invariant mass around that of the Z."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "307",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "muon",
+      "Z"
+    ],
+    "title": "Z to two muons from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>In April 2011 the CMS CB approved 1000 W to enu events be made available for educational use. Included here are the data files and summary files.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the electron (GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the electron (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the electron (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the electron.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the electron (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the electron.",
+        "variable": "Q"
+      },
+      {
+        "description": "The missing transverse momentum of the event (GeV).",
+        "variable": "MET"
+      },
+      {
+        "description": "The phi angle of the missing transverse momentum (rad).",
+        "variable": "phiMET"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "csv",
+        "ig",
+        "json"
+      ],
+      "number_events": 1000
+    },
+    "doi": "10.7483/OPENDATA.CMS.US2A.EKV9",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:bd89683f",
+        "size": 118664,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu.csv"
+      },
+      {
+        "checksum": "adler32:83cc6b86",
+        "size": 62907595,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_7.ig"
+      },
+      {
+        "checksum": "adler32:d9a37d9e",
+        "size": 62674146,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_8.ig"
+      },
+      {
+        "checksum": "adler32:c272aef3",
+        "size": 61176750,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_9.ig"
+      },
+      {
+        "checksum": "adler32:7a64f2af",
+        "size": 214620,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu.json"
+      },
+      {
+        "checksum": "adler32:5792a395",
+        "size": 64952388,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_0.ig"
+      },
+      {
+        "checksum": "adler32:ddb8fac6",
+        "size": 60210853,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_1.ig"
+      },
+      {
+        "checksum": "adler32:a54ddc21",
+        "size": 61418718,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_2.ig"
+      },
+      {
+        "checksum": "adler32:71ad04bb",
+        "size": 63468946,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_3.ig"
+      },
+      {
+        "checksum": "adler32:94058e82",
+        "size": 62875572,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_4.ig"
+      },
+      {
+        "checksum": "adler32:9b2c180b",
+        "size": 61386136,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_5.ig"
+      },
+      {
+        "checksum": "adler32:a3391aee",
+        "size": 62332632,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wenu_6.ig"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "These events were selected because of the presence of an electron with high transverse momentum and significant missing transverse energy."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "308",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "electron",
+      "W",
+      "missing transverse energy"
+    ],
+    "title": "W to electron and neutrino from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>In April 2011 the CMS CB approved 1000 W to munu events be made available for educational use. Included here are the data files and summary files.</p> <p>These data were selected for use in education and outreach and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The total energy of the muon GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the muon (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the muon (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the muon.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the muon (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the muon.",
+        "variable": "Q"
+      },
+      {
+        "description": "The missing transverse momentum of the event (GeV).",
+        "variable": "MET"
+      },
+      {
+        "description": "The phi angle of the missing transverse momentum (rad).",
+        "variable": "phiMET"
+      }
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "csv",
+        "ig",
+        "json"
+      ],
+      "number_events": 1000
+    },
+    "doi": "10.7483/OPENDATA.CMS.SQG7.44B9",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:4cfc8e85",
+        "size": 118774,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu.csv"
+      },
+      {
+        "checksum": "adler32:67ee070b",
+        "size": 59026045,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_7.ig"
+      },
+      {
+        "checksum": "adler32:c9ae7363",
+        "size": 59259117,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_8.ig"
+      },
+      {
+        "checksum": "adler32:634f1b69",
+        "size": 58035272,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_9.ig"
+      },
+      {
+        "checksum": "adler32:51c71904",
+        "size": 214730,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu.json"
+      },
+      {
+        "checksum": "adler32:f7d95d75",
+        "size": 61590952,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_0.ig"
+      },
+      {
+        "checksum": "adler32:90657853",
+        "size": 55434949,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_1.ig"
+      },
+      {
+        "checksum": "adler32:115bc685",
+        "size": 58404898,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_2.ig"
+      },
+      {
+        "checksum": "adler32:1fd122d7",
+        "size": 56704404,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_3.ig"
+      },
+      {
+        "checksum": "adler32:cd8f9d68",
+        "size": 59413356,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_4.ig"
+      },
+      {
+        "checksum": "adler32:45666666",
+        "size": 60189101,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_5.ig"
+      },
+      {
+        "checksum": "adler32:37965d4f",
+        "size": 60361441,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/Wmunu_6.ig"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "These events were selected because of the presence of a muon with high transverse momentum and significant missing transverse energy."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "309",
+    "run_period": [
+      "Run2010B"
+    ],
+    "signature": [
+      "muon",
+      "W",
+      "missing transverse energy"
+    ],
+    "title": "W to muon and neutrino from 2010",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>This document collects event information for use in the 2014 CMS masterclass exercise. It contains previously-released data: 800 events each of W to munu and enu, 75 events each of Z to ee and mumu, 100 dimuon events between 2-100 GeV, 50 dimuon events between 2-12 GeV (i.e. J/psi and upsilon), three 4-lepton Higgs candidate events and ten di-photon Higgs candidate events.</p> <p>These data were selected for use in education and outreach, particularly for the CMS masterclass, and contain a subset of the total event information. The selection criteria may be different from that used in CMS physics results. They are not suitable for a full physics analysis.</p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "date_created": [
+      "2010"
+    ],
+    "date_published": "2014",
+    "distribution": {
+      "formats": [
+        "csv",
+        "ig",
+        "xls"
+      ]
+    },
+    "doi": "10.7483/OPENDATA.CMS.SSYF.EGXW",
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:90e5d0d4",
+        "size": 8747,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_1-leptons.csv"
+      },
+      {
+        "checksum": "adler32:0b77b77e",
+        "size": 10588,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_11-lnu.csv"
+      },
+      {
+        "checksum": "adler32:69e71bb4",
+        "size": 123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_11-photon.csv"
+      },
+      {
+        "checksum": "adler32:0ddf0358",
+        "size": 63150455,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_11.ig"
+      },
+      {
+        "checksum": "adler32:a25c98ec",
+        "size": 11650,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_12-leptons.csv"
+      },
+      {
+        "checksum": "adler32:a384d009",
+        "size": 10716,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_12-lnu.csv"
+      },
+      {
+        "checksum": "adler32:d28a1c64",
+        "size": 127,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_12-photon.csv"
+      },
+      {
+        "checksum": "adler32:f8bbca3e",
+        "size": 59339377,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_12.ig"
+      },
+      {
+        "checksum": "adler32:136b3da6",
+        "size": 13903,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_13-leptons.csv"
+      },
+      {
+        "checksum": "adler32:5a33032b",
+        "size": 10996,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_13-lnu.csv"
+      },
+      {
+        "checksum": "adler32:dc1b1c79",
+        "size": 127,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_13-photon.csv"
+      },
+      {
+        "checksum": "adler32:25c7e6bf",
+        "size": 10846,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_1-lnu.csv"
+      },
+      {
+        "checksum": "adler32:ae60746a",
+        "size": 59788242,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_13.ig"
+      },
+      {
+        "checksum": "adler32:7ef534c0",
+        "size": 8379,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_14-leptons.csv"
+      },
+      {
+        "checksum": "adler32:f9df7670",
+        "size": 11611,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_14-lnu.csv"
+      },
+      {
+        "checksum": "adler32:b7971c29",
+        "size": 126,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_14-photon.csv"
+      },
+      {
+        "checksum": "adler32:c8ef88b6",
+        "size": 64351304,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_14.ig"
+      },
+      {
+        "checksum": "adler32:db498e38",
+        "size": 11599,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_15-leptons.csv"
+      },
+      {
+        "checksum": "adler32:96335e55",
+        "size": 11490,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_15-lnu.csv"
+      },
+      {
+        "checksum": "adler32:bbfd1c4b",
+        "size": 126,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_15-photon.csv"
+      },
+      {
+        "checksum": "adler32:ebde83c3",
+        "size": 60762184,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_15.ig"
+      },
+      {
+        "checksum": "adler32:637db39f",
+        "size": 15899,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_16-leptons.csv"
+      },
+      {
+        "checksum": "adler32:69e71bb4",
+        "size": 123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_1-photon.csv"
+      },
+      {
+        "checksum": "adler32:a2383a85",
+        "size": 9926,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_16-lnu.csv"
+      },
+      {
+        "checksum": "adler32:63661b92",
+        "size": 123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_16-photon.csv"
+      },
+      {
+        "checksum": "adler32:fc174749",
+        "size": 59539570,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_16.ig"
+      },
+      {
+        "checksum": "adler32:b3edbcf5",
+        "size": 9093,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_17-leptons.csv"
+      },
+      {
+        "checksum": "adler32:49390252",
+        "size": 10982,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_17-lnu.csv"
+      },
+      {
+        "checksum": "adler32:67891bac",
+        "size": 123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_17-photon.csv"
+      },
+      {
+        "checksum": "adler32:53a475e8",
+        "size": 62130580,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_17.ig"
+      },
+      {
+        "checksum": "adler32:1f410ce3",
+        "size": 13632,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_18-leptons.csv"
+      },
+      {
+        "checksum": "adler32:1ecbe943",
+        "size": 10858,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_18-lnu.csv"
+      },
+      {
+        "checksum": "adler32:a39c1c25",
+        "size": 125,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_18-photon.csv"
+      },
+      {
+        "checksum": "adler32:603b97f9",
+        "size": 63466325,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_1.ig"
+      },
+      {
+        "checksum": "adler32:2e9444d4",
+        "size": 60314289,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_18.ig"
+      },
+      {
+        "checksum": "adler32:012f0a6a",
+        "size": 5403,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_19-leptons.csv"
+      },
+      {
+        "checksum": "adler32:fb48d7f9",
+        "size": 12141,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_19-lnu.csv"
+      },
+      {
+        "checksum": "adler32:d57a1c5d",
+        "size": 127,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_19-photon.csv"
+      },
+      {
+        "checksum": "adler32:807db499",
+        "size": 63208795,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_19.ig"
+      },
+      {
+        "checksum": "adler32:96da17fd",
+        "size": 10950,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_2-leptons.csv"
+      },
+      {
+        "checksum": "adler32:a14c2de8",
+        "size": 11224,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_2-lnu.csv"
+      },
+      {
+        "checksum": "adler32:d28a1c64",
+        "size": 127,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_2-photon.csv"
+      },
+      {
+        "checksum": "adler32:8d7f1c0a",
+        "size": 62500899,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_2.ig"
+      },
+      {
+        "checksum": "adler32:d1f16dcd",
+        "size": 12781,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_3-leptons.csv"
+      },
+      {
+        "checksum": "adler32:71691377",
+        "size": 6832,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_10-leptons.csv"
+      },
+      {
+        "checksum": "adler32:33641a80",
+        "size": 11123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_3-lnu.csv"
+      },
+      {
+        "checksum": "adler32:dc1b1c79",
+        "size": 127,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_3-photon.csv"
+      },
+      {
+        "checksum": "adler32:2c22d585",
+        "size": 61956913,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_3.ig"
+      },
+      {
+        "checksum": "adler32:06ecd4e4",
+        "size": 14707,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_4-leptons.csv"
+      },
+      {
+        "checksum": "adler32:bb02b5ab",
+        "size": 10576,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_4-lnu.csv"
+      },
+      {
+        "checksum": "adler32:b7971c29",
+        "size": 126,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_4-photon.csv"
+      },
+      {
+        "checksum": "adler32:be792bc3",
+        "size": 62720130,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_4.ig"
+      },
+      {
+        "checksum": "adler32:9df038e8",
+        "size": 9780,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_5-leptons.csv"
+      },
+      {
+        "checksum": "adler32:73c27c11",
+        "size": 11648,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_5-lnu.csv"
+      },
+      {
+        "checksum": "adler32:bbfd1c4b",
+        "size": 126,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_5-photon.csv"
+      },
+      {
+        "checksum": "adler32:3abead15",
+        "size": 11914,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_10-lnu.csv"
+      },
+      {
+        "checksum": "adler32:ebfa6b85",
+        "size": 62710389,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_5.ig"
+      },
+      {
+        "checksum": "adler32:6495dd6d",
+        "size": 13387,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_6-leptons.csv"
+      },
+      {
+        "checksum": "adler32:6bbad5bb",
+        "size": 10751,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_6-lnu.csv"
+      },
+      {
+        "checksum": "adler32:63661b92",
+        "size": 123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_6-photon.csv"
+      },
+      {
+        "checksum": "adler32:63fd3e3a",
+        "size": 61086654,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_6.ig"
+      },
+      {
+        "checksum": "adler32:7724c356",
+        "size": 15972,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_7-leptons.csv"
+      },
+      {
+        "checksum": "adler32:57c997fd",
+        "size": 10427,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_7-lnu.csv"
+      },
+      {
+        "checksum": "adler32:67891bac",
+        "size": 123,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_7-photon.csv"
+      },
+      {
+        "checksum": "adler32:cef8d1aa",
+        "size": 65644163,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_7.ig"
+      },
+      {
+        "checksum": "adler32:e10e2bae",
+        "size": 9705,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_8-leptons.csv"
+      },
+      {
+        "checksum": "adler32:52401b94",
+        "size": 122,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_10-photon.csv"
+      },
+      {
+        "checksum": "adler32:d1379778",
+        "size": 11796,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_8-lnu.csv"
+      },
+      {
+        "checksum": "adler32:a39c1c25",
+        "size": 125,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_8-photon.csv"
+      },
+      {
+        "checksum": "adler32:a8744d50",
+        "size": 65166464,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_8.ig"
+      },
+      {
+        "checksum": "adler32:3df5e2a8",
+        "size": 6558,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_9-leptons.csv"
+      },
+      {
+        "checksum": "adler32:f6f0c3ab",
+        "size": 12025,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_9-lnu.csv"
+      },
+      {
+        "checksum": "adler32:d57a1c5d",
+        "size": 127,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_9-photon.csv"
+      },
+      {
+        "checksum": "adler32:9490ba00",
+        "size": 57749966,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_9.ig"
+      },
+      {
+        "checksum": "adler32:f3f466c8",
+        "size": 59177597,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_10.ig"
+      },
+      {
+        "checksum": "adler32:cbbb3b62",
+        "size": 13871,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass_11-leptons.csv"
+      },
+      {
+        "checksum": "adler32:4df04e85",
+        "size": 728576,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/masterclass-2014.xls"
+      }
+    ],
+    "keywords": [
+      "masterclass"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "These events were selected from other derived datasets for use in the 2014 CMS masterclass exercise."
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "310",
+    "title": "Event files for CMS masterclass exercise 2014",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>These data are in use in the 2014 CMS masterclass: <a href=\"http://cms.physicsmasterclasses.org/pages/cmswz.html\">CMS Masterclass WZH Measurement</a>. Files with the extension .ig are JSON files containing information suitable for visual display. The data can be accessed from the file menu of <a href=\"/visualise/events/CMS\">the online event display</a>. Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>This document contains 10 gamma-gamma Higgs candidate events (with an invariant mass between 120-130 GeV). Events have been released by CMS for use in education and outreach. </p> <p>Data was selected for use in education and outreach and contain a subset of the total event information. They are not suitable for a full physics analysis. </p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The transverse momentum of the photon (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the photon.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the photon (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The invariant mass of two photon (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2011"
+    ],
+    "date_published": "2019",
+    "distribution": {
+      "formats": [
+        "csv"
+      ],
+      "number_events": 10
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:dca4af81",
+        "size": 869,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/files/diphoton.csv"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "<p>These events were selected by the CMS Higgs Physics Analysis Group</p>"
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "5209",
+    "run_period": [
+      "Run2011A"
+    ],
+    "relations": [
+      {
+        "description": "This data file and other similar data files can be found from ",
+        "doi": "10.7483/OPENDATA.CMS.N9MJ.QEEC",
+        "recid": "300",
+        "title": "Higgs candidate events for use in education and outreach",
+        "type": "isChildOf"
+      }
+    ],
+    "signature": [
+      "H",
+      "photon"
+    ],
+    "title": "Higgs to two photons from 2011",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    },
+    "validation": {
+      "description": "These events were validated by the CMS Higgs Physics Analysis Group"
+    }
+  },
+  {
+    "abstract": {
+      "description": "<p>This document contains 3 Higgs candidate events (with an invariant mass between 120-130 GeV), where Higgs decays to four leptons. Events have been released by CMS for use in education and outreach. </p> <p>Data was selected for use in education and outreach and contain a subset of the total event information. They are not suitable for a full physics analysis. </p>"
+    },
+    "accelerator": "CERN-LHC",
+    "authors": [
+      {
+        "name": "McCauley, Thomas",
+        "orcid": "0000-0001-6589-8286"
+      }
+    ],
+    "collections": [
+      "CMS-Derived-Datasets"
+    ],
+    "dataset_semantics": [
+      {
+        "description": "The event number.",
+        "variable": "Event"
+      },
+      {
+        "description": "The run number of the event.",
+        "variable": "Run"
+      },
+      {
+        "description": "The total energy of the lepton (GeV).",
+        "variable": "E"
+      },
+      {
+        "description": "The components of the momemtum of the lepton (GeV).",
+        "variable": "px,py,pz"
+      },
+      {
+        "description": "The transverse momentum of the lepton (GeV).",
+        "variable": "pt"
+      },
+      {
+        "description": "The pseudorapidity of the lepton.",
+        "variable": "eta"
+      },
+      {
+        "description": "The phi angle of the lepton (rad).",
+        "variable": "phi"
+      },
+      {
+        "description": "The charge of the lepton.",
+        "variable": "Q"
+      },
+      {
+        "description": "The invariant mass of four leptons (GeV).",
+        "variable": "M"
+      }
+    ],
+    "date_created": [
+      "2011"
+    ],
+    "date_published": "2019",
+    "distribution": {
+      "formats": [
+        "csv"
+      ],
+      "number_events": 3
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:554607ac",
+        "size": 1256,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/masterclass-2014/files/4lepton.csv"
+      }
+    ],
+    "keywords": [
+      "education"
+    ],
+    "license": {
+      "attribution": "CC0"
+    },
+    "methodology": {
+      "description": "<p>These events were selected by the CMS Higgs Physics Analysis Group</p>"
+    },
+    "publisher": "CERN Open Data Portal",
+    "recid": "5210",
+    "run_period": [
+      "Run2011A"
+    ],
+    "relations": [
+      {
+        "description": "This data file and other similar data files can be found from ",
+        "doi": "10.7483/OPENDATA.CMS.N9MJ.QEEC",
+        "recid": "300",
+        "title": "Higgs candidate events for use in education and outreach",
+        "type": "isChildOf"
+      }
+    ],
+    "signature": [
+      "muon",
+      "electron",
+      "H"
+    ],
+    "title": "Higgs to four leptons from 2011",
+    "type": {
+      "primary": "Dataset",
+      "secondary": [
+        "Derived"
+      ]
+    },
+    "usage": {
+      "description": " <p>Comma-separated value (csv) files can be used in online applications such as <a href=\"/visualise/histograms/CMS\">the histogram visualizer</a> and other applications, examples are given in</p> ",
+      "links": [
+        {
+          "recid": "5101"
+        },
+        {
+          "recid": "5102"
+        },
+        {
+          "recid": "5100"
+        }
+      ]
+    },
+    "validation": {
+      "description": "These events were validated by the CMS Higgs Physics Analysis Group"
+    }
+  }
+]

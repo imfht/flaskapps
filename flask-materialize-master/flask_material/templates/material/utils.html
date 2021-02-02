@@ -1,0 +1,57 @@
+{% macro flashed_messages(messages=None, container=True, transform={
+  'critical': 'danger',
+  'error': 'danger',
+  'info': 'info',
+  'warning': 'warning',
+  'debug': 'default',
+  'notset': 'default',
+}, default_category=None) -%}
+{% with messages = messages or get_flashed_messages(with_categories=True) -%}
+{% if messages -%} {# don't output anything if there are no messages #}
+
+{% if container -%}
+<!-- begin message block -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+{% endif -%}
+
+{% for cat, msg in messages %}      <div class="alert alert-{{transform.get(cat.lower(), default_category or cat)}}" role="alert">{{msg|safe}}</div>{% endfor -%}
+
+{% if container %}
+    </div>
+  </div>
+</div>
+<!-- end message block -->
+{% endif -%}
+
+{% endif -%}
+{% endwith -%}
+{% endmacro -%}
+
+
+{% macro icon(type=None, extra_classes=[]) -%}
+<i{{ ({'class': (['mdi-' + type] + extra_classes)|join(' ')})|xmlattr }}{{ kwargs|xmlattr}}></i>
+{%- endmacro %}
+
+{% macro form_button(content, class = [], type='submit', name='action', icon = False, iconclass=[]) -%}
+<button class="btn {{ class|join(' ') }}" type="{{type}}" name="{{name}}">{{content}} {% if icon %}<i class="{{ iconclass|join(' ') }} right"></i>{% endif %}</button>
+{%- endmacro %}
+
+{% macro card(title, content, actions = []) %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title black-text">{{ title }}</span>
+    {{ content|safe }}
+  </div>
+  {% if actions %}
+  <div class="card-action">
+  {% if actions %}
+    {% for each in actions %}
+      <a href="{{ each[0] }}">{{ each[1]|safe }}</a>
+    {% endfor %}
+  {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

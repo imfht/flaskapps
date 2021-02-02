@@ -1,0 +1,26 @@
+{% extends "admin.html" %}
+{% block tab %}管理插件{% endblock %}
+{% block content %}
+<div class="admin-post">
+    <ul>
+        {% for box in boxes %}
+        <li>
+            {% if box.title %}{{ box.title }}{% else %}无标题{% endif %}
+            <a href="{{url_for('admin.delete_side_box',id=box.id)}}">
+                <button class="delete-btn">删除</button>
+            </a>
+            <a href="{{url_for('admin.edit_side_box', id=box.id)}}">
+                <button class="edit-btn">编辑</button>
+            </a>
+            {% if box.unable == True %}
+            <a href="{{url_for('admin.unable_side_box',id=box.id)}}"><button class="allow-btn">通过</button></a>
+            {% else %}
+            <a href="{{url_for('admin.unable_side_box',id=box.id)}}"><button class="edit-btn">隐藏</button></a>
+            {% endif %}
+
+            <p>{{box.body}}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

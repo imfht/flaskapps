@@ -1,0 +1,13 @@
+{% extends 'events/registration/display/_event_registration_base.html' %}
+
+{% block title %}
+    {%- if regform and regform.moderation_enabled %}
+        {%- trans %}Application{% endtrans %}
+    {%- else %}
+        {%- trans %}Registration{% endtrans %}
+    {%- endif %}
+{% endblock %}
+
+{% block subtitle %}
+    {{ regform.title }}
+{% endblock %}

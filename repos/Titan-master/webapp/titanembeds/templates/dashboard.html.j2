@@ -1,0 +1,97 @@
+{% extends 'site_layout.html.j2' %}
+{% set title="Dashboard" %}
+
+{% block content %}
+<h1>User Dashboard</h1>
+
+<div class="col l12">
+  <div class="card-panel indigo lighten-5 z-depth-3 hoverable">
+    <div class="row valign-wrapper">
+      <div class="col s2">
+        <img src="{{ session['avatar'] }}" alt="" class="circle responsive-img">
+      </div>
+      <div class="col s10">
+        <span class="black-text">
+          <p class="flow-text">Welcome <strong>{{ session['username'] }}#{{ session['discriminator'] }}</strong> to <strong>Titan Embeds</strong>!</p>
+          <p>Not the right account? Sign out of the Discord online client <a href="#" onclick="window.open('{{ url_for("user.logout", redirect="https://discordapp.com/channels/@me") }}'); setTimeout(function () {window.location.href = '{{ url_for("index") }}';}, 3000); return false;">here</a> and log back into Titan Embeds.</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="flow-text">Select a server to configure Titan Embeds.</p>
+<p>*List missing some servers? It's because you must have either <strong>Manage Server</strong>, <strong>Kick Members</strong>, or <strong>Ban Members</strong> permissions to modify embed settings.</p>
+<div class="row">
+  {% for server in servers %}
+  <div class="col l4 m6 s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable">
+      <div class="row valign-wrapper">
+        <div class="col s3">
+          {% if server.icon %}
+          <img src="{{ icon_generate(server.id, server.icon) }}" alt="" class="circle responsive-img">
+          {% else %}
+          <span class="black-text">No icon :(</span>
+          {% endif %}
+        </div>
+        <div class="col s7">
+          <span class="black-text">
+            <p class="flow-text truncate">{{ server.name|e }}</p>
+            <br>
+            <a class="waves-effect waves-light btn" href="{{url_for('user.administrate_guild', guild_id=server['id'])}}">Modify</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<hr>
+
+{% if (not cosmetics) or (cosmetics and not cosmetics.css) %}
+<div class="row">
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>User Defined CSS!</h4>
+      <p class="flow-text">Would you like to have <strong>user defined css</strong> (e.g. custom css) for your embed?</p>
+      <p>All you have to do is join our support server to request for Custom CSS and tag the HELP role!</p>
+      <a class="waves-effect waves-light btn" href="https://discord.io/Titan">Talk to us!</a>
+      <p>The first slot is on the house. Increasing the slot count requires the user to spend Titan Tokens. However, we do offer unlimited predefined CSS Color Variables at no charge.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if css_list is not none %}
+<p class="flow-text">
+  Create or modify your user defined CSS.
+  <a class="waves-effect waves-light btn" href="{{ url_for("user.new_custom_css_get") }}">New</a>
+</p>
+<p>You have used <strong>{{ premium_css_count }} out of {{ cosmetics.css_limit }}</strong> custom css slots. {% if premium_css_count >= cosmetics.css_limit %}<strong>Don't fret! You can still use CSS variables.</strong>{% endif %} Donate below to obtain more slots!</p>
+{% if premium_css_count >= cosmetics.css_limit %}<p>Free up some slots by emptying your other custom CSS field and submitting it (Titan will automatically mark empty custom css editor fields as unused slots in the database) or delete the user defined css slot altogether.</p>{% endif %}
+<div class="row">
+  {% for css in css_list %}
+  <div class="col l4 m6 s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <p class="flow-text truncate"><code>#{{ css.id }}</code> {{ css.name|e }}</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for("user.edit_custom_css_get", css_id=css.id) }}">Modify</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<hr>
+
+<div class="row">
+  <div class="col s12">
+    <div class="card-panel indigo lighten-5 z-depth-3 hoverable black-text">
+      <h4>Donations!</h4>
+      <p class="flow-text">Would you like to support the Titan Embeds project?</p>
+      <p>You currently have <strong>{{ session["tokens"] }}</strong> Titan Tokens.</p>
+      <a class="waves-effect waves-light btn" href="{{ url_for('user.donate_get') }}">Donate!!</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

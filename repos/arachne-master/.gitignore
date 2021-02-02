@@ -1,0 +1,10 @@
+*.pyc
+.editorconfig
+.coverage
+twistd.pid
+venv/
+dist/
+build/
+*.egg-info/
+docs/build
+.tox/

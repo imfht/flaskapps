@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    List of jams
+{% endblock %}
+
+{% block content %}
+<p>
+    <input type="text" placeholder="Quick filter" id="filter" data-filter=".jam-row" />
+    <a href="{{ url_for('admin_jam') }}" style="vertical-align: top;" class="btn btn-small">Create a jam</a>
+</p>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Theme</th>
+        <th>Status</th>
+        <th>Announced</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+        <th>Flags</th>
+        <th></th>
+    </tr>
+{% for jam in jams %}
+    <tr class="jam-row">
+        <td>
+            <a href="{{ url_for('admin_jam', id = jam.id) }}">
+                {{ jam.title }}
+            </a>
+        </td>
+        <td>
+            {{ jam.theme or "n/a" }}
+        </td>
+        <td>
+            <b style="font-size: 0.8em; color: gray;">{{ ["ANNOUNCED", "REGISTRATION", "RUNNING", "PACKAGING", "RATING", "FINISHED"][jam.get_status().code] }}</b>
+        </td>
+        <td>{{ jam.announced | humantime }}</td>
+        <td>{{ jam.start_time | formattime }}</td>
+        <td>
+            <b>{{ jam.duration }}h</b>
+            + {{ jam.packaging_duration }}h
+            + {{ jam.rating_duration }}h
+        </td>
+        <td>
+            {% if jam.restrictions %}
+                <span class="flags orange">RESTRICTIONS<span>
+            {% endif %}
+
+            {% if jam.team_limit != 1 %}
+                <span class="flags green">TEAMS<span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{ jam.url() }}"><i class="icon-eye-open"></i></a>
+            <a href="{{ url_for('admin_jam', id = jam.id) }}"><i class="icon-edit"></i></a>
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+</form>
+
+{% endblock %}

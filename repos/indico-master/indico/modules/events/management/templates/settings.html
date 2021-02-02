@@ -1,0 +1,53 @@
+{% extends 'events/management/base.html' %}
+{% from 'events/management/_settings.html' import render_event_settings %}
+
+{% block title %}{% trans %}Settings{% endtrans %}{% endblock %}
+
+{% block content %}
+    {{ template_hook('event-actions', event=event) }}
+    {%- if show_booking_warning -%}
+        <div class="action-box warning">
+            <div class="section">
+                <div class="icon icon-bookmark"></div>
+                <div class="text">
+                    <div class="label">{% trans %}Book the event location{% endtrans %}</div>
+                    {% trans %}
+                        There is no active booking linked to this event.
+                    {% endtrans %}
+                </div>
+                <div class="toolbar">
+                    <div class="group">
+                        <a class="i-button icon-settings"
+                           href="{{ url_for('rb.event_booking_list', event) }}">
+                            {% trans %}Book the room{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%- endif -%}
+    {%- if show_draft_warning -%}
+        <div class="action-box warning">
+            <div class="section">
+                <div class="icon icon-edit"></div>
+                <div class="text">
+                    <div class="label">{% trans %}Contributions are in draft mode{% endtrans %}</div>
+                    {% trans %}
+                        While in draft mode, regular users cannot see the contributions and timetable.
+                    {% endtrans %}
+                </div>
+                <div class="toolbar">
+                    <div class="group">
+                        <a class="i-button icon-settings"
+                           href="{{ url_for('contributions.manage_contributions', event) }}">
+                            {% trans %}Manage Contributions{% endtrans %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%- endif -%}
+    <div class="action-box event-settings">
+        {{ render_event_settings(event, has_reference_types, has_event_labels) }}
+    </div>
+{%- endblock %}

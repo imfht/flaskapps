@@ -1,0 +1,8 @@
+*.mo
+*.pyc
+*.pyo
+*.swp
+*.swo
+*.~
+
+Procfile*

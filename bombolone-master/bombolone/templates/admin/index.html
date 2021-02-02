@@ -1,0 +1,90 @@
+{% extends "admin/base.html" %}
+
+{% block header %}
+<header>
+  <nav>
+    <a href="/" title="">
+      <img src="/static/layout/admin/bombolone_header.png" alt="" />
+    </a>
+    <ul class="nav pull-right header-tabs">
+      <li>
+        <a href="/admin/" title="">
+          {% if my.image %}
+          <img src="{{ path }}/static/avatars/{{ my.username.lower() }}/{{ my.image[1] }}"
+          style="margin-right:2px;width:20px" alt="{{ my.username }}" />
+          {% endif %}
+          {{ g.my.username }}
+        </a>
+      </li>
+      <li class="menu_account dropdown" ng-click="dropdown()" 
+      ng-class="{open: dropdown_status=='open'}">
+        <a>
+          <i class="fa fa-bars"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{{ url_for('settings.account') }}" title="" >{{ g.admin.settings }}</a></li>
+          {% if g.my['rank'] < 25 %}
+          <li><a href="{{ url_for('admin.dashboard') }}" title="" >Admin</a></li>
+          {% endif %}
+          <li><a href="{{ url_for('login.logout') }}" title="" >{{ g.admin.logout }}</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="row" {% block ng_section %}{% endblock %}>
+  <div class="col-md-3">
+    <ul class="nav nav-tabs nav-stacked">
+      <li>
+        <a {% block nav_active_1 %}{% endblock %} data-test="menu-left-1"
+        href="{{ url_for('admin.dashboard') }}" title="" >Dashboard</a>
+      </li>
+      <li>
+        <a {% block nav_active_6 %}{% endblock %} data-test="menu-left-2"
+        href="{{ url_for('pages.index') }}" title="" >Pages</a>
+      </li>
+      {% if g.my['rank'] < 15 %}
+      <li>
+        <a {% block nav_active_2 %}{% endblock %} data-test="menu-left-3"
+        href="{{ url_for('users.index') }}" title="" >Users</a>
+      </li>
+      <li>
+        <a {% block nav_active_3 %}{% endblock %} data-test="menu-left-4"
+        href="{{ url_for('rank.index') }}" title="" >Rank</a>
+      </li>
+      <li>
+        <a {% block nav_active_4 %}{% endblock %} data-test="menu-left-5"
+        href="{{ url_for('languages.index') }}" title="" >Languages</a>
+      </li>
+      <li>
+        <a {% block nav_active_5 %}{% endblock %} data-test="menu-left-6"
+        href="{{ url_for('hash_table.index') }}" title="" >Hash Table</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class="col-md-9">
+    <div class="content_right" ng-controller="AdminCtrl">
+      {% block admin %}
+      {% endblock %}
+      {% include "admin/remove_item.html" %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block js_names %}
+  'bombolone.controllers.admin',
+  'bombolone.directives.table',
+  {% block js_module_names %}{% endblock %}
+{% endblock %}
+
+{% block js_files %}
+  "{{ '/static/js/%s' % js_version['admin/admin'] }}",
+  "{{ '/static/js/%s' % js_version['directives/table'] }}",
+  {% block js_module_files %}{% endblock %}
+{% endblock %}

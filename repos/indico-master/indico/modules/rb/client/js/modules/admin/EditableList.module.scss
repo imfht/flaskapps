@@ -1,0 +1,47 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &.editing {
+    align-items: normal;
+  }
+
+  .info {
+    flex-grow: 1;
+
+    .name {
+      font-size: 1.1em;
+      margin-right: 0.5em;
+    }
+  }
+
+  form {
+    flex-grow: 1;
+    padding-right: 2em;
+  }
+
+  .actions {
+    white-space: nowrap;
+
+    button:global(.basic) {
+      &,
+      &:global(.negative),
+      &:global(.negative):hover {
+        // remove the border of the buttons
+        box-shadow: none !important;
+      }
+    }
+  }
+}

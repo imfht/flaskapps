@@ -1,0 +1,38 @@
+{% if category %}<h1 class="">Category Archives: {{ category.name }}</h1>{% endif %}
+{% if tag %}<h1 class="">Tag Archives: {{ tag.name }}</h1>{% endif %}
+{% if topic %}<h1 class="">Topic Archives: {{ topic.name }}</h1>{% endif %}
+{% if year or month %}<h1 class="">Monthly Archives: {{ year }}-{{ month }}</h1>{% endif %}
+{% if not keyword %}{% set keyword=None %}{% endif %}
+
+{% if articles %}
+{% for article in articles %}
+<div class="post" id="article-{{ article.id }}">
+  <ul class="date">
+    <li class="day">{{ article.created|date('%d') }}</li>
+    <li class="month">{{ article.created|date('%m') }}月</li>
+  </ul>
+
+  <div class="title">
+    <h2 class="topic">{% if article.ontop %}[置顶]{% endif %}<a class="keyword" href="{{ article.link }}" rel="bookmark" title="{{ article.title }}">{{ article.title|emphasis(keyword)|safe }}</a></h2>
+    <p class="postmeta">Post by {{ article.author }} at {{
+    article.created|date('%Y') }}. Category: <a href="{{ article.category.link }}">{{ article.category.name }}</a>.
+    {{ article.hits }} Views.</p></div>
+
+  <div class="clear"></div>
+  <div class="entry">
+    <p class="keyword">{{ article.summary|emphasis(keyword)|safe }}</p>
+    {% if article.has_more %}<p><a href="{{ article.link }}" rel="nofollow">Read More...</a>{% endif %}
+  </div>
+</div>
+
+{% endfor %}
+{% else %}
+  <p>没有内容</p>
+{% endif %}
+
+{% if pagination and pagination.page_count > 1 %}
+<div class="pagenavi">
+{{ pagination.pager('$link_first $link_previous ~2~ $link_next $link_last (Page $page/$page_count)') }}
+</div>
+{% endif %}
+

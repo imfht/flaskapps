@@ -1,0 +1,336 @@
+{% block css %}
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{ settings.MirrorSite }}/static/assets/pagedown/Markdown.Converter.js"></script>
+<script type="text/javascript" src="{{ settings.MirrorSite }}/static/assets/pagedown/Markdown.Sanitizer.js"></script>
+<script type="text/javascript" src="{{ settings.MirrorSite }}/static/assets/pagedown/Markdown.Extra.js"></script>
+<script type="text/javascript">
+    var editor = null;
+
+    var md_converter = Markdown.getSanitizingConverter();
+    md_converter.hooks.chain("postConversion", function (text) {
+        // convert player links
+        return $.create_player(text);
+    });
+    Markdown.Extra.init(md_converter, {
+        table_class: "table table-hover table-striped"
+    });
+    var md2html = md_converter.makeHtml;
+
+    var md_short_converter = Markdown.getSanitizingConverter();
+    md_short_converter.hooks.chain("postConversion", function (text) {
+        // convert player links
+        return $.create_player(text);
+    });
+    md_short_converter.hooks.chain("preConversion", function (text) {
+        // add tag <more>
+        var pos = text.indexOf('\n<!--more-->');
+        if (pos > -1){
+            text = text.slice(0, pos) + " ......\n\n<more></more>";
+        }
+        return text;
+    });
+    Markdown.Extra.init(md_short_converter, {
+        table_class: "table table-hover table-striped"
+    });
+    var md2html_short = md_short_converter.makeHtml;
+
+    var get_post_id = function($post){
+        return $post.attr("id").replace(/^post_/, "");
+    };
+    var get_post_date = function($post){
+        var post_id = get_post_id($post);
+        return $("#post_date_"+post_id).attr("value").toString().to_date();
+    };
+    var bind_img_box = function($container, gallery, parent, min_width, min_height) {
+        $("img", $container).image_box(min_width, min_height, gallery, parent);
+    };
+    var bind_img_info = function($container, min_width, min_height) {
+         $("img", $container).image_info(min_width, min_height);
+    };
+
+    var build_thumbnails = function($thumbnails, post, gallery, parent){
+        if (post.category.template != "Photo"){
+            return;
+        }
+        $.each(post.photos, function(index, photo) {
+            $thumbnails.append('<div class="col-xs-6 col-lg-3">' +
+                    '<div class="thumbnail">' +
+                    '<img src="{0}" real_src="{1}" alt="{2}" photo_id="{3}">'.format(photo.url_thumb||photo.url,
+                            photo.url, photo.alt, photo.id) +
+                    '</div></div>');
+        });
+        $thumbnails.show();
+        $thumbnails.imagesLoaded(function(){
+            bind_img_box($thumbnails, gallery, parent, 40, 30);
+        });
+    };
+
+    var build_post_panel = function($post, post) {
+        $post.attr("id", "post_{0}".format(post.id));
+
+        var $tags = $(".tags", $post).empty();
+        $.each(post.tags, function(index, tag){
+            $tags.append('<a href="/tags/{0}">{0}</a>'.format(tag));
+        });
+
+        if (post.public) {
+            $post.removeClass("text-muted");
+            $(".post-hide", $post).text("").hide();
+        } else {
+            $post.addClass("text-muted");
+            $(".post-hide", $post).text("{{ _("Hidden") }}").show();
+        }
+
+        if(post.sticky) {
+            $(".post-sticky", $post).show();
+        } else {
+            $(".post-sticky", $post).hide();
+        }
+
+        $("input.date_val", $post).val(post.post_date).attr("id", "post_date_"+post.id);
+        $(".post-title .title", $post).text(post.title).attr("href", "/post/"+post.id);
+        $(".post-category", $post).attr("href","/"+post.category.url).append(post.category.name);
+        $(".avatar", $post).attr("src", post.author.avatar_url).attr("title", post.author.nickname);
+        $(".post-date", $post).text(post.post_date.format("yyyy-MM-dd"));
+        $(".post-author", $post).text(post.author.nickname);
+        $(".post-viewed", $post).text(post.stats.view_count);
+
+        var $share = $(".share", $post);
+        var $icon = $share.find("i").clone();
+        $share.empty().append($icon, post.stats.share_count);
+        $share.unbind("click").click(function(){
+            show_share(post);
+        });
+
+        var $like = $(".stats[name=like_count]", $post);
+        $icon = $like.find("i").clone();
+        $like.empty().append($icon, post.stats.like_count);
+
+        var $unlike = $(".stats[name=unlike_count]", $post);
+        $icon = $unlike.find("i").clone();
+        $unlike.empty().append($icon, post.stats.unlike_count);
+
+        var $comment = $(".comment", $post);
+        $icon = $comment.find("i").clone();
+        $comment.empty().append($icon, post.stats.comment_count);
+
+        var $comments_panel = $(".comments_panel", $post);
+        $(".cmdbar .comment", $post).unbind("click").click(function(){
+            $comments_panel.show();
+            var comment = new Comment(md2html);
+            comment.show_comments($comments_panel,  post.id);
+        });
+
+        $(".cmdbar .stats", $post).unbind("click").click(function(){
+            var $this = $(this);
+            var $icon = $this.find("i").clone();
+            $.json_action("stats",{
+                stats_type: $.toJSON($this.attr("stats_type")),
+                id: $.toJSON(post.id),
+                oper: $.toJSON($this.attr("oper")),
+                name: $.toJSON($this.attr("name"))
+            },function(resp){
+                $this.empty();
+                $this.append($icon);
+                $this.append(resp.stats[$this.attr("name")]);
+                post.stats = resp.stats;
+            },function(err){
+                bootbox.alert(err);
+            });
+            $this.unbind("click");
+        });
+
+        {% if user.is_admin() %}
+        $(".menu-edit", $post).unbind("click").click(menu_edit);
+        $(".menu-delete", $post).unbind("click").click(menu_delete);
+        {% endif %}
+
+        return $post;
+    };
+
+    var build_post_body = function($post, post) {
+        var $post_body = $(".post-body", $post);
+
+        $post_body.html(md2html_short(post.body));
+
+        var $btn_more = $("more", $post_body);
+        $btn_more.html('<button class="btn btn-default btn-sm btn-block"> {{ _("Full Article") }}</button>');
+        $btn_more.unbind("click").click(function(){
+            $post_body.html(md2html(post.body));
+            $("pre>code", $post_body).parent().addClass("prettyprint");
+            prettyPrint();
+
+            $post_body.imagesLoaded(function(){
+                bind_img_box($post_body, "post_"+post.id, ".post-body");
+                bind_img_info($post_body, 150, 120);
+            });
+        });
+
+        $("pre>code", $post_body).parent().addClass("prettyprint");
+        prettyPrint();
+
+        $post.imagesLoaded(function(){
+            bind_img_box($post_body, "post_"+post.id, ".post-body");
+            bind_img_info($post_body, 150, 120);
+        });
+    };
+
+    var preventDefault = function(key){
+        if (key.preventDefault) {
+            key.preventDefault();
+        }
+
+        if (window.event) {
+            window.event.returnValue = false;
+        }
+    };
+
+    var bind_shortcuts = function($menu_list, active_menu, load_callback, selector){
+        selector = selector || "li";
+        $(document).keydown(function(key){
+            if (editor && editor.is_shown()){
+                return; // disable for editor
+            }
+            var $focus_inputs=$(document.activeElement);
+            if ($focus_inputs && ($focus_inputs.is("input")  || $focus_inputs.is("textarea"))){
+                return; // disable if in text input mode
+            }
+
+            var keyCode = key.charCode || key.keyCode;
+            var keyCodeStr = String.fromCharCode(keyCode).toLowerCase();
+            var all_menus = $menu_list.find(selector);
+            if (all_menus.length < 1){
+                return;
+            }
+            var active_index = all_menus.index($menu_list.find(selector+".active"));
+            switch (keyCodeStr) {
+                case "i":
+                    active_menu($(all_menus[0]));
+                    break;
+                case "j":
+                    active_menu($(all_menus[active_index+1]));
+                    break;
+                case "k":
+                    if (active_index == -1){
+                        active_index = all_menus.length;
+                    }
+                    active_menu($(all_menus[active_index-1]));
+                    break;
+                case "n":
+                    active_menu($(all_menus[all_menus.length-1]));
+                    break;
+                default:
+                    switch (keyCode) {
+                        case 13: //Enter
+                            load_posts(load_callback);
+                            break;
+                        case 32: // space
+                            if (active_index == -1 || active_index+1 >= all_menus.length){
+                                active_menu($(all_menus[0]));
+                                preventDefault(key);
+                                break;
+                            }
+                            active_menu($(all_menus[active_index+1]));
+                            preventDefault(key);
+                            break;
+                    }
+
+            }
+
+        });
+    };
+
+    var show_share = function(post, callback){
+        var share_iframe = $('<iframe src="/share?postid={0}&title={1}&summary={2}" '.format(encodeURIComponent(post.id),
+                encodeURIComponent($.trim(post.title)), encodeURIComponent($.trim(post.body).substr(0,40))) +
+                            'frameborder="0" width="100%" width="100%"></iframe>');
+        bootbox.confirm(share_iframe, function(ok){
+            if(!ok){
+                return;
+            }
+            $.json_action("stats",{
+                stats_type: $.toJSON("Post"),
+                id: $.toJSON(post.id),
+                oper: $.toJSON("increase"),
+                name: $.toJSON("share_count")
+            },function(resp){
+                callback && callback(resp);
+            },function(err){
+                bootbox.alert(err);
+            });
+        });
+    };
+
+    /* Post Menu Actions */
+    {% if user.is_admin() %}
+    var menu_edit = function(){
+        var $post = $(this).parents(".post");
+        var post_id = get_post_id($post);
+        editor.edit_post(post_id); //edit post
+    };
+    var menu_delete = function(e, $post, callback){
+        $post = $post || $(this).parents(".post");
+        bootbox.confirm("{{ _("Delete post, r u sure?") }}", function(sure){
+            if (sure){
+                var post_id = get_post_id($post);
+                $.json_action("post/delete",
+                        {'id':$.toJSON(post_id)},
+                        function(resp){
+                            $post.fadeOut(1000);
+                            window.setTimeout(function(){
+                                $post.remove();
+                            }, 2000);
+                            callback && callback(resp);
+                        },
+                        function(err){
+                            bootbox.alert(err);
+                        }
+                );
+            }
+        });
+    };
+    {% endif %}
+
+    {% if pager and category %}
+    var pager = { "cur_page" : {{ pager.cur_page }},
+                "per_page" : {{ pager.per_page }},
+                "is_last_page" : {% if pager.is_last_page %}true{% else %}false{% endif %},
+                "group_by" : "{{ pager.group_by }}",
+                "start_cursor" : "{{ pager.start_cursor }}"
+    };
+
+    var load_posts = function(callback){
+        var $load_more_post = $(".load-more-post");
+        var $post_loading = $(".post-loading");
+        if (pager.is_last_page){
+            $load_more_post.remove();
+            return;
+        }
+
+        $load_more_post.hide();
+        $post_loading.show();
+        $.json_action("category/posts",
+            {'category':$.toJSON('{{ category.url }}'),
+             'page':  $.toJSON(pager.cur_page + 1),
+             'per_page': $.toJSON(pager.per_page),
+             'group_by': $.toJSON(pager.group_by),
+             'start_cursor': $.toJSON(pager.start_cursor)
+            },
+            function(resp){
+                pager = resp.pager;
+                $post_loading.fadeOut(1000);
+                $.each(resp.posts, function(index, post){
+                    callback(post);
+                });
+                pager.is_last_page ? $load_more_post.remove() : $load_more_post.show();
+            },function(err){
+                bootbox.alert(err);
+                $load_more_post.show();
+                $post_loading.fadeOut(1000);
+        });
+    };
+    {% endif %}
+</script>
+{% endblock %}

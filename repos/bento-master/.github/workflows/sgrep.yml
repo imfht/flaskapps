@@ -1,0 +1,16 @@
+name: sgrep
+
+on: [push]
+
+jobs:
+  self_test:
+    runs-on: ubuntu-latest
+    name: A job to run sgrep
+    steps:
+      - uses: actions/checkout@v2
+      - name: sgrep action step
+        id: sgrep
+        uses: returntocorp/sgrep-action@develop
+        with:
+          config: r2c
+          output: https://sgrep.r2c.dev/api/report/returntocorp/bento-core

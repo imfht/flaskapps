@@ -1,0 +1,57 @@
+{% extends 'emails/base.txt' %}
+
+{% macro user_details(user) -%}
+    Name:     {{ user.full_name }}
+    Email:    {{ user.email }}
+    {%- if user.phone %}
+    Phone:    {{ user.phone }}
+    {%- endif -%}
+{%- endmacro %}
+
+
+{% macro event_details(event) -%}
+    Name:     {{ event.title }}
+    {% if event.start_dt.date() == event.end_dt.date() -%}
+    Date:     {{ event.start_dt | format_date(timezone=event.tzinfo) }}, {{ event.start_dt | format_time(timezone=event.tzinfo) }}
+    {%- else -%}
+    Dates:    {{ event.start_dt | format_date(timezone=event.tzinfo) }}, {{ event.start_dt | format_time(timezone=event.tzinfo) }} - {{ event.end_dt | format_date(timezone=event.tzinfo) }}, {{ event.end_dt | format_time(timezone=event.tzinfo) }}
+    {%- endif %}
+    Location: {% if event.venue_name %}{{ event.venue_name }}: {% endif %}{{ event.room_name }}
+    Details:  {{ event.external_url }}
+{%- endmacro %}
+
+
+{%- block subject -%}
+    [{{ req.definition.title }}] {% block request_subject %}{% endblock %}
+{%- endblock -%}
+
+
+{% block header %}{% endblock %}
+
+
+{% block body -%}
+    {%- filter dedent -%}
+        {% block request_message %}{% endblock %}
+        {{ url_for('requests.event_requests_details', req, _external=True) }}
+
+        {% filter underline %}Requested by{% endfilter %}
+        {{ user_details(req.created_by_user) }}
+        {%- if req.created_by_user != event.creator %}
+
+            {% filter underline %}Event created by{% endfilter %}
+            {{ user_details(event.creator) }}
+        {%- endif %}
+
+        {% filter underline %}Event details{% endfilter %}
+        {{ event_details(event) }}
+
+        {%- if self.request_details() %}
+
+            {% filter underline %}Request details{% endfilter %}
+            {% block request_details %}{% endblock -%}
+        {% endif %}
+    {%- endfilter %}
+{% endblock %}
+
+
+{% block footer_title %}Service Requests{% endblock %}

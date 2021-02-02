@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of Invenio.
+# Copyright (C) 2015-2018 CERN.
+#
+# Invenio is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
+
+include *.rst
+include *.sh
+include *.txt
+include .dockerignore
+include .editorconfig
+include LICENSE
+include docs/requirements.txt
+include pytest.ini
+prune docs/_build
+recursive-include docs *.bat
+recursive-include docs *.css
+recursive-include docs *.gif
+recursive-include docs *.jpeg
+recursive-include docs *.jpg
+recursive-include docs *.plantuml
+recursive-include docs *.png
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs *.svg
+recursive-include docs *.html
+recursive-include docs Makefile
+recursive-include misc *.py
+recursive-include misc *.rst
+recursive-include nginx *.conf
+recursive-include scripts *.cfg
+recursive-include scripts *.sh
+recursive-include tests *.py
+recursive-include docs *.xml

@@ -1,0 +1,55 @@
+{% macro render_left_post(post, even) %}
+<div class="post-item">
+  <div class="row">
+    {% if post.image-%}
+    <div class="col-md-6">
+      <div class="post-item-image lazy" data-bg="{{post.image}}">
+      </div>
+    </div>
+    {%-endif %}
+    <div class="col-md-6">
+      <h4>{{ post.title }}</h4>
+      <div class="post-item-meta">
+        <span class="datetime">{{ moment(post.date).format('ll') }}</span>
+        {% if post.category %}
+        <span class="category"><a href="{{ url_for('category', cat_id=post.category.id) }}"><i class="fa fa-folder-open"></i> {{ post.category }}</a></span>
+        {% endif %}
+      </div>
+      <p>
+        {{ post.excerpt | striptags }}
+      </p>
+      <div class="white-button">
+        <a href="{{ post.url }}">{{_('Read More')}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro render_right_post(post) %}
+<div class="post-item">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>{{ post.title }}</h4>
+      <div class="post-item-meta">
+        <span class="datetime">{{ moment(post.date).format('ll') }}</span>
+        {% if post.category %}
+        <span class="category"><a href="{{ url_for('category', cat_id=post.category.id) }}"><i class="fa fa-folder-open"></i> {{ post.category }}</a></span>
+        {% endif %}
+      </div>
+      <p>
+        {{ post.excerpt | striptags }}
+      </p>
+      <div class="white-button">
+        <a href="{{ post.url }}">{{_('Read More')}}</a>
+      </div>
+    </div>
+    {% if post.image-%}
+    <div class="col-md-6">
+      <div class="post-item-image lazy" data-bg="{{post.image}}">
+      </div>
+    </div>
+    {%-endif %}
+  </div>
+</div>
+{% endmacro %}

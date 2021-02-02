@@ -1,0 +1,83 @@
+* Style Archives page (make font 13px)
+    * Use css3 spalten to make use of the horizontal space both on months and categories
+    * make pagination smaller 1em
+* BUG: If post doesn't exist yet, preview shows 1970!
+* make datetime field explicitly settable, both in the model
+  and on the compose page through a datetime widget
+    * set default to now but when updating load saved date
+    * This has a lot of implications especially the id of the posts 
+      cannot be used as a relative time measurement. Views that rely on
+      that should be rewritten to rely on the date. Test should be added
+      before that, where id and date give different relative time measurement.
+* Javascript Tag suggestion
+* rename in setup.py to v0.5
+* Refactor(pyflakes/epydoc)/Tests/Document/Readme/Changelog
+
+-> v0.5
+
+----------------
+
+* search (http://pypi.python.org/pypi/Whoosh/)
+    * create dedicated page for search
+        * put there instructions like "in:category [tags]"
+    * use render_post_minimal or similar to list posts
+        * look at flask search page how it is done (bold findings, ajax...)
+* think about replacing cherokee with nginx?
+    * http://www.westphahl.net/blog/2010/4/8/running-django-nginx-and-uwsgi/
+* rename in setup.py to v0.6
+* Refactor(pyflakes/epydoc)/Tests/Document/Readme/Changelog
+
+-> v0.6
+
+----------------
+
+* Restyle archives page
+    * remove months, instead show 20 latest blog posts titles with date
+      and pagination
+    * below that show categories in 3 columns
+    * the last thing is the tag cloud
+* statistics (or can I use google statitstsic or how that is called for that?)
+    * or use cherokee logger? add to documentation
+* Update to Flask-SQLAlchemy 0.10 and rewrite tidy_tags to use model_committed event
+* clean css
+* put something like "Eugen Kiss * Contact * Powered by Flask" at the bottom"
+    * Add setting-option: OWNER
+* be able to rename categories
+* Put hardcoded Messages in config file (localisation?)
+* rename in setup.py to v0.7
+* Refactor(pyflakes/epydoc)/Tests/Document/Readme/Changelog
+
+-> v0.7
+
+----------------
+
+* improve performance
+    * profiling (with google profiling tools) in order to improve performance (archives view esp.)
+    * caching queries with pure python?
+        * http://github.com/thadeusb/flask-cache Flask Cache
+        * http://beaker.groovie.org/ http://www.sqlalchemy.org/docs/examples.html#examples-caching
+* rename in setup.py to v0.8
+* Refactor(pyflakes/epydoc)/Tests/Document/Readme/Changelog
+
+-> v0.8
+
+----------------
+
+* error pages (403...), style them read flask doc howto
+* use css3 spalten to make archives page more effectively use horizontal space
+  (e.g. 3 columns for months, 3 columns for categories, tag cloud and then
+  recent posts)
+* Pingback/Traceback (or does Disqus already do that?) / Look at Zine
+* rename in setup.py to v0.9
+* Refactor(pyflakes/epydoc)/Tests/Document/Readme/Changelog
+
+-> v0.9
+
+----------------
+
+* Update markdown2 lib (maybe smartypants? I love real quotation marks)
+* Refactor(pyflakes/epydoc)/Tests/Document/Readme/Changelog
+* Wait a little, maybe bugs appear
+* rename in setup.py to v1.0
+
+-> v1.0

@@ -1,0 +1,14 @@
+version: '2'
+services:
+  backend-s:
+    image: ansrivas/flask-backend:latest
+    container_name: backend-c
+  frontend-s:
+    image: ansrivas/angular2-frontend:latest
+    container_name: frontend-c
+    ports:
+      - "3000:80"
+    links:
+      - backend-s
+    depends_on:
+      - backend-s

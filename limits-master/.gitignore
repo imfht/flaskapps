@@ -1,0 +1,16 @@
+*.pyc
+*.log
+cover/*
+.coverage*
+.test_env
+.idea
+build/
+dist/
+htmlcov
+*egg-info*
+*.rdb
+redis-git
+.python-version
+# gae test files
+google_appengine
+google

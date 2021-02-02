@@ -1,0 +1,10 @@
+pytest
+empty
+flask
+flask-testing
+flask-security-too
+flask-admin
+flask-sqlalchemy
+flask-migrate
+flask-wtf
+flask-debugtoolbar

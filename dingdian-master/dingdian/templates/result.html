@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+搜索结果
+{% endblock %}
+
+{% block content %}
+<div>
+    <a href="{{url_for('main.index')}}">
+    <button type="button" class="btn btn-default btn-sm">
+      <span class="glyphicon glyphicon-search"></span> 返回搜索
+    </button>
+    </a>
+</div>
+<h3 align="center">{{search}}的搜索结果</h3><hr>
+{% if not books %}
+<h4>啊哦，似乎没有找到你需要的结果！</h4>
+{% endif %}
+{% for i in books %}
+<ul class="list-group">
+    <li class="list-group-item">
+        <table>
+            <tr>
+                <td>
+                    <img class="img" src="{{i.book_img}}">
+                </td>
+                <td>
+                    <a href="{{url_for('main.chapter',book_id=i.id)}}">{{i.book_name}}</a>
+                    <p><b>简介：</b>{{i.profile | safe}}</p>
+                    <p><b>作者：</b>{{i.author}}</p>
+                    <p><b>类型：</b>{{i.style}}</p>
+                    <p><b>更新时间：</b>{{i.last_update}}</p>
+                </td>
+            </tr>
+        </table>
+    </li>
+</ul>
+{% endfor %}
+<ul class="pager">
+    {% if page-1 != -1 %}
+	<li class="previous"><a href="{{url_for('main.result',search=search,page=page-1)}}">&larr; Older</a></li>
+    {% else %}
+    <li class="previous disable">&larr; Older</li>
+    {% endif %}
+    {% if page+1 !=10 %}
+	<li class="next"><a href="{{url_for('main.result',search=search,page=page+1)}}">Newer &rarr;</a></li>
+    {% else %}
+    <li class="next disable">Newer &rarr;</li>
+    {% endif %}
+</ul>
+{% endblock %}

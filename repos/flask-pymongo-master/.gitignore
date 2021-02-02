@@ -1,0 +1,15 @@
+Flask_PyMongo.egg-info
+nose*.egg-info
+nose*.egg
+_build
+.coverage
+dist/
+*.pyc
+.pytest_cache/
+_version.py
+version.txt
+.eggs/
+.tox/
+build/
+
+.idea

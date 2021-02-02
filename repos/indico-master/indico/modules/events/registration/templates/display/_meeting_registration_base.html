@@ -1,0 +1,13 @@
+{% extends 'layout/meeting_page_base.html' %}
+
+{% block title %}
+    {%- if regform and regform.moderation_enabled %}
+        {%- trans %}Application{% endtrans %}
+    {%- else %}
+        {%- trans %}Registration{% endtrans %}
+    {%- endif %}
+{% endblock %}
+
+{% block subtitle %}
+    {{ regform.title }}
+{% endblock %}

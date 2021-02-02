@@ -1,0 +1,257 @@
+{% extends "layout.html" %}
+{% block body %}
+        {% include "notifications.html" %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {% include "small_topbar.html" %}
+          <ul class="breadcrumb" style="margin-bottom: 5px;">
+            <li><a href="{{ url_for('view.home') }}">{{ _('Home') }}</a></li>
+            <li class="active">{{ _('Administration') }}</li>
+          </ul>
+          <br />
+          <div class="form-container">
+            <legend id="grants">{{ _('Grants') }}</legend>
+            <div class="row well">
+              <h3>{{ _('Create new grant') }}</h3>
+              <p><button class="btn btn-success" id="btn-add-grant" ng-click="addNewGrant()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ _('New grant') }}</button></p>
+            </div>
+          </div>
+          <div class="form-container">
+            <legend>{{ _('Grants list') }}</legend>
+            <div id="waiting-user-container" class="row">
+              <i class="fa fa-spin fa-fw fa-refresh" aria-hidden="true"></i>&nbsp;{{ _('Loading, Please wait...') }}
+              <br />
+              <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-info" style="width: 100%"></div>
+              </div>
+            </div>
+            <div class="table-responsive" id="table-users-container" style="display: none;">
+              <table class="table table-striped table-hover nowrap" id="table-users" width="100%">
+                <thead>
+                  <tr>
+                    <th>{{ _('Username') }}</th>
+                    <th>{{ _('Authorization Backend') }}</th>
+                    <th>{{ _('Role') }}</th>
+                    <th>{{ _('Groups') }}</th>
+                    <th>{{ _('Grants') }}</th>
+                    <th>{{ _('Controls') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="form-container">
+            <legend id="grants">{{ _('Groups') }}</legend>
+            <div class="row well">
+              <h3>{{ _('Create new group') }}</h3>
+              <p><button class="btn btn-success" id="btn-add-group" ng-click="addNewGroup()"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ _('New group') }}</button></p>
+            </div>
+          </div>
+          <div class="form-container">
+            <legend>{{ _('Groups list') }}</legend>
+            <div id="waiting-group-container" class="row">
+              <i class="fa fa-spin fa-fw fa-refresh" aria-hidden="true"></i>&nbsp;{{ _('Loading, Please wait...') }}
+              <br />
+              <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-info" style="width: 100%"></div>
+              </div>
+            </div>
+            <div class="table-responsive" id="table-groups-container" style="display: none;">
+              <table class="table table-striped table-hover nowrap" id="table-groups" width="100%">
+                <thead>
+                  <tr>
+                    <th>{{ _('Group name') }}</th>
+                    <th>{{ _('Authorization Backend') }}</th>
+                    <th>{{ _('Role') }}</th>
+                    <th>{{ _('Members') }}</th>
+                    <th>{{ _('Grants') }}</th>
+                    <th>{{ _('Controls') }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="delete-user-modal" class="modal fade">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ _('Confirmation') }}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-warning">
+                  <i class="fa fa-fw fa-2x fa-question-circle"></i>{{ _('You are about to delete a user, are you sure?') }}
+                </div>
+                <form class="form-horizontal" id="delete-user-form">
+                  <fieldset id="delete-details">
+                  </fieldset>
+                </form>
+                <br />
+                <div class="alert alert-danger" id="delete-confirm" style="display:none;">
+                  <strong><i class="fa fa-fw fa-2x fa-exclamation-circle"></i>{{ _('Warning!') }}</strong> {{ _('You are about to remove your grants associated to your <strong>current</strong> user.') }}
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="perform-delete">{{ _('Confirm') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="edit-user-modal" class="modal fade">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ _('Confirmation') }}</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <fieldset id="edit-details">
+                  </fieldset>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" id="perform-edit">{{ _('Edit') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="delete-group-modal" class="modal fade">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ _('Confirmation') }}</h4>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-warning">
+                  <i class="fa fa-fw fa-2x fa-question-circle"></i>{{ _('You are about to delete a group, are you sure?') }}
+                </div>
+                <form class="form-horizontal" id="delete-group-form">
+                  <fieldset id="delete-group-details">
+                  </fieldset>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="perform-group-delete">{{ _('Confirm') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="edit-group-modal" class="modal fade">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{ _('Confirmation') }}</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <fieldset id="edit-group-details">
+                  </fieldset>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" id="perform-group-edit">{{ _('Edit') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="create-grant-modal" class="modal fade">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                {% raw -%}
+                <h4 class="modal-title">{{ modalTitle }}</h4>
+                {% endraw -%}
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal" name="pctrl.grantAdd" ng-submit="addGrant($event)">
+                  <fieldset>
+                    {% raw -%}
+                    <Legend>{{ modalLegend }}</Legend>
+                    <div class="form-group" ng-class="{'has-error': pctrl.grantAdd.name.$touched && !pctrl.grantAdd.name.$valid}">
+                      <label class="col-lg-2 control-label" for="name">{{ nameLabel }}</label>
+                      <div class="col-lg-10">
+                        <input class="form-control" type="text" id="name" name="name" placeholder="{{ nameLabel }}" ng-model="name" required>
+                      </div>
+                    </div>
+                    {% endraw -%}
+                    <div class="form-group">
+                      <label class="col-lg-2 control-label" for="acl_backend">{{ _('Backend') }}</label>
+                      <div class="col-lg-10">
+                        <select class="form-control" name="acl_backend" id="acl_backend" ng-model="acl_backend" ng-change="checkSelect()" required>
+                          <option selected disabled value="placeholder">{{ _('Authorization Backend') }}</option>
+                          {% raw -%}
+                          <option ng-repeat="back in acl_backends" ng-disabled="!actionAllowed(back)" value="{{ back.name }}">{{ back.name }}</option>
+                          {% endraw -%}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': !validGrantInput}">
+                      <label for="grantValue" class="col-lg-2 control-label">{{ _('Grants') }}</label>
+                      <div class="col-lg-6">
+                        <div ui-ace ng-model="grantValue" ace-mode="json" ace-theme="ambiance" style="height: 200px;" class="form-control"></div>
+                      </div>
+                      <span id="helpBlock" class="help-block" ng-show="!validGrantInput" ng-cloak>{{ _('You need to enter a valid JSON expression. Example:') }}&nbsp;<kbd>"client"</kbd>, <kbd>{"clients": ["c1", "c2"]}</kbd>, <kbd>["client1", "client2"]</kbd>, <kbd>{ "agents": { "agent1": ["client1", "client2"] } }</kbd></span>
+                    </div>
+                    <div class="form-group" ng-if="mode == 'group'">
+                      <label for="group-members" class="col-lg-2 control-label">{{ _('Group members') }}</label>
+                      <div class="col-lg-6">
+                        <ui-select id="group-members" name="group-members" multiple ng-model="pctrl.grantAdd.groupMembers" ng-disabled="$parent.loadingMembers" style="width: 100%;" title="{{ _('Choose a person') }}">
+                          <ui-select-match placeholder="{{ _('Select person...') }}">{{ '{{$item.id}}' }}</ui-select-match>
+                          <ui-select-choices repeat="person.id as person in pctrl.grantAdd.backendUsers | filter: $select.search">
+                            <div ng-bind-html="person.id | highlight: $select.search"></div>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-3 col-lg-offset-2">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" ng-model="isAdmin"> {{ _("Is Admin") }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-3 col-lg-offset-2">
+                        <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="isModerator"> {{ _("Is Moderator") }}
+                        </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-lg-2 col-lg-offset-2">
+                        <button class="btn btn-success" type="submit" ng-disabled="!pctrl.grantAdd.$valid || !validGrantInput"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{ _('Create') }}</button>
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" ng-model="dismiss"> {{ _("Close modal after success") }}
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ _('Cancel') }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

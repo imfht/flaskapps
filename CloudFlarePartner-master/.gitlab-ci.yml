@@ -1,0 +1,35 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  # DOCKER_HOST: tcp://dockerd:2375
+  IMAGE: registry.gitlab.com/brickworks/bitrabbit/arthas
+
+before_script:
+  - PRODUCTION_IMAGE_TAG=${IMAGE}:production-${CI_COMMIT_SHA:0:8}
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+
+build:
+  stage: build
+  only:
+    - master
+    - develop
+  tags:
+    - build
+  script:
+    - echo Building ${STAGING_IMAGE_TAG}
+    - docker build -f Dockerfile -t ${PRODUCTION_IMAGE_TAG} .
+    - docker push ${PRODUCTION_IMAGE_TAG}
+
+deploy:
+  variables:
+    DOCKER_HOST: tcp://dockerd:2375
+  stage: deploy
+  only:
+    - master
+  tags:
+    - deploy-staging
+  when: manual
+  script:
+    - kubectl set image -n default deployment/arthas-dashboard "arthas-dashboard=${PRODUCTION_IMAGE_TAG}" --record

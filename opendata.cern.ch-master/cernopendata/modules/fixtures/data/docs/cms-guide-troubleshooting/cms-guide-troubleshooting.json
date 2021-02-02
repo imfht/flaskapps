@@ -1,0 +1,31 @@
+[
+  {
+    "body": {
+      "content": "cms-guide-troubleshooting.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "CMS"
+      },
+      {
+        "primary": "education"
+      }
+    ],
+    "experiment": "CMS",
+    "short_description": {
+      "content": "This page lists possible solutions to frequently encountered issues with CMS Open Data: for the virtual machine; for the CMSSW software and examples; and for the file download and access."
+    },
+    "slug": "cms-guide-troubleshooting",
+    "tags": [
+      "Getting Started"
+    ],
+    "title": "CMS Guide to troubleshooting",
+    "type": {
+      "primary": "Documentation",
+      "secondary": [
+        "Guide"
+      ]
+    }
+  }
+]

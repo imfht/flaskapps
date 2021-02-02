@@ -1,0 +1,24 @@
+# docs
+data/docs
+
+# debug files
+playground/
+
+# Pycharm files
+.idea/
+
+# Python cache
+__pycache__
+
+# keys
+keys.txt
+github_webhook_keys.txt
+
+# Database
+./data/topaz.sqlite
+
+# Envs
+.topaz/
+
+# cache
+cached/

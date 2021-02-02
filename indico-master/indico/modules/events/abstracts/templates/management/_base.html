@@ -1,0 +1,8 @@
+{% extends 'layout/base.html' if standalone else 'events/management/base.html' %}
+
+{% block page_content_class %}{{ super() }} reviewing-page{% endblock %}
+{% block page_id %}reviewing-page{% endblock %}
+
+{% block title %}
+    {% trans %}Call for Abstracts{% endtrans %}
+{% endblock %}

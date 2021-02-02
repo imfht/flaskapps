@@ -1,0 +1,32 @@
+# To use this file, run `docker-compose up`.
+version: '3.4'
+
+x-backend-config: &backend
+  build:
+    context: "."
+    dockerfile: "./scripts/docker/Dockerfile.backend"
+
+services:
+  # Main application
+  backend:
+    <<: *backend
+    volumes:
+      - .:/usr/src/app
+
+  # Migration service
+  migration:
+    <<: *backend
+    volumes:
+      - .:/usr/src/app
+
+  frontend:
+    build:
+      context: "."
+      dockerfile: "./scripts/docker/Dockerfile.frontend"
+      args:
+        - TM_APP_API_URL=http://localhost/api
+    volumes:
+      - ".:/usr/src/app"
+    labels:
+      - traefik.http.routers.frontend.rule=Host(`localhost`)
+      - traefik.http.services.frontend.loadbalancer.server.port=80

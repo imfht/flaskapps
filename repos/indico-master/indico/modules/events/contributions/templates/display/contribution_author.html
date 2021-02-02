@@ -1,0 +1,51 @@
+{% extends 'events/display/conference/base.html' %}
+
+{% macro details_table_row(caption, value) %}
+    {% if value %}
+        <div>
+            <label>{{ caption }}</label>
+            <span class="text-normal">{{ value }}</span>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% block title -%}
+    {% trans full_name=author.full_name -%}
+        Details for {{ full_name }}
+    {%- endtrans %}
+{%- endblock %}
+
+{% block content %}
+    <section>
+        {{ details_table_row(_('Title:'), author.title) }}
+        {{ details_table_row(_('Affiliation:'), author.affiliation) }}
+    </section>
+    {% if contribs -%}
+        <section>
+            <div class="header">
+                <div class="header-row">
+                    <h3>
+                        {%- trans count=contribs|length -%}
+                            Author in the following contribution
+                        {%- pluralize -%}
+                            Author in the following contributions
+                        {%- endtrans -%}
+                    </h3>
+                </div>
+            </div>
+            <div class="i-box">
+                <div class="i-box-content">
+                    <ul class="group-list no-content-before">
+                        {% for contrib in contribs -%}
+                            <li>
+                                <a class="js-mathjax" href="{{ url_for('contributions.display_contribution', contrib) }}">
+                                    {{- contrib.title -}}
+                                </a>
+                            </li>
+                        {%- endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    {%- endif %}
+{% endblock %}

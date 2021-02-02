@@ -1,0 +1,7 @@
+{% extends 'spoiler/base.html' %}
+
+{% block title %}View Spoiler{% endblock %}
+
+{% block content %}
+    <div class="well well-sm">{{ message|markdown }}</div>
+{% endblock %}

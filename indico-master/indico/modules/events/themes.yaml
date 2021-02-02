@@ -1,0 +1,79 @@
+defaults:
+    conference: ~
+    lecture: lecture
+    meeting: standard
+
+definitions:
+  # Lectures - base
+  lecture: &lecture
+    event_types: [lecture]
+    stylesheet: indico.scss
+    template: indico/lecture.html
+    title: Lecture
+    user_visible: true
+
+  event:
+    <<: *lecture
+    title: Event
+
+  # Meetings - base
+  standard: &standard
+    event_types: [conference, meeting]
+    stylesheet: indico.scss
+    # XXX: this maybe be inherited by custom themes in plugins so we
+    # need to use path relative to the main htdocs folder which is
+    # always included in the assets env
+    print_stylesheet: print/indico.scss
+    template: indico/meeting.html
+    title: Indico style
+    user_visible: true
+
+  standard_inline_minutes:
+    <<: *standard
+    title: Indico style - inline minutes
+    settings:
+      show_notes: true
+
+  nicecompact:
+    event_types: [conference, meeting]
+    stylesheet: compact.scss
+    template: compact.html
+    title: Compact style
+    user_visible: true
+
+  indico_weeks_view:
+    event_types: [conference, meeting]
+    stylesheet: weeks.scss
+    template: weeks.html
+    title: Indico Weeks View
+    user_visible: true
+    user_settings:
+      colors:
+        caption: Contribution Colours
+        description: 'Colours used for different types of timetable entries'
+        type: MultipleItemsField
+        required: false
+        kwargs:
+          fields:
+            - id: entry
+              caption: Keyword
+            - id: color
+              caption: Colour
+          unique_field: entry
+        defaults:
+          - entry: foo
+            color: '#ff0000'
+          - entry: bar
+            color: '#00ffff'
+      start_day:
+        caption: Week start day
+        description: 'First day of weeks view'
+        type: SelectField
+        required: true
+        kwargs:
+          choices:
+            - [event, Event start day]
+            - [monday, Monday]
+            - [sunday, Sunday]
+        defaults:
+            monday

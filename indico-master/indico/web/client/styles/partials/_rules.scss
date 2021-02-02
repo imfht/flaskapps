@@ -1,0 +1,36 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.titled-rule {
+  color: $gray;
+  font-size: 0.9em;
+  margin: 10px 0;
+  overflow: hidden;
+  text-align: center;
+
+  &::before,
+  &::after {
+    box-shadow: 1px 1px 1px $light-gray;
+    background-color: $default-border-color;
+    content: '';
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+
+  &::before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+
+  &::after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
+}

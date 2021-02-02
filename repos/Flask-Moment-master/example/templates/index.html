@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Flask-Moment example app</title>
+        {{ moment.include_jquery() }}
+        {{ moment.include_moment() }}
+        <script>
+        function load_ajax_timestamp() {
+            $.ajax({
+                url: '{{ url_for('ajax') }}',
+                dataType: 'json'
+            }).done(function(response) {
+                $('#ajax').append('<p>' + response.timestamp + '</p>');
+                flask_moment_render_all();
+            });
+        }
+        </script>
+    </head>
+    <body>
+        <p>The current date and time is: {{ moment().format('MMMM Do YYYY, h:mm:ss a') }}.</p>
+        <p>
+            {{ moment(midnight).fromTime(now) }} it was midnight in the UTC timezone. 
+            That was {{ moment(midnight).calendar() }} in your local time.
+            It will be midnight again {{ moment(midnight).toNow() }}.
+        </p>
+        <p>
+            Unix epoch is {{ moment(epoch, local=True).format('LLLL') }} in the UTC timezone.
+            That was {{ moment(epoch).format('LLLL') }} in your local time.
+        </p>
+        <p>
+            This page was rendered on {{ moment(now).format('LLL') }},
+            which was {{ moment(now).fromNow(refresh = True) }}.
+        </p>
+        <p>
+            The next Saturday will be in {{ moment(now).toTime(next_saturday) }}, from the time this page was rendered.
+        </p>
+        <div id="ajax"></div>
+        <a href="#" onclick="load_ajax_timestamp()">Load Ajax timestamp</a>
+    </body>
+</html>

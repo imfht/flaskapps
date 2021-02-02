@@ -1,0 +1,81 @@
+*.py[cod]
+*~
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+.eggs/
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+__pycache__
+staticroot
+/media
+*.sqlite
+bower
+/youckan.ini
+*.db
+*.log
+*.pid
+.webassets-cache
+js-built
+.DS_Store
+*.min.css
+*.min.js
+/instance/
+/static/
+/doc/_build/
+/site/
+/node_modules/
+/udata/static/
+/udata/manifest.json
+/jsdoc/
+*.rdb
+venv
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.cache
+.coverage
+.pytest_cache
+.tox
+cover
+nosetests.xml
+coverage.xml
+/coverage/
+/reports/
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Force .gitignore files
+!.gitignore
+.noseids
+Procfile
+
+# Local configuration file of udata
+udata.cfg
+
+# Local data directory
+data
+
+# PyCharm
+.idea

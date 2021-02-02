@@ -1,0 +1,14 @@
+pyms:
+  services:
+    swagger:
+      path: ""
+      file: "swagger.yaml"
+  config:
+    DEBUG: true
+    TESTING: true
+    APP_NAME: "Python Microservice With Flask in tests"
+    test_var: general
+    subservice1:
+       test: input
+    subservice2:
+       test: output

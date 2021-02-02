@@ -1,0 +1,135 @@
+@import "normalize.less";
+@import "variables.less";
+@import "resets.less";
+@import "iconfont.less";
+@import "pace.less";
+@import "highlight.less";
+
+
+.truncate(@width) {
+    max-width: @width;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 260px;
+    padding: @width-gap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 10;
+    background-color: @color-background-dark;
+    color: @color-text-light;
+
+    ul,li {
+        margin: 0;
+    }
+    ul {
+        padding-left: @width-gap*1.5;
+    }
+
+    a {
+        color: @color-text-light;
+    }
+    span{
+      cursor: default;
+    }
+}
+
+.content {
+    margin-left: 260px;
+    padding: 0 @width-gap*4 @width-gap*2;
+}
+
+.action-url {
+    font-size: 32px;
+    color: @color-text-dark;
+}
+
+@media (min-width: @width-breakpoint) {
+    .content-wrapper {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+.toggle-sidebar {
+    position: fixed;
+    top: 0;
+    right: 4px;
+    color: @color-text-gray;
+    &:hover {
+        color: @color-text-dark;
+        cursor: pointer;
+    }
+    i {
+        font-size: 32px;
+    }
+}
+
+.show-on-mobile {
+    display: none;
+}
+
+@media (max-width: @width-breakpoint) {
+    .container{
+        padding: @padding-small;
+    }
+    .sidebar {
+        display: none;
+    }
+    .content {
+        margin-left: 0;
+        padding: 8px;
+    }
+    .show-on-mobile{
+        display: block;
+    }
+    .hide-on-mobile{
+        display: none;
+    }
+}
+
+.section-role {
+    overflow-x: auto;
+    font-size: @font-size-small;
+
+    table {
+        border-collapse: collapse;
+        margin-top:2*@width-gap;
+    }
+    td {
+        border: 1px solid #ccc;
+        padding: @width-gap;
+    }
+    .role-resource{
+        font-weight: bold;
+        color: @color-text-light;
+        background-color: @color-background-dark;
+    }
+    .role-item{
+        overflow: hidden;
+    }
+    .role-item-desc{
+        .truncate(200px)
+    }
+    .role-item-title{
+        .icon-allow{
+            color: #5cb85c;
+        }
+        .icon-block{
+            color: @color-text-gray;
+        }
+    }
+}

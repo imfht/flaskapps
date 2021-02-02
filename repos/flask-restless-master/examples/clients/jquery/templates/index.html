@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+  <title>Flask-Restless — jQuery example</title>
+  <meta charset="utf-8" />
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript">
+  var SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  var JSONAPI_MIMETYPE = "application/vnd.api+json";
+  (function() {
+    "use strict";
+    $(document).ready(function() {
+      $("#next-button").click(function() {
+        var nextid = parseInt($("#next-id").val(), 10);
+        $.ajax({
+          error: function() {
+            alert("No more people.");
+          },
+          headers: {
+            "Accept": JSONAPI_MIMETYPE
+          },
+          success: function(data) {
+            var person_id = data.data.id;
+            var person_name = data.data.attributes.name;
+            var new_row = $("<tr><td>" + person_id + "</td><td>" + person_name
+                            + "</td></tr>");
+            $("#people").append(new_row);
+            $("#next-id").val(nextid + 1);
+          },
+          url: SCRIPT_ROOT + '/api/person/' + nextid
+        });
+      });
+      $("#all-button").click(function() {
+        var filters = [{"name": "id", "op": "lte", "val": 5}];
+        $.ajax({
+          data: {"filter[objects]": JSON.stringify(filters)},
+          headers: {
+            "Accept": JSONAPI_MIMETYPE
+          },
+          success: function(data) {
+            var all_people, new_row, i, person, person_id, person_name;
+            all_people = data.data;
+            for (i = 0; i < all_people.length; ++i) {
+              person = all_people[i];
+              person_id = person.id;
+              person_name = person.attributes.name;
+              new_row = $("<tr><td>" + person_id + "</td><td>" + person_name
+                            + "</td></tr>");
+              $("#people-with-y").append(new_row);
+            }
+          },
+          url: SCRIPT_ROOT + '/api/person'
+        });
+      });
+      $("#add-a-person").click(function() {
+        var data;
+        data = {
+          data: {
+            type: "person",
+            attributes: {
+              name: $("#new-name").val()
+            }
+          }
+        }
+        $.ajax({
+          data: JSON.stringify(data),
+          headers: {
+            "Accept": JSONAPI_MIMETYPE,
+            "Content-Type": JSONAPI_MIMETYPE
+          },
+          method: "POST",
+          success: function(data) {
+            $("#message").text("Added " + $("#new-name").val());
+            $("#new-name").val("");
+          },
+          url: SCRIPT_ROOT + '/api/person'
+        });
+      })
+    });
+  }());
+  </script>
+</head>
+<body>
+  <input type="button" id="add-a-person" value="Add a person with name" />
+  <input type="text" id="new-name" />
+  <p id="message"></p>
+  <br />
+  <input type="button" id="next-button" value="Get next person" />
+  <input type="hidden" id="next-id" value="1" />
+  <table id="people">
+    <tr><th>ID</th><th>Name</th></tr>
+  </table>
+  <input type="button" id="all-button" value="Show the first 5 people" />
+  <table id="people-with-y">
+    <tr><th>ID</th><th>Name</th></tr>
+  </table>
+</body>
+</html>

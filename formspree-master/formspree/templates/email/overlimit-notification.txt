@@ -1,0 +1,9 @@
+Hey there,
+
+Someone just submitted your form on {{host}}.
+
+You are past the limit of {{ limit }} free submissions per month. Never fear! We have safely stored the content of this form in our archive. You can access it by logging in at {{ url_for('register', _external=True) }} and upgrading your account.
+
+---
+
+You are receiving this because you confirmed this email address on <a href="{{config.SERVICE_URL}}">{{config.SERVICE_NAME}}</a>. If you don't remember doing that, or no longer wish to receive these emails, please remove the form on {{host}} or visit {{unconfirm_url}} to unsubscribe from this endpoint.

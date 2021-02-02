@@ -1,0 +1,10 @@
+# Coverage configuration file
+
+[run]
+source = .
+
+omit =
+  migrations/*
+  tests/*
+  config/*
+  runapp.py

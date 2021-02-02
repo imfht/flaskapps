@@ -1,0 +1,33 @@
+# Config file for automatic testing at travis-ci.org
+
+language: python
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+python:
+  - "2.6"
+  - "2.7"
+  - "pypy"
+  - "3.3"
+  - "3.4"
+
+install:
+  - "pip install --upgrade pip"
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install importlib; fi
+  - "pip install -r requirements/dev.txt"
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+
+script:
+  - "coverage run manage.py test"
+  - flake8 flask_editablesite tests
+
+after_success:
+  coveralls
+
+matrix:
+  allow_failures:
+    - python: "pypy"

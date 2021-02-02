@@ -1,0 +1,208 @@
+$glyphicon-menu-font-size: 17px;
+
+.nav>div>a>img {
+  max-height: 60px;
+  height:auto;
+}
+
+.navbar-nav > a {
+  padding: 0;
+}
+
+.avatar {
+  $size: 35px;
+  height: $size;
+  width: $size;
+}
+
+.navbar {
+  z-index: 1030;
+  margin-bottom: 0;
+  padding: 0 $spacer-small * 0.5 0;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+  background-color: $header-color;
+
+  @include media-breakpoint-up(md) {
+    padding: 0 30px 0;
+  }
+}
+
+.navbar .logo {
+  margin: 0;
+}
+
+.header-background-hover {
+  a:hover {
+    background-color: $header-color;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar-left .dropdown-menu, .navbar-right .dropdown-menu, .navbar-left .open .dropdown-menu, .navbar-right .open .dropdown-menu {
+    z-index: 1000;
+    margin-top: 0 !important;
+    float: left;
+    position: absolute;
+    top: 99%;
+    left: -1px;
+    min-width: 100%;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  }
+}
+
+.w230 {
+  min-width: 230px;
+}
+
+.list-group {
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+
+.navbar-nav .dropdown-menu {
+  @extend .tk-futura-pt;
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  margin: 0;
+  list-style: none;
+  text-align: left;
+  border: 0;
+  background-clip: padding-box;
+  padding: 15px 12px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.navbar-nav.navbar-right .dropdown-menu {
+  @include media-breakpoint-up(md) {
+    left: -80px;
+  }
+}
+
+.open > .dropdown-menu {
+  display: block;
+}
+
+.navbar .nav .list-group > .list-group-item > span {
+  position: absolute;
+  top: 14px;
+  font-size: 17px;
+  color: #2a3342;
+}
+
+.logo-title {
+  @extend .tk-futura-pt-bold;
+  color: #fff;
+  font-size: 2em;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.lighten-header {
+  background-color: unset;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  @extend .lighten-header;
+}
+
+.dropdown-menu > a {
+  &:focus, &:active, &:hover {
+    background-color: unset;
+  }
+}
+
+.dropdown-item > a {
+  &:focus, &:active, &:hover {
+    background-color: unset;
+  }
+}
+
+.dropdown {
+
+  position: static;
+  @include media-breakpoint-up(md) {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    .dropdown-toggle-icon {
+      @extend .ml-5;
+      top: 4px;
+    }
+  }
+
+  button.dropdown-toggle {
+    margin-left: $spacer-small;
+    padding-left: $spacer-small;
+    padding-right: $spacer-small;
+
+    @include media-breakpoint-up(md) {
+  		margin-left: $spacer-large;
+      padding-left: $spacer-large;
+      padding-right: $spacer-large;
+  	}
+  }
+
+  .nav-menu-icon {
+    font-size: $glyphicon-menu-font-size;
+
+    &.glyphicon {
+      margin-left: $spacer-small;
+      margin-right: $spacer-small;
+    }
+  }
+
+  .nav-menu-button {
+    $menu-color: #333333; // same color as for other menu items
+    background-color: unset;
+    color: unset;
+    height: unset;
+    letter-spacing: unset;
+    line-height: unset;
+    padding: 0;
+    margin: 0;
+    margin-left: -4px;
+    color: $menu-color;
+
+    &:disabled,
+  	&[disabled],
+  	&.disabled {
+      $disable-color: lighten($menu-color, 50%);
+  		color: $disable-color;
+  		border: 0;
+  		&:hover,
+  		&:focus {
+        border: 0;
+        color: $disable-color;
+  		}
+  	}
+
+  }
+}
+
+.nav {
+  button.account {
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: normal;
+  }
+}
+
+.capitalize {
+  text-transform: capitalize;
+}

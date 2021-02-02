@@ -1,0 +1,86 @@
+<div class="comment-box dis-none" style="display: block;">
+    <div class="comment-title" title="Click to Collapse">
+        <span class="comment-count">{{ post.comments.count() }}</span> 所有评论  <span class="caret"></span>
+    </div>
+    <div class="comment-input">
+
+    <form action="" method="post" class="form" role="form">
+
+            <script type="text/javascript">f = function() {
+                function edit_tab(obj){
+                  if (event.keyCode == 9)
+                  {
+                     obj.value = obj.value + "    "; // 跳几格由你自已决定
+                     event.returnValue = false;
+                  }
+                }
+                if (typeof flask_pagedown_converter === "undefined") {
+                    //flask_pagedown_converter = Markdown.getSanitizingConverter().makeHtml;
+                    flask_pagedown_converter = marked;
+                }
+                var textarea = document.getElementById("flask-pagedown-post-comment");
+                var preview = document.getElementById("flask-pagedown-post-comment-preview");
+                textarea.onkeyup = function() { preview.innerHTML = flask_pagedown_converter(textarea.value); }
+                textarea.onkeyup.call(textarea);
+                }
+                if (document.readyState === 'complete')
+                    f();
+                else if (window.addEventListener)
+                    window.addEventListener("load", f, false);
+                else if (window.attachEvent)
+                    window.attachEvent("onload", f);
+                else
+                    f();
+            </script>
+        {{ form.csrf_token }}
+        <div class="form-group  required"><label class="control-label" for="comment">记录你的声音</label>
+            <div class="flask-pagedown"><textarea class="form-control flask-pagedown-input" id="flask-pagedown-post-comment" name="comment" required="" onkeydown="edit_tab(this)"></textarea></div>
+            <div class="markdown" id="flask-pagedown-post-comment-preview"></div>
+        </div>
+
+        <input class="btn btn-default" id="submit" name="submit" type="submit" value="提交">
+    </form>
+    </div>
+    <ul class="threads" style="display: block;">
+        {% for comment in post.comments %}
+        <li class="dis-none thread" style="display: list-item;">
+            <div class="command">
+                {% if current_user.is_anonymous %}
+                <i class="fa fa-user"></i> <span class="user_name"><a href="">{{ comment.author.username }}</a></span>
+                {% else %}
+                <i class="fa fa-user"></i> <span class="user_name"><a href="{{ url_for('user.profile', username=comment.author.username) }}">{{ comment.author.username }}</a></span>
+                {% endif %}
+                <i class="fa fa-clock-o"></i> <abbr class="date timeago text-muted">{{ moment(comment.timestamp).fromNow() }}</abbr>
+                <div class="pull-right">
+                    <a class="stats" stats_type="Comment" name="like_count" oper="increase"
+                        href="{{ url_for('comment.remark', id=comment.id, post_id=comment.post.id, attitude=Remark_Attitude.AGREE_WITH) }}" title="赞同"><i class="fa fa-thumbs-o-up"></i>{{ comment.remark_count(Remark_Attitude.AGREE_WITH) }}
+                    </a>&nbsp;
+                    <a class="stats" stats_type="Comment" name="unlike_count" oper="increase"
+                        href="{{ url_for('comment.remark', id=comment.id, post_id=comment.post.id, attitude=Remark_Attitude.DISAGREE_WITH) }}" title="反对"><i class="fa fa-thumbs-o-down"></i>{{ comment.remark_count(Remark_Attitude.DISAGREE_WITH) }}
+                    </a>&nbsp;
+                    <a class="reply-comment" href="javascript:" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
+                    {% if current_user.can(Permission.MODERATE_USERS) or comment.author == current_user%}
+                    <a class="delete-comment" href="{{ url_for('comment.delete', id=comment.id, post_id=comment.post.id) }}" title="删除"><i class="fa fa-trash-o"></i></a>&nbsp;
+                    {% endif %}
+                </div>
+            </div>
+            <!--防止转义-->
+            <div id="repeat-item">
+            <textarea id="flask-pagedown-comment" style="display: none; ">{{ comment.body | safe }}</textarea>
+            <div class="markdown" id="flask-pagedown-comment-preview"></div></div>
+            <script type="text/javascript">
+                /*$(document).ready(function() {
+                    var preview = document.getElementById("flask-pagedown-comment-preview");
+                    preview.innerHTML = marked(document.getElementById("flask-pagedown-comment").value);
+                });*/
+                $(document).ready(function(){
+                    $("div[id=repeat-item]").each(function(){
+                        $(this).children('#flask-pagedown-comment-preview').get(0).innerHTML = marked( $(this).children("#flask-pagedown-comment").get(0).value);
+                    });
+                });
+            </script>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+

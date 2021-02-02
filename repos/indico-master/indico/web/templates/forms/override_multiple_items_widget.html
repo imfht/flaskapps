@@ -1,0 +1,45 @@
+{% extends 'forms/base_widget.html' %}
+
+
+{% block html %}
+    {% set value = field._value() %}
+    <input type="hidden" id="{{ field.id }}" name="{{ field.name }}" value="{{ value | tojson | forceescape }}">
+    <div id="{{ field.id }}-widget" class="override-multiple-items-widget">
+        <table class="i-table-widget">
+            <thead data-tooltip-anchor>
+                <tr>
+                    {% for item in field.fields -%}
+                        <th>{{ item.caption }}</th>
+                    {% endfor -%}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in field.field_data %}
+                    <tr>
+                        {% for item in field.fields %}
+                            <td>
+                                {% if item.id in field.edit_fields %}
+                                    <input class="table-input" type="text" placeholder="{{ row[item.id] }}"
+                                           value="{{ field.get_overridden_value(row, item.id) }}"
+                                           data-key="{{ field.get_row_key(row) }}" data-field="{{ item.id }}"
+                                           {% if disabled %}disabled{% endif %}>
+                                {% else %}
+                                    {{ row[item.id] }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        setupOverrideMultipleItemsWidget({
+            fieldId: {{ field.id | tojson }}
+        });
+    </script>
+{% endblock %}

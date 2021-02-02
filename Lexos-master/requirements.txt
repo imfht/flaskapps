@@ -1,0 +1,16 @@
+beautifulsoup4
+biopython
+chardet
+colorlover
+flask
+gensim
+lxml
+matplotlib
+natsort
+numpy
+pandas
+plotly
+requests
+scikit-learn
+scipy
+werkzeug

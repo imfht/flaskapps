@@ -1,0 +1,14 @@
+[tool.black]
+exclude = '''
+/(
+    \.pytest_cache
+  | \.git
+  | \.venv
+)/
+'''
+
+[build-system]
+requires = [
+    "setuptools >= 35.0.2",
+]
+build-backend = "setuptools.build_meta"

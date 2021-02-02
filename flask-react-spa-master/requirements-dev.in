@@ -1,0 +1,20 @@
+# config file used to generate requirements-dev.txt
+#
+# pip-compile requirements-dev.in --output-file requirements-dev.txt
+
+pip-tools
+
+# docs
+guzzle-sphinx-theme
+livereload
+sphinx
+sphinx-click
+sphinxcontrib-websupport
+travis-sphinx
+
+# testing
+faker
+pytest
+pytest-flask
+PyYAML
+tox

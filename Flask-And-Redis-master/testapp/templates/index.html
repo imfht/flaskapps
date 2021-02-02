@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Comments App{% endblock %}
+{% block content %}
+
+  <form action="{{ url_for("index") }}" method="post">
+    <fieldset>
+      <legend>Select your username</legend>
+
+      <p>
+        <label for="username"><strong>Username</strong></label><br>
+        <input autocomplete="off" autofocus id="username" name="username"
+               required size="80"><br>
+        {% if error %}
+          <strong>Invalid value for username. Please try again.</strong><br>
+        {% endif %}
+        <small>Username should have at least 2 chars.</small>
+      </p>
+
+      <p>
+        <button type="submit"><strong>Submit</strong></button>
+      </p>
+    </fieldset>
+  </form>
+
+{% endblock %}

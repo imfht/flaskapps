@@ -1,0 +1,15 @@
+^\.project$
+^\.pydevproject$
+^ziggurat_foundations\.egg-info$
+^.*\.pyc$
+^\.settings$
+^alembic\.ini$
+^test\.py$
+docs/_build
+build/
+dist/
+ziggurat_foundations.egg-info
+venv*
+*.pyc
+.idea
+.eggs

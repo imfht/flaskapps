@@ -1,0 +1,13 @@
+{
+    "status_code": 201, 
+    "data": {
+        "path": "/{parameter_1}", 
+        "pathPart": "{parameter_1}", 
+        "id": "ndmj6n", 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 201, 
+            "RequestId": "5a09c6b7-28f4-11e6-b8f8-d1b42d374c32"
+        }, 
+        "parentId": "6ahk6mn0bi"
+    }
+}

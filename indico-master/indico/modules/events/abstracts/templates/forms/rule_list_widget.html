@@ -1,0 +1,34 @@
+{% extends 'forms/base_widget.html' %}
+{% from 'message_box.html' import message_box %}
+
+{% block html %}
+    <div>
+        {%- trans -%}
+            The emails generated from this notification template will be sent once <strong>any</strong> of the following rules is matched.
+        {%- endtrans -%}
+    </div>
+    <input type="hidden" id="{{ field.id }}" name="{{ field.name }}" value="{{ field._value() }}">
+    <div id="rule-widget-{{ field.id }}" class="js-rule-list-widget">
+        <ul class="rule-list flexcol"></ul>
+        {% call message_box('info', classes='no-rules-placeholder') %}
+            {% trans %}No rules have been added{% endtrans%}
+        {% endcall %}
+        <div class="toolbar f-j-end">
+            <div class="group">
+                <button class="i-button icon-plus highlight js-add-new-rule">
+                    {% trans %}Add new rule{% endtrans %}
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#{{ field.id }}').rulelistwidget({
+            containerElement: $('#rule-widget-{{ field.id }}'),
+            conditionTypes: {{ field.accepted_condition_types | map(attribute='name') | list | tojson }},
+            conditionChoices: {{ field.condition_choices | tojson }}
+        });
+    </script>
+{% endblock %}

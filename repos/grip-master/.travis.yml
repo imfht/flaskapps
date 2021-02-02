@@ -1,0 +1,15 @@
+dist: xenial
+language: python
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+  - 3.7
+  - pypy
+  - pypy3
+install:
+  - pip install -e .[tests]
+script:
+  - flake8
+  - pytest -m "not assumption"

@@ -1,0 +1,16 @@
+venv/
+.idea/
+__pycache__/
+*.pyc
+*.pem
+*.conf
+config.json
+test/static
+flask_session/
+app/static/config
+app/static/custom_config
+
+# pip stuff
+build/
+dist/
+*.egg-info/

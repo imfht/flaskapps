@@ -1,0 +1,196 @@
+{% extends "layouts/charts_base.html" %}
+
+{# Generate all the charts for a row (grid mode only) #}
+{%- macro chart_row(rownum, modules=None) %}
+    <div class="row grid-row {{ 'grid-row-template' if not modules else '' }}">
+        <p class="grid-row-label-wrapper text-center">
+            Row <span class="rownum">{{ rownum }}</span>
+            <a href="#chart-options" class="grid-row-label btn btn-success btn-xs" data-toggle="modal" data-row="{{ rownum }}">
+                <span class="fa fa-plus"></span> Add a widget</span>
+            </a>
+            <a href="#" class="btn btn-xs btn-danger delete-row"><span class="fa fa-times-circle"></span> Delete row</a>
+        </p>
+        {% if modules %}
+            {% for module in modules %}
+                {{ chart(module=module) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endmacro -%}
+
+{# Macro to create a new chart template or existing chart from a config #}
+{%- macro chart(module=None) %}
+    {% if module %}
+        {% set dims = module|get_dims %}
+        {% set fixedcol = view.layout == 'grid' %}
+        {% if fixedcol %}
+            {% set colcount = dims.width|string|replace('col-', '') %}
+            <div class="col-sm-12 col-xs-12 col-md-{{ colcount }} col-lg-{{ colcount }}">
+        {% endif %}
+        <div class="hidden item widget"
+            data-guid="{{ module.guid }}"
+            data-refresh="{{ module.refresh }}"
+            data-refresh-interval="{{ module.refreshInterval }}"
+            style="width:{{ '100%' if fixedcol else '%spx'|format(dims.width) }};height: {{ dims.height }}px;">
+    {% endif %}
+        <div class="error-overlay hidden">
+            <div class="alert alert-danger"></div>
+        </div>
+        <div class="loader-overlay"></div>
+        <span class="widget-loader fa fa-circle-o-notch fa-spin"></span>
+        <p class="widget-title">
+            <span class="widget-title-text">{{ module.name }}</span>
+            <span class="pull-right">
+                {% if module.inputs %}
+                    <span rel="tooltip"
+                    data-target='[data-guid="{{ module.guid }}"] .chart-inputs'
+                    data-toggle="collapse"
+                    title="Form options for this chart"
+                    class="icon charts-input-icon fa fa-plus-square"></span>&nbsp;
+                {% endif %}
+                {% if can_edit and not demo_mode and not embeddable %}
+                    <span rel="tooltip" title="Edit panel configuration" data-target="#chart-options" data-toggle="modal" class="icon fa fa-cog widget-edit"></span>
+                    <span rel="tooltip" title="Delete panel" data-toggle="modal" class="text-danger icon fa fa-times-circle widget-delete"></span>
+                    <span rel="tooltip" title="Drag to move this panel around"  class="dragger icon fa fa-arrows"></span>
+                {% endif %}
+                <span rel="tooltip" title="Refresh the panels url endpoint (will reset any options)" class="icon widget-refresh fa fa-refresh"></span>
+            </span>
+        </p>
+        <div class="chart-container"></div>
+        {% if module.inputs and can_edit %}
+            <div class="chart-inputs collapse">
+                <form action="{{ module.dataSoure }}" class="form-horizontal form-group-sm">
+                    <fieldset>
+                        <legend>Query override options</legend>
+                        {% for input in module.inputs.options %}
+                            <label>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+                                        <span class="label-text">{{ input.label }}</span>
+                                        {% if input.help_text %}
+                                            <br><small class="help-text">{{ input.help_text }}</small>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        {% if input.type == 'select' and input.options %}
+                                            <select
+                                                class="{{ input.input_classes|join(' ') or '' }}"
+                                                name="{{ input.name }}">
+                                                {% for val, name in input.options %}
+                                                    <option value="{{ val }}">{{ name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        {% elif input.type == 'checkbox' %}
+                                            <input class="{{ input.input_classes|join(' ') or '' }}"
+                                                type="checkbox"
+                                                name="{{ input.name }}"
+                                                {{ 'checked="checked"' if input.default and input.default != "false" else '' }}>
+                                        {% elif input.type == 'radio' and input.options %}
+                                            {% for val, name in input.options %}
+                                                <div class="input-radio">
+                                                    <input class="{{ input.input_classes|join(' ') or '' }}"
+                                                        type="radio"
+                                                        name="{{ input.name }}"
+                                                        value="{{ val }}"
+                                                        {% if val == input.default %}checked{% endif %}> {{ val }}
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <input type="{{ input.type or 'text' }}"
+                                                class="{{ input.input_classes|join(' ') or '' }}"
+                                                name="{{ input.name }}"
+                                                value="{{ input.value }}"
+                                                placeholder="{{ input.placeholder }}"
+                                                {% if pattern %}pattern="{{ input.validator_regex }}"{% endif %}
+                                                >
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </label>
+                        {% endfor %}
+                    </fieldset>
+                    <button class="{{ module.inputs.btn_classes|join(' ') or '' }}">
+                        {{ module.inputs.submit_text or 'Submit' }}
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+        {% if module %}
+            </div><!-- end item.widget -->
+            {% if fixedcol %}
+                </div>
+            {% endif %}
+        {% endif %}
+{% endmacro -%}
+
+{% block chart_body %}
+<div class="row">
+    <div class="col-md-12">
+        {% if not embeddable %}
+            <h2 class="chart-header lead text-center">
+                {% if not demo_mode %}
+                    <small>
+                        <a href="{{ url_for('jsondash.dashboard') }}" class="btn-xs btn btn-default pull-left">
+                            <span class="fa fa-angle-left"></span> Back
+                        </a>
+                    </small>
+                {% endif %}
+
+                <span class="dashboard-title">{{ view.name }}</span>
+
+                {% if can_edit and not demo_mode %}
+                    <small>{% include "partials/dashboard-options.html" %}</small>
+                {% endif %}
+            </h2>
+        {% endif %}
+        {% if can_edit and not demo_mode and not embeddable %}
+            <div class="{{ 'collapse' if view.modules|length else '' }} edit-mode-component" id="edit-view-container">
+                {% if not view.modules|length %}
+                    <div class="alert alert-warning text-center">
+                        <p>
+                            It looks like this dashboard has no modules - add some!
+                        </p>
+                    </div>
+                {% endif %}
+                <div class="text-center">
+                    {% include "partials/dashboard-global-form.html" %}
+                </div>
+            </div>
+            {% include "partials/dashboard-json-form.html" %}
+        {% endif %}
+        <div class="layout" data-layout="{{ view.layout or 'freeform' }}" id="view-builder">
+            <div id="container">
+                {% if view.layout == 'grid' %}
+                    <div class="row collapse edit-mode-component add-new-row-container" data-row-placement="top">
+                        <br>
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-default btn-block lead well text-center">
+                                <span class="fa fa-plus"></span> Add new row above
+                            </a>
+                        </div>
+                    </div>
+                    {% for row in modules %}
+                        {{ chart_row(loop.index, modules=row) }}
+                    {% endfor %}
+                    <div class="row collapse edit-mode-component add-new-row-container" data-row-placement="bottom">
+                        <br>
+                        <div class="col-md-12">
+                            <a href="#" class="btn btn-default btn-block lead well text-center">
+                                <span class="fa fa-plus"></span> Add new row below
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    {% for module in modules %}
+                        {{ chart(module=module) }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {# Used as a template to clone from in js only #}
+        <div class="hidden" id="chart-template">{{ chart() }}</div>
+        <div class="hidden" id="row-template">{{ chart_row(0) }}</div>
+    </div>
+</div>
+{% include "partials/dashboard-edit-modal.html" %}
+{% endblock %}

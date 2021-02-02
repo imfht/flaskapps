@@ -1,0 +1,47 @@
+[
+  {
+    "abstract": {
+      "description": "<p>The pileup configuration file.</p> <p> This file describes the exact setup for the\n      CMS software executable which was used in a data-processing step. It is\n      provided only <i>for information purposes</i>. Although all the components\n      required to <i>analyse</i> the public primary datasets - such as\n      corresponding input data, condition data, software version - are provided\n      on this portal, it is not necessarily possible to <i>reproduce</i> all the\n      described data-processing steps. </p>"
+    },
+    "accelerator": "CERN-LHC",
+    "collaboration": {
+      "name": "CMS collaboration",
+      "recid": "451"
+    },
+    "collections": [
+      "CMS-Configuration-Files"
+    ],
+    "collision_information": {
+      "energy": "7TeV"
+    },
+    "date_created": [
+      "2011"
+    ],
+    "date_published": "2016",
+    "distribution": {
+      "formats": [
+        "py"
+      ]
+    },
+    "experiment": "CMS",
+    "files": [
+      {
+        "checksum": "adler32:11ce0f5e",
+        "size": 3418,
+        "uri": "root://eospublic.cern.ch//eos/opendata/cms/configuration-files/2011/mix_2011_FinalDist_OOTPU_cfi.py"
+      }
+    ],
+    "publisher": "CERN Open Data Portal",
+    "recid": "3600",
+    "run_period": [
+      "Run2011A"
+    ],
+    "title": "CMS pileup configuration file mix_2011_FinalDist_OOTPU_cfi",
+    "type": {
+      "primary": "Supplementaries",
+      "secondary": [
+        "Configuration HLT"
+      ]
+    }
+  }
+]

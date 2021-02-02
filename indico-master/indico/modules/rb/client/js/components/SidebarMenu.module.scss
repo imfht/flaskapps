@@ -1,0 +1,40 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'rb:styles/palette';
+
+.sidebar:global(.inverted.menu) {
+  background-color: darken($primary-color, 10%);
+  top: calc(125px + var(--extra-bars, 0) * 50px - var(--offset, 0) * 1px);
+  height: calc(100% - 125px - var(--extra-bars, 0) * 50px + var(--offset, 0) * 1px) !important;
+  position: fixed !important;
+
+  .bottom-align {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.sidebar-button {
+  transition: color 0.25s ease-in, transform 0.25s ease-in;
+  color: $white;
+  cursor: pointer;
+
+  &:hover {
+    color: darken($highlight-color, 20%);
+  }
+
+  &:global(.active) {
+    color: darken($highlight-color, 30%);
+    transform: rotate(90deg);
+  }
+
+  i:global(.icon) {
+    margin: 0;
+  }
+}

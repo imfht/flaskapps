@@ -1,0 +1,25 @@
+{% from '_protection_messages.html' import render_protected_protection_message, render_inherited_protection_message %}
+
+<div class="form-group">
+    <div class="form-label"></div>
+    <div class="form-field">
+        {{ render_protected_protection_message() }}
+        {{ render_inherited_protection_message(parent, parent.type) }}
+
+        <div class="action-box for-form folder-protection-message warning">
+            <div class="section">
+                <div class="icon icon-lock"></div>
+                <div class="text">
+                    <div class="label">
+                        {% trans %}Protected{% endtrans %}
+                    </div>
+                    <div>
+                        {% trans -%}
+                            This object is not publicly accessible since <strong class="folder-name"></strong> (Folder) is protected.
+                        {%- endtrans %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

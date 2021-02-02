@@ -1,0 +1,43 @@
+language: python
+cache: pip
+python:
+-   "2.7"
+-   "3.6"
+-   "3.7"
+install:
+  - pip install -e .
+  - pip install coveralls
+  - pip install tox
+  - pip install tox-travis
+  - pip install webtest
+  - pip install tox-pytest-summary
+
+before_script:
+  - mysql -e 'create database myapp_test;' # username: "root", password: ""
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+  - psql -c 'create database travis_ci_test;' -U postgres
+
+script: tox -v
+
+services:
+  - mongodb
+  - mysql
+  - postgresql
+
+addons:
+    postgresql: "9.6"
+
+after_success:
+  - coveralls
+
+after_script:
+  - tox-pytest-summary
+
+dist: xenial
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - libmysqlclient-dev
+    - python3-dev

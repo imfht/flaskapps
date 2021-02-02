@@ -1,0 +1,151 @@
+0.60.0
+    - Now
+    - remove command --basedir when creating. Use the full path to create
+
+0.51.0
+    - You can now provide a nginx config file, that will be copied
+
+0.50.6
+    - Break backward compatibility
+    - New command: -w | --webs to deploy site by name, ie: `propel -w mysite.com`
+    - New command: --all-webs : To deploy all sites
+    - New command: --status : show only the propel status
+    - command --ps removed
+    - command --websites removed
+    - maintenance mode has been deprecated
+
+
+0.43.0
+    - workers are now k/v of dict workers
+
+    - Workers now must be called with a worker name
+
+    - backwards incompatibility on workers
+
+    - change name --reload_server to --reload, but using -r is still ok
+
+    - Added --restart to restart Supervisor
+
+0.31.2
+    - Fix Gunicorn options
+
+0.31.1
+     - fix maintenance bug
+
+0.31.0
+    - Added new scripts hook:
+        before_all,
+        after_all,
+        before_web,
+        after_web,
+        before_workers,
+        after_workers
+
+0.30.4
+    - In propel.py, If only maintenance.active is True, will put down everything
+
+- 0.30.2
+    - In the propel Summary, fixed the supervisor process name
+    - Change == to = in post-receive hook
+
+- 0.30.0
+    - Refactoring
+    - backward incompatible.
+    - If upgrading,
+        need to rerun 'propel-setup'
+        stop all the processes 'propel -x' or manually
+        relaunch 'propel -w'
+
+
+- 0.25.0
+    - Change the name of the supervisor app name
+    - Added command 'propel -c' to create a new repository directory
+        ie: propel -c mynewapp
+
+    - Added command --ps to show processes
+
+- 0.24.0
+    - Fixed missing 'exclude' in web options. 'exclude' takes precedence over 'remove'.
+      If found, it will exclude it
+
+- 0.23.0
+    - added 'pip_options' to set pip options
+
+- 0.22.6
+    - Add test to see if 'propel-setup' has been setup
+    - Set force_non_www to True by default
+
+- 0.22.5
+    - Fixed missing 'environment'
+    - Reformat the result summary
+
+- 0.22.4
+    - Fixed missing data
+
+- 0.22.0
+    - bump version
+
+- 0.21.0
+    - rename 'deployapp' to 'propel'
+    - rename $PYTHON to $PYTHON_ENV
+
+- 0.20.0
+
+    - Add maintenance page
+    - Added more setup config in propel-setup
+        - install nginx
+        - install php-fpm
+        - setup virtualenvwrapper
+        -
+    - no longer have 'exclude' option in web
+    - change scripts into dict with multiple keys to run
+    - new command
+        --maintenance on | off
+    - rename git command
+        --git-init $repo_name
+        --git-push-web $repo_name
+        --git-push-cmd $repo_name '$cmd1' '$cmd2' '$cmd...'
+    - short command
+        -w => --website
+        -s => --scripts
+        -k => --workers
+        -x => --undeploy
+        -m => --maintenance
+
+
+- 0.12.2
+    - Small refactor. Use var application instead of checking if it's exist again
+
+- 0.12.1
+    - Added $CWD to refer to the current working directory
+
+- 0.12.0
+    - Change some git command name
+        - '--git-init www' changed to '--on www --git-init'
+        - '--git-push-deploy www' changed to '--on www --git-push-web'
+        - '--git-push-no-deploy www' has been removed
+
+    - Added new git command
+        - '--on $repo_name --git-init' initiate the bare repo
+        - '--on $repo_name --git-push-web' Deploy a web app on each push
+        - '--on $repo_name --git-push-cmd '$cmd' ' Set a command to be executed on push
+        - '--on $repo_name --git-push-cmd ''' empty, it will remove all command
+
+- 0.10.1
+    - fixed missing 'workers' key in deploy_workers()
+
+- 0.10.0
+    - added --undeploy to undeploy applications
+    - added option for undeploy script 'scripts_undeploy' to execute on --undeploy
+    - added option to run custom scripts '--scripts --name $script_name'
+    -
+
+- 0.9.0
+    - add server_name in nginx option to  allow multiple server_name
+
+- 0.8.3
+    - use $PYTHON & $LOCAL_BIN to refer to environment path
+
+- 0.8.2
+    - Added option to specify logs directly in the nginx config
+

@@ -1,0 +1,47 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.i-color-field {
+  max-width: 400px;
+
+  .clickable-wrapper {
+    float: left;
+    display: inline-block;
+
+    .color-preview {
+      @extend %form-field-input;
+      @include border-all();
+      @extend %default-border-radius;
+      display: inline-block;
+      width: 3em;
+      float: left;
+      margin-right: 0.5em;
+
+      &.no-value {
+        @extend %tilted-strips-bg;
+      }
+    }
+
+    input[type='text'] {
+      width: 7em !important;
+    }
+  }
+
+  a.clear-color-btn {
+    color: $gray;
+    font-size: 1.2em;
+
+    &:hover {
+      cursor: pointer;
+      color: $red;
+    }
+
+    &:active {
+      color: $dark-red;
+    }
+  }
+}

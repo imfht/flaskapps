@@ -1,0 +1,89 @@
+{% extends "single.html" %}
+
+
+{% block title %}
+  Verify Your Security Key
+{% endblock %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='assets/js/vendors/base64.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/vendors/webauthn.js') }}"></script>
+{% endblock %}
+
+{% block single_content %}
+  <div class="card">
+    <div class="card-body">
+
+      <div class="mb-2">
+        Your account is protected with your security key (WebAuthn). <br><br>
+        Follow your browser's steps to continue the sign-in process.
+      </div>
+
+      <form id="formRegisterKey" method="post">
+        {{ fido_token_form.csrf_token }}
+        {{ fido_token_form.sk_assertion(class="form-control", placeholder="") }}
+
+        <div class="text-center">
+          <button id="btnVerifyKey" class="btn btn-success mt-2" onclick="verifyKey();">Use your security key</button>
+        </div>
+
+        <div class="form-check">
+          {{ fido_token_form.remember(class="form-check-input", id="remember") }}
+          <label class="form-check-label" for="remember">
+            {{ fido_token_form.remember.description }}
+          </label>
+        </div>
+      </form>
+
+
+      {% if enable_otp %}
+        <hr>
+        <div class="text-muted mt-5" style="margin-top: 1em;">
+          Don't have your key with you? <br> <a href="{{ url_for('auth.mfa') }}">Verify by One-Time Password</a>
+        </div>
+      {% endif %}
+
+      <hr>
+
+      <div class="mt-5">
+        If you have troubles with your authentication app, you can use the recovery code to login. <br>
+        <a href="{{ url_for('auth.recovery_route', next=next_url) }}">Use Recovery Codes</a>
+      </div>
+
+
+      <script>
+        async function verifyKey() {
+          $("#btnVerifyKey").prop('disabled', true);
+          $("#btnVerifyKey").text('Waiting for Security Key...');
+
+          const credentialRequestOptions = transformCredentialRequestOptions(
+            JSON.parse('{{webauthn_assertion_options|tojson|safe}}')
+          )
+
+          let assertion;
+          try {
+            assertion = await navigator.credentials.get({
+              publicKey: credentialRequestOptions
+            });
+          } catch (err) {
+            toastr.error("An error occurred when we trying to verify your key.");
+            $("#btnVerifyKey").prop('disabled', false);
+            $("#btnVerifyKey").text('Use your security key');
+            return console.error("Error when trying to get credential:", err);
+          }
+
+          const skAssertion = transformAssertionForServer(assertion);
+          $('#sk_assertion').val(JSON.stringify(skAssertion));
+          $('#formRegisterKey').submit();
+        }
+
+      </script>
+
+      {% if auto_activate %}
+        <script>$('document').ready(verifyKey());</script>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

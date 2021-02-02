@@ -1,0 +1,231 @@
+{% from 'events/papers/reviewing/timeline.html' import render_paper_content, render_paper_metadata %}
+
+{% macro render_paper_section(contribution) %}
+    {% set paper = contribution.paper %}
+    {% set can_submit = contribution.can_submit_proceedings(session.user) %}
+    {% set show_paper = paper and paper.accepted_revision %}
+    {% set show_paper_status = paper and can_submit %}
+    {% set show_paper_submission = contribution.event.cfp.is_open and can_submit %}
+
+    {% if show_paper or show_paper_status or show_paper_submission %}
+        <section>
+            <div class="header">
+                <div class="header-row">
+                    <h2>{% trans %}Peer reviewing{% endtrans %}</h2>
+                </div>
+            </div>
+            <div class="header">
+                <div class="header-row">
+                    <h3 class="icon-file">{% trans %}Paper{% endtrans %}</h3>
+                    {% if show_paper and paper.state.name == 'accepted' %}
+                        {{ render_paper_metadata(paper, contribution_page=true) }}
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if show_paper %}
+                {{ render_paper_content(paper, contribution_page=true) }}
+            {% endif %}
+
+            {% if show_paper_status and paper.state.name != 'accepted' %}
+                {{ _render_paper_status_box(paper) }}
+            {% elif not show_paper and show_paper_submission %}
+                {{ _render_paper_submission_box(contribution) }}
+            {% endif %}
+        </section>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_editables_section(contribution) %}
+    {% set can_create_editable = contribution.allowed_types_for_editable|length > 0 %}
+    {% set can_submit = contribution.can_submit_proceedings(session.user) %}
+    {% set enabled_editables = contribution.enabled_editables %}
+    {% set has_enabled_types = enabled_editables|length > 0 %}
+
+    {% if can_submit and (has_enabled_types or can_create_editable) %}
+        <section>
+            <div class="header">
+                <div class="header-row">
+                    <h2>{% trans %}Editing{% endtrans %}</h2>
+                </div>
+            </div>
+            {% if has_enabled_types %}
+                <div class="action-box">
+                    {% for editable in enabled_editables -%}
+                        <div class="section f-j-space-between">
+                            <div class="i-tag {{ editable.state.css_class }}">
+                                {{ editable.type.title }}: {{ editable.state.title }}
+                            </div>
+                            <div>
+                                <a href="{{ url_for('event_editing.editable', editable) }}">
+                                    {%- trans %}Go to timeline{% endtrans -%}
+                                </a>
+                            </div>
+                        </div>
+                    {%- endfor %}
+                </div>
+            {% endif %}
+            {% if can_create_editable %}
+                <div class="action-box highlight" style="margin-top: 10px;">
+                    <div class="section flexrow">
+                        <div class="icon icon-file"></div>
+                            <div class="text">
+                                <div class="label">
+                                    {% trans %}Submission is open{% endtrans %}
+                                </div>
+                                <div>
+                                    {% trans %}You can submit files for editing{% endtrans %}
+                                </div>
+                            </div>
+                        <div class="toolbar">
+                            <div id="editable-submission-button"
+                                 data-available-types="{{ contribution.allowed_types_for_editable|tojson|forceescape }}"
+                                 data-event-id="{{ contribution.event_id }}"
+                                 data-contribution-id="{{ contribution.id }}"
+                                 data-contribution-code="{{ contribution.code }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </section>
+    {% endif %}
+{% endmacro %}
+
+{% macro _render_paper_status_box(paper) %}
+    {% set state_mapping = {'submitted': '',
+                            'rejected': 'danger',
+                            'to_be_corrected': 'warning'} %}
+    <div class="action-box {{state_mapping[paper.last_revision.state.name]}}">
+        <div class="section flexrow">
+            <div class="icon icon-file"></div>
+            <div class="text">
+                {{ _render_paper_status(paper) }}
+            </div>
+            <div>
+                <a href="{{ url_for('papers.paper_timeline', paper) }}">
+                    {%- trans %}Go to timeline{% endtrans -%}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro _render_paper_submission_box(contribution) %}
+    <div class="action-box highlight">
+        <div class="section">
+            <div class="icon icon-file"></div>
+            <div class="text">
+                <div class="label">
+                    {%- trans %}The call for papers is open{% endtrans -%}
+                </div>
+                <div>
+                    {%- trans %}You can submit a paper.{% endtrans -%}
+                </div>
+            </div>
+            <div class="toolbar">
+                <a href="#" class="ui button primary"
+                   data-title="{% trans title=contribution.title %}Submit paper for &quot;{{ title }}&quot;{% endtrans %}"
+                   data-href="{{ url_for('papers.submit_revision', contribution) }}"
+                   data-redirect-after="{{ url_for('papers.paper_timeline', contribution) }}"
+                   data-confirm-close-unsaved
+                   data-ajax-dialog>
+                    {%- trans %}Submit paper{% endtrans -%}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro _render_paper_status(paper) %}
+    {% set revision = paper.last_revision %}
+    {% if paper.state.name == 'submitted' %}
+        <div class="label">
+            {%- trans %}Your paper is under review{% endtrans -%}
+        </div>
+        <div>
+            {%- trans %}Please wait until the reviewers come back to you{% endtrans -%}
+        </div>
+    {% elif paper.state.name == 'rejected' %}
+    <div class="label">
+            {%- trans %}Your paper was rejected{% endtrans -%}
+        </div>
+        <div>
+            {%- trans %}You can check the review history in the timeline{% endtrans -%}
+        </div>
+    {% elif paper.state.name == 'to_be_corrected' %}
+        <div class="label">
+            {%- trans %}Your paper needs to be corrected{% endtrans -%}
+        </div>
+        <div>
+            {%- trans %}Please check the review and submit a revised version{% endtrans -%}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro _render_file_type_section(revision_files, file_type) %}
+    <div class="files field-separator">
+        <div class="attachments-box">
+            <div class="attachments-box-header">
+                <h3 class="file-type-header">{{ file_type.name }}</h3>
+            </div>
+            <table class="tree">
+                {% for rev_file in revision_files %}
+                    {% set file = rev_file.file %}
+                    {% set download_url = rev_file.download_url %}
+                    {% set icon = icon_from_mimetype(file.content_type, 'icon-file-filled') %}
+                    <tr>
+                        <td class="revision-file-row">
+                            <a href="{{ download_url }}" class="attachment {{ icon }}" target="_blank">
+                                {{ file.filename }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro render_proceedings_section(contribution) %}
+    <section>
+        <div class="header">
+            <div class="header-row">
+                <h2>{% trans %}Proceedings{% endtrans %}</h2>
+            </div>
+        </div>
+        {% for editable in contribution.enabled_editables if editable.published_revision -%}
+            {% set published_revision = editable.published_revision %}
+            {% set spotlight_file = published_revision.get_spotlight_file() %}
+            {% set published_files = published_revision.get_published_files() %}
+            {% if spotlight_file or published_files %}
+                <section>
+                    <div class="header">
+                        <div class="header-row">
+                            <h3 class="icon-file">{{ editable.type.title }}</h3>
+                        </div>
+                    </div>
+                    {% if spotlight_file %}
+                        {% set icon = icon_from_mimetype(spotlight_file.file.content_type, 'icon-file-filled') %}
+                        <div class="paper-content flexcol">
+                            <div class="flexrow f-a-center spotlight-file i-button text-color borderless paper-file"
+                                title="{{ spotlight_file.filename }}">
+                                <a href="{{ spotlight_file.download_url }}"
+                                class="attachment spotlight-file-name flexrow f-a-center truncate-text {{ icon }}">
+                                    <span class="title truncate-text">{{ spotlight_file.file.filename }}</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% for file_type, files in published_files.items() %}
+                            {{ _render_file_type_section(files, file_type) }}
+                        {% endfor %}
+                    {% endif %}
+                </section>
+            {% endif %}
+        {%- endfor %}
+    </section>
+{% endmacro %}

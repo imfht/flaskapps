@@ -1,0 +1,31 @@
+{% extends 'events/display/conference/base.html' %}
+
+{% from 'events/papers/_paper_list.html' import render_paper_assignment_content %}
+{% from 'message_box.html' import message_box %}
+
+{% block title %}
+    {{- page_title -}}
+{% endblock %}
+
+{% block description %}
+    {%- trans %}The judging area shows the papers for which you are a judge. It allows you to assign reviewers and judge papers.{% endtrans -%}
+{% endblock %}
+
+{% block content %}
+    {% if not event.cfp.is_judge(session.user) %}
+        {% call message_box('info') %}
+            {% set link_start -%}
+                <a href="{{ url_for('.papers_list', event, management=true) }}">
+            {%- endset %}
+            {% set link_end -%}
+                </a>
+            {%- endset %}
+            {% trans -%}
+                Paper judges use this area to judge papers assigned to them.<br>
+                As a manager you can see all papers in the {{ link_start }}management area{{ link_end }}.
+            {%- endtrans %}
+        {% endcall %}
+    {% endif %}
+
+    {{ render_paper_assignment_content(event, total_entries, contribs, static_columns, selected_entry) }}
+{% endblock %}

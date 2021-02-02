@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+{{room_name}} - {{config['CHAT_NAME']}}
+{% endblock %}
+
+{% block main %}
+
+    <div id="room_online_user" class="user_status">
+        <p>在线用户</p>
+        <div class="user_list">
+        {% for user in room_online_users %}
+        <span>{{user}}</span>
+        {% endfor %}
+        </div>
+    </div>
+
+    <div id="chat_content">
+         <table style="width:100%; border:1px solid #ccc; padding:5px">
+			<thead>
+            <tr>
+                <th>user</th>
+                <th>content</th>
+                <th>time</th>
+            </tr>
+			</thead>
+
+			<tbody>
+			{% for item in room_content %}
+            <tr id="msg-{{item.id}}">
+				<td>{{item.user|safe}}</td>
+				<td>{{item.content|safe}}</td>
+				<td>{{item.created}}</td>
+			</tr>
+			{% endfor %}
+			</tbody>
+        </table>
+    </div>
+	<form action="/post_content" method="POST" id="post_content">
+		<input name="content" type="TEXT" style="width:300px"/>
+		<input type="hidden" name="room_id" value="{{room_id}}" />
+		<input type="SUBMIT" value="发言" />
+	</form>
+{% endblock %}
+
+{% block script %}
+	<script> room_id = '{{room_id}}'; uri = '{{uri}}' </script>
+	<script src="/static/script/main.js"></script>
+    <script> create_room_comet(); </script>
+{% endblock %}

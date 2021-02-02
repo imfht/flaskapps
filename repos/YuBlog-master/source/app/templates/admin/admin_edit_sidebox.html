@@ -1,0 +1,47 @@
+{% extends "admin.html" %}
+{% block styles %}
+{{ super() }}
+    <style>
+        .write-body textarea {
+            width: 96%;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 2px;
+            font-size: 16px;
+            color: #444;
+            outline: none;
+        }
+    </style>
+{% endblock %}
+{% block tab %}编辑插件{% endblock %}
+{% block content %}
+
+<div class="admin-write">
+    <form action="{%if title== '添加插件'%}{{url_for('admin.add_side_box')}}{%else%}{{url_for('admin.edit_side_box',id=box.id)}}{%endif%}" method="post">
+        {{form.hidden_tag()}}
+        <div class="aticle-data">
+            <div class="data-ipt">
+                <p>勾选广告，盒子会固定顶部</p>
+                <p>广告：{{form.is_advertising()}}</p>
+            </div>
+        </div>
+        <div class="aticle-body">
+            <div class="write-body">
+                <p>{{form.title(class="aticle-title",placeholder="标题: 可以为空")}}</p>
+                <div id="editormd">
+                    {{form.body(style="display:block;",rows="5",cols="30",placeholder="支持原生html，css，js。请指定元素宽度不超过240px")}}<br>
+                </div>
+                {% if title == '添加插件' %}
+                <p>{{ form.submit(class="write-btn",value="添加") }}</p>
+                {% else %}
+                <p>{{ form.submit(class="write-btn",value="更新") }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </form>
+
+</div>
+{% endblock %}
+

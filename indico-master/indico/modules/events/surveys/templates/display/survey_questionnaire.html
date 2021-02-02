@@ -1,0 +1,82 @@
+{% extends 'events/display/conference/base.html' if event.type == 'conference' else 'layout/meeting_page_base.html' %}
+
+{% from 'forms/_form.html' import form_header, form_footer, form_fieldset, form_row, form_row_static %}
+
+{% block title %}
+    {%- trans %}Survey{% endtrans -%}
+{% endblock %}
+
+{% block subtitle %}
+    {{ survey.title }}
+    {% if event.type != 'conference' %}
+        <small>({{ event.title }})</small>
+    {% endif %}
+{% endblock %}
+
+{% block description %}
+    {{ survey.introduction }}
+{% endblock %}
+
+{% block content %}
+    {{ form_header(form, id='survey-questionnaire', orientation='vertical') }}
+    {% for section in survey.sections if section.children %}
+        {% call form_fieldset(section.title, section.description|replace('\n', '<br>'|safe),
+                              render_as_fieldset=section.display_as_section) %}
+            {% for item in section.children %}
+                {% if item.type.name == 'question' %}
+                    {{ form_row(form['question_{}'.format(item.id)]) }}
+                {% elif item.type.name == 'text' %}
+                    {% call form_row_static(single_row=false, skip_label=true) %}
+                        {{ item.description|replace('\n', '<br>'|safe) }}
+                    {% endcall %}
+                {% endif %}
+            {% endfor %}
+        {% endcall %}
+    {% endfor %}
+    {% call form_footer(form) %}
+        {% if partial_completion and session.user %}
+            <a class="i-button big js-save-answers"
+               data-href="{{ url_for('.display_save_answers', survey.locator.token) }}"
+               data-method="POST"
+               data-params-selector="#survey-questionnaire input[name^=question_]:checked,
+                                     #survey-questionnaire [name^=question_]:not(:radio):not(:checkbox)"
+               data-ajax>
+                {%- trans %}Save answers{% endtrans -%}
+            </a>
+        {% endif %}
+        <input class="i-button big highlight" type="submit" value="{% trans %}Submit{% endtrans %}">
+        {% if back_button_endpoint is not none %}
+            <a href="{{ url_for(back_button_endpoint, event) }}" class="i-button big" data-button-back>
+                {%- trans %}Back{% endtrans -%}
+            </a>
+        {% endif %}
+        <div class="form-field-description">
+            {% if survey.anonymous %}
+                {% trans %}Your answers will be submitted anonymously.{% endtrans %}
+            {% else %}
+                {% trans %}Your answers will be associated with your account.{% endtrans %}
+            {% endif %}
+        </div>
+    {% endcall %}
+
+    <script>
+        (function() {
+            'use strict';
+            // allow deselecting a horizontal radio button unless it's required
+            $('#survey-questionnaire .inline-vcentered input:radio:not([required])').resettableRadioButtons();
+            $('.js-save-answers').on('declarative:success', function() {
+                var $form = $(this).closest('form');
+                cornerMessage({
+                    actionLabel: $T.gettext('Submit'),
+                    progressMessage: $T.gettext('Submitting...'),
+                    message: $T.gettext('Your answers have been saved, do not forget to submit the survey when you finish!'),
+                    class: 'highlight',
+                    duration: 10000,
+                    actionCallback: function() {
+                        $form.submit();
+                    }
+                });
+            });
+        })();
+    </script>
+{% endblock %}

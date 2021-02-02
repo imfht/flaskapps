@@ -1,0 +1,9 @@
+*.pyc
+.DS_Store
+
+*.egg-info
+/dist
+MANIFEST
+
+/venv*
+/docs/_build

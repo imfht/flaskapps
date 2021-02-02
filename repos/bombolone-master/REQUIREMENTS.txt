@@ -1,0 +1,6 @@
+Flask
+pymongo
+simplejson
+Werkzeug
+requests
+Pillow

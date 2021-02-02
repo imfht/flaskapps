@@ -1,0 +1,8 @@
+version: "3.6"
+
+services:
+  webpack:
+    build: "."
+    command: yarn run watch
+    volumes:
+      - ".:/app"

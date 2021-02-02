@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% call text() %}
+    <h1>
+      An email sent to your alias {{ alias.email }} from {{ website_email }} was <b>bounced</b> by your mailbox
+      {{ mailbox_email }}
+    </h1>
+  {% endcall %}
+
+  {% call text() %}
+    This is usually because your mailbox service thinks the email is a <b>spam</b>.
+  {% endcall %}
+
+  {{ render_button("View the bounced email", refused_email_url) }}
+
+  {{ render_text('The email is automatically deleted in 7 days.') }}
+
+  {% call text() %}
+    Please consider the following options: <br>
+
+    <ol>
+      <li>If the email is not spam at all, you can create a <b>filter</b> to explicitly allow this email
+        or simply all emails from SimpleLogin. <br>
+        How to create the filter depends on your mailbox service.
+      </li>
+
+      <li>
+        If this email is indeed a spam, it means your alias {{alias.email}} is now in the hands of a spammer. <br>
+        You should <b>disable</b> the alias immediately. <br>
+        We'll <b>automatically</b> disable this alias when too many emails sent to it are bounced.
+      </li>
+    </ol>
+  {% endcall %}
+
+  {{ render_button("Disable alias", disable_alias_link) }}
+
+  {{ render_text('Thanks, <br />SimpleLogin Team.') }}
+  {{ raw_url(disable_alias_link) }}
+{% endblock %}

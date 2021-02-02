@@ -1,0 +1,2 @@
+graft flask_dropzone/static
+include *.txt, *.md, *.rst

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block loading %}
+    <script type="text/javascript"> group_list(); </script>
+{% endblock %}
+
+
+{% block daohang %}
+        <div class="leftDiv" id="leftDiv" path="online" >
+            <div id="group" class="sidebar-menu">
+            </div>
+            </br>
+            <div id="project" class="sidebar-menu">
+            </div>
+        </div>
+{% endblock %}
+
+{% block page_content %}
+
+    <ol class="breadcrumb">
+        <li><a href="/index">Home</a></li>
+        <li><a href="/online">上线</a></li>
+        <li class="active">上线</li>
+    </ol>
+
+
+    <div class="projectinfo" style="height:auto;border:1px solid #ccc;padding-left:10px;">
+        <div style="float:left" id="project_button"></div>
+        <br>
+        <div class="add_project_div" id="project_div"  status="close"></div>
+        <br>
+        <div class="config_div" id="config_div"  status="close"></div>
+        <br>
+        <div>
+            <div style="float:left" id="add_host_div"></div>
+            <div style="float:right" id="edit_host_div"></div>
+        </div>
+        <br>
+        <div style="width:auto;height:auto;">
+            <div class="addListTable" id="add_host_table"></div>
+            <div class="hostListTable" id="hostManage"></div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+
+    <div class="hostList" style="height:auto;border:1px solid #ccc;padding-left:10px;overflow-x:scroll;white-space:nowrap;">
+        <div style="float:left" id="onlineManage"></div>
+        <br>
+        <br>
+        <div  style="height:50px;">
+            <div style="float:left;width:260px;">
+                <a href="javascript:;" onclick='selectAll("onlinehost");'>全选</a>
+            </div>
+            <div style="float:left;width:80px;">
+                其他操作:
+            </div>
+            <div style="float:left;width:90px;">
+                 <button id="restart_submit" class="btn btn-info btn-sm" >重启</button>
+            </div>
+            <div style="float:left;width:90px;">
+                 <button id="rmlock" class="btn btn-info btn-sm" >清除锁</button>
+            </div>
+            <div style="float:left;width:130px;">
+                 <button id="killtask" class="btn btn-info btn-sm" >终止发布任务</button>
+            </div>
+            <div style="float:left;width:130px;">
+                 <button id="clean_git_cache" class="btn btn-info btn-sm" >清除git缓存</button>
+            </div>
+        </div>
+
+        <div style="width:auto;height:auto;">
+            <div class="hostListTable" id="host"></div>
+        </div>
+        <br>
+
+        <div class="div2" style="width:auto;">
+            <div id="select_project"></div>
+            <div style="height:50px;">
+                <div style="width:430px;">
+                    <div style="float:left;width:75px;">
+                        HistoryTag:
+                    </div>
+                    <div id="tag_div" style="float:left;width:210px;">
+                        <select id="select_tag" class="form-control">
+                          <option value="online1">tag</option>
+                        </select>
+                    </div>
+                    <div style="float:left;width:130px;">
+                        快速:<select id="fastback"><option value="no" selected="selected">no</option><option value="yes">yes</option></select>
+                        <button id="back_submit" class="btn btn-danger btn-sm" >回滚</button>
+                    </div>
+                </div>
+
+                <div style="float:right;width:360px;">
+                    <div style="float:left;width:260px;">
+                        <div style="float:left;width:80px;">
+                            CurrentTag:
+                        </div>
+                        <div id="online_tag_div" style="float:left;width:180px;">
+                            null
+                        </div>
+                    </div>
+                    <div id="updatebutton" style="float:right;width:100px;">
+                        <button id="btn_submit" class="btn btn-success" type="button">更新重启</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="resRight" style="margin-top:20px;border:1px solid #CCCCCC;padding-left:10px;">
+        <div >
+            <div style="float:left">
+                <label>【任务执行状态】</label>
+            </div>
+            <div id="lastlog">
+               <a>上次更新日志</a>
+            </div>
+        </div>
+        </br>
+        <div id="resDiv"></div>
+        <div id="ProgressBarDiv" class="progress">
+        </div>
+        <div ><label>【远程执行结果】</label></div>
+        <div id="cnt"></div>
+    </div>
+
+{% endblock %}
+
+
+
+

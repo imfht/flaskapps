@@ -1,0 +1,10 @@
+anki-vector
+Pillow
+flask
+flask-sqlalchemy
+flask-bcrypt
+flask-login
+flask-wtf
+flask-migrate
+flask-script
+flask-restful

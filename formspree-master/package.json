@@ -1,0 +1,52 @@
+{
+  "dependencies": {
+    "class-set": "^0.0.4",
+    "codemirror": "^5.39.2",
+    "is-valid-email": "0.0.2",
+    "prettyaml": "^1.3.0",
+    "query-string": "^5.1.1",
+    "react": "^16.4.2",
+    "react-codemirror2": "^5.1.0",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1",
+    "url": "^0.11.0",
+    "valid-url": "^1.0.9"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "sourceMaps": true,
+          "sourceMapsAbsolute": true
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "7.0.0-rc.1",
+    "@babel/preset-env": "7.0.0-rc.1",
+    "@babel/preset-react": "7.0.0-rc.1",
+    "babelify": "^9.0.0",
+    "browserify": "^16.2.2",
+    "envify": "^4.1.0",
+    "prettier": "1.14.2",
+    "uglify-js": "^3.4.7",
+    "uglifyify": "^5.0.1"
+  },
+  "prettier": {
+    "semi": false,
+    "arrowParens": "avoid",
+    "insertPragma": true,
+    "printWidth": 80,
+    "proseWrap": "preserve",
+    "singleQuote": true,
+    "trailingComma": "none",
+    "useTabs": false,
+    "jsxBracketSameLine": false,
+    "bracketSpacing": false
+  },
+  "scripts": {
+    "heroku-postbuild": "make prod"
+  }
+}

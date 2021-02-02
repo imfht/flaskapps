@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% block page_title %}
+    Daily Energy Output for {{ today.strftime('%d.%m.%Y') }} - Solar Pi
+{% endblock %}
+{% block meta_description %}
+    Photovoltaic chart for {{ today.strftime('%d.%m.%Y') }}. Generated energy: {{ '%0.2f'| format(daily_energy|float) }}
+    kWh
+{% endblock %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            {% if error %}
+                <div class="bg-danger">
+                    <span class="text-danger"><strong>Error:</strong> {{ error }}
+                    </span>
+                </div>
+            {% endif %}
+            <div class="col-lg-12">
+                <h1 class="page-header">Daily Energy: {{ '%0.2f'| format(daily_energy|float) }} kWh </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="{{ url_for('charts.daily', date=yesterday.strftime('%Y-%m-%d')) }}"
+                           class="btn btn-default"><i class="fa fa-angle-left"></i></a>
+                        <span>Solar Data for {{ today.strftime('%Y-%m-%d') }}</span>
+                        <a href="{{ url_for('charts.daily', date=tomorrow.strftime('%Y-%m-%d')) }}"
+                           class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div id="daily-chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Input Voltage for {{ today.strftime('%Y-%m-%d') }}</span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="daily-input-voltage-chart"
+                             style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span>Output Voltage {{ today.strftime('%Y-%m-%d') }}</span>
+                    </div>
+                    <div class="panel-body">
+                        <div id="daily-output-voltage-chart"
+                             style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/daily-chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/daily-input-voltage-chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/daily-output-voltage-chart.js') }}"></script>
+    <script>
+        $('#chart_nav').addClass('collapse in');
+        $('#side-menu').find('a').each(function (i) {
+            $(this).removeClass('active');
+        });
+        $('#daily_data').addClass("active");
+        var data = {{ data|safe }};
+        var data_max = {{ data2|safe }};
+        var input_voltage_1 = {{ input_voltage_1_chart_data|safe }};
+        var input_voltage_2 = {{ input_voltage_2_chart_data|safe }};
+        var output_voltage_1 = {{ output_voltage_1_chart_data|safe }};
+        var output_voltage_2 = {{ output_voltage_2_chart_data|safe }};
+        var output_voltage_3 = {{ output_voltage_3_chart_data|safe }};
+    </script>
+{% endblock %}

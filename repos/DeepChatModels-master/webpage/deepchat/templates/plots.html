@@ -1,0 +1,263 @@
+
+{%  extends  "base.html" %}
+{% set active_page = "plots" %}
+
+{% block nav_session_user %}
+  <ul class="nav navbar-nav navbar-right">
+<span id='nav-session-user' class="navbar-text">
+  {% if user %}
+    User: {{ user }}
+  {% else %}
+    User: Anon
+  {% endif %}
+</span>
+  </ul>
+{% endblock nav_session_user %}
+
+{% block head %}
+  {{ super() }}
+
+  <style type="text/css">
+    ul.custom {
+      list-style-type: circle;
+    }
+
+    .popover-content {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .jumbotron .popover {
+      max-height: 600px;
+      max-width: 500px;
+    }
+
+
+  </style>
+
+{% endblock head %}
+
+
+{% block page_content %}
+
+
+  <div class="jumbotron">
+    <h1>Interactive Plots</h1>
+
+    <p>
+    Scans over hyperparameter space for the models, in order
+    to first get a semi-quantitative idea of which regions to focus on (and it's fun).
+    </p>
+    <button type="button" class="btn btn-med btn-primary"
+            data-toggle="popover"
+            title="Hover over a plot">
+      How do I interact with things?
+    </button>
+  </div>
+
+  <h2>Overview and Setup</h2>
+  <div class="row">
+  <div class="col-xs-12 col-sm-10">
+
+    <p>
+      All plots on this page show some value plotted every 200 iterations out of 10,000 total, for
+      a model identified by the plot label (configuration/params shown at the end of each section).
+    </p>
+
+    <p>
+      The label will contain the main distinction/info regarding
+      how the given model differs from the others on a given plot. Currently, I'm most
+      interested in comparing performance for GRU vs. LSTM, number of layers, and
+      how much the BidirectionalEncoder, AttentionDecoder, and combinations thereof
+      improve the baseline (basic) model with BasicEncoder and BasicDecoder.
+    </p>
+
+    <p>
+     <span class="text-danger">
+       If you are reading this and know how to do curve fitting with D3 please let me know.
+     </span>
+      I haven't looked extensively how to do it, but it is certainly on my list considering
+      the jagged appearance of the plots right now (doing simple splines).
+    </p>
+
+  </div>
+  </div>
+
+  <hr>
+
+
+  <h3>Back to Basics</h3>
+  <p>
+    Below are plots on training accuracy, training loss, and validation loss for
+    basic models trained on the Cornell dataset. Any time I refer to a model as
+    &quot;basic&quot;, I am saying that it uses the BasicEncoder and BasicDecoder
+    classes (members of the chatbot.components package).
+  </p>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div id="accuracy-fig"></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div id="training-loss-fig"></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div id="validation-loss-fig"></div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Configuration Parameters</h4>
+  <p>
+    Below are labeled buttons that show the configuration parameters for the corresponding
+    plot label. For ease of viewing, a parameter is only shown if not all plotted models have
+    the same value; e.g. if all plots above used a batch size of 256 (the default),  none of
+    the buttons below will show a value for batch size.
+  </p>
+  <div id="configs-row" class="row">
+  </div>
+  <hr>
+
+  <div style="display: none;">
+  <h3>Paying Attention</h3>
+  <p>
+    Now let's try and incorporate attention into these models.
+  </p>
+
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div id="attn-accuracy-fig"></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div id="attn-training-loss-fig"></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-10 col-lg-9">
+      <div id="attn-validation-loss-fig"></div>
+    </div>
+  </div>
+  <hr>
+
+  <h3>Configuration Parameters</h3>
+  <div id="attn-configs-row" class="row">
+  </div>
+  </div>
+
+
+
+
+
+{% endblock page_content %}
+
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/bootstrapify.js') }}"></script>
+  <script>
+      let popoverButton = $('.jumbotron [data-toggle="popover"]');
+      popoverButton.data('content',
+              '<p>At the bottom left of each plot (upon hovering), a few buttons are shown:</p>' +
+              '<ul class="custom">' +
+              '<li>To move the plot view around, click the arrow cross thing.</li>' +
+              '<li>To zoom in a rectangle selection, click the magnifying glass and make your selection.</li>' +
+              '<li>At any time, you can reset back to default view by clicking the home button.</li>' +
+              '</ul>');
+      popoverButton.popover({
+          id: 'jumbotron-popover',
+          container: 'body',
+          html: true
+      });
+  </script>
+
+  <script>
+      let mpld3LoadLib = (url, callback) => {
+          var s = document.createElement('script');
+          s.src = url;
+          s.async = true;
+          s.onreadystatechange = s.onload = callback;
+          s.onerror = function(){console.warn("failed to load library " + url);};
+          document.getElementsByTagName("head")[0].appendChild(s);
+      }
+
+      mpld3LoadLib("https://mpld3.github.io/js/d3.v3.min.js", function(){
+          mpld3LoadLib("https://mpld3.github.io/js/mpld3.v0.3.js", function() {
+
+              let plotJSON = (fileName, divName) => {
+                  $.getJSON(url, function(response) {
+                      response.width = $('#'+divName).width();
+                      mpld3.draw_figure(divName, response);
+                      //$('.mpld3-axesbg').css('fill', $('body').css('background-color'));
+                      //$('.mpld3-text').css('fill', $('body').css('color'));
+                  });
+              };
+
+              // DARN YOU url_for/JAVASCRIPT!!!!!
+              let url = '{{ url_for('static', filename='assets/plots/accuracy.json') }}';
+              plotJSON(url, 'accuracy-fig');
+
+              url = '{{ url_for('static', filename='assets/plots/training.json') }}';
+              plotJSON(url, 'training-loss-fig');
+
+              url = '{{ url_for('static', filename='assets/plots/validation.json') }}';
+              plotJSON(url, 'validation-loss-fig');
+
+          });
+      });
+
+
+      //var configs;
+      // Retrieve the configuration dictionaries for each model plotted.
+      $.getJSON('{{ url_for('static', filename='assets/plots/configs.json') }}', function(response) {
+          let configs = response;
+          //let plotNames = Object.keys(configs);
+          let configsRow = $('#configs-row');
+          Object.keys(configs).map((plotName) => {
+
+              let content = '';
+              Object.keys(configs[plotName]).map((key) => {
+                  if (configs[plotName][key] instanceof Object) {
+                      content += '<p>' + key + ': <ul class="list-group">';
+                      Object.keys(configs[plotName][key]).map((k) => {
+                          content += '<li class="list-group-item"><small><small>' + k +
+                                  ': ' + configs[plotName][key][k] + '</small></small></li>';
+                      });
+                      content += '</ul></p>';
+                  } else {
+                      content += '<p>' +
+                              key + ': ' + JSON.stringify(configs[plotName][key]) +
+                              '</p>';
+                  }
+              });
+
+              // Create new column in configs row for the config button to be placed.
+              let configCol = $('<div class="col-xs-2"></div>');
+
+              // Place the new config button in the config column.
+              $('<btn/>', {
+                  'class': 'btn btn-primary btn-sm btn-block',
+                  'data-toggle': 'popover',
+                  text: plotName
+              }).popover({
+                  title: plotName,
+                  placement: 'top',
+                  container: 'body',
+                  html: true,
+                  content: content
+              }).appendTo(configCol);
+
+
+              configCol.appendTo(configsRow);
+          });
+
+      });
+
+
+
+  </script>
+
+{% endblock scripts %}

@@ -1,0 +1,36 @@
+body, html {
+	margin: 0;
+}
+body {
+	font-family: sans-serif;
+	padding: 50px;
+}
+
+/* abstract */
+.nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.nav li {
+	display: inline-block;
+}
+
+/* layout */
+nav {
+	background-color: #f0f0f0;
+	margin: -50px -50px 50px;
+}
+nav a {
+	text-decoration: none;
+}
+nav .nav li a {
+	display: block;
+	padding: 1em;
+}
+nav .nav li a:hover {
+	background-color: rgba(0,0,0,0.05);
+}
+.nav-account {
+	float: right;
+}

@@ -1,0 +1,13 @@
+﻿.dataTables_wrapper .dataTables_filter {
+    float: right;
+    text-align: right;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: right;
+    text-align: right;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}

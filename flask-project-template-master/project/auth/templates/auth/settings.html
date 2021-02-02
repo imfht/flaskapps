@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% set page_title = _('Settings') %}
+
+{% block content %}
+<h2>{{ _("Personal settings") }}</h2>
+
+{% from 'macros.html' import render_bootstrap_field with context%}
+
+<form action="{{ url_for('auth.settings') }}" method="POST" role="form" class="form-horizontal">
+
+  {{ form.csrf_token }}
+  {{ render_bootstrap_field(form.ui_lang) }} 
+  {{ render_bootstrap_field(form.url) }}
+  {{ render_bootstrap_field(form.username) }}
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">{{ _("Update settings") }}</button>
+    </div>
+  </div>
+
+</form>
+
+{% endblock %}

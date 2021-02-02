@@ -1,0 +1,126 @@
+#!/bin/bash
+# vim: et ts=4 sw=4 ft=sh
+
+# Interesting post on max line length:
+# http://stackoverflow.com/questions/88942/why-should-python-pep-8-specify-a-maximum-line-length-of-79-characters
+
+PYUPGRADE_CMD='pyupgrade --py38-plus --keep-percent-format'
+FLAKE8_CMD='flake8'
+ESLINT_CMD='npx eslint'
+STYLELINT_CMD='npx stylelint'
+
+RED=$(echo -e $"\033[1;31m")
+YELLOW=$(echo -e $"\033[0;33m")
+CYAN=$(echo -e $"\033[0;36m")
+RESET=$(echo -e $"\033[0;0m")
+BRIGHTYELLOW=$(echo -e $"\033[1;33m")
+WHITE=$(echo -e $"\033[1;37m")
+
+RE="s/\([^:]*\):\([0-9]*\):\([0-9]*\): \([EW][0-9]*\) \(.*\)/$WHITE[$CYAN\1$RESET $BRIGHTYELLOW\2:\3$WHITE] $RED\4 $YELLOW\5$RESET/g"
+STATUS=0
+
+_get_files() {
+    local i
+    unset FILES
+    while IFS= read -r -d $'\0' file; do
+        FILES[i++]="$file"
+    done < <(git diff --name-only --diff-filter=ACMR --staged -z "$@")
+}
+
+# Most spammy checks first so the most likely useful ones are at the
+# bottom and thus less likely to scroll out of view immediately
+
+# SASSLint
+_get_files '*.scss' '*.css'
+if [[ ${#FILES[@]} -ne 0 ]]; then
+    if ! RESULT=$(FORCE_COLOR=1 $STYLELINT_CMD -q "${FILES[@]}"); then
+        STATUS=1
+        echo "${RED}There are SCSS errors in your code:${RESET}"
+        echo "$RESULT"
+    elif [[ -n "$RESULT" ]] ; then
+        STATUS=1
+        echo "${BRIGHTYELLOW}There are SCSS warnings in your code:${RESET}"
+        echo "$RESULT"
+    fi
+fi
+
+
+# ESLint
+_get_files '*.js' '*.jsx'
+if [[ ${#FILES[@]} -ne 0 ]]; then
+    if ! RESULT=$($ESLINT_CMD --color "${FILES[@]}"); then
+        STATUS=1
+        echo "${RED}There are JS errors in your code:${RESET}"
+        echo "$RESULT"
+    elif [[ -n "$RESULT" ]] ; then
+        STATUS=1
+        echo "${BRIGHTYELLOW}There are JS warnings in your code:${RESET}"
+        echo "$RESULT"
+    fi
+fi
+
+
+# flake8, pyupgrade
+_get_files '*.py'
+if [[ ${#FILES[@]} -ne 0 ]]; then
+    if ! RESULT=$($FLAKE8_CMD "${FILES[@]}"); then
+        STATUS=1
+        echo "${RED}There are python issues in your code:${RESET}"
+        echo "$RESULT"
+        echo
+    fi
+
+    # thanks to pyupgrade not having any option to output a diff, we have to
+    # use this incredibly ugly workaround...
+    PYUPGRADE_RESULT=""
+    for f in "${FILES[@]}"; do
+        if ! RESULT=$(diff -u --label "a/$f" --label "b/$f" "$f" <($PYUPGRADE_CMD - < "$f")); then
+            STATUS=1
+            echo "${YELLOW}Outdated python constructs found in ${BRIGHTYELLOW}${f}${RESET}"
+            RESULT=$(IFS= echo "$RESULT" | pygmentize -l diff -f terminal256 -O style=native,bg=dark)
+            if [[ -n "$PYUPGRADE_RESULT" ]]; then
+                PYUPGRADE_RESULT=$(IFS= printf '%s\n%s' "$PYUPGRADE_RESULT" "$RESULT")
+            else
+                PYUPGRADE_RESULT=$(IFS= printf '\n%s' "$RESULT")
+            fi
+        fi
+    done
+
+    if [[ -n "$PYUPGRADE_RESULT" ]]; then
+        echo
+        echo "${RED}There are pyupgrade issues in your code:${RESET}"
+        IFS= echo "$PYUPGRADE_RESULT"
+        echo
+        echo "${CYAN}Run this command to update the files:${RESET}"
+        echo "git diff --staged --name-only --diff-filter d '*.py' | xargs -d'\n' ${PYUPGRADE_CMD}"
+    fi
+fi
+
+
+# isort
+if ! RESULT=$(python -c 'import sys; from isort.hooks import git_hook; sys.exit(git_hook(strict=True))' 2>&1); then
+    STATUS=1
+    echo
+    echo "${RED}There are isort issues in your code:${RESET}"
+    echo "$RESULT"
+    echo
+    echo "${CYAN}Run this command to sort the imports:${RESET}"
+    echo "git diff --staged --name-only --diff-filter d '*.py' | xargs -d'\n' isort"
+fi
+
+
+if [[ $STATUS != 0 ]] ; then
+    # claim stdin back
+    exec < /dev/tty
+    echo
+    read -r -p "${RED}Do you wish to commit it anyway ${CYAN}[${WHITE}y${CYAN}/${WHITE}N${CYAN}]${RESET}? " yn
+    case $yn in
+        [Yy]* ) exit 0;;
+        [Nn]* ) exit $STATUS;;
+        * ) exit $STATUS;;
+    esac
+    # close stdin
+    exec <&-
+fi
+
+exit $STATUS

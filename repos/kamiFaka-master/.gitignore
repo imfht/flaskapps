@@ -1,0 +1,44 @@
+# Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+
+
+# Early critical step version
+@backup
+
+# Concept Design
+设计稿
+
+# logs
+*.log
+# test sql
+*.db
+*.txt
+
+# scaffold
+*.ipynb
+
+# vue-source
+vue3
+v2
+v4
+
+# My configurations:
+myconfig.py
+my_db_init.py
+
+# system img
+public/images/*
+public/backups/*
+public/sql/*
+# sql是必须要创建的
+# # !alipay.png
+# # !null.png
+
+# # # backup
+# public/backups/*
+# public/sql/*
+
+ssl
+tg.py

@@ -1,0 +1,193 @@
+rule_engine:
+  code: 'rule_engine'
+  enable: 1
+  icon: 'filter_list'
+  level: 1
+  method: null
+  order: 4
+  parentCode: null
+  tabs: 0
+  url: null
+  service: rules
+
+business_rules:
+  code: 'business_rules'
+  enable: 1
+  icon: null
+  level: 2
+  method: null
+  order: 1
+  parentCode: 'rule_engine'
+  tabs: 0
+  url: null
+  service: rules
+
+business_rules-view:
+  code: 'business_rules-view'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'GET'
+  order: 1
+  parentCode: 'business_rules'
+  tabs: 0
+  url: '/rules'
+  service: rules
+
+business_rules-create:
+  code: 'business_rules-create'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'POST'
+  order: 2
+  parentCode: 'business_rules'
+  tabs: 0
+  url: '/rules'
+  service: rules
+
+business_rules-edit:
+  code: 'business_rules-edit'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'PUT'
+  order: 3
+  parentCode: 'business_rules'
+  tabs: 0
+  url: '/rules/:id'
+  service: rules
+
+business_rules-delete:
+  code: 'business_rules-delete'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'DELETE'
+  order: 4
+  parentCode: 'business_rules'
+  tabs: 0
+  url: '/rules'
+  service: rules
+
+
+scope_rules:
+  code: 'scope_rules'
+  enable: 1
+  icon: null
+  level: 2
+  method: null
+  order: 2
+  parentCode: 'rule_engine'
+  tabs: 0
+  url: null
+  service: rules
+
+scope_rules-view:
+  code: 'scope_rules-view'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'GET'
+  order: 1
+  parentCode: 'scope_rules'
+  tabs: 0
+  url: '/rules'
+  service: rules
+
+scope_rules-create:
+  code: 'scope_rules-create'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'POST'
+  order: 2
+  parentCode: 'scope_rules'
+  tabs: 0
+  url: '/rules'
+  service: rules
+
+scope_rules-edit:
+  code: 'scope_rules-edit'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'PUT'
+  order: 3
+  parentCode: 'scope_rules'
+  tabs: 0
+  url: '/rules/:id'
+  service: rules
+
+scope_rules-delete:
+  code: 'scope_rules-delete'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'DELETE'
+  order: 4
+  parentCode: 'scope_rules'
+  tabs: 0
+  url: '/rules'
+  service: rules
+
+
+actions:
+  code: 'actions'
+  enable: 1
+  icon: null
+  level: 2
+  method: null
+  order: 3
+  parentCode: 'rule_engine'
+  tabs: 0
+  url: null
+  service: rules
+
+actions-view:
+  code: 'actions-view'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'GET'
+  order: 1
+  parentCode: 'actions'
+  tabs: 0
+  url: '/actions'
+  service: rules
+
+actions-create:
+  code: 'actions-create'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'POST'
+  order: 2
+  parentCode: 'actions'
+  tabs: 0
+  url: '/actions'
+  service: rules
+
+actions-edit:
+  code: 'actions-edit'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'PUT'
+  order: 3
+  parentCode: 'actions'
+  tabs: 0
+  url: '/actions/:id'
+  service: rules
+
+actions-delete:
+  code: 'actions-delete'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'DELETE'
+  order: 4
+  parentCode: 'actions'
+  tabs: 0
+  url: '/actions'
+  service: rules

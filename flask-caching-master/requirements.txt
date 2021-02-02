@@ -1,0 +1,8 @@
+Flask
+Werkzeug
+Sphinx
+pytest
+pytest-cov
+pytest-xprocess
+redis
+pylibmc

@@ -1,0 +1,53 @@
+    <!-- Create customer Form -->
+   <div class="container" ng-show="signUp">
+
+      <form class="form-signin" ng-submit="addUser()">
+        <h2 class="form-signin-heading">Sign Up</h2>
+        <label for="name" class="sr-only">Name</label>
+        <input type="text" id="name" class="form-control" placeholder="Name" ng-model="name" required autofocus>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  ng-model="email" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="password" required>
+          <button  ng-disabled="loading" type="submit" class="btn btn-lg btn-primary btn-block">
+           <span ng-hide="loading">Create</span>
+           <span ng-show="loading">Loading....</span></button>
+       </form>
+
+    </div> <!-- Login -->
+
+     <div class="container"   ng-show="login">
+        <form class="form-signin" ng-submit="signIn()">
+
+             <h2 class="form-signin-heading">Sign In</h2>
+
+               <label for="inpEmail" class="sr-only">Email address</label>
+        <input type="email" id="inEmail" class="form-control" placeholder="Email address"  ng-model="email" required autofocus>
+        <label for="inPassword" class="sr-only">Password</label>
+        <input type="password" id="inPassword" class="form-control" placeholder="Password" ng-model="password" required>
+          <button  ng-disabled="loading" type="submit" id="signButton" class="btn btn-lg btn-primary btn-block">
+           <span ng-hide="loading">Sign In</span>
+           <span ng-show="loading">Loading....</span></button>
+
+            </form>
+
+          </div>
+        <!-- Forgot password  -->
+
+         <div class="container"  ng-show="fp" >
+           <form class="form-signin" ng-submit="forgotPassword()" >
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" id="iEmail" class="form-control" placeholder="Email address"  ng-model="email" required autofocus>
+             <button  ng-disabled="loading" type="submit" id="fpass" class="btn btn-lg btn-primary btn-block">
+                     <span ng-hide="loading">Resend</span>
+                     <span ng-show="loading">Loading....</span></button>             </form>
+
+           </div>
+
+      <div class="container">
+         <form class="form-signin" >
+             <a href="" id="logIn" class="form-signin" ng-click="loginClick()"  ng-hide="login"  >Login </a>
+             <a href="" id="signUp"   ng-click="signUpClick()" ng-hide="signUp" >Sign Up </a>
+             <a href="" id="forgotPassword"  ng-click="fpClick()"  ng-hide="fp">Forgot Password </a>
+          </form>
+        </div>

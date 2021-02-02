@@ -1,0 +1,66 @@
+{% from 'events/timetable/display/indico/_common.html' import render_speakers, render_references,
+                                                              render_description %}
+{% from 'attachments/_display.html' import render_attachments_folders %}
+
+{# Do not forget to update the conditions in the parent template when you add a new row in the details table. #}
+
+<div class="event-details">
+    {% if event.description %}
+        <div class="event-details-row">
+            <div class="event-details-label">{% trans %}Description{% endtrans %}</div>
+            <div class="event-details-content">{{ render_description(event, class='event-description') }}</div>
+        </div>
+    {% endif %}
+    {% if event.references and event.type_.name == "meeting" %}
+        <div class="event-details-row">
+            <div class="event-details-label">{% trans %}External references{% endtrans %}</div>
+            <div class="event-details-content">{{ render_references(event) }}</div>
+        </div>
+    {% endif %}
+    {% if files or folders %}
+        <div class="event-details-row">
+            <div class="event-details-label icon-attachment inline-attachments-icon"></div>
+            <div class="event-details-content material-list">
+                {{ render_attachments_folders(files=files, folders=folders) }}
+            </div>
+        </div>
+    {% endif %}
+    {% if lectures %}
+        <div class="event-details-row">
+            <div class="event-details-label">{% trans %}From the same series{% endtrans %}</div>
+            <div class="event-details-content">
+                {% for lecture in lectures %}
+                    <a href="{{ lecture.url }}" class="lecture-series-link">{{ lecture.series_pos }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% if event.organizer_info %}
+        <div class="event-details-row">
+            <div class="event-details-label">{% trans %}Organized by{% endtrans %}</div>
+            <div class="event-details-content">{{ event.organizer_info | markdown }}</div>
+        </div>
+    {% endif %}
+
+    {{ hook_event_header }}
+
+    {% if event.contact_emails or event.contact_phones %}
+        <div class="event-details-row">
+            <div class="event-details-label">{{ event.contact_title }}</div>
+            <div class="event-details-content">
+                {% for email in event.contact_emails %}
+                    <div>
+                        <i class="icon-mail"></i>
+                        <a href="mailto:{{ email }}">{{ email }}</a>
+                    </div>
+                {% endfor %}
+                {% for phone in event.contact_phones %}
+                    <div>
+                        <i class="icon-phone"></i>
+                        <a href="tel:{{ phone }}">{{ phone }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>

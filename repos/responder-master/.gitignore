@@ -1,0 +1,17 @@
+.vscode/
+.cache
+.idea
+.python-version
+.coverage
+.pytest_cache
+.DS_Store
+coverage.xml
+
+__pycache__
+tests/__pycache__
+
+build
+responder.egg-info/
+dist/
+app.py
+app2.py

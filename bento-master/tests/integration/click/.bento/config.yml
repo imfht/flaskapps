@@ -1,0 +1,6 @@
+formatter:
+  - clippy: {}
+  - histo: {}
+tools:
+  r2c.click:
+    ignore: []

@@ -1,0 +1,68 @@
+{% from 'events/management/_lists.html' import render_displayed_entries_fragment %}
+
+{% macro render_user_papers_list(event, contributions, to_review=false, reviewed=false) %}
+    <section>
+        {% if to_review %}
+            {% set id = 'to-review-list' %}
+        {% elif reviewed %}
+            {% set id = 'reviewed-list' %}
+        {% endif %}
+        <div {% if id %}id="{{ id }}"{% endif %} class="paper-contribution-list">
+            <ul>
+                {% for contribution in contributions|sort(attribute='friendly_id') %}
+                    {% set latest_revision = contribution.paper.last_revision %}
+                    <div class="contribution-row" data-friendly-id="{{ contribution.friendly_id }}">
+                        <li>
+                            <div class="row-title">
+                                <a href="{{ url_for('.paper_timeline', contribution) }}" data-searchable="{{ contribution.title|lower }}">
+                                    #{{ contribution.friendly_id }}: {{ contribution.title }}
+                                </a>
+                            </div>
+                            <div class="row-content flexrow f-j-space-between">
+                                <div>
+                                    {% if reviewed or to_review -%}
+                                        <div class="submitter icon-user" data-searchable="{{ latest_revision.submitter.display_full_name|lower }}">
+                                            {{ latest_revision.submitter.display_full_name }}
+                                        </div>
+                                        <div>
+                                            {% if session.user in contribution.paper_layout_reviewers %}
+                                                <div class="label i-tag layout-reviewer review-role">
+                                                    {%- trans %}Layout{% endtrans -%}
+                                                    {% if latest_revision.has_user_reviewed(session.user, 'layout') %}
+                                                        <i class="icon-circle-small" title="{% trans %}Already reviewed{% endtrans %}"></i>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                            {% if session.user in contribution.paper_content_reviewers %}
+                                                <div class="label i-tag content-reviewer review-role">
+                                                    {%- trans %}Content{% endtrans -%}
+                                                    {% if latest_revision.has_user_reviewed(session.user, 'content') %}
+                                                        <i class="icon-circle-small" title="{% trans %}Already reviewed{% endtrans %}"></i>
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    <div class="label i-tag semantic-background {{ latest_revision.state.css_class }}">
+                                        {{ latest_revision.state.title }}
+                                    </div>
+                                </div>
+                                <ul>
+                                    {% for file in latest_revision.files %}
+                                        {% set icon = icon_from_mimetype(file.content_type, 'icon-file') %}
+                                        <li class="flexrow f-j-end">
+                                            <a href="{{ url_for('.download_file', file) }}">
+                                                <span>{{ file.filename }}</span>
+                                                <i class="attachment {{ icon }}"></i>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endmacro %}

@@ -1,0 +1,14 @@
+app:
+    build: app
+    links:
+        - redis
+
+nginx:
+    build: nginx
+    ports:
+        - "1337:80"
+    links:
+        - app
+
+redis:
+    build: redis

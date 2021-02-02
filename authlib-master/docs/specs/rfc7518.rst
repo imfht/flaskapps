@@ -1,0 +1,115 @@
+.. _specs/rfc7518:
+
+RFC7518: JSON Web Algorithms
+============================
+
+.. meta::
+    :description: API references on RFC7518 JSON Web Algorithms (JWA) Authlib implementation.
+
+This section contains the generic implementation of RFC7518_.
+
+.. _RFC7518: https://tools.ietf.org/html/rfc7518
+
+
+Algorithms for JWS
+------------------
+
+The interface for JWS Algorithms are all inherit from
+:class:`authlib.jose.JWSAlgorithm`.
+
+Find how to use them in :ref:`jws_guide`.
+
+HMAC with SHA-2 Functions
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section is defined by RFC7518 `Section 3.2`_.
+
+.. _`Section 3.2`: https://tools.ietf.org/html/rfc7518#section-3.2
+
+1. HS256: HMAC using SHA-256
+2. HS384: HMAC using SHA-384
+3. HS512: HMAC using SHA-512
+
+Digital Signature with RSASSA-PKCS1-v1_5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Algorithms in this section requires extra crypto backends.
+This section is defined by RFC7518 `Section 3.3`_.
+
+.. _`Section 3.3`: https://tools.ietf.org/html/rfc7518#section-3.3
+
+1. RS256: RSASSA-PKCS1-v1_5 using SHA-256
+2. RS384: RSASSA-PKCS1-v1_5 using SHA-384
+3. RS512: RSASSA-PKCS1-v1_5 using SHA-384
+
+Digital Signature with ECDSA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Algorithms in this section requires extra crypto backends.
+This section is defined by RFC7518 `Section 3.4`_.
+
+.. _`Section 3.4`: https://tools.ietf.org/html/rfc7518#section-3.4
+
+1. ES256: ECDSA using P-256 and SHA-256
+2. ES384: ECDSA using P-384 and SHA-384
+3. ES384: ECDSA using P-521 and SHA-512
+
+Digital Signature with RSASSA-PSS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Algorithms in this section requires extra crypto backends.
+This section is defined by RFC7518 `Section 3.5`_.
+
+.. _`Section 3.5`: https://tools.ietf.org/html/rfc7518#section-3.5
+
+1. PS256: RSASSA-PSS using SHA-256 and MGF1 with SHA-256
+2. PS384: RSASSA-PSS using SHA-384 and MGF1 with SHA-384
+3. PS512: RSASSA-PSS using SHA-512 and MGF1 with SHA-512
+
+Algorithms for JWE
+------------------
+
+This section contains algorithms for JWE ``alg`` and ``enc`` header. For
+``alg`` the interface are all inherited from
+:class:`authlib.jose.JWEAlgorithm`. For ``enc``, the interface are
+inherited from :class:`authlib.jose.JWEEncAlgorithm`.
+
+Current available algorithms for ``alg``:
+
+0. dir: Direct use of a shared symmetric key
+1. RSA1_5: RSAES-PKCS1-v1_5
+2. RSA-OAEP: RSAES OAEP using default parameters
+3. RSA-OAEP-256: RSAES OAEP using SHA-256 and MGF1 with SHA-256
+4. A128KW: AES Key Wrap with default initial value using 128-bit key
+5. A192KW: AES Key Wrap with default initial value using 192-bit key
+6. A256KW: AES Key Wrap with default initial value using 256-bit key
+7. A128GCMKW: Key wrapping with AES GCM using 128-bit key
+8. A192GCMKW: Key wrapping with AES GCM using 192-bit key
+9. A256GCMKW: Key wrapping with AES GCM using 256-bit key
+10. ECDH-ES: In the Direct Key Agreement mode
+11. ECDH-ES+A128KW: using Concat KDF and CEK wrapped with A128KW
+12. ECDH-ES+A192KW: using Concat KDF and CEK wrapped with A192KW
+13. ECDH-ES+A256KW: using Concat KDF and CEK wrapped with A256KW
+
+Current available algorithms for ``enc``:
+
+1. A128CBC-HS256
+2. A192CBC-HS384
+3. A256CBC-HS512
+4. A128GCM
+5. A192GCM
+6. A256GCM
+
+Current available algorithms for ``zip``:
+
+1. DEF
+
+Algorithms for JWK
+------------------
+
+This section defines the parameters for keys using the algorithms via
+RFC7518 `Section 6`_.
+
+Find how to use them in :ref:`jwk_guide`.
+
+.. _`Section 6`: https://tools.ietf.org/html/rfc7518#section-6

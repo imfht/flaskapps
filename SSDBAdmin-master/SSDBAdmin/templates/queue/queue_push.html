@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h3> Add List type record</h3>
+    <form action="{{ url_for('queuePush') }}" method="post">
+        <table class="table table-striped">
+            <thead>
+            <tr class="info">
+                <th width="30%">Queue name</th>
+                <th width="10%">Location</th>
+                <th width="60%">Item</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input type="text" name="queue_name" class="form-control"
+                           {% if queue_name %}
+                            value="{{ queue_name }}" readonly
+                           {% endif %}
+                           required></td>
+                <td>
+                    <select name="type" class="form-control">
+                        <option value="back">Back</option>
+                        <option value="front">Front</option>
+                    </select>
+                </td>
+                <td><textarea name="item" class="form-control" required></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="center">
+            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+            <button class="btn btn-sm btn-default" onclick="history.go(-1)">Cancel</button>
+        </div>
+
+    </form>
+{% endblock %}

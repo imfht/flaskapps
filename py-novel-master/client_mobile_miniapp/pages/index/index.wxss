@@ -1,0 +1,100 @@
+/* 个人信息 */
+.profile {
+  height: 160rpx;
+  background-color: rgb(244, 243, 249);
+  padding: 20rpx 40rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.avatar {
+  width: 20%;
+}
+.avatar-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+.nickname {
+  width: 60%;
+  color: #333;
+  font-size: 38rpx;
+}
+.setting {
+  width: 20%;
+}
+.icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.user-btn {
+  background: transparent;
+  border: none;
+  width: 80%;
+  font-size: 30rpx;
+}
+
+/* 书架列表 */
+.shelf {
+  width: 90%;
+  margin: 20rpx auto;
+  padding: 20rpx;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.shelf-item {
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+  padding: 20rpx 0;
+}
+.btn-remove {
+  position: absolute;
+  top: 0;
+  right: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.shelf-wrapper {
+  padding: 20rpx 50rpx;
+  position: relative;
+}
+.shelf-cover {
+  width: 100%;
+  height: 320rpx;
+  box-shadow: 6rpx 10rpx 6rpx #ccc;
+  border-radius: 16rpx;
+}
+.shelf-novelname {
+  font-size: 34rpx;
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.shelf-authorname {
+  font-size: 26rpx;
+  position: absolute;
+  top: 70%;
+  right: 20%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+/* 书架列表为空 */
+.shelf-empty {
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+  font-size: 30rpx;
+}

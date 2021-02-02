@@ -1,0 +1,90 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block css %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+<!-- <form method="POST" action="" id='new-post'>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            
+            <br><br><br><br>
+            <div class="row">
+                <button type="submit" class="btn btn-primary" name="publish" value="publish">submit</button>
+                
+            </div>
+        
+        </div>
+    </div>
+            
+    
+</form> -->
+<div class="col-md-6 col-md-offset-1">
+    <h3>Edit</h3>
+    <hr>
+    {% import "_form.html" as forms %}
+    <form method="POST" action="">
+        {{ forms.render(form) }}
+        <br>
+        <label for="allow_post_types">Allow Post Types</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="allow_post_types" placeholder="post, page" name="allow_post_types" value="{% if widget %}{{ widget.allow_post_types|join(', ') }}{% endif %}">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                {% for post_type in post_types %}
+                    <li><a href="#" class="post-type" data-post-type="{{ post_type }}">{{ post_type }}</a></li>
+                {% endfor %}
+            </ul>
+          </div><!-- /btn-group -->
+        </div><br>
+
+        <div class="form-group">
+            <label for="update_time">Update Time</label>
+            <div class='input-group date' id='update_time'>
+                <input type='text' class="form-control" name="update_time" value="{% if widget%}{{ widget.update_time.strftime('%Y-%m-%d %H:%M:%S') }}{% endif %}" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="user" value="user">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript">
+    $('.post-type').on('click', function(event){
+        var postType = $(this).data('post-type');
+        // alert(category);
+        var elem = document.getElementById("allow_post_types");
+        if(elem.value==''){
+            elem.value = postType;
+        }else{
+            // elem.value += ', ';
+            // elem.value += tag;
+            elem.value = [elem.value, postType].join(', ')
+        }
+
+        // $(this).remove();
+        return false
+    });
+
+    $(function () {
+        $('.date').datetimepicker({format:'YYYY-MM-DD HH:mm:ss'});
+    }); 
+
+</script>
+{% endblock %}

@@ -1,0 +1,9 @@
+Flask==1.1.2
+blinker==1.4
+Flask-RESTful==0.3.8
+Flask-Cors==3.0.8
+flask-restful-swagger-2==0.35
+Flask-JSON==0.3.4
+neo4j==4.1.1
+gunicorn==19.10.0
+python-dotenv==0.14.0

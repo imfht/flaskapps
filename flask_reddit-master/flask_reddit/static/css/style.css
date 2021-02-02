@@ -1,0 +1,394 @@
+/*  
+ *  Here will be all of flask_reddit's custom CSS. Let's keep this
+ *  fairly organized!
+ */
+
+body {
+
+}
+
+.well {
+    background-color: #fff;
+}
+
+.listing-row {
+    margin-bottom: 22px;
+}
+
+div.spacer {
+    margin-top: 10px;
+}
+
+.listing-title-text {
+    margin-bottom: 5.5px;
+}
+
+.listing-row a {
+    color: #000;
+    /* text-decoration: underline; */
+}
+
+.listing-text {
+    margin-top: -12px;
+    margin-left: 18px;
+}
+
+.listing-vote-box {
+    width: 10px;
+}
+
+.listing-vote-box:hover {
+
+}
+
+.listing-vote-button:hover, .listing-vote-button:focus {
+    color: #eb6864 !important;
+    text-decoration: none !important;
+}
+
+.comment-body {
+    margin-bottom: 2px;
+}
+
+.comments-element {
+    margin-bottom: 10px;
+}
+
+.inverse-white-button {
+    color: #eb6864;
+    background-color: #fff;
+    border-color: #eb6864;
+}
+
+.add-subreddit-button {
+    margin-bottom: 21px;
+}
+
+.add-subreddit-button:hover, .add-subreddit-button:focus {
+    color: #eb6864;
+    background-color: #FFF5F5;
+    border-color: #eb6864;
+}
+
+#subreddit-list {
+    padding-left: 0px;
+    margin-bottom: 21px;
+}
+
+#subreddit-list, a {
+    color: #000;
+    text-decoration: none;
+}
+
+#subreddit-list a:hover, #subreddit-list a:focus {
+    color: #eb6864;
+    text-decoration: underline;
+}
+
+
+.pre-reg-info {
+    margin-bottom: 21px;
+    margin-left: -15px;
+}
+
+.submit-post-button {
+    margin-bottom: 21px;
+}
+
+.nested-comment-text-box {
+    display: none;
+    width: 250px;
+}
+
+.nested-submit-comment-button {
+    display: none;
+    width: 50px;
+    height: 25px;
+    font-size: 9px;
+    margin-top: -19px;
+    margin-left: 5px;
+}
+
+.right-bar {
+    position: fixed;
+    top: 80px;
+    right: 100px;
+}
+
+.main-box {
+    margin-top: 20px;
+    min-height: 700px;
+}
+
+.the-404-image {
+    margin: 20px 0 80px 0;
+}
+
+.the-500-image {
+    margin: -20px 0 80px 0;
+}
+
+.post-listing-meta {
+    font-size: 13px;
+}
+
+.user-profile-box {
+    padding-left: 0px;
+    margin-top: -11px;
+}
+
+.thread-submit-box {
+    padding-left: 0px;
+    margin-bottom: 40px;
+}
+
+.thread-submit-title {
+    margin-top: 0px;
+}
+
+.thread-text {
+    margin: 0 0 0 -30px;
+}
+
+.listing-title {
+    margin-top: 0px;
+}
+
+.listing-title:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.all-subreddits-label {
+    margin: 0px 0 20px 0px;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-inverse .navbar-brand:focus {
+    color: #eb6864;
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #eb6864;
+    background-color: #fff;
+}
+
+.thread-comment-section {
+    padding-left: 0px;
+}
+
+.thread-comment-box {
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.logout-button {
+    font-size:13px;
+}
+
+.login-nav-text {
+    font-size: 13px;
+    margin-top: 22px;
+    color: #fff;
+}
+
+.reddit-search {
+    width: 200px;
+    margin-bottom: 21px;
+}
+
+.profile-listing {
+    font-size: 17px;
+}
+
+.profile-listing-inline {
+    font-size: 12px;
+}
+
+a.brand-nav {
+    margin-left: -12px;
+    background-color: #eeeeee;
+}
+
+
+a.brand-nav:hover, a.brand-nav:focus {
+    margin-left: -12px;
+    background-color: #eeeeee !important;
+}
+
+.flash-banner {
+    margin-top: 12px;
+}
+
+img.permalink-listing-image {
+    width: 70px;
+    height: 70px;
+    margin-left: 5px;
+    margin-top: 0;
+}
+
+img.listing-image {
+    width: 70px;
+    height: 70px;
+    margin-left: 5px;
+    margin-top: -14px;
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+.thread-permalink .listing-title {
+    margin-top: 10px;
+}
+
+.thread-permalink .listing-vote-box {
+    margin-top: 7px;
+}
+
+.byline-lucas {
+    font-size: 14px;
+    margin-top: 80px;
+}
+
+div.github-fork-text {
+    opacity: 0.4;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.dash-text {
+    margin-top: 0px;
+    width: 200px;
+}
+
+.login-nav-text a {
+    color: #000; 
+    text-decoration: underline;
+}
+
+.login-nav-text a:hover {
+    color: #eb6864; 
+    text-decoration: underline;
+}
+
+.listing-votes-number {
+    margin-left: 4px;
+}
+
+#footer-row {
+    font-size: 13px;
+}
+
+.profile-comment-div {
+    text-decoration: italic;
+}
+
+.align-right-col {
+    margin-left: -17px;
+}
+
+.subreddit-desc {
+    margin-left: -17px;
+    width: 270px;
+    margin-bottom: 21px;
+}
+
+.karma-star {
+    color: #eb6864;
+}
+
+.profile-label {
+    margin: 25px 0 25px 0;
+}
+
+.trophy-room {
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.red {
+    color: #eb6864;
+}
+
+/*
+ * Google style login form
+ */
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+    margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+    font-weight: normal;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+    z-index: 2;
+}
+.form-signin input[type="text"]
+{
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.account-wall
+{
+    margin-top: 20px;
+    padding: 40px 0px 20px 0px;
+    /*
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    */
+}
+.login-title
+{
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+.need-help
+{
+    margin-top: 10px;
+}
+.new-account
+{
+    display: block;
+    margin-top: 10px;
+}

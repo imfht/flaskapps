@@ -1,0 +1,103 @@
+.features-page {
+
+  p, h1, h2 {
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2{
+    font-weight: 100;
+  }
+  h4{
+    font-weight: 700;
+  }
+  .jumbotron{
+    background-color: transparent;
+    padding-bottom: 0;
+  }
+  .introducing p {
+    line-height: 28px;
+    padding-top: 20px
+  }
+  .marketing-bg {
+    background-color: $color6;
+    padding-bottom: 75px;
+    padding-top: 75px;
+  }
+  .jumbotron h1 {
+    font-size: 70px;
+  }
+  .row{
+    margin-bottom: 50px;
+  }
+
+  .features {
+    .jumbotron h1 {
+      font-size: 3em;
+    }
+
+    .container-fluid:nth-child(odd) {
+      background-color: $color6;
+      text-align: left;
+    }
+
+    .container-fluid:nth-child(even) {
+      text-align: right;
+    }
+
+    .centered {
+      height: 100%;
+      text-align: center;
+
+      img {
+        padding: 15px;
+        max-width: 100%;
+        max-height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+#contact-page {
+
+  .alert-info a {
+    text-decoration: none;
+  }
+
+  .form-group {
+    margin-bottom: 0px;
+
+    .control-label {
+      margin-top: 7px;
+    }
+    .has-error span.help-inline {
+      margin-bottom: 10px;
+    }
+  }
+
+  textarea[name="description"] {
+    height: 110px;
+  }
+
+  .content-tab {
+    margin-bottom: 10px;
+    min-height: 40px;
+  }
+
+  .upload-panel {
+
+    margin-bottom: 0px;
+
+    .upload-header {
+      margin-bottom: 20px;
+    }
+
+    a.upload-button {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+
+}

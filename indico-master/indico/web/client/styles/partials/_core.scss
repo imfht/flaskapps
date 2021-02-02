@@ -1,0 +1,129 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+/* Basic elements */
+
+.right {
+  float: right;
+  margin-left: auto;
+}
+
+.left {
+  float: left;
+}
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.inline-vcentered {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header-aligned {
+  margin-top: 0.35em;
+}
+
+.clear {
+  clear: both;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.weak-hidden {
+  display: none;
+}
+
+.hidden-if-empty:empty {
+  display: none !important;
+}
+
+.icon-medium {
+  font-size: 3em;
+}
+
+.icon-large {
+  font-size: 5em;
+}
+
+.icon-background {
+  font-size: 10em;
+  color: #eee;
+}
+
+.area {
+  color: #555;
+  margin-top: 1em;
+  padding: 1em;
+  background: #fafafa;
+}
+
+.area h2:first-of-type {
+  margin-top: 0;
+}
+
+.area h2 {
+  color: #aaa;
+}
+
+.prevent-scrolling {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.transparent-overlay {
+  position: relative;
+
+  &::before {
+    @include gradient(transparent, white);
+    bottom: 0;
+    content: '';
+    height: 3em;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+.truncate-text {
+  @include ellipsis();
+}
+
+@media print {
+  .noprint {
+    visibility: hidden;
+  }
+
+  .print {
+    visibility: visible;
+  }
+}
+
+img {
+  border: 0;
+}
+
+label:not(.ui.checkbox),
+.label:not(.ui.checkbox) {
+  font-weight: bold;
+}

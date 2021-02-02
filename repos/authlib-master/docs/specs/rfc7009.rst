@@ -1,0 +1,60 @@
+.. _specs/rfc7009:
+
+RFC7009: OAuth 2.0 Token Revocation
+===================================
+
+.. meta::
+    :description: API references on RFC7009 OAuth 2.0 Token Revocation Authlib implementation.
+
+This section contains the generic implementation of RFC7009_.
+
+.. _RFC7009: https://tools.ietf.org/html/rfc7009
+
+.. module:: authlib.oauth2.rfc7009
+
+.. _register_revocation_endpoint:
+
+Register Revocation Endpoint
+----------------------------
+
+The revocation endpoint can be easily registered to :ref:`flask_oauth2_server`
+or :ref:`django_oauth2_server`. But there are missing methods to be
+implemented::
+
+    from authlib.oauth2.rfc7009 import RevocationEndpoint
+
+    class MyRevocationEndpoint(RevocationEndpoint):
+        def query_token(self, token, token_type_hint, client):
+            q = Token.query.filter_by(client_id=client.client_id)
+            if token_type_hint == 'access_token':
+                return q.filter_by(access_token=token).first()
+            elif token_type_hint == 'refresh_token':
+                return q.filter_by(refresh_token=token).first()
+            # without token_type_hint
+            item = q.filter_by(access_token=token).first()
+            if item:
+                return item
+            return q.filter_by(refresh_token=token).first()
+
+        def revoke_token(self, token):
+            token.revoked = True
+            db.session.add(token)
+            db.session.commit()
+
+    # register it to authorization server
+    authorization_server.register_endpoint(MyRevocationEndpoint)
+
+After the registration, you can create a response with::
+
+    @app.route('/oauth/revoke', methods=['POST'])
+    def revoke_token():
+        return server.create_endpoint_response(MyRevocationEndpoint.ENDPOINT_NAME)
+
+
+API Reference
+-------------
+
+.. autoclass:: RevocationEndpoint
+    :member-order: bysource
+    :members:
+    :inherited-members:

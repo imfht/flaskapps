@@ -1,0 +1,43 @@
+repos:
+  - repo: https://github.com/prettier/prettier
+    rev: "1.15.2" # Use the sha or tag you want to point at
+    hooks:
+      - id: prettier
+        exclude: "(tests/integration/|.bento-whitelist.yml|.github/)"
+
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v1.4.0
+    hooks:
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-added-large-files
+
+  # Seeds third party packages so isort can sort appropriately
+  - repo: https://github.com/asottile/seed-isort-config
+    rev: "51dfa07d8775040a433388c234d54d84c582beb3" # v1.9.2
+    hooks:
+      - id: seed-isort-config
+        args: ["--exclude=tests"]
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: "fe48703af934101b40ea9059d43355aec45ca3fb"
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/ambv/black
+    rev: "18.9b0"
+    hooks:
+      - id: black
+        language_version: python3.7
+        exclude: tests/integration/*
+
+  - repo: local
+    hooks:
+      - id: mypy
+        name: Check mypy static types
+        entry: mypy --show-error-codes
+        language: system
+        types: [python]
+        exclude: tests/integration/

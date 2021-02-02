@@ -1,0 +1,16 @@
+*.py[co]
+*.egg
+*.egg-info
+
+/build
+/dist
+/docs/_build
+/.tox
+
+Pipfile
+Pipfile.lock
+
+env*
+.coverage
+
+.DS_Store

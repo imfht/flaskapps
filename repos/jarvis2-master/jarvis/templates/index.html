@@ -1,0 +1,47 @@
+<!doctype html>
+<html translate="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>
+      JARVIS
+      {% if widget  %}
+      &mdash; {{ widget|capitalize }}
+      {% endif %}
+    </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    {% if config['DEBUG'] %}
+    {% assets "css_all" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% else %}
+    {% assets "css_min_all" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% endif %}
+  </head>
+  <body>
+    {% if layout %}
+    {% include layout %}
+    {% else %}
+    {% include 'layout.html' %}
+    {% endif %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/1.1.6/mithril.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/nb.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+    {% if config['DEBUG'] %}
+    {% assets "js_all" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% else %}
+    {% assets "js_min_all" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% endif %}
+    <script nonce="{{ nonce }}">
+      jrvs.widgets = ['{{ "', '".join(widgets) | safe }}'];
+    </script>
+  </body>
+</html>

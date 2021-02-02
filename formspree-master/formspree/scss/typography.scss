@@ -1,0 +1,93 @@
+$font-primary: 'proxima-nova-soft';
+$font-local: 'Proxima Nova Soft';
+
+body {
+    font-size: 18px;
+    line-height: 1.5em;
+    font-family: $font-primary, $font-local, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p,
+.h1-seo-hack, .h2-seo-hack, .h3-seo-hack {
+
+    font-family: $font-primary, $font-local, sans-serif;
+
+    &:first-child {
+        margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &>small {
+        font-size: 0.65em;
+        color: #aaa;
+    }
+
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, 
+.h1-seo-hack, .h2-seo-hack, .h3-seo-hack {
+    font-weight: 600;
+    line-height: 1.3em;
+
+    
+    color: $dark-blue;
+
+    &.light {
+        font-weight: 400;
+        color: #444;
+    }
+}
+
+p {
+    line-height: 1.5em;
+    color: #444;
+}
+
+a {
+    color: $green;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    &:hover{
+        color: $dark-green;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.caps {
+    text-transform: uppercase;
+}
+
+.subtext {
+    color: $gray;
+    font-size: small;
+}
+
+.h1-seo-hack {
+    font-size: $h1_font_size;
+    margin: $h1_margin;
+    display: block;
+}
+
+.h2-seo-hack {
+    font-size: $h2_font_size;
+    margin: $h2_margin;
+    
+    display: block;
+}
+
+.h3-seo-hack {
+    font-size: $h3_font_size;
+    margin: $h3_margin;
+    display: block;
+}
+

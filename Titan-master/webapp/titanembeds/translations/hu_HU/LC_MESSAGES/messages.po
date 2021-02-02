@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: titanembeds\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2018-02-18 22:46+0000\n"
+"PO-Revision-Date: 2018-06-25 00:20+0000\n"
+"Last-Translator: EndenDragon <jeremyzhang5000@gmail.com>\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: crowdin.com\n"
+"X-Crowdin-Project: titanembeds\n"
+"X-Crowdin-Language: hu\n"
+"X-Crowdin-File: /master/webapp/titanembeds/translations/messages.pot\n"
+"Language: hu_HU\n"
+
+#: titanembeds/blueprints/embed/embed.py:15
+msgid "Let's get to know each other! My name is Titan, what's yours?"
+msgstr "Ismerjük meg egymást! Titan vagyok, téged hogy hívnak?"
+
+#: titanembeds/blueprints/embed/embed.py:16
+msgid "Hello and welcome!"
+msgstr "Helló és üdvözlet!"
+
+#: titanembeds/blueprints/embed/embed.py:17
+msgid "What brings you here today?"
+msgstr "Mi szél hozott?"
+
+#: titanembeds/blueprints/embed/embed.py:18
+msgid "....what do you expect this text to say?"
+msgstr "....mit vársz, mi legyen ide írva?"
+
+#: titanembeds/blueprints/embed/embed.py:19
+msgid "Aha! ..made you look!"
+msgstr "Aha! ..idenéztél!"
+
+#: titanembeds/blueprints/embed/embed.py:20
+msgid "Initiating launch sequence..."
+msgstr "Indítási szekvencia kezdeményezése..."
+
+#: titanembeds/blueprints/embed/embed.py:21
+msgid "Captain, what's your option?"
+msgstr "Kapitány, mit választasz?"
+
+#: titanembeds/blueprints/embed/embed.py:22
+msgid "Alright, here's the usual~"
+msgstr "Rendben, itt a szokásos~"
+
+#: titanembeds/templates/embed.html.j2:78
+msgid "Actions"
+msgstr "Műveletek"
+
+#: titanembeds/templates/embed.html.j2:79
+msgid "Manage Guild Embed"
+msgstr "A Guild beágyazása"
+
+#: titanembeds/templates/embed.html.j2:80
+msgid "Open Server on Discordapp"
+msgstr "Nyissa meg a kiszolgálót a Discordapp alkalmazásban"
+
+#: titanembeds/templates/embed.html.j2:84
+msgid "Channel Topic"
+msgstr "Csatorna-téma"
+
+#: titanembeds/templates/embed.html.j2:89
+msgid "Channels"
+msgstr "Csatornák"
+
+#: titanembeds/templates/embed.html.j2:94
+msgid "Online Server Members"
+msgstr "Online szerver tagok"
+
+#: titanembeds/templates/embed.html.j2:99
+msgid "Authenticated Embed Users"
+msgstr "Hitelesített felhasználók beágyazása"
+
+#: titanembeds/templates/embed.html.j2:102
+msgid "Guest Embed Users"
+msgstr "Vendég beágyazó felhasználók"
+
+#: titanembeds/templates/embed.html.j2:122
+msgid "Please choose one of the following methods to authenticate!"
+msgstr "Kérjük, válasszon az alábbi módszerek egyikének hitelesítéséhez!"
+
+#: titanembeds/templates/embed.html.j2:128
+msgid "Discord Login"
+msgstr "Diszkrét bejelentkezés"
+
+#: titanembeds/templates/embed.html.j2:129
+msgid "You will be invited into this server."
+msgstr "Ez a szerver meghívja Önt."
+
+#: titanembeds/templates/embed.html.j2:133
+msgid "Of course, you also have the option to login by picking a temporary username for your current browsing session."
+msgstr "Természetesen a bejelentkezéshez is lehetősége van, ha ideiglenes felhasználónevet választasz az aktuális böngészési munkamenethez."
+
+#: titanembeds/templates/embed.html.j2:135
+msgid "Username (Hit ENTER/RETURN key to confirm)"
+msgstr "Felhasználónév (nyomja meg az ENTER / RETURN gombot a megerősítéshez)"
+
+#: titanembeds/templates/embed.html.j2:147
+msgid "Change Username"
+msgstr "Felhasználónév módosítása"
+
+#: titanembeds/templates/embed.html.j2:150
+msgid "Guests Accounts Only"
+msgstr "Csak vendégek számlái"
+
+#: titanembeds/templates/embed.html.j2:152
+msgid "Change your username (Hit ENTER/RETURN key to confirm)"
+msgstr "Változtassa meg felhasználónevét (nyomja meg az ENTER / RETURN gombot a megerősítéshez)"
+
+#: titanembeds/templates/embed.html.j2:156
+msgid "Theme"
+msgstr "Téma"
+
+#: titanembeds/templates/embed.html.j2:167
+msgid "Overwrite Current Embed Theme w/ User CSS"
+msgstr "Overwrite Current beágyazott téma w / User CSS"
+
+#: titanembeds/templates/embed.html.j2:171
+msgid "Notification Sound"
+msgstr "Értesítési hang"
+
+#: titanembeds/templates/embed.html.j2:176
+msgid "New Messages"
+msgstr "Új üzenetek"
+
+#: titanembeds/templates/embed.html.j2:180
+msgid "Mentions"
+msgstr "Megemlít"
+
+#: titanembeds/templates/embed.html.j2:184
+msgid "Nothing"
+msgstr "Semmi"
+
+#: titanembeds/templates/embed.html.j2:188
+msgid "Display Rich Embeds"
+msgstr ""
+
+#: titanembeds/templates/embed.html.j2:193
+msgid "Enable"
+msgstr ""
+
+#: titanembeds/templates/embed.html.j2:197
+msgid "Disable"
+msgstr ""
+
+#: titanembeds/templates/embed.html.j2:209
+msgid "Just one more step..."
+msgstr "Még egy lépés..."
+
+#: titanembeds/templates/embed.html.j2:217
+msgid "NSFW Channel"
+msgstr "NSFW Csatorna"
+
+#: titanembeds/templates/embed.html.j2:218
+msgid "You must be at least eighteen years old to view this channel. Are you over eighteen and willing to see adult content?"
+msgstr "Tizennyolc éven felülinek kell lenned, hogy megkinthesd ezt a csatornát. Idõsebb vagy mint tizennyolc, és kívánod megtekinteni a felnõtt tartalmat?"
+
+#: titanembeds/templates/embed.html.j2:220
+msgid "Nope"
+msgstr "Tovább"
+
+#: titanembeds/templates/embed.html.j2:221
+msgid "Continue"
+msgstr "Dehogy"
+
+#: titanembeds/templates/embed.html.j2:232
+msgid "Mention"
+msgstr "Említés"
+
+#: titanembeds/templates/embed.html.j2:237
+msgid "TitanEmbeds Administrator"
+msgstr "TitanEmbeds Administrator"
+
+#: titanembeds/templates/embed.html.j2:238
+msgid "TitanEmbeds Partner"
+msgstr "TitanEmbeds partner"
+
+#: titanembeds/templates/embed.html.j2:239
+msgid "TitanEmbeds Supporter"
+msgstr "TitanEmbeds támogatója"
+
+#: titanembeds/templates/embed.html.j2:240
+msgid "I have voted for Titan on Discord Bots today!"
+msgstr ""
+
+#: titanembeds/templates/embed.html.j2:242
+msgid "User is offline in Discord."
+msgstr "A felhasználó offline állapotban van."
+
+#: titanembeds/templates/embed.html.j2:243
+msgid "Playing"
+msgstr "Játék"
+
+#: titanembeds/templates/embed.html.j2:244
+msgid "Roles"
+msgstr "Szerepek"
+
+#: titanembeds/templates/embed.html.j2:253
+msgid "Server Emoji"
+msgstr "Szerver Emoji"
+
+#: titanembeds/templates/embed.html.j2:270
+msgid "Please login to post a message."
+msgstr "Kérjük, jelentkezzen be."
+
+#: titanembeds/templates/embed.html.j2:270
+msgid "Login"
+msgstr "Belépés"
+

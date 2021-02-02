@@ -1,0 +1,37 @@
+{% extends theme('mobile/layout.html') %}
+
+{% block title %}标签{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ url_for('main.tags', _external=True) }}" />
+{%- endblock %}
+
+{% block main %}
+  <h2 class="t1"><b>栏目</b></h2>
+  <div class="entry">
+    {% with categories = category_lists() %}
+    {% if categories %}
+    <ul class="taglist clearfix">
+      {%- for category in categories %}
+      <li><a href="{{ category.link }}">{{ category.name }}</a></li>
+      {%- endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+
+  <h2 class="t1"><b>标签</b></h2>
+  <div class="entry">
+    {% with tags = tag_lists() %}
+    {% if tags %}
+    <ul class="taglist clearfix">
+      {%- for tag in tags %}
+      <li><a href="{{ tag.link }}">{{ tag.name }}</a>({{ tag.count }})</li>
+      {%- endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}
+
+{% block nav %} <b>&#187;</b> <a href="{{ url_for('main.tags') }}">标签</a>{% endblock %}

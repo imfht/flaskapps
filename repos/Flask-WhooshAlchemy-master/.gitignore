@@ -1,0 +1,15 @@
+!.gitignore
+*.egg
+*.egg-info
+*.orig
+*.pyc
+*.swp
+.tox
+bin
+build
+dist
+doc
+env
+include
+lib
+src

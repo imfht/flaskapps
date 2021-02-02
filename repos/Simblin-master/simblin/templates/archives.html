@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block body %}
+<h3>Months</h3>
+<ul class=archives id="months">
+{% for month in months %}
+<li>
+  <a href="{{ url_for('main.show_month', year=month.year, month=month.index) }}">{{ month.year }} {{ month.name }}</a>
+  <div class="post-count">({{ month.count }})</div>
+</li>
+{% endfor %}
+</ul>
+<div class=spacer></div>
+
+<h3>Categories</h3>
+<ul class=archives id="categories">
+{% if uncategorized_count %}
+<li>
+  <a href="{{ url_for('main.show_uncategorized', page=1) }}">Uncategorized</a>
+  <div class="post-count">({{ uncategorized_count }})</div>
+</li>
+{% endif %}
+{% for category in categories %}
+<li>
+  <a href="{{ url_for('main.show_category', category=category.name) }}">{{ category.name }}</a>
+  <div class="post-count">({{ category.post_count }})</div>
+  {% if session.logged_in %}
+  <a class="delete-category" href=# category-id="{{ category.id }}">delete</a>
+  {% endif %}
+</li>
+{% endfor %}
+</ul>
+{% if session.logged_in %}
+<a id='create-category' href='#'>create category</a>
+{% endif %}
+<div class=spacer></div>
+
+<h3>Tags</h3>
+<div class=archives id="tag-cloud">
+{% for tag in tags %}
+{% if tag.post_count > 0 %}
+<a href="{{ url_for('main.show_tag', tag=tag.name) }}" 
+   title="{{ tag.post_count }} tagged in {{ tag.name }}"
+   style="font-size:{{ 50 + 150 * tag.post_count / max_count }}%; margin-right:1em;">{{ tag.name }}</a>
+{% endif %}
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block bottom %}
+{% if session.logged_in %}
+<script type=text/javascript>
+  $(function() {
+    // Create Category
+    $("#create-category").bind('click', function(e) {
+      e.preventDefault();
+      var name = prompt("Enter the name of the category you want to create");
+      $.ajax({
+        type: "POST",
+        url: "/_add_category",
+        data: {'name':name},
+        success: function(category) {
+          location.reload();
+        },
+        error: function() {
+          alert('Could not create category');
+        }
+      });
+      return false;
+    });
+    
+    // Delete Category
+    $(".delete-category").live('click', function(e) {
+      e.preventDefault();
+      if (confirm("Really delete this post?")) {
+        var id = $(this).attr('category-id');
+        //: The parent list item that contains the link to the category, delete link, count
+        var li = $(this).closest('li');
+        $.ajax({
+          type: "POST",
+          url: "/_delete_category",
+          data: {'id':id},
+          success: function() {
+            li.fadeTo('fast', 0, function() {
+              $(this).remove();
+              location.reload();
+            });
+          },
+          error: function() {
+            alert('Could not delete category');
+          }
+        });
+      }
+      return false;
+    });
+  });
+</script>
+{% endif %}
+{% endblock %}
+<!-- kate: tab-width 2; -->

@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block pagetitle %}
+<h2>{{ page.title }}</h2>
+{% endblock %}
+
+{% block content %}
+<article class="article">
+  {{ page.html|safe }}
+</article>
+{% endblock %}

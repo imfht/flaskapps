@@ -1,0 +1,4 @@
+-r test.pip
+invoke==1.3.0
+wheel
+twine

@@ -1,0 +1,9 @@
+{% extends 'layouts/master.html' %}
+{% block title %}Edit contact{% endblock %}
+{% block body %}
+<h1>Edit contact</h1>
+<form method="post">
+	{{ generate_fields(form) }}
+	<input type="submit" class="btn btn-success" value="Save">
+</form>
+{% endblock %}

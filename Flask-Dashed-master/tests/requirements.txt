@@ -1,0 +1,5 @@
+Flask
+hg+https://bitbucket.org/simplecodes/wtforms#egg=WTForms
+Flask-SQLAlchemy
+Flask-Testing
+Flask-WTF

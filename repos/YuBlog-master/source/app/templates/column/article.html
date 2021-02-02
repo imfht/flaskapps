@@ -1,0 +1,113 @@
+{% extends "column_base.html" %}
+
+{% block nav_btn %}
+<div class="column-menu-btn">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+{% endblock %}
+
+{% block column_content %}
+<div class="menu-list" style="display: none;">
+    <div class="column-menu">主题目录</div>
+    <div class="menu-title">
+        <a href="{{ url_for('column._column',id=column.id) }}">{{ column.column }}</a>
+    </div>
+    <ul>
+        {% for i in data %}
+        <li>
+            <span>{{ i.num }}</span>
+            <a href="{{ url_for('column.article',url=column.url_name,id=i.item.id) }}" class="{% if i.item==article %}current{% else %}{% endif %}">
+                {{ i.item.title }}
+            </a>
+            {% if i.item.secrecy == True %}
+            <span style="color: red;float: right;"> ! </span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="article-main site-box">
+
+    <div class="column-item">
+        <div class="article-title">
+            <h1>{{ article.title }}</h1>
+        </div>
+
+        <div class="article-meta">
+            <span class="post-time"><i class="demo-icon icon-calendar"></i> {{ article.timestamp }}</span>
+            <span class="post-comments-count">
+                <i class="demo-icon icon-comment-empty"></i> 评论： {{ counts }}
+            </span>
+            <span class="post-view-count" postid="{{ article.id }}"><i class="demo-icon icon-eye"></i> 阅读： </span>
+        </div>
+
+        <div class="article-body">
+            <div class="article-desc">
+                {{ article.body | safe }}
+            </div>
+        </div>
+
+        <div class="article-btn">
+            {% if article.prev_article %}
+            <a href="{{ url_for('column.article',url=column.url_name,id=article.prev_article.id) }}" class="prev-btn">上一章</a>
+            {% endif %}
+            {% if article.next_article %}
+            <a href="{{ url_for('column.article',url=column.url_name,id=article.next_article.id) }}" class="next-btn">下一章</a>
+            {% endif %}
+        <div class="clear"></div>
+        </div>
+
+
+    </div>
+
+    {% include "_comment.html" %}
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script src="{{url_for('static', filename='js/comment.js')}}"></script>
+<script>
+    var menuList = document.getElementsByClassName('menu-list')[0];
+    var menuBtn = document.getElementsByClassName('column-menu-btn')[0];
+    menuBtn.onclick = function() {
+        if (menuList.style.display === "block") {
+            menuList.style.display = "none";
+        } else {
+            menuList.style.display = "block";
+        }
+    }
+
+    function getViewCount(id) {
+        var request;
+        if (window.XMLHttpRequest) {
+            request = new XMLHttpRequest();
+        } else {
+            request = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        request.onreadystatechange = function () { // 状态发生变化时，函数被回调
+            if (request.readyState === 4) {
+                if (request.status === 200) {
+                    respText = JSON.parse(request.responseText);
+                    viewSpans.innerHTML += respText.count;
+                } else {
+                    console.log('Ajax fail');
+                }
+            }
+        };
+        request.open('GET', '/api/view/column/'+id);
+        request.send();
+    }
+
+    var viewSpans = document.getElementsByClassName('post-view-count')[0];
+    var postId = viewSpans.attributes["postid"].value;
+    getViewCount(postId)
+</script>
+{% endblock %}

@@ -1,0 +1,4 @@
+flask==0.10.1
+flask-markdown
+pymongo==3.0.3
+gunicorn

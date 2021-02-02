@@ -1,0 +1,16 @@
+This email is sent to {{ user.email }}.
+Unsubscribe from our emails on {{URL}}/dashboard/setting#notification
+----------------
+
+Hi
+
+If you use Safari on a MacBook or iMac, you should check out our new Safari extension.
+
+It can be installed on:
+
+https://apps.apple.com/app/id1494051017
+
+As usual, let me know if you have any question by replying to this email.
+
+Best regards,
+SimpleLogin Team.

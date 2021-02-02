@@ -1,0 +1,32 @@
+language: python
+python:
+- '2.7'
+- '3.4'
+- '3.6'
+install:
+- pip install -r requirements.txt
+script:
+- python test.py
+jobs:
+  include:
+  - stage: deploy
+    python: '3.6'
+    script:
+    - pip install pygreen
+    - cd doc && npm install && npm run build && rm -r node_modules && cd ..
+    - pygreen gen -f doc docbuild
+    deploy:
+    - provider: pages
+      skip-cleanup: true
+      github-token: "$GITHUB_TOKEN"
+      local-dir: docbuild
+      target-branch: gh-pages
+      on:
+        branch: master
+    - provider: pypi
+      user: nicolasvan
+      password:
+        secure: ET7159/tdSCzpOO6l/enxNOnN3UfM9MC/nIBA8/m3KZp51mLbdKx8hDRHH3jCxpL4J6Cv5kobEw87ehzRCNjMMhparYDKSiTPe9G4pshVY6g0hKrTQXhh7MDIAiPudyrPQFFJPbj7XdW9Ld4ucaezrXgp+43ahhtS+S5tdY2Vwz+/th3B3F+3YpIJhID5gjErdcjB/sn57pABy8c0sD8jUbGagY6/u+CVzUx69XyK67wfpObCT0V51KJ08yB/8Zkn2CO0olfvPNjcTSMbEM+RXdVnUbOA6tqG3nOeQghInvAPjYlye2vDfm+tpJWlsrMHZtCM32tf9Y1gadUOAT5my0bZpqIzYBYn6ELTzWhGdzyvn9MzuEx8b5Aq7FwBPxBz3JtqQVvI2CNXfQcGJsVWkytb7z1rNjjG0zITuIgaSFUM8R6GWQXAi8LPgGvn7ShwPpau4ehUjGRlraFdBhuw9jteyJPUwpfQriHXcJB1c9TlcSMmm7zsZCLFFOGPlHcNN1/UziJ+1iWQI0pWxVhGm9g1vBhUV8n+djsfFxFDdafBxDZ/aZtjLDHNcOLNXdqjSADm/RV3W2im8JX/BpQb9l4ou2rWEYYNK50Ik3S5jzVp++26XtI7GkDzRdZQLF5OycVBoLAJEx5+MK/khqXQyFAZcZDhgBRC+3INcybr2Y=
+      on:
+        tags: true
+        branch: master

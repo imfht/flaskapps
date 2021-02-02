@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  name: nlc-icd10-classifier
+  disk_quota: 1024M
+  buildpack: python_buildpack
+  env:
+    CLASSIFIER_ID: placeholder
+    NATURAL_LANGUAGE_CLASSIFIER_APIKEY: placeholder

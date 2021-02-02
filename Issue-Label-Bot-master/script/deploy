@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+read -n 1 -r -p "Are you sure you want to deploy the app? If so, type 'publish' "
+echo    # move to a new line
+if [[ $REPLY == 'publish' ]]
+then
+    docker push hamelsmu/mlapp
+    kubectl -n mlapp apply -f $(dirname "$0")/../deployment/deployments.yaml
+    kubectl -n mlapp get pods
+fi

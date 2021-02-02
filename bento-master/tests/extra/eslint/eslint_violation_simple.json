@@ -1,0 +1,35 @@
+[
+  {
+    "filePath": "tests/integration/simple/init.js",
+    "messages": [
+      {
+        "ruleId": "no-console",
+        "severity": 1,
+        "message": "Unexpected console statement.",
+        "line": 1,
+        "column": 1,
+        "nodeType": "MemberExpression",
+        "messageId": "unexpected",
+        "endLine": 1,
+        "endColumn": 12
+      },
+      {
+        "ruleId": "semi",
+        "severity": 2,
+        "message": "Missing semicolon.",
+        "line": 1,
+        "column": 15,
+        "nodeType": "ExpressionStatement",
+        "fix": {
+          "range": [14, 14],
+          "text": ";"
+        }
+      }
+    ],
+    "errorCount": 1,
+    "warningCount": 1,
+    "fixableErrorCount": 1,
+    "fixableWarningCount": 0,
+    "source": "console.log(3)\n"
+  }
+]

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}GalaCoding - 用户资料{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>{{ user.username }}</h1>
+    <p>
+        {% if current_user.is_authenticated and user == current_user%}
+        <a href="{{ url_for('user.edit') }}">编辑</a>
+        {% endif %}
+    </p>
+    <div>
+        <img class="img-rounded profile-thumbnail" width="256px" height="256px" src="{{ user.avatar_url_auto(size=256) }}">
+        <div class="profile-header">
+            {% if user.name or user.location %}
+            <p>
+                {% if user.name %}真实姓名： {{ user.name }}{% endif %}<br/>
+                {% if user.location %}
+                来自：{{ user.location }}<br/>
+                {% endif %}
+            </p>
+            {% endif %}
+            {% if current_user.is_administrator() %}
+            <p>
+                管理员邮箱：<a href="mailto:{{ user.email }}">{{ user.email }}</a>
+            </p>
+            {% endif %}
+            {% if user.about_me %}<p>关于我：{{ user.about_me }}</p>{% endif %}<br/>
+            <p>
+                登录时间： {{ moment(user.member_since).format('LLLL') }}<br/>
+                上次登录时间： {{ moment(user.last_seen).fromNow() }}
+            </p>
+
+            <p>
+                {% if current_user.can(Permission.FOLLOW) and user != current_user %}
+                    {% if not current_user.is_following(user) %}
+                        <a href="{{ url_for('user.follow', username=user.username) }}"
+                        class="btn btn-primary">关注</a>
+                    {% else %}
+                        <a href="{{ url_for('user.unfollow', username=user.username) }}"
+                        class="btn btn-danger">取消关注</a>
+                    {% endif %}
+                {% endif %}
+                <a href="#{# {{ url_for('user.followers', username=user.username) }} #}">
+                    博客数量： <span class="badge">{{ user.posts.count() }}</span>
+                </a>|
+                <a href="#{# {{ url_for('user.followers', username=user.username) }} #}">
+                    被关注：<span class="badge">{{ user.followers.count() }}</span>
+                </a>
+                <a href="#{# {{ url_for('user.followed_by', username=user.username) }} #}">
+                    关注人数：<span class="badge">{{ user.followed.count() }}</span>
+                </a>
+                {% if current_user.is_authenticated and user != current_user and user.is_following(current_user) %}
+                | <span class="label label-default">该用户关注了你</span>
+                {% endif %}
+            </p>
+        </div>
+        {% if current_user.is_administrator() %}
+        <p>
+            <a class="btn bg-danger" href="{{ url_for('user.edit_admin', id=user.id) }}">编辑此用户</a>
+        </p>
+        {% endif %}
+    </div>
+</div>
+<div>
+    <h3>博客动态：</h3>
+    {% include '_timeline.html' %}'
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, 'main.index') }}
+    </div>
+</div>
+{% endblock %}

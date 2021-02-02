@@ -1,0 +1,31 @@
+@import "compass";
+
+/* =============================================================================
+Main layout style
+============================================================================= */
+body {
+  background-color: #efefef;
+  color: #424242;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: left; 
+}
+
+.content {
+  margin: 54px auto 5px;
+  min-height: 500px;
+  padding: 15px 0;
+  width: 940px; 
+}
+
+.hidden {
+  display: none;
+  visibility: none;
+}
+
+@import "header";
+@import "main";
+@import "footer";
+@import "login";
+

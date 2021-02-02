@@ -1,0 +1,10 @@
+*.swp
+tags
+*.pyc
+*.egg-info
+.pypirc
+.vagrant/
+.idea/
+build/
+dist/
+*.vim

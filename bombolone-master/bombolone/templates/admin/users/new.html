@@ -1,0 +1,66 @@
+{% extends "admin/index.html" %}
+
+{% block title %} New user {% endblock %}
+
+{% block ng_section %}ng-controller="UsersAdminCtrl"{% endblock %}
+
+{% block admin %}
+<h2>{{ g.users.add_user }}</h2>
+<div class="new_user">
+  <ul class="nav nav-tabs">
+    <li class="li_account active" ng-class="{active:tab_menu.selected == 'account'}">
+      <a ng-click="select_tab('account')">Account</a>
+    </li>
+    <li class="li_profile" ng-class="{active:tab_menu.selected == 'profile'}">
+      <a ng-click="select_tab('profile')">{{ g.admin.profile }}</a>
+    </li>
+    <li class="li_password" ng-class="{active:tab_menu.selected == 'password'}">
+      <a ng-click="select_tab('password')">Password</a>
+    </li>
+  </ul>
+  {% include "error/message.html" %}
+  <div class="form-horizontal" ng-controller="UsersCtrl">
+    <fieldset>
+
+      <section ng-class="{hidden:tab_menu.selected != 'account'}" data-test="tab-1">
+        {% include "admin/users/account.html" %}
+        <div class="control-group">
+          <label>Status</label>
+          <div class="controls">
+            <select ng-model="user.status">
+              <option value="" selected="selected"></option>
+              <option value="0">Disattivato</option>
+              <option value="1">Attivo</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'profile'}" data-test="tab-2">
+        {% include "admin/users/upload_image.html" %}
+        {% include "admin/users/profile.html" %}
+      </section>
+
+      <section class="hidden" ng-class="{hidden:tab_menu.selected != 'password'}" data-test="tab-4">
+        {% include "admin/users/new_password.html" %}
+      </section>
+
+      <div class="form-actions">
+        <button tabindex="200" ng-click="create()" class="btn btn-primary" data-test="submit">{{ g.users.create_user }}</button>
+      </div>
+    </fieldset>
+  </div><!-- .form-horizontal -->
+</div>
+{% endblock %}
+
+{% block js_module_names %}
+  'bombolone.controllers.usersAdmin',
+  'bombolone.controllers.users',
+  'bombolone.controllers.upload'
+{% endblock %}
+
+{% block js_module_files %}
+  "{{ '/static/js/%s' % js_version['admin/users'] }}",
+  "{{ '/static/js/%s' % js_version['controllers/users'] }}",
+  "{{ '/static/js/%s' % js_version['controllers/upload'] }}",
+{% endblock %}

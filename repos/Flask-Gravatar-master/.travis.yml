@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of Flask-Gravatar
+# Copyright (C) 2015, 2017 CERN.
+# Copyright (C) 2018 Swiss Data Science Center (SDSC)
+# A partnership between École Polytechnique Fédérale de Lausanne (EPFL) and
+# Eidgenössische Technische Hochschule Zürich (ETHZ).
+#
+# Flask-Gravatar is free software; you can redistribute it and/or modify
+# it under the terms of the Revised BSD License; see LICENSE file for
+# more details.
+
+notifications:
+  email: false
+
+sudo: false
+
+language: python
+
+cache:
+  - pip
+
+env:
+  - REQUIREMENTS=lowest
+  - REQUIREMENTS=release DEPLOY=true
+
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "pypy"
+
+matrix:
+  allow_failures:
+    - python: pypy
+  fast_finish: true
+
+before_install:
+  - "travis_retry pip install --upgrade pip setuptools py"
+  - "travis_retry pip install twine wheel coveralls requirements-builder"
+  - "requirements-builder --level=min setup.py > .travis-lowest-requirements.txt"
+  - "requirements-builder --level=pypi setup.py > .travis-release-requirements.txt"
+
+install:
+  - "travis_retry pip install -r .travis-${REQUIREMENTS}-requirements.txt"
+  - "travis_retry pip install -e .[all]"
+
+script:
+  - "./run-tests.sh"
+
+after_success:
+  - coveralls
+
+deploy:
+  provider: pypi
+  skip_cleanup: true
+  user: jirikuncar
+  password:
+    secure: RraR7dpFd+tLVdXSnjduDypCCSoqJ1Uj/zYUU2P8d9wW0EXOaNJ92OzBNDCzQmOxmkmWx793+GZWvjM28dXm+tsom7dWlYDApuWBRc9DBedM6n+/O0wtSRBU50F8Rwvi5IDThHaaY4c/9UTxZC1L7EOjQlvDxohAOmAxkmf0HWo=
+  distributions: "sdist bdist_wheel"
+  on:
+    tags: true
+    python: "3.6"
+    repo: zzzsochi/Flask-Gravatar
+    condition: $DEPLOY = true

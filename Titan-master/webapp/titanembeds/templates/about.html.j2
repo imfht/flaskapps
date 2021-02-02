@@ -1,0 +1,360 @@
+{% extends 'site_layout.html.j2' %}
+{% set title="About Titan" %}
+
+{% block content %}
+<div class="row">
+  <div class="col s12">
+    <div class="card-panel pink darken-3">
+      <span class="white-text flow-text">
+        <a href="https://docs.titanembeds.com/" class="white-text" target="_blank">
+          This about page is no longer maintained! Check out our docs to see the most up-to-date information.
+        </a>
+      </span>
+    </div>
+  </div>
+</div>
+
+
+<p class="flow-text center-align">In the beginning, there was <strong>silence</strong>.</p>
+<p class="center-align">
+    <a class="white-text" href="https://www.reddit.com/r/discordapp/comments/3tucod/embedding_discord_via_iframe_disabled/" target="_blank">People</a>
+    <a class="white-text" href="https://feedback.discordapp.com/forums/326712-discord-dream-land/suggestions/10821381-please-turn-back-on-iframe-embed-for-discord-chat" target="_blank">like</a>
+    <a class="white-text" href="https://feedback.discordapp.com/forums/326712-discord-dream-land/suggestions/18454222-embed-in-forum-chat-option" target="_blank">you</a>,
+    would <strong>LOVE</strong> to embed their Discord server on webpages... but simply, there were no other options to do such thing!
+
+<br><br><br>
+
+<p class="flow-text center-align">Well, say no more!</p>
+<!-- Say no more! :) http://vignette3.wikia.nocookie.net/mlp/images/7/70/Rainbow_Dash_%22say_no_more%21%22_S03E13.png/revision/latest?cb=20130217125130 -->
+
+<h1 class="center-align">Introducing</h1>
+<img class="center-align hide-on-med-and-down" style="width: 50%;" src="{{ url_for('static', filename='img/titanembeds.png') }}">
+<img class="center-align hide-on-large-only" style="width: 100%;" src="{{ url_for('static', filename='img/titanembeds.png') }}">
+<p class="flow-text center-align">A unique, stripped down version of your Discord server, embeddable on any webpages alike!</p>
+<br>
+<hr>
+<br>
+<h3>About</h3>
+<p>There was a time when Discord doesn't support embedding the chat on a webpage. One must go into
+extreme measures to ensure that they do not break the Cross Origin policy that Discord client is
+enforcing, which resulted in many very sad outcomes. Many users have also complained that the Discord's
+built in widget does not include the chat itself. What is the point of embedding Discord without
+chat?!</p>
+<p>This is where <strong>Titan</strong> steps in. By inviting Titan bot into your server,
+it acts like a proxy where it relays chat from your website embed to the Discord server. As
+soon as you invite Titan to your server, you will be given a unique URL/iframe code to paste
+directly onto your website.</p>
+<p>It just doesn't ends here! Titan is jam packed with many features, such as guest users
+as well as allowing Discord users to participate. Guest users will be treated similar to users without a role.
+Discord users however will inherit their own permission abilities. The client itself is designed
+with flexibility. It looks good in websites of all taste!</p>
+<p>Please note that Titan is just a mere piece of code that runs alongside of Discord. <strong style="text-decoration: underline;">It is never
+used to replace Discord itself</strong>. (that's what the mobile apps are for!)
+It is used in conjunction for a quick and dirty Discord embed for websites. Some uses include forum shoutboxes,
+etc.</p>
+
+{% include 'card_commands.html.j2' %}
+
+{% include 'card_queryparams.html.j2' %}
+
+<h3>Chat with us!</h3>
+<div class="video-container">
+    <iframe src="https://titanembeds.com/embed/295085744249110529" frameborder="0"></iframe>
+</div>
+
+<h3>Cool People</h3>
+<p class="flow-text">Keep in mind, this project is not complete without these awesome people!</p>
+<div class="row" id="cool-people">
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="{{ url_for('static', filename='img/people/endendragon.png') }}" alt="EndenDragon" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">EndenDragon</h5>
+                <p class="black-text flow-text">Project Lead</p>
+                <p class="black-text">The one who started this project. Legends say that the place he worked at (BronyTV) decided to ditch IRC for Discord, and Titan was the product of this chaos.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/aelwen.png" alt="Aelwen" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Aelwen</h5>
+                <p class="black-text flow-text">Server Witch</p>
+                <p class="black-text">This gal manages our server and figures out how to keep the hamsters in the basement in line! Without her they might all run away!</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="{{ url_for('static', filename='img/people/appledash.png') }}" alt="AppleDash" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">AppleDash</h5>
+                <p class="black-text flow-text">Server Hosting</p>
+                <p class="black-text">From the shadows of Poniverse, AppleDash swiftly jumps in and offered his server to make websockets possible!</p>
+            </div>
+          </div>
+        </div>
+    </div>
+      
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/addy.png" alt="Addy" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Addy</h5>
+                <p class="black-text flow-text">Frontend Design</p>
+                <p class="black-text">Do you know what makes CSS ticks? Me either... However with Addy, being the experienced one here, knows exactly how to cook a perfect CSS brew.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/jelle.jpeg" alt="Jelle" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Jelle</h5>
+                <p class="black-text flow-text">Wiki Author & Theme Developer</p>
+                <p class="black-text">Swiftly keeping Titan documentation up-to-date! Creates excellent themes for all to enjoy.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/codefined.png" alt="Codefined" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Codefined</h5>
+                <p class="black-text flow-text">Server Manager</p>
+                <p class="black-text">During the busy holiday season, he swooped in and kept the site online. He is very experienced and lends a friendly hand!</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/ry.png" alt="Ry" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Ry</h5>
+                <p class="black-text flow-text">Sample Text</p>
+                <p class="black-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et risus nibh.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/riva.png" alt="Riva" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Riva</h5>
+                <p class="black-text flow-text">Former Bot Hosting</p>
+                <p class="black-text">This guy hosts our lovely bot, without him Titan would probably not been that great (ahem, indefinitely offline bot).</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="/static/img/people/dotjs.jpg" alt="dotJS" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">dotJS</h5>
+                <p class="black-text flow-text">Former CSS Architect</p>
+                <p class="black-text">Although been well known for his name of JavaScript, he helped us improve the embeds with his CSS skillz.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="{{ url_for('static', filename='img/people/justmaffie.png') }}" alt="JustMaffie" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">JustMaffie</h5>
+                <p class="black-text flow-text">Former Head Developer</p>
+                <p class="black-text">Have you heard of JustMaffie? He has done quite some developing for Titan.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col s12 m6 person">
+        <div class="card-panel indigo lighten-5 z-depth-1 no-height-padding">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="{{ url_for('static', filename='img/people/semic.png') }}" alt="Semic" class="circle responsive-img">
+            </div>
+            <div class="col s10">
+                <h5 class="black-text card-title">Semic</h5>
+                <p class="black-text flow-text">Logo Designer</p>
+                <p class="black-text">From our friends over at ProCord, Semic made most of our awesome and heroic Titan logo.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<h3>Partners</h3>
+<p class="flow-text">These are awesome communities that offers amazing tools to enhance your Discord experience and are willing to promote us! So do we!! #TitanThoughtOfTheDay</p>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+          <div class="row">
+            <div class="col s12 l2">
+              <img src="{{ url_for('static', filename='img/partners/historical_european_martial_arts.png') }}" alt="" class="circle responsive-img">
+            </div>
+            <div class="col s12 l10">
+                <h5 class="black-text card-title">Historical European Martial Arts Alliance</h5>
+                <p class="black-text flow-text">The Server That You're Stabbin' to Join For</p>
+                <p class="black-text">Interested in historical combat? Ever wanted to slash, stab, lunge someone with a blade? Maybe try your hand, at unarmed? Recreate the Arts from the manuals of old, this is our hub of international fencers and instructors across the world. We spar and teach with real longswords, rapiers, shields, you name it, and will happily answer any of your questions, too.</p>
+                <a href="https://www.hemaalliance.com/club-finders/" class="waves-effect btn" target="_blank">Website</a>
+                <a href="https://discord.gg/AkQ3azJ" class="waves-effect btn" target="_blank">Discord Server</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+          <div class="row">
+            <div class="col s12 l2">
+              <img src="{{ url_for('static', filename='img/partners/lgbtq_lounge.png') }}" alt="" class="responsive-img">
+            </div>
+            <div class="col s12 l10">
+                <h5 class="black-text card-title">LGBTQ+ Lounge</h5>
+                <p class="black-text flow-text">We respect everyone, of any sexuality or gender, from any country.</p>
+                <p class="black-text">LGBTQ+ Lounge is a community that welcomes all, regardless of gender or sexuality, come to our server to enjoy yourself and make new friends and involve yourself with some of the events and activities that the staff will organise.</p>
+                <a href="https://lgbtqlounge.com/" class="waves-effect btn" target="_blank">Website</a>
+                <a href="https://discord.gg/pHETaB9" class="waves-effect btn" target="_blank">Discord Server</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+          <div class="row">
+            <div class="col s12 l2">
+              <img src="{{ url_for('static', filename='img/partners/ratelimitedme.png') }}" alt="" class="responsive-img">
+            </div>
+            <div class="col s12 l10">
+                <h5 class="black-text card-title">RATELIMITED.ME</h5>
+                <p class="black-text flow-text">A no-bullshit file hosting service.</p>
+                <p class="black-text">RATELIMITED is a no-bullshit file hosting service, offering over a dozen of domains to choose from, wildcarding on both the subdomain, and the subdirectory level, and a great support team always there to help!</p>
+                <a href="https://ratelimited.me/" class="waves-effect btn" target="_blank">Website</a>
+                <a href="https://discord.gg/S9rbnNC" class="waves-effect btn" target="_blank">Discord Server</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+          <div class="row">
+            <div class="col s12 l2">
+              <img src="{{ url_for('static', filename='img/partners/wonderfulsubs.png') }}" alt="" class="circle responsive-img">
+            </div>
+            <div class="col s12 l10">
+                <h5 class="black-text card-title">WonderfulSubs</h5>
+                <p class="black-text flow-text">The best place on the web for all things Anime!</p>
+                <p class="black-text">WonderfulSubs is an Anime entertainment site that strives to support the Anime industry while entertaining and informing people of the latest and greatest in the Anime world.</p>
+                <a href="https://www.wonderfulsubs.com/" class="waves-effect btn" target="_blank">Website</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+          <div class="row">
+            <div class="col s12 l2">
+              <img src="{{ url_for('static', filename='img/partners/project_mindfulness.png') }}" alt="" class="circle responsive-img">
+            </div>
+            <div class="col s12 l10">
+                <h5 class="black-text card-title">Project Mindfulness</h5>
+                <p class="black-text flow-text">Approaching Meditation Practically & Pragmatically</p>
+                <p class="black-text">Project Mindfulness aims to break through the cultural barriers of mysticism and secrecy often surrounding meditation and its related practices. We aim to create a radically accessible platform where as many people as possible can benefit from meditation and mindfulness.</p>
+                <a href="https://projectmindfulness.com/courses/lets-achieve-access-concentration/" class="waves-effect btn" target="_blank">Website (Start our Free Course!)</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<h3>Translators</h3>
+<p class="flow-text">Thanks to all these amazing folks who taught Titan long and hard so that it could speak your language!</p>
+<div class="row black-text">
+    <div class="col s12">
+        <div class="card-panel indigo lighten-5 z-depth-1">
+            <ul>
+              {% for language in constants.LANGUAGES %}
+              <li>
+                <span class="flow-text">{{ language["name_en"] }} ({{ language["name"] }}) [{{ language["code"] }}]</span>
+                <ul class="browser-default">
+                  {% for translator in language["translators"] %}
+                  <li>{{ translator["name"] }} (<a href="https://crowdin.com/profile/{{ translator["crowdin_profile"] }}" target="_blank">{{ translator["crowdin_profile"] }}</a>)</li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% endfor %}
+            </ul>
+            <p>Wish Titan supported your language? Consider contributing to our <a href="http://translate.titanembeds.com/" target="_blank">CrowdIn project</a>! </p>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js" integrity="sha256-YFADoQJIYFj+isdXssMGUrmsVNbVDfN5m8jPgVN+9m4=" crossorigin="anonymous"></script>
+
+<script> 
+    $(function() {
+        var $container = $('#cool-people');
+        $container.masonry({
+            itemSelector: '.person'
+        });
+    });
+</script>
+{% endblock %}

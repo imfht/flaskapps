@@ -1,0 +1,34 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.room-selector {
+  .selected-rooms-row {
+    padding-top: 0 !important;
+
+    .rooms-list {
+      max-height: 140px;
+      overflow: hidden;
+      overflow-y: auto;
+
+      :global(.item) {
+        display: flex;
+        overflow: hidden;
+        align-items: center;
+
+        .room-actions {
+          margin-left: auto;
+          display: flex;
+          align-items: center;
+        }
+
+        .room-actions :global(.icon.remove) {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

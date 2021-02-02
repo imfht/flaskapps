@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% from 'forms/_form.html' import form_header, form_row, form_rows, form_fieldset, form_footer %}
+
+{% block title %}{% trans %}Hello there!{% endtrans %}{% endblock %}
+
+{% block head %}
+    {{ webpack['module_bootstrap.js'] }}
+{% endblock %}
+
+{% block body %}
+    <div class="bootstrap-header">
+        <img class="header-logo" src="{{ url_for('assets.image', filename='logo_indico_white.png') }}">
+        <div class="header-title">{% trans %}Hello there!{% endtrans %}</div>
+        <div class="header-subtitle">{% trans %}Indico needs just a little bit more data from you...{% endtrans %}</div>
+        {% if languages and session.lang in languages %}
+            <div id="language-selector" class="toolbar language-selector">
+                <a class="i-button transparent-button borderless icon-earth arrow js-dropdown" data-toggle="dropdown">
+                    {{ languages[session.lang][0] }}
+                </a>
+                <ul class="i-dropdown">
+                    {% for name, (title, territory) in languages|dictsort(by='value') %}
+                        <li>
+                            {% if name == session.lang %}
+                                <a class="disabled" title="{% trans %}This is your current language.{% endtrans %}">
+                                    {{- title }} ({{ territory }})
+                                </a>
+                            {% else %}
+                                <a data-href="{{ url_for('core.change_lang') }}"
+                                data-method="POST"
+                                data-params='{{ {'lang': name}|tojson|forceescape }}'
+                                data-reload-after
+                                data-ajax>
+                                    {{- title }} ({{ territory }})
+                                </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="bootstrap-body">
+        {% include 'flashed_messages.html' %}
+        {{ form_header(form, method='post', id='bootstrap-form', orientation='', classes='bootstrap-form') }}
+        <div class="step-wrapper" id="step1">
+            <div class="step-icon">
+                <i class="icon-user"></i>
+            </div>
+            <div class="center step-container">
+                <h1 class="step-title">{% trans %}Administrator Account{% endtrans %}</h1>
+                <div class="step-description">
+                    <div>{% trans %}Insert here all basic information needed to create your account.{% endtrans %}</div>
+                    <div class="additional-information">
+                        {%- trans -%}
+                            You can change any extra parameters (like your address or phone number) afterwards by
+                            accessing "Account Details" (from "My Profile").
+                        {%- endtrans -%}
+                    </div>
+                </div>
+                <div class="fields-container">
+                    {{ form_rows(form, fields=('first_name', 'last_name', 'email', 'username', 'password',
+                                               'confirm_password'), placeholder=true) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="step-wrapper" id="step2">
+            <div class="step-icon">
+                <i class="icon-earth"></i>
+            </div>
+            <div class="center step-container">
+                <h1 class="step-title">{% trans %}Site configuration{% endtrans %}</h1>
+                <div class="step-description">
+                    <div>{% trans %}These are the default parameters for your Indico site.{% endtrans %}</div>
+                    <div class="additional-information">
+                        {%- trans -%}
+                            Please note that this information will also be used for your own user profile. You can
+                            change it later.
+                        {%- endtrans -%}
+                    </div>
+                    <div class="additional-information">
+                        {%- trans -%}
+                            The time zone for the server has been set to {{ timezone }} and can be modified in
+                            <span class="mono">indico.conf</span>.
+                        {%- endtrans -%}
+                    </div>
+                </div>
+                <div class="fields-container">
+                    {{ form_rows(form, fields=('affiliation',), placeholder=true) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="step-wrapper" id="step3">
+            <div class="step-icon">
+                <i class="icon-mail"></i>
+            </div>
+            <div class="center step-container">
+                <h1 class="step-title">{% trans %}Let us know you exist!{% endtrans %}</h1>
+                <div class="step-description">
+                    <div>
+                        {%- trans -%}
+                            Be part of the ever growing Indico community! Choose to receive news on the latest
+                            releases (2–3 times per year) as well as important security advisories.
+                        {%- endtrans -%}
+                    </div>
+                    <div>
+                        {% trans %}The following data will be sent to the Community Hub:{% endtrans %}
+                        <ul>
+                            <li>{% trans %}Server URL{% endtrans %}</li>
+                            <li>{% trans %}Indico version installed{% endtrans %} ({{ indico_version }})</li>
+                            <li>{% trans %}Python version used{% endtrans %} ({{ python_version }})</li>
+                            <li>{% trans %}Postgres version used{% endtrans %} ({{ postgres_version }})</li>
+                            <li>{% trans %}Operating system used{% endtrans %} ({{ operating_system }})</li>
+                            <li>{% trans %}Debug mode{% endtrans %} ({{ _('enabled') if config.DEBUG else _('disabled') }})</li>
+                            <li>
+                                {%- trans -%}
+                                    Basic statistics (number of events, contributions and users)
+                                {%- endtrans -%}
+                            </li>
+                            <li>{% trans %}Server default language{% endtrans %}</li>
+                            <li>{% trans %}Contact person{% endtrans %}</li>
+                            <li>{% trans %}Affiliation of your Indico server{% endtrans %}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        {%- trans -%}
+                            Please note that <strong>no private information</strong> will ever be sent to the
+                            Community Hub or the Indico Project and that you can disable it any time (from the
+                            "Community Hub" section of the administrative area).
+                        {%- endtrans -%}
+                    </div>
+                </div>
+                <div class="fields-container">
+                    {{ form_rows(form, fields=('enable_tracking', 'contact_name', 'contact_email'), placeholder=true) }}
+                    {% if show_local_warning %}
+                        {% include 'cephalopod/not_prod_warning.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% call form_footer(form, i_form=true) %}
+            <input type="submit" id="submit-bootstrap" class="i-button highlight big"
+                   value="{% trans %}Finish{% endtrans %}"/>
+        {% endcall %}
+    </div>
+{% endblock %}

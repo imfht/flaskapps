@@ -1,0 +1,489 @@
+TODO:
+
+See http://wiki.sagemath.org/SageTasks for a related list.
+
+[ ] Fix this:
+    sage: pwd --> '/some/random/directory'
+    sage: notebook()  # then let the notebook start up, then hit ctrl-c
+    sage: pwd -->  '/Users/palmieri/.sage'  
+
+[ ] admin should *NOT* see all users worksheets.  This is not good, e.g., 
+when there are 50,000 worksheets!
+
+[ ] Clicking publish should update the "last changed" time.  E.g.,
+take an old worksheet and publish it -- should always make it new.
+
+[ ] change number word wrap columns in notebook settings has no immediate impact, though it
+does after restarting the server. 
+
+[ ] implement base_url
+
+[ ] make communication between twist.py and notebook_lib.js use JSON
+instead of encode_list and response_text.split.
+
+[ ] Get peter.jipsen's "canvas3d_lib.js + Pre3d does shaded surfaces" into Sage
+
+[ ] codenode's engine/interpreter.py has a function with this comment:
+        """input_string could contain multiple lines, multiple commands, or
+        multiple multiline commands. This method builds a compiled command
+        line by line until a complete command has been compiled. Once it
+        has a complete command, it execs it in the username space and the
+        output is stored in the output trap. There may be more than one
+        command; the number of complete commands is counted
+        (Based off of ipython1.core.shell.InteractiveShell._runlines)"""
+This approach means that in codenode we would have
+{{{
+a = 5; b = 7
+a+b
+a-b
+print a*b
+///
+12
+-2
+35
+}}}
+which is more natural, since it mimics the command line.   We should change Sage
+so it does the same.  I think this would simply involving changing the
+interfaces/* stuff a little.  This is probably easy, and is now high priority since
+it is something that has bugged me for a long time. 
+
+[ ] idea from codenode: in their revisions log they label each
+ revision with two columns, one being the last changed input in that
+ worksheet (meant to jar ones memory), and second the total number of
+ cells.
+
+[ ] "shift-enter to save tinymce cell" on safari goes "beep", which is
+annoying
+
+[ ] make it possible to set the default font in tinymce
+
+[ ] The startup of the notebook involves reading all the directories
+and creating worksheets.  This takes anywhere from 5 minutes to an
+*hour* with sagenb.org.  So this *must* be fixed to be massively
+faster.  This is a top optimization priority.
+
+[ ] download just the text version of the worksheet
+
+[ ] "untitled renaming".  Make it an option in the user confs, which
+is on by default, by you can turn it off.
+
+
+[ ] get coverage to 100%.
+
+
+[ ] we can make it so that if worksheet.html file changes on disk but
+not currently open, then when reopen it uses the new version from
+disk.  More precisely, make it so "save and quit" deletes body of
+worksheet, so if user opens that worksheet again it'll grab the
+content from disk.
+
+[ ] page through list of worksheets (don't show hundreds at once)
+
+[ ] do something about this in worksheet.py
+    def autosave(self, username):
+        return
+
+[ ] add info about when user last logged in to user.py.
+
+[ ] way to send all registered users an email
+
+[ ] instructions about running a daemon sage server with conf scripts:
+http://groups.google.com/group/sage-support/browse_thread/thread/b0d15b82eea3d652
+
+[ ] "data" link appears in reference implementation in output of every cell
+
+[ ] filesize limit -- option so that any computation that produces a
+file that exceeds a certain size would get deleted and replaced by a
+message.  This would limit (though not prevent) damages.
+
+[ ] Jonathan Gutow -- redo how jmol works
+
+
+
+[ ] maybe get rid of list of 'Sage Users' when publishing worksheets --
+that's not appropriate given how sage has grown.
+
+[ ] notebook(default_mode="python") way to make the notebook default
+to use python instead of sage.
+
+[ ] fulltext -- when output long, make it all available with a link
+even before computation finishes, and definitely if it is interrupted!
+
+[ ] write an overview of how the sage notebook works: http://wiki.sagemath.org/SageNotebook
+
+[ ] switch from twisted.web2 to twisted.web.  Alex Clemesha says
+"Pretty easily actually... the Resource object is pretty similar, the
+main difference is that the Web2 Resource object has the "locateChild"
+method, where as the Web Resource has "getChild" - and even those are
+pretty similar.  Also, there's some subtle differences in the way you
+doing "rendering"... i.e. with Web2 you subclass
+Resource/PostableResource and then you use the "render" method, where
+are with Web you just subclass Resource and implemented either
+"render_GET" or "render_POST".  Probably just looking through the
+examples here: http://jcalderone.livejournal.com/tag/sixty+seconds
+would be good enough to do the switch."
+
+[ ] move is_valid_username (etc.) out of twist.py, which is definitely *not* where it belongs
+
+[ ] ldap support (see, eg., http://math.univ-lyon1.fr/~tdumont/sage)  but make sure to first
+    abstract away authentication first so it is much CLEARER.
+
+
+[ ] find a way to provide same info as data directory but without making it super-permissive.
+    Maybe I can make an api for getting files from a data location or something...
+
+[ ] control-c doesn't quite work for reference implementation quitting notebook server
+
+
+[ ] make it so uploading a worksheet does not lock the server like it does now.
+
+[ ] secure mode outside of sage -- fix it to work with openssl, etc.
+
+[ ] more stress testing, etc., using mechanize: http://wwwsearch.sourceforge.net/mechanize/
+
+[ ] have a worksheet export screen and the option to save just certain
+parts (e.e., images, DATA, etc.) with checkboxes.
+
+[ ] change api for notebook command; in particular enable capability
+    to have different sage command on remote machine
+
+[ ] worksheet processes using named pipes
+
+[ ] code to benchmark notebook externally
+
+[ ] implement %cython mode outside sage (and as a full mode?)
+
+[ ] worksheet processes using server on remote machine
+
+[ ] worksheet processes using fork
+
+[ ] worksheet process using multiprocessing 
+
+[ ] genuine infinite undo implemented not using stupid snapshots but a revision log
+
+[ ] @interact: make it so docstring of function is somehow nicely typeset and accessible
+
+[ ] @interact's that can be included with sage
+
+[ ] "browse your computer" field of upload is not editable.  fix that.
+
+[ ] improve tracebacks of % modes, e.g., %python then 1/0 is ugly.
+
+[ ] and small hint about google accounts: in gmail at the bottom is a
+"last account activity" line and if you click on details, you can see
+what has happened recently. login IPs, type and time. you can also
+invalidate all other sessions on other PCs where cookies are stored.
+
+[ ] somehow connect http://qwebirc.org with Sage?
+
+[ ] statistics of notebooks, e.g., how many per user, names of all
+users, how many users?
+
+[ ] a way to put a code block between two text blocks that lie one
+right after the other.
+
+[ ] component architecture (??): see Brickenstein sage-devel email 
+  that mentions http://python-rum.org/browser/rum/component.py
+
+[ ] use memory mapped files for worksheet processes??
+http://docs.python.org/library/mmap.html
+
+
+
+
+============
+
+
+DONE:
+[x] preparser
+[x] make sure all "/" is replaced by os.path.join, so will work on windows eventually.
+[x] worksheet_process.py -- make it so graphics work, i.e., files created
+[x] jsmath
+[x] static documentation
+[x] jmol
+[x] tinymce
+[x] @interact -- need to properly preparse and base64 encode maybe?
+[x] live documentation
+[x] introspection
+[x] fill in not implemented stuff
+[x] %cython
+[x] control-c to stop notebook
+[x] write pexpect based worksheet process system using the filesystem as before.
+[x] reference should have restart reset state
+[x] one user running another user's sage install on OS X -- Abort!
+[x] implement ulimit/ssh/etc options like before
+[x] good error message on crash of the sage process...
+[x] max_walltime -- doesnt' work
+[x] push my hg repo somewhere
+[x] start public demo server using ssh
+[x] simple notebook stress test
+[x] trim list of alternative notebooks sessions when not run as part of sage.
+[x] secure mode with sage present -- fix it
+[x] uploading: "rbeezer -- williamstein: I tried one URL, one on disk,
+both came back "internal server error" - I can try a few more.  Do you
+want bugs in Trac or Google group"
+[x] open(DATA+'/foo.txt','w')
+DATA directory permissions issue -- the whole design of the "DATA" directory needs to be redone, since I vastly improved the security model of how the two-user notebook works (now all computations are done by a user that does *not* have permission to view or change *anything* in the server's sage_notebook directory -- everything happens in /tmp -- this is a VAST improvement, but means that DATA directory just doesn't work anymore as implemented). 
+[x] "Upload or create data file attached to the worksheet '%s'"
+[x] pure python mode now broken with expect implementation -- every input crashes worksheet
+[x] notebook(...) command should *not* remember options from last run. that's just obnoxious.
+[x] Downloading a file from data doesn't work
+[x] data dropdown doesn't list uploaded files
+[x] publishing + automically republish crashes with internal server error (harald schilly reported)
+[x] "edit a copy" doesn't work [for published]
+[x] "download" from published doesn't work right.
+[x] (invalid) permissions of .sagenb directory:
+drwxr-xr-x    5 wstein     staff    170 Sep 26 15:28 .sagenb
+this is a problem unless we just switch back to using .sage directory in official release (which we will do!)
+[x] notebook server should take ownership of all files it gets back
+[x] Uploading file (button at bottom of page is misleading).
+[x] (invalid) make patch to remove notebook from sage itself.
+    We *can't* do this, because if we do, then old notebooks can't be migrated.  Ouch.
+[x] make sure that the old notebook directory "just works" with the
+new notebook: problem -- old notebooks unpickle into the old notebook
+code.
+[x] discard and quit crashes weirdly with *this* worksheet:
+http://buzzard.ups.edu/private/Sample.sws (this was fixed by getting
+rid of the conf.sobj useless crap, which according to hg I = William
+Stein wrote! ouch)
+[x] expect-based worksheet process without ssh and with ulimit -- see todo in interfaces/expect.py
+[x] make it so usernames can be shorter/more arbitrary (requested by tom boothby, and he has a point)
+[x] make an official spkg for inclusion in sage-4.1.2.
+[x] show(plot(sin)); show(plot(cos))  only shows one plot
+[x] reimplement sphinx introspection. 
+    * confdir in cell.py won't work without a trivial Sphinx directory, when not in Sage. make it.
+[x] sphinx: crazy insane whitespace -- see screenshot here:
+      http://sage.math.washington.edu/home/wstein/patches/whitespace.png
+    got from E = EllipticCurve([0,-39409298,0,5554231502,0]); 
+    E.Lambda(<tab>
+[x] "Sign into the Sage Notebook v" <-- missing version number
+[x] version not listed in upper left corner of worksheet either
+
+[x] sphinx: get math macros working on sphinx mode, e.g., if you do "ZZ?" you
+    see "ZZ" in the docstring, but should get a bold ZZ.
+[x] Copy your "a random test worksheet full of stuff". Go to
+ "Data|foo.txt"; Change the text; Click "Save Changes" An error page appears.
+
+[x] sphinx: factorial?? hangs
+
+[x] bug search_doc(...) reported by victor miller
+
+[x] migration didn't update user's conf field.
+
+[X] loading of old worksheets -- need to deal with {{{ --> <pre>{{{ change.
+
+[x] move password over to new notebook.
+
+[x] new filestructure
+
+
+[x] sagenb.org itself currently has about 50,000 worksheets.  Loading them all on
+startup -- even there conf info, isn't a good idea.  At 10ms each, which is what it
+would take given using YAML, that would be 100/second or 500 seconds to load!
+And that's just the metadata.  Another option would be to "load" a very lightweight
+version of the worksheets, with no metadata exception owner and id_number.
+Then the first time any additional metadata is needed about a specific worksheet,
+load it from disk. E.g., for our 50000 on sagenb.org, it's very rare any particular
+one is needed. ...   I'm just using pickle, which works fine for 50000 worksheets...
+
+[x] rewrite this in notebook.py:     
+     def export_worksheet(self, worksheet_filename, output_filename, verbose=True):
+
+[x] make sure latest worksheet state is what is dumped when saving
+worksheet, including the name
+
+[x] id_number: for a given user must never repeat -- store id with username
+[x] change notebooks so they use a 100% sobj free data format for
+storage, so that code refactoring is possible.  The plan is to do this
+little by little, until no sobjs are needed.  Subtodolist:
+
+TODO: 
+   * implement to/from basic for server data
+   * add that to data store
+   * implement all worksheet data (except ratings) being stored in worksheet
+     in say a JSON or Python header?  Maybe even make this info programmatically 
+     accessible in worksheet?
+   * switch over to using new model
+   * when transitioning put new notebook in a directory with .sagenb extension:
+         sage_notebook.sagenb
+
+  [x] worksheets -- the file worksheet.txt + filesystem
+  [x] worksheet attributes:   
+  [x] list of worksheets -- determined by the filesytem
+  [x] notebook:
+  [x] user:
+[x] last cell: "exceptions.AttributeError: TextCell instance has no attribute 'evaluate'"
+
+[x] yikes: one run two notebook servers on the same directory at same time (?)
+
+[x] delete worksheet doesn't work, in sense that delete, quit notebook
+    server, restart, then worksheets are back!
+
+[x] rewrite file upload, noting a remark in the python docs (!)
+Warning: Never extract archives from untrusted sources without prior
+inspection. It is possible that files are created outside of path,
+e.g. members that have absolute filenames starting with "/" or
+filenames with two dots "..".
+
+Incidentally, this implies somebody could hack the Sage notebook
+server by uploading a foo.sws that overwrites key information, e.g.,
+nb.sobj or worksheet source code (!)
+
+[x] docstring bug:
+import numpy
+numpy.load?
+
+[x] (wontfix) additional user conf data beyond just username/password could just
+be stored in the user's home directory -- that would make the only
+slow power of save/load faster.
+
+[x] delete "class PublicWorksheetsHome(resource.Resource):" since it is not used.
+
+[x] running worksheets not explicitly listed as running in /home/ display
+
+[x] stop button in home screen should save worksheet.
+
+[x] search worksheets should include title
+
+[x] get rid of file menu in big worksheet list -- it is probably
+massively slowing things down, and serves no real purpose (and google
+docs got rid of it).   Also make the worksheet titles bolder and black.
+
+[x] check that autopublish activating and deactiving didn't get
+totally broken.  That code was very confusing.
+
+[x] clean up the other abstract_storage layers (maybe get rid of them?):
+     1. delete all of the others (ouch!)
+     2. rename simple_filesystem.py --> filesystem_storage.py
+
+[x] fix DownloadWorksheets object to be truly async, since that will
+clarify to me how to improve a lot of other things.
+[x] force choice of title
+[x] make it so new notebooks work
+
+[x] Starting w/o an existing .sage, I get exceptions.KeyError: "No key
+ 'email' and no default for this key" with the latest
+  sagenb, if I click on "Settings" as admin.
+  Actually, simply clicking "Sign out" triggers the 'email' KeyError, 
+[x] http://trac.sagemath.org/sage_trac/ticket/7110
+
+[x] add the new sagenb icon from here somehow:
+http://groups.google.com/group/sage-notebook/pendmsg?hl=en
+
+[x] accounts=True is broken
+[x] after migration last modified times wrong?
+[x] login doesn't work anymore, but does if you make a new account
+
+[x] DATA directory not copied over during migration.
+
+[x] after migration the fact that a worksheet was published is lost
+
+[x] implement loading of old-format worksheets: reading old worksheet
+   format (see "def edit_save_old_format(self, text):" in
+   worksheet.py)
+
+[x] (seems fixed, but need to test more later) server_pool -- keeps getting set to null in server conf?
+
+[x] I could make DATA be of the form: DATA = ...' + os.path.sep which
+ on UNIX would still have / at the end and on Windows would end in \.
+ Should I do that?
+
+[X] Jason Grout: "I don't like that the icon takes up a lot of vertical space that is not
+used otherwise.  On a computer projector at 800x600 or 1024x768,
+especially with a mac where you can't make the browser go full-screen,
+the vertical real-estate is premium.  Ideally, when you "Toggle" the
+header, there would be only one line at the top of the notebook before
+the cells start.
+
+At the very least, maybe putting the version number right under "Sage
+Notebook" would justify the extra vertical space.  I think it would be
+better if the icon were only one line high, and the toggle collapsed
+everything to one line."
+
+[x] Incorporate "parenthesis matching introduced in trac #3646"
+
+
+[x] BUG: This traceback occurs several times with with sagenb.org:
+            return super(Resource, self).http_GET(request)
+            s = notebook.html(worksheet_filename = self.name,  username=self.username)
+          File "/home/sage/sage_install/sage/local/lib/python2.6/site-packages/sagenb/notebook/notebook
+.py", line 1833, in html
+
+          File "/home/sage/sage_install/sage/local/lib/python2.6/site-packages/sagenb/notebook/workshee
+t.py", line 2336, in html
+            for cell in self.cell_list():
+        exceptions.UnicodeDecodeError: 'ascii' codec can't decode byte 0xc2 in position 825: ordinal no
+t in range(128)
+
+[x] jsmath image fonts spkg (especially on sagenb.org!):
+
+[x] easy way for admin to change people's password
+
+[x] Review and incorporate http://trac.sagemath.org/sage_trac/ticket/7110
+
+[x] make it so the set of worksheets for a given user is 100% determined by the filesystem, not the nb sobj
+
+[x] make it so the conf object is not an sobj
+
+[x] worksheet process -- runs as another unix user.
+[x] deprecate the objects directory (see notebook.py) -- I think this
+is used nowhere
+
+[x] "When I try to save a worksheet on uw... I first get "undefined" in
+Safari 4.0.3, and then the second time I click a save button it works
+fine.  This *always* happens." -- from kcrisman
+[x] "Save as" option when downloading worksheets (requested by bill
+page) " prompts you with a pop-up for a name in the same way as
+'Rename worksheet' and then does a Save.
+[x] If a worksheet is still named "untitled" then perhaps the system
+should not just blindly save it with that pseudo-title when you click
+'Save' but rather automatically pop-up the rename box and invite the
+user to change it before saving.
+[x] BUG "$D<1$ is good." renders without leaving the $-environment
+
+[x] when printing to pdf the output is shown twice. 
+
+[x] insert new cell above text cells (finish fixing bug)
+
+
+[x] synchronization between the browser and server. 
+
+[x] permissions issues -- since the DATA directory must be readable,
+currently by default all the directories are *readable*, including
+history, output etc.  Definitely history should be made readable only
+by the server, and the conf files (including user accounts) should be
+forced to be only readable by the server on startup (no matter what
+the user sets up).
+
+[X] I saw this traceback: "	    ).addCallback(lambda res: self.render(request))
+	  File "/Users/wstein/sage/build/64bit/sage/local/lib/python2.6/site-packages/sagenb/notebook/twist.py", line 1146, in render
+	    worksheet.check_comp()
+	  File "/Users/wstein/sage/build/64bit/sage/local/lib/python2.6/site-packages/sagenb/notebook/worksheet.py", line 3122, in check_comp
+	    c = self.best_completion(out, C._word_being_completed)
+	exceptions.AttributeError: Cell instance has no attribute '_word_being_completed'"
+[x] Also remove 'cell_input_color':'#000000',
+'cell_output_color':'#0000EE', since I think they are used nowhere.
+Also, server confs is a weird place to put such things.
+Alternatively, actually use these.
+
+[x] Deprecate "Number of backups" from server settings, since backups
+aren't made anymore.  Or use this somehow.
+
+[x] When saving a worksheet, the default filename has "..." in it. 
+
+[x] add message to the top of each *old* sage notebook .py file
+ stating that one should work on sagenb instead.  This is a patch to
+ the core Sage library.
+
+[x] fix all doctests in sagenb code and make a patch against core
+sage library that imports enough of sagenb by default so I can 
+run all these doctests.  
+
+[x] rate a worksheet -- note that the top of the browser (title) says
+error, though in fact there is no error.
+
+[x] change to 100% html format for worksheets.
+
+[x] notebook docs -- something in "doc/en/sagenb"
+
+[x] automated testing -- "Windmill seems to be more popular now -- especially with Python stuff "

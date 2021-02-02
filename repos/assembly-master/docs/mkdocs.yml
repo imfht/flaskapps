@@ -1,0 +1,69 @@
+
+site_name: Assembly
+site_description: ""
+site_url: "https://mardix.github.com/assembly"
+copyright: 'Copyright &copy; 2020 - Forever Mardix'
+
+repo_url: https://github.com/mardix/assembly
+repo_name: "assembly"
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'pink'
+    accent: 'deep purple'
+  font:
+    text: 'Ubuntu'
+    code: 'Ubuntu Mono'
+  logo:
+    icon: 'local_florist'
+  feature:
+      tabs: false
+
+ 
+markdown_extensions:
+  - admonition
+  - codehilite
+  - markdown_include.include:
+      base_path: docs
+
+
+
+
+pages:
+  - Overview: index.md
+  - Installation: install.md 
+  - Architecture: architecture.md
+  - Tutorials: tutorials.md  
+  - Configuration: config.md 
+  - Views: application/views.md
+  - Models: application/models.md
+  - Templates: application/templates.md
+  - Static: application/static.md
+  - wsgi.py: wsgipy.md  
+  - Advanced:
+    - Core: advanced/core.md
+    - Request: advanced/request.md
+    - Response: advanced/response.md
+    - Redirect: advanced/redirect.md
+    - Signals: advanced/signals.md
+    - Date: advanced/date.md
+    - Form Validations: advanced/form-validations.md
+    - Caching: advanced/caching.md    
+    - CSFR: advanced/csrf.md
+    - Mail: advanced/mail.md
+    - Storage: advanced/storage.md
+    - Flash: advanced/flash.md
+    - Login Manager: advanced/login-manager.md
+    - Pagination: advanced/pagination.md    
+    - Utils: advanced/utils.md    
+    - Error Handling: advanced/error-handling.md  
+    - Sessions: advanced/sessions.md      
+    - Cookies: advanced/cookies.md      
+  - CLI: cli.md
+  - Deployment: deploy.md
+  - Contribute: contribute.md
+  
+  
+
+

@@ -1,0 +1,50 @@
+[flake8]
+max-line-length = 120
+
+# colored output
+format = ${cyan}%(path)s${reset}:${yellow_bold}%(row)d${reset}:${green_bold}%(col)d${reset}: ${red_bold}%(code)s${reset} %(text)s
+
+# decent quote styles
+inline-quotes = single
+multiline-quotes = single
+docstring-quotes = double
+avoid-escape = true
+
+exclude =
+    build
+    dist
+    docs
+    ext_modules
+    htmlcov
+    indico.egg-info
+    node_modules
+    .*/
+    indico.conf
+    # TODO: remove the next two entries and use extend-exclude once flake8 3.8.0 is out
+    .git
+    __pycache__
+
+ignore =
+    # allow omitting whitespace around arithmetic operators
+    E226
+    # don't require specific wrapping before/after binary operators
+    W503
+    W504
+    # allow assigning lambdas (it's useful for single-line functions defined inside other functions)
+    E731
+    # while single quotes are nicer, we have double quotes in way too many places
+    Q000
+    # for non-docstring multiline strings we don't really enforce a quote style
+    Q001
+
+per-file-ignores =
+    # signals use wildcard imports to expose everything in `indico.core.signals`
+    indico/core/signals/event/__init__.py:E402,F403,F401
+    indico/core/signals/__init__.py:F403,F401
+    # allow long lines in migrations (only do that for raw SQL please)
+    indico/migrations/versions/*.py:E501
+    indico/util/mdx_latex_test.py:E501
+    # allow nicely aligned parametrizations
+    indico/*_test.py:E241
+    # sphinx config has many commented-out variables with no space after `#`
+    docs/source/conf.py:E265

@@ -1,0 +1,76 @@
+<div class="nav-left-sidebar sidebar-dark">
+    <div class="menu-list">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-column">
+                    <!--
+                    <li class="nav-divider">
+                        Links
+                    </li>
+                    -->
+                    <li class="nav-item ">
+                        <a id="queues_link" href="#" class="nav-link" aria-expanded="false">
+                            <i class="fab fa-fw fa-wpforms"></i>
+                            Queues
+                        </a>
+                    </li>                   
+                    <li class="nav-item">
+                        <a id="workers_link" href="#" class="nav-link" aria-expanded="false">
+                            <i class="fa fa-fw fa-rocket"></i>
+                            Workers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false"
+                            data-target="#jobsmenu" aria-controls="jobsmenu">
+                            <i class="fas fa-fw fa-chart-pie"></i>
+                                Jobs
+                        </a>
+                        <div id="jobsmenu" class="collapse submenu" style="">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                                        data-target="#jobstatus" aria-controls="jobstatus" 
+                                        aria-expanded="false">
+                                        Job Status
+                                    </a>
+                                    <div id="jobstatus" class="submenu collapse" style="">
+                                        <ul class="nav flex-column">
+                                            {% for job_status in rq_possible_job_status %}
+                                            <li class="nav-item jobstatuslistitem">
+                                                <a class="nav-link" href="#">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" checked="checked" class="custom-control-input" id="{{job_status}}">
+                                                        <label class="custom-control-label active" for="{{job_status}}">{{job_status}}</label>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                                        data-target="#fromqueues" aria-controls="fromqueues" 
+                                        aria-expanded="false">
+                                        Selected Queues
+                                    </a>
+                                    <div id="fromqueues" class="submenu collapse" style="">
+                                        <div id="sidebar_queues">
+                                            {% include 'rqmonitor/sidebar_queues.html' %}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

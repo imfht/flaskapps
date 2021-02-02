@@ -1,0 +1,138 @@
+/* base styles
+-------------------------------------------------- */
+
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    font-size: 100%;
+    background-color: #fff;
+}
+
+#footer {
+    height: 30px;
+    position: relative;
+}
+
+#formupload {
+    height: 400px;
+    width: 100%;
+    font-family: monospace;
+}
+
+#files p {
+    word-break: break-all;
+}
+#files p .break-word {
+    word-break: break-word;
+    font-weight: normal !important;
+}
+
+#filelist {
+    height: auto;
+    width: 100%;
+    font-family: monospace;
+}
+
+.fileupload-abort {
+    float: right;
+    margin-left: 10px;
+}
+
+.dropzone {
+    width: 100%;
+    padding: 3em;
+}
+
+#wrapper {
+    min-height: 100%;
+    margin: 0 auto -30px;
+    padding: 0 0 60px;
+}
+
+#wrapper > .container {
+    padding: 0 15px 60px;
+}
+
+.jumbotron .fa {
+    font-size: 80px;
+}
+
+.jumbotron {
+    font-size: 100%;
+    text-align: center;
+}
+
+.alert {
+    padding: 5px 10px;
+}
+
+.alert-processing {
+    color: #464646;
+    background-color: #f0f0f0;
+    border-color: #eeeeee;
+}
+
+.alert-processing hr {
+    border-top-color: #e6e6e6;
+}
+
+.alert-processing .alert-link {
+    color: #959595;
+}
+
+/* if data is too wide, show scrollbars */
+.data {
+   width: 100%;
+   overflow: auto;
+}
+
+.line-highlight {
+    background-color: #ffc;
+}
+
+/* override pygments table highlighting style */
+table.highlighttable {
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+}
+
+.linenodiv pre, .highlight pre {
+    margin-bottom: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding: 9.5px;
+}
+
+.highlight p {
+    margin: 0;
+    padding: 0 0.7em;
+}
+
+.linenodiv pre {
+    border-right-style: none;
+}
+
+.linenodiv pre a:hover {
+    text-decoration: none;
+}
+
+.highlight pre {
+    padding-left: 0;
+    padding-right: 0;
+    border-left: 1px solid #ccc;
+}
+
+/* Set minimal width and let the contents push the block width */
+.linenos {
+    width: 1px;
+}
+
+/* autocomplete for modify dialog */
+.ui-autocomplete {
+    z-index: 1065;
+}

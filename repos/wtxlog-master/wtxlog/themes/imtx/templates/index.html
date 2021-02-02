@@ -1,0 +1,37 @@
+{% extends theme('layout.html') %}
+
+{% block fulltitle %}
+    {{ label('index_title') or config['SITE_NAME'] }}
+    {% if pagination %}{% if pagination.page > 1 %}_第{{ pagination.page }}页{% endif %}{% endif %}
+{% endblock %}
+{% block keywords %}{{ label('index_keywords') }}{% endblock %}
+{% block description %}{{ label('index_description') }}{% endblock %}
+{% block author %}{{ config['SITE_NAME'] }}{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ request.base_url }}" />
+  <meta name="mobile-agent" content="format=html5;url={{ request.base_url }}"/>
+  <meta name="mobile-agent" content="format=xhtml;url={{ request.base_url }}"/>
+{%- endblock %}
+
+{% block crumbwrap %}{% endblock %}
+
+{% block logo %}<h1 class="logo">{{ logo() }}</h1>{% endblock %}
+
+{% block main %}
+  {% include theme('article_lists.html') %}
+{% endblock %}
+
+{% block friendlinks %}
+
+{% with flinks = friendlinks() %}
+{% if flinks %}
+<h2>Links</h2>
+<ul>
+  {% for flink in flinks -%}
+  <li><a href="{{ flink.url }}" title="{{ flink.title }}" target="_blank">{{ flink.anchor }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}

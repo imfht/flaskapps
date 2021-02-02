@@ -1,0 +1,102 @@
+{% macro render_roles(roles, email_button=true) -%}
+    {% for role in roles|sort(attribute='code') %}
+        <tbody id="event-role-{{ role.id }}">
+            {{ render_role(role, email_button=email_button) }}
+        </tbody>
+    {% else %}
+        <tr>
+            <td colspan="4">
+                {% trans %}There are no roles defined yet.{% endtrans %}
+            </td>
+        </tr>
+    {% endfor %}
+{%- endmacro %}
+
+
+{% macro render_role(role, collapsed=true, email_button=true) -%}
+    <tr>
+        <td class="badge-column toggle-members">
+            <span class="i-tag outline role-badge" style="{{ role.css }};">
+                {{- role.code -}}
+            </span>
+        </td>
+        <td class="role-title toggle-members">{{ role.name }}</td>
+        <td class="role-members-summary toggle-members">
+            {% if role.members %}
+                <span class="icon-users i-label text-color outline highlight">
+                    {%- trans count=role.members|length -%}
+                        1 person
+                    {%- pluralize -%}
+                        {{ count }} people
+                    {%- endtrans -%}
+                </span>
+            {% else %}
+                <span class="icon-users i-label text-color outline dashed">
+                    {% trans %}Unassigned{% endtrans %}
+                </span>
+            {% endif %}
+        </td>
+        <td class="action-column">
+            <div class="thin toolbar right entry-action-buttons">
+                <div class="group">
+                    {% if email_button %}
+                        <button class="icon-mail i-button text-color borderless"
+                                data-href="{{ url_for('persons.email_event_persons', role.event) }}"
+                                data-title="{% trans %}Send email{% endtrans %}"
+                                data-method="POST"
+                                data-params="{{ dict(role_id=role.id) | tojson | forceescape }}"
+                                data-ajax-dialog></button>
+                    {% endif %}
+                    <button class="icon-edit i-button text-color borderless"
+                            data-href="{{ url_for('.edit_role', role) }}"
+                            data-title="{% trans %}Edit role{% endtrans %}"
+                            data-update="#event-role-{{ role.id }}"
+                            data-ajax-dialog></button>
+                    <button class="icon-remove i-button text-color borderless danger"
+                            data-href="{{ url_for('.delete_role', role) }}"
+                            data-method="DELETE"
+                            data-title="{% trans name=role.name %}Delete role '{{ name }}'{% endtrans %}"
+                            data-confirm="{% trans %}Are you sure you want to permanently delete this role?{% endtrans %}"
+                            data-update="#event-roles"
+                            data-ajax></button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="role-list-row">
+        <td colspan="4">
+            <div class="content-area slide {{ 'close' if collapsed else 'open' }}">
+                {% if role.members %}
+                     <ul class="role-list">
+                        {% for user in role.members|sort(attribute='display_full_name') %}
+                            <li class="i-tag outline highlight icon-user">
+                                {{ user.display_full_name }}
+                                <button class="icon-cross i-button borderless text-color danger"
+                                        data-href="{{ url_for('.remove_role_member', role, user) }}"
+                                        data-method="DELETE"
+                                        data-update="#event-role-{{ role.id }}"
+                                        data-ajax></button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="empty">{% trans %}There are no members yet.{% endtrans %}</div>
+                {% endif %}
+                <div class="toolbar f-j-end">
+                    <button class="i-button highlight text-color icon-upload"
+                            data-href="{{ url_for('.add_members_import_csv', role) }}"
+                            data-update="#event-role-{{ role.id }}"
+                            data-ajax-dialog>
+                        {% trans %}Import users from CSV file{% endtrans %}
+                    </button>
+                    <button class="i-button highlight text-color icon-plus js-add-members"
+                            data-href="{{ url_for('.add_role_members', role) }}"
+                            data-method="POST"
+                            data-update="#event-role-{{ role.id }}">
+                        {% trans %}Add user{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </td>
+    </tr>
+{%- endmacro %}

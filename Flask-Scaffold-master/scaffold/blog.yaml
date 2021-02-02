@@ -1,0 +1,18 @@
+ posts:
+  - tittle:string
+  - body:text
+  - author:string
+  - creation_date:datetime
+  - published:boolean
+ comments:
+  - author:string
+  - body:text
+  - author_url:url
+  - created_on:date
+  - approved:boolean
+ authors:
+  - name:string
+  - profile:text
+  - url:url
+
+  

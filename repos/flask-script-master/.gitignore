@@ -1,0 +1,16 @@
+*~
+_build/
+*.cfg
+*.coverage
+*.db
+dist/
+*.egg-info
+*.log
+*.orig
+*.pyc
+*.swo
+*.swp
+*.tox
+*.zip
+*.sublime-*
+.env

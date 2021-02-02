@@ -1,0 +1,65 @@
+<div class="login-page" [@routerTransition]>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
+            <h1>SB Admin BS4 Angular5</h1>
+            <form role="form" [formGroup]="SignUpForm"  (ngSubmit)="onSubmit()"   #formDir="ngForm">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="text" class="form-control input-underline input-lg" id="name" 
+                                 required    formControlName = "name" placeholder=" Name">
+
+                                 <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                                        class="alert alert-danger">
+
+                                    <div *ngIf="name.errors.required">
+                                        Name is required.
+                                    </div>
+                                    
+                                    
+                                    </div>
+                    </div>
+
+
+            <div class="form-group">
+                <input type="text" class="form-control input-underline input-lg" id="email" required    
+                required  formControlName = "email" placeholder="Email">
+
+                <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                                    class="alert alert-danger">
+
+                                <div *ngIf="email.errors.required">
+                                    Email is required.
+                                </div>
+                </div>
+             </div>        
+                          
+
+          <div class="form-group">
+                <input type="password" class="form-control input-underline input-lg" id="password" 
+                               formControlName = "password"   placeholder="password (min 8 chars)" required>
+
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                                    class="alert alert-danger">
+
+                                <div *ngIf="password.errors.required">
+                                    Password is required.
+                                </div>
+                                <div *ngIf="password.errors.minlength">
+                                    Password must be at least 8 characters long.
+                                </div>
+                                </div>
+              </div>  
+                </div>
+                <button  class="btn rounded-btn" type="submit" [disabled]="!SignUpForm.valid"  >Register </button>
+&nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
+            </form>
+
+            <div class="alert alert-danger"   *ngIf="http_errors" role="alert">
+                <p [innerHTML]=" error_message " ></p>
+
+            </div>
+        </div>
+    </div>
+</div>

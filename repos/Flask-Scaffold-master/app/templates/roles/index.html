@@ -1,0 +1,24 @@
+
+<a class="btn btn-default pull-right btn-primary" ui-sref="roles.new" role="button" ng-if="isAuthenticated()">New</a>
+
+<table datatable="ng" dt-options="dtOptions" class="table table-bordered" ng-if="isAuthenticated()">
+
+
+ <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="role in roles">
+            <td>{{ role.id }}</td>
+            <td>{{ role.name }}</td>
+            <td><a ui-sref="roles.edit({id:role.id })" id="editButton" class="btn btn-default btn-warning" role="button" ><i class="fa fa-edit"></i></a>
+            <button class="btn btn-default btn-danger" id="deleteButton" ng-click="deleteRole(role.id)"><i class="fa fa-trash-o"></i></button>
+            </td>
+        </tr>
+        </tbody>
+
+</table>

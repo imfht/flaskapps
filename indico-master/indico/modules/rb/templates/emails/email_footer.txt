@@ -1,0 +1,6 @@
+
+
+--
+Best regards,
+Indico :: Room Booking
+{{ url_for('rb.roombooking', _external=true) }}

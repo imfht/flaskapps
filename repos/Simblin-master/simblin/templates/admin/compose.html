@@ -1,0 +1,142 @@
+{% from 'macros.html' import render_post with context %}
+{% extends "base.html" %}
+{% block head %}
+<script type=text/javascript src="{{ static(filename='taboverride.js') }}"></script>
+{% endblock %}
+{% block body %}
+  <h3>Compose</h3>
+  <form action="{{ request.url }}" method="post" class="compose">
+  <div>
+    {# Title #}
+    <div style="margin-bottom:5px">
+      <input name="title" size=50 type="text" class="title" value="{{ post.title if post else '' }}"/>
+    </div>
+    
+    {# Markup #}
+    <div style="margin-bottom:5px">
+      <textarea name="markup" rows="40" 
+      style="width:100%;" class="markup">{{ post.markup|safe if post else "" }}</textarea>
+    </div>
+    
+    {# Tags #}
+    <div>
+      <label for=tags>Tags:</label> 
+      <input name="tags" type="text" size=50 
+      value="{% if post %}{{ post.get_tagstring() }}{% endif %}"/>
+    </div>
+    <div style="margin-top: 0.5em"></div>
+    
+    {# Categories #}
+    <table style="margin:0; padding:0; border-spacing:0;">
+    <tr>
+    <td style="vertical-align:top;">
+      <label>Categories:</label>
+    </td>
+    <td>
+      <div id="categories">
+      </div>
+      <a id='add-category' href='#'>Add Another Category</a>
+    </td>
+    </tr>
+    </table>
+    <div style="margin-top: 0.5em"></div>
+    
+    {# Comments allowed? #}
+    Comments allowed? <input type="checkbox" name="comments_allowed" value="True" 
+    {% if post and not post.comments_allowed %}{% else %}Checked{% endif %}/> 
+    
+    {# Visible? #}
+    Visible? <input type="checkbox" name="visible" value="True" 
+    {% if post and not post.visible %}{% else %}Checked{% endif %}/>
+    
+    {# Date #}
+    <input type="hidden" name="datetime" value="{{ post.datetime.strftime('%s') if post else -1 }}"/>
+    
+    {# Buttons #}
+    <div style="margin-top:1em; text-align:right;">
+      <input type="submit" name="action" value="{{ 'Update' if post and post.slug else 'Publish' }}" class="submit"/>&nbsp;
+      <input id='preview-button' type="submit" name="action" value="Preview" class="submit"/>&nbsp;
+      <input type="submit" name="action" value="Cancel" class="submit"/>
+      <input type=hidden name=next value="{{ request.values.next or '' }}">
+    </div>
+  </div>
+  </form>
+  
+  {# Preview Area #}
+  <div id=preview></div>
+{% endblock %}
+{% block search %}{% endblock %}
+{% block bottom %}
+<script type=text/javascript>
+  $(function() {
+    // Tabs should work correctly in textarea
+    $("textarea").tabOverride();
+    // set the tab size to 4 spaces for all textareas
+    $.fn.tabOverride.setTabSize(4);
+    
+    // Ajax Preview
+    $("#preview-button").bind('click', function(e) {
+      e.preventDefault();
+      var data = {
+        'title': $("input[name$='title']").val(),
+        'markup': $("textarea[name$='markup']").val(),
+        'tags': $("input[name$='tags']").val(),
+        'datetime': $("input[name$='datetime']").val(),
+        // Get all the names of the categories as a comma separated list
+        'categories': $("#categories div select option:selected").map(
+          function() { return $(this).text(); }).get().join(',')
+      }
+      $.ajax({
+        type: "POST",
+        url: "/_preview",
+        data: data,
+        success: function(preview) {
+          $('#preview').html("<h3>Preview</h3>" + preview)
+          .fadeTo(0,0).fadeTo('normal',1);
+        }
+      });
+      return false;
+    });
+    
+    // Add Categories
+    categoryCounter = 0;
+    $("#add-category").bind('click', function(e) {
+      e.preventDefault();
+      categoryCounter++;
+      var deleteLink = "<a id='delete-category-"+categoryCounter+"' href=#>" +
+        "Delete</a>";
+      var categorySelect = 
+        "<div id='category-"+categoryCounter+"'>" +
+          "<select name='category-"+categoryCounter+"'>" +
+            {% for category in categories %}
+            "<option value={{ category.id }}>{{ category.name}}</option>" +
+            {% endfor %}
+          "</select>" + deleteLink +
+        "</div>";
+      $("#categories").append(categorySelect);
+      $("#category-"+categoryCounter).fadeTo(0, 0).fadeTo('fast', 1);
+      
+      var currentCategoryCount = categoryCounter;
+      $("#delete-category-"+categoryCounter).bind('click', function(e) {
+        e.preventDefault();
+        $("#category-"+currentCategoryCount).fadeTo('fast', 0, function() {
+          $(this).remove();
+        });
+        categoryCounter--;
+        return false;
+      });
+      return false;
+    });
+    
+    // Prepopulate with categories of post
+    {% if post %}
+    {% for category in post.categories %}
+    $("#add-category").trigger('click');
+    $("#categories select:last option[value='{{ category.id }}']")
+    .attr('selected', 'selected');
+    {% endfor %}
+    {% endif %}
+  });
+</script>
+{% endblock %}
+<!-- kate: tab-width 2; -->

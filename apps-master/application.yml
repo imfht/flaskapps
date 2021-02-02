@@ -1,0 +1,158 @@
+shiny:
+  proxy:
+    title: Carson Sievert's Web Applications
+    logo-url: https://cpsievert.me/favicon.ico
+    landing-page: /
+    heartbeat-rate: 10000
+    heartbeat-timeout: 60000
+    port: 8080
+    authentication: none
+    # Note that this configuration shouldn't be used in enterprise/production
+    # environments -- https://www.shinyproxy.io/configuration/#docker
+    docker:
+      cert-path: /home/none
+      url: http://localhost:2375
+      port-range-start: 20000
+    # https://www.shinyproxy.io/configuration/#reporting-issues
+    support:
+      container-log-path: ./container-logs
+      mail-to-address: cpsievert1@gmail.com
+  # https://www.shinyproxy.io/configuration/#usage-statistics
+  usage-stats-url: http://localhost:8086
+  usage-stats-db: shinyproxy_usagestats
+  apps:
+  - name: bcviz
+    display-name: bcviz
+    description: BC housing market explorer (see <a href='https://vimeo.com/207379729'>here</a> for a demo video).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-bcviz
+  - name: zikar
+    display-name: zikar
+    description: Exploring zika virus reports (see <a href='https://vimeo.com/190736801'>here</a> and <a href='https://vimeo.com/190610577'>here</a> for demo videos).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-zikar
+  - name: plotlyAg
+    display-name: plotlyAg
+    description: Exploring US agricultural exports with plotly and ggplot2.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-plotlyAg
+  - name: ggtree
+    display-name: ggtree
+    description: Visualizing ggplot2 internals (see <a href='https://blog.cpsievert.me/2014/06/01/visualizing-ggplot2-internals-with-shiny-and-d3/'>here</a> for an explanation).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-ggtree
+  - name: LDAelife
+    display-name: LDAelife
+    description: Visualizing a topic model of elife abstracts (explained in <a href='https://ropensci.org/blog/2014/04/16/topic-modeling-in-r/'>this post</a>).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-LDAelife
+  - name: eechidna
+    display-name: eechidna
+    description: Exploring relationships between demographics and Australian voting outcomes (see <a href='https://vimeo.com/167367369?cjevent=7af7ea258aa511e8801200ce0a240613'>here</a>, <a href='https://vimeo.com/221026626'>here</a>, and <a href='https://vimeo.com/191553616'>here</a> for demo videos).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-eechidna
+  - name: worldBank-ggvis
+    display-name: worldBank-ggvis
+    description: The evolution in the relationship between health and wealth.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-worldBank-ggvis
+  - name: topnames
+    display-name: topnames
+    description: Search for the frequency of baby name(s).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-topnames
+  - name: lmGadget
+    display-name: lmGadget
+    description: Remove outliers from a linear model.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-lmGadget  
+  - name: 3Dnormal
+    display-name: 3Dnormal
+    description: Linked brushing in a grand tour of 3-dimensional data (see <a href='https://vimeo.com/160825528'>here</a> for a demo video).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-3Dnormal
+  #- name: brush2plotly
+  #  display-name: brush2plotly
+  #  description: Simple example of linked brushing with ggplot2 and plotly.
+  #  docker-cmd: ["R", "-e", "shiny::runApp()"]
+  #  docker-image: cpsievert/apps:shiny-brush2plotly
+  #- name: clearBrush
+  #  display-name: clearBrush
+  #  description: 
+  #  docker-cmd: ["R", "-e", "shiny::runApp()"]
+  #  docker-image: cpsievert/apps:shiny-clearBrush
+  - name: pitchRx
+    display-name: pitchRx
+    description: Upload and visualize PITCHf/x data via the pitchRx package.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-pitchRx
+  #- name: pitchRx-db
+  #  display-name: pitchRx-db
+  #  description: ...
+  #  docker-cmd: ["R", "-e", "shiny::runApp()"]
+  #  docker-image: cpsievert/apps:shiny-pitchRx-db
+  #- name: pitchRx2
+  #  display-name: pitchRx2
+  #  description: ...
+  #  docker-cmd: ["R", "-e", "shiny::runApp()"]
+  #  docker-image: cpsievert/apps:shiny-pitchRx2
+  - name: plotlyLinkedClick
+    display-name: plotlyLinkedClick
+    description: Click on a cell of a correlation matrix to plot the corresponding scatterplot.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-plotlyLinkedClick
+  - name: plotlyLinkedBrush
+    display-name: plotlyLinkedBrush
+    description: A basic example of linked brushing with plotly and shiny.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-plotlyLinkedBrush
+  - name: plotlyEvents
+    display-name: plotlyEvents
+    description: A demonstration of how to access plotly user events.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-plotlyEvents
+  #- name: plotlyViewer
+  #  display-name: plotlyViewer
+  #  description: A tool
+  #  docker-cmd: ["R", "-e", "shiny::runApp()"]
+  #  docker-image: cpsievert/apps:shiny-plotlyViewer
+  - name: cdf
+    display-name: cdf
+    description: Understanding cumulative distribution functions.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-cdf
+  - name: CLT
+    display-name: CLT
+    description: Understanding the Central Limit Thereom.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-CLT
+  - name: intervals
+    display-name: intervals
+    description: Understanding the Law of Large Numbers.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-intervals
+  - name: sampling
+    display-name: sampling
+    description: Understanding sampling distributions.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-sampling
+  - name: regInf
+    display-name: regInf
+    description: Understanding the connection between sampling distributions and regression inference.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-regInf  
+  - name: testing
+    display-name: testing
+    description: Understanding the connection between confidence intervals and hypothesis tests.
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-testing
+  - name: testing2
+    display-name: testing2
+    description: Understanding the connection between confidence intervals and hypothesis tests (continued).
+    docker-cmd: ["R", "-e", "shiny::runApp()"]
+    docker-image: cpsievert/apps:shiny-testing2
+  
+
+logging:
+  file:
+    shinyproxy.log

@@ -1,0 +1,24 @@
+# Deployment files
+*.egg-info
+dist
+
+# Environment files
+site-packages
+instance
+build
+env
+.venv
+.cache
+*.py[cod]
+settings_local.py
+
+# Test files
+.pytest_cache
+
+# OS-specific files
+.DS_Store
+Desktop.ini
+Thumbs.db
+
+# IDE-specific files
+.idea

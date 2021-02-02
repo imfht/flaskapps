@@ -1,0 +1,127 @@
+steps:
+  - include: generic.yaml
+  #
+  # CHANGES TO INDEX ONLY
+  #
+  # Staged addition, no diffs
+  # fails check, fails commit
+  - name: stage add
+    description: stage a new file with findings
+    command:
+      - bash
+      - -c
+      - echo "y = z" > bar.py && git add bar.py
+  # If check stage add is failing after regenerating qa tests note that
+  # the next three steps must have the same output
+  - name: check stage add
+    description: bento check with a new file with findings
+    command: bento check
+    returncode: 2
+    expected_out: check-stage-add.out
+    expected_err: check-stage-add.err
+  - name: check stage add with . path
+    description: bento check . with a new file with findings
+    command: bento check .
+    returncode: 2
+    expected_out: check-stage-add.out
+    expected_err: check-stage-add.err
+  - name: check stage add with direct path
+    description: bento check bar.py with a new file with findings
+    command: bento check bar.py
+    returncode: 2
+    expected_out: check-stage-add.out
+    expected_err: check-stage-add.err
+  - name: check stage add with path to no stage
+    description: bento check foo.py with a new file with findings
+    command: bento check foo.py
+    returncode: 0
+    expected_out: check-stage-none.out
+    expected_err: check-stage-none.err
+  # Next three tests should have same output
+  - name: check stage add --all
+    description: bento check --all with a new file with findings
+    command: bento check --all
+    returncode: 2
+    expected_out: check-stage-all.out
+    expected_err: check-stage-all.err
+  - name: check stage add --all .
+    description: bento check --all with a new file with findings
+    command: bento check --all .
+    returncode: 2
+    expected_out: check-stage-all.out
+    expected_err: check-stage-all.err
+  - name: check stage add --all paths
+    description: bento check --all foo.py bar.py with a new file with findings
+    command: bento check --all foo.py bar.py
+    returncode: 2
+    expected_out: check-stage-all.out
+    expected_err: check-stage-all.err
+  - name: commit stage add
+    description: attempt to commit a new file with findings
+    command: git commit -m foo
+    returncode: 1
+    expected_out: null
+    expected_err: commit-stage-add.err
+  - name: status stage add
+    description: ensure git status shows added file
+    command: git status --porcelain -uno
+    returncode: 0
+    expected_out: status-stage-add.out
+  - name: reset stage add
+    description: restore git index
+    command: git reset --hard
+  #
+  # Staged modification, no diffs
+  # fails check, fails commit
+  - name: stage modify
+    description: modify file
+    command:
+      - bash
+      - -c
+      - echo "x = z" > foo.py && git add foo.py
+  - name: check stage modify
+    description: bento check with a modified file with findings
+    command: bento check
+    returncode: 2
+    expected_out: check-stage-modify.out
+    expected_err: check-stage-modify.err
+  - name: commit stage modify
+    description: attempt to commit a modified file with findings
+    command: git commit -m foo
+    returncode: 1
+    expected_out: null
+    expected_err: commit-stage-modify.err
+  - name: status stage modify
+    description: ensure git status shows modified file
+    command: git status --porcelain -uno
+    returncode: 0
+    expected_out: status-stage-modify.out
+  - name: reset stage modify
+    description: restore git index
+    command: git reset --hard
+    #
+    # Staged deletion, no diffs
+    # passes check, passes commit
+  - name: stage delete
+    description: delete file
+    command: git rm foo.py
+  - name: check stage delete
+    description: bento check with a deleted file with findings
+    command: bento check
+    returncode: 0
+    expected_out: null
+    expected_err: check-stage-delete.err
+  - name: status stage delete
+    description: ensure git status shows deleted file
+    command: git status --porcelain -uno
+    returncode: 0
+    expected_out: status-stage-delete.out
+  - name: commit stage delete
+    description: attempt to commit a deletion with findings
+    command: git commit -m foo
+    returncode: 0
+    expected_err: commit-stage-delete.err
+    expected_out: commit-stage-delete.out
+  - name: reset stage delete
+    description: restore git index
+    command: git reset --hard master

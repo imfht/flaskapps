@@ -1,0 +1,67 @@
+{% extends "base_templates/dashboard_base.html" %}
+
+{% block title %}
+Notifications
+{% endblock %}
+
+{% block content %}
+<!-- Page Heading -->
+<h1 class="h3 mt-3 mb-4 text-gray-800">All Your Notifications</h1>
+{% for message in all_notifications %}
+<div class="mx-auto noti_div">
+    <div class="card shadow p-3 mt-3 ">
+        <a class="row text-decoration-none noti" id="{{message.id}}" href="#noti_{{message.id}}" data-is-read="{{message.isRead}}" data-toggle="collapse">
+            <div class="col">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-xs-6 icon-circle bg-{{message.color}}">
+                            <i class="fas fa-{{message.icon}} text-white"></i>
+                        </div>
+                        <div class="col-xs-6 ml-3 justify-content-center align-items-center" style="display: flex;">
+                            <span class="font-weight-bold text-center">{{message.created_date}}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col ml-2 mt-2 mx-auto">
+                    {{message.message_preview + '..'}}
+                </div>
+            </div>
+        </a>
+        <div id="noti_{{message.id}}" class="collapse mt-2">
+            {{message.message}}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+window.onload = function() {
+    $( ".noti" ).click(function() {
+        isRead = $(this).attr('data-is-read');
+
+        if (isRead == "False") {
+            update_read_status($(this).attr("id"));
+            $(this).attr('data-is-read', 'True');
+        }
+    });
+    
+    id = localStorage.getItem("noti_id");
+    if (id != null) {
+        ele = document.getElementById(id);
+        ele.scrollIntoView(true);
+        ele.click();
+        localStorage.removeItem("noti_id");
+    }
+}
+
+function update_read_status(noti_id) {
+    data = JSON.stringify({
+        noti_id: noti_id
+    });
+
+    ajax('/notification_read', 'PUT', data, function successfn(response) {}, function errorfn(error){})
+}
+</script>
+
+{% endblock %}

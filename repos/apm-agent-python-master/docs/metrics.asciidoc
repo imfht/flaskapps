@@ -1,0 +1,180 @@
+[[metrics]]
+== Metrics
+
+With Elastic APM, you can capture system and process metrics.
+These metrics will be sent regularly to the APM Server and from there to Elasticsearch
+
+[float]
+[[metric-sets]]
+=== Metric sets
+
+* <<cpu-memory-metricset>>
+* <<transactions-metricset>>
+* <<breakdown-metricset>>
+
+[float]
+[[cpu-memory-metricset]]
+==== CPU/Memory metric set
+
+`elasticapm.metrics.sets.cpu.CPUMetricSet`
+
+This metric set collects various system metrics and metrics of the current process.
+
+NOTE: if you do *not* use Linux, you need to install https://pypi.org/project/psutil/[`psutil`] for this metric set.
+
+
+*`system.cpu.total.norm.pct`*::
++
+--
+type: scaled_float
+
+format: percent
+
+The percentage of CPU time in states other than Idle and IOWait, normalized by the number of cores.
+--
+
+
+*`system.process.cpu.total.norm.pct`*::
++
+--
+type: scaled_float
+
+format: percent
+
+The percentage of CPU time spent by the process since the last event.
+This value is normalized by the number of CPU cores and it ranges from 0 to 100%.
+--
+
+*`system.memory.total`*::
++
+--
+type: long
+
+format: bytes
+
+Total memory.
+--
+
+*`system.memory.actual.free`*::
++
+--
+type: long
+
+format: bytes
+
+Actual free memory in bytes. 
+--
+
+*`system.process.memory.size`*::
++
+--
+type: long
+
+format: bytes
+
+The total virtual memory the process has.
+--
+
+*`system.process.memory.rss.bytes`*::
++
+--
+type: long
+
+format: bytes
+
+The Resident Set Size. The amount of memory the process occupied in main memory (RAM).
+--
+
+[float]
+[[cpu-memory-cgroup-metricset]]
+===== Linux’s cgroup metrics
+
+*`system.process.cgroup.memory.mem.limit.bytes`*::
++
+--
+type: long
+
+format: bytes
+
+Memory limit for current cgroup slice.
+--
+
+*`system.process.cgroup.memory.mem.usage.bytes`*::
++
+--
+type: long
+
+format: bytes
+
+Memory usage in current cgroup slice.
+--
+
+
+[float]
+[[transactions-metricset]]
+==== Transactions metric set
+
+This metric set collects metrics in relation with transactions.
+
+*`transaction.duration`*::
++
+--
+type: simple timer
+
+This timer tracks the duration of transactions and allows for the creation of graphs displaying a weighted average.
+
+Fields:
+
+* `sum`: The sum of all transaction durations in ms since the last report (the delta)
+* `count`: The count of all transactions since the last report (the delta)
+
+You can filter and group by these dimensions:
+
+* `transaction.name`: The name of the transaction
+* `transaction.type`: The type of the transaction, for example `request`
+--
+
+[float]
+[[breakdown-metricset]]
+==== Breakdown metric set
+
+NOTE: Tracking and collection of this metric set can be disabled using the <<config-breakdown_metrics>> setting.
+
+*`transaction.breakdown.count`*::
++
+--
+type: long
+
+format: count (delta)
+
+The number of transactions for which breakdown metrics (`span.self_time`) have been created.
+As the Java agent tracks the breakdown for both sampled and non-sampled transactions,
+this metric is equivalent to `transaction.duration.count`
+
+You can filter and group by these dimensions:
+
+* `transaction.name`: The name of the transaction
+* `transaction.type`: The type of the transaction, for example `request`
+
+--
+
+*`span.self_time`*::
++
+--
+type: simple timer
+
+This timer tracks the span self-times and is the basis of the transaction breakdown visualization.
+
+Fields:
+
+* `sum`: The sum of all span self-times in ms since the last report (the delta)
+* `count`: The count of all span self-times since the last report (the delta)
+
+You can filter and group by these dimensions:
+
+* `transaction.name`: The name of the transaction
+* `transaction.type`: The type of the transaction, for example `request`
+* `span.type`: The type of the span, for example `app`, `template` or `db`
+* `span.subtype`: The sub-type of the span, for example `mysql` (optional)
+
+--

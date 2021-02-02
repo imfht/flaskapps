@@ -1,0 +1,16 @@
+{% extends theme('mobile/layout.html') %}
+
+{% block title %}{{ flatpage.seotitle or flatpage.title }}{% endblock %}
+
+{% block head_extend -%}
+  <link rel="canonical" href="{{ flatpage.link }}" />
+{%- endblock %}
+
+{% block main %}
+<h2 class="t1">{{ flatpage.title }}</h2>
+<div class="content">
+{{ flatpage.body_html|safe }}
+</div>
+{% endblock %}
+
+{% block nav %}<b>&#187;</b>{{ flatpage.title }}{% endblock %}

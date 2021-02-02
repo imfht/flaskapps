@@ -1,0 +1,19 @@
+# Editor directories and files
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+.idea
+.vscode
+
+# Local working file
+app/config/local_setting.py
+app/config/local_secure.py
+app/static/uploads/
+guide/
+wx-tool/
+php-resource/
+.venv/*
+tmp/
+.env
+Pipfile.lock

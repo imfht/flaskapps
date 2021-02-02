@@ -1,0 +1,95 @@
+{% if regforms %}
+    <div class="event-details-row">
+        <div class="event-details-label align-top">{% trans %}Registration{% endtrans %}</div>
+        <div class="event-details-content">
+            {% for regform in regforms %}
+                {% set registration = user_registrations[regform] %}
+                <div class="event-service-row">
+                    <div class="event-service-row-collapsed clearfix">
+                        <div class="event-service-info left">
+                            <i class="icon-ticket"></i>
+                            <span class="event-service-title">
+                                {% if loop.length == 1 and registration %}
+                                    <em>{% trans %}You are registered for this event.{% endtrans %}</em>
+                                {% elif loop.length == 1 and regform.open %}
+                                    <em>{% trans %}This event is open to new participants.{% endtrans %}</em>
+                                {% else %}
+                                    {{ regform.title }}
+                                {% endif %}
+                                {% if registration %}
+                                    {% if registration.state.name == 'withdrawn' %}
+                                        <span class="event-label ui-qtip ui label basic red mini">Withdrawn</span>
+                                    {% elif registration.state.name == 'rejected' %}
+                                        <span class="event-label ui-qtip ui label basic red mini">Rejected</span>
+                                    {% elif registration.state.name == 'pending' %}
+                                        <span class="event-label ui-qtip ui label basic orange mini">Pending</span>
+                                    {% endif %}
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% if not g.static_site %}
+                            <div class="event-service-toolbar toolbar right">
+                                {% if regform.publish_registration_count %}
+                                    <span class="i-button i-button-small icon-user label" title="{% trans %}Total registrations{% endtrans %}">
+                                        {{- regform.active_registration_count }}
+                                        {%- if regform.registration_limit %}
+                                            / {{ regform.registration_limit }}
+                                        {%- endif -%}
+                                    </span>
+                                {% endif %}
+                                <div class="group">
+                                   {% if registration %}
+                                       {% if registration.can_be_modified %}
+                                           <a class="i-button i-button-small icon-edit highlight"
+                                              href="{{ url_for('event_registration.display_regform', regform) }}">
+                                               <strong>{% trans %}Modify registration{% endtrans %}</strong>
+                                           </a>
+                                       {% else %}
+                                           <a class="i-button i-button-small highlight"
+                                              href="{{ url_for('event_registration.display_regform', regform) }}">
+                                               <strong>{% trans %}Check details{% endtrans %}</strong>
+                                           </a>
+                                       {% endif %}
+                                   {% elif regform.limit_reached %}
+                                       <a class="i-button i-button-small highlight disabled"
+                                          title="{% trans %}There are no more places available.{% endtrans %}">
+                                           <strong>{% trans %}Register{% endtrans %}</strong>
+                                       </a>
+                                   {% elif regform.moderation_enabled %}
+                                       <a class="i-button i-button-small highlight icon-question"
+                                          href="{{ url_for('event_registration.display_regform', regform) }}">
+                                           <strong>{% trans %}Apply for participation{% endtrans %}</strong>
+                                       </a>
+                                   {% else %}
+                                       <a class="i-button i-button-small highlight icon-quill"
+                                          href="{{ url_for('event_registration.display_regform', regform) }}">
+                                           <strong>{% trans %}Register{% endtrans %}</strong>
+                                       </a>
+                                   {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% if event.published_registrations %}
+    <div class="event-details-row">
+        <div class="event-details-label">{% trans %}Participants{% endtrans %}</div>
+        <div class="event-details-content">
+            <div class="participant-list-wrapper">
+                <ul class="participant-list">
+                    {%- for participant in event.published_registrations|sort(attribute='display_full_name') -%}
+                        <li class="ui image label meeting-participant {% if participant.checked_in and participant.registration_form.publish_checkin_enabled %} checked-in {% endif %}">
+                            <img src="{{ participant.avatar_url }}" alt="">{{ participant.display_full_name }}
+                        </li>
+                    {%- endfor -%}
+                </ul>
+                <a class="trigger icon-expand" title="{% trans %}See the full list{% endtrans %}"></a>
+            </div>
+        </div>
+    </div>
+{% endif %}

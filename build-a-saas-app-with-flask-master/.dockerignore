@@ -1,0 +1,6 @@
+.git/
+assets/node_modules/
+public/
+.env
+.dockerignore
+docker-compose.override.yml

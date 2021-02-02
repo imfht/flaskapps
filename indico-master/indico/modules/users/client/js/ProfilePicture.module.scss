@@ -1,0 +1,45 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'base/palette';
+
+.profile-picture-selection {
+  margin: 15px 10px;
+
+  :global(.ui.cards) {
+    text-align: center;
+
+    :global(.description) {
+      height: 160px;
+      margin: 0 8px;
+      color: rgb(85, 85, 85);
+    }
+
+    :global(.ui.image) {
+      margin: 15px auto;
+      height: 80px;
+      width: 80px;
+      object-fit: cover;
+    }
+
+    :global(.extra) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .placeholder {
+      font-size: 80px;
+      margin: 15px auto;
+      display: table;
+      color: $pastel-gray;
+    }
+  }
+
+  :global(.ui.form .field) {
+    margin-top: 15px;
+  }
+}

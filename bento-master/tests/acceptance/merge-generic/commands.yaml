@@ -1,0 +1,59 @@
+steps:
+  - include: generic.yaml
+  #
+  # Tests behavior on merges
+  - name: create left
+    description: Create merge source branch
+    command:
+      - bash
+      - -c
+      - git checkout -b lhs master && echo "x = a" >> foo.py && git add foo.py && git commit -n -m'lhs'
+  - name: create right
+    description: Create merge target branch
+    command:
+      - bash
+      - -c
+      - git checkout -b rhs master && echo "x = b" >> foo.py && git add foo.py && git commit -n -m'rhs'
+  - name: stage merge
+    description: Attempt to merge branches
+    command: git merge lhs
+    returncode: 1
+    expected_out: stage-merge.out
+    expected_err: null
+  - name: check unmerged
+    description: Bento check with unmerged files should fail
+    command: bento check
+    returncode: 3
+    expected_out: null
+    expected_err: check-unmerged.out
+  - name: commit unmerged
+    description: git commit with unmerged files should fail
+    command: git commit
+    returncode: 128
+    expected_out: commit-unmerged.out
+    expected_err: commit-unmerged.err
+  - name: resolve conflicts
+    description: Resolve merge conflicts in unmerged files
+    command:
+      - bash
+      - -c
+      - git checkout --ours foo.py && git add foo.py
+    returncode: 0
+    expected_out: null
+    # expected_err: resolve-conflict.err  # This output differs in git 2.20 and git 2.21, so let's ignore it
+  - name: complete merge
+    description: Complete merge should find no diffs
+    command: git commit --no-edit
+    returncode: 0
+    expected_out: complete-merge.out
+    expected_err: complete-merge.err
+  - name: validate git log
+    description: Assert git log has merge commit
+    command:
+      - git
+      - log
+      - "-1"
+      - --format=format:%B
+    returncode: 0
+    expected_out: validate-git-log.out
+    expected_err: null

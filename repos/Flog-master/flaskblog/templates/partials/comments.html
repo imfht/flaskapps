@@ -1,0 +1,151 @@
+{% macro disqus(page) %}
+<section class="comments">
+  <div id="disqus_thread"></div>
+</section>
+
+<script>
+  disqus_shortname = '{{integration.disqus.shortname}}';
+  disqus_page_url = '{{request.url}}'; // optional
+  disqus_page_title = '{{page.title}}'; // optional
+
+</script>
+<script src="//a.typcdn.com/embed/disqus.js"></script>
+{% endmacro %}
+
+{% macro render_comment_item(item, is_top=True) %}
+<div class="comment-item">
+  <div class="comment-head d-flex justify-content-between">
+    <div class="d-flex align-items-center">
+      <div class="gravatar">
+        <img src="{{item.author.avatar}}" alt="{{item.author.display_name}}">
+      </div>
+      <div class="author">
+        <div>
+          {% if item.author.link-%}<a class="person-link" href="{{ item.author.link }}">{%-endif-%}
+          <strong>{{ item.author.display_name }}</strong>
+          {%-if item.author.link-%}</a>{%-endif %}
+          {%-if item.author.is_admin-%}
+          <span class="text-success">({{ _('Admin') }})</span>
+          {%-endif-%}
+          {%-if item.parent-%}<span class="ml-1 fa fa-share"> @{{ item.parent.author.display_name }}</span>{%-endif-%}
+        </div>
+        <time datetime="{{item.create_at}}">{{moment(item.create_at).fromNow()}}</time>
+      </div>
+    </div>
+    <div class="comment-right">
+      <span class="comment-hidden d-lg-none">
+        <a href="#comment-form" data-id="{{item.id}}" data-author="{{item.author.display_name}}">{{_('Reply')}}</a>
+      </span>
+      {% if is_top-%}<a href="#post-comment-{{item.floor}}"># {{item.floor}}</a>{%-endif %}
+    </div>
+  </div>
+  <div class="comment-body">
+    {{ item.html|safe }}
+    {% if is_top %}
+    {% for child in item.children %}
+      {{ render_comment_item(child, False) }}
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro render_comments(post, items, count) %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<section class="comments" id="native-comment">
+  <div>
+    <h6 class="comment-count">{{_('Post Comments')}}<span class="count-number">({{count}})</span></h6>
+    {% for item in items %}
+    <div class="comment-box" id="post-comment-{{item.floor}}">
+      {{ render_comment_item(item) }}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="mb-4">
+    {% if not current_user.is_authenticated %}
+    <div class="bg-light text-center p-4">
+      <p>{{_('Please login before comment')}}</p>
+      <form role="login" class="form-inline justify-content-center mb-4">
+        <input type="text" class="form-control mr-sm-2" name="username" placeholder="{{_('Username(Required)')}}" required>
+        <input type="text" class="form-control mr-sm-2" name="email" placeholder="{{_('Email(Required)')}}" required>
+        <input type="text" class="form-control mr-sm-2" name="link" placeholder="{{_('Website(Optional)')}}">
+        <button class="button">{{_('LOGIN')}}</button>
+      </form>
+      <div class="white-button">
+        <div>{{_('Or login with')}}</div>
+        <a data-oauth="{{url_for('auth.github_login')}}" href="javascript:void(0)"><i class="fa fa-github"></i> GitHub</a>
+        <a data-oauth="{{url_for('auth.google_login')}}" href="javascript:void(0)"><i class="fa fa-google"></i> Google</a>
+      </div>
+    </div>
+    {% else %}
+    <form role="comment" id="comment-form">
+      <input type="hidden" name="post_id" value="{{post.id}}">
+      <input type="hidden" name="parent_id" value="">
+      <textarea name="content" placeholder="{{_('Type with markdown syntax')}}"></textarea>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex align-items-center">
+          <strong>{{ current_user.display_name }}</strong>
+          {%-if current_user.is_admin-%}
+          <span class="text-success">({{ _('Admin') }})</span>
+          {%-endif-%}
+          <button class="btn btn-light btn-sm ml-2 d-none" type="button" name="reply"><i class="fa fa-share"></i>@<span
+              id="reply-to"></span></button>
+        </div>
+        <button class="button" type="submit" name="comment">{{_('Comment')}}</button>
+      </div>
+    </form>
+    <script>
+      var simplemde = new SimpleMDE({ spellChecker: false, status: false });
+
+    </script>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  $(function () {
+    $('form[role=login]').submit(function (e) {
+      e.preventDefault();
+      fetch('/auth/login', {
+        method: 'post',
+        body: new FormData(this)
+      }).then(_ => {
+        location.reload();
+      });
+    });
+
+    $('form[role=comment]').submit(function (e) {
+      e.preventDefault();
+      fetch('/comment', {
+        method: 'post',
+        body: new FormData(this),
+        credentials: 'same-origin'
+      }).then(_ => {
+        location.reload();
+      });
+    });
+
+    $('[data-author]').click(function () {
+      $('#reply-to').text($(this).data('author')).parent().removeClass('d-none');
+      $('input[name=parent_id]').val($(this).data('id'));
+    });
+    $('#reply-to').parent().click(function () {
+      $(this).addClass('d-none');
+      $('#reply-to').text('');
+      $('input[name=parent_id]').val('');
+      return false;
+    })
+
+    $('[data-oauth]').click(function () {
+      if (hasTouchScreen()) {
+        location.href = $(this).data('oauth');
+      } else {
+        window.open($(this).data('oauth'), '', 'height=600,width=700');
+      }
+      return false;
+    })
+  });
+
+</script>
+{% endmacro %}

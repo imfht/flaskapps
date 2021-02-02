@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <title>{% block site_title %}VueJS Blog with Python{% endblock %}</title>
+
+    <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+{% block body %}{% endblock %}
+
+<script
+    type="text/javascript"
+    crossorigin="anonymous"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+<script type="text/javascript">
+  Vue.filter('pluralize', function (value, plural) {
+    return (value == 1) ? '' : (plural || 's');
+  });
+</script>
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+{% block extra_scripts %}
+{% assets "js_all" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
+{% endblock %}
+</body>
+</html>

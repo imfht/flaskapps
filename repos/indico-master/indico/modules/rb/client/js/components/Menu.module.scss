@@ -1,0 +1,23 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'rb:styles/palette';
+@import 'rb:styles/util';
+
+ul.rb-menu {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: $highlight-color;
+  border-bottom: none;
+  line-height: $menu-height;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
+  width: 100%;
+}

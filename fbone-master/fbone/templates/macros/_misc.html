@@ -1,0 +1,32 @@
+{% macro render_pagination(pagination, endpoint) %}
+    {% if pagination.pages > 1 %}
+        <div class='pagination'>
+            <ul>
+                <li class="prev {% if not pagination.has_prev %}disabled{% endif %}"><a href="{{ url_for(endpoint, page=pagination.page-1) }}">&larr; Previous</a></li>
+                {% for page in pagination.iter_pages() %}
+                    {% if page %}
+                        <li class='{% if page == pagination.page %}active{% endif %}'>
+                            <a href='{{ url_for(endpoint, page=page) }}'>{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href='#'>...</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <li class="next {% if not pagination.has_next %}disabled{% endif %}"><a href="{{ url_for(endpoint, page=pagination.page+1) }}">Next &rarr;</a></li>
+            </ul>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_signup_nav() %}
+<ul class="nav nav-tabs">
+    <li role="presentation" class="{% if request.endpoint == 'frontend.login' %}active{% endif %}">
+        <a href="{{ url_for('frontend.login') }}">Log in</a>
+    </li>
+    <li role="presentation" class="{% if request.endpoint == 'frontend.signup' %}active{% endif %}">
+        <a href="{{ url_for('frontend.signup') }}">Sign up</a>
+    </li>
+</ul>
+{% endmacro %}

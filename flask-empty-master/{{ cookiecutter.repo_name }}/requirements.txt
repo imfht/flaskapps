@@ -1,0 +1,57 @@
+{%- set uses_cockroachdb = cookiecutter.use_sql_cockroachdb in ('y', 'yes') -%}
+{%- set uses_postgres = cookiecutter.use_sql_postgres in ('y', 'yes') -%}
+{%- set uses_sqlite = cookiecutter.use_sql_sqlite in ('y', 'yes') -%}
+{%- set uses_mysql = cookiecutter.use_sql_mysql in ('y', 'yes') -%}
+{%- set uses_sql = uses_cockroachdb or uses_postgres or uses_mysql or uses_sqlite -%}
+{%- set uses_mongodb = cookiecutter.use_nosql_mongodb in ('y', 'yes') -%}
+{%- set uses_http_mixin = cookiecutter.use_http_mixin in ('y', 'yes') -%}
+
+pytest
+empty
+flask
+flask-testing
+{%- if cookiecutter.use_security in ('yes', 'y') %}
+flask-security-too
+{%- endif -%}
+{%- if cookiecutter.use_async_tasks in ('yes', 'y') %}
+flask-rq2
+{%- endif -%}
+{%- if cookiecutter.use_admin in ('yes', 'y') %}
+flask-admin
+{%- endif -%}
+{%- if uses_sql %}
+flask-sqlalchemy
+flask-migrate
+sqlalchemy-utils
+{%- endif -%}
+{%- if uses_postgres or uses_cockroachdb %}
+psycopg2
+{%- endif -%}
+{%- if uses_mysql %}
+mysqlclient
+{%- endif -%}
+{%- if uses_mongodb %}
+flask-mongoengine
+{%- endif -%}
+{%- if uses_http_mixin %}
+flask-wtf
+{%- endif -%}
+{%- if uses_http_mixin and uses_sql %}
+wtforms-sqlalchemy
+{%- endif -%}
+{%- if cookiecutter.use_rest in ('yes', 'y') %}
+marshmallow
+flask-marshmallow
+flask-jsglue
+{%- endif -%}
+{%- if cookiecutter.use_socketio in ('yes', 'y') %}
+eventlet
+flask-socketio
+{%- endif -%}
+{%- if uses_sql and cookiecutter.use_rest in ('yes', 'y') %}
+marshmallow-sqlalchemy
+{%- endif %}
+flask-debugtoolbar
+{%- if cookiecutter.serve_static_files in ('yes', 'y') %}
+flask-static-compress
+{%- endif %}

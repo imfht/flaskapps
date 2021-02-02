@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+    List of games
+{% endblock %}
+
+{% block content %}
+<p>
+    <input type="text" placeholder="Quick filter" id="filter" data-filter=".game-row" />
+</p>
+
+<form action="{{ url_for('admin_games_form') }}" method="post">
+
+<table id="checkbox-toggle-table">
+    <tr>
+        <th></th>
+        <th>Jam</th>
+        <th>Game Title</th>
+        <th>Created</th>
+        <th>Team</th>
+        <th>Flags</th>
+        <th></th>
+    </tr>
+    {% for jam in jams %}
+        {% for game in jam.games %}
+            <tr class="checkbox-toggle game-row">
+                <td>
+                    <input type="checkbox" name="game-{{ game.id }}" style="vertical-align: top;"/>
+                </td>
+                <td>
+                    <a href="{{ url_for('admin_jam', id = jam.id) }}">{{ jam.title }}</a>
+                </td>
+                <td>
+                    {{ game.title }}
+                </td>
+                <td>{{ game.created | humantime }}</td>
+                <td><a href="{{ game.team.url() }}">{{ game.team.name }}</a></td>
+                <td>
+                    {% if game.is_deleted %}
+                        <span class="flags">DELETED<span>
+                    {% endif %}
+                    {% if game.has_cheated %}
+                        <span class="flags red">CHEATED<span>
+                    {% endif %}
+                </td>
+                <td><a href="{{ game.url() }}"><i class="icon-eye-open"></i></a></td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    <tr>
+        <th colspan="7" class="actions">
+            <input type="submit" name="submit" value="Toggle Deleted" class="btn btn-small"/>
+            <input type="submit" name="submit" value="Toggle Cheated" class="btn btn-small"/>
+            <span style="margin-left:10px;" id="table-count">0</span> games selected
+        </th>
+    </tr>
+</table>
+
+</form>
+
+{% endblock %}

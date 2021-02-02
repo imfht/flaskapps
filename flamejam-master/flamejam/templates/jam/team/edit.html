@@ -1,0 +1,119 @@
+{% set jam = team.jam %}
+{% extends "jam/base.html" %}
+{% from "_formhelpers.html" import form_errors %}
+
+{% block content %}
+<h1>Team settings</h1>
+
+<div class="row-fluid">
+    <div class="span5">
+        <form action="{{ url_for('team_settings', jam_slug = team.jam.slug) }}" method="post" class="block">
+        {{ settings_form.hidden_tag() }}
+        {{ form_errors(settings_form) }}
+
+        <h2>Team Settings</h2>
+
+        <div class="field">
+            {{ settings_form.name.label }}
+            {{ settings_form.name() }}
+        </div>
+
+        <div class="field">
+            {{ settings_form.livestreams.label }}
+            {{ settings_form.livestreams(rows = 5, cols = 39) }}
+            <div class="form-info">Enter one URL per row</div>
+            <div class="form-info">Don't forget the "http://"</div>
+        </div>
+
+        <div class="field">
+            {{ settings_form.irc.label }}
+            {{ settings_form.irc() }}
+            <div class="form-info">e.g. "irc.freenode.net#baconteam"</div>
+        </div>
+
+        <h2>{{ settings_form.description.label }}</h2>
+        <div class="form-info">
+            <p>
+                Tell others (and potential team members) what you plan to do/are doing.
+                Include technologies, ideas, and general organisation information. You can
+                also publish contact information for questions. <b>Parsed with Markdown</b>.
+            </p>
+        </div>
+        {{ settings_form.description(class="comment", rows="10") }}
+
+        <p style="text-align: center">
+            <input type="reset" value="Reset" class="btn" />
+            <input type="submit" value="Save settings" class="btn btn-primary" />
+        </p>
+        </form>
+    </div>
+
+    <div class="span4">
+        <h2>Team members</h2>
+        <ul>
+        {% for member in team.members %}
+            <li>{{ member.get_link() }}</li>
+        {% endfor %}
+        {% for invitation in team.invitations %}
+            <li>{{ invitation.user.get_link() }}
+                <span style="font-size: 0.8em;">
+                    (Invitation:
+                    <a href="{{ url_for('invitation', id = invitation.id) }}" style="color: green;">Show</a> /
+                    <a href="{{ url_for('invitation', id = invitation.id, action = 'revoke') }}" style="color: red;">Revoke</a>
+                    )
+                </span>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <hr />
+
+        {% if not team.can_invite(current_user) %}
+            <div class="alert alert-error">
+                {% if team.jam.team_limit == 1 %}
+                    This is no team jam. You cannot invite other users.
+                {% else %}
+                    This team is full. You can not invite further users.
+                {% endif %}
+            </div>
+        {% else %}
+            <form action="{{ url_for('team_settings', jam_slug = team.jam.slug) }}" method="post" class="block inline">
+                <div class="field input-append">
+                    {{ invite_form.hidden_tag() }}
+                    {{ form_errors(invite_form) }}
+                    {{ invite_form.username() }}
+                    <input type="submit" value="Invite user" class="btn btn-primary"/>
+                </div>
+            </form>
+            <p>
+                The user will receive an email with a link to the invitation.
+                {% if team.jam.team_limit != 0 %}
+                <b>You can invite {{ team.jam.team_limit - team.number_members_and_invitations}}
+                more users</b> (Team Limit {{ team.jam.team_limit }}).{% endif %}
+            </p>
+        {% endif %}
+        </form>
+    </div>
+
+    <div class="span3">
+        <h2>Game settings</h2>
+        <p>
+            {% if team.game %}
+                Please go to the <a href="{{ url_for('edit_game', jam_slug = jam.slug, game_id = team.game.id) }}">
+                game settings</a> page.
+            {% else %}
+                You have to <a href="{{ url_for('create_game', jam_slug = jam.slug) }}">
+                create a game</a> first, then edit it on the game
+                settings page.
+            {% endif %}
+        </p>
+        <p>
+            Settings made here will be lost unless applied before
+            switching to the game settings.
+        </p>
+    </div>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,181 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+%survey-results-text-box {
+  @extend %default-border-radius;
+  background: $light-gray;
+  color: $light-black;
+  margin: 1em 0;
+  padding: 1em;
+}
+
+#survey-list {
+  .survey-actions {
+    text-align: right;
+  }
+}
+
+#survey-questionnaire {
+  .form-group + .form-group,
+  .form-group + fieldset,
+  fieldset + fieldset {
+    margin-top: 1.5em;
+  }
+
+  // "No selection" option
+  .radio-item-0:not(.inline-vcentered) input:not([required]) + label {
+    color: $gray;
+    font-style: italic;
+  }
+}
+
+#survey-questionnaire-preview {
+  .i-box {
+    .standalone-section-title {
+      color: $dark-gray;
+      font-style: italic;
+      padding-right: 0.5rem;
+    }
+
+    .item-action-buttons {
+      visibility: hidden;
+    }
+
+    li.survey-item:hover {
+      .item-action-buttons,
+      .item-sortable-handle {
+        visibility: visible;
+      }
+    }
+  }
+
+  .i-box-content > ul {
+    @extend %i-box-cancel-margin;
+
+    & > li.survey-item {
+      background-color: white;
+
+      .item-row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        > .i-form {
+          flex-grow: 1;
+          margin-top: 0;
+        }
+
+        > .item-action-buttons {
+          flex-grow: 0;
+          flex-shrink: 0;
+          margin-right: $i-box-padding;
+        }
+      }
+    }
+  }
+
+  .empty-msg {
+    display: none;
+  }
+
+  .empty > .empty-msg {
+    display: block;
+  }
+}
+
+#survey-results {
+  h4 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .chart-answer {
+    display: inline-block;
+    vertical-align: top;
+    width: 49%;
+    position: relative;
+
+    .axis-x-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: $gray;
+    }
+
+    .axis-y-label {
+      position: absolute;
+      bottom: 50%;
+      left: 0;
+      text-align: center;
+      transform: rotate(-90deg);
+      color: $gray;
+    }
+  }
+
+  .number-answer {
+    text-align: center;
+  }
+
+  .text-answer {
+    @extend %survey-results-text-box;
+    font-style: italic;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .chart-option-details {
+    @extend %survey-results-text-box;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .survey-pie-chart,
+  .survey-bar-chart {
+    .ct-label {
+      font-weight: bold;
+    }
+  }
+
+  .survey-summary {
+    margin-bottom: 1em;
+    color: $gray;
+    font-style: italic;
+  }
+}
+
+#survey-submission {
+  .answer-data {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .i-box {
+    margin-bottom: 1em;
+  }
+}
+
+.survey-active {
+  color: $blue !important;
+}
+
+.survey-finished {
+  color: $green !important;
+}
+
+.survey-limit-reached {
+  color: $purple !important;
+}

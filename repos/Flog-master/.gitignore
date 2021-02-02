@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+.vscode/
+
+.env
+.webassets-cache/
+flaskblog/.cos_secret.json
+.envrc
+whooshee/
+*.sqlite3
+*.mo
+.mypy_cache/
+.idea/
+__pypackages__/
+.pdm.toml
+*.egg-info/

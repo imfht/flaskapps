@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+
+{% block style -%}
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='lib/index/index.css') }}">
+{%- endblock style %}
+
+{% block wrap -%}
+  <div class="entry-cover">
+    <div class="entry-cover-left">
+      <div class="entry-center">
+        <img class="img-circle" src="{{ DEFAULT.SITE['header'].replace('mini', 'small') }}">
+        <h3>lin.jiang</h3>
+        <cite>风落花语风落天，花落风雨花落田.</cite>
+        <ul class="list-inline">
+          <li><a href="{{ url_for("blog.articles") }}"><i class="fa fa-home" title="BLOG"></i></a></li>
+          {% for item in DEFAULT.INFO %}
+            <li><a href="{{ item.url }}" target="_blank" title="{{ item.name }}"><i class="fa {{ item.icon }}"></i></a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="entry-cover-right">
+      <div class="entry-center">
+        <h3>夜雨行</h3>
+        <p>佚名</p>
+        <div>
+          <p>雨中漫步行 夜深無人听</p>
+          <p>悄然歸故裡 卧龍不知情</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endblock wrap %}
+
+{% block script -%}
+  <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static',filename='lib/index/index.js') }}"></script>
+{%- endblock script %}
+
+{% block footer -%}
+{%- endblock footer %}

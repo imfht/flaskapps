@@ -1,0 +1,6 @@
+*.pyc
+.virtualenv
+.DS_Store
+.idea
+static/.webassets-cache
+static/gen/

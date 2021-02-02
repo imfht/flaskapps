@@ -1,0 +1,11 @@
+{% extends "utility_window.html" %}
+{% block content %}
+  <div class="container text-center">
+    <p>Vector could not connect!</p>
+    <p>It could be one of the following:</p>
+    <p>1. Vector is stuck</p>
+    <p>2. Vector is not connected to WIFI</p>
+    <p>3. Something is taking higher privilege</p>
+    <a href="/home" class="btn btn-dark" role="button" onclick="loading();">Home</a>
+  </div>
+{% endblock content %}

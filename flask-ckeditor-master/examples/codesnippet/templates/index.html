@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask-CKEditor Demo: Code Snippet</title>
+</head>
+<body>
+	<div class="warpper" style="width: 700px; margin: auto">
+		<h1>Flask-CKEditor Demo: Code Snippet</h1>
+		<form method="post">
+			{{ form.csrf_token }}
+			{{ form.title.label }}<br>
+			{{ form.title }}<br><br>
+			{{ form.body.label }}<br>
+			{{ form.body }}
+			<br>
+			{{ form.submit }}
+		</form>
+	</div>
+	{{ ckeditor.load() }}
+	{{ ckeditor.config(name='body') }}
+	{# unconmment lines below if you load CKEditor from CDN, because codesnippet plugin is not available on CKEditor CDN #}
+	<script>
+		// Enable local "codesnippet" plugin from /ckeditor/static/standard/plugins/codesnippet/ path.
+		// CKEDITOR.plugins.addExternal( 'codesnippet', '/ckeditor/static/standard/plugins/codesnippet/', 'plugin.js' );
+	</script>
+</body>
+</html>
+

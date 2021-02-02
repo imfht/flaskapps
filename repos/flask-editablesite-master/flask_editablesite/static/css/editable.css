@@ -1,0 +1,165 @@
+/* EDITABLE */
+
+.form-editable label {
+  display: none;
+}
+
+.form-editable-button {
+  margin-bottom: 40px;
+}
+
+.form-editable-inline {
+  display: inline;
+}
+
+.title-image-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.edit-icon-wrapper {
+  position: absolute;
+  top: 0.7em;
+  left: -2.5em;
+  color: #999;
+}
+
+.btn .edit-icon-wrapper {
+  top: 0;
+  left: -2em;
+}
+
+h1 .edit-icon-wrapper, .h1 .edit-icon-wrapper {
+  top: 1em;
+  left: -2em;
+  font-size: 18px;
+}
+
+.edit-icon-dante {
+  left: -1.5em;
+}
+
+.form-editable input[type=text] {
+  background-color: transparent;
+  width: 100%;
+}
+
+.form-editable span input[type=text] {
+  width: 40%;
+}
+
+.form-editable input[type=text], .dante-editable {
+  border: 1px solid transparent;
+}
+
+.form-editable input[type=text].active, .dante-editable.active {
+  border: 1px dotted #999;
+}
+
+.postArticle .layoutSingleColumn {
+  width: auto;
+}
+
+.postArticle section {
+  overflow: hidden;
+}
+
+
+/* Dropzone */
+
+.dropzone {
+  min-height: 0;
+  border: 1px solid transparent;
+  background-color: transparent;
+  padding: 0;
+  position: relative;
+}
+
+.dropzone:hover {
+  border: 1px dotted #999;
+}
+
+.dropzone .dz-message {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: none;
+}
+
+.jumbotron .dropzone .dz-message {
+  bottom: 100px;
+}
+
+.modal .modal-content .dropzone .dz-message {
+  bottom: 40%;
+}
+
+.dropzone:hover .dz-message {
+  display: block;
+  z-index: 1001;
+}
+
+.dropzone .dz-message span {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 0.5em;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+  background-color: transparent;
+}
+
+.dropzone .dz-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.jumbotron .dropzone .dz-preview {
+  text-align: center;
+}
+
+.jumbotron .dropzone .dz-preview .dz-image {
+  border-radius: 50%;
+  display: inline-block;
+  width: 256px;
+  height: 256px;
+}
+
+.modal .modal-content .dropzone .dz-preview .dz-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 0;
+}
+
+
+
+/* WEIGHT / DELETE CONTROLS */
+
+.form-delete-item {
+  display: inline-block;
+  position: absolute;
+  bottom: 50px;
+  right: 35px;
+}
+
+.form-delete-item .btn, .weight-controls .btn {
+  font-size: 1.8em;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.weight-controls {
+  display: inline-block;
+  position: absolute;
+  bottom: 50px;
+  left: 35px;
+}
+
+.weight-controls .btn {
+  margin-right: 15px;
+}

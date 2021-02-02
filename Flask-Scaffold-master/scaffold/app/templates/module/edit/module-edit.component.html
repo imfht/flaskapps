@@ -1,0 +1,36 @@
+<div  [@routerTransition]>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <h2> Edit {Resource}</h2>
+            <form role="form" [formGroup]="{Resource}EditForm"  (ngSubmit)="onSubmit()" >
+                <div class="form-content">
+
+
+                        
+
+
+                    {angular_form_fields}
+
+
+                 
+                    
+                    
+                </div>
+                <button type="submit" [disabled]="!{Resource}EditForm.valid" class="btn btn-success" >Update</button>
+                
+            </form>
+
+
+            &nbsp;
+            
+            <div class="alert alert-danger"   *ngIf="http_errors" role="alert">
+                <p [innerHTML]=" error_message " ></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

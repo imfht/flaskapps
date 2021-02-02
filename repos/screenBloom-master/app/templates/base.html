@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en-US">
+    <head>
+        <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, user-scalable=yes">
+        {% if title %}
+            <title>ScreenBloom - {{ title }}</title>
+        {% else %}
+            <title>ScreenBloom</title>
+        {% endif %}
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ images_path if images_path }}favicon.png" type="image/x-icon">
+        <link rel="icon" href="{{ images_path if images_path }}" type="image/x-icon">
+
+        <!-- CSS -->
+        <link type="text/css" rel="stylesheet" href="{{ fonts_path if fonts_path }}font-awesome{{ '.min' if not fonts_path }}.css"/>
+        <link type="text/css" rel="stylesheet" href="{{ css_path if css_path }}{{ 'vendor' if environment == 'dev' }}/tipped.css"/>
+        <link type="text/css" rel="stylesheet" href="{{ css_path if css_path }}screenbloom.css"/>
+    </head>
+
+    <body>
+        <div class="result-wrapper">
+            <i id="loading" class="fa fa-spinner fa-spin animate"></i>
+        </div>
+
+        <div id="header">
+            <div id="header-container">
+                <h1 class="header-title raleway">Screen</h1><h1 class="header-title lobster"><span class="bloom color-animate">Bloom</span></h1>
+            </div>
+        </div>
+
+        <div id="container" class="container">
+            <div class="notification-sidebar"></div>
+
+            {% block content %}{% endblock %}
+
+            <div class="system-wrapper">
+                <div class="system-options-toggle simple-tooltip" title="System Options" data-tipped-options="position: 'left'">
+                    <i class="fa fa-gear"></i>
+                </div>
+
+                <div class="system-inner hidden">
+                    <div class="regen-config simple-tooltip" title="Regen Config File" data-tipped-options="position: 'left'"><i class="fa fa-cogs" aria-hidden="true"></i></div>
+                    <div class="regen-config-confirm-wrapper hidden">
+                        <div class="regen-config-confirm">
+                            <p>Remove your ScreenBloom config file and generate a new one?</p>
+
+                            <div id="regen-confirm" class="regen-config-btn">Regen Config</div>
+                            <div id="regen-cancel" class="regen-config-btn">Cancel</div>
+                        </div>
+                    </div>
+
+                    <div class="version simple-tooltip" data-version="{{ version }}" title="Version" data-tipped-options="position: 'left'"><span>v{{ version }}</span></div>
+
+{#                    <div class="send-diagnostic-data simple-tooltip" title="Get diagnostic data" data-tipped-options="position: 'left'"><i class="fa fa-bar-chart"></i></div>#}
+                </div>
+            </div>
+
+            <div id="secret-goldblum" class="animate">
+                <img alt="Secret Goldblum!" src="{{ images_path if images_path }}goldblum.jpg" class="animate">
+                <div id="goldbloom-trigger" class="animate"></div>
+            </div>
+        </div>
+
+        <!-- JavaScripts -->
+        <script type="text/javascript" src="{{ js_path if js_path }}{{ 'vendor' if environment == 'dev' }}/jquery-2.2.0.min.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}{{ 'vendor' if environment == 'dev' }}/jqueryColor-2.1.2.min.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}{{ 'vendor' if environment == 'dev' }}/packery.min.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}{{ 'vendor' if environment == 'dev' }}/randomColor.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}{{ 'vendor' if environment == 'dev' }}/tipped.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}colorWave.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}screenBloom.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}screenBloomPresets.js"></script>
+        <script type="text/javascript" src="{{ js_path if js_path }}zoneselect.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+                screenBloom.config.briUrl = '{{ url_for("update_bri") }}';
+                screenBloom.config.updateSpeedUrl = '{{ url_for("update_update_speed") }}';
+                screenBloom.config.partyModeUrl = '{{ url_for("update_party_mode") }}';
+                screenBloom.config.autoStartUrl = '{{ url_for("update_auto_start") }}';
+                screenBloom.config.diagnosticUrl = '{{ url_for("get_diagnostic_data") }}';
+                screenBloom.config.regenConfigUrl = '{{ url_for("regen_config") }}';
+                screenBloom.config.zoneUrl = '{{ url_for('update_zones') }}';
+                screenBloom.config.bulbsUrl = '{{ url_for("update_bulbs") }}';
+                screenBloom.config.displayUrl = '{{ url_for("update_display") }}';
+                screenBloom.config.updateSatUrl = '{{ url_for("update_sat_value") }}';
+                screenBloom.config.state = {{ 'true' if state else 'false' }};
+                screenBloom.config.autoStartState = {{ 'true' if auto_start_state else 'false' }};
+                screenBloom.config.currentPreset = '{{ current_preset }}';
+                screenBloom.config.faClassNames = {{ fa_class_names|safe if fa_class_names is defined else [] }};
+
+                {% if lights %}
+                screenBloom.config.bulbs = {{ lightsJs }};
+                {% endif %}
+
+                {% if default_color %}
+                screenBloom.config.defaultColor = '{{ default_color|safe }}';
+                {% endif %}
+                screenBloom.init();
+
+                var lights = {};
+                {% for light in lights %}
+                    lights[{{ light[0] }}] = '{{ light[2] }}';
+                {% endfor %}
+
+                screenBloomPresets.init();
+
+                zoneGrid.updateZonesUrl = '{{ url_for("update_zones") }}';
+                zoneGrid.toggleZonesUrl = '{{ url_for("toggle_zone_state") }}';
+                zoneGrid.screenshotUrl = '{{ url_for("refresh_screenshot") }}';
+                zoneGrid.zones = {{ zones|safe if zones else [] }};
+                zoneGrid.zonesTemp = {{ zones|safe if zones else [] }};
+                zoneGrid.lightsMaster = lights;
+                zoneGrid.state = {{ 'true' if zone_state  else 'false' }};
+                zoneGrid.audioPath = '{{ audio_path if audio_path }}';
+                zoneGrid.init();
+
+                {% if title == 'Home' %}
+                    autoStart();
+                {% endif %}
+            });
+      </script>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "user/base.html" %}
+{% from "macros.html" import render_form %}
+
+{% block title %}
+我的简历
+{% endblock %}
+
+{% block right %}
+<h1>我的简历</h1>
+{{ render_form('', form, url_for('user.resume'), file_url=file_url, upload=True) }}
+{% endblock %}

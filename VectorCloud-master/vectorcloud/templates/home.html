@@ -1,0 +1,487 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+      <div class="content-section">
+          {% for command in command_list %}
+            <p>
+              >> {{ command }}
+            </p>
+            <p></p>
+          {% endfor %}
+
+          <!-- Command Form -->
+          <form method="POST" action="{{ url_for('main.home') }}">
+              <input type="hidden" name="form-name" value="command-form">
+              {{ form.hidden_tag() }}
+              <fieldset class="form-group">
+                  <legend class="border-bottom border-dark text-center"><b>Vector Commands</b>
+                    <img align="right"
+                         class="legend-icon"
+                         src="{{ url_for('static', filename='icons/info.svg') }}"
+                         width="24px"
+                         height="24px"
+                         data-toggle="popover"
+                         data-placement="left"
+                         title="Robot Commands <a href='#' class='close' data-dismiss='alert'>&times;</a>"
+                         data-html="true"
+                         data-content="
+                    <p><b>Enter a robot. command: </b>In this command bar you can enter python code with the condition of: </p>
+                    <p><code>with anki_vector.Robot(args.serial) as robot:</code></p>
+                    <p><b>Sample Commands: </b></p>
+                    <p><code>robot.get_version_state()</code></p>
+                    <p><code>robot.get_battery_state()</code></p>
+                    <p><code>robot.behavior.drive_off_charger()</code></p>
+                    <p><code>robot.behavior.drive_on_charger()</code></p>
+                    <p><code>robot.behavior.say_text('Hello World')</code></p>
+                    <p><code>robot.behavior.set_eye_color(hue=0.0, saturation=0.0)</code></p>
+                    <p><code>time.sleep(10)</code></p>
+                    <p>Refer to the API section of the docs in the SDK folder for a full list of commands.</p>
+                    <p><b>Database Commands: </b>The command bar sends python code to the running application, so a side effect is that
+                    we can send database queries from the bar as well. Full documentation on the database is coming, but some common database queries would be:</p>
+                    <p><b>Clear the user table:</b></p>
+                    <p><code>db.session.query(User).delete()</code></p>
+                    <p>Note: This will delete the user account and redirect you to the register screen</p>
+                    <p><b>Clear the applications table:</b></p>
+                    <p><code>db.session.query(Application).delete()</code></p>
+                    <p><code>db.session.query(AppSupport).delete()</code></p>
+                    <p>Note: This will clear the application table and support files entries in the database, but will not delete the files from the folders</p>
+                    ">
+                  </legend>
+                  <div class="row image-container">
+                    <div class="column search-bar">
+                          <div onsubmit="loading();">
+                            {{ form.command(autocomplete="off",
+                                            class="form-control form-control-lg",
+                                            placeholder="Enter a command..") }}
+                          </div>
+                    </div>
+                    <div class="column search-icon">
+                      {{ form.submit(class="btn btn-dark") }}
+                    </div>
+                  </div>
+              </fieldset>
+          </form>
+
+
+
+          <div class="image-container row">
+            {% if command_list %}
+                <a href="{{ url_for('main.execute_commands') }}">
+                <img class="store-icon column mb-4" src="{{ url_for('static', filename='icons/play.svg') }}" onclick="loading();" width="32px" height="32px" data-toggle="tooltip" data-placement="top" title="Execute Commands">
+                </a>
+                <a href="{{ url_for('main.clear_commands') }}">
+                <img class="store-icon column mb-4" src="{{ url_for('static', filename='icons/trash.svg') }}" width="32px" height="32px" data-toggle="tooltip" data-placement="top" title="Clear Commands">
+                </a>
+            {% endif %}
+          </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="{{ url_for('application_store.app_store') }}">
+      <img class="store-icon" align="right" src="{{ url_for('static', filename='icons/package-grey.svg') }}" width="24px" height="24px" data-toggle="tooltip" data-placement="top" title="Add Applications">
+      </a>
+    </div>
+    {% block view %}{% endblock %}
+    <div>
+      <legend class="text-left border-dark mb-4">Applications</legend>
+    </div>
+    {% if app_list %}
+
+
+    <!-- Search Form -->
+    <form method="POST" action="{{ url_for('main.home') }}">
+        <input type="hidden" name="form-name" value="search-form">
+        {{ search_form.hidden_tag() }}
+        <fieldset class="form-group">
+          <div class="content-section">
+            <div class="row image-container">
+              <div class="form-group column search-bar">
+                  {% if search_form.search.errors %}
+                      {{ search_form.search(class="form-control form-control-lg is-invalid") }}
+                      <div class="invalid-feedback">
+                          {% for error in search_form.search.errors %}
+                              <span>{{ error }}</span>
+                          {% endfor %}
+                      </div>
+                  {% else %}
+                    <div onsubmit="loading();">
+                      {{ search_form.search(autocomplete="off", class="form-control form-control-lg") }}
+                    </div>
+                  {% endif %}
+              </div>
+              <div class="column search-icon">
+                {{ search_form.go(class="btn btn-dark") }}
+              </div>
+            </div>
+            <div class="row image-container">
+              <div class="form-check column">
+                  {{ search_form.by_name(class="form-check-input") }}
+                  {{ search_form.by_name.label(class="form-check-label") }}
+              </div>
+              <div class="form-check column">
+                  {{ search_form.by_description(class="form-check-input") }}
+                  {{ search_form.by_description.label(class="form-check-label") }}
+              </div>
+              <div class="form-check column" >
+                  {{ search_form.by_author(class="form-check-input") }}
+                  {{ search_form.by_author.label(class="form-check-label") }}
+              </div>
+            </div>
+            {% if search_term %}
+            <p></p>
+            <div class="border-bottom border-dark grey-text">
+              <b>Searching: </b>{{ search_term }} | {{ num_results }} results
+              <a href="{{ url_for('main.home') }}">
+              <img class="store-icon" align="right" src="{{ url_for('static', filename='icons/close.svg') }}" width="16px" height="16px">
+              </a>
+            </div>
+            {% endif %}
+          </div>
+        </fieldset>
+    </form>
+
+
+    {% endif %}
+    {% if not app_list %}
+      <p></p>
+      <div class="text-center">
+        <a href="{{ url_for('application_store.app_store') }}">
+        <img class="mb-4" src="{{ url_for('static', filename='icons/package-grey.svg') }}" width="128px" height="128px" data-toggle="tooltip" data-placement="top" title="App Store">
+        </a>
+        <div class="grey-text">
+          <p>No applications installed. Go to the app store or upload a local package.</p>
+        </div>
+      </div>
+    {% else %}
+      <div class="content-section">
+          {% for app in app_list %}
+          <div class="border-bottom border-dark">
+            <div class="image-container row">
+
+              <a href="{{ url_for('application_system.run_script', script_hex_id=app.hex_id) }}" onclick="loading();">
+              <img class="store-icon-main column" src="{{ url_for('static', filename='app_icons/' + app.icon) }}" width="48px" height="48px">
+              </a>
+              <a href="{{ url_for('application_system.run_script', script_hex_id=app.hex_id) }}" onclick="loading();">
+              <div class="app-name column">
+                <b>{{ app.script_name }}</b>
+              </div>
+              </a>
+              {% if app.pid != None %}
+                <a href="{{ url_for('application_system.kill_process', pid=app.pid) }}">
+                <img class="list-view-spinner column" align="right" src="{{ url_for('static', filename='icons/running_in_bkrd.svg') }}" data-toggle="tooltip" data-placement="top" title="Process Running. Click here to kill.">
+                </a>
+              {% endif %}
+
+              <a data-toggle="collapse" href="#{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <img class="list-view-spinner column"
+                     src="{{ url_for('static', filename='icons/arrow-down.svg') }}"
+                     width="24px" height="24px">
+              </a>
+            </div>
+            <div class="collapse" id="{{ app.hex_id }}">
+              <div class="border-top border-dark mt-4"></div>
+              <div class="row mt-4 image-container">
+                <div class="column store-icon-main">
+                  <a data-toggle="collapse" href="#edit-{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <img src="{{ url_for('static', filename='icons/edit.svg') }}"
+                         width="24px" height="24px" data-toggle="tooltip" data-placement="top" title="Edit Metadata">
+                  </a>
+                </div>
+                <div class="column store-icon-main">
+                  <a data-toggle="collapse" href="#files-{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <img src="{{ url_for('static', filename='icons/files.svg') }}"
+                         width="24px" height="24px" data-toggle="tooltip" data-placement="top" title="Edit Files">
+                  </a>
+                </div>
+                <div class="column store-icon-main">
+                  <a data-toggle="collapse" href="#settings-{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <img src="{{ url_for('static', filename='icons/settings.svg') }}"
+                         width="24px" height="24px" data-toggle="tooltip" data-placement="top" title="Application Settings">
+                  </a>
+                </div>
+                <div class="column store-icon-main">
+                  <a href="{{ url_for('application_store.export_application', script_id=app.id) }}">
+                  <img src="{{ url_for('static', filename='icons/download.svg') }}" width="24px" height="24px" data-toggle="tooltip" data-placement="top" title="Download Package">
+                  </a>
+                </div>
+                <div class="column store-icon-main">
+                  <a href="{{ url_for('application_system.delete_application', script_id=app.id) }}">
+                  <img align="left" src="{{ url_for('static', filename='icons/trash.svg') }}" width="24px" height="24px" data-toggle="tooltip" data-placement="top" title="Delete">
+                  </a>
+                </div>
+                <div class="column store-icon-main" data-toggle="tooltip" data-placement="top" title="Duplicate Application">
+                  <a href="{{ url_for('application_system.duplicate_application', script_id=app.id) }}">
+                  <img src="{{ url_for('static', filename='icons/copy.svg') }}" width="24px" height="24px">
+                  </a>
+                </div>
+              </div>
+
+              <div class="collapse" id="edit-{{ app.hex_id }}">
+                <div class="border-top border-dark mt-4 mb-4"></div>
+
+
+                <!-- Edit Form -->
+                <form method="POST" action="{{ url_for('main.home') }}" enctype="multipart/form-data">
+                    <input type="hidden" name="form-name" value="edit-form">
+                    {{ edit_form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom border-dark darker text-center">Editing: {{ app.script_name }}
+                          <div class="grey-text">
+                            <p>Hex ID: {{ app.hex_id }}</p>
+                          </div>
+                        </legend>
+                        <div class="form-group">
+                            {{ edit_form.script_name.label(class="form-control-label") }}
+                            {% if edit_form.script_name.errors %}
+                                {{ edit_form.script_name(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in edit_form.script_name.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ edit_form.script_name(autocomplete="off", onsubmit="loading();", class="form-control darker form-control-lg", value=app.script_name) }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ edit_form.description.label(class="form-control-label") }}
+                            {% if edit_form.description.errors %}
+                                {{ edit_form.description(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in edit_form.description.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {% set f = edit_form.description.process_data(app.description) %}
+                                {{ edit_form.description(onsubmit="loading();", class="form-control darker form-control-lg app-description") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ edit_form.author.label(class="form-control-label") }}
+                            {% if edit_form.author.errors %}
+                                {{ edit_form.author(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in edit_form.author.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ edit_form.author(autocomplete="off", class="form-control darker form-control-lg", value=app.author) }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ edit_form.website.label(class="form-control-label") }}
+                            {% if edit_form.website.errors %}
+                                {{ edit_form.website(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in edit_form.website.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ edit_form.website(autocomplete="off", class="form-control darker form-control-lg", value=app.website) }}
+                            {% endif %}
+                        </div>
+                    {% set f = edit_form.run_in_bkrd.process_data(app.run_in_bkrd) %}
+                    <div class="form-check">
+                      <p>
+                        {{ edit_form.run_in_bkrd(class="form-check-input") }}
+                        {{ edit_form.run_in_bkrd.label(class="form-check-label") }}
+                      </p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="mt-4 mb-4 image-container">
+                          {{ edit_form.update(class="btn btn-dark") }}
+                        </div>
+
+                        <div class="image-container">
+                          <a data-toggle="collapse" href="#edit-{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="{{ url_for('static', filename='icons/close.svg') }}"
+                                 width="32px" height="32px" class="close-icon">
+                          </a>
+                        </div>
+
+                        <div class="form-group hidden">
+                          {{ edit_form.hex_id(autocomplete="off", class="form-control form-control-lg", value=app.hex_id) }}
+                        </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+
+
+              </div>
+
+
+              <div class="collapse" id="files-{{ app.hex_id }}">
+                <div class="border-top border-dark mt-4 mb-4"></div>
+
+
+                <!-- Files Form -->
+                <form method="POST" action="{{ url_for('main.home') }}" enctype="multipart/form-data">
+                    <input type="hidden" name="form-name" value="files-form">
+                    {{ edit_form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom border-dark darker text-center">Editing Files: {{ app.script_name }}
+                          <img align="right"
+                               class="legend-icon"
+                               src="{{ url_for('static', filename='icons/info.svg') }}"
+                               width="24px"
+                               height="24px"
+                               data-toggle="popover"
+                               data-placement="left"
+                               title="Editing Application Files <a href='#' class='close' data-dismiss='alert'>&times;</a>"
+                               data-html="true"
+                               data-content="
+                          <p><b>Set Main Python File:</b> Change your main python file for running your application. This deletes the old main file. This must have the extension '.py'</p>
+                          <p><b>Add Support File:</b> Add supporting python files for your application. These files are placed in the lib package. Be sure your main python application imports support files from 'lib'.
+                            E.g. <p><code>from lib import <i>your_file</i></code></p>Support file names must be unique. </p>
+                          <p><b>Add Icon Image:</b> Give your application an icon. Custom icons should be 125px x 125px </p>
+                          ">
+                          <div class="grey-text">
+                            <p>Hex ID: {{ app.hex_id }}</p>
+                          </div>
+                        </legend>
+
+                        <div class="form-group mb-4">
+                          <h5>Support Files</h5>
+                          <p></p>
+                          {% for file in support_files %}
+                            {% if '.ini' in file.file_name %}
+                            {% elif app.hex_id == file.hex_id %}
+                              <p><font color="#898F91">
+                                {{ file.file_name }}
+                                <a href="{{ url_for('application_system.delete_support_file', file_id=file.id) }}">
+                                <img class="" align="right" src="{{ url_for('static', filename='icons/trash.svg') }}" width="18px" height="18px" data-toggle="tooltip" data-placement="top" title="Delete {{ file.file_name }}">
+                                </a>
+                              </p>
+                            {% endif %}
+                          {% endfor %}
+                          <div class="border-top border-dark mt-4 mb-4"></div>
+                        </div>
+
+                        <div class="form-group">
+                            {{ edit_form.script.label() }}
+                            {{ edit_form.script(class="form-control-file darker") }}
+                            {% if edit_form.script.error %}
+                              {% for error in edit_form.script.errors %}
+                                  <span> class="text-danger">{{ error }}</span></br>
+                              {% endfor %}
+                            {% endif %}
+                          </div>
+                        <div class="form-group">
+                            {{ edit_form.script_helpers.label() }}
+                            {{ edit_form.script_helpers(class="form-control-file darker") }}
+                            {% if edit_form.script_helpers.error %}
+                              {% for error in edit_form.script_helpers.errors %}
+                                  <span> class="text-danger">{{ error }}</span></br>
+                              {% endfor %}
+                            {% endif %}
+                          </div>
+                        <div class="form-group">
+                            {{ edit_form.icon.label() }}
+                            {{ edit_form.icon(class="form-control-file darker") }}
+                            {% if edit_form.icon.error %}
+                              {% for error in edit_form.icon.errors %}
+                                  <span> class="text-danger">{{ error }}</span></br>
+                              {% endfor %}
+                            {% endif %}
+                          </div>
+                    <div class="form-group">
+                        <div class="mt-4 mb-4 image-container">
+                          {{ edit_form.update(class="btn btn-dark") }}
+                        </div>
+
+                        <div class="image-container">
+                          <a data-toggle="collapse" href="#files-{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="{{ url_for('static', filename='icons/close.svg') }}"
+                                 width="32px" height="32px" class="close-icon">
+                          </a>
+                        </div>
+
+                        <div class="form-group hidden">
+                          {{ edit_form.hex_id(autocomplete="off", class="form-control form-control-lg", value=app.hex_id) }}
+                        </div>
+                    </div>
+                  </fieldset>
+                </form>
+
+
+
+              </div>
+
+              <div class="collapse" id="settings-{{ app.hex_id }}">
+                <div class="border-top border-dark mt-4 mb-4"></div>
+
+
+                <!-- Settings Form -->
+                <form method="POST" action="{{ url_for('main.home') }}" enctype="multipart/form-data">
+                  <input type="hidden" name="form-name" value="settings-form">
+                  {{ settings_form.hidden_tag() }}
+                  <fieldset class="form-group">
+                    <div class="form-group">
+                      <div class="border-bottom border-dark darker">
+                        <h3 class="text-center">{{ app.script_name }} Settings</h3>
+                      </div>
+                      {% for file in support_files %}
+                        {% if app.hex_id in file.file_name %}
+                          {% set f = settings_form.variable.process_data(file.settings) %}
+                        {% endif %}
+                      {% endfor %}
+                      <div class="form-group">
+                          {{ settings_form.variable.label(class="form-control-label") }}
+                          {% if settings_form.variable.errors %}
+                              {{ settings_form.variable(class="form-control form-control-lg is-invalid") }}
+                              <div class="invalid-feedback">
+                                  {% for error in settings_form.variable.errors %}
+                                      <span>{{ error }}</span>
+                                  {% endfor %}
+                              </div>
+                          {% else %}
+
+                              {{ settings_form.variable(autocomplete="off", onsubmit="loading();", class="code-box form-control form-control-lg darker app-description") }}
+                          {% endif %}
+                      </div>
+                      <div class="form-group image-container">
+                        {{ settings_form.save(class="btn btn-dark") }}
+                      </div>
+                      <div class="image-container">
+                        <a data-toggle="collapse" href="#settings-{{ app.hex_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <img src="{{ url_for('static', filename='icons/close.svg') }}"
+                               width="32px" height="32px" class="close-icon">
+                        </a>
+                      </div>
+                      <div class="form-group hidden">
+                        {{ settings_form.hex_id(autocomplete="off", class="form-control form-control-lg", value=app.hex_id) }}
+                      </div>
+                  </fieldset>
+                </form>
+
+
+
+              </div>
+
+              <div class="border-top border-dark mt-4"></div>
+              <div class="image-container mt-4">
+                <a href="{{ url_for('application_system.run_script', script_hex_id=app.hex_id) }}" onclick="loading();">
+                <img class="store-icon-main" src="{{ url_for('static', filename='app_icons/' + app.icon) }}" width="125px" height="125px">
+                </a>
+              </div>
+              <div class="grey-text-md mt-2 text-center list-info">
+                <p><b><u>Author</u></b></p>
+                <p>{{ app.author }}</p>
+                <p><b><u>Website</u></b></p>
+                <p>{{ app.website }}</p>
+                <p><b><u>Description</u></b></p>
+                <p>{{ app.description }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+{% endblock content %}

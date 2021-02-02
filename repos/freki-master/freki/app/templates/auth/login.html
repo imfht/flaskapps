@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %} Login - Project Freki {% endblock %}
+
+{% block content %}
+    <main class="container pt-4">
+        <div class="row">
+            <div class="card dark-card col-md-5 mx-auto">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Login</h4>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <p class="custom-warning">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                    <form class="row custom-form" method="POST">
+                        <div class="col-sm">
+                            Username or email
+                            <input type="text" name="user" id="user" placeholder="Please type your username or email" required/>
+                            New password
+                            <input type="password" name="password" id="password" placeholder="Please type your password" required/>
+
+                            <button type="submit" class="btn btn-primary float-right">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 mx-auto text-center">
+                <a href="/signup" class="custom-link">Sign Up</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

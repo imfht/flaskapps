@@ -1,0 +1,108 @@
+{% extends 'admin/layout.html' %}
+{% import 'admin/_macros.html' as lib with context %}
+{% set name = admin_view.get_display_name() %}
+
+{% block head_css %}
+    <link href="{{ url_for('admin.static', filename='chosen/chosen.css') }}" rel="stylesheet">
+    <link href="{{ url_for('admin.static', filename='css/datepicker.css') }}" rel="stylesheet">
+    {{super()}}
+{% endblock %}
+
+{% block body %}
+    <form method="POST" action="#">
+        {% if csrf_token %}
+        <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}" />
+        {% endif %}
+        <h1 id="main-title">{{ _gettext('%(model)s model', model=name|capitalize) }}</h1>
+
+        {% if admin_view.can_create %}
+            <a class="btn btn-primary btn-title" href="{{ url_for('.add') }}">{{ _gettext('Add %(model)s', model=name) }}</a>
+        {% endif %}
+
+        <select class="actions btn-title hidden" name="action" data-placeholder="{{ _gettext('Choose action') }}">
+            <option value=""></option>
+            {% if admin_view.can_delete %}
+                <option value="delete">{{ _gettext('Delete selected') }}</option>
+            {% endif %}
+        </select>
+
+        <div class="clearfix"></div>
+        <hr />
+
+        <div class="total-count">Total count: {{ count }}</div>
+
+        <div class="page-content">
+            {% if admin_view.search_fields %}
+                <div class="search">
+                    <div class="clear-btn{% if not search_query %}hide{% endif %}"></div>
+                    <input type="text" tabindex="0" autofocus="autofocus" name="q" class="search-input" placeholder="Search" {% if search_query %}value="{{ search_query }}"{% endif %}/>
+                </div>
+            {% endif %}
+
+            <table class="table model-list">
+                <thead>
+                    <tr>
+                        <th class="model-check"><input type="checkbox" name="selected_all_instances" value="all"></th>
+                        {% for c in admin_view.list_display %}
+                            <th>
+                                {% set name = admin_view.field_name(c) %}
+                                {% if admin_view.is_sortable(c)%}
+                                    {% if sort == c %}
+                                        <a href="{{ admin_view.sort_url(c if not sort_desc else None, True) }}">
+                                            {{ name }}
+                                            {% if sort_desc %}
+                                                <i class="icon-chevron-up"></i>
+                                            {% else %}
+                                                <i class="icon-chevron-down"></i>
+                                            {% endif %}
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ admin_view.sort_url(c) }}">{{ name }}</a>
+                                    {% endif %}
+                                {% else %}
+                                    {{ name }}
+                                {% endif %}
+                            </th>
+                        {% else %}
+                            <th>
+                                {{ name|capitalize }}
+                            </th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                {% for instance in data %}
+                    <tr>
+                        <td>
+                            {% set pk = admin_view.get_pk(instance) %}
+                            <input type="checkbox" name="_selected_action" value="{{ pk }}">
+                        </td>
+                        {% for c in admin_view.list_display %}
+                            {% if loop.first %}
+                                <td><a href="{{ url_for('.edit', pk=pk) }}">{{ admin_view.get_column(instance, c) }}</a></td>
+                            {% else %}
+
+                                {% with reference = admin_view.get_reference(admin_view.get_column(instance, c)) %}
+                                    {% if reference %}
+                                        <td><a href="{{ reference }}">{{ admin_view.get_column(instance, c) }}</a></td>
+                                    {% else %}
+                                        <td>{{ admin_view.get_column(instance, c) }}</td>
+                                    {% endif %}
+                                {% endwith %}
+
+                            {% endif %}
+                        {% else %}
+                            <td><a href="{{ url_for('.edit', pk=pk) }}">{{ instance|string or 'None' }}</a></td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ lib.pager(page, total_pages, admin_view.page_url) }}
+        </div>
+    </form>
+{% endblock %}
+
+{% block tail %}
+    <script src="{{ url_for('admin.static', filename='js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ url_for('admin.static', filename='js/form.js') }}"></script>
+    <script src="{{ url_for('admin.static', filename='js/filters.js') }}"></script>
+{% endblock %}

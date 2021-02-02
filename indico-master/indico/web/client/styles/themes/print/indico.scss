@@ -1,0 +1,127 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+$header-bg-color: white;
+$header-icon-color: black;
+$header-text-color: black;
+
+$tt-primary-color: black;
+$tt-secondary-color: black;
+$tt-secondary-pastel: black;
+$tt-nested-time-color: black;
+$tt-additional-text-color: black;
+
+$gray: black;
+
+@import 'themes/indico';
+
+%black-and-white {
+  background-color: white !important;
+  color: black !important;
+}
+
+%no-shadow {
+  box-shadow: none !important;
+}
+
+body {
+  @extend %black-and-white;
+}
+
+.manage-button,
+.event-manage-button,
+#session-bar,
+.eventHeaderButtonBar,
+.js-go-to-day,
+.trigger.icon-expand {
+  display: none !important;
+}
+
+.timetable-duration,
+.dayList .day,
+.dayList .day-title,
+.participant-list-wrapper {
+  @extend %black-and-white;
+}
+
+.timetable-time {
+  .start-time,
+  .end-time {
+    @extend %black-and-white;
+  }
+}
+
+.timetable-item {
+  &.timetable-break .timetable-item-header {
+    background: transparent !important;
+
+    .timetable-title {
+      @extend %black-and-white;
+    }
+  }
+}
+
+.participant-list-wrapper {
+  max-height: none !important;
+}
+
+.event-service-row {
+  @extend %no-shadow;
+  border: none !important;
+
+  .event-service-toolbar {
+    display: none;
+  }
+}
+
+.meeting-timetable {
+  @extend %no-shadow;
+  border: 1px solid $gray;
+
+  .start-time {
+    @extend %no-shadow;
+    border: 1px solid $gray;
+
+    &::before {
+      display: none !important;
+    }
+  }
+}
+
+.event-sub-header {
+  @extend %no-shadow;
+  border: none;
+}
+
+.flexrow,
+.flexcol {
+  // XXX: this is awful and while making some things in the header look
+  // slightly ugly, it fixes both the IE11 crash and firefox only printing
+  // the first page.
+  display: block !important;
+}
+
+.event-date > * {
+  float: left;
+}
+
+.event-location {
+  clear: both;
+}
+
+// this would re-introduce the IE crash so we limit it to modern browsers
+// http://browserhacks.com/#hack-8a0d11a6b2e3d172711eed35cb7237b9
+@supports (-webkit-appearance: none) {
+  .timetable-item-body {
+    margin-top: 0.5em;
+  }
+}
+
+.main-action-bar,
+.footer {
+  display: none !important;
+}

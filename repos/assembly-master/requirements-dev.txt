@@ -1,0 +1,4 @@
+# Install this requirements for dev environment
+pytest
+
+

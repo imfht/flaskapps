@@ -1,0 +1,14 @@
+*.pyc
+.calendar.json
+.gmail.json
+/.vagrant/
+/jarvis/static/.webassets-cache/
+/jarvis/static/gen/
+/jarvis/templates/layouts/
+/inventory
+/venv/
+/venv2/
+/venv3/
+config.py
+config_*.py
+/.vscode/

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}ohai todo{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/formalize.css">
+<style>
+    p{
+        font-size:20px;
+        margin:10px 0;
+        text-align:center;
+    }
+    h1{
+        font-size:48px;
+        margin:75px 0 25px;
+        text-align:center;
+    }
+    div.center{
+        width:600px;
+        margin:0 auto;
+    }
+    input[type="text"]{
+        font-size:20px;
+        padding:5px;
+        width:500px;
+    }
+    input[type="submit"]{
+        margin:0 5px;
+        padding:5px 10px;
+    }
+    ul{
+        margin:25px auto 0;
+        width:600px;
+    }
+    li{
+        padding:5px;
+    }
+</style>
+{% endblock %}
+
+
+{% block header %}
+<p><a href="{{ url_for('views.index') }}">&larr; go back home</a></p>
+{% endblock %}
+
+
+{% block main %}
+<h1>some todos</h1>
+<div class="center">
+  <form action="{{ url_for('views.add_todo') }}" method="post">
+      {{ form.hidden_tag() }}
+      {{ form.todo(placeholder="write your todo here") }}
+      {{ form.submit }}
+  </form>
+</div>
+
+<ul id="todos">
+  {% for todo in todos %}
+    <li>{{ todo.text }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
+
+
+{% block js %}
+<script src="/js/jquery.formalize.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+  (function(){
+
+    var num = $('ul').children().length,
+        form = $('form');
+
+    if(num === 0){
+      $('input[type="text"]').val('read the source code, luke');
+    }
+
+    form.submit(function(e){
+      var add = $('input[type="submit"]'),
+          container = $('#container');
+
+      add.attr('disabled', true);
+
+      container.load(
+        form.attr('action') + '#todos',
+        form.serializeArray(),
+        function(response, status){
+          $('input[type="submit"]').attr('disabled', false);
+        });
+
+      e.preventDefault();
+
+    });
+
+  })();
+
+</script>
+{% endblock %}

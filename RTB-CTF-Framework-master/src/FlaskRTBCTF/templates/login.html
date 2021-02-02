@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% from "forms.html" import login_form_macro %}
+{% block content %}
+    
+    {{ login_form_macro(form=form, url=url_for('users.login') ) }}
+    <div class="border-top pt-3">
+        <small class="text-light">
+            Need An Account? <a class="ml-2 red-underlined-link" href="{{ url_for('users.register') }}">Sign Up Now</a>
+        </small>
+    </div>
+    
+{% endblock content %}

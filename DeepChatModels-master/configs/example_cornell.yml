@@ -1,0 +1,13 @@
+model: DynamicBot
+dataset: Cornell
+model_params:
+    base_cell: LSTMCell
+    num_layers: 2
+    attention_mechanism: LuongAttention
+    decoder.class: AttentionDecoder
+    encoder.class: BidirectionalEncoder
+    ckpt_dir: out/cornell
+dataset_params:
+    data_dir: /home/brandon/Datasets/cornell # The only truly 'mandatory' parameter.
+    vocab_size: 52000 # Approximately the true number of unique words in the dataset.
+    max_seq_len: 20

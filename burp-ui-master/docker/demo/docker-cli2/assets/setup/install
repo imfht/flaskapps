@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+SETUP_DIR="/app/setup"
+CONFIG_DIR="${SETUP_DIR}/config"
+
+echo "deb http://ziirish.info/repos/debian/stretch zi-stable main" >/etc/apt/sources.list.d/ziirish.list
+wget https://ziirish.info/repos/debian.gpg -O- | apt-key add -
+
+apt-get update
+apt-get install -y burp-server burp-client
+
+# configure supervisord log rotation
+cat > /etc/logrotate.d/supervisord <<EOF
+/var/log/supervisor/*.log {
+  weekly
+  missingok
+  rotate 52
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+EOF
+
+# configure supervisord to start crond
+cat > /etc/supervisor/conf.d/cron.conf <<EOF
+[program:cron]
+priority=20
+directory=/tmp
+command=/usr/sbin/cron -f
+user=root
+autostart=false
+autorestart=true
+stdout_logfile=/var/log/supervisor/%(program_name)s.log
+stderr_logfile=/var/log/supervisor/%(program_name)s.log
+EOF
+
+cp ${CONFIG_DIR}/burp/* /etc/burp/
+
+cat >>/etc/crontab<<EOF
+24 1,5,9,13,17,21 * * * root burp -c /etc/burp/demo3.conf -a t &>/dev/null
+59 0,4,8,12,16,20 * * * root burp -c /etc/burp/demo4.conf -a t &>/dev/null
+EOF
+
+# cleanup
+rm -rf /var/lib/apt/lists/*

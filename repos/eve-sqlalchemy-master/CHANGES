@@ -1,0 +1,144 @@
+Changelog
+---------
+
+0.7.2 (unreleased)
+~~~~~~~~~~~~~~~~~~
+
+- Nothing changed yet.
+
+
+0.7.1 (2019-08-10)
+~~~~~~~~~~~~~~~~~~
+
+- Updated Tutorial to use werkzeug.security module (#196) [Mandar Vaze]
+- Require Flask-SQLAlchemy >= 2.4 and SQLAlchemy >= 1.3 due to security issues
+  [Dominik Kellner]
+- Support filtering on embedded document fields / across relations (#186)
+  [Dominik Kellner]
+- Fix sorting across relations [Dominik Kellner]
+- Add Python 3.7 and PyPy3 to supported (and tested) versions [Dominik Kellner]
+- Pin SQLAlchemy version due to warnings in Flask-SQLAlchemy [Dominik Kellner]
+- Improve documentation (#187, #189) [Marc Vila]
+
+
+0.7.0 (2018-10-08)
+~~~~~~~~~~~~~~~~~~
+
+- Eve 0.7 support (#178) [Nicola Iarocci]
+
+
+0.6.0 (2018-08-15)
+~~~~~~~~~~~~~~~~~~
+
+- Fix querying of list relations using `where` [Dominik Kellner]
+- Update Tutorial (#177) [Nicola Iarocci]
+- Return None-values again (#155) [Cuong Manh Le]
+- Allow to supply own Flask-SQLAlchemy driver (#86) [fubu]
+- Support columns with server_default (#160) [Asif Mahmud Shimon]
+
+
+0.5.0 (2017-10-22)
+~~~~~~~~~~~~~~~~~~
+
+- Add DomainConfig and ResourceConfig to ease configuration (#152)
+  [Dominik Kellner]
+- Fixes in documentation (#151) [Alessandro De Angelis]
+- Fix deprecated import warning (#142) [Cuong Manh Le]
+- Configure `zest.releaser` for release management (#137)
+  [Dominik Kellner, Øystein S. Haaland]
+- Leverage further automated syntax and formatting checks (#138)
+  [Dominik Kellner]
+- Clean up specification of dependencies [Dominik Kellner]
+- Added 'Contributing' section to docs (#129) [Mario Kralj]
+- Fix trivial app output in documentation (#131) [Michal Vlasák]
+- Added dialect-specific PostgreSQL JSON type (#133) [Mario Kralj]
+- Fix url field in documentation about additional lookup (#110) [Killian Kemps]
+- Compatibility with Eve 0.6.4 and refactoring of tests (#92) [Dominik Kellner]
+
+
+0.4.1 (2015-12-16)
+~~~~~~~~~~~~~~~~~~
+
+- improve query with null values [amleczko]
+
+
+0.4.0a3 (2015-10-20)
+~~~~~~~~~~~~~~~~~~~~
+
+- `hybrid_properties` are now readonly in Eve schema [amleczko]
+
+
+0.4.0a2 (2015-09-17)
+~~~~~~~~~~~~~~~~~~~~
+
+- PUT drops/recreates item in the same transaction [goneri]
+
+
+0.4.0a1 (2015-06-18)
+~~~~~~~~~~~~~~~~~~~~
+
+- support the Python-Eve generic sorting syntax [Goneri Le Bouder]
+- add support for `and_` and `or_` conjunctions in sqla expressions [toxsick]
+- embedded table: use DOMAIN to look up the resource fields [Goneri Le Bouder]
+
+
+0.3.4 (2015-05-18)
+~~~~~~~~~~~~~~~~~~
+
+- fix setup.py metadata
+- fix how embedded documents are resolved [amleczko]
+
+
+0.3.3 (2015-05-13)
+~~~~~~~~~~~~~~~~~~
+
+- added support of SA association proxy [Kevin Roy]
+- make sure relationships are generated properly [amleczko]
+
+
+0.3.2 (2015-05-01)
+~~~~~~~~~~~~~~~~~~
+
+- add fallback on attr.op if the operator doesn't exists in the
+  `ColumnProperty` [Kevin Roy]
+- add support for PostgreSQL JSON type [Goneri Le Bouder]
+
+
+0.3.1 (2015-04-29)
+~~~~~~~~~~~~~~~~~~
+
+- more flexible handling sqlalchemy operators [amleczko]
+
+
+0.3 (2015-04-17)
+~~~~~~~~~~~~~~~~
+
+- return everything as dicts instead of SQLAResult, remove SQLAResult
+  [Leonidaz0r]
+- fix update function, this closes #22 [David Durieux]
+- fixed replaced method, we are compatible with Eve>=0.5.1 [Kevin Roy]
+- fixed jsonify function [Leonidaz0r]
+- update documentation [Alex Kerney]
+- use id_field column from the config [Goneri Le Bouder]
+- add flake8 in tox [Goneri Le Bouder]
+
+
+0.2.1 (2015-02-25)
+~~~~~~~~~~~~~~~~~~
+
+- always wrap embedded documents [amleczko]
+
+
+0.2 (2015-01-27)
+~~~~~~~~~~~~~~~~
+
+- various bugfixing [Arie Brosztein, toxsick]
+- refactor sorting parser, add sql order by expresssions; please check
+  https://eve-sqlalchemy.readthedocs.org/#sqlalchemy-sorting for more details
+  [amleczko]
+
+
+0.1 (2015-01-13)
+~~~~~~~~~~~~~~~~
+
+- First public preview release. [amleczko]

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% from "utils.html" import pager, comments_popup %}
+
+{% block content %}
+<div class="status-list">
+    {% for s in status_list %}
+    <div id="status-{{ s.id }}" class="ui vertical segment status-item">
+        <div class="status-content">{{ s.content|safe }}</div>
+        {% if s.rootUid %}
+        <div class="ui message status-quote">
+            {{ s.rootUname }}: {{ s.rootContent|safe }}
+        </div>
+        {% endif %}
+        <div class="status-info entry-info">
+            <span class="entry-time">{{ s.t.strftime("%Y-%m-%d %H:%M:%S") }}</span>
+            {% if s.location %}
+            <span>- 在<a class="entry-location" href="{{ s.locationUrl }}" target="_blank">{{ s.location }}</a></span>
+            {% endif %}
+            <span class="entry-stat entry-popover">
+                {{ s.like }} 赞 / {{ s.repeat }} 分享 / {{ s.comment }} 评论
+            </span>
+            {{ comments_popup(s) }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{{ pager('status_list_page', page, total_page) }}
+
+{% endblock %}

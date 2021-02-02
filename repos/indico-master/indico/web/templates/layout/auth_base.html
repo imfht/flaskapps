@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="main">
+            <div class="layout-wrapper login-page">
+                <div class="middle">
+                    <div class="centered-column-wrapper">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

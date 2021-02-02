@@ -1,0 +1,49 @@
+<div class="homepage-section news section" id="news" data-anchor="news">
+    <div class="ui container fluid">
+        <div class="news-header">
+            <h3 class="">News & Updates</h3>
+        </div>
+        <div class="ui grid news-wrapper">
+            {% for article in featured_articles %}
+            {% set article = article._source %}
+            <div class="news-item ui five wide column card-body">
+                <div class="news-card">
+                    <p class="date-author-small">
+                        {{ article.created or '-' }} by
+                        {{ article.author or 'Open Data Portal team'}}
+                    </p>
+                    <div>
+                        <h4>
+                            <a href="/docs/{{article.control_number}}">{{article.title}}</a>
+                        </h4>
+                    </div>
+                    <div class="tags-box">
+                        <a href="/search?type={{article.type.primary}}"
+                            class="ui label blue">
+                            {{article.type.primary }}
+                        </a>
+                        {% if article.type.secondary %}
+                        {% for subtype in article.type.secondary %}
+                        <a href="/search?subtype={{subtype}}" class="ui label teal">{{ subtype }}</a>
+                        {% endfor %}
+                        {% endif %}
+                        {% for tag in article.tags %}
+                        <a href="/search?tags={{tag}}" class="ui label">{{ tag }}</a>
+                        {% endfor %}
+                        {% if article.experiment %}
+                        <a href="/search?experiment={{article.experiment}}"
+                            class="ui label orange">
+                            {{ article.experiment }}
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="more-container">
+            <div class="more"><a
+                    href="{{url_for('invenio_search_ui.search', type = 'News') }}">more</a></div>
+        </div>
+    </div>
+</div>

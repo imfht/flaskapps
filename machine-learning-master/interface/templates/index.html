@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{#
+    index.html, single page application skeleton.
+
+    @charset, specify unicode (utf-8) encoding for html document
+    @http-equiv, use latest (IE) rendering engine, for IE
+    @script, motivated by https://github.com/jeff1evesque/machine-learning/issues/2347
+    @name='viewport', set the width of the page to follow the screen-width of the device,
+        with no zooming applied (1:1 scale)
+#}
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='/static/css/style.css'>
+  </head>
+  <body>
+    <div class='react-container' id='bootstrap-override'></div>
+    <script src='/static/js/content.js'></script>
+  </body>
+</html>

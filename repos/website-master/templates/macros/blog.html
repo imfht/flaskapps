@@ -1,0 +1,28 @@
+{% macro render_blog_post(post, from_index=false) %}
+  <div class="blog-post">
+  {% if from_index %}
+    <h2><a href="{{ post|url }}">{{ post.title }}</a></h2>
+  {% else %}
+    <h2>{{ post.title }}</h2>
+  {% endif %}
+  <p class="meta">
+    written by
+    {% if post.twitter_handle %}
+      <a href="https://twitter.com/{{ post.twitter_handle
+        }}">{{ post.author or post.twitter_handle }}</a>
+    {% else %}
+      {{ post.author }}
+    {% endif %}
+    on {{ post.pub_date }}
+    {%- if post.categories %}
+      in
+      {% for category_id in post.categories %}
+        {%- set category = site.get('/blog-categories/' ~ category_id) %}
+        {%- if not loop.first %},{% endif %}
+        <a href="{{ category|url }}">{{ category.name }}</a>
+      {% endfor %}
+    {% endif %}
+  </p>
+  {{ post.body }}
+  </div>
+{% endmacro %}

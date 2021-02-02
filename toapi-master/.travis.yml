@@ -1,0 +1,14 @@
+sudo: false
+language: python
+python:
+  - "3.6"
+install:
+  - pip install .
+  - pip install -r requirements.txt
+script: coverage run --source=toapi -m pytest && coverage report
+
+after_success:
+  - codecov
+branches:
+  only:
+    - master

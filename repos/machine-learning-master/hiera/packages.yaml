@@ -1,0 +1,27 @@
+##
+## This file contains versions of installed packages.
+##
+system:
+    timezone:
+        region: 'America'
+        locality: 'New_York'
+
+    packages:
+        apt:
+            general:
+                inotify-tools: '3.14-1ubuntu1'
+                libssl-dev: '1.0.1f-1ubuntu2.2*'
+                openssl: '1.0.1f-1ubuntu2.2*'
+                python-dev: '2.7.5-5ubuntu3'
+
+        pip:
+            general:
+                flask-script: '2.0.5'
+                flask-jwt-extended: '3.3.4'
+                voluptuous: '0.10.5'
+                pytest-flask: '0.10.0'
+                six: '1.5.2'
+                xmltodict: '0.10.1'
+                scrypt: '0.8.0'
+                pymongo: '3.4.0'
+                mlxtend: '0.13.0'

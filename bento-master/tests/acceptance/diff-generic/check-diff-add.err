@@ -1,0 +1,6 @@
+Running Bento checks on staged files...
+
+⚠ Nothing to check or archive. Please confirm that changes are staged and not
+excluded by `.bentoignore`. To check all Git tracked files, use `--all`.
+
+✔ 0 findings due to staged changes in  s

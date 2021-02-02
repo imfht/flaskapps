@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+
+  {% compress 'css' %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',
+    filename='tufte.css') }}">
+  {% endcompress %}
+
+  <title>{{ config.title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='shortcut icon' href="{{ url_for('static', filename='favicon.ico') }}" type='image/x-icon'/>
+  <style type="text/css">
+   img { mix-blend-mode: multiply; }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div class="splash">
+      <p>
+        <img align="left" width="41" height="54" class="mached" src="{{
+        url_for('static', filename='athena.png') }}">
+        <span class="newthought">{{ config.title }}</span><br />
+        {{ config.indexdesc }}
+      </p>
+    </div> <!-- splash end -->
+
+    <div class="navigation">
+      <ul class="navigation-list">
+        <li class="active"><a href="{{ url_for("index") }}">home</a> ·</li>
+        {% for page in hpages %}
+            <li>
+              <a href="{{ url_for("hardpagelink", path=page.path)}}">
+                {{ page.title.lower() }}
+              </a> ·
+            </li>
+         {% endfor %}
+        <li><a href="{{ url_for("recent_feed") }}">subscribe</a></li>
+      </ul>
+    </div> <!-- navigation end -->
+  </div> <!-- header end -->
+
+  <div class="content">
+
+{% block content %}
+    {% for page in pages|sort(attribute="date")|reverse %}
+        <h1><a href="{{ url_for("page", path=page.path) }}">
+          {{ page.title }}</a></h1>
+        <subtitle class="loop-date">
+          {{ page.date.strftime('%B %d, %Y') }}
+        </subtitle>
+    {% else %}
+        <p>No posts yet.</p>
+    {% endfor %}
+{% endblock content %}
+
+ </div> <!-- content end -->
+
+  <div class="thefooter">
+    <p>{{ config.footer }}
+      <br><br>Copyright, <i>2016</i>
+    </p>
+  </div> <!-- footer end -->
+</body>
+</html>

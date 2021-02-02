@@ -1,0 +1,27 @@
+        <div style="position: fixed; width: 100%; z-index: 9999;">
+          <div {% if not no_sidebar %}class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2"{% endif %}>
+            <div id="bui-notifications">
+              {% with messages = get_flashed_messages(with_categories=true) -%}
+                {% if messages -%}
+                  {% for category, message in messages -%}
+                    <div class="alert alert-dismissable alert-{{category}}">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      {{message}}
+                    </div>
+                  {% endfor -%}
+                {% endif -%}
+              {% endwith -%}
+              {% if config.BUI_DEMO and login -%}
+              <div class="alert alert-dismissable alert-info" data-permanent="true">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p>
+                {{ _("
+                <strong>Hello!</strong> Welcome to Burp-UI's demo.
+                You can login with either <em>admin</em> / <em>admin</em>, <em>moderator</em> / <em>moderator</em> or with <em>demo</em> / <em>demo</em>.
+                ") }}
+                </p>
+              </div>
+              {% endif -%}
+            </div>
+          </div>
+        </div>

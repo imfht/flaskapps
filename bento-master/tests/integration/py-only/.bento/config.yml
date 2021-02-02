@@ -1,0 +1,36 @@
+formatter:
+  stylish: {}
+tools:
+  bandit:
+    ignore:
+    - any-other-function-with-shell-equals-true
+    - assert-used
+    - hardcoded-bind-all-interfaces
+    - hardcoded-password-default
+    - hardcoded-password-funcarg
+    - hardcoded-password-string
+    - hardcoded-sql-expressions
+    - hardcoded-tmp-directory
+    - import-lxml
+    - import-pickle
+    - import-subprocess
+    - import-xml-expat
+    - import-xml-minidom
+    - import-xml-pulldom
+    - import-xml-sax
+    - import_xml-etree
+    - md5
+    - random
+    - start-process-with-no-shell
+    - start-process-with-partial-path
+    - subprocess-without-shell-equals-true
+    - try-except-continue
+    - urllib-urlopen
+  flake8:
+    ignore:
+    - bad-wildcard-import
+    - bare-except-bugbear
+    - no-getattr
+    - no-setattr
+    - unused-module
+    - unused-variable

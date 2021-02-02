@@ -1,0 +1,191 @@
+---
+version: 2
+
+jobs:
+  python:
+    docker:
+      - image: udata/circleci:2-alpine
+      - image: circleci/mongo:3.6-stretch-ram
+      - image: redis:alpine
+      - image: udata/elasticsearch:2.4.5
+    environment:
+       BASH_ENV: /root/.bashrc
+    steps:
+      - checkout
+      - run:
+          name: Compute Python dependencies key
+          command: cat requirements/*.pip > python.deps
+      - run:
+          name: Get the base reference branch
+          command: export BASE_BRANCH=$(base_branch)
+      - restore_cache:
+          keys:
+          - py3-cache-v9-{{ arch }}-{{ checksum "python.deps" }}
+          - py3-cache-v9-{{ arch }}-{{ .Branch }}
+          - py3-cache-v9-{{ arch }}-{{ .Environment.BASE_BRANCH }}
+      - run:
+          name: Install python dependencies
+          command: |
+            virtualenv venv
+            source venv/bin/activate
+            pip install -e . || pip install -e .
+            pip install -r requirements/circleci.pip
+      - save_cache:
+          key: py3-cache-v9-{{ arch }}-{{ checksum "python.deps" }}
+          paths:
+          - venv
+      - save_cache:
+          key: py3-cache-v9-{{ arch }}-{{ .Branch }}
+          paths:
+          - venv
+      - run:
+          name: Check dependencies
+          command: |
+            source venv/bin/activate
+            pip check
+      - run:
+          name: Run tests
+          command: |
+            mkdir -p reports/python
+            source venv/bin/activate
+            inv test --report --ci
+      - store_test_results:
+          path: reports/python
+      - store_artifacts:
+          path: reports/
+          destination: reports
+
+      - persist_to_workspace:
+          root: .
+          paths:
+          - venv
+
+  assets:
+    docker:
+      # TODO make an image based on 2-alpine w/ nvm and phantom deps
+      - image: udata/circleci:py3
+    environment:
+       BASH_ENV: /root/.bashrc
+    steps:
+      - checkout
+      - run:
+          name: Compute JS dependencies key
+          command: cat .nvmrc package.json > js.deps
+      - run:
+          name: Get the base reference branch
+          command: export BASE_BRANCH=$(base_branch)
+      - restore_cache:
+          keys:
+            - js-cache-{{ arch }}-{{ checksum "js.deps" }}
+            - js-cache-{{ arch }}-{{ .Branch }}
+            - js-cache-{{ arch }}-{{ .Environment.BASE_BRANCH }}
+      - run:
+          name: Install NodeJS and dependencies
+          command: |
+            nvm install
+            npm install
+            npm list || true
+      - save_cache:
+          key: js-cache-{{ arch }}-{{ checksum "js.deps" }}
+          paths:
+          - node_modules
+      - save_cache:
+          key: js-cache-{{ arch }}-{{ .Branch }}
+          paths:
+          - node_modules
+      # - run:
+      #     name: Execute Karma tests
+      #     command: |
+      #       mkdir -p reports/karma
+      #       REPORT_DIR=reports/karma npm -s run test:unit -- --reporters mocha,junit
+      # - store_test_results:
+      #     path: reports/karma
+      # - store_artifacts:
+      #     path: reports/
+      #     destination: reports
+      - run:
+          name: Compile assets
+          command: |
+            npm run assets:build
+            npm run widgets:build
+            npm run oembed:build
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - udata/static
+            - udata/manifest.json
+
+  dist:
+    docker:
+      - image: udata/circleci:2-alpine
+    environment:
+       BASH_ENV: /root/.bashrc
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build a distributable package
+          command: |
+            source venv/bin/activate
+            # Build a wheel release
+            if [[ $CIRCLE_TAG ]]; then
+                # This is a tagged release
+                inv pydist
+            elif [[ "$CIRCLE_BRANCH" == feature/* ]]; then
+                # This is a feature branch
+                inv pydist -b $CIRCLE_BUILD_NUM+${CIRCLE_BRANCH#*/}
+            else
+                # This is a simple development build
+                inv pydist -b $CIRCLE_BUILD_NUM
+            fi
+      - store_artifacts:
+          path: dist
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+
+  publish:
+    docker:
+      - image: udata/circleci:2-alpine
+    steps:
+      - attach_workspace:
+          at: .
+      - deploy:
+          name: Publish on PyPI
+          command: |
+            pip install twine
+            twine upload --username "${PYPI_USERNAME}" --password "${PYPI_PASSWORD}" dist/*.whl
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - python:
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+      - assets:
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+      - dist:
+          requires:
+            - python
+            - assets
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+      - publish:
+          requires:
+            - dist
+          filters:
+            branches:
+              only:
+                - master
+                - /[0-9]+(\.[0-9]+)+/
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
+          context: org-global

@@ -1,0 +1,4 @@
+formatter:
+- clippy: {}
+- histo: {}
+tools: {}

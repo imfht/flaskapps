@@ -1,0 +1,148 @@
+/* DiscordDark Theme by .JS#2125 */
+
+@font-face {
+    font-family: Whitney;
+    font-style: light;
+    font-weight: 300;
+    src: url("../font/whitney_light.woff") format("woff")
+}
+
+@font-face {
+    font-family: Whitney;
+    font-style: normal;
+    font-weight: 500;
+    src: url("../font/whitney_normal.woff") format("woff")
+}
+
+@font-face {
+    font-family: Whitney;
+    font-style: medium;
+    font-weight: 600;
+    src: url("../font/whitney_medium.woff") format("woff")
+}
+
+@font-face {
+    font-family: Whitney;
+    font-style: bold;
+    font-weight: 700;
+    src: url("../font/whitney_bold.woff") format("woff")
+}
+
+* {
+font-family: Whitney, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+/*background-color: var(--dark-highlight);*/
+:root {
+  /*--: */
+  --dark-primary: #2e3136;
+  --dark-secondary: #36393e;
+  --dark-highlight: #2e3136;
+  --dark-highlight-guildlist: #1e2124;
+  --dark-highlight-channellist: #2e3136;
+  --dark-highlight-channelheader: #36393e;
+}
+#footer {
+background-color: #3C3C3C;
+background-color: var(--chatbox);
+}
+#footercontainer {
+border-radius:20px;
+border: 1px solid rgb(99,99,99);
+margin-left:-0px!important;
+padding-left:-4px!important;
+background-color: #3C3C3C;
+background-color: var(--chatbox);
+}
+#nameplate {
+background:transparent!important;
+margin-left:10px
+}
+#curuser_discrim {
+font-size:50%;
+color: #7D8386;
+color:var(--discrim);
+}
+#curuser_discrim,
+#curuser_name {
+margin-top:-2px
+}
+#currentuserimage {
+margin-top:4px;
+margin-right:4px
+}
+/*#chatcontent > p > span:nth-child(1):before { content:"Today at " }*/
+/*#chatcontent > p > span.chatusername { display: table-header-group }*/
+#chatcontent > p > span.chatmessage { display: block; color:#C3C4C5;color:var(--chatmessage); }
+#chatcontent {
+background: #36393E;
+background:var(--main)
+}
+::-webkit-input-placeholder { color: #636363; color:var(--placeholder); }
+:-moz-placeholder { color: #636363; color:var(--placeholder);  }
+::-moz-placeholder { color: #636363; color:var(--placeholder);  }
+:-ms-input-placeholder { color: #636363; color:var(--placeholder);  }
+::-ms-input-placeholder { color: #636363; color:var(--placeholder);  }
+body > div.navbar-fixed > nav > div,
+#members-nav {
+background: #1E2124;
+background:var(--rightsidebar)
+}
+#guild-nav {
+background: #2E3136;
+background: var(--leftsidebar)
+}
+div.divider {
+background:rgb(46,49,54);
+margin-left:10px;
+margin-right:10px;
+/*height:150%*/
+}
+#discord-members > li > a.subheader,
+#online-server-members-header > a,
+#discord-members-count,
+#embed-discord-members-count,
+#authenticated-embed-users-header > a,
+#guest-members-count,
+#guest-embed-users-header > a {
+text-transform: uppercase;
+color:rgb(130,131,134)
+}
+body > main,
+body {
+background: #36393E;
+background:var(--main)
+}
+.circle:hover {
+border-radius:20px;
+background: linear-gradient(to right, #f9f9f9 90%, #fff);
+}
+#channels-list > li:hover {
+-webkit-filter: brightness(150%);
+}
+#discord-members > li > a,
+#embed-discord-members > li > a,
+#embed-unauth-users > li > a {
+color: #ABADAF;
+color:var(--noroleusers);
+}
+.modal {
+    background: #36393E;
+    background: var(--modal);
+}
+
+/* CSS Variables */
+:root {
+  /*--<var>: <value>*/
+  --modal: #36393E;
+  --noroleusers: #ABADAF;
+  --main: #36393E;
+  --placeholder: #636363;
+  --sidebardivider: #2E3136;
+  --leftsidebar: #2E3136;
+  --rightsidebar: #1E2124;
+  --header: #2E3136;
+  --chatmessage: #C3C4C5;
+  --discrim: #7D8386;
+  --chatbox: #3C3C3C;
+}

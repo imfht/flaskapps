@@ -1,0 +1,28 @@
+[
+  {
+    "body": {
+      "content": "lhcb-about.md",
+      "format": "md"
+    },
+    "collections": [
+      {
+        "experiment": "LHCb"
+      }
+    ],
+    "experiment": "LHCb",
+    "short_description": {
+      "content": "The Large Hadron Collider (LHC) is not only a tool with which to search for exotic new particles, but also a factory of particles whose existence is in no doubt but whose precise properties are not yet known well enough. LHCb, unlike the other experiments ATLAS and CMS,..."
+    },
+    "slug": "about-lhcb",
+    "tags": [
+      "Getting Started"
+    ],
+    "title": "About LHCb",
+    "type": {
+      "primary": "Documentation",
+      "secondary": [
+        "About"
+      ]
+    }
+  }
+]

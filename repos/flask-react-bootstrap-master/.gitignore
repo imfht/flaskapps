@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.woff2
+*.svg
+*.ttf
+*.eot
+*.woff
+*#*
+.*#*
+supervisord.log
+*.log
+*.pyc
+supervisor.pid
+supervisord.pid
+*.log.*
+dist/

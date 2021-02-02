@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+# {{{ application.name }}} (c) {{{ author.name }}}
+
+from nose.plugins.attrib import attr
+from .mixins import DiamondTestCase
+from .fixtures import typical_workflow
+from ..models import Planet, Satellite, User
+
+
+class MarshmallowMixinTestCase(DiamondTestCase):
+    "Coverage for CRUD Mixin"
+
+    def setUp(self):
+        super(MarshmallowMixinTestCase, self).setUp()
+        typical_workflow()
+
+    def test_dump(self):
+        user = User.find(email="guest@example.com")
+        result = user.dump()
+        self.assertEqual(result['email'], "guest@example.com")
+
+    def test_dumps(self):
+        user = User.find(email="guest@example.com")
+        result = user.dumps()
+        self.assertRegexpMatches(result, r"guest@example.com")
+
+    @attr("skip")
+    def test_dumpf(self):
+        pass

@@ -1,0 +1,26 @@
+venv
+.python-version
+.idea
+*__pycache__*
+*.pyc
+tmp
+*.sqlite3
+
+# Test&converage
+htmlcov/
+coverage.xml
+nosetests.xml
+.coverage
+.tox
+py_ms.egg-info/*
+.eggs/*
+pylintReport.txt
+.scannerwork/
+.mypy_cache
+
+# Deploy
+build/
+dist/
+
+# other
+site/*

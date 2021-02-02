@@ -1,0 +1,48 @@
+{#
+# This file is part of Zenodo.
+# Copyright (C) 2015, 2016 CERN.
+#
+# Zenodo is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# Zenodo is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Zenodo; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+-#}
+
+{%- set communities_in = record|zenodo_community_branding_links %}
+{%- set published_in = record|zenodo_related_links(all_pending_comms + all_accepted_comms) %}
+{%- set is_openaire = record|openaire_type %}
+
+{%- if communities_in or published_in or is_openaire %}
+<div class="well metadata">
+  {% if communities_in %}
+    <small class="text-muted">{{_('Part of')}}</small>
+    {%- for comm_id, comm_img in communities_in %}
+      <a href="{{url_for('invenio_communities.about', community_id=comm_id)}}"><img src="{{ comm_img }}" class="img-thumbnail" width="100%" /></a>
+    {% endfor %}
+  {% endif %}
+  {%- for item in published_in %}
+    <small class="text-muted">{{item.text}}</small>
+    <a href="{{item.link}}"><img src="{{ url_for('static', filename=item.image) }}" class="img-thumbnail" width="100%" /></a>
+  {%- endfor %}
+  {%- if is_openaire %}
+    <small class="text-muted">{{_('Indexed in')}}</small>
+    <a href="{{record|openaire_link}}">
+      <img src="{{ url_for('static', filename='img/openaire-horizontal-old.png') }}" class="img-thumbnail" width="100%" />
+    </a>
+  {%- endif %}
+</div>
+{%- endif %}

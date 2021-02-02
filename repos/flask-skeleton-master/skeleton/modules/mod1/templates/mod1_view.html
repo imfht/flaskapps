@@ -1,0 +1,32 @@
+{% extends "layout/base.html" %}
+{% block title %}mod1_view.html{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+  .import { color: #336699; }
+</style>
+{% endblock %}
+{% block content %}
+<h1>/mod1_view</h1>
+
+<p class="important">Welcome to the mod1 module! <a href="{{ url_for('.static', filename='mod1/asset.txt') }}">mod1 asset (note '.static', not 'static')</a></p>
+
+<p>mod1 demonstrates adding a module to the root prefix. This html file is currently called mod1_view.html but would be more appropriately named index.html.</p>
+
+<p><a href="{{ url_for('list_all') }}">List the contents of the mod1.h2 table.</a><br/><a href="{{ url_for('list_one') }}">List one row in <code>mod1.h2</code>.</a></p>
+
+<h2>Memoized Functions</h2>
+<p>A total of {{unique_values}}</p>
+<ol>
+{% for i in cached_values %}
+<li>{{i}}</li>
+{% endfor %}
+</ol>
+{% endblock %}
+{% block footer %}
+{{ super() }}
+I acknowledge that the world would be a better place if there was less
+Windows, Java and Flash technology in existence (only commenting on energy
+consumption, not the merits of how terrible the respective technologies
+are).
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "helpers/base-template.html" %}
+
+{% block title %}Upload{% endblock %}
+
+
+<!-- Head -->
+{% block head %}
+
+    <!-- Page JS and CSS -->
+    <script type="text/javascript" src="frontend/js/upload.js"></script>
+    <link rel="stylesheet" type="text/css" href="frontend/css/upload.css"/>
+{% endblock %}
+
+
+<!-- Main content -->
+{% block content %}
+
+    <div id="top-section">
+
+        <!-- Upload section -->
+        <div id="upload-section" class="section">
+
+            <div class="vertical-splitter section-top">
+                <h3 id="upload-title" class="title">Upload</h3>
+                <span id="upload-tooltip-button" class="right-justified tooltip-button">?</span>
+            </div>
+
+            <div class="borderless-section-body">
+                <span id="browse-button">Browse...</span>
+
+                <div id="drag-and-drop-section">
+                    <h3>Drag Files Here</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrape section -->
+        <div id="scrape-section" class="section">
+
+            <div class="vertical-splitter section-top">
+                <h3 id="scrape-title" class="title">Scrape</h3>
+                <div class="right-justified">
+                    <span id="scrape-button" class="button">Scrape</span>
+                    <span id="scrape-tooltip-button" class="tooltip-button">?</span>
+                </div>
+            </div>
+
+            <div class="borderless-section-body">
+                <textarea id="scrape-input" spellcheck="false" placeholder="Enter URLs to scrape here." aria-labelledby="scrape-title"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload list -->
+    <div id="upload-list" class="section">
+
+        <div class="vertical-splitter section-top">
+            <h3 class="title">Upload List</h3>
+            <span id="upload-list-tooltip-button" class="right-justified tooltip-button">?</span>
+        </div>
+
+        <div class="section-body">
+            <div id="no-uploads-text" class="centerer"><h3>No Uploads</h3></div>
+            <div id="upload-previews-grid"></div>
+        </div>
+    </div>
+
+    <!-- Hidden elements -->
+    <input type="file" id="file-select-input" style="display:none" aria-labelledby="upload-title" multiple/>
+{% endblock %}

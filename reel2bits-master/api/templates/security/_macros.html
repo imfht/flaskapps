@@ -1,0 +1,15 @@
+{% macro value_or_carret(value, suffix=None) %}
+{% if value %}
+{{ value }} {{ suffix if suffix }}
+{% else %}
+-
+{% endif %}
+{% endmacro %}
+
+{% macro value_checkbox(value) %}
+{% if value %}
+<span class="fa fa-check"></span>
+{% else %}
+<span class="fa fa-times"></span>
+{% endif %}
+{% endmacro %}

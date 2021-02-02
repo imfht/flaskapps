@@ -1,0 +1,36 @@
+{%- extends "invenio_github/settings/view.html" %}
+
+{%- block javascript %}
+  {% include "zenodo_theme/javascript.html" %}
+  <script type="text/javascript">
+  require(['jquery', 'js/github/view'], function($, view) {
+    $(document).ready(function(){
+      view({
+        hook_url: "{{url_for('invenio_github.hook')}}",
+        sync_url: "{{url_for('invenio_github.index')}}",
+        sync_button: "button[name='sync-repos']",
+        github_view: "#github-view"
+      });
+    });
+  });
+  </script>
+{%- endblock javascript %}
+{%- block releasetab_metadata scoped %}
+<div role="tabpanel" class="tab-pane" id="{{ release.model.id }}-metadata">
+  <h4>{{_('JSON Export')}}</h4>
+  <p>
+  <small class="text-muted">
+    {{config.THEME_SITENAME | default('Invenio')}} automatically
+    extracts metadata about your repository from GitHub APIs.
+    For example, the authors are determined from the repository's
+    contributor statistics.
+    The automatic extraction is <strong>solely a best guess</strong>.
+    Add a <code>{{config.GITHUB_METADATA_FILE}}</code> file the root of
+    your repository to explicit define the metadata. The format of
+    file is the same as for our REST API (use e.g. below JSON to
+    get started).
+  </small>
+  </p>
+  <pre>{{ serializer.serialize(release.recid, release.record)|prettyjson }}</pre>
+</div>
+{%- endblock releasetab_metadata %}

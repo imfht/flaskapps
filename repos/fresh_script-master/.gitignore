@@ -1,0 +1,7 @@
+.cache*
+.config.ini
+praw.ini
+__pycache__
+*.ini`
+venv/*
+credentials.json

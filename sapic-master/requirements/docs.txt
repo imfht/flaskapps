@@ -1,0 +1,7 @@
+-r base.txt
+# py3
+sphinx
+pygments
+git+https://github.com/staugur/sphinx_press_theme.git@master
+sphinxcontrib-httpdomain
+sphinxcontrib-httpexample

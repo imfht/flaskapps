@@ -1,0 +1,9 @@
+version: "3.6"
+
+services:
+  flask:
+    build : .
+    volumes : 
+     - ../scripts:/scripts
+    ports:
+     - 8080:5000

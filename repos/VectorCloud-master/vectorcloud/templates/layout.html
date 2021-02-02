@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#222D32">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+
+    <!-- static/js/head.js -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/head.js') }}"></script>
+
+
+    <!-- static/css/main.css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}?version=1.1">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/white-theme.css') }}?version=1.1"> -->
+
+    {% if title %}
+        <title>VectorCloud - {{ title }}</title>
+    {% else %}
+        <title>VectorCloud</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <div class="icon" data-toggle="tooltip" data-placement="auto" title="Home">
+            <a class="" href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='icons/vectorcloud.svg') }}" width="40px" height="40px" class="d-inline-block align-top" onclick="loading();" alt=""></a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <div class="row image-container">
+                <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Remote Control">
+                  <a class="icon" href="{{ url_for('flask_app.control') }}">
+                  <img src="{{ url_for('static', filename='icons/remote.svg') }}" width="32px" height="32px" onclick="loading();">
+                  </a>
+                </div>
+                <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Cube Info">
+                  <img class="icon" src="{{ url_for('static', filename='icons/cube.svg') }}" width="42px" height="42px"
+                    data-placement="bottom"
+                    title="Cube Info <a href='#' class='close' data-dismiss='alert'>&times;</a>"
+                    data-toggle="popover"
+                    data-content="
+                    {% if vector_status.cube_battery_volts == 0 %}
+                      <p><a href='{{ url_for('main.connect_cube') }}'>
+                        Connect to Cube
+                      </a></p>
+                    {% endif %}
+                    <p>Cube battery level: {{ vector_status.cube_battery_level }}</p>
+                    <p>Cube battery volts: {{ vector_status.cube_battery_volts }}</p>
+                    <p>Cube Factory ID: {{ vector_status.cube_id }}</p>"
+                    data-html="true">
+                </div>
+                {% if vector_status.status_charging == True %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Battery Info">
+                    <img class="icon" src="{{ url_for('static', filename='icons/battery_charging.svg') }}" width="42px" height="42px42px" data-toggle="popover" data-placement="bottom"  title="Battery Info <a href='#' class='close' data-dismiss='alert'>&times;</a>" data-html="true" data-content="
+                    <p><h5>Battery Voltage: </h5>{{ vector_status.battery_voltage }}</p>
+                    <p><h5>Battery Charging: </h5>{{ vector_status.status_charging }}</p>
+                    ">
+                  </div>
+                {% elif vector_status.battery_voltage > 3.85 %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Battery Info">
+                    <img class="icon" src="{{ url_for('static', filename='icons/battery_full.svg') }}" width="42px" height="42px" data-toggle="popover" data-placement="bottom"  title="Battery Info <a href='#' class='close' data-dismiss='alert'>&times;</a>" data-html="true" data-content="
+                    <p><h5>Battery Voltage: </h5>{{ vector_status.battery_voltage }}</p>
+                    <p><h5>Battery Charging: </h5>{{ vector_status.status_charging }}</p>
+                    ">
+                  </div>
+                {% elif 3.75 <= vector_status.battery_voltage <= 3.85 %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Battery Info">
+                    <img class="icon" src="{{ url_for('static', filename='icons/battery_med.svg') }}" width="42px" height="42px" data-toggle="popover" data-placement="bottom"  title="Battery Info <a href='#' class='close' data-dismiss='alert'>&times;</a>" data-html="true" data-content="
+                    <p><h5>Battery Voltage: </h5>{{ vector_status.battery_voltage }}</p>
+                    <p><h5>Battery Charging: </h5>{{ vector_status.status_charging }}</p>
+                    ">
+                  </div>
+                {% elif 3.6 <= vector_status.battery_voltage < 3.75 %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Battery Info">
+                    <img class="icon" src="{{ url_for('static', filename='icons/battery_low.svg') }}" width="42px" height="42px" data-toggle="popover" data-placement="bottom"  title="Battery Info <a href='#' class='close' data-dismiss='alert'>&times;</a>" data-html="true" data-content="
+                    <p><h5>Battery Voltage: </h5>{{ vector_status.battery_voltage }}</p>
+                    <p><h5>Battery Charging: </h5>{{ vector_status.status_charging }}</p>
+                    ">
+                  </div>
+                {% elif vector_status.battery_voltage < 3.6 %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Battery Info">
+                    <img class="icon" src="{{ url_for('static', filename='icons/battery_empty.svg') }}" width="42px" height="42px" data-toggle="popover" data-placement="bottom"  title="Battery Info <a href='#' class='close' data-dismiss='alert'>&times;</a>" data-html="true" data-content="
+                    <p><h5>Battery Voltage: </h5>{{ vector_status.battery_voltage }}</p>
+                    <p><h5>Battery Charging: </h5>{{ vector_status.status_charging }}</p>
+                    ">
+                  </div>
+                {% endif %}
+                {% if vector_status.status_charging == True %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Undock">
+                    <a class="icon" href="{{ url_for('main.undock') }}">
+                    <img src="{{ url_for('static', filename='icons/undock.svg') }}" width="32px" height="32px" onclick="loading();">
+                    </a>
+                  </div>
+                {% elif vector_status.status_charging == False %}
+                  <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Dock">
+                    <a class="icon" href="{{ url_for('main.dock') }}">
+                    <img src="{{ url_for('static', filename='icons/dock.svg') }}" width="32px" height="32px" onclick="loading();">
+                    </a>
+                  </div>
+                {% endif %}
+                <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Settings">
+                  <a class="icon" href="{{ url_for('settings_system.settings') }}">
+                  <img src="{{ url_for('static', filename='icons/settings-menu.svg') }}" width="32px" height="32px" onclick="loading();">
+                  </a>
+                </div>
+                <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Wiki">
+                  <a class="icon" href="{{ url_for('wiki_system.wiki') }}">
+                  <img src="{{ url_for('static', filename='icons/help.svg') }}" width="32px" height="32px" onclick="loading();">
+                  </a>
+                </div>
+
+                <div class="image-container column" data-placement="top">
+                  <img class="icon" src="{{ url_for('static', filename='icons/power.svg') }}" width="42px" height="42px"
+                    data-placement="bottom"
+                    title="Power<a href='#' class='close' data-dismiss='alert'>&times;</a>"
+                    data-toggle="popover"
+                    data-content="
+                      <p><a href='{{ url_for('main.server_shutdown') }}'>
+                        Shutdown Server
+                      </a></p>
+                      <p><a href='{{ url_for('main.server_reboot') }}'>
+                        Reboot Server
+                      </a></p>"
+                    data-html="true">
+                </div>
+
+              {% if current_user.is_authenticated %}
+                <div class="image-container column" data-toggle="tooltip" data-placement="top" title="Logout">
+                  <a class="icon" href="{{ url_for('user_system.logout') }}">
+                  <img src="{{ url_for('static', filename='icons/logout.svg') }}" width="32px" height="32px" onclick="loading();">
+                  </a>
+                </div>
+              {% endif %}
+              </div>
+          </div>
+          <div class="fixed">
+            <div class="grey-text-md" align="right">
+              <p>
+                <text><b>{{ vector_status.name }}</b></text>
+              </p>
+              <p>
+                <text><b>IP:</b> {{ vector_status.ip }}</text>
+              </p>
+              <p>
+                <text><b>OS Version:</b> {{ vector_status.version }}</text>
+              </p>
+                <text><b>SDK Version:</b> {{ sdk_version }}</text>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div id="loading"><h5 class="text-center"><b>Waiting for Vector..</b></h5></div>
+    <main role="main" class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-lg-6 layout-content">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  <button type="button" class="close close-dark" data-dismiss="alert">&times;</button>
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <div id="bod" class="mt-4">
+          {% block content %}{% endblock %}
+          </div>
+        </div>
+        </div>
+      </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js & tooltip, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/body.js') }}"></script>
+    </body>
+    </html>

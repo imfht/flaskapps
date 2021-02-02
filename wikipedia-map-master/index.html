@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <!-- iOS optimization -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- SEO -->
+  <meta charset="UTF-8">
+  <meta name="description" content="Wikipedia Map is a tool for visualizing topics by exploring the connections between Wikipedia pages.">
+  <meta name="keywords" content="Wikipedia,Python,Javascript,HTML,CSS,Concepts,Information,Exploration,Visualization,Data,API,Web Scraping">
+  <meta name="author" content="Luke Deen Taylor">
+  <!-- Page title -->
+  <title>Wikipedia Map</title>
+
+  <!-- Simple Analytics -->
+  <script data-skip-dnt="true" async defer src="https://sa.luk.ke/latest.js"></script>
+  <noscript><img src="https://sa.luk.ke/noscript.gif?ignore-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+
+  <!-- Load 3rd party CSS -->
+  <!-- Load CSS for vis.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+  <!-- Load CSS for shepherd.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shepherd/1.7.0/css/shepherd-theme-arrows.css" type="text/css" />
+  <!-- Load ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" type="text/css" />
+
+  <!-- Load my CSS -->
+  <!-- Load main CSS -->
+  <link rel="stylesheet" href="./css/style.css" type="text/css"/>
+  <!-- Load CSS for top bar -->
+  <link rel="stylesheet" href="./css/bar.css" type="text/css"/>
+  <!-- Load CSS for bottom right buttons -->
+  <link rel="stylesheet" href="./css/buttongroup.css" type="text/css"/>
+  <!-- Load css for the custom Shepherd styles -->
+  <link rel="stylesheet" href="./css/shepherd-custom.css" type="text/css"/>
+  <!-- Load css for comma input field -->
+  <link rel="stylesheet" href="./css/commafield.css" type="text/css"/>
+  <!-- Load css for welcome info box -->
+  <link rel="stylesheet" href="./css/welcome.css" type="text/css"/>
+  <!-- Load css for modals -->
+  <link rel="stylesheet" href="./css/modals.css" type="text/css"/>
+  <!-- Load css for progress bars -->
+  <link rel="stylesheet" href="./css/progress.css" type="text/css"/>
+
+
+</head>
+
+<body>
+  <!-- The top bar -->
+  <div id="formbox" class="transparent-blur">
+    <div id="input" class="commafield" data-placeholder="Search Wikipedia..."> </div>
+    <button id="submit" type="button" title="Enter the name of a wikipedia page, then press 'Go'">
+      Go
+    </button>
+    <button id="random" type=button title="Random article">
+      <i class="icon ion-shuffle"></i>
+    </button>
+    <button id="clear" type="button" title="Clear the graph" style="display: none;">
+      <i class="icon ion-trash-a"></i>
+    </button>
+  </div>
+
+  <!-- The buttons (about, github, etc) -->
+  <div id="buttons" class="button-container transparent-blur">
+    <button id="github" type="button" title="Visit Wikipedia Map on GitHub">
+      <i class="icon ion-social-github"></i>
+    </button>
+    <button id="about" type="button" title="Learn more">
+      <i class="icon ion-ios-book"></i>
+    </button>
+    <button id="help" type="button" title="Help">
+      <i class="icon ion-help-circled"></i>
+    </button>
+  </div>
+
+  <!-- Will hold the network -->
+  <div id="container" class="fullscreen">
+    <!-- Welcome message -->
+    <div id="info">
+      <h1>Wikipedia Map</h1>
+      <p>A tool for exploring the world’s knowledge by making connections between topics.</p>
+      <button id="tourinit" class="shepbtn">instructions</button>
+    </div>
+  </div>
+
+
+
+  <!-- 3rd Party -->
+  <!-- Load vis.js (just Network) -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+  <!-- Load clipboard.js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"> </script>
+  <!-- Load Shepherd and Tether for the tour -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.3/js/tether.min.js"> </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shepherd/1.7.0/js/shepherd.min.js"> </script>
+
+  <!-- My Stuff -->
+  <!-- Load Wikipedia API functions -->
+  <script type="text/javascript" src="./js/wikipedia_parse.js"></script>
+  <!-- Load helper functions -->
+  <script type="text/javascript" src="./js/helpers.js"> </script>
+  <!-- Load main functions -->
+  <script type="text/javascript" src="./js/main_functions.js"> </script>
+  <!-- Load code for all the user-facing tutorial+information stuff -->
+  <script type="text/javascript" src="./js/help.js"> </script>
+  <!-- Load the main script -->
+  <script type="text/javascript" src="./js/main.js"> </script>
+  <!-- Load serialization functions -->
+  <script type="text/javascript" src="./js/network_serialize.js"> </script>
+  <!-- Load bindings -->
+  <script type="text/javascript" src="./js/bindings.js"> </script>
+  <!-- Transform comma field -->
+  <script type="text/javascript" src="./js/commafield.js"> </script>
+  <!-- Load a saved graph if one was linked in the URL -->
+  <script type="text/javascript" src="./js/loadsaved.js"> </script>
+  <!-- Load micro-libraries for modals and progress bars -->
+  <script type="text/javascript" src="./js/modals.js"> </script>
+  <script type="text/javascript" src="./js/progress.js"> </script>
+
+  <script>
+    // Run events that need to happen on initialization.
+    window.onload = function () {
+      bind();
+      loadSaved();
+    };
+  </script>
+</body>
+
+</html>

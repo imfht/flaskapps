@@ -1,0 +1,291 @@
+{#-
+# This file is part of Zenodo.
+# Copyright (C) 2017 CERN.
+#
+# Zenodo is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# Zenodo is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Zenodo; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+-#}
+
+{% extends "zenodo_theme/page.html" %}
+{%- from "zenodo_support/macros.html" import render_form_field, render_form_input, render_form_label %}
+
+{%- block page_body %}
+{%- set user = current_user.is_authenticated and current_user %}
+<div id="contact-page" class="container" >
+  <div class="row">
+    <div class="col-md-10">
+      <div class="panel-body">
+        <h2 class="header-form">Contact us</h2>
+        <p>Before making a request, you can have a look at our <a href="http://help.zenodo.org">FAQ</a> and <a href="http://about.zenodo.org">other resources</a> for more detailed information about the operation, features and goals of Zenodo.</p>
+        {%- if not user %}
+        <p>It is recommended to <a href="{{url_for_security('login')}}">login</a> before sending a request, so we can automatically fill-in your contact information. It is especially important for quicker resolution of all technical issues and requests concerning your Zenodo account.</p>
+        {%- endif %}
+        <form id="contact-form" method="POST" enctype="multipart/form-data" role="form">
+          {{ form.csrf_token }}
+          <div class="contact">
+            <div class="row">
+              {{ render_form_field(form.name, input_extras={'disabled': True} if current_user.profile and current_user.profile.full_name else {}) }}
+            </div>
+            <div class="row">
+              {{ render_form_field(form.email, input_extras={'disabled': True} if user else {}) }}
+            </div>
+            <div class="row">
+              {{ render_form_field(form.issue_category) }}
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <ul id="categories-tab" class="nav nav-tabs">
+                  {%- for category in categories.values() %}
+                    <li class="{%- if loop.index == 1 %} active in{%- endif %}">
+                      <a name="{{ category.key }}" href="#{{ category.key }}"></a>
+                    </li>
+                  {%- endfor %}
+                </ul>
+                <div class="tab-content content-tab">
+                  {%- for category in categories.values() %}
+                  <div id="{{ category.key }}" class="tab-pane fade {%- if loop.index == 1 %} active in {%- endif %}">
+                    {{ category.description|safe }}
+                  </div>
+                  {%- endfor %}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              {{ render_form_field(form.subject, input_size=10) }}
+            </div>
+            <div class="row">
+              {{ render_form_field(form.description, input_size=10) }}
+            </div>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <div class="panel panel-default upload-panel" align="center">
+                  <h3 class="upload-header">Drag files anywhere or click <a class="upload-button">here</a> to upload</h3>
+                  <p class="upload-info"></p>
+                </div>
+                {{ render_form_input(form.attachments, size=None, extras={'style': 'display:none'}) }}
+              </div>
+            </div>
+            <div class="row">
+              {{ render_form_label(form.include_os_browser) }}
+              <div class="col-md-10">
+                <p>{%- if uap.os %}<strong>Operating System:</strong> {{ uap.os }} - {% endif %}{%- if uap.browser %}<strong>Browser:</strong> {{ uap.browser }} {% endif %}{%- if uap.device and uap.device != 'Other' %}- <strong>Device:</strong> {{ uap.device }} {%- endif %}</p>
+                <label class="checkbox-inline" for="{{form.include_os_browser.label.field_id}}">
+                  {{ render_form_input(form.include_os_browser, size=None, extras={'class_':''}) }}
+                  <p>Include this information to assist us with narrowing down the cause of your problem.</p>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                {% if not user and form.recaptcha %}{{ render_form_input(form.recaptcha, size=None) }}{% endif %}
+                <br>
+                <button class="btn btn-block btn-success" type="submit">Send request</button>
+              </div>
+              <div class="col-md-4"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="confirmationModalLabel">Warning!</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <p>
+                    You haven't attached any files. If you want to add/update files, make sure to attach them or
+                    provide us with the link to them.
+                  </p>
+                  <p>Do you want to proceed anyway?</p>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="confirm">Send request</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endblock page_body %}
+
+{%- block javascript %}
+{{super()}}
+
+<script type="text/javascript">
+
+var MAX_FILE_SIZE = {{ config.SUPPORT_ATTACHMENT_MAX_SIZE|tojson }};
+var DESCRIPTION_MIN_LENGTH = {{ config.SUPPORT_DESCRIPTION_MIN_LENGTH|tojson }};
+var DESCRIPTION_MAX_LENGTH = {{ config.SUPPORT_DESCRIPTION_MAX_LENGTH|tojson }};
+
+var confirmed = false;
+
+function formatFileSize(bytes) {
+  if (bytes == 0) {return '0.00 B';}
+  var e = Math.floor(Math.log(bytes) / Math.log(1000));
+  return (bytes / Math.pow(1000, e)).toFixed(2) + ' ' + ' KMGTP'.charAt(e) + 'B';
+};
+
+function getFiles(e) {
+  if (e.target && e.target.files) {
+    return e.target.files;
+  } else if (e.originalEvent && e.originalEvent.dataTransfer) {
+    return e.originalEvent.dataTransfer.files;
+  }
+}
+
+// Shows an error if size is greater than max attachment size.
+function handleFileSelection(event) {
+  var files = getFiles(event);
+  if(files.length == 0) return;
+  var filesInfo = '<strong>' + files.length + ' file(s) selected.</strong>';
+  var totalSize = 0;
+  for(var i = 0; i < files.length; i++){
+    totalSize += files[i].size;
+    filesInfo += '<br/><small>' + files[i].name + ' &nbsp&nbsp ' +
+    formatFileSize(files[i].size) + '</small>';
+  }
+
+  $('.upload-info').get(0).innerHTML = filesInfo;
+
+  if(totalSize > MAX_FILE_SIZE) {
+    $('.field-attachments').addClass('has-error');
+    $('#error-attachments').get(0).innerHTML =
+      'File size exceeded. Please add URLs to the files or make a smaller selection.';
+    $('button#form_button').prop('disabled', true);
+
+  } else {
+    $('.field-attachments').removeClass('has-error');
+    $('#error-attachments').get(0).innerHTML = '';
+    $('button#form_button').prop('disabled', false);
+  }
+}
+
+// Setup file upload droparea
+function initFileDroparea(droparea, button) {
+  function noop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  droparea.on({
+    dragenter: noop,
+    dragover: noop,
+    dragleave: noop,
+    drop: function(e) {
+      noop(e);
+      handleFileSelection(e);
+    },
+  });
+
+  var attachments = $('#attachments');
+  attachments.change(handleFileSelection);
+  button.click(function() {
+    attachments.value = null;
+    attachments.trigger('click');
+  });
+}
+
+function validateForm() {
+  var isValid = true;
+  var fields = ['name', 'email', 'issue_category', 'subject', 'description'];
+  var errorMessages = fields.reduce(function(acc, key) { acc[key] = []; return acc }, {} );
+
+  var required = ['name', 'email', 'issue_category', 'subject'];
+  required.forEach(function(fieldName) {
+    var field = $('#contact-form :input#' + fieldName);
+    if (!$.trim(field.val()).length) {
+      errorMessages[fieldName].push('This field is required.');
+      isValid = false;
+    }
+  });
+
+  var name = $('#contact-form :input#name').val();
+  if (name.includes(',')) {
+    errorMessages.name.push(
+      'Field should not contain any comma.');
+    isValid = false;
+  }
+
+  var email = $('#contact-form :input#email').val();
+  if (email.includes(',')) {
+    errorMessages.email.push(
+      'Field should not contain any comma.');
+    isValid = false;
+  }
+
+  var description = $('#contact-form :input#description').val()
+  if (description.length < DESCRIPTION_MIN_LENGTH ||
+      description.length > DESCRIPTION_MAX_LENGTH) {
+    errorMessages.description.push(
+      'Field must be between ' + DESCRIPTION_MIN_LENGTH + ' and ' + DESCRIPTION_MAX_LENGTH + ' characters long.');
+    isValid = false;
+  }
+
+  $.each(errorMessages, function(fieldName, errors) {
+    var field = $('#contact-form :input#' + fieldName);
+    if (errors.length) {
+      $('span#error-' + fieldName).text(errors.join('<br>'));
+      field.closest('div.form-group').addClass('has-error');
+    } else {
+      $('span#error-' + fieldName).text('');
+      field.closest('div.form-group').removeClass('has-error');
+    }
+  });
+
+  var category = $('#contact-form :input#issue_category').val();
+  var files = $('#attachments')[0].files;
+  // if there's no file to be uploaded, display a warning
+  // and ask for a confirmation before sending the request
+  if (isValid && category=='file-modification' && files.length == 0 && !confirmed) {
+    isValid = false;
+    $('#confirmationModal').modal({backdrop: 'static'}),
+    $('#confirm').click(function(e){
+      confirmed = true;
+      $('form#contact-form').submit();
+    })
+  }
+
+  return isValid;
+}
+
+$(function () {
+  // Setup issue category descriptions
+  $('#categories-tab').hide();
+  $('#issue_category').on('change', function(e){
+    $('#categories-tab li a[name="'+ $(this).val() + '"]').tab('show');
+  });
+  initFileDroparea($('html'), $('a.upload-button'));
+  $('form#contact-form').submit(validateForm);
+});
+</script>
+{% endblock javascript %}

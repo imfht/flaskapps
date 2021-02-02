@@ -1,0 +1,44 @@
+{% macro render(form) -%}
+
+{% for field in form %}
+  {% if field.type in ['CSRFTokenField', 'HiddenField'] %}
+    {{ field() }}
+  {% elif field.type == "BooleanField" %}
+  <div class="checkbox">
+    <label>
+      {{ field() }} {{ field.label }}
+    </label>
+  </div>
+
+  {% elif field.type == "RadioField" %}
+  {{ field.label }}
+    {% for subfield in field %}
+      <div class="radio">
+        <label>{{ subfield }} {{ subfield.label }}</label>
+      </div>
+  {% endfor %}
+    
+
+  {% else %}
+    <div class="clearfix {% if field.errors %}has-error{% endif %} form-group">
+
+      {{ field.label }}
+        {% if field.type == "TextAreaField" %}
+          {{ field(class_="form-control", rows=10) }}
+        {% else %}
+          {{ field(class_="form-control") }}
+        {% endif %}
+        {% if field.errors or field.help_text %}
+          <span class="help-block">
+          {% if field.errors %}
+            {{ field.errors|join(' ') }}
+          {% else %}
+            {{ field.help_text }}
+          {% endif %}
+          </span>
+        {% endif %}
+    </div>
+  {% endif %}
+{% endfor %}
+
+{% endmacro %}

@@ -1,0 +1,65 @@
+// _layout.scss: generates css solution for the overall layout.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .react-container {
+    display: flex;
+    flex: 1;
+
+    .small-viewport {
+      flex: 1;
+    }
+
+    .large-viewport,
+    .medium-viewport {
+      display: flex;
+      flex: 1;
+
+      .anonymous,
+      .authenticated {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        .content {
+          display: flex;
+          flex: 1;
+          margin: 0;
+
+          .main-full-span {
+            flex: 1;
+          }
+
+          .row {
+            display: flex;
+            flex: 1;
+
+            .flex {
+              display: flex;
+              flex: 1;
+
+              .lcolumn-container {
+                display: flex;
+                flex: 1;
+
+                .lcolumn {
+                  flex: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

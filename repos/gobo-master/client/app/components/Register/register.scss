@@ -1,0 +1,114 @@
+.registration-screen {
+  @include display(absolute);
+  @include topLeft(0, 0);
+  @include bottomRight(0, 0);
+  min-height: 520px;
+  @include animation(fadeIn .4s ease-in-out forwards);
+
+  .status-text {
+    margin: 2em 0;
+    color:red;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .registration-form {
+    @include flex-display();
+    @include flex-direction(column);
+    @include justify-content(center);
+    @include align-items(center);
+    position: relative;
+    margin-top: $spacer-large * 2;
+
+    > h1 {
+      @include display(relative);
+      font-size: 34px;
+      letter-spacing: .8px;
+      font-weight: 200;
+      line-height: 34px;
+      margin: 0 0 40px 0;
+    }
+
+    p {
+      @include display(relative);
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: .7px;
+      color: $text-color;
+    }
+
+    .registration-description {
+      margin: 0 0 $spacer-large 0;
+      text-align: center;
+    }
+
+    .checkbox_group {
+      @include display(relative);
+      min-height: 40px;
+
+      span {
+        letter-spacing: .5px;
+      }
+    }
+
+    .button-icon {
+      float:right;
+      font-size: 1.6em;
+    }
+
+    .confirm-age {
+      margin-top: $spacer-large;
+      margin-bottom: $spacer-large;
+    }
+  }
+
+  .content, form {
+    width: 500px;
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
+  }
+
+  hr {
+    border-color: $primary-color;
+    display: block;
+    margin-top: 4em;
+    padding-top: 1em;
+    border-style: dotted;
+  }
+
+  .couhes-text {
+    background: #fff;
+    padding:1em;
+
+    h2, h4 {
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    h3 {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .registration-form {
+      margin: 30px 3px 40px 3px;
+    }
+  }
+}
+
+.next-back-buttons {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 2em;
+}
+
+.forgot-password {
+  padding-bottom: $spacer-large * 1.2;
+}
+
+//$-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+//$-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+//$keyframes fadeIn { from { opacity:0; } to { opacity:1; } }

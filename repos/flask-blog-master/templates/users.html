@@ -1,0 +1,42 @@
+{%- extends 'index.html' -%}
+{%- block body -%}
+	<div class="post">
+		<div class="row">
+			<div class="col-lg-12">
+				{%- if users -%}
+					<div class="page-header">
+						<h1>Users</h1>
+					</div>
+					<div class="content">
+						{%- with messages = get_flashed_messages(with_categories=True) -%}
+		                    {%- if messages -%}
+		                        {%- for category, message in messages -%}
+		                            <div class="response">
+		                                <span class="message {{ category }}">{%- if category == 'success' -%}✔{%- endif -%}&nbsp;{{ message }}</span>
+		                            </div>
+		                        {%- endfor -%}
+		                    {%- endif -%}
+		                {%- endwith -%}
+						<a href="{{ url_for('add_user') }}" class="response btn btn-primary">Add User</a>
+						<table class="table table-striped">
+							<tr>
+								<th>Username</th>
+								<th>Email</th>
+								<th>Registration Date</th>
+								<th>Action</th>
+							</tr>
+							{%- for user in users -%}
+							<tr>
+								<td><a title="Username" href="{{ url_for('edit_user', id=user['id']) }}" data-target="_blank">{{ user['id'] }}</a></td>
+								<td>{{ user['email'] }}</td>
+								<td>{{ user['date'] |formatdate }}</td>
+								<td><a title="Edit" href="{{ url_for('edit_user', id=user['id']) }}" class="icon-edit-sign bigger icon"></a>{%- if user['id'] != session['user']['username'] -%}&nbsp;&nbsp;<a title="Delete" href="{{ url_for('delete_user', id=user['id']) }}" class="icon-remove-sign bigger icon"></a>{%- endif -%}</td>
+							</tr>
+							{%- endfor -%}
+						</table>
+					</div>
+				{%- endif -%}
+		    </div>
+		</div>
+	</div>
+{%- endblock -%}

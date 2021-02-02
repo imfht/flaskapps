@@ -1,0 +1,135 @@
+# default roles
+
+super_admin_role:
+  exclude: null
+  include: all
+  method: GET
+  extra: [
+    'tenants-edit',
+    'system_info-edit',
+    'logo_info-edit',
+    'codec-edit'
+  ]
+  role:
+    roleName: super_admin_role
+    description: '平台管理员'
+    isShare: 0
+    roleType: 1
+    order: 1
+
+company_admin_role:
+  exclude: [
+    'tenants',
+    'system_info',
+    'logo_info'
+  ]
+  include: all
+  method: all
+  extra: null
+  role:
+    roleName: company_admin_role
+    description: '公司用户管理员'
+    isShare: 0
+    roleType: 1
+    order: 2
+
+personal_admin_role:
+  exclude: [
+    'users',
+    'roles',
+    'tenants',
+    'system_info',
+    'logo_info'
+  ]
+  include: all
+  method: all
+  extra: null
+  role:
+    roleName: personal_admin_role
+    description: '个人用户管理员'
+    isShare: 0
+    roleType: 1
+    order: 3
+
+system_user_role:
+  exclude: [
+    'tenants',
+    'system_info',
+    'logo_info'
+  ]
+  include: all
+  method: all
+  extra: null
+  role:
+    roleName: system_user_role
+    description: '用户拥有平台全部功能的权限'
+    isShare: 1
+    roleType: 1
+    order: 4
+
+common_user_role:
+  exclude: [
+    'tenants',
+    'system_info',
+    'logo_info'
+  ]
+  include: all
+  method: GET
+  extra: null
+  role:
+    roleName: common_user_role
+    description: '用户仅能查看所有资源信息'
+    isShare: 1
+    roleType: 1
+    order: 5
+
+device_user_role:
+  exclude: null
+  include: ['device_manage']
+  method: all
+  extra: null
+  role:
+    roleName: device_user_role
+    description: '用户能管理设备、产品、分组等信息'
+    isShare: 1
+    roleType: 1
+    order: 6
+
+admin_app_role:
+  exclude: null
+  include: [
+    'device_manage',
+    'alert_manage'
+  ]
+  method: all
+  extra: null
+  role:
+    roleName: admin_app_role
+    description: '应用能调用平台提供的所有API'
+    isShare: 1
+    roleType: 2
+    order: 7
+
+display_app_role:
+  exclude: null
+  include: ['device_manage', 'alert_manage']
+  method: GET
+  extra: null
+  role:
+    roleName: display_app_role
+    description: '应用仅能查看设备、产品、分组、证书、策略、日志等信息'
+    isShare: 1
+    roleType: 2
+    order: 8
+
+device_app_role:
+  exclude: null
+  include: ['devices-devices', 'gateways']
+  method: all
+  extra: null
+  role:
+    roleName: device_app_role
+    description: '应用能查看、新建、编辑、删除、控制设备'
+    isShare: 1
+    roleType: 2
+    order: 9

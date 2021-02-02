@@ -1,0 +1,47 @@
+
+# Configuration files #
+tasking-manager*.env
+
+# Generated frontend #
+frontend/node_modules/
+frontend/build/
+frontend/public/static/
+frontend/assets/styles/
+frontend/package-lock.json
+frontend/.env
+frontend/coverage/
+
+# Ignore dist folder as this contains the minimized build for deploy
+backend/web/static/dist
+backend/web/static/dist/
+
+# Ignore local logs
+logs/
+*.log
+
+# Ignore some translation stuff
+.tx/
+
+#python
+venv/
+*pyc
+
+# Editor generated files #
+.idea/
+.vscode/
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.elasticbeanstalk/
+venv_aws/

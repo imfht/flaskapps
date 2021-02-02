@@ -1,0 +1,30 @@
+{
+  "extends": "standard",
+
+  "rules": {
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "camelcase": "off",
+
+    "valid-jsdoc": "error",
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": false,
+          "FunctionExpression": false
+        }
+      }
+    ]
+  },
+
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true
+  }
+}

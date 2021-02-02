@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>BGP Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Custom Theme Style -->
+    <link href="../static/css/custom.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="navbar-left" style="padding-left: 30px;">
+                <h1 style="color: #34495e;">ASN{{source_asn}}</h1>
+                <h2><i>{{source_asn_name}}</i></h2>
+              </div>
+              <div class="title_right">
+                <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right top_search">
+                  <form onsubmit="location.href='/bgp/api/v1.0/asn/' + document.getElementById('asnInput').value; return false;" class="input-group">
+                    <input type="text" id="asnInput" class="form-control" placeholder="ASN Search...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                  </form>
+                </div>
+              </div>
+              <div class="title_right">
+                <div class="col-md-2 col-sm-2 col-xs-12 form-group pull-right top_search">
+                  <form onsubmit="location.href='/bgp/api/v1.0/ip/' + document.getElementById('ipInput').value.split('/')[0]; return false;" class="input-group">
+                    <input type="text" id="ipInput" class="form-control" placeholder="IP/DNS Search...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">Go!</button>
+                    </span>
+                  </form>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="row top_tiles">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats" id="peers_box">
+                  <div class="icon"><i id="peersIDIcon"></i></div>
+                  <div class="count" id="peersID">0</div>
+                  <h3>Peer Count</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="peersIDChangeTime"></p>
+                    <p>Active egress BGP peers</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="peers_count_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="ipv4TableSizeIcon"></i></div>
+                  <div class="count" id="ipv4TableSize">0</div>
+                  <h3>IPv4 Prefixes</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="ipv4TableSizeChangeTime"></p>
+                    <p>IPv4 BGP Table Size</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="ipv4_table_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="ipv6TableSizeIcon"></i></div>
+                  <div class="count" id="ipv6TableSize">0</div>
+                  <h3>IPv6 Prefixes</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="ipv6TableSizeChangeTime"></p>
+                    <p>IPv6 BGP Table Size</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="ipv6_table_sparkline pull-right"  style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="nexthopIPCountIcon"></i></div>
+                  <div class="count" id="nexthopIPCount">0</div>
+                  <h3>Next Hop Addresses</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="nexthopIPCountChangeTime"></p>
+                    <p>Unique Egress IP Addresses</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="nexthop_count_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+            </div>
+            <!--  Second Row -->
+            <div class="row top_tiles">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="avgAsPathLengthIcon"></i></div>
+                  <div class="count" id="avgAsPathLength">0</div>
+                  <h3>Average AS Path Length</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="avgAsPathLengthChangeTime"></p>
+                    <p>ASN hops to destination (lower is better)</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="avg_as_path_length_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="customerIPv4PrefixesIcon"></i></div>
+                  <div class="count" id="customerIPv4Prefixes">0</div>
+                  <h3>Customer IPv4 Prefixes</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="customerIPv4PrefixesChangeTime"></p>
+                    <p>Customer & Orginated IPv4 Prefix Count</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="customer_ipv4_prefixes_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="customerIPv6PrefixesIcon"></i></div>
+                  <div class="count" id="customerIPv6Prefixes">0</div>
+                  <h3>Customer IPv6 Prefixes</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="customerIPv6PrefixesChangeTime"></p>
+                    <p>Customer & Orginated IPv6 Prefix Count</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="customer_ipv6_prefixes_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i id="customerCountIcon"></i></div>
+                  <div class="count" id="customerCount">0</div>
+                  <h3>BGP Customers</h3>
+                  <div>
+                    <p class="count_bottom pull-right" id="customerCountChangeTime"></p>
+                    <p>Downstream BGP connected ASNs</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  <p class="customer_count_sparkline pull-right" style="margin-right: 5px; margin-left: 5px;">Loading..</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Peer Data <small>Updated every 60s</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                      <div class="demo-container">
+                        <table id="datatable" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>ASN</th>
+                          <th>Name</th>
+                          <th>IPv4 Prefixes<br>Originated</th>
+                          <th>IPv4 Prefixes<br>NextHop</th>
+                          <th>IPv6 Prefixes<br>Originated</th>
+                          <th>IPv6 Prefixes<br>NextHop</th>
+                          <th>Downstream<br>ASN Count</th>
+                        </tr>
+                      </thead>
+                    </table>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                      <div>
+                        <div class="x_title">
+                          <h2>Top Peers (Prefixes Received)</h2>
+
+                          <div class="clearfix"></div>
+                        </div>
+                        <ul class="list-unstyled top_profiles scroll-view">
+                          {% for peer in top_peers %}
+                          <li class="media event">
+                            <a class="pull-left border-blue profile_thumb">
+                              <i class="fa fa-arrows-alt blue"></i>
+                            </a>
+                            <div class="media-body">
+                              <a class="title" href="#">ASN {{ peer.asn }}</a>
+                              <p><strong>{{ '{0:,}'.format(peer.count) }}</strong> Prefixes </p>
+                              <p> <small>{{ peer.name }}</small>
+                              </p>
+                            </div>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>BGP Prefix Distributions <small>Prefix Count</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="row" style="border-bottom: 0px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">
+                      <div class="col-md-12">
+                        <div class="row" style="text-align: center;">
+                          <div id="graph_donut1" class="col-md-4" style="width:50%; height:180px;">
+                            <h4 style="margin:0">Peering Prefix Count</h4>
+                          </div>
+                          <div id="graph_donut2" class="col-md-4" style="width:50%; height:180px;">
+                            <h4 style="margin:0">Transit vs. Peering</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- bar chart -->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>IPv4 Network Mask <small>Prefix Count</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div id="graph_bar" style="width:100%; height:280px;"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- /bar charts -->
+
+              <!-- bar charts group -->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>IPv6 Network Mask <small>Prefix Count</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content1">
+                    <div id="graph_bar_group" style="width:100%; height:280px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <!-- /bar charts group -->
+              <div class="clearfix"></div>
+              <!-- /bar charts group -->
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <a href="https://github.com/rhicks/bgp-dashboard">BGP Dashboard</a> at Github</a>
+            <div class="clearfix"></div>
+            <a href="https://github.com/puikinsh/gentelella">Gentelella</a> - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- jQuery Sparklines -->
+    <script src="../static/js/jquery.sparkline.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js" integrity="sha256-Gn7MUQono8LUxTfRA0WZzJgTua52Udm1Ifrk5421zkA=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/jquery.dataTables.min.js" integrity="sha256-yWA356lDhruy1J8jGncaMWKAPYDbK47OKb0uT/aELLc=" crossorigin="anonymous"></script>
+
+
+    <!-- Custom Theme Scripts -->
+    <!-- <script src="../static/js/custom.min.js"></script> -->
+
+  <script>
+  function up_or_down_checker(css_tag, data, json_tag)
+  {
+    var myDateFormat  = moment().format('MMM D YYYY, H:mm:ss');
+    var css_tag_id   = '#' + css_tag;
+    var css_tag_icon  = css_tag_id + 'Icon';
+    var css_tag_change_time = css_tag_id + 'ChangeTime';
+
+    if (jQuery(css_tag_id).text().replace(/\,/g,'') > data[json_tag])
+    {
+      jQuery(css_tag_icon).removeClass();
+      jQuery(css_tag_icon).addClass("red fa fa-arrow-circle-down");
+      diff = data[json_tag] - jQuery(css_tag_id).text().replace(/\,/g,'');
+      diff = diff.toLocaleString('en-Us', {minimumFractiondigits: 0});
+      jQuery(css_tag_change_time).html('<i class="red">' + diff  + '</i> at ' + myDateFormat + '&nbsp');
+    }
+    else if (jQuery(css_tag_id).text().replace(/\,/g,'') < data[json_tag])
+    {
+      jQuery(css_tag_icon).removeClass();
+      jQuery(css_tag_icon).addClass("green fa fa-arrow-circle-up");
+      diff = data[json_tag] - jQuery(css_tag_id).text().replace(/\,/g,'');
+      diff = diff.toLocaleString('en-Us', {minimumFractiondigits: 0});
+      jQuery(css_tag_change_time).html('<i class="green"> +' + diff  + '</i> at ' + myDateFormat + '&nbsp');
+    }
+  }
+
+  function update_sparklines(data, how_many_times)
+  {
+    while (how_many_times > 0)
+    {
+      peer_count_sparkline_data.push(data['peer_count']);
+      ipv4_table_sparkline_data.push(data['ipv4_table_size']);
+      ipv6_table_sparkline_data.push(data['ipv6_table_size']);
+      nexthop_count_sparkline_data.push(data['nexthop_ip_count']);
+      avg_as_path_length_data.push(data['avg_as_path_length']);
+      customer_count_data.push(data['customer_count']);
+      customer_ipv4_prefix_data.push(data['customer_ipv4_prefixes']);
+      customer_ipv6_prefix_data.push(data['customer_ipv6_prefixes']);
+      how_many_times--;
+    }
+  }
+
+  var stats = jQuery.getJSON("/bgp/api/v1.0/stats")
+  var peer_count_sparkline_data = [];
+  var ipv4_table_sparkline_data = [];
+  var ipv6_table_sparkline_data = [];
+  var nexthop_count_sparkline_data = [];
+  var avg_as_path_length_data = [];
+  var customer_count_data = [];
+  var customer_ipv4_prefix_data = [];
+  var customer_ipv6_prefix_data = [];
+
+  var peers_table = jQuery('#datatable').DataTable({
+        ajax: {
+          url: "/bgp/api/v1.0/stats",
+          dataSrc: "peers"
+      },
+      columns: [
+          { data: "asn", render: function (asn) {return '<a href=/bgp/api/v1.0/asn/'+asn+'>'+asn+'</a>';} },
+          { data: "name" },
+          { data: "ipv4_origin_count", render: function (data, type, full, meta) {return '<a href=/bgp/api/v1.0/asn/'+full.asn+'/originated/ipv4>'+full.ipv4_origin_count+'</a>';} },
+          { data: "ipv4_nexthop_count", render: function (data, type, full, meta) {return '<a href=/bgp/api/v1.0/asn/'+full.asn+'/nexthop/ipv4>'+full.ipv4_nexthop_count+'</a>';} },
+          { data: "ipv6_origin_count", render: function (data, type, full, meta) {return '<a href=/bgp/api/v1.0/asn/'+full.asn+'/originated/ipv6>'+full.ipv6_origin_count+'</a>';} },
+          { data: "ipv6_nexthop_count", render: function (data, type, full, meta) {return '<a href=/bgp/api/v1.0/asn/'+full.asn+'/nexthop/ipv6>'+full.ipv6_nexthop_count+'</a>';} },
+          { data: "asn_count", render: function (data, type, full, meta) {return '<a href=/bgp/api/v1.0/asn/'+full.asn+'/downstream>'+full.asn_count+'</a>';} }
+      ],
+        "oLanguage":
+        {
+        "sSearch": "Filter Table: "
+      },
+        paging: false,
+        scrollY: 400
+      });
+
+
+  function update_counters()
+  {
+    update_counters.count = update_counters.count || 0;
+    jQuery.getJSON("/bgp/api/v1.0/stats", function(data)
+    {
+      update_sparklines(data, 1)
+      if (update_counters.count > 0) //only update times after the first run
+      {
+        up_or_down_checker('peersID', data, 'peer_count');
+        up_or_down_checker('ipv4TableSize', data, 'ipv4_table_size');
+        up_or_down_checker('ipv6TableSize', data, 'ipv6_table_size');
+        up_or_down_checker('nexthopIPCount', data, 'nexthop_ip_count');
+        up_or_down_checker('avgAsPathLength', data, 'avg_as_path_length');
+        up_or_down_checker('customerCount', data, 'customer_count');
+        up_or_down_checker('customerIPv4Prefixes', data, 'customer_ipv4_prefixes');
+        up_or_down_checker('customerIPv6Prefixes', data, 'customer_ipv6_prefixes');
+      }
+
+      update_counters.count = 1;
+      sparkline_max_width = $("div#peers_box.tile-stats").width() - 10
+      sparkline_data_width = peer_count_sparkline_data.length
+      if (sparkline_data_width < sparkline_max_width)
+      {
+        sparkline_width = sparkline_data_width
+      }
+      else
+      {
+        sparkline_width = sparkline_max_width
+      }
+      jQuery('#peersID').text(data['peer_count'].toLocaleString('en-US', {minimumFractionDigits: 0}));
+      jQuery('#ipv4TableSize').text(data['ipv4_table_size'].toLocaleString('en-US', {minimumFractionDigits: 0}));
+      jQuery('#ipv6TableSize').text(data['ipv6_table_size'].toLocaleString('en-US', {minimumFractionDigits: 0}));
+      jQuery('#nexthopIPCount').text(data['nexthop_ip_count'].toLocaleString('en-US', {minimumFractionDigits: 0}));
+      jQuery('#avgAsPathLength').text(data['avg_as_path_length']);
+      jQuery('#customerCount').text(data['customer_count']);
+      jQuery('#customerIPv4Prefixes').text(data['customer_ipv4_prefixes']);
+      jQuery('#customerIPv6Prefixes').text(data['customer_ipv6_prefixes']);
+      jQuery('.peers_count_sparkline').sparkline(peer_count_sparkline_data, {width: sparkline_width});
+      jQuery('.ipv4_table_sparkline').sparkline(ipv4_table_sparkline_data, {width: sparkline_width});
+      jQuery('.ipv6_table_sparkline').sparkline(ipv6_table_sparkline_data, {width: sparkline_width});
+      jQuery('.nexthop_count_sparkline').sparkline(nexthop_count_sparkline_data, {width: sparkline_width});
+      jQuery('.avg_as_path_length_sparkline').sparkline(avg_as_path_length_data, {width: sparkline_width});
+      jQuery('.customer_count_sparkline').sparkline(customer_count_data, {width: sparkline_width});
+      jQuery('.customer_ipv4_prefixes_sparkline').sparkline(customer_ipv4_prefix_data, {width: sparkline_width});
+      jQuery('.customer_ipv6_prefixes_sparkline').sparkline(customer_ipv6_prefix_data, {width: sparkline_width});
+
+
+      //$('.dynamicbar').sparkline(myvalues, {type: 'bar', barColor: 'green'} );
+      console.log("sparkline_data_width: " + sparkline_data_width)
+      console.log("sparkline_width: " + sparkline_width)
+      console.log("sparkline_max_width: " + sparkline_max_width)
+      if (sparkline_data_width > 1)
+      {
+        //peer_count_sparkline_data.shift();
+        peer_count_sparkline_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        //ipv4_table_sparkline_data.shift();
+        ipv4_table_sparkline_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        // ipv6_table_sparkline_data.shift();
+        ipv6_table_sparkline_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        // nexthop_count_sparkline_data.shift();
+        nexthop_count_sparkline_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        // avg_as_path_length_data.shift();
+        avg_as_path_length_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        // customer_count_data.shift();
+        customer_count_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        // customer_ipv4_prefix_data.shift();
+        customer_ipv4_prefix_data.splice(0, (sparkline_data_width - sparkline_max_width))
+        // customer_ipv6_prefix_data.shift();
+        customer_ipv6_prefix_data.splice(0, (sparkline_data_width - sparkline_max_width))
+      }
+      update_sparklines(data, 1)
+      peers_table.ajax.reload(null, false)
+    });
+  }
+
+  jQuery(document).ready(update_counters());
+  setInterval(function() { update_counters() }, 2000);
+
+  </script>
+
+     <!-- morris.js -->
+      <script>
+      $(document).ready(function() {
+          Morris.Bar({
+            element: 'graph_bar',
+            data: [
+              {%- for cidr in cidr_breakdown -%}
+                {% if cidr.ip_version == 4 %}
+                  {cidr: "/{{ cidr.mask }}", count: {{ cidr.count }}},
+                {% endif %}
+              {%- endfor -%}
+            ],
+            xkey: 'cidr',
+            ykeys: ['count'],
+            labels: ['count'],
+            barRatio: 0.4,
+            barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+            xLabelAngle: 60,
+            hideHover: 'auto',
+            resize: true
+          });
+
+          Morris.Bar({
+            element: 'graph_bar_group',
+            data: [
+              {%- for cidr in cidr_breakdown -%}
+                {% if cidr.ip_version == 6 %}
+                  {cidr: "/{{ cidr.mask }}", count: {{ cidr.count }}},
+                {% endif %}
+              {%- endfor -%}
+            ],
+            xkey: 'cidr',
+            ykeys: ['count'],
+            labels: ['count'],
+            barRatio: 0.4,
+            barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB'],
+            xLabelAngle: 60,
+            hideHover: 'auto',
+            resize: true
+          });
+
+          Morris.Donut({
+            element: 'graph_donut1',
+            data: [
+              {%- for comm in communities -%}
+                {% if comm.community[:-1] == peer_bgp_community[:-1] %}
+                  {label: "{{ comm.name }}", value: {{ comm.count }}},
+                {% endif %}
+              {%- endfor -%}
+            ],
+            colors: ['#26B99A', '#34495E', '#E59443', '#3498DB', '#E74C3C', '#FF7BAC', '#26B99A', '#34495E', '#E59443', '#3498DB', '#E74C3C', '#333333'],
+            formatter: function (y) {
+              return y;
+            },
+            resize: true
+          });
+
+          Morris.Donut({
+            element: 'graph_donut2',
+            data: [
+            {% set total_prefixes = data.ipv4_table_size + data.ipv6_table_size %}
+            {%- for comm in communities -%}
+              {% if comm.community == transit_bgp_community %}
+                {label: 'Peering', value: {{ (((comm.count - total_prefixes) / total_prefixes) * -100)|round }}},
+                {label: 'Transit', value: {{ ((comm.count / total_prefixes) * 100)|round }}},
+              {% endif %}
+            {%- endfor -%}
+            ],
+            colors: ['#34495E', '#3498DB'],
+            formatter: function (y) {
+              return y + "%";
+            },
+            resize: true
+          });
+
+          // Morris.Donut({
+          //   element: 'graph_donut3',
+          //   data: [
+          //   {%- for comm in communities -%}
+          //     {% if comm.community == "3701:370" %}
+          //       {label: 'Customer', value: {{ comm.count }}}
+          //     {% endif %}
+          //   {%- endfor -%}
+          //   ],
+          //   colors: ['#34495E'],
+          //   formatter: function (y) {
+          //     return y;
+          //   },
+          //   resize: true
+          // });
+
+        });
+      </script>
+      <!-- /morris.js -->
+
+  </body>
+</html>

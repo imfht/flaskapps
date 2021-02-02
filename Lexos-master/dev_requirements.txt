@@ -1,0 +1,6 @@
+flake8
+pytest
+codecov
+pytest-cov
+pydocstyle
+pep8-naming

@@ -1,0 +1,10 @@
+.idea
+*.pyc
+.pytest_cache
+.dockerignore
+actor_data
+private_services
+deploy/production/codec/_temp/
+instance/*
+!instance/certs/
+__pycache__/

@@ -1,0 +1,140 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'base/palette';
+
+.outer-dropzone {
+  margin-top: auto;
+}
+
+.dropzone {
+  width: 100%;
+  border: 2px dashed $gray;
+  border-radius: 3px;
+  text-align: center;
+  padding: 0.5em;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:global(.active) {
+    opacity: 0.5;
+  }
+}
+
+.file-manager-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-manager {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.9em;
+
+  .file-type {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    border: 1px solid $gray;
+    border-radius: 3px;
+    padding: 1em;
+    width: 31%;
+    margin-left: 0.9em;
+
+    .file-requirements {
+      font-style: italic;
+      color: $gray;
+      margin: 0.2em 0;
+      padding: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .file-type h3 {
+    margin-bottom: 0;
+  }
+}
+
+.file-list {
+  list-style-type: none;
+  padding: 0;
+
+  .file-row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.delete-icon {
+  color: $red;
+  cursor: pointer;
+
+  &:hover {
+    color: $dark-red;
+  }
+}
+
+.undo-icon {
+  color: $blue;
+  cursor: pointer;
+
+  &:hover {
+    color: $dark-blue;
+  }
+}
+
+.exchange-icon {
+  color: $dark-gray;
+  cursor: pointer;
+
+  &:hover {
+    color: $light-black;
+  }
+}
+
+.file-state {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 4;
+
+  &:global(.added) {
+    color: $green;
+  }
+
+  &:global(.modified) {
+    color: $dark-orange;
+  }
+
+  &:global(.deleted) {
+    text-decoration: line-through;
+    color: $dark-red;
+  }
+
+  &:global(.uploading) {
+    color: $gray;
+  }
+
+  &:global(.error) {
+    color: $dark-red;
+  }
+}
+
+.uploading-file-list {
+  @extend .file-list;
+  padding-bottom: 1em;
+
+  .uploading-file-row {
+    display: flex;
+  }
+}

@@ -1,0 +1,14 @@
+cython==0.29.21
+tox
+unittest2
+coverage
+flake8
+pydocstyle
+sphinx_autobuild
+pip
+mypy
+pyyaml
+httpx
+fastapi
+
+-r requirements-ext.txt

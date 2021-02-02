@@ -1,0 +1,14 @@
+{% macro get_subject() -%}
+    {% block subject_prefix %}[Indico]{% endblock %} {% block subject %}{% endblock %}
+{%- endmacro %}
+
+{% macro get_body(footer) %}
+    {%- block header %}Dear {% block header_recipient %}{% endblock %},
+
+{% endblock -%}
+{% block body -%}{%- endblock %}
+
+--
+Indico :: {% block footer_title %}Email Notifier{% endblock %}
+{% block footer_url %}{{ url_for_index(_external=true) }}{% endblock %}
+{% endmacro %}

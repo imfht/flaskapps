@@ -1,0 +1,17 @@
+
+{
+  "data": {
+    "type": "customers",
+    "attributes": {
+      "name": "leo",
+      "address": "Asbnkjlkjgljgljlg 234 klkk&^%$#",
+      "is_active":"true",
+      "mobile": "9820109677",
+      "email": "leo@leog.in",
+      "url": "http:leog.in",
+      "date": "2015-12-1",
+      "pricing": "44"
+     
+      }
+     }
+  }

@@ -1,0 +1,45 @@
+{% set current_step = 'progress' %}
+
+{% extends 'layouts/progress.html' %}
+
+{% block head_scripts %}
+  <script type="text/javascript">
+    ga('send', {
+      hitType: 'event',
+      eventCategory: 'Formspree',
+      eventAction: 'confirm-sent',
+      eventLabel: 'Confirmation Sent'
+    });
+    var onloadCallback = function() {
+      grecaptcha.render('recaptcha', {
+        'sitekey' : {{ config.RECAPTCHA_KEY|tojson|safe }},
+        'callback' : function () {
+          document.querySelector('form').submit()
+        },        
+        'size': window.innerWidth < 400 ? 'compact' : 'normal'        
+      });
+    }
+  </script>
+{% endblock head_scripts %}
+
+{% block content %}
+    <h1>Confirm your email</h1>
+    <p>We've sent a link to your email. To prevent spam, you'll have to confirm your email before things start working.</p>
+    <p class="small"><strong>Email: </strong> {{email}}, <strong>Site</strong> {{host}}</p>
+
+    {% if resend %}
+      <a href="#" class="resend">Resend confirmation email?</a>
+      <form class="resend" style="display: none"
+        action="{{ url_for('resend_confirmation', email=email) }}"
+        method="POST"
+      >
+        <div id="recaptcha" style="text-align:center; display:inline-block"></div>
+        <input type="hidden" name="host" value="{{ host }}">
+      </form>
+    {% endif %}
+
+{% endblock %}
+
+{% block tail_scripts %}
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+{% endblock tail_scripts %}

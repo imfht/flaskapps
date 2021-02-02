@@ -1,0 +1,72 @@
+body {
+    text-align: center;
+    color: #FFF;
+    background: #111;
+    font-family: Arial, sans-serif;
+    font-size: 15pt;
+}
+
+a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF9;
+}
+
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+.countdown {
+    position: relative;
+    left: -600px;
+    top: -160px;
+    width: 1200px;
+    height: 320px;
+}
+
+.text {
+    margin-bottom: 20px;
+}
+
+.link {
+    margin-top: 20px;
+}
+
+.text,
+.link {
+    font-weight: bold;
+    font-size: 15pt;
+}
+
+.time {
+    display: inline-block;
+}
+
+.explanations {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.digits {
+    font-family: "Ubuntu Mono", Arial;
+    font-size: 150pt;
+    text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width:1200px) {
+    .digits {
+        font-size: 100pt;
+    }
+}
+
+@media (max-width:800px) {
+    .digits {
+        font-size: 60pt;
+    }
+}

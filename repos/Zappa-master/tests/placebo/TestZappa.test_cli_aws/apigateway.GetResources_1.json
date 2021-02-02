@@ -1,0 +1,15 @@
+{
+    "status_code": 200, 
+    "data": {
+        "items": [
+            {
+                "path": "/", 
+                "id": "6ahk6mn0bi"
+            }
+        ], 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 200, 
+            "RequestId": "5494870d-28f4-11e6-87ec-8f98a402daaf"
+        }
+    }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            My app | {% block jsondash_title %}{% endblock %}
+        {% endblock %}
+    </title>
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}">
+    {% block jsondash_css %}{% endblock %}
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well text-center">
+                    <h4><strong>Flask JSONDASH example app.</strong> <br><small>A place to demonstrate how to use the blueprint.</small></h4>
+                </div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for category, message in get_flashed_messages(with_categories=True) %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'info' }}">
+                                <p class="flash">{{ 'Error: ' if category == 'error' else '' }}{{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block jsondash_body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- VENDOR JS -->
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+{% block jsondash_scripts %}{% endblock %}
+{% block jsondash_init %}{% endblock %}
+{% block jsondash_api_scripts %}
+{#
+<script>
+    $(document).ready(function(){
+        if(!window.jsondash) return;
+        jsondash.api.registerCallback('chart-id-here', function(container, config, myargs){
+        }, ['Hello world']);
+    });
+</script>
+#}
+{% endblock %}
+</body>
+</html>

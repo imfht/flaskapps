@@ -1,0 +1,13 @@
+{% extends 'events/management/base.html' %}
+
+{% block title %}
+    {%- trans %}Logs{% endtrans -%}
+{% endblock %}
+
+{% block content %}
+    <div class="event-log"
+         data-fetch-logs-url="{{ url_for('.logs', event) }}"
+         data-realms="{{ realms|tojson|forceescape }}"
+         data-metadata-query="{{ metadata_query|tojson|forceescape }}">
+    </div>
+{% endblock %}

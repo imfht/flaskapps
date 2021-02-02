@@ -1,0 +1,124 @@
+---
+- name: sync project code from local dir
+  synchronize:
+    src: '{{ local_project_dir }}'
+    dest: '{{ project_dir }}'
+    recursive: yes
+    delete: yes
+    verify_host: yes
+    rsync_opts:
+      - "--exclude=*.pyc"
+      - "--exclude=__pycache__"
+      - "--exclude=ansible"
+      - "--exclude=docs"
+      - "--exclude=node_modules"
+      - "--exclude=tests"
+      - "--exclude=*.sqlite"
+      - "--exclude=celerybeat.pid"
+      - "--exclude=celerybeat-schedule"
+  tags:
+    - flask
+    - flask.import_articles
+
+- name: create uwsgi.ini file
+  template:
+    src: uwsgi.ini.j2
+    dest: '{{ project_dir }}/uwsgi.ini'
+
+- name: clear .pyc files
+  command: find . -name '*.pyc' -delete
+  args:
+    chdir: '{{ project_dir }}'
+  changed_when: False
+
+- name: clear __pycache__ folders
+  command: find . -name __pycache__ -type d -exec rm -fr {} +
+  args:
+    chdir: '{{ project_dir }}'
+  changed_when: False
+
+- name: make sure static files dir exists
+  file:
+    path: '{{ FLASK_STATIC_FOLDER }}'
+    owner: '{{ nginx_user }}'
+    group: '{{ nginx_user }}'
+    state: directory
+  tags:
+    - flask.static_files
+    - flask.import_articles
+
+- name: copy static files
+  synchronize:
+    src: '{{ local_project_dir }}/{{ static_dir_name }}/'
+    dest: '{{ FLASK_STATIC_FOLDER }}'
+    recursive: yes
+    delete: yes
+    rsync_opts:
+      - "--exclude=*.stats"
+  tags: flask.static_files
+
+- name: copy articles static files
+  synchronize:
+    src: '{{ local_project_dir }}/{{ articles_dir_name }}/'
+    dest: '{{ FLASK_STATIC_FOLDER }}/{{ articles_dir_name }}'
+    recursive: yes
+    delete: yes
+    rsync_opts:
+      - "--exclude=*.md"
+  tags:
+    - flask.static_files
+    - flask.import_articles
+
+- name: set ownership of static files to {{ nginx_user }}
+  file:
+    path: '{{ FLASK_STATIC_FOLDER }}'
+    owner: '{{ nginx_user }}'
+    group: '{{ nginx_user }}'
+    state: directory
+    recurse: yes
+  tags:
+    - flask.static_files
+    - flask.import_articles
+
+- name: install pip-tools
+  pip: virtualenv={{ project_virtualenv_dir }} name=pip-tools
+
+- name: install packages from requirements.txt
+  command: "{{ project_virtualenv_dir }}/bin/pip-sync {{ requirements_path }}"
+  args:
+    chdir: '{{ project_dir }}'
+
+- name: run database migrations
+  when: run_migrations is defined and run_migrations
+  command: "{{ venv_exec }} {{ python3 }} manage.py --env=prod --no-warn db upgrade"
+  args:
+    chdir: '{{ project_dir }}'
+  tags: flask.run_migrations
+
+- name: run database fixtures [dev]
+  when: run_fixtures is defined and run_fixtures and app_env == 'dev'
+  command: "{{ venv_exec }} {{ python3 }} manage.py --env=prod --no-warn db fixtures fixtures.json --reset"
+  args:
+    chdir: '{{ project_dir }}'
+  tags: flask.run_fixtures
+
+- name: run database fixtures [prod]
+  when: run_fixtures is defined and run_fixtures and app_env == 'prod'
+  command: "{{ venv_exec }} {{ python3 }} manage.py --env=prod --no-warn db fixtures fixtures.json"
+  args:
+    chdir: '{{ project_dir }}'
+  tags: flask.run_fixtures
+
+- name: import articles [dev]
+  when: import_articles is defined and import_articles and app_env == 'dev'
+  command: "{{ venv_exec }} {{ python3 }} manage.py --env=prod --no-warn blog import-articles --reset"
+  args:
+    chdir: '{{ project_dir }}'
+  tags: flask.import_articles
+
+- name: import articles [prod]
+  when: import_articles is defined and import_articles and app_env == 'prod'
+  command: "{{ venv_exec }} {{ python3 }} manage.py --env=prod --no-warn blog import-articles"
+  args:
+    chdir: '{{ project_dir }}'
+  tags: flask.import_articles

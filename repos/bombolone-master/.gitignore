@@ -1,0 +1,50 @@
+# Compiled files
+*.pyc
+*.pyo
+build*
+dist*
+*.egg-info
+
+# OSX sucks
+.DS_Store
+
+# Eclipse & PyDev stuff
+.project
+.pydevproject
+.settings
+
+# Sass
+.sass-cache
+~
+
+# fabfile caches
+.coffeecache
+.minifycache
+
+# Node
+node_modules
+npm-debug.log
+
+# Virtualenv
+venv
+
+# IDEA sucks
+.idea*
+
+# Bower
+static/components/**/.*
+static/components/**/bower.json
+static/components/**/README.md
+static/components/**/gruntfile.js
+static/components/**/LICENSE
+static/components/**/package.json
+static/components/**/Makefile
+static/components/bootstrap/fonts*
+static/components/bootstrap/grunt*
+static/components/bootstrap/js*
+static/components/bootstrap/less*
+static/components/bootstrap/dist/js
+static/components/bootstrap/dist/css/bootstrap-theme*
+static/components/components-font-awesome/less
+static/components/components-font-awesome/scss
+static/components/jquery/

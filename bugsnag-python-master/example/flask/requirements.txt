@@ -1,0 +1,9 @@
+blinker==1.4
+bugsnag==3.6.1
+click==7.1.2
+Flask==1.1.2
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+WebOb==1.8.6
+Werkzeug==1.0.1

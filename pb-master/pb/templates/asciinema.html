@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/asciinema-player/2.4.1/asciinema-player.css" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+<asciinema-player src="{{ url }}"></asciinema-player>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/asciinema-player/2.4.1/asciinema-player.min.js"></script>
+{% endblock %}

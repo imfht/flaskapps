@@ -1,0 +1,550 @@
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/comment_medias_by_location.py:78
+     ╷
+   78│   input(u"How much comments per location?\n")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/comment_medias_by_location.py:81
+     ╷
+   81│   location_name = input(u"Write location name:\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/comment_medias_by_location.py:86
+     ╷
+   86│   ncomments = args.amount or input(u"How much comments per location?\n")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/comment_medias_by_location.py:92
+     ╷
+   92│   ans = input(u"What place would you want to choose?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/filter_blacklist_hashtag_medias.py:15
+     ╷
+   15│   blacklist_hashtag_input = input("\n Enter a blacklist hashtag: ")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/filter_private_profiles.py:18
+     ╷
+   18│   private_user_input = input("\n Enter a private user: ")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/interact_DM.py:29
+     ╷
+   29│   get_choice = input(message)
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/interact_DM.py:52
+     ╷
+   52│   text = input("write your message: ")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/like_medias_by_location.py:76
+     ╷
+   76│   nlikes = input(u"How much likes per location?\n")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/like_medias_by_location.py:81
+     ╷
+   81│   location_name = input(u"Write location name:\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/like_medias_by_location.py:87
+     ╷
+   87│   nlikes = input(u"How much likes per location?\n")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/like_medias_by_location.py:95
+     ╷
+   95│   ans = int(input(u"What place would you want to choose?\n").strip())
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/message_users.py:65
+     ╷
+   65│   scrape = input("what page likers do you want to message? :")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit start-process-with-a-shell https://bandit.readthedocs.io/en/latest/plugins/b605_start_process_with_a_shell.html
+     > examples/multi_script_CLI.py:42
+     ╷
+   42│   os.system("cls")
+     ╵
+     = Starting a process with a shell: Seems safe, but may be changed in the
+       future, consider rewriting without shell
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:235
+     ╷
+  235│   ans = input("What would you like to do?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:267
+     ╷
+  267│   ans = input("How do you want to follow?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:279
+     ╷
+  279│   input(
+  280│       "Insert hashtags separated by spaces\n"
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:302
+     ╷
+  302│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:316
+     ╷
+  316│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:330
+     ╷
+  330│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:360
+     ╷
+  360│   ans = input("How do you want to like?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:372
+     ╷
+  372│   input(
+  373│       "Insert hashtags separated by spaces\n"
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:394
+     ╷
+  394│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:407
+     ╷
+  407│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:420
+     ╷
+  420│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:452
+     ╷
+  452│   ans = input("How do you want to comment?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:462
+     ╷
+  462│   hashtag = input("what?").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:475
+     ╷
+  475│   user_id = input("who?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:520
+     ╷
+  520│   ans = input("How do you want to unfollow?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:547
+     ╷
+  547│   ans = input("how do you want to block?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:576
+     ╷
+  576│   ans = input("What setting do you need?\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/multi_script_CLI.py:580
+     ╷
+  580│   change = input("Want to change it? y/n\n").strip()
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/reset_following.py:20
+     ╷
+   20│   answer = input(
+   21│       """
+   22│   Please select
+   23│   1) Create Friends List
+   24│       Make a list of the users you follow before you follow bot.
+   25│   2) Restore Friends List
+   26│       Unfollow all user accept for the users in your friends list.
+   27│   3) Exit
+   28│   \n
+   29│   """
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > examples/video/upload_video.py:75
+     ╷
+   75│   caption = input(
+   76│       "No caption found for this media. "
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > instabot/api/api.py:318
+     ╷
+  318│   code = input("Insert choice: ")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > instabot/api/api.py:328
+     ╷
+  328│   code = input("Insert code: ")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit python2-input https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b322-input
+     > instabot/api/api.py:476
+     ╷
+  476│   two_factor_code = input("Enter 2FA verification code: ")
+     ╵
+     = The input method in Python 2 will read from standard input, evaluate and
+       run the resulting string as python source code. This is similar, though
+       in many ways worse, then using eval. On Python 2, use raw_input instead,
+       input is safe in Python 3.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > instabot/api/api.py:538
+     ╷
+  538│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api.py:673
+     ╷
+  673│   def get_timeline_feed(self, options=[]):
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api.py:736
+     ╷
+  736│   options={},
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api.py:777
+     ╷
+  777│   self, video, caption=None, upload_id=None, thumbnail=None, options={}
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api.py:817
+     ╷
+  817│   options={},
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api_photo.py:107
+     ╷
+  107│   options={},
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api_video.py:102
+     ╷
+  102│   options={}
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/api/api_video.py:234
+     ╷
+  234│   options={}
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/bot/bot.py:170
+     ╷
+  170│   blacklist_hashtags=["#shop", "#store", "#free"],
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/bot/bot.py:752
+     ╷
+  752│   options={}
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/bot/bot.py:780
+     ╷
+  780│   def upload_video(self, video, caption="", thumbnail=None, options={}):
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+bandit pickle-used https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b301-pickle
+     > instabot/bot/bot_checkpoint.py:66
+     ╷
+   66│   checkpoint = pickle.load(f)
+     ╵
+     = Pickle and modules that wrap it can be unsafe when used to deserialize
+       untrusted data, possible security issue.
+
+bandit try-except-pass https://bandit.readthedocs.io/en/latest/plugins/b110_try_except_pass.html
+     > instabot/bot/bot_checkpoint.py:71
+     ╷
+   71│   except Exception:
+     ╵
+     = Try, Except, Pass detected.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/bot/bot_photo.py:13
+     ╷
+   13│   options={}
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+flake8 no-mutable-default-args https://github.com/PyCQA/flake8-bugbear/blob/master/README.rst#list-of-warnings
+     > instabot/bot/bot_video.py:4
+     ╷
+    4│   def upload_video(self, video, caption="", thumbnail=None, options={}):
+     ╵
+     = Do not use mutable data structures for argument defaults.  They are
+       created during function definition time. All calls to the function reuse
+       this one instance of that data structure, persisting changes between
+       them.
+
+shellcheck SC2148 https://github.com/koalaman/shellcheck/wiki/SC2148
+     > push.sh:1
+     ╷
+    1│   LAST_COMMIT_MESSAGE="$(git log --no-merges -2 --pretty=%B)"
+     ╵
+     = Tips depend on target shell and yours is unknown. Add a shebang.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > push.sh:6
+     ╷
+    6│   git remote add origin https://${GITHUB_TOKEN}@github.com/instagrambot/instabot.git
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > push.sh:13
+     ╷
+   13│   twine upload -u $PYPI_USERNAME -p $PYPI_PASSWORD dist/*
+     ╵
+     = Double quote to prevent globbing and word splitting.
+
+shellcheck SC2086 https://github.com/koalaman/shellcheck/wiki/SC2086
+     > push.sh:13
+     ╷
+   13│   twine upload -u $PYPI_USERNAME -p $PYPI_PASSWORD dist/*
+     ╵
+     = Double quote to prevent globbing and word splitting.
+

@@ -1,0 +1,18 @@
+# Files
+*.pyc
+*.db
+*.log
+.coverage
+bootstrap.min.css
+
+# Directory
+*.egg-info/
+env
+env3
+venv
+.idea
+.vscode
+dist
+.DS_Store
+.cache
+.pytest_cache/

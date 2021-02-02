@@ -1,0 +1,12 @@
+*.pyc
+*.pyo
+env
+env*
+dist
+*.egg-info
+*.egg
+*.swp
+examples/static
+docs/_build
+/.eggs
+/build

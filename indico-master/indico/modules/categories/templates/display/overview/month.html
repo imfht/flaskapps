@@ -1,0 +1,58 @@
+{% extends 'categories/display/overview/base.html' %}
+{% from 'categories/display/overview/event.html' import render_event %}
+
+{% block overview_title %}
+    {{ start_dt|format_date }} – {{ end_dt|format_date }}
+{% endblock %}
+
+{% block overview_navigation_left %}
+    <a href="{{ previous_year_url }}" title="{% trans %}Previous year{% endtrans %}">
+        &lt;&lt;
+    </a>
+    <a href="{{ previous_month_url }}" title="{% trans %}Previous month{% endtrans %}">
+        &lt;
+    </a>
+{% endblock %}
+
+{% block overview_navigation_right %}
+    <a href="{{ next_month_url }}" title="{% trans %}Next month{% endtrans %}">
+        &gt;
+    </a>
+    <a href="{{ next_year_url }}" title="{% trans %}Next year{% endtrans %}">
+        &gt;&gt;
+    </a>
+{% endblock %}
+
+{% block overview %}
+    <table>
+        <tr>
+            {% for day_number in range(0, 7 if not hide_weekend else 5) %}
+                <th>{{ current_locale.weekday(day_number, short=False) }}</th>
+            {% endfor %}
+        </tr>
+        {% set batch_size = 5 if hide_weekend else 7 %}
+        {% for events_by_day_in_week in events_by_day|batch(batch_size) %}
+            <tr>
+                {% for day, events in events_by_day_in_week %}
+                    {% if day.month == start_dt.month %}
+                        <td class="day">
+                            <div class="calendar-date">
+                                <a href="{{ url_for('.overview', category, detail=detail, period='day', date=day|format_date('yyyy-MM-dd')) }}">
+                                    {{ day.day }}
+                                </a>
+                            </div>
+                            <table>
+                                {% for event in events %}
+                                    {{ render_event(event, timezone=category.display_tzinfo, detail=detail,
+                                                    accessible_categories=accessible_categories) }}
+                                {% endfor %}
+                            </table>
+                        </td>
+                    {% else %}
+                        <td class="other-month"></td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

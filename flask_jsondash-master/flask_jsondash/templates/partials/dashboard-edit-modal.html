@@ -1,0 +1,159 @@
+{# The popup modal for editing/adding charts #}
+<div class="modal fade" id="chart-options">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">
+                Chart options
+                <small data-view-chart-guid>
+                    &nbsp;
+                    <span class="guid-text"></span>
+                    <span class="guid-text-helper">
+                        &nbsp;
+                        <span class="fa fa-angle-left"></span> This is the permanent ID of the chart.
+                    </span>
+                </small>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-block row" id="module-form" role="form">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend class="lead">Required fields</legend>
+                        <small class="text-danger">All fields marked with a * are required for the chart to work.</small>
+                        <label>
+                            Name <small class="text-danger">*</small>
+                            <input class="form-control" type="text" name="name" placeholder="name" required>
+                        </label>
+                        <label>
+                            Type <small class="text-danger">*</small>
+                            {% include "partials/form-diagram-options.html" %}
+                        </label>
+                        <label>
+                            Width <small class="text-danger">*</small>
+                            {% if view.layout == 'grid' %}
+                                <small>The columns are relatively sized</small>
+                                <select name="width" class="form-control">
+                                    {% for colcount in range(1, 13) %}
+                                        <option value="col-{{ colcount }}">{{ colcount }} columns</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <small>Absolute value in pixels</small>
+                                <input class="form-control" type="text" name="width" placeholder="e.g. 500" required>
+                            {% endif %}
+                        </label>
+                        {% if view.layout == 'grid' %}
+                            <label>
+                                Row to add this widget to
+                                <small class="text-danger">*</small>
+                                <select name="row" class="form-control"></select>
+                            </label>
+                        {% endif %}
+                        <label>
+                            Height <small class="text-danger">*</small>
+                            <input class="form-control" type="number" min="200" name="height" placeholder="e.g. 400" required>
+                        </label>
+                        <label>
+                            Data Source <small class="text-danger">*</small>
+                            <small>API, json, webpage, template, etc...</em></small>
+                            <input class="form-control" type="text" name="dataSource" value="http://" placeholder="e.g. localhost:5000/my/endpoint" required>
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend class="lead">Options</legend>
+                        <label>
+                            <input type="checkbox" name="override">
+                            Use custom configuration? <br><small>Note: this will pass the <strong>entire</strong> payload from <code>config.dataSource</code> to the widget constructor, and may result in errors if not configured properly.</small>
+                        </label>
+                        <label>
+                            Order <small>(position in the dashboard.)</small>
+                            <select class="form-control" type="number" name="order"></select>
+                        </label>
+                        <br>
+                        <label>
+                            <input type="checkbox" name="refresh">
+                            Auto-refresh?
+                        </label>
+                        <br>
+                        <label>
+                            Auto refresh interval <br>
+                            <small>
+                                You can enter milliseconds, <a href="#ival-fmt-options" data-toggle="collapse">or enter a interval format.</a>
+                                <dl class="collapse" id="ival-fmt-options">
+                                    <dt>N-s</dt>
+                                    <dd>integer - seconds (e.g. 15-s)</dd>
+                                    <dt>N-m</dt>
+                                    <dd>integer - minutes (e.g. 10-m)</dd>
+                                    <dt>N-h</dt>
+                                    <dd>integer - hours (e.g. 2-h)</dd>
+                                    <dt>N-d</dt>
+                                    <dd>integer - days (e.g. 1-d)</dd>
+                                </dl>
+                            </small>
+                            <input class="form-control" name="refreshInterval" value="10000">
+                        </label>
+                        <label>
+                            CSS classes <br>
+                            <small>A comma separated list of CSS classes to apply to this chart</small>
+                            <input class="form-control" name="classes" placeholder="e.g. class1, class2">
+                        </label>
+                        <hr>
+                        <label>
+                            Custom inputs <br>
+                            <small>
+                                Custom input options can be added (currently via raw config only) to allow your chart to have interactive input fields.
+                                <a href="{{ docs_url }}config.md" target="_blank">Visit schema documentation</a>
+                            </small>
+                        </label>
+                    </fieldset>
+                </div>
+                <div class="col-md-12 api-preview-container">
+                    <hr>
+                    <p class="lead clearfix">
+                        API response
+                        <span class="pull-right">
+                            <button id="api-output-preview" class="btn btn-xs btn-success">Preview</button>
+                        </span>
+                    </p>
+                    <pre><code id="api-output" class="json">...</code></pre>
+                </div>
+            </form>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <p><a href="#chart-docs" data-toggle="collapse">Toggle chart documentation</a></p>
+                    <div class="collapse" id="chart-docs">
+                        <p>
+                            <small>The documentation below explains all the possible details available for a given <strong>third-party</strong> chart.</small>
+                        </p>
+                        <ul>
+                            {% for label, options in charts_config.items()|sort %}
+                                {% if options.help_link %}
+                                    <li>
+                                        <a href="{{ options.help_link }}" target="_blank">{{ label }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+            {% if view %}
+                <button type="button" id="update-module" data-dismiss="modal" class="btn btn-primary">Update</button>
+            {% else %}
+                <button type="button" id="save-module" class="btn btn-primary">Save</button>
+            {% endif %}
+            {% if view %}
+                <button id="delete-widget" class="btn btn-danger"><span class="fa fa-times"></span> Delete</button>
+            {% endif %}
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

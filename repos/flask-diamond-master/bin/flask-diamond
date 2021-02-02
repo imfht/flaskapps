@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# flask-diamond (c) 2016 Ian Dennis Miller
+
+import click
+import pkg_resources
+import os
+import flask_diamond
+import string
+import random
+from flask_diamond.__meta__ import __version__
+
+
+@click.group()
+@click.version_option(__version__)
+def cli():
+    "Flask-Diamond"
+
+
+@cli.command('scaffold', short_help='apply a scaffold')
+@click.argument('skel')
+def scaffold(skel):
+    if skel in pkg_resources.resource_listdir('flask_diamond', 'skels'):
+        filename = pkg_resources.resource_filename('flask_diamond', 'skels')
+        pathname = os.path.dirname(os.path.abspath(flask_diamond.__file__))
+        print(os.path.join(pathname, filename))
+
+        if skel == "app":
+            with open(".mrbob.ini", "w") as f:
+                f.write("[defaults]\n")
+                f.write("home_directory = {0}\n".format(os.environ["HOME"]))
+                # f.write("flask_diamond_version = {0}\n".format(__version__))
+                chars = string.ascii_letters + string.digits + '^!$&=?+~#-_.:,;'
+                secret_str = "".join([random.choice(chars) for _ in range(24)])
+                f.write("secret = \"{0}\"\n".format(secret_str))
+                f.write("hash_salt = {0}\n".format(
+                    "".join(random.choice(string.ascii_letters+string.digits) for _ in range(16))))
+                f.write("simple_password = {0}\n".format(
+                    "".join(random.choice(string.ascii_lowercase) for _ in range(3))))
+
+        cmd = "mrbob -w --config .mrbob.ini -O . {0}".format(
+            os.path.join(pathname, filename, skel))
+        os.system(cmd)
+    else:
+        print("unrecognized skel: {0}".format(skel))
+        list_skels()
+
+
+@cli.command('list', short_help='list available skels.')
+def list_skels():
+    print("Available skels:\n")
+    for skel in pkg_resources.resource_listdir('flask_diamond', 'skels'):
+        print("- {0}".format(skel))
+    print("")
+
+
+if __name__ == '__main__':
+    cli()

@@ -1,0 +1,39 @@
+* maple-blog
+  [[license][https://img.shields.io/badge/license-GPL3.0-blue.svg]]
+  [[https://www.python.org/download/releases/3.0/][https://img.shields.io/badge/python-3.5-green.svg]]
+
+  This is my own blog website by flask  
+
+  You can have a look [[https://honmaple.com][here]]
+
+* How to use
+  
+** Install necessary package
+   #+BEGIN_SRC python
+   pip install -r requirements.txt
+   #+END_SRC
+
+** Configure
+   remember to modify *config.py*
+   #+BEGIN_EXAMPLE
+     emacs config.py
+   #+END_EXAMPLE
+** Initialization sql
+   #+BEGIN_SRC bash
+   $ python runserver.py db init
+   $ python runserver.py db migrate
+   $ python runserver.py db upgrade
+   #+END_SRC
+   or 
+   #+BEGIN_SRC bash
+   $ python runserver.py db initdb
+   #+END_SRC
+
+** Create superuser
+   #+BEGIN_SRC shell
+    python runserver.py create-user
+   #+END_SRC
+** Run 
+   #+BEGIN_SRC shell
+    python runserver.py
+   #+END_SRC

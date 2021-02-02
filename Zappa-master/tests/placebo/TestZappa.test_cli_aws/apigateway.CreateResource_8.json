@@ -1,0 +1,13 @@
+{
+    "status_code": 201, 
+    "data": {
+        "path": "/{parameter_1}", 
+        "pathPart": "{parameter_1}", 
+        "id": "lkkm6z", 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 201, 
+            "RequestId": "90702348-28f7-11e6-a01d-971fdfddbf7e"
+        }, 
+        "parentId": "vw69yjtx3b"
+    }
+}

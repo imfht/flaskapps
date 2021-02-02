@@ -1,0 +1,21 @@
+{% extends 'events/management/full_width_base.html' %}
+{% from 'events/papers/_paper_list.html' import render_paper_assignment_content %}
+
+{% block title %}
+    {% trans %}Paper Peer Reviewing{% endtrans %}
+{% endblock %}
+
+{% block subtitle %}
+    {% trans %}Paper Assignment{% endtrans %}
+{% endblock %}
+
+{% block description %}
+    {%- trans -%}
+        Assign <strong>reviewers</strong> and <strong>judges</strong> to contributions in order to allow assessing
+        their paper revisions.
+    {%- endtrans -%}
+{% endblock %}
+
+{% block content %}
+    {{ render_paper_assignment_content(event, total_entries, contribs, static_columns, selected_entry, management=true) }}
+{% endblock %}

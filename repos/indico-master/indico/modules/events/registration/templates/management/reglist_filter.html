@@ -1,0 +1,126 @@
+{% from 'forms/_form.html' import form_header, form_footer, form_rows %}
+
+{% macro _render_column_selector(item_id, item, filter_choices, is_static_item=false) %}
+    {% set filters = filters['items'] if is_static_item else filters['fields'] %}
+    <div class="label-group list-column">
+        <div class="i-label title-wrapper"
+             data-id="{{ item.personal_data_type.name if item.personal_data_type else item_id }}">
+            <div class="title">{{ item.title }}</div>
+            <div class="actions">
+                <span class="visibility icon-eye"></span>
+            </div>
+        </div>
+        {% if filter_choices %}
+            <div class="i-label filter">
+                <a class="icon-filter" data-toggle="dropdown"></a>
+                <ul class="i-dropdown" style="display: none">
+                    {% for value, caption in filter_choices.items() %}
+                        <li>
+                            <input type="checkbox" name="field_{{ item_id }}" value="{{ value }}"
+                                   id="field_{{ item_id }}_option_{{ value }}"
+                                   {% if value in filters[item_id|string] %}
+                                       checked
+                                   {% endif %}>
+                            <label for="field_{{ item_id }}_option_{{ value }}">
+                                {{ caption }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro _render_regform_item_col_selector(section) %}
+    <h3>{{ section.title }}</h3>
+    <div class="flexrow f-wrap">
+        {% for field in section.active_fields %}
+            {% set filter_choices = field.field_impl.filter_choices %}
+            {{ _render_column_selector(field.id, field, filter_choices) }}
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+<div class="action-box">
+    <div class="section">
+        <div class="icon icon-wrench"></div>
+        <div class="text">
+            <div class="label">Customize registration list</div>
+            <div>
+                {% set filter_icon = '<i class="icon-filter"></i>' | safe %}
+                {%- trans -%}
+                    Change the configuration of the registration list by enabling/disabling the columns listed below, or by applying filtering ({{ filter_icon }}) options.
+                {%- endtrans -%}
+            </div>
+        </div>
+        <div class="toolbar">
+            <a class="i-button icon-checkbox-checked arrow left icon-only" aria-hidden="true" href="#"
+               data-toggle="dropdown"></a>
+            <ul class="i-dropdown">
+                <li><a href="#" id="list-filter-select-all">{% trans %}All{% endtrans %}</a></li>
+                <li><a href="#" id="list-filter-select-none">{% trans %}None{% endtrans %}</a></li>
+            </ul>
+            <a class="i-button js-reset-btn icon-close warning" type="button">
+                {%- trans %}Clear filters{% endtrans -%}
+            </a>
+        </div>
+    </div>
+</div>
+<div class="success-message-box js-clear-filters-message" style="display: none">
+    <div class="message-text">
+        {%- trans -%}
+            All filters have been cleared.
+        {%- endtrans -%}
+    </div>
+</div>
+<form class="list-filter" method="POST">
+    <input id="visible-items" type="hidden" name="visible_items"
+           value="{{ visible_items | tojson | forceescape }}">
+    <h3>{% trans %}General registration info{% endtrans %}</h3>
+    <div class="flexrow f-wrap">
+        {% for item_id, item in static_items.items() %}
+            {% set filter_choices = item.get('filter_choices') %}
+            {{ _render_column_selector(item_id, item, filter_choices, is_static_item=true) }}
+        {% endfor %}
+    </div>
+
+    {% for section in regform.sections if section.is_visible and section.active_fields %}
+        {{ _render_regform_item_col_selector(section) }}
+    {% endfor %}
+
+    {% set disabled_sections = regform.disabled_sections|selectattr('active_fields')|list %}
+    {% if disabled_sections %}
+        <h1 class="disabled-caption">
+            {%- trans %}Disabled sections{% endtrans -%}
+            <a class="button icon-next js-toggle-disabled" title="Click to show/hide disabled sections"></a>
+        </h1>
+        <div class="disabled-sections">
+            {% for section in disabled_sections %}
+                {{ _render_regform_item_col_selector(section) }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="bottom-buttons">
+        <input class="i-button big highlight" type="submit" data-disabled-until-change
+               value="{% trans %}Apply{% endtrans %}">
+        <button class="i-button big" type="button" data-button-back>{% trans %}Cancel{% endtrans %}</button>
+    </div>
+</form>
+<script>
+    (function() {
+        'use strict';
+
+        setupListFilter();
+
+        $('.js-toggle-disabled').on('click', function() {
+            var $this = $(this);
+            $('.disabled-sections').slideToggle({
+                start: function() {
+                    $this.toggleClass('icon-next icon-expand');
+                }
+            });
+        });
+    })();
+</script>

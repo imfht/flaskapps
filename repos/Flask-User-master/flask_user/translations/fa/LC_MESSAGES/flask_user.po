@@ -1,0 +1,371 @@
+# Persian translations for PROJECT.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+# Mohammad Amin Sameti <mamins1376@gmail.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-11-22 22:36+0500\n"
+"PO-Revision-Date: 2016-11-04 01:24+0330\n"
+"Last-Translator: Mohammad Amin Sameti <mamins1376@gmail.com>\n"
+"Language: fa\n"
+"Language-Team: Persian <>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: flask_user/forms.py:41
+msgid "This Username is already in use. Please try another one."
+msgstr "در حال حاضر این نام کاربری استفاده شده است. نام دیگری امتحان کنید."
+
+#: flask_user/forms.py:48
+msgid "This Email is already in use. Please try another one."
+msgstr "این رایانامه قبلا استفاده شده است. نشانی دیگری وارد کنید."
+
+#: flask_user/forms.py:57 flask_user/forms.py:156 flask_user/forms.py:217
+#: flask_user/forms.py:248 flask_user/forms.py:305 flask_user/forms.py:348
+msgid "Email"
+msgstr "رایانامه"
+
+#: flask_user/forms.py:58 flask_user/forms.py:157 flask_user/forms.py:249
+#: flask_user/forms.py:349
+msgid "Email is required"
+msgstr "رایانامه باید وارد شود"
+
+#: flask_user/forms.py:59 flask_user/forms.py:158 flask_user/forms.py:250
+#: flask_user/forms.py:350
+msgid "Invalid Email"
+msgstr "رایانامه نامعتبر"
+
+#: flask_user/forms.py:61
+msgid "Add Email"
+msgstr "افزودن رایانامه"
+
+#: flask_user/forms.py:66 flask_user/forms.py:111
+msgid "Old Password"
+msgstr "گذرواژه قدیمی"
+
+#: flask_user/forms.py:67 flask_user/forms.py:112
+msgid "Old Password is required"
+msgstr "گذرواژه قدیمی وارد نشده است"
+
+#: flask_user/forms.py:69 flask_user/forms.py:319
+msgid "New Password"
+msgstr "گذرواژه جدید"
+
+#: flask_user/forms.py:70 flask_user/forms.py:320
+msgid "New Password is required"
+msgstr "گذرواژه جدید وارد نشده است"
+
+#: flask_user/forms.py:73 flask_user/forms.py:323
+msgid "Retype New Password"
+msgstr "تکرار گذرواژه جدید"
+
+#: flask_user/forms.py:74 flask_user/forms.py:324
+msgid "New Password and Retype Password did not match"
+msgstr "گذرواژه‌های جدید مطابقت ندارند"
+
+#: flask_user/forms.py:76 flask_user/forms.py:326
+#: flask_user/templates/flask_user/change_password.html:5
+#: flask_user/templates/flask_user/edit_user_profile.html:26
+msgid "Change password"
+msgstr "تغییر گذرواژه"
+
+#: flask_user/forms.py:97 flask_user/forms.py:132
+msgid "Old Password is incorrect"
+msgstr "گذرواژه قدیمی نادرست است"
+
+#: flask_user/forms.py:106
+msgid "New Username"
+msgstr "نام کاربری جدید"
+
+#: flask_user/forms.py:107 flask_user/forms.py:154 flask_user/forms.py:245
+msgid "Username is required"
+msgstr "نام کاربری لازم است"
+
+#: flask_user/forms.py:114
+#: flask_user/templates/flask_user/change_username.html:5
+#: flask_user/templates/flask_user/edit_user_profile.html:23
+msgid "Change username"
+msgstr "تغییر نام کاربری"
+
+#: flask_user/forms.py:142
+msgid "First name"
+msgstr ""
+
+#: flask_user/forms.py:143
+msgid "Last name"
+msgstr ""
+
+#: flask_user/forms.py:145
+msgid "Update"
+msgstr ""
+
+#: flask_user/forms.py:153 flask_user/forms.py:213 flask_user/forms.py:244
+msgid "Username"
+msgstr "نام کاربری"
+
+#: flask_user/forms.py:160 flask_user/forms.py:252
+msgid "Password"
+msgstr "گذرواژه"
+
+#: flask_user/forms.py:161 flask_user/forms.py:253
+msgid "Password is required"
+msgstr "گذرواژه مورد نیاز است"
+
+#: flask_user/forms.py:163
+msgid "Remember me"
+msgstr "مرا به یاد داشته باش"
+
+#: flask_user/forms.py:165 flask_user/forms.py:356
+#: flask_user/templates/flask_user/login.html:5
+#: flask_user/templates/flask_user/login_or_register.html:9
+#: flask_user/templates/flask_user_layout.html:42
+msgid "Sign in"
+msgstr "ورود"
+
+#: flask_user/forms.py:172
+msgid "Username or Email"
+msgstr "رایانامه یا نام کاربری"
+
+#: flask_user/forms.py:209
+msgid "Username/Email"
+msgstr "رایانامه/نام کاربری"
+
+#: flask_user/forms.py:223 flask_user/forms.py:305
+#, python-format
+msgid "%(username_or_email)s does not exist"
+msgstr "%(username_or_email)s موجود نیست"
+
+#: flask_user/forms.py:226
+#, fuzzy
+msgid "Incorrect Password"
+msgstr "فراموشی گذرواژه"
+
+#: flask_user/forms.py:230
+#, python-format
+msgid "Incorrect %(username_or_email)s and/or Password"
+msgstr "گذرواژه و/یا نام کاربری %(username_or_email)s نامعتبر"
+
+#: flask_user/forms.py:255
+msgid "Retype Password"
+msgstr "بازنویسی گذرواژه"
+
+#: flask_user/forms.py:256
+msgid "Password and Retype Password did not match"
+msgstr "گذرواژه و بازنویسی آن با هم مطابقت ندارند"
+
+#: flask_user/forms.py:257
+msgid "Token"
+msgstr "توکن"
+
+#: flask_user/forms.py:259
+#: flask_user/templates/flask_user/login_or_register.html:41
+#: flask_user/templates/flask_user/register.html:5
+msgid "Register"
+msgstr "ثبت‌نام"
+
+#: flask_user/forms.py:294 flask_user/forms.py:310
+msgid "Your email address"
+msgstr "نشانی رایانامه شما"
+
+#: flask_user/forms.py:295 flask_user/forms.py:311
+msgid "Email address is required"
+msgstr "رایانامه لازم است"
+
+#: flask_user/forms.py:296 flask_user/forms.py:312
+msgid "Invalid Email address"
+msgstr "رایانامه نامعتبر"
+
+#: flask_user/forms.py:298
+msgid "Send reset password email"
+msgstr "فرستادن رایانامه برای بازنشانی گذرواژه"
+
+#: flask_user/forms.py:314
+msgid "Resend email confirmation email"
+msgstr "ارسال دوباره رایانامه تأیید حساب کاربری"
+
+#: flask_user/forms.py:352
+msgid "Invite!"
+msgstr "دعوت کنید!"
+
+#: flask_user/forms.py:357 flask_user/templates/flask_user_layout.html:40
+msgid "Sign out"
+msgstr ""
+
+#: flask_user/forms.py:358
+msgid "Home Page"
+msgstr "صفحه اصلی"
+
+#: flask_user/forms.py:359
+#: flask_user/templates/flask_user/edit_user_profile.html:5
+msgid "User profile"
+msgstr "نمایه کاربر"
+
+#: flask_user/forms.py:360
+msgid "Member Page"
+msgstr ""
+
+#: flask_user/forms.py:361
+msgid "Admin Page"
+msgstr ""
+
+#: flask_user/user_manager.py:250
+msgid ""
+"Password must have at least 6 characters with one lowercase letter, one "
+"uppercase letter and one number"
+msgstr ""
+"گذرواژه باید حداقل ۶ کاراکتر شامل حداقل یک عدد، یک حرف بزرگ و یک حرف کوچک"
+" باشد"
+
+#: flask_user/user_manager.py:266
+msgid "Username must be at least 3 characters long"
+msgstr "نام کاربری باید حداقل ۳ کاراکتر باشد"
+
+#: flask_user/user_manager.py:272
+msgid "Username may only contain letters, numbers, '-', '.' and '_'"
+msgstr ""
+"نام کاربری می‌تواند فقط دارای عدد، حروف و یکی از کاراکترهای رو به رو "
+"باشد: ـ-."
+
+#: flask_user/user_manager__views.py:113
+msgid "Your password has been changed successfully."
+msgstr "گذرواژه شما با موفقیت تغییر یافت."
+
+#: flask_user/user_manager__views.py:147
+#, python-format
+msgid "Your username has been changed to '%(username)s'."
+msgstr "نام کاربری شما به '%(username)s' تغییر یافت."
+
+#: flask_user/user_manager__views.py:172
+msgid "Invalid confirmation token."
+msgstr "توکن تأیید نامعتبر است."
+
+#: flask_user/user_manager__views.py:184
+msgid "Your email has been confirmed."
+msgstr "رایانامه شما تأیید شد."
+
+#: flask_user/user_manager__views.py:277
+#, python-format
+msgid ""
+"A reset password email has been sent to '%(email)s'. Open that email and "
+"follow the instructions to reset your password."
+msgstr ""
+"یک رایانامه برای بازنشانی گذرواژه به '%(email)s' ارسال شد. آن نشانی را "
+"باز کنید و مراحل را دنبال کنید تا گذرواژه‌تان را بازنشانی کنید."
+
+#: flask_user/user_manager__views.py:348
+msgid "Invitation has been sent."
+msgstr "دعوت‌نامه فرستاده شد."
+
+#: flask_user/user_manager__views.py:417
+msgid "You have signed out successfully."
+msgstr "شما با موفقیت خارج شدید."
+
+#: flask_user/user_manager__views.py:570
+msgid "Your reset password token is invalid."
+msgstr "توکن بازنشانی گذرواژه شما نامعتبر است."
+
+#: flask_user/user_manager__views.py:593
+msgid "Your password has been reset successfully."
+msgstr "گذرواژه شما با موفقیت بازنشانده شد."
+
+#: flask_user/user_manager__views.py:610
+#, python-format
+msgid "You must be signed in to access '%(url)s'."
+msgstr "برای دسترسی به نشانی '%(url)s' باید وارد شوی."
+
+#: flask_user/user_manager__views.py:621
+#, python-format
+msgid "You do not have permission to access '%(url)s'."
+msgstr "شما اجازه دسترسی به '%(url)s' را ندارید."
+
+#: flask_user/user_manager__views.py:647 flask_user/user_manager__views.py:661
+#, python-format
+msgid ""
+"A confirmation email has been sent to %(email)s with instructions to "
+"complete your registration."
+msgstr ""
+"یک رایانامه به همراه راهنمای کامل کردن ثبت‌نام شما به %(email)s فرستاده "
+"شد."
+
+#: flask_user/user_manager__views.py:649
+msgid "You have registered successfully."
+msgstr "شما با موفقیت ثبت نام کردید."
+
+#: flask_user/user_manager__views.py:670
+msgid "Your account has not been enabled."
+msgstr "حساب شما فعال نشده استو"
+
+#: flask_user/user_manager__views.py:679
+#, python-format
+msgid ""
+"Your email address has not yet been confirmed. Check your email Inbox and"
+" Spam folders for the confirmation email or <a href=\"%(url)s\">Re-send "
+"confirmation email</a>."
+msgstr ""
+"رایانامه شما هنوز تأیید نشده است. صندوق ورودی یا پوشه اسپم رایانامه خود "
+"را بررسی کنید یا <a href=\"%(url)s\">رایانامه تأیید را دوباره ارسال "
+"کنید</a>."
+
+#: flask_user/user_manager__views.py:690
+msgid "You have signed in successfully."
+msgstr "شما با موفقیت وارد شدید."
+
+#: flask_user/templates/flask_user_layout.html:48
+msgid "Home page"
+msgstr ""
+
+#: flask_user/templates/flask_user/forgot_password.html:5
+msgid "Forgot Password"
+msgstr "فراموشی گذرواژه"
+
+#: flask_user/templates/flask_user/invite_user.html:5
+msgid "Invite User"
+msgstr "دعوت کردن کاربر"
+
+#: flask_user/templates/flask_user/login.html:21
+msgid "New here? Register."
+msgstr "تازه این جایید؟ ثبت نام کنید."
+
+#: flask_user/templates/flask_user/login.html:44
+#: flask_user/templates/flask_user/login_or_register.html:34
+msgid "Forgot your Password?"
+msgstr "گذرواژه‌تان را از یاد بردید؟"
+
+#: flask_user/templates/flask_user/manage_emails.html:5
+msgid "Manage Emails"
+msgstr "مدیریت رایانامه‌ها"
+
+#: flask_user/templates/flask_user/register.html:21
+msgid "Already registered? Sign in."
+msgstr "در حال حاضر ثبت نام کرده اید؟ وارد شوید."
+
+#: flask_user/templates/flask_user/resend_confirm_email.html:5
+msgid "Resend Confirmation Email"
+msgstr "ارسال دوباره رایانامه تأیید"
+
+#: flask_user/templates/flask_user/reset_password.html:5
+msgid "Reset Password"
+msgstr "بازنشانی گذرواژه"
+
+#~ msgid "Your confirmation token has expired."
+#~ msgstr "توکن تأیید شما منقضی شده است."
+
+#~ msgid "Your reset password token has expired."
+#~ msgstr "توکن بازنشانی گذرواژه شما منقضی شده است."
+
+#~ msgid "Profile Page"
+#~ msgstr "صفحه نمایه"
+
+#~ msgid "Special Page"
+#~ msgstr "صفحه خاص"
+
+#~ msgid "You must confirm your email to access '%(url)s'."
+#~ msgstr "شما باید برای دسترسی به '%(url)s' رایانامه خود را تأیید کنید."
+

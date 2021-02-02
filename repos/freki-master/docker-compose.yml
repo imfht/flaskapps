@@ -1,0 +1,59 @@
+version: '3.7'
+
+services:
+
+  freki:
+    build: ./freki
+    container_name: freki
+    restart: always
+    command: bash -c "/freki/wait_for_mysql.sh && gunicorn -w 5 --timeout 300 -b :8000 run:app"
+    expose:
+      - 8000
+    depends_on:
+      - db
+    environment:
+      FREKI_MYSQL_HOST: "192.168.99.98"
+      FREKI_MYSQL_PASSWORD: "${DB_PASSWORD}"
+      FREKI_SECRET_KEY: "${FREKI_SECRET_KEY}"
+      FREKI_VT_MASTER_KEY: "${VT_MASTER_KEY}"
+    networks:
+      frekinet:
+        ipv4_address: 192.168.99.99
+
+  db:
+    build: ./docker/mariadb
+    container_name: freki_db
+    restart: always
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: freki
+      MYSQL_USER: freki
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+    networks:
+      frekinet:
+        ipv4_address: 192.168.99.98
+
+  nginx:
+    build: ./docker/nginx
+    container_name: freki_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx/certs:/etc/nginx/certs
+    depends_on:
+      - freki
+    networks:
+      frekinet:
+        ipv4_address: 192.168.99.100
+
+networks:
+  frekinet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.99.100/28

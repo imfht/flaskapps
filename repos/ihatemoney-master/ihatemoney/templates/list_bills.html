@@ -1,0 +1,178 @@
+{% extends "sidebar_table_layout.html" %}
+
+{%- macro bill_amount(bill, currency=bill.original_currency, amount=bill.amount) %}
+    {{ amount|currency(currency) }} ({{ _("%(amount)s each", amount=bill.pay_each_default(amount)|currency(currency)) }})
+{% endmacro -%}
+
+{% block title %} - {{ g.project.name }}{% endblock %}
+{% block js %}
+    {% if add_bill %} $('#new-bill > a').click(); {% endif %}
+
+    // ask for confirmation before removing an user
+    $('.action.delete').each(function(){
+        var link = $(this).find('button');
+        link.click(function(){
+            if ($(this).hasClass("confirm")){
+                return true;
+            }
+            $(this).html("{{_("you sure?")}}");
+            $(this).addClass("confirm");
+            return false;
+        });
+    });
+
+    var highlight_owers = function(){
+        var ower_ids = $(this).attr("owers").split(',');
+        var payer_id = $(this).attr("payer");
+        $.each(ower_ids, function(i, val){
+            $('#bal-member-'+val).addClass("ower_line");
+        });
+        $("#bal-member-"+payer_id).addClass("payer_line");
+    };
+
+    var unhighlight_owers = function(){
+        $('[id^="bal-member-"]').removeClass("ower_line payer_line");
+    };
+
+    $('#bill_table tbody tr').hover(highlight_owers, unhighlight_owers);
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="sidebar_content">
+        <form id="add-member-form" action="{{ url_for(".add_member") }}" method="post">
+            {{ forms.add_member(member_form) }}
+        </form>
+
+        <div id="table_overflow">
+            {{ balance_table(member_edit=True) }}
+        </div>
+    </div>
+    <div class="identifier">
+	{% if g.lang == 'fr' %}
+        <a class="btn btn-secondary btn-block" href=""  onclick="javascript:showGallery(); return false;">
+            <i class="icon icon-white high before-text">{{ static_include("images/read.svg") | safe }}</i>
+	    Voir la BD explicative
+        </a>
+	{% endif %}
+        <a class="btn btn-secondary btn-block" href="{{ url_for('.invite') }}">
+            <i class="icon icon-white high before-text">{{ static_include("images/paper-plane.svg") | safe }}</i>
+            {{ _("Invite people") }}
+        </a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <span id="new-bill" class="float-right"  {% if not g.project.members %} data-toggle="tooltip" title="{{_('You should start by adding participants')}}" {% endif %}>
+        <a href="{{ url_for('.add_bill') }}" class="btn btn-primary float-right {% if not g.project.members %} disabled {% endif %}" data-toggle="modal" data-keyboard="false" data-target="#bill-form">
+            <i class="icon icon-white before-text">{{ static_include("images/plus.svg") | safe }}</i>
+            {{ _("Add a new bill") }}
+        </a>
+    </span>
+    <div id="bill-form" class="modal fade show" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">{{ _('Add a bill') }}</h3>
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                </div>
+                <form action="{{ url_for(".add_bill") }}" method="post" class="modal-body container">
+                {{ forms.add_bill(bill_form, title=False) }}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% if bills.pages > 1 %}
+    <span id="previous-page" class="float-left">
+      <a class="btn btn-outline-secondary float-left {% if bills.page == 1 %}disabled{% endif %}" href="{{ url_for('main.list_bills', page=bills.prev_num) }}">&laquo; {{ _("Newer bills") }}</a>
+    </span>
+
+    <span id="next-page" class="float-left">
+      <a class="btn btn-outline-secondary float-left {% if bills.page == bills.pages %}disabled{% endif %}" href="{{ url_for('main.list_bills', page=bills.next_num) }}">{{ _("Older bills") }} &raquo;</a>
+    </span>
+{% endif %}
+
+    {% if bills.total > 0 %}
+        <div class="clearfix"></div>
+
+        <table id="bill_table" class="col table table-striped table-hover table-responsive-sm">
+            <thead>
+                <tr><th>{{ _("When?") }}
+                </th><th>{{ _("Who paid?") }}   
+                </th><th>{{ _("For what?") }}
+                </th><th>{{ _("For whom?") }}
+                </th><th>{{ _("How much?") }}
+                </th><th>{{ _("Actions") }}</th></tr>
+            </thead>
+        <tbody>
+        {% for bill in bills.items %}
+        <tr owers="{{bill.owers|join(',','id')}}" payer="{{bill.payer.id}}">
+                <td>
+                    <span data-toggle="tooltip" data-placement="top"
+                        title="{{ _('Added on %(date)s', date=bill.creation_date|dateformat("long") if bill.creation_date else bill.date|dateformat("long")) }}">
+                        {{ bill.date }}
+                    </span>
+                </td>
+                <td>{{ bill.payer }}</td>
+                <td>{{ bill.what }}</td>
+                <td>{% if bill.owers|length == g.project.members|length -%}
+                {{ _("Everyone") }}
+                {%- elif bill.owers|length > g.project.members|length / 2 + 1 -%}
+                {{ _("Everyone but %(excluded)s", excluded=g.project.members|reject('in', bill.owers)|join(', ', 'name')) }}
+                {%- else -%}
+                {{ bill.owers|join(', ', 'name') }}
+                {%- endif %}</td>
+                <td>
+                    <span data-toggle="tooltip" data-placement="top"
+                        title="{{ bill_amount(bill, g.project.default_currency, bill.converted_amount) if bill.original_currency != g.project.default_currency else '' }}">
+                        {{ bill_amount(bill) }}
+                    </span>
+                </td>
+                <td class="bill-actions">
+                    <a class="edit" href="{{ url_for(".edit_bill", bill_id=bill.id) }}" title="{{ _("edit") }}">{{ _('edit') }}</a>
+                    <a class="delete" href="{{ url_for(".delete_bill", bill_id=bill.id) }}" title="{{ _("delete") }}">{{ _('delete') }}</a>
+                    {% if bill.external_link %}
+                    <a class="show" href="{{ bill.external_link }}" ref="noopener" target="_blank" title="{{ _("show") }}">{{ _('show') }} </a>
+                    {% endif %}
+                </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+
+{% if bills.pages > 1 %}
+<ul class="pagination">
+  <li class="page-item {% if bills.page == 1 %}disabled{% endif %}"><a class="page-link" href="{{ url_for('main.list_bills', page=bills.prev_num) }}">&laquo; Newer bills</a></li>
+  {%- for page in bills.iter_pages() %}
+  {% if page %}
+  <li class="page-item {% if page == bills.page %}active{% endif %}"><a class="page-link" href="{{ url_for('main.list_bills', page=page) }}">{{ page }}</a></li>
+  {% else %}
+  <li class="page-item disabled"><span class="ellipsis page-link">…</span></li>
+  {% endif %}
+  {%- endfor %}
+  <li class="page-item {% if bills.page == bills.pages %}disabled{% endif %}"><a class="page-link" href="{{ url_for('main.list_bills', page=bills.next_num) }}">Older bills &raquo;</a></li>
+</ul>
+{% endif %}
+
+    {% else %}
+        <div class="py-3 d-flex justify-content-center empty-bill">
+        <div class="card d-inline-flex p-2">
+            <div class="card-body text-center text-muted">
+                <i class="icon icon-white billimg">{{ static_include("images/bill.svg") | safe }}</i>
+                <h3>{{ _('No bills')}}</h3>
+                <p>
+                    {{ _("Nothing to list yet.")}}<br />
+                    {{ _("You probably want to") }}
+                    {%- if g.project.members %} <a href="{{ url_for('.add_bill') }}" data-toggle="modal" data-target="#bill-form">
+                            {{- _("add a bill") -}}
+                        </a> ?
+                    {% else %} <a href="{{ url_for('.add_member') }}">
+                            {{- _('add participants') -}}
+                        </a> ?
+                    {%- endif -%}
+                </p>
+            </div>
+        </div></div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% from 'topic/reply/_macro.html' import like,no_replies %}
+{% import 'base/link.html' as link %}
+{% from 'base/paginate.html' import footer as p_footer %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{ _('Received %(total)s replies',total=replies.total) }}
+    <ul class="pull-right list-inline reply-order">
+      <li><a href="{{ url_for('topic.topic',topicId=topic.id,orderby='time')}}"> <i class="icon icon-time"></i>{{_('time')}}</a></li>
+      <li><a href="{{ url_for('topic.topic',topicId=topic.id,orderby='like')}}"> <i class="icon icon-thumbs-up"></i>{{_('likers')}}</a></li>
+    </ul>
+  </div>
+  {% if replies.items %}
+  {% for reply in replies.items %}
+  {% set user = reply.author %}
+  {% set floor = loop.index + 12 * (replies.page - 1) %}
+  <div class="panel-body media" id="reply-{{ reply.id }}" style="border-bottom:1px solid #eee;margin:0">
+    <div class="media-left">
+      <a href="{{ url_for('user.user',username=reply.author.username) }}">
+        <img class="media-object img-circle" src="{{ url_for('avatar',text=user.username) }}" alt="avatar" style="width:48px;height:48px"/>
+      </a>
+    </div>
+    <div class="media-body">
+      <small class="media-heading" style="color:#999">
+        <span>{{ link.user(reply.author)}}</span>
+        <span>{{ reply.created_at | timesince }}</span>
+        <a name="reply{{ reply.id }}" class="anchor" href="#reply{{ floor }}" aria-hidden="true">#{{ floor }}</a>
+      </small>
+      <div  class="reply-content">
+        {{ reply.content | safe_clean }}
+      </div>
+    </div>
+    <div class="media-right">
+      {{ like(reply) }}
+    </div>
+    <div class="media-right">
+      <a href="javascript:void(0);" style="color:#ccc;padding:0" class="reply-author btn btn-sm" data-id="{{ reply.author.username }}" title="回复">
+        <i class="fa fa-reply"></i>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+  {{ p_footer(replies,'topic.topic',dict(topicId=topic.id))}}
+  {% else %}
+  {{ no_replies() }}
+  {% endif %}
+</div>
+{% include "topic/reply/form.html" %}

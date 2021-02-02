@@ -1,0 +1,152 @@
+Changelog
+---------
+
+Version 0.13 2014-04-21
+```````````````````````
+
+- Port to Python >= 3.3 (requiring Python 2.6/2.7 for 2.x).
+- Fixed bug with using per-memoize timeouts greater than the default timeout
+- Added better support for per-instance memoization.
+- Various bug fixes
+
+Version 0.12 2013-04-29
+```````````````````````
+
+- Changes jinja2 cache templates to use stable predictable keys. Previously
+  the key for a cache tag included the line number of the template, which made
+  it difficult to predict what the key would be outside of the application.
+- Adds config variable `CACHE_NO_NULL_WARNING` to silence warning messages
+  when using 'null' cache as part of testing.
+- Adds passthrough to clear entire cache backend.
+
+Version 0.11.1 2013-04-7
+````````````````````````
+
+- Bugfix for using memoize on instance methods.
+  The previous key was id(self), the new key is repr(self)
+
+Version 0.11 2013-03-23
+```````````````````````
+
+- Fail gracefully in production if cache backend raises an exception.
+- Support for redis DB number
+- Jinja2 templatetag cache now concats all args together into a single key
+  instead of treating each arg as a separate key name.
+- Added delete memcache version hash function
+- Support for multiple cache objects on a single app again.
+- Added SpreadSASLMemcached, if a value is greater than the memcached threshold
+  which defaults to 1MB, this splits the value across multiple keys.
+- Added support to use URL to connect to redis.
+
+Version 0.10.1 2013-01-13
+`````````````````````````
+
+- Added warning message when using cache type of 'null'
+- Changed imports to relative instead of absolute for AppEngine compatibility
+
+Version 0.10.0 2013-01-05
+`````````````````````````
+
+- Added `saslmemcached` backend to support Memcached behind SASL authentication.
+- Fixes a bug with memoize when the number of args != number of kwargs
+
+Version 0.9.2 2012-11-18
+````````````````````````
+
+- Bugfix with default kwargs
+
+Version 0.9.1 2012-11-16
+````````````````````````
+
+- Fixes broken memoized on functions that use default kwargs
+
+Version 0.9.0 2012-10-14
+````````````````````````
+
+- Fixes memoization to work on methods.
+
+Version 0.8.0 2012-09-30
+````````````````````````
+
+- Migrated to the new flask extension naming convention of flask_cache instead of flaskext.cache
+- Removed unnecessary dependencies in setup.py file.
+- Documentation updates
+
+Version 0.7.0 2012-08-25
+````````````````````````
+
+- Allows multiple cache objects to be instantiated with different configuration values.
+
+Version 0.6.0 2012-08-12
+````````````````````````
+
+- Memoization is now safer for multiple applications using the same backing store.
+- Removed the explicit set of NullCache if the Flask app is set testing=True
+- Swapped Conditional order for key_prefix
+
+Version 0.5.0 2012-02-03
+````````````````````````
+
+- Deleting memoized functions now properly functions in production
+  environments where multiple instances of the application are running.
+- get_memoized_names and get_memoized_keys have been removed.
+- Added ``make_name`` to memoize, make_name is an optional callable that can be passed
+  to memoize to modify the cache_key that gets generated.
+- Added ``unless`` to memoize, this is the same as the unless parameter in ``cached``
+- memoization now converts all kwargs to positional arguments, this is so that
+  when a function is called multiple ways, it would evaluate to the same cache_key
+
+Version 0.4.0 2011-12-11
+````````````````````````
+
+- Added attributes for uncached, make_cache_key, cache_timeout
+  to the decorated functions.
+
+Version 0.3.4 2011-09-10
+````````````````````````
+
+- UTF-8 encoding of cache key
+- key_prefix argument of the cached decorator now supports callables.
+
+Version 0.3.3 2011-06-03
+````````````````````````
+
+Uses base64 for memoize caching. This fixes rare issues where the cache_key
+was either a tuple or larger than the caching backend would be able to
+support.
+
+Adds support for deleting memoized caches optionally based on function parameters.
+
+Python 2.5 compatibility, plus bugfix with string.format.
+
+Added the ability to retrieve memoized function names or cache keys.
+
+Version 0.3.2
+`````````````
+
+Bugfix release. Fixes a bug that would cause an exception if no
+``CACHE_TYPE`` was supplied.
+
+Version 0.3.1
+`````````````
+
+Pypi egg fix.
+
+Version 0.3
+```````````
+
+- CACHE_TYPE changed. Now one of ['null', 'simple', 'memcached',
+  'gaememcached', 'filesystem'], or an import string to a function that will
+  instantiate a cache object. This allows Flask-Cache to be much more
+  extensible and configurable.
+
+Version 0.2
+```````````
+- CACHE_TYPE now uses an import_string.
+- Added CACHE_OPTIONS and CACHE_ARGS configuration values.
+- Added delete_memoized
+
+Version 0.1
+```````````
+
+- Initial public release

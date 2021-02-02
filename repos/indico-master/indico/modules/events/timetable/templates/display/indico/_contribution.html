@@ -1,0 +1,68 @@
+{% from 'events/display/common/_manage_button.html' import render_manage_button %}
+{% from 'events/display/indico/_common.html' import render_location %}
+{% from 'events/timetable/display/indico/_subcontribution.html' import render_subcontribution %}
+{% from 'events/timetable/display/indico/_common.html' import render_speakers, render_references, render_attachments,
+                                                              render_notes, render_description, render_time %}
+
+{% macro render_contribution(contrib, event, theme_settings, theme_context, parent=none, nested=false, hide_end_time=false,
+                             timezone=none, show_notes=false, show_location=false) -%}
+    {% set anchor = slugify(contrib.friendly_id, contrib.title, maxlen=30) %}
+    <li class="timetable-item timetable-contrib" id="{{ anchor }}">
+        <span class="timetable-time {{ 'nested' if nested else 'top-level' }}">
+            {% if theme_settings.number_contributions %}
+                <span class="start-time">
+                    {{ theme_context.num_contribution }}
+                </span>
+            {% else %}
+                {{ render_time(contrib, timezone=timezone, hide_end_time=hide_end_time) }}
+            {% endif %}
+        </span>
+
+        <div class="timetable-item-body flexcol">
+            <div class="timetable-item-header flexrow">
+                <span class="timetable-title {{ 'nested' if nested }}" data-anchor="{{ anchor }}">
+                    {{- contrib.title -}}
+                </span>
+                {% if contrib.duration and not theme_settings.hide_duration -%}
+                    <span class="icon-time timetable-duration">
+                        {{- contrib.duration | format_human_timedelta(narrow=true) -}}
+                    </span>
+                {%- endif %}
+                {% if contrib.has_location_info and show_location -%}
+                    {{ render_location(contrib, parent=parent) }}
+                {%- endif %}
+                <div class="timetable-item-actions">
+                    {{ render_manage_button(contrib, 'CONTRIBUTION', show_notes=show_notes,
+                                            show_button=(not event.is_locked and
+                                                         contrib.can_manage_attachments(session.user))) }}
+                    {{ template_hook('vc-actions', event=event, item=contrib) }}
+                </div>
+            </div>
+
+            {% if contrib.description %}
+                {{ render_description(contrib, class='contrib-description') }}
+            {% endif %}
+
+            {% set speakers = contrib.person_links|selectattr("is_speaker")|list %}
+            {% if speakers %}
+                {{ render_speakers(speakers) }}
+            {% endif %}
+
+            {% if contrib.references -%}
+                {{ render_references(contrib) }}
+            {%- endif %}
+            {{ render_attachments(contrib) }}
+
+            {{ render_notes(contrib) }}
+
+            {% if contrib.subcontributions %}
+                <ul class="subcontrib-list">
+                    {% for subcont in contrib.subcontributions %}
+                        {% set theme_context.num_subcontribution = loop.index %}
+                        {{ render_subcontribution(subcont, event, theme_settings, theme_context, show_notes=show_notes) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </li>
+{%- endmacro %}

@@ -1,0 +1,90 @@
+{% from 'attachments/_management_info_column.html' import render_attachment_info %}
+{% from 'events/timetable/balloons/_balloon_utils.html' import render_time_and_location %}
+
+<div class="balloon {{ 'event-locked' if event_locked }}">
+    <div class="title-container">
+        <div class="title">{{ contrib.title }}</div>
+        <div class="group right entry-action-buttons hide-if-locked">
+            {% if editable %}
+                {% if can_manage_contributions %}
+                    <a class="i-link icon-edit js-dialog-action js-edit js-hide-balloon"
+                       title="{% trans %}Edit contribution{% endtrans %}"
+                       data-title="{% trans title=contrib.title %}Edit contribution '{{ title }}'{% endtrans %}"></a>
+                    <a class="i-link icon-shield js-hide-balloon"
+                       title="{% trans %}Manage contribution protection{% endtrans %}"
+                       data-href="{{ url_for('contributions.manage_contrib_protection', contrib) }}"
+                       data-title="{% trans %}Manage contribution protection{% endtrans %}"
+                       data-ajax-dialog></a>
+                {% endif %}
+                {% if can_manage_event %}
+                    <a class="i-link icon-transmission js-move js-hide-balloon"
+                       title="{% trans %}Move contribution{% endtrans %}"
+                       data-subtitle="{% trans %}Contribution{% endtrans %}: {{ contrib.title }}"></a>
+                    <a href="#" class="i-link icon-copy js-clone js-hide-balloon"
+                       title="{% trans %}Clone contribution{% endtrans %}"
+                       data-title="{% trans title=contrib.title %}Clone contribution '{{ title }}' {% endtrans %}"
+                       data-confirm="{% trans %}Are you sure you want to clone this contribution?{% endtrans %}"></a>
+                {% endif %}
+                {% if contrib.event.type == 'conference' %}
+                    <a class="i-link icon-remove js-delete js-hide-balloon"
+                       data-title="{% trans title=contrib.title %}Unschedule contribution '{{ title }}'?{% endtrans %}"
+                       title="{% trans %}Unschedule contribution{% endtrans %}"
+                       data-confirm="{% trans title=contrib.title %}Are you sure you want to unschedule the contribution '{{ title }}'?{% endtrans %}"></a>
+                {% elif can_manage_contributions %}
+                    <a class="i-link icon-remove js-delete js-hide-balloon"
+                       data-title="{% trans title=contrib.title %}Delete contribution '{{ title }}'?{% endtrans %}"
+                       title="{% trans %}Delete contribution{% endtrans %}"
+                       data-confirm="{% trans title=contrib.title %}Are you sure you want to delete the contribution '{{ title }}'?{% endtrans %}"></a>
+                {% endif %}
+            {% else %}
+                <a class="i-link icon-list" title="{% trans %}View contribution details{% endtrans %}"
+                   href="{{ url_for('contributions.display_contribution', contrib) }}"></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="description" data-display-href="{{ url_for('contributions.display_contribution', contrib) }}">
+         {{ contrib.description }}
+     </div>
+    {{ render_time_and_location(contrib, editable=(editable and can_manage_contributions), use_event_tz=editable) }}
+    {% if contrib.speakers or (editable and can_manage_contributions) %}
+        <span class="hr"></span>
+        <dl class="i-data-list thirty-seventy">
+            {% if contrib.speakers %}
+                <dt>
+                    {% trans count=contrib.speakers|count -%}
+                        Presenter
+                    {%- pluralize -%}
+                        Presenters
+                    {%- endtrans %}
+                </dt>
+                <dd>
+                    {% for speaker in contrib.speakers | sort(attribute='display_order_key') -%}
+                        <div>{{ speaker.display_full_name }}</div>
+                    {%- endfor %}
+                </dd>
+            {% endif %}
+            {% if editable and can_manage_contributions %}
+                <dt>{% trans %}Material{% endtrans %}</dt>
+                <dd>{{ render_attachment_info(contrib) }}</dd>
+            {% endif %}
+        </dl>
+    {% endif %}
+    {% if (editable and can_manage_contributions) or subcontribution_count %}
+        <span class="hr"></span>
+        <div class="attribute">
+            <div class="attribute-title">
+                {%- trans %}Subcontributions{% endtrans %}
+                <span class="badge">{{ contrib.subcontribution_count }}</span>
+            </div>
+            {% if editable and can_manage_contributions %}
+                <div class="group right entry-action-buttons">
+                    <a class="attribute-settings icon-settings js-manage-subcontribs js-hide-balloon"
+                       title="{% trans %}Manage subcontributions{% endtrans %}"
+                       data-href="{{ url_for('contributions.manage_subcontributions', contrib) }}"
+                       data-title="{% trans title=contrib.title %}Subcontributions of contribution '{{ title }}'{% endtrans %}"
+                       data-ajax-dialog></a>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

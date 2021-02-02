@@ -1,0 +1,34 @@
+# Checks that bento works with the workflow of running in a brand new git repo
+steps:
+  - name: init
+    description: initialize a git repo
+    command:
+      - bash
+      - -c
+      - git init && git config user.email test@r2c.dev && git config user.name Test
+  - name: bento init
+    description: bento init on empty repo
+    command: bento --agree init
+    returncode: 3
+    expected_out: bento-init.out
+    expected_err: bento-init.err
+  - name: stage add
+    description: stage a new file with findings
+    command:
+      - bash
+      - -c
+      - echo "y = z" > bar.py && git add bar.py
+  - name: enable flake8
+    description: enable a tool
+    command: bento --agree enable tool flake8
+    returncode: 0
+  - name: install tool
+    description: install flake8
+    command: bento --agree init --clean
+    returncode: 0
+  - name: check stage add
+    description: bento check with a new file with findings does not crash even if no head
+    command: bento --agree check
+    returncode: 2
+    expected_out: check-stage-add.out
+    expected_err: check-stage-add.err

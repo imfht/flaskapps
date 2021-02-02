@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.pyc
+config.yaml
+
+.tox/
+.coverage
+
+*.egg
+*.egg-info
+build/
+dist/
+.eggs/
+node_modules/
+.cache
+
+ChangeLog

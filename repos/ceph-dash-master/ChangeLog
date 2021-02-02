@@ -1,0 +1,24 @@
+2015-09-24	Christian Eichelmann	<christian@crapworks.de>
+	* ceph-dash (code): refactoring flask structure 
+	* ceph-dash (code): use of blueprints insteatd of method views
+	* ceph-dash (code): added proxy endpoints for influxdb, graphite
+	* ceph-dash (code): added support for influxdb graphing
+
+2015-02-26	Christian Eichelmann	<christian@crapworks.de>
+	* ceph-dash (js): show warning icon if showing old data
+	* ceph-dash (js): general cleanup of javascript code
+
+2014-11-05	Christian Eichelmann	<christian@crapworks.de>
+	* ceph-dash (js): show popover with details for unhealthy osds (hover)
+	* ceph-dash (api): if osds are unhealthy, retrieve additional information
+	* ceph-dash (code): small refactorings
+
+2014-09-10	Christian Eichelmann	<christian@crapworks.de>
+	* ceph-dash (js/css): general cleanup
+	* ceph-dash (js/css): sections are now collapsable
+
+2014-09-11	Christian Eichelmann	<christian@crapworks.de>
+	* ceph-dash (js): added flot library
+	* ceph-dash (js/css): added code to show graphite graphs in ceph-dash
+	* ceph-dash (config): added sample config for graphite integration
+	* ceph-dash (template): added optional metrics section for flot

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="content-section">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+            <h1 class="display-5">Welcome to {{ settings.ctf_name }}</h1>
+            {% if current_user.is_authenticated %}
+                <p class="lead">
+                    Read the rules and have fun!
+                </p>
+            {% else %}
+                <p class="lead">You need to <a class="red-underlined-link" href="{{ url_for('users.login') }}">login</a> first.</p>
+            {% endif %}
+      </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2 class="title-heading">Rules</h2>
+    <hr/>
+    <ul>
+        <li>Running time: 
+            <code>{{ RunningTime['from'].strftime("%Y-%m-%d %I:%M %p") }}</code>
+            to 
+            <code>{{ RunningTime['to'].strftime("%Y-%m-%d %I:%M %p") }}</code>
+             (All times in <code>UTC</code>)
+        </li>
+        <li>Needless to say: no bruteforcing (you'll never guess, anyway)</li>
+        <li>Automated vulnerability scanners will get you nowhere.</li>
+        <li>Attacking this CTF infrastructure website is unnecessary. There are no hints.</li>
+        <li>Have fun! :)</li>
+    </ul>
+</div>
+
+{% endblock content %}

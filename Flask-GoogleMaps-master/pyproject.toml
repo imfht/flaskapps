@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "flask_googlemaps"
+version = "0.4.1"
+description = "Easy way to add GoogleMaps to Flask Applications"
+authors = ["Riverfount - Vulgo Vicente Marçal <vicente.marcal@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/flask-extensions/Flask-GoogleMaps"
+homepage = "https://flaskextensions.com"
+classifiers=[
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Web Environment',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 2',
+    'Programming Language :: Python :: 3',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    'Topic :: Software Development :: Libraries :: Python Modules'
+]
+packages = [
+    {include = "flask_googlemaps"}
+]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+flask = ">=0.10"
+mkdocs = "^1.1"
+mkdocs-material = "^5.0.2"
+mkdocs-minify-plugin = "^0.3.0"
+requests = "^2.25.1"
+
+[tool.poetry.dev-dependencies]
+ipdb = "^0.12.3"
+dynaconf = "^3.1.2"
+flake8 = "^3.7.9"
+black = "^20.8b1"
+gitchangelog = "^3.0.4"
+pylint = "^2.4.4"
+Pygments = "^2.6.1"
+pytest = "^5.4.1"
+pytest-cov = "^2.8.1"
+
+[build-system]
+requires = ["poetry>=1.1.2"]
+build-backend = "poetry.masonry.api"

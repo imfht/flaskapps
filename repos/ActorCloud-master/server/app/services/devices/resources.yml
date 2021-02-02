@@ -1,0 +1,255 @@
+device_manage:
+  code: 'device_manage'
+  enable: 1
+  icon: 'memory'
+  level: 1
+  method: null
+  order: 1
+  parentCode: null
+  tabs: 0
+  url: null
+  service: devices
+
+
+devices:
+  code: 'devices'
+  enable: 1
+  icon: null
+  level: 2
+  method: null
+  order: 1
+  parentCode: 'device_manage'
+  tabs: 1
+  url: null
+  service: devices
+
+devices-devices:
+  code: 'devices-devices'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 1
+  parentCode: 'devices'
+  tabs: 0
+  url: '/devices/devices'
+  service: devices
+
+devices-view:
+  code: 'devices-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 1
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/devices'
+  service: devices
+
+devices-create:
+  code: 'devices-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 2
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/devices'
+  service: devices
+
+devices-edit:
+  code: 'devices-edit'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'PUT'
+  order: 3
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/devices/:id'
+  service: devices
+
+devices-delete:
+  code: 'devices-delete'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'DELETE'
+  order: 4
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/devices'
+  service: devices
+
+gateways:
+  code: 'gateways'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 2
+  parentCode: 'devices'
+  tabs: 0
+  url: '/devices/gateways'
+  service: devices
+
+
+devices_export-view:
+  code: 'devices_export-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 5
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/devices_export'
+  service: devices
+
+devices_import-create:
+  code: 'devices_import-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 6
+  parentCode: 'devices-devices'
+  tabs: 0
+  url: '/devices_import'
+  service: devices
+
+devices-groups:
+  code: 'devices-groups'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 3
+  parentCode: 'devices'
+  tabs: 0
+  url: '/devices/groups'
+  service: devices
+
+groups-view:
+  code: 'groups-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 1
+  parentCode: 'devices-groups'
+  tabs: 0
+  url: '/groups'
+  service: devices
+
+groups-create:
+  code: 'groups-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 2
+  parentCode: 'devices-groups'
+  tabs: 0
+  url: '/groups'
+  service: devices
+
+groups-edit:
+  code: 'groups-edit'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'PUT'
+  order: 3
+  parentCode: 'devices-groups'
+  tabs: 0
+  url: '/groups/:id'
+  service: devices
+
+groups-delete:
+  code: 'groups-delete'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'DELETE'
+  order: 4
+  parentCode: 'devices-groups'
+  tabs: 0
+  url: '/groups'
+  service: devices
+
+
+security:
+  code: 'security'
+  enable: 1
+  icon: null
+  level: 2
+  method: null
+  order: 3
+  parentCode: 'device_manage'
+  tabs: 1
+  url: null
+  service: devices
+
+security-certs:
+  code: 'security-certs'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 1
+  parentCode: 'security'
+  tabs: 0
+  url: '/security/certs'
+  service: devices
+
+certs-view:
+  code: 'certs-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 1
+  parentCode: 'security-certs'
+  tabs: 0
+  url: '/certs'
+  service: devices
+
+certs-create:
+  code: 'certs-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 2
+  parentCode: 'security-certs'
+  tabs: 0
+  url: '/certs'
+  service: devices
+
+certs-edit:
+  code: 'certs-edit'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'PUT'
+  order: 3
+  parentCode: 'security-certs'
+  tabs: 0
+  url: '/certs/:id'
+  service: devices
+
+certs-delete:
+  code: 'certs-delete'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'DELETE'
+  order: 4
+  parentCode: 'security-certs'
+  tabs: 0
+  url: '/certs'
+  service: devices
+

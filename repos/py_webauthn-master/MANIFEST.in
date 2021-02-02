@@ -1,0 +1,11 @@
+include LICENSE
+include README.rst
+
+graft flask_demo
+graft tests
+graft webauthn/trusted_attestation_roots
+
+global-exclude .DS_Store
+global-exclude *.db
+global-exclude *.env
+global-exclude *.py[co]

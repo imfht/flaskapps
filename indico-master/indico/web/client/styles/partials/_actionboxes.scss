@@ -1,0 +1,162 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+// ============================================================================
+// Base definitions
+// ============================================================================
+
+%action-box {
+  box-sizing: border-box;
+  @extend %default-border-radius;
+  margin-bottom: 1rem;
+  padding: 10px;
+  width: 100%;
+
+  > .section {
+    @include clearfix();
+    @extend .flexrow;
+
+    align-items: center;
+    overflow: visible;
+
+    > .toolbar {
+      margin: 0;
+      padding: 0 0 0 0.5em;
+      flex-shrink: 0;
+      margin-left: auto;
+
+      &.right {
+        padding-left: 0.5em;
+      }
+
+      a:not(.i-button),
+      a:not(.ui.button) {
+        line-height: 2.2em;
+      }
+
+      > .group {
+        margin-bottom: 0;
+      }
+    }
+
+    &:not(:first-child) {
+      margin-top: 5px;
+      padding-top: 5px;
+      border-top: 1px solid $gray;
+    }
+  }
+
+  > .section > .text {
+    flex-grow: 1;
+
+    > .label {
+      font-weight: bold;
+    }
+  }
+
+  > .section > .icon {
+    font-size: 2rem;
+    padding-right: 0.5rem;
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  &.for-form {
+    width: 400px;
+  }
+}
+
+@mixin action-box-colors($color, $emphasis-color, $background-color, $border-color) {
+  @include border-all($border-color);
+  background: $background-color;
+  color: $color;
+
+  .section:not(.highlight):not(.warning):not(.danger):not(.disabled):not(.accept):not(.plain) {
+    > .icon {
+      color: $emphasis-color;
+    }
+
+    .text .label {
+      color: $emphasis-color;
+    }
+  }
+}
+
+// ============================================================================
+// Element and flavors
+// ============================================================================
+
+.action-box {
+  @extend %action-box;
+  @include action-box-colors(
+    $color: $dark-gray,
+    $emphasis-color: $light-black,
+    $background-color: $light-gray,
+    $border-color: $dark-gray
+  );
+
+  &.highlight {
+    @include action-box-colors(
+      $color: $light-black,
+      $emphasis-color: $blue,
+      $background-color: $light-blue,
+      $border-color: $blue
+    );
+  }
+
+  &.warning {
+    @include action-box-colors(
+      $color: $dark-gray,
+      $emphasis-color: $yellow,
+      $background-color: $light-yellow,
+      $border-color: $yellow
+    );
+  }
+
+  &.danger {
+    @include action-box-colors(
+      $color: $light-black,
+      $emphasis-color: $red,
+      $background-color: $light-red,
+      $border-color: $red
+    );
+  }
+
+  &.disabled {
+    @include action-box-colors(
+      $color: $light-black,
+      $emphasis-color: $black,
+      $background-color: $pastel-gray,
+      $border-color: $black
+    );
+  }
+
+  &.accept {
+    @include action-box-colors(
+      $color: $light-black,
+      $emphasis-color: $green,
+      $background-color: $light-green,
+      $border-color: $green
+    );
+  }
+
+  &.plain {
+    border: none;
+    background-color: transparent;
+  }
+
+  ul:not(.i-dropdown) {
+    margin: 0;
+    padding-left: 1.5em;
+    max-height: 100px;
+    overflow: auto;
+  }
+
+  .date {
+    font-weight: bold;
+  }
+}

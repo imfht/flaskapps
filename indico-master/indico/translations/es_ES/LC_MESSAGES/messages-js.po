@@ -1,0 +1,1731 @@
+# Translations template for indico.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the indico project.
+#
+# Translators:
+# Arturo Diaz Rosemberg <arturo@diazrosemberg.net>, 2012
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011
+# Jesús Martín <jesusmartin@sallep.net>, 2017
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2011
+# rodrigotorrens <rodrigotorrens@gmail.com>, 2011
+msgid ""
+msgstr ""
+"Project-Id-Version: Indico\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-05-08 16:43+0200\n"
+"PO-Revision-Date: 2017-05-26 10:03+0000\n"
+"Last-Translator: Jesús Martín <jesusmartin@sallep.net>\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/indico/indico/language/es_ES/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: indico/htdocs/js/indico/Common/Export.js:65
+msgid "Would you like to export private information to your calendar?"
+msgstr "¿Desea exportar información privada a su calencario?"
+
+#: indico/htdocs/js/indico/Common/Export.js:210
+msgid ""
+"Would you like to create a persistent URL for use with your calendaring "
+"application?"
+msgstr "¿Desea crear una URL persistente para usarla con su aplicación de calendario?"
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:55
+msgid "Change timezone"
+msgstr "Cambiar zona horaria"
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:67
+msgid " Use the events' local timezone "
+msgstr "Usar la zona horaria local de los eventos "
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:69
+msgid " Your saved timezone"
+msgstr "Su zona horaria guardada"
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:71
+msgid " Specify a timezone"
+msgstr "Especificar una zona horaria"
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:74
+msgid "Loading list of timezones..."
+msgstr "Cargando lista de zonas horarias..."
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:112
+msgid " Remember these settings next time I log in"
+msgstr "Recordar esta configuración la próxima vez que inicie sesión"
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:117
+msgid "Apply"
+msgstr "Aplicar"
+
+#: indico/htdocs/js/indico/Common/TimezoneSelector.js:118
+#: indico/htdocs/js/indico/Core/Dialogs/Popup.js:405
+#: indico/htdocs/js/indico/Core/Dialogs/PopupWidgets.js:29
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:744
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:890
+#: indico/htdocs/js/indico/Management/RoomBookingMapOfRooms.js:76
+#: indico/htdocs/js/indico/angular/directives.js:78
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:552
+#: indico/htdocs/js/indico/widgets/multiple_items_widget.js:47
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:128
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:134
+#: indico/htdocs/js/indico/RoomBooking/validation.js:215
+#: indico/htdocs/js/indico/RoomBooking/validation.js:234
+#: indico/htdocs/js/indico/modules/designer.js:583
+#: indico/legacy/webinterface/tpls/RoomBookingSearchBookings.tpl:237
+#: indico/legacy/webinterface/tpls/RoomBookingSearchRooms.tpl:324
+msgid "Error"
+msgstr "Error"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:128
+msgid "Unable to send your error report: "
+msgstr "No se pudo enviar su informe de errores:"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:132
+msgid "Success"
+msgstr "Con éxito"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:132
+msgid "Your report has been sent. Thank you!"
+msgstr "Su informe ha sido enviado. ¡Gracias!"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:134
+msgid "Your report could not be sent to the support address."
+msgstr "Su informe no pudo ser enviado a la dirección de asistencia."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:152
+msgid ""
+"An error has occurred while processing your request. We advise you to submit"
+" an error report, by clicking \"Send report\"."
+msgstr "Se produjo un error al procesar su solicitud. Le aconsejamos que envíe un informe de error, pulsando en \"Enviar informe\"."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:155
+msgid "Your e-mail: "
+msgstr "Su correo:"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:165
+msgid "Send report"
+msgstr "Enviar informe"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:168
+msgid "Do not send report"
+msgstr "No enviar el informe"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:185
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:878
+#: indico/htdocs/js/indico/modules/designer.js:417
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingForm.tpl:116
+msgid "Warning"
+msgstr "Advertencia"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:195
+msgid "Go to login page"
+msgstr "Ir a la página de inicio de sesión"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Base.js:220
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Popup.js:278
+msgid "OK"
+msgstr "Ok"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Popup.js:375
+msgid "Reason: "
+msgstr "Motivo:"
+
+#: indico/htdocs/js/indico/Core/Dialogs/PopupWidgets.js:26
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:740
+msgid "Choose"
+msgstr "Elegir"
+
+#: indico/htdocs/js/indico/Core/Dialogs/PopupWidgets.js:37
+msgid "Invalid date range"
+msgstr "Rango de fechas no válido"
+
+#: indico/htdocs/js/indico/Core/Dialogs/PopupWidgets.js:37
+msgid "The selected date range is invalid."
+msgstr "El rango de fechas seleccionado no es válido."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:34
+msgid "Remove from your list of favorite users"
+msgstr "Eliminar de tu lista de usuarios favoritos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:34
+msgid "Add to your list of favorite users"
+msgstr "Añadir a tu lista de usuarios favoritos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:108
+msgid "This person exists in the event"
+msgstr "Esta persona está en el evento"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:176
+msgid "Users with no Indico account"
+msgstr "Usuarios sin cuenta Indico"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:202
+msgid "Search"
+msgstr "Búsqueda"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:215
+msgid "Grant all selected users submission rights"
+msgstr "Conceder a todos los usuarios seleccionados permisos de envío"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:234
+msgid "You can use the form above to search for users..."
+msgstr "Puede utilizar el formulario superior para buscar usuarios..."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:276
+msgid "Family name"
+msgstr "Apellidos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:277
+msgid "First name"
+msgstr "Nombre"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:278
+msgid "E-mail"
+msgstr "Correo"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:279
+msgid "Organisation"
+msgstr "Organización"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:280
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:374
+msgid "Exact Match"
+msgstr "Coincidencia exacta"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:310
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:394
+msgid "No results for this search..."
+msgstr "No hay resultados para esta búsqueda..."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:374
+msgid "Group name"
+msgstr "Nombre del grupo"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:481
+msgid "Users"
+msgstr "Usuarios"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:481
+msgid "Groups"
+msgstr "Grupos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:531
+msgid "Suggested users"
+msgstr "Usuarios sugeridos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:534
+msgid "There are no suggested users for you at the moment. Why not add some "
+msgstr "No hay ningún usuario sugerido para usted en este momento. Por qué no añadir alguno"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:535
+msgid "favourites"
+msgstr "favoritos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:715
+msgid "Please select at least one item"
+msgstr "Por favor, seleccione al menos un ítem"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:740
+#: indico/htdocs/js/indico/modules/registration/form/field.js:147
+msgid "Add"
+msgstr "Añadir"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:832
+msgid "Grant submission rights"
+msgstr "Conceder permisos de envío"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:833
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:840
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:848
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:854
+msgid "Note:"
+msgstr "Nota:"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:833
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:840
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:848
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:854
+msgid " If this person does not already have an Indico account, "
+msgstr "Si esta persona no tiene ya una cuenta Indico,"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:834
+msgid "he or she will be sent an email asking to register as a user."
+msgstr "se le enviará un correo pidiéndole que se registre como usuario."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:835
+msgid " After the registration the user will automatically be given"
+msgstr "Tras el registro se le darán automáticamente al usuario"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:836
+msgid " submission rights."
+msgstr "permisos de envío."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:839
+msgid "Give management rights"
+msgstr "Conceder permisos de gestión"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:841
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:849
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:855
+msgid "he or she will be sent an email asking to create an account."
+msgstr "se le enviará un correo pidiéndole que cree una cuenta."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:842
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:850
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:856
+msgid " After the account creation the user will automatically be"
+msgstr "Tras crear la cuenta el usuario tendrá automáticamente"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:843
+msgid " given management rights."
+msgstr "permisos de gestión."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:847
+msgid "Give coordination rights"
+msgstr "Conceder permisos de coordinación"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:851
+msgid " given coordination rights."
+msgstr "permisos de coordinación."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:857
+msgid " given the rights."
+msgstr "los permisos."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:861
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:27
+msgid "Title"
+msgstr "Título"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:861
+msgid "Mr."
+msgstr "Sr."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:861
+msgid "Mrs."
+msgstr "Sra."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:861
+msgid "Ms."
+msgstr "Srta."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:861
+msgid "Dr."
+msgstr "Dr."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:861
+msgid "Prof."
+msgstr "Prof."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:862
+msgid "Family Name"
+msgstr "Apellidos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:863
+msgid "First Name"
+msgstr "Nombre"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:864
+msgid "Affiliation"
+msgstr "Organización"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:865
+msgid "Email"
+msgstr "Correo"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:866
+msgid "Address"
+msgstr "Dirección"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:867
+msgid "Telephone"
+msgstr "Teléfono"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:876
+#: indico/htdocs/js/indico/Management/RoomBookingMapOfRooms.js:71
+#: indico/htdocs/js/indico/widgets/multiple_items_widget.js:42
+msgid "Save"
+msgstr "Guardar"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:878
+msgid ""
+"It is not possible to grant submission rights to a participant without an "
+"email address. Please set an email address."
+msgstr "No es posible conceder permisos de envío a un participante sin una dirección de correo. Por favor, solucione este problema."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:926
+msgid "User privileges"
+msgstr "Privilegios de usuario"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:971
+msgid "User rights"
+msgstr "Permisos de usuario"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:988
+msgid "Submission rights"
+msgstr "Permisos de envío"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1159
+msgid ""
+"Please note that you have added a user that does not exist in Indico.\n"
+"                                    Non existing users will be asked via email to create an account so\n"
+"                                    that they will be able to use the privileges below."
+msgstr "Tenga en cuenta que ha añadido un usuario que no existe en Indico.\nA los usuarios no existentes se les pedirá por correo que creen una cuenta\nde modo que puedan disfrutar de los siguientes privilegios :"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1162
+msgid ""
+"Please note that you have added a user without an email address. Users without \n"
+"                                    email will not be able to use the privileges below."
+msgstr "Tenga en cuenta que ha añadido un usuario sin correo.\nLos usuarios sin correo no podrán disfrutar de los siguientes privilegios."
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1234
+msgid "Add User / Group"
+msgstr "Añadir usuario / grupo"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1234
+msgid "Add user"
+msgstr "Añadir usuario"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1237
+msgid "Add IP Network"
+msgstr "Añadir IP Network"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1260
+msgid "Add Users and Groups"
+msgstr "Añadir usuarios y grupos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1260
+msgid "Add Users"
+msgstr "Añadir usuarios"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1262
+msgid "Search Users and Groups"
+msgstr "Buscar usuarios y grupos"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1262
+msgid "Search Users"
+msgstr "Buscar usuarios"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1321
+msgid "Add New"
+msgstr "Añadir nuevo"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1326
+msgid "New user"
+msgstr "Nuevo usuario"
+
+#: indico/htdocs/js/indico/Core/Dialogs/Users.js:1348
+msgid "Grant all these users with privileges: "
+msgstr "Conceder a todos estos usuarios con privilegios:"
+
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:478
+msgid "See  results more"
+msgstr "Ver más resultados"
+
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:481
+msgid "See all"
+msgstr "Ver todo"
+
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:550
+msgid "No more to load"
+msgstr "No hay más por cargar"
+
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:765
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:769
+msgid "Previous tab"
+msgstr "Pestaña anterior"
+
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:778
+#: indico/htdocs/js/indico/Core/Widgets/Base.js:782
+msgid "Next tab"
+msgstr "Siguiente pestaña"
+
+#: indico/htdocs/js/indico/Core/Widgets/Inline.js:189
+msgid "No options"
+msgstr "Sin opciones"
+
+#: indico/htdocs/js/indico/Core/Widgets/RichText.js:220
+msgid "switch to plain text"
+msgstr "cambiar a texto plano"
+
+#: indico/htdocs/js/indico/Core/Widgets/RichText.js:223
+msgid "switch to rich text"
+msgstr "cambiar a editor de texto wysiwyg"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:319
+msgid "At least one must be selected"
+msgstr "Debe seleccionar al menos uno."
+
+#: indico/htdocs/js/indico/Legacy/Util.js:324
+msgid "Please enable the checkbox"
+msgstr "Por favor, active la casilla de verificación"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:329
+#: indico/htdocs/js/indico/Legacy/Util.js:334
+msgid "Please choose an option"
+msgstr "Por favor, seleccione una opción"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:338
+msgid "Field must be a number"
+msgstr "El valor del campo debe ser un número"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:344
+msgid "Field must be a positive number"
+msgstr "El valor del campo debe ser un número positivo"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:347
+msgid "Date format is not valid. It should be dd/mm/yyyy hh:mm"
+msgstr "El formato de fecha no es válido. Debería ser dd/mm/yyyy hh:mm"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:350
+msgid "Invalid e-mail address"
+msgstr "Dirección de correo no válida"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:353
+msgid "Invalid URL"
+msgstr "URL no válida"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:356
+msgid "Time format is not valid. It should be hh:mm"
+msgstr "El formato de hora no es válido. Debería ser hh:mm"
+
+#: indico/htdocs/js/indico/Legacy/Util.js:359
+msgid "Field is mandatory"
+msgstr "El campo es obligatorio"
+
+#: indico/htdocs/js/indico/Management/RoomBookingMapOfRooms.js:62
+msgid "Default on start-up"
+msgstr "Por defecto en el arranque"
+
+#: indico/htdocs/js/indico/Management/RoomBookingMapOfRooms.js:142
+msgid "Default"
+msgstr "Por defecto"
+
+#: indico/htdocs/js/indico/Management/RoomBookingMapOfRooms.js:172
+msgid "Add Map Aspect"
+msgstr "Añadir área"
+
+#: indico/htdocs/js/indico/Management/RoomBookingMapOfRooms.js:177
+msgid "New map aspect"
+msgstr "Nueva área"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:186
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:821
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:54
+msgid "Room"
+msgstr "Sala"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:196
+msgid "Book"
+msgstr "Libro"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:201
+msgid "More"
+msgstr "Más"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:206
+msgid "Details"
+msgstr "Detalles"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:472
+msgid "Search criteria"
+msgstr "Criterios de búsqueda"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:489
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:190
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:385
+msgid "Filter"
+msgstr "Filtro"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:496
+msgid "Reset"
+msgstr "Restaurar"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:777
+msgid "Total"
+msgstr "Total"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:778
+msgid "room(s)"
+msgstr "sala(s)"
+
+#: indico/htdocs/js/indico/RoomBooking/MapOfRooms.js:779
+msgid "building(s)"
+msgstr "edificio(s)"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:29
+msgid "Legend:"
+msgstr "Leyenda:"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:30
+msgid "Available"
+msgstr "Disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:31
+msgid "Conflict"
+msgstr "Conflicto"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:32
+msgid "Booked"
+msgstr "Reservada"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:33
+msgid "PRE-Booking"
+msgstr "Pre-reserva"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:34
+msgid "Conflict with PRE-Booking"
+msgstr "Conflicto con pre-reserva"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:35
+msgid "Concurrent PRE-Bookings"
+msgstr "Pre-reservas concurrentes"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:36
+msgid "Blocked"
+msgstr "Bloqueado"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:37
+msgid "Too early to book"
+msgstr "Demasiado pronto para reservar"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:257
+msgid "Click to book it"
+msgstr "Pulse para reservarlo"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:260
+msgid "This bar indicates the time which will be booked."
+msgstr "Esta barra indica el tiempo que se reservará."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:264
+msgid "Room blocked by"
+msgstr "Sala reservada por"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:269
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:822
+msgid "Reason"
+msgstr "Motivo"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:271
+msgid ""
+"Booking not allowed for this period.<br>This room can only be booked {0} "
+"days in advance."
+msgstr "No está permitida la reserva para este periodo. <br>Esta sala solo puede ser reservada con {0} días de antelación."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:347
+msgid "This room cannot booked more than {0} days in advance."
+msgstr "Esta sala no se puede reservar con más de {0} días de antelación."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:357
+msgid ""
+"This room cannot be booked due to conflicts with existing reservations or "
+"room blockings."
+msgstr "Esta sala no se puede reservar debido a conflictos con reservas existentes o bloqueos de la sala."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:361
+msgid ""
+"This booking contains conflicts with existing reservations or blockings."
+msgstr "Esta reserva tiene conflictos con reservas o bloqueos existentes."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:387
+msgid "Bookings of this room are limited to members of {0}."
+msgstr "Las reservas de esta sala están limitadas a los miembros de {0}."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:389
+msgid "You are not authorized to book this room."
+msgstr "No tiene permisos para reservar esta sala."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:400
+msgid ""
+"This room is blocked on this date and you don't have permissions to book it."
+msgstr "Esta sala está bloqueda en esta fecha y no tiene permisos para reservarla."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:401
+msgid "This room is not available on this date."
+msgstr "Esta sala no está disponible en esta fecha."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:430
+msgid "Unable to book"
+msgstr "Incapaz de hacer la reserva"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:590
+msgid "No results found in the given period of time."
+msgstr "No se han encontrado resultados para el periodo de tiempo dado."
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:619
+msgid "This room cannot be booked for this date"
+msgstr "No se puede reservar esta sala para esa fecha"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:663
+msgid "( show 3 months preview )"
+msgstr "(mostrar la previsualización de 3 meses )"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:680
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:824
+#: indico/htdocs/js/indico/modules/registration/form/field.js:414
+msgid "Date"
+msgstr "Fecha"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:754
+msgid "Show"
+msgstr "Mostrar"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:758
+msgid "Reject"
+msgstr "Rechazar"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:761
+msgid "Rejecting a booking"
+msgstr "Rechazando una reserva"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:763
+msgid "Are you sure you want to REJECT the booking for ?"
+msgstr "¿Está seguro de que quiere RECHAZAR la reserva para ?"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:764
+msgid "If so, please give a reason:"
+msgstr "Si es así, por favor, dé un motivo:"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:823
+msgid "Booked for"
+msgstr "Reservada para"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:825
+#: indico/htdocs/js/indico/jquery/timerange.js:23
+msgid "Time"
+msgstr "Hora"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:853
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:862
+msgid "Display room booking summary "
+msgstr "Mostrar resumen de la reserva de la sala"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:868
+msgid "Hide room booking summary"
+msgstr "Ocultar resumen de la reserva de la sala"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:877
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:879
+msgid "Reject ALL Conflicting PRE-Bookings"
+msgstr "Rechazar TODAS las pre-reservas en conflicto"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:880
+msgid "Are you sure you want to REJECT ALL conflicting PRE-bookings?"
+msgstr "¿Está seguro de que desea RECHAZAR TODAS las pre-reservas en conflicto?"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:913
+msgid "day"
+msgstr "día"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:914
+msgid "week"
+msgstr "semana"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:914
+msgid "period"
+msgstr "periodo"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:929
+msgid "Choose Period"
+msgstr "Escoger periodo"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:947
+msgid "Change period"
+msgstr "Cambiar periodo"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:964
+#: indico/htdocs/js/indico/jquery/defaults.js:28
+msgid "Previous"
+msgstr "Anterior"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:973
+#: indico/htdocs/js/indico/jquery/defaults.js:27
+msgid "Next"
+msgstr "Siguiente"
+
+#: indico/htdocs/js/indico/RoomBooking/RoomBookingCalendar.js:989
+msgid "Hide empty rooms/days"
+msgstr "Ocultar salas / días vacíos"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:126
+msgid "Filter rooms"
+msgstr "Filtrar salas"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:238
+msgid "Show only my rooms"
+msgstr "Mostrar solo mis salas"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:271
+msgid "Select"
+msgstr "Seleccionar"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:280
+msgid "Require"
+msgstr "Requerir"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:283
+msgid "Videoconference"
+msgstr "Videoconferencia"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:286
+msgid "Webcast"
+msgstr "Webcast"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:289
+msgid "Projector"
+msgstr "Proyector"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:292
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:354
+msgid "Public room"
+msgstr "Sala pública"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:300
+msgid "Capacity"
+msgstr "Aforo"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:351
+msgid "Videoconference available"
+msgstr "Videoconferencia disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:352
+msgid "Webcast/Recording available"
+msgstr "Webcast / Grabación disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:353
+msgid "Projector available"
+msgstr "Proyector disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:355
+msgid "Maximum capacity"
+msgstr "Aforo"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:356
+msgid "Videoconference not available"
+msgstr "Videoconferenica no disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:357
+msgid "Webcast/Recording not available"
+msgstr "Webcast / Grabación no disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:358
+msgid "Projector not available"
+msgstr "Proyector no disponible"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:359
+msgid "Private room"
+msgstr "Sala privada"
+
+#: indico/htdocs/js/indico/RoomBooking/roomselector.js:378
+msgid "Expand picture"
+msgstr "Ampliar imagen"
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:135
+msgid "Invalid end date for daily repetition"
+msgstr "Fecha final no válida para la repetición diaria"
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:140
+msgid "Invalid end date for weekly repetition"
+msgstr "Fecha final no válida para la repetición semanal"
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:145
+msgid "Invalid end date for monthly repetition"
+msgstr "Fecha final no válida para la repetición mensual"
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:187
+msgid ""
+"Please, confirm first you understood the implications of the conflicts "
+"mentioned above."
+msgstr "Por favor, confirme primero que ha entendido las implicaciones de los conflictos mencionados anteriormente."
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:189
+msgid "Unable to book for the selected day(s)."
+msgstr "No se puede reservar para los días seleccionados."
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:215
+#: indico/legacy/webinterface/tpls/RoomBookingSearchBookings.tpl:241
+msgid "Please select a room (or several rooms)."
+msgstr "Por favor, seleccione una o varias salas."
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:234
+msgid "Please fill in all the required fields (highlighted in red)."
+msgstr "Por favor, complete todos los campos obligatorios (destacados en rojo)."
+
+#: indico/htdocs/js/indico/RoomBooking/validation.js:267
+msgid "Booking creation error"
+msgstr "Error en la creación de la reserva"
+
+#: indico/htdocs/js/indico/angular/directives.js:77
+msgid "Ok"
+msgstr "Ok"
+
+#: indico/htdocs/js/indico/angular/directives.js:118
+msgid "The content of this dialog is currently unavailable."
+msgstr "El contenido de este diálogo no está disponible actualmente."
+
+#: indico/htdocs/js/indico/jquery/ajaxdialog.js:80
+msgid ""
+"You have unsaved changes. Do you really want to close the dialog without "
+"saving?"
+msgstr "Tiene cambios sin guardar. ¿Desea cerrar el diálogo sin guardarlos?"
+
+#: indico/htdocs/js/indico/jquery/ajaxdialog.js:140
+msgid "Unsaved changes"
+msgstr "Cambios no guardados"
+
+#: indico/htdocs/js/indico/jquery/authors.js:38
+msgid "author"
+msgstr "autor"
+
+#: indico/htdocs/js/indico/jquery/authors.js:38
+msgid "authors"
+msgstr "autores"
+
+#: indico/htdocs/js/indico/jquery/categorynavigator.js:452
+msgid "Make the search more specific for more accurate results"
+msgstr "Haga la búsqueda más específica para obtener resultados más precisos"
+
+#: indico/htdocs/js/indico/jquery/declarative.js:230
+msgid "Confirm action"
+msgstr "Confirmar acción"
+
+#: indico/htdocs/js/indico/jquery/defaults.js:41
+msgid "Choose the start date"
+msgstr "Escoger fecha de inicio"
+
+#: indico/htdocs/js/indico/jquery/defaults.js:42
+msgid "Choose the end date"
+msgstr "Escoger fecha final"
+
+#: indico/htdocs/js/indico/jquery/multitextfield.js:270
+#: indico/htdocs/js/indico/widgets/multiple_items_widget.js:40
+msgid "Delete"
+msgstr "Borrar"
+
+#: indico/htdocs/js/indico/jquery/multitextfield.js:344
+msgid "Empty values are not allowed."
+msgstr "No está permitido poner valores vacíos."
+
+#: indico/htdocs/js/indico/jquery/principalfield.js:112
+msgid "Choose person"
+msgstr "Escoger persona"
+
+#: indico/htdocs/js/indico/jquery/principalfield.js:124
+msgid "Edit information"
+msgstr "Editar información"
+
+#: indico/htdocs/js/indico/jquery/principalfield.js:132
+msgid "Enter person"
+msgstr "Introducir persona"
+
+#: indico/htdocs/js/indico/modules/attachments.js:160
+msgid "You are not authorized to access this file."
+msgstr "No tiene autorización para acceder a este archivo."
+
+#: indico/htdocs/js/indico/modules/attachments.js:160
+#: indico/htdocs/js/indico/modules/attachments.js:163
+msgid "Access Denied"
+msgstr "Acceso denegado"
+
+#: indico/htdocs/js/indico/modules/attachments.js:162
+msgid "This file is protected. You will be redirected to the login page."
+msgstr "Este archivo está protegido. Se le redirigirá a la página de inicio de sesión."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:43
+msgid "Unknown error while contacting the Community Hub"
+msgstr "Error desconocido al contactar con el Community Hub"
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:45
+msgid "Internal error: Parse error on the reply of the Community Hub."
+msgstr "Error interno: \"parse error\" en la respuesta del Community Hub."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:47
+msgid "Unable to contact the Community Hub."
+msgstr "No ha sido posible contactar con el Community Hub."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:49
+msgid "The connection to the Community Hub timed out."
+msgstr "La conexión con el Community Hub caducó."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:51
+msgid "Your server is not registered with the Community Hub."
+msgstr "Su servidor no está registrado en el Community Hub."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:90
+msgid "Disabled"
+msgstr "Deshabilitado"
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:91
+msgid "This server is not registered as part of the community."
+msgstr "Este servidor no está registrado como parte de la comunidad."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:107
+msgid "Synchronized"
+msgstr "Sincronizado"
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:108
+msgid "This server is registered as part of the community and is up to date."
+msgstr "Este servidor está registrado como parte de la comunidad y está actualizado."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:115
+msgid "Out of sync"
+msgstr "Sin sincronización"
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:116
+msgid ""
+"Your Indico server is out of sync. Synchronize it with the button on the "
+"right."
+msgstr "Su servidor Indico no está sincronizado. Sincronícelo utilizando el botón de la deracha."
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:123
+msgid "Error!"
+msgstr "¡Error!"
+
+#: indico/htdocs/js/indico/modules/cephalopod.js:135
+msgid ""
+"Your Indico server is not synchronized with the Community Hub! You can solve"
+" this <a href=\"{0}\">here</a>."
+msgstr "Su servidor Indico no está sincronizado con el Community Hub. Puede solucionarlo <a href=\"{0}\">aquí</a>."
+
+#: indico/htdocs/js/indico/modules/designer.js:82
+msgid "Fixed text"
+msgstr "Texto fijo"
+
+#: indico/htdocs/js/indico/modules/designer.js:417
+msgid "Please choose a name for the template"
+msgstr "Por favor, seleccione un nombre para la plantilla"
+
+#: indico/htdocs/js/indico/modules/vc.js:78
+msgid ""
+"This room has been deleted and cannot be used. \n"
+"                         You can detach it from the event, however."
+msgstr "Esta sala ha sido eliminada y no puede ser utilizada.\nSin embargo, puede separarlo del evento."
+
+#: indico/htdocs/js/indico/modules/vc.js:100
+msgid "Click to toggle collapse status"
+msgstr "Pulse para activar el estado de colapso"
+
+#: indico/htdocs/js/indico/modules/events/display.js:157
+msgid "Edit minutes"
+msgstr "Editar actas"
+
+#: indico/htdocs/js/indico/modules/global/impersonation.js:43
+msgid "Select user to impersonate"
+msgstr "Seleccionar usuario por el que hacerse pasar"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:144
+msgid "New Field"
+msgstr "Nuevo campo"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:144
+msgid "Edit Field"
+msgstr "Editar campo"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:147
+msgid "Update"
+msgstr "Actualizar"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:359
+msgid "Checkbox"
+msgstr "Casilla de verificación"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:382
+msgid "Country"
+msgstr "País"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:430
+msgid "File"
+msgstr "Archivo"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:446
+msgid "Free Text"
+msgstr "Texto libre"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:462
+msgid "Number"
+msgstr "Número"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:590
+msgid "Choice"
+msgstr "Elección"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:650
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1073
+msgid "Caption"
+msgstr "Leyenda"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:651
+#: indico/htdocs/js/indico/modules/registration/form/field.js:996
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1074
+msgid "Billable"
+msgstr "Facturable"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:652
+#: indico/htdocs/js/indico/modules/registration/form/field.js:997
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1075
+msgid "Price"
+msgstr "Precio"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:653
+#: indico/htdocs/js/indico/modules/registration/form/field.js:998
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1076
+msgid "Places limit"
+msgstr "Límite de plazas"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:654
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1077
+msgid "Max. extra slots"
+msgstr "Máx. puestos extra"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:655
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1078
+msgid "Extra slots pay"
+msgstr "Pago de puestos extra"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:656
+#: indico/htdocs/js/indico/modules/registration/form/field.js:999
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1079
+msgid "Enabled"
+msgstr "Activado"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:745
+msgid "Phone"
+msgstr "Teléfono"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:759
+msgid "Text"
+msgstr "Texto"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:774
+msgid "Textarea"
+msgstr "Área de texto"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:790
+msgid "Yes/No"
+msgstr "Sí / No"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:793
+msgid "yes"
+msgstr "sí"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:793
+msgid "no"
+msgstr "no"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:809
+msgid "Email address"
+msgstr "Direccón de correo"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:911
+msgid "Title of the \"None\" option"
+msgstr "Título de la opción \"NInguno\""
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:918
+msgid "Accommodation"
+msgstr "Alojamiento"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:995
+msgid "Accommodation option"
+msgstr "Opción de alojamiento"
+
+#: indico/htdocs/js/indico/modules/registration/form/field.js:1062
+msgid "Multi choice"
+msgstr "Opción múltiple"
+
+#: indico/htdocs/js/indico/modules/registration/form/sectiontoolbar.js:53
+msgid "Add new field"
+msgstr "Añadir nuevo campo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:52
+msgid "Session"
+msgstr "Sesión"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:139
+msgid "Updating the timetable..."
+msgstr "Actualizando el horario..."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:207
+msgid "Printable version"
+msgstr "Versión imprimible"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:223
+msgid "Go back"
+msgstr "Volver"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:225
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:360
+msgid "Print"
+msgstr "Imprimir"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:263
+msgid "Switching to full screen mode..."
+msgstr "Cambiando a modo de pantalla completa..."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:292
+msgid "Exit Full Screen"
+msgstr "Salir de pantalla completa"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:366
+msgid "PDF"
+msgstr "PDF"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:372
+msgid "Full screen"
+msgstr "Pantalla completa"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:379
+msgid "Link"
+msgstr "Enlace"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:382
+msgid "Detailed view"
+msgstr "Vista detallada"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:437
+msgid "All days"
+msgstr "Todos los días"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:631
+msgid "You are viewing the contents of the session block:"
+msgstr "Está viendo los contenidos del bloque de sesión:"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:713
+msgid "Your changes triggered the automatic modification of some settings:"
+msgstr "Sus cambios ocasionaron la modificación automática de algunos ajustes:"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:723
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:724
+msgid "The <strong>starting time</strong> of the session interval <strong>"
+msgstr "La <strong> hora de inicio</strong> del intervalo de sesión <strong>"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:723
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:724
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:728
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:729
+msgid "</strong> was moved from "
+msgstr "</strong> fue movida desde"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:725
+msgid ""
+"The <strong>starting time</strong> of the <strong>Event</strong> was moved "
+"from "
+msgstr "La <strong>hora de inicio</strong> del <strong>Evento</strong> se movió desde"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:728
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:729
+msgid "The <strong>ending time</strong> of the session interval <strong>"
+msgstr "La <strong>hora de finalización </strong> del intervalo de sesión <strong>"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:730
+msgid ""
+"The <strong>ending time</strong> of the <strong>Event</strong> was moved "
+"from "
+msgstr "La <strong>hora de finalización</strong> del <strong>Evento</strong> se movió desde"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:733
+msgid "The contents of the interval <strong>"
+msgstr "Los contenidos del intervalo <strong>"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:733
+msgid "</strong> were moved from "
+msgstr "</strong> fueron movidos desde"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:739
+msgid " to "
+msgstr "hasta"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:916
+msgid "Session block"
+msgstr "Bloque de sesión"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:930
+msgid "Contribution"
+msgstr "Contribución"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:938
+msgid "Break"
+msgstr "Descanso"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:956
+msgid "Add poster"
+msgstr "Añadir cartel"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:958
+msgid "Add new"
+msgstr "Añadir nuevo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:961
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:549
+msgid "Reschedule"
+msgstr "Reprogramar"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:968
+msgid "Fit to content"
+msgstr "Ajustar al contenido"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:975
+msgid "Add new block"
+msgstr "Añadir nuevo bloque"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:1015
+msgid "Add one hour"
+msgstr "Añadir una hora"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:1068
+msgid "Session legend"
+msgstr "Leyenda de la sesión"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:1102
+msgid "see more..."
+msgstr "ver más..."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:1107
+msgid "less..."
+msgstr "menos..."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Base.js:1540
+msgid "Up to timetable"
+msgstr "Hasta el horario"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/DragAndDrop.js:49
+msgid "move to resize"
+msgstr "mover para redimensionar"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/DragAndDrop.js:422
+msgid ""
+"<span class=\"key light\">Shift</span> is currently pressed. Changes will be"
+" applied to blocks after."
+msgstr "<span class=\"key light\">La tecla Mayús.</span> está activada. Los cambios se aplicarán a los bloques después."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/DragAndDrop.js:575
+msgid "Drop to move block inside session"
+msgstr "Soltar para mover el bloque dentro de la sesión"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Draw.js:207
+msgid "et al."
+msgstr "et al."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Draw.js:293
+msgid "This poster session has "
+msgstr "Esta sesión de póster académico tiene"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Draw.js:293
+msgid " contribution(s)."
+msgstr "contribución(es)."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Draw.js:294
+msgid "Please click for more information."
+msgstr "Pulse aquí para más información."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Filter.js:198
+msgid "Sessions"
+msgstr "Sesiones"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Filter.js:199
+msgid "No sessions in the timetable"
+msgstr "No hay sesiones definidas en el horario"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Filter.js:202
+msgid "Rooms"
+msgstr "Salas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Filter.js:203
+msgid "No rooms found in the timetable"
+msgstr "No se encontraron salas en el horario"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Filter.js:207
+msgid "Filter options"
+msgstr "Opciones de filtro"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Filter.js:209
+msgid "Reset filter"
+msgstr "Restaurar filtro"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:24
+msgid "All"
+msgstr "Todo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:25
+msgid "None"
+msgstr "Ninguno"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:26
+msgid "ID"
+msgstr "ID"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:29
+msgid "Sort by: "
+msgstr "Ordenado por:"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:30
+msgid "Select: "
+msgstr "Seleccionar:"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:170
+msgid "Add Contribution"
+msgstr "Añadir contribución"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:219
+msgid "Add selected"
+msgstr "Añadir selección"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:225
+msgid "Close"
+msgstr "Cerrar"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:246
+msgid "Create a new one"
+msgstr "Crear uno nuevo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:251
+msgid "You may choose to:"
+msgstr "Usted puede optar por:"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:255
+msgid "Choose one (or more) unscheduled"
+msgstr "Elija uno (o más) no programado"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:261
+msgid "To add an unscheduled contribution, please select at least one"
+msgstr "Para añadir una contribución no programada, por favor seleccione al menos una"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:346
+msgid "Step 1: Choose type of rescheduling"
+msgstr "Paso 1: Elegir el tipo de reprogramación"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:349
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:367
+msgid "See an example"
+msgstr "Ver un ejemplo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:352
+msgid "Adjust starting time of all entries"
+msgstr "Ajustar la hora de inicio de todas las entradas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:355
+msgid "Move the entries of "
+msgstr "Mover las entradas de"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:355
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:356
+msgid " by changing their"
+msgstr "cambiando sus"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:356
+msgid "Move the entries of the interval "
+msgstr "Mover las entradas del intervalo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:357
+msgid " starting times. "
+msgstr "horas de inicio."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:359
+msgid "The first entry will start when the event starts ("
+msgstr "La primera entrada iniciará cuando comience el evento ("
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:360
+msgid "The first entry will start when the interval starts ("
+msgstr "La primera entrada iniciará cuando comience el intervalo ("
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:361
+msgid ""
+"and the other entries will follow consecutively after it. The durations of "
+"the entries will not change. "
+msgstr "y el resto de entradas la seguirán consecutivamente. Las duraciones de las entradas no cambiarán."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:370
+msgid "Adjust duration of all entries"
+msgstr "Ajustar la duración de todas las entradas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:372
+msgid "Adjust the "
+msgstr "Ajustar el"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:372
+msgid " duration "
+msgstr "duración"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:372
+msgid "of the entries of "
+msgstr "de las entradas de"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:375
+msgid "the interval "
+msgstr "el intervalo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:376
+msgid ""
+" to fill the gaps between them, so that their starting time don't change. If"
+" a time gap is specified, the duration will be extended up to the value of "
+"this time gap before the starting time of the next entry. "
+msgstr "para llenar los vacíos entre ellos, de modo que su tiempo de inicio no cambie. Si se especifica un intervalo de tiempo, la duración se ampliará hasta el valor de este intervalo de tiempo antes de la hora de inicio de la entrada siguiente."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:441
+msgid "Step 2: Choose time gap between entries"
+msgstr "Paso 2: Elija intervalo de tiempo entre entradas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:463
+msgid "Step 3: Choose to fit sessions to their content"
+msgstr "Paso 3: Elija ajustar sesiones a su contenido"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:473
+msgid ""
+"This changes the start and end times of the session blocks occuring on  in "
+"order to fit their respective content "
+msgstr "Esto cambia la hora de inicio y fin de los bloques de sesión que se producen de modo que ajuste su contenido respectivo"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:474
+msgid "before"
+msgstr "antes"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:474
+msgid " performing the rescheduling."
+msgstr "ejecutando la reprogramación."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:499
+msgid "There will be no gaps between consecutive entries."
+msgstr "No habrá espacios entre entradas consecutivas."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:504
+msgid "Entries will be separated by gaps of "
+msgstr "Las entradas estarán separadas por intervalos de "
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:506
+msgid "1 hour "
+msgstr "1 hora"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:508
+msgid " hours "
+msgstr " horas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:512
+msgid "and "
+msgstr "y"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:516
+msgid "1 minute."
+msgstr "1 minuto."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:518
+msgid " minutes."
+msgstr " minutos."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:610
+msgid "Are you sure you want to reschedule entries ?"
+msgstr "¿Está seguro de que desea reprogramar las entradas?"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:611
+msgid "The entries that are part of a session will"
+msgstr "Las entradas que forman parte de una sesión serán"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:612
+msgid " first"
+msgstr " primero"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:613
+msgid " be fitted to their content."
+msgstr "ajustadas a su contenido."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:614
+msgid "Then, all entries "
+msgstr "Después, todas las entradas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:614
+msgid "All entries "
+msgstr "Todas las entradas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:615
+msgid " will have their "
+msgstr "tendrán su"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:616
+msgid "starting times"
+msgstr "horas de inicio"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:616
+msgid "duration"
+msgstr "duración"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:617
+msgid " changed."
+msgstr " cambiadas."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:622
+msgid "Please review your choice"
+msgstr "Por favor revise su selección"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:636
+msgid "Please select the rescheduling type"
+msgstr "Por favor, seleccione el tipo de reprogramación"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:662
+msgid "Reschedule Entries"
+msgstr "Reprogramar Entradas"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:696
+msgid "This will change the starting and ending times of the Session "
+msgstr "Esto cambiará la hora de inicio y fin de la Sesión"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:698
+msgid " so that it encompasses all entries defined in its timetable."
+msgstr "de manera que abarque todas las entradas definidas en su calendario."
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:700
+msgid "Are you sure you want to proceed?"
+msgstr "¿Está seguro de que desea continuar?"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Management.js:735
+msgid "Fit timetable to content"
+msgstr "Ajustar horario al contenido"
+
+#: indico/htdocs/js/indico/modules/timetable/timetable/Undo.js:22
+msgid "Undo last operation"
+msgstr "Deshacer la última operación"
+
+#: indico/htdocs/js/indico/widgets/multiple_items_widget.js:43
+msgid "Edit"
+msgstr "Editar"
+
+#: indico/htdocs/js/indico/widgets/multiple_items_widget.js:297
+msgid "Please fill in the required fields."
+msgstr "Por favor, rellene los campos obligatorios."
+
+#: indico/legacy/webinterface/tpls/ConfDetailsFull.tpl:82
+msgid "Login to see email address"
+msgstr "Identifíquese para ver las direcciones de correo"
+
+#: indico/legacy/webinterface/tpls/RoomBookingAdminLocation.tpl:259
+msgid "Delete room"
+msgstr "Borrar sala"
+
+#: indico/legacy/webinterface/tpls/RoomBookingAdminLocation.tpl:259
+msgid ""
+"Are you sure you want to delete this room? All related bookings will also be"
+" deleted. this action is PERMANENT!"
+msgstr "¿Está seguro de querer borrar esta sala? Todas las reservas relacionadas también se eliminarán. Esta acción no se puede deshacer."
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingForm.tpl:116
+msgid "Please add at least one room."
+msgstr "Añada al menos una sala."
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingForm.tpl:120
+msgid "Create blocking"
+msgstr "Crear bloqueo"
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingForm.tpl:120
+msgid ""
+"Do you want to create the blocking? Please note that the start and end date "
+"cannot be changed after creation."
+msgstr "¿Desea crear el bloqueo? Tenga en cuenta que las fechas de inicio y fin no se pueden cambiar tras la creación del mismo."
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingForm.tpl:166
+msgid "Add Room"
+msgstr "Añadir sala"
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingList.tpl:50
+msgid "Hide rooms"
+msgstr "Ocultar salas"
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingList.tpl:50
+msgid "Show rooms"
+msgstr "Mostrar salas"
+
+#: indico/legacy/webinterface/tpls/RoomBookingBlockingsForMyRooms.tpl:77
+msgid "Processing..."
+msgstr "Procesando..."
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:21
+msgid "This applies to all the following occurrences ({0} in total):"
+msgstr "Esto se aplica a todos los siguientes casos ({0} en total):"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:34
+msgid "Are you sure you want to <strong>cancel the whole booking</strong>?"
+msgstr "¿Está seguro de que desea <strong> cancelar la reserva por completo</strong>?"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:35
+msgid "Cancel booking"
+msgstr "Cancelar reserva"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:41
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:50
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:61
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:73
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:83
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:92
+msgid "Yes"
+msgstr "Sí"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:41
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:50
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:61
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:73
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:83
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:92
+msgid "No"
+msgstr "No"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:44
+msgid "Accept booking"
+msgstr "Aceptar reserva"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:44
+msgid "Are you sure you want to <strong>accept</strong> this booking?"
+msgstr "¿Está seguro de que desea <strong>aceptar</strong> esta reserva?"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:53
+msgid "Are you sure you want to <strong>reject the whole booking</strong>?"
+msgstr "¿Está seguro de que desea <strong>rechazar toda la reserva</strong>?"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:54
+msgid "Reject booking"
+msgstr "Rechazar reserva"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:65
+msgid ""
+"Are you sure you want to <strong>reject</strong> the booking for the "
+"selected date"
+msgstr "¿Está seguro de que desea <strong>rechazar</strong> la reserva en la fecha seleccionada?"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:66
+msgid "Reject occurrence"
+msgstr "Rechazar caso"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:76
+msgid ""
+"Are you sure you want to <strong>cancel</strong> the booking for the "
+"selected date"
+msgstr "¿Está seguro de que desea <strong>cancelar</strong> la reserva en la fecha seleccionada?"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:77
+msgid "Cancel occurrence"
+msgstr "Cancelar caso"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:86
+msgid ""
+"This action is irreversible. Are you sure you want to "
+"<strong>delete</strong> the booking?"
+msgstr "Esta acción es irreversible. ¿Está seguro de que desea <strong>borrar</strong> la reserva?"
+
+#: indico/legacy/webinterface/tpls/RoomBookingDetails.tpl:87
+msgid "Delete booking"
+msgstr "Borrar reserva"
+
+#: indico/legacy/webinterface/tpls/RoomBookingSearchBookings.tpl:237
+#: indico/legacy/webinterface/tpls/RoomBookingSearchRooms.tpl:324
+msgid ""
+"There are errors in the form. Please correct fields with red background."
+msgstr "Hay errores en el formulario. Por favor, corrija los campos con fondo rojo."
+
+#: indico/legacy/webinterface/tpls/RoomBookingSearchBookings.tpl:241
+msgid "Select room"
+msgstr "Seleccionar sala"

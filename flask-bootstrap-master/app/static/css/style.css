@@ -1,0 +1,23 @@
+
+/* ******************** */
+/* Bootstrap overrides */
+/* ******************** */
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #fff !important;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  color: #fcf8e3 !important;
+}
+.navbar-brand {
+  color: #fff !important;
+}
+
+a.navbar-brand:hover {
+  color: #fcf8e3 !important;
+}
+
+.page-header {
+  margin: 20px 0 20px !important;
+}

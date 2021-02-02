@@ -1,0 +1,7 @@
+sphinx
+sphinx-issues
+sphinx-rtd-theme
+
+flask
+apispec
+webargs

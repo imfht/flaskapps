@@ -1,0 +1,705 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Day04 Sqlite数据库 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Day05 大型程序结构.html" />
+    
+    
+    <link rel="prev" href="Day03 Web表单.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Day01 Hello Flask.html">
+            
+                <a href="Day01 Hello Flask.html">
+            
+                    
+                    Day01 Hello Flask
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Day02 Jinja2&Bootstrap.html">
+            
+                <a href="Day02 Jinja2&Bootstrap.html">
+            
+                    
+                    Day02 Jinja2&Bootstrap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="Day03 Web表单.html">
+            
+                <a href="Day03 Web表单.html">
+            
+                    
+                    Day03 Web表单
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="Day04 Sqlite数据库.html">
+            
+                <a href="Day04 Sqlite数据库.html">
+            
+                    
+                    Day04 Sqlite数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="Day05 大型程序结构.html">
+            
+                <a href="Day05 大型程序结构.html">
+            
+                    
+                    Day05 大型程序结构
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="Day06 创建用户.html">
+            
+                <a href="Day06 创建用户.html">
+            
+                    
+                    Day06 创建用户
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="Day07 后台管理与发布文章.html">
+            
+                <a href="Day07 后台管理与发布文章.html">
+            
+                    
+                    Day07 后台管理与发布文章
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="Day08 难说再见.html">
+            
+                <a href="Day08 难说再见.html">
+            
+                    
+                    Day08 难说再见
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="使用Flask-Mail提供电子邮件支持.html">
+            
+                <a href="使用Flask-Mail提供电子邮件支持.html">
+            
+                    
+                    使用Flask-Mail提供电子邮件支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="使用Flasky-SQLAlchemy 管理数据库.html">
+            
+                <a href="使用Flasky-SQLAlchemy 管理数据库.html">
+            
+                    
+                    使用Flasky-SQLAlchemy 管理数据库
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Day04 Sqlite数据库</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="sqlite&#x6570;&#x636E;&#x5E93;">Sqlite&#x6570;&#x636E;&#x5E93;</h1>
+<p>&#x6E90;&#x4EE3;&#x7801;: <a href="https://github.com/ltoddy/flask-tutorial" target="_blank">https://github.com/ltoddy/flask-tutorial</a></p>
+<p>&#x6280;&#x672F;&#x4EA4;&#x6D41;&#x7FA4;:630398887(&#x6B22;&#x8FCE;&#x4E00;&#x8D77;&#x5439;&#x725B;)</p>
+<p>&#x7528;&#x5230;&#x7684;&#x6570;&#x636E;&#x5E93;&#x662F;sqlite&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x4E0D;&#x9700;&#x8981;&#x5B89;&#x88C5;(&#x56E0;&#x4E3A;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8FD0;&#x884C;&#x662F;&#x57FA;&#x4E8E;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;)&#xFF0C;&#x53EA;&#x8981;&#x4F60;&#x7535;&#x8111;&#x80FD;&#x8FD0;&#x884C;C&#x8BED;&#x8A00;&#x5C31;&#x884C;&#xFF08;&#x662F;&#x4E2A;&#x80FD;&#x5F00;&#x673A;&#x7684;&#x7535;&#x8111;&#x5C31;&#x53EF;&#x4EE5;&#x2026;&#x2026;&#xFF09;&#x3002;</p>
+<p>&#x5B89;&#x88C5;&#xFF1A;</p>
+<pre><code>pip install flask-sqlalchemy
+</code></pre><p>&#x6216;&#x8005;&#x901A;&#x8FC7;pycharm&#x5185;&#x7F6E;&#x7684;pip&#x5B89;&#x88C5;</p>
+<p>&#x8FD9;&#x91CC;&#x8BF4;&#x4E00;&#x4E0B;&#x6570;&#x636E;&#x5E93;URL&#xFF08;&#x5F85;&#x4F1A;&#x8981;&#x7528;&#x5230;&#xFF09;&#x3002;&#x5C31;&#x662F;&#x8BF4;&#x963F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8981;&#x94FE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5F97;&#x5148;&#x544A;&#x8BC9;&#x7A0B;&#x5E8F;&#x6570;&#x636E;&#x5E93;&#x5728;&#x54EA;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;local&#x7684;&#x6216;&#x8005;remote&#x7684;&#x3002;URL&#x5C31;&#x662F;&#x90A3;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQLite(Unix)</td>
+<td>sqlite:////absolute/path/to/database</td>
+</tr>
+<tr>
+<td>SQLite(Windows)</td>
+<td>sqlite:///c:/absolute/path/to/database</td>
+</tr>
+</tbody>
+</table>
+<p>&#x4E0D;&#x540C;&#x7684;&#x7CFB;&#x7EDF;&#x5BF9;&#x4E8E;SQLite&#x7684;URL&#x662F;&#x6709;&#x4E00;&#x70B9;&#x4E0D;&#x540C;&#x7684;&#xFF0C;&#x6211;&#x8BF4;&#x4E00;&#x4E0B;&#x539F;&#x56E0;&#xFF0C;&#x5728;Unix&#x7CFB;&#x7EDF;&#x5BB6;&#x65CF;&#x4E2D;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x6839;&#x76EE;&#x5F55;&quot;/&quot;&#xFF0C;Unix&#x7CFB;&#x7EDF;&#x662F;&#x4E0D;&#x5206;&#x76D8;&#x7B26;&#x7684;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6CA1;&#x6709;C&#x76D8;&#xFF0C;D&#x76D8;&#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x6240;&#x6709;&#x4E1C;&#x897F;&#x90FD;&#x5728;&#x6839;&#x76EE;&#x5F55;&#x4E4B;&#x4E0B;&#x3002;&#x800C;windows&#x7CFB;&#x7EDF;&#x5462;&#x662F;&#x5206;&#x76D8;&#x7B26;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4F60;&#x6709;&#x4E1C;&#x897F;&#x5728;C&#x76D8;&#xFF0C;&#x90A3;&#x4E48;&#x5BF9;&#x4E8E;C&#x76D8;&#x6765;&#x8BF4;&#xFF0C;&#x5B83;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x4E5F;&#x5C31;&#x662F;c:/&#x6240;&#x4EE5;&#x8BF4;&#xFF0C;&#x5BF9;&#x4E8E;&#x8FD9;&#x4E24;&#x4E2A;&#x7CFB;&#x7EDF;&#x6570;&#x636E;&#x5E93;URL&#x7684;&#x5207;&#x6362;&#xFF0C;&#x53EA;&#x9700;&#x8981;&apos;/&apos;&#x4E0E;&apos;c:/&apos;&#x4E92;&#x76F8;&#x8F6C;&#x6362;&#x4E00;&#x4E0B;&#x5C31;&#x597D;&#x4E86;&#x3002;</p>
+<p>&#x914D;&#x7F6E;&#x6570;&#x636E;&#x5E93;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> flask_sqlalchemy <span class="hljs-keyword">import</span> SQLAlchemy
+<span class="hljs-keyword">import</span> os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+<span class="hljs-comment"># &#x6211;&#x4EEC;&#x8981;&#x628A;&#x6570;&#x636E;&#x5E93;&#x653E;&#x5728;&#x5F53;&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#x5939;,&#x8FD9;&#x4E2A;basedir&#x5C31;&#x662F;&#x5F53;&#x4E0B;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;</span>
+
+app = Flask(__name__)
+app.config[<span class="hljs-string">&apos;SQLALCHEMY_DATABASE_URI&apos;</span>] = <span class="hljs-string">&apos;sqlite:///&apos;</span> + \
+                                        os.path.join(basedir, <span class="hljs-string">&apos;data.sqlite&apos;</span>)
+<span class="hljs-comment"># &#x8FD9;&#x91CC;&#x6CE8;&#x610F;&#x770B;&#xFF0C;&#x5199;&#x7684;&#x662F;URI&#xFF08;&#x7EDF;&#x4E00;&#x8D44;&#x6E90;&#x6807;&#x8BC6;&#x7B26;&#xFF09;</span>
+app.config[<span class="hljs-string">&apos;SQLALCHEMY_COMMIT_TEARDOWN&apos;</span>] = <span class="hljs-keyword">True</span>
+<span class="hljs-comment"># SQLALCHEMY_COMMIT_TEARDOWN &#x56E0;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x6BCF;&#x6B21;&#x6709;&#x53D8;&#x52A8;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6570;&#x636E;&#x6539;&#x53D8;&#xFF0C;&#x4F46;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x7684;&#x53BB;&#x6539;&#x53D8;&#x6570;&#x636E;&#x5E93;&#x91CC;&#x9762;&#x7684;&#x6570;&#x636E;&#xFF0C;</span>
+<span class="hljs-comment"># &#x53EA;&#x6709;&#x4F60;&#x53BB;&#x624B;&#x52A8;&#x63D0;&#x4EA4;&#xFF0C;&#x544A;&#x8BC9;&#x6570;&#x636E;&#x5E93;&#x8981;&#x6539;&#x53D8;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#x624D;&#x4F1A;&#x6539;&#x53D8;&#xFF0C;&#x8FD9;&#x91CC;&#x914D;&#x7F6E;&#x8FD9;&#x4E2A;&#x4EE3;&#x8868;&#x7740;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x4F60;&#x624B;&#x52A8;&#x7684;&#x53BB;&#x63D0;&#x4EA4;&#x4E86;&#xFF0C;&#x81EA;&#x52A8;&#x5E2E;&#x4F60;&#x63D0;&#x4EA4;&#x4E86;&#x3002;</span>
+<span class="hljs-comment"># &#x5F85;&#x4F1A;&#x4F1A;&#x6709;&#x6F14;&#x793A;</span>
+app.config[<span class="hljs-string">&apos;SQLALCHEMY_TRACK_MODIFICATIONS&apos;</span>] = <span class="hljs-keyword">False</span>
+db = SQLAlchemy(app)
+</code></pre>
+<p>&#x7B80;&#x5355;&#x8BF4;&#x4E00;&#x4E0B;&#x6570;&#x636E;&#x5E93;&#xFF1A;
+&#x6B63;&#x89C4;&#x70B9;&#x7684;&#x5B9A;&#x4E49;&#x5C31;&#x662F;&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x662F;&#x957F;&#x671F;&#x5B58;&#x50A8;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x5185;&#xFF0C;&#x5927;&#x91CF;&#x6709;&#x7EC4;&#x7EC7;&#x53EF;&#x5171;&#x4EAB;&#x7684;&#x6570;&#x636E;&#x7684;&#x96C6;&#x5408;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x70B9;&#x5C31;&#x662F;&#xFF0C;&#x6BD4;&#x5982;&#x4F60;&#x6709;&#x4E00;&#x4E2A;database&#xFF08;&#x6570;&#x636E;&#x5E93;&#xFF09;,&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6709;&#x5F88;&#x591A;&#x8868;&#x683C;&#xFF0C;&#x5C31;&#x50CF;excel&#x90A3;&#x6837;&#x5B50;&#x3002;
+&#x8868;&#x683C;&#x4E2D;&#x6709;&#x6BCF;&#x4E00;&#x5217;&#x7684;&#x540D;&#x5B57;&#xFF08;&#x5B57;&#x6BB5;&#xFF09;&#xFF0C;&#x7528;&#x6765;&#x6807;&#x8BB0;&#x6BCF;&#x4E00;&#x5217;&#x662F;&#x5B58;&#x7684;&#x4EC0;&#x4E48;&#x4FE1;&#x606F;&#x3002;&#x5C31;&#x8FD9;&#x4E48;&#x7B80;&#x5355;&#xFF0C;&#x5F53;&#x7136;&#x6570;&#x636E;&#x8FD8;&#x4F1A;&#x6709;&#x4E9B;&#x7279;&#x6B8A;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x6BD4;&#x5982;primary key&#xFF0C; unique&#xFF0C; not null&#x7B49;&#x7B49;&#x3002;</p>
+<p>OK&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x4E0B;&#x6211;&#x4EEC;&#x7684;&#x8868;&#x683C;&#x3002;&#x8FD9;&#x4E2A;&#x9879;&#x76EE;&#x4E3A;&#x4E86;&#x7B80;&#x5355;&#xFF0C;&#x53EA;&#x8BBE;&#x7ACB;&#x4E00;&#x4E2A;User&#x8868;&#x3002;&#x7528;&#x6765;&#x4E4B;&#x540E;&#x7684;&#x6CE8;&#x518C;&#x7528;&#x7684;&#x3002;</p>
+<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span><span class="hljs-params">(db.Model)</span>:</span>
+    __tablename__ = <span class="hljs-string">&apos;users&apos;</span>
+    id = db.Column(db.Integer, primary_key=<span class="hljs-keyword">True</span>)
+    <span class="hljs-comment"># &#x5982;&#x679C;&#x4F60;&#x5B66;&#x8FC7;&#x6570;&#x636E;&#x5E93;&#x7684;&#x8BDD;&#x5C31;&#x77E5;&#x9053;&#x6211;&#x4EEC;&#x4E00;&#x822C;&#x901A;&#x8FC7;id&#x6765;&#x4F5C;&#x4E3A;&#x4E3B;&#x952E;&#xFF0C;&#x6765;&#x627E;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x4FE1;&#x606F;&#x7684;,&#x901A;&#x8FC7;id&#x6765;&#x5B9E;&#x73B0;&#x552F;&#x4E00;&#x6027;</span>
+    name = db.Column(db.String(<span class="hljs-number">64</span>), unique=<span class="hljs-keyword">True</span>)
+</code></pre>
+<p>&#x4E0B;&#x9762;&#x5C06;&#x6709;&#x4E00;&#x5806;&#x77E5;&#x8BC6;&#x70B9;&#xFF0C;&#x6CA1;&#x7A7A;&#x770B;&#x7684;&#x8BDD;&#x5C31;&#x8DF3;&#x8FC7;&#x53BB;&#x597D;&#x4E86;&#xFF0C;&#x7B49;&#x9047;&#x5230;&#x4E86;&#x8FD9;&#x65B9;&#x9762;&#x7684;&#x95EE;&#x9898;&#x518D;&#x6765;&#x67E5;&#x770B;&#x3002;
+&#x6211;&#x590D;&#x5236;&#x7684;&#xFF0C;&#x592A;&#x591A;&#x4E86;&#x624B;&#x6253;&#x5F97;&#x7D2F;&#x6B7B;&#x6211;&#x3002;</p>
+<h3 id="&#x5E38;&#x89C1;&#x7684;sqlalchemy&#x5217;&#x7C7B;&#x578B;">&#x5E38;&#x89C1;&#x7684;SQLALCHEMY&#x5217;&#x7C7B;&#x578B;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x7C7B;&#x578B;&#x540D;&#x79F0;</th>
+<th>python&#x7C7B;&#x578B;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>int</td>
+<td>&#x5E38;&#x89C4;&#x6574;&#x5F62;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;32&#x4F4D;</td>
+</tr>
+<tr>
+<td>SmallInteger</td>
+<td>int</td>
+<td>&#x77ED;&#x6574;&#x5F62;&#xFF0C;&#x901A;&#x5E38;&#x4E3A;16&#x4F4D;</td>
+</tr>
+<tr>
+<td>BigInteger</td>
+<td>int&#x6216;long</td>
+<td>&#x7CBE;&#x5EA6;&#x4E0D;&#x53D7;&#x9650;&#x6574;&#x5F62;</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>float</td>
+<td>&#x6D6E;&#x70B9;&#x6570;</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>decimal.Decimal</td>
+<td>&#x5B9A;&#x70B9;&#x6570;</td>
+</tr>
+<tr>
+<td>String</td>
+<td>str</td>
+<td>&#x53EF;&#x53D8;&#x957F;&#x5EA6;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>str</td>
+<td>&#x53EF;&#x53D8;&#x957F;&#x5EA6;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x9002;&#x5408;&#x5927;&#x91CF;&#x6587;&#x672C;</td>
+</tr>
+<tr>
+<td>Unicode</td>
+<td>unicode</td>
+<td>&#x53EF;&#x53D8;&#x957F;&#x5EA6;Unicode&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>bool</td>
+<td>&#x5E03;&#x5C14;&#x578B;</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>datetime.date</td>
+<td>&#x65E5;&#x671F;&#x7C7B;&#x578B;</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>datetime.time</td>
+<td>&#x65F6;&#x95F4;&#x7C7B;&#x578B;</td>
+</tr>
+<tr>
+<td>Interval</td>
+<td>datetime.timedelta</td>
+<td>&#x65F6;&#x95F4;&#x95F4;&#x9694;</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>str</td>
+<td>&#x5B57;&#x7B26;&#x5217;&#x8868;</td>
+</tr>
+<tr>
+<td>PickleType</td>
+<td>&#x4EFB;&#x610F;Python&#x5BF9;&#x8C61;</td>
+<td>&#x81EA;&#x52A8;Pickle&#x5E8F;&#x5217;&#x5316;</td>
+</tr>
+<tr>
+<td>LargeBinary</td>
+<td>str</td>
+<td>&#x4E8C;&#x8FDB;&#x5236;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x5E38;&#x89C1;&#x7684;sqlalchemy&#x5217;&#x9009;&#x9879;">&#x5E38;&#x89C1;&#x7684;SQLALCHEMY&#x5217;&#x9009;&#x9879;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x53EF;&#x9009;&#x53C2;&#x6570;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>primary_key</td>
+<td>&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;True&#xFF0C;&#x5219;&#x4E3A;&#x8BE5;&#x5217;&#x8868;&#x7684;&#x4E3B;&#x952E;</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;True&#xFF0C;&#x8BE5;&#x5217;&#x4E0D;&#x5141;&#x8BB8;&#x76F8;&#x540C;&#x503C;</td>
+</tr>
+<tr>
+<td>index</td>
+<td>&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;True&#xFF0C;&#x4E3A;&#x8BE5;&#x5217;&#x521B;&#x5EFA;&#x7D22;&#x5F15;&#xFF0C;&#x67E5;&#x8BE2;&#x6548;&#x7387;&#x4F1A;&#x66F4;&#x9AD8;</td>
+</tr>
+<tr>
+<td>nullable</td>
+<td>&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;True&#xFF0C;&#x8BE5;&#x5217;&#x5141;&#x8BB8;&#x4E3A;&#x7A7A;&#x3002;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E3A;False&#xFF0C;&#x8BE5;&#x5217;&#x4E0D;&#x5141;&#x8BB8;&#x7A7A;&#x503C;</td>
+</tr>
+<tr>
+<td>default</td>
+<td>&#x5B9A;&#x4E49;&#x8BE5;&#x5217;&#x7684;&#x9ED8;&#x8BA4;&#x503C;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;">&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;</h2>
+<h3 id="&#x521B;&#x5EFA;&#x8868;">&#x521B;&#x5EFA;&#x8868;</h3>
+<pre><code>python blog.py shell
+&gt;&gt;&gt; from hello import db
+&gt;&gt;&gt; db.create_all()
+</code></pre><h3 id="&#x5220;&#x9664;&#x8868;">&#x5220;&#x9664;&#x8868;</h3>
+<pre><code>db.drop_all()
+</code></pre><h3 id="&#x63D2;&#x5165;&#x884C;">&#x63D2;&#x5165;&#x884C;</h3>
+<pre><code>#&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#xFF0C;&#x6A21;&#x578B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#x662F;&#x4F7F;&#x7528;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x6A21;&#x578B;&#x5C5E;&#x6027;&#x521D;&#x59CB;&#x503C;&#x3002;
+admin_role = Role(name=&apos;Admin&apos;)
+user_role = Role(name=&apos;User&apos;)
+user_susan = User(username=&apos;susan&apos;, role=user_role)#role &#x5C5E;&#x6027;&#x4E5F;&#x53EF;&#x4F7F;&#x7528;,&#x867D;&#x7136;&#x5B83;&#x4E0D;&#x662F;&#x771F;&#x6B63;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5217;,&#x4F46;&#x5374;&#x662F;&#x4E00;&#x5BF9;&#x591A;&#x5173;&#x7CFB;&#x7684;&#x9AD8;&#x7EA7;&#x8868;&#x793A;&#x3002;
+user_john = User(username=&apos;john&apos;, role=admin_role)
+#&#x8FD9;&#x4E9B;&#x65B0;&#x5EFA;&#x5BF9;&#x8C61;&#x7684; id &#x5C5E;&#x6027;&#x5E76;&#x6CA1;&#x6709;&#x660E;&#x786E;&#x8BBE;&#x5B9A;,&#x56E0;&#x4E3A;&#x4E3B;&#x952E;&#x662F;&#x7531; Flask-SQLAlchemy &#x7BA1;&#x7406;&#x7684;&#x3002;
+print(admin_role.id)#None
+#&#x901A;&#x8FC7;&#x6570;&#x636E;&#x5E93;&#x4F1A;&#x8BDD;&#x7BA1;&#x7406;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x6240;&#x505A;&#x7684;&#x6539;&#x52A8;,&#x5728; Flask-SQLAlchemy &#x4E2D;,&#x4F1A;&#x8BDD;&#x7531; db.session &#x8868;&#x793A;&#x3002;
+##&#x9996;&#x5148;&#xFF0C;&#x5C06;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;&#x5230;&#x4F1A;&#x8BDD;&#x4E2D;
+db.session.add(admin_role)
+db.session.add(user_role)
+db.session.add(user_susan)
+db.session.add(user_john)
+#&#x7B80;&#x5199;&#xFF1A;db.session.add_all([admin_role, user_role, user_john, user_susan])
+##&#x901A;&#x8FC7;&#x63D0;&#x4EA4;&#x4F1A;&#x8BDD;(&#x4E8B;&#x52A1;)&#xFF0C;&#x5C06;&#x5BF9;&#x8C61;&#x5199;&#x5165;&#x6570;&#x636E;&#x5E93;
+db.session.commit()
+</code></pre><h3 id="&#x4FEE;&#x6539;&#x884C;">&#x4FEE;&#x6539;&#x884C;</h3>
+<pre><code>admin_role.name = &apos;Administrator&apos;
+db.session.add(admin_role)
+session.commit()
+</code></pre><h3 id="&#x5220;&#x9664;&#x884C;">&#x5220;&#x9664;&#x884C;</h3>
+<pre><code>db.session.delete(mod_role)
+session.commit()
+</code></pre><h3 id="&#x67E5;&#x8BE2;&#x884C;">&#x67E5;&#x8BE2;&#x884C;</h3>
+<pre><code>&#x67E5;&#x8BE2;&#x5168;&#x90E8;&#x3002;Role.query.all()
+&#x6761;&#x4EF6;&#x67E5;&#x8BE2;&#xFF08;&#x4F7F;&#x7528;&#x8FC7;&#x6EE4;&#x5668;&#xFF09;&#x3002;User.query.filter_by(role=user_role).all()
+user_role = Role.query.filter_by(name=&apos;User&apos;).first()#filter_by() &#x7B49;&#x8FC7;&#x6EE4;&#x5668;&#x5728; query &#x5BF9;&#x8C61;&#x4E0A;&#x8C03;&#x7528;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x66F4;&#x7CBE;&#x786E;&#x7684; query &#x5BF9;&#x8C61;&#x3002;
+</code></pre><h3 id="&#x5E38;&#x7528;&#x8FC7;&#x6EE4;&#x5668;">&#x5E38;&#x7528;&#x8FC7;&#x6EE4;&#x5668;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x8FC7;&#x6EE4;&#x5668;</th>
+<th>&#x8BF4; &#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter()</td>
+<td>&#x628A;&#x8FC7;&#x6EE4;&#x5668;&#x6DFB;&#x52A0;&#x5230;&#x539F;&#x67E5;&#x8BE2;&#x4E0A;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x67E5;&#x8BE2;</td>
+</tr>
+<tr>
+<td>filter_by()</td>
+<td>&#x628A;&#x7B49;&#x503C;&#x8FC7;&#x6EE4;&#x5668;&#x6DFB;&#x52A0;&#x5230;&#x539F;&#x67E5;&#x8BE2;&#x4E0A;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x67E5;&#x8BE2;</td>
+</tr>
+<tr>
+<td>limit()</td>
+<td>&#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x503C;&#x9650;&#x5236;&#x539F;&#x67E5;&#x8BE2;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x6570;&#x91CF;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x67E5;&#x8BE2;</td>
+</tr>
+<tr>
+<td>offset()</td>
+<td>&#x504F;&#x79FB;&#x539F;&#x67E5;&#x8BE2;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x67E5;&#x8BE2;</td>
+</tr>
+<tr>
+<td>order_by()</td>
+<td>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x5BF9;&#x539F;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x6392;&#x5E8F;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x67E5;&#x8BE2;</td>
+</tr>
+<tr>
+<td>group_by()</td>
+<td>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x5BF9;&#x539F;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x5206;&#x7EC4;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x67E5;&#x8BE2;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x6700;&#x5E38;&#x4F7F;&#x7528;&#x7684;sqlalchemy&#x67E5;&#x8BE2;&#x6267;&#x884C;&#x51FD;&#x6570;">&#x6700;&#x5E38;&#x4F7F;&#x7528;&#x7684;SQLAlchemy&#x67E5;&#x8BE2;&#x6267;&#x884C;&#x51FD;&#x6570;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x65B9; &#x6CD5;</th>
+<th>&#x8BF4; &#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>all()</td>
+<td>&#x4EE5;&#x5217;&#x8868;&#x5F62;&#x5F0F;&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7684;&#x6240;&#x6709;&#x7ED3;&#x679C;</td>
+</tr>
+<tr>
+<td>first()</td>
+<td>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7ED3;&#x679C;,&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7ED3;&#x679C;,&#x5219;&#x8FD4;&#x56DE; None</td>
+</tr>
+<tr>
+<td>first_or_404()</td>
+<td>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7ED3;&#x679C;,&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7ED3;&#x679C;,&#x5219;&#x7EC8;&#x6B62;&#x8BF7;&#x6C42;,&#x8FD4;&#x56DE; 404 &#x9519;&#x8BEF;&#x54CD;&#x5E94;</td>
+</tr>
+<tr>
+<td>get()</td>
+<td>&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x4E3B;&#x952E;&#x5BF9;&#x5E94;&#x7684;&#x884C;,&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5BF9;&#x5E94;&#x7684;&#x884C;,&#x5219;&#x8FD4;&#x56DE; None</td>
+</tr>
+<tr>
+<td>get_or_404()</td>
+<td>&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x4E3B;&#x952E;&#x5BF9;&#x5E94;&#x7684;&#x884C;,&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x4E3B;&#x952E;,&#x5219;&#x7EC8;&#x6B62;&#x8BF7;&#x6C42;,&#x8FD4;&#x56DE; 404 &#x9519;&#x8BEF;&#x54CD;&#x5E94;</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>&#x8FD4;&#x56DE;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x7684;&#x6570;&#x91CF;</td>
+</tr>
+<tr>
+<td>paginate()</td>
+<td>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Paginate &#x5BF9;&#x8C61;,&#x5B83;&#x5305;&#x542B;&#x6307;&#x5B9A;&#x8303;&#x56F4;&#x5185;&#x7684;&#x7ED3;&#x679C;</td>
+</tr>
+</tbody>
+</table>
+<p>OK,&#x77E5;&#x8BC6;&#x70B9;&#x5230;&#x6B64;&#x4E3A;&#x6B62;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x6765;&#x64CD;&#x4F5C;&#x4E00;&#x4E0B;&#x6570;&#x636E;&#x5E93;:
+&#x66F4;&#x6539;&#x8FD9;&#x4E2A;&#x8DEF;&#x7531;</p>
+<pre><code class="lang-python"><span class="hljs-meta">@app.route(&apos;/&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>:</span>
+</code></pre>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;:</p>
+<pre><code class="lang-python"><span class="hljs-meta">@app.route(&apos;/&apos;, methods=[&apos;GET&apos;, &apos;POST&apos;])</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span><span class="hljs-params">()</span>:</span>
+    form = NameForm()
+    <span class="hljs-keyword">if</span> form.validate_on_submit():
+        user = User.query.filter_by(name=form.name.data)
+        <span class="hljs-keyword">if</span> user <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
+            user = User(name=form.name.data)
+            db.session.add(user)
+            session[<span class="hljs-string">&apos;known&apos;</span>] = <span class="hljs-keyword">False</span>
+        <span class="hljs-keyword">else</span>:
+            session[<span class="hljs-string">&apos;known&apos;</span>] = <span class="hljs-keyword">True</span>
+        session[<span class="hljs-string">&apos;name&apos;</span>] = form.name.data
+        form.name.data = <span class="hljs-string">&apos;&apos;</span>
+        <span class="hljs-keyword">return</span> redirect(url_for(<span class="hljs-string">&apos;index&apos;</span>))
+    <span class="hljs-keyword">return</span> render_template(<span class="hljs-string">&apos;index.html&apos;</span>,
+                           form=form, name=session.get(<span class="hljs-string">&apos;name&apos;</span>),
+                           known=session.get(<span class="hljs-string">&apos;known&apos;</span>, <span class="hljs-keyword">False</span>))
+</code></pre>
+<p>&#x6CE8;&#x610F;&#x770B; db.session.add(user)&#x3002;</p>
+<p>&#x5047;&#x8BBE;&#x6CA1;&#x6709;</p>
+<pre><code>app.config[&apos;SQLALCHEMY_COMMIT_TEARDOWN&apos;] = True
+</code></pre><p>&#x8FD9;&#x884C;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x90A3;&#x4E48;&#x90A3;&#x884C;db.session.add(user)&#x7684;&#x540E;&#x9762;&#x9700;&#x8981;&#x52A0;&#x4E0A;db.session.commit()&#x624D;&#x53EF;&#x4EE5;&#x628A;&#x6570;&#x636E;&#x653E;&#x5230;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x3002;</p>
+<p>&#x5BF9;&#x5E94;&#x7684; /templates/index.html &#x4E5F;&#x8981;&#x66F4;&#x6539;&#x4E00;&#x4E0B;:</p>
+<pre><code class="lang-jinja2">{% extends &apos;base.html&apos; %}
+{% import &apos;bootstrap/wtf.html&apos; as wtf %}
+{% block page_content %}
+    &lt;div class=&quot;page-header&quot;&gt;
+        &lt;h1&gt;Hello {% if name %}{{ name }}{% else %}stranger!{% endif %}&lt;/h1&gt;
+        {% if not known %}
+            &lt;p&gt;Nice to meet you!&lt;/p&gt;
+        {% else %}
+            &lt;p&gt;Happy to see you again!&lt;/p&gt;
+        {% endif %}
+    &lt;/div&gt;
+    {{ wtf.quick_form(form) }}
+{% endblock %}
+</code></pre>
+<p>&#x8BF4;&#x4E00;&#x4E0B;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x8981;&#x8FD0;&#x884C;&#x9879;&#x76EE;&#xFF0C;&#x7136;&#x540E;&#x6253;&#x5F00;&#x9875;&#x9762;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;&#x4E00;&#x4E9B;SQLAlchemy&#x7684;&#x5F02;&#x5E38;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#xFF0C;&#x9996;&#x5148;&#x53BB;&#x770B;&#x4E00;&#x4E0B;</p>
+<pre><code>app.config[&apos;SQLALCHEMY_DATABASE_URI&apos;] = &apos;sqlite:///&apos; + \
+                                        os.path.join(basedir, &apos;data.sqlite&apos;)
+</code></pre><p>&#x8FD9;&#x4E2A;&#xFF0C;&#x6211;&#x4EEC;&#x5173;&#x5FC3;&#x7684;&#x662F;&#x6700;&#x540E;data.sqlite&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x5B58;&#x5728;&#x3002;
+&#x5982;&#x679C;&#x4F60;&#x6CA1;&#x6709;&#x53D1;&#x73B0;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x6253;&#x5F00;terminal(pycharm&#x5DF2;&#x7ECF;&#x96C6;&#x6210;&#x597D;&#x4E86;).</p>
+<pre><code>python3 blog.py shell
+&gt;&gt;&gt; from blog import *
+&gt;&gt;&gt; db # &#x8FD9;&#x4E00;&#x884C;&#x76EE;&#x7684;&#x662F;&#x770B;&#x770B;db&#x88AB;&#x6DFB;&#x52A0;&#x8FDB;&#x6765;&#x4E86;&#x4E48;&#x3002;
+&lt;SQLAlchemy engine=sqlite:////home/me/PycharmProjects/blog/data.sqlite&gt;
+&gt;&gt;&gt; db.drop_all()
+&gt;&gt;&gt; db.create_all()
+</code></pre><p>&#x8FD9;&#x4E2A;&#x6837;&#x5B50;&#x4F60;&#x5C31;&#x4F1A;&#x770B;&#x5230;data.sqlite&#x51FA;&#x73B0;&#x5728;&#x4F60;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x4E86;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Day03 Web表单.html" class="navigation navigation-prev " aria-label="Previous page: Day03 Web表单">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Day05 大型程序结构.html" class="navigation navigation-next " aria-label="Next page: Day05 大型程序结构">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Day04 Sqlite数据库","level":"1.5","depth":1,"next":{"title":"Day05 大型程序结构","level":"1.6","depth":1,"path":"Day05 大型程序结构.md","ref":"./Day05 大型程序结构.md","articles":[]},"previous":{"title":"Day03 Web表单","level":"1.4","depth":1,"path":"Day03 Web表单.md","ref":"./Day03 Web表单.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Day04 Sqlite数据库.md","mtime":"2018-03-24T04:51:40.595Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-24T10:18:17.126Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

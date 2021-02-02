@@ -1,0 +1,9 @@
+language: csharp
+mono:
+  - latest
+solution: DeadlyTradewithExileDirection.sln
+install:
+  - nuget restore DeadlyTradewithExileDirection.sln
+script :
+  - msbuild /p:Configuration=Release DeadlyTradewithExileDirection.sln
+  

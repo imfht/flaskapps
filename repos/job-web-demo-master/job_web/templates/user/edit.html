@@ -1,0 +1,10 @@
+{% extends "user/base.html" %}
+{% from "macros.html" import render_form %}
+
+{% block title %}
+帐号管理
+{% endblock %}
+
+{% block right %}
+{{ render_form('帐号管理', form, url_for('user.edit')) }}
+{% endblock %}

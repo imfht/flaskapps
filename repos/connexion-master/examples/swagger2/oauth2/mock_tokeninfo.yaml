@@ -1,0 +1,23 @@
+swagger: "2.0"
+
+info:
+  title: Mock OAuth Token Info
+  version: "1.0"
+
+paths:
+  /tokeninfo:
+    get:
+      summary: OAuth2 token info
+      operationId: mock_tokeninfo.get_tokeninfo
+      responses:
+        200:
+          description: Token info object
+          schema:
+            type: object
+            properties:
+              uid:
+                type: string
+              scope:
+                type: array
+                items:
+                  type: string

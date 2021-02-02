@@ -1,0 +1,12 @@
+{
+  "./bad.py": [
+    {
+      "code": "r2c-boto3-hardcoded-access-token",
+      "filename": "./bad.py",
+      "line_number": 4,
+      "column_number": 1,
+      "text": "Hardcoded access token detected. Consider using a config file or environment variables.",
+      "physical_line": "Session(aws_access_key_id='AKIA1235678901234567',"
+    }
+  ]
+}

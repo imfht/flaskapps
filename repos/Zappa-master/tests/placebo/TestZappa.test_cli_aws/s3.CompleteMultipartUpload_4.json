@@ -1,0 +1,14 @@
+{
+    "status_code": 200, 
+    "data": {
+        "ETag": "\"79446d3807f886f8f89ed5179c6f4c81-2\"", 
+        "Bucket": "lmbda", 
+        "Location": "https://lmbda.s3.amazonaws.com/zappa-ttt888-1464895457.zip", 
+        "ResponseMetadata": {
+            "HTTPStatusCode": 200, 
+            "HostId": "cGdNVqQMWt2lKxO7WUwdjjb0UPz/X8hD8HyjMDJEwmVWz5nRkuHCQuvaKIow46iMIkWyPmq+RiA=", 
+            "RequestId": "9E9942B27023A8D4"
+        }, 
+        "Key": "zappa-ttt888-1464895457.zip"
+    }
+}

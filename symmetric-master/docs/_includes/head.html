@@ -1,0 +1,38 @@
+<!-- Misc -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title %}{{ page.title }} | Symmetric{% else %}Symmetric{% endif %}</title>
+
+<!-- Bulma -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+<!-- Font Awesome -->
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+<!-- Custom JS -->
+<script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+
+<!-- Favicon -->
+{% include favicon.html %}
+
+<!-- Google Analytics -->
+{% include google-analytics.html %}
+
+<!-- Meta -->
+<meta http-equiv=”content-language” content=”en”>
+<meta name=”distribution” content=”global”>
+<meta name='keywords' content='python, flask, api, easy, simple, powerful'>
+<meta
+  name='description'
+  content='A powerful tool to enable super fast module-to-API transformations.
+           Learn in minutes, implement in seconds. Batteries included.'
+>

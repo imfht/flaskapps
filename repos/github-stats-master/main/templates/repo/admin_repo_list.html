@@ -1,0 +1,46 @@
+# extends 'admin/admin_base.html'
+# import 'macro/utils.html' as utils
+
+# block head
+  {{utils.prefetch_link(next_url)}}
+# endblock
+
+# block admin_content
+  <div class="table-responsive {{'hide' if not repo_dbs|count}}">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr class="text-nowrap">
+          <th class="col-xs-1">{{utils.order_by_link('name', 'Name')}}</th>
+          <th class="col-xs-1">{{utils.order_by_link('description', 'Description')}}</th>
+          <th class="col-xs-1 text-right">{{utils.order_by_link('stars', 'Stars')}}</th>
+          <th class="col-xs-1 text-right">{{utils.order_by_link('forks', 'Forks')}}</th>
+          <th class="col-xs-1 text-right">{{utils.order_by_link('fork', 'Fork')}}</th>
+          <th class="col-xs-1 text-right">{{utils.order_by_link('language', 'Language')}}</th>
+          <th class="col-xs-1">{{utils.order_by_link('modified', 'Modified')}}<br><small>{{utils.order_by_link('created', 'Created')}}</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        # for repo_db in repo_dbs
+          <tr>
+            <td>{{repo_db.name}}<br><small class="text-muted">{{repo_db.account_username}}</small></td>
+            <td>{{repo_db.description}}</td>
+            <td class="text-right">{{repo_db.stars_hu}}</td>
+            <td class="text-right">{{repo_db.forks_hu}}</td>
+            <td class="text-right">{{repo_db.fork}}</td>
+            <td class="text-right">{{repo_db.language}}</td>
+            <td>
+              <time datetime="{{repo_db.modified}}">
+                {{repo_db.modified.strftime('%Y-%m-%d')}}
+              </time><br>
+              <time class="text-success small" datetime="{{repo_db.created}}">
+                {{repo_db.created.strftime('%Y-%m-%d')}}
+              </time>
+            </td>
+          </tr>
+        # endfor
+      </tbody>
+    </table>
+  </div>
+
+  {{utils.next_link(next_url)}}
+# endblock

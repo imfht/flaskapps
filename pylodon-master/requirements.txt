@@ -1,0 +1,11 @@
+activipy
+Flask
+Flask-IndieAuth
+Flask-PyMongo
+Flask-Cors
+Flask-SSLify
+gunicorn
+httpsig
+python-dotenv
+requests
+Werkzeug

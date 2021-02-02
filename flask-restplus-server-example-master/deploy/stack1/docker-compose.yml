@@ -1,0 +1,14 @@
+revproxy:
+  restart: always
+  build: ./revproxy
+  ports:
+    - "80:80"
+  links:
+    - api:api
+
+api:
+  restart: always
+  build: ../../
+  environment:
+    EXAMPLE_API_REVERSE_PROXY_SETUP: 'true'
+    FLASK_CONFIG: 'production'

@@ -1,0 +1,29 @@
+{% extends "people-layout.html" %}
+{% from 'macros/person.html' import detail, link_detail %}
+{% block title %}{{ this.name }}{% endblock %}
+{% block people_body %}
+  <h1>{{ this.name }}</h1>
+  <div class="row">
+    <div class="col-sm-8">
+      {{ this.description }}
+      <hr>
+      <a class="github-button"
+        href="https://github.com/{{ this.github }}"
+        data-style="mega"
+        data-count-href="/{{ this.github }}/followers"
+        data-count-api="/users/{{ this.github }}#followers"
+        data-count-aria-label="# followers on GitHub"
+        aria-label="Follow @{{ this.github }} on GitHub">Follow @{{ this.github }}</a>
+    </div>
+    <div class="col-sm-4">
+      <div class="infobox">
+        {{ detail('user', this.role) }}
+        {{ detail('map-marker', this.location) }}
+        {{ link_detail('external-link', this.website.host if this.website else none, this.website) }}
+        {{ link_detail('twitter', this.twitter, 'https://twitter.com/' ~ this.twitter) }}
+        {{ link_detail('github', this.github, 'https://github.com/' ~ this.github) }}
+        {{ link_detail('bitbucket', this.bitbucket, 'https://bitbucket.org/' ~ this.bitbucket) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

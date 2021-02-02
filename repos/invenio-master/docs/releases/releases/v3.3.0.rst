@@ -1,0 +1,105 @@
+..
+    This file is part of Invenio.
+    Copyright (C) 2020 CERN.
+
+    Invenio is free software; you can redistribute it and/or modify it
+    under the terms of the MIT License; see LICENSE file for more details.
+
+Version 3.3.0
+=============
+
+*Released 2020-05-18*
+
+We are proud to announce the release of Invenio v3.3.0.
+
+**Python compatibility**
+
+Invenio v3.3 supports Python versions 3.6 and 3.7. Python 2 support in Invenio
+ended on January 1st, 2020 with the official end of life for Python 2 on the
+same date.
+
+Getting started
+---------------
+
+See our :ref:`quickstart` guide.
+
+Upgrading to v3.3
+~~~~~~~~~~~~~~~~~
+
+To upgrade your Invenio instance to v3.3 follow the upgrading guide:
+:ref:`upgrade-3_2-3_3`
+
+
+What's new in Invenio v3.3?
+---------------------------
+
+Python 3.7
+~~~~~~~~~~
+
+Python 3.7 is now supported by Invenio!
+
+Improved support for Single Page Applications
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Invenio v3.3 improves the support for Single Page Applications (SPA) by adding
+REST APIs for account management operations such as login, logout, user registration,
+password change, email confirmation and more. The integrated OAuth client
+also adds a new REST API so that you can login via your OAuth providers such
+as GitHub, ORCID and Globus.
+
+CSRF Protection
+~~~~~~~~~~~~~~~
+Invenio-REST adds a CSRF middleware, called `CSRFProtectMiddlewate` to protect
+API views against CSRF attacks. The CSRF checks can be skipped in REST API
+calls when using a personal OAuth API token.
+
+Dependency management
+~~~~~~~~~~~~~~~~~~~~~
+
+We have revamped management of third-party dependencies. New releases
+of some of the many third-party packages Invenio depends on could often
+cause dependency conflicts. Invenio v3.3 introduces the concept of coordinator
+packages, who are responsible for properly specifying third-party dependencies.
+
+Here's a table of all the current coordinator modules:
+
+=================== ==================================================================================================================
+ Module             Dependencies
+=================== ==================================================================================================================
+ `invenio-base`     `Flask`, `werkzeug`, `six`, `blinker`
+ `invenio-accounts` `Flask-Security`, `Flask-KVSession`, `Flask-Login`
+ `invenio-admin`    `Flask-Admin`
+ `invenio-celery`   `celery`, `kombu`, `msgpack`
+ `invenio-rest`     `webargs`, `marshmallow`
+ `invenio-i18n`     `Flask-BabelEx`
+ `invenio-db`       `Flask-SQLAlchemy`, `Flask-Alembic`, `SQLAlchemy`, `SQLAlchemy-Continuum`, `SQLAlchemy-Utils`, `psycopg2`, `pymysql`
+ `invenio-search`   `elasticsearch`, `elasticsearch-dsl`
+ `pytest-invenio`   `pytest`, `coverage`, `isort`, `check-manifest`
+=================== ==================================================================================================================
+
+Minor changes in v3.3
+---------------------
+
+- Invenio-Access: adds `explicit excludes`. It enables to deny a specific need or role.
+- Invenio-Celery: fixes the rate limiting during celery task
+
+Features removed in v3.3
+------------------------
+
+- Support for Elasticsearch 2
+
+Maintenance policy
+------------------
+
+Invenio v3.3 will be supported with bug and security fixes until the release of
+Invenio v3.5 and minimum until 2021-05-18.
+
+See our :ref:`maintenance-policy`.
+
+What's next?
+------------
+In Invenio v3.4 we are planning to release two major new features:
+
+- Theming support and a new Semantic UI theme.
+- A statistics bundle that adds support for collecting COUNTER Research Data Usage Metrics compliant statistics.
+- Index migration support for migrating between Elasticsearch clusters (aka zero down-time reindexing and index migration).

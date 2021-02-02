@@ -1,0 +1,47 @@
+{% extends "company/base.html" %}
+{% from "macros.html" import render_pagination %}
+
+{% block title %}
+职位管理
+{% endblock %}
+
+{% block right %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>职位</th>
+      <th>发布时间</th>
+      <th>更新时间</th>
+      <th>操作</th>
+    </tr>
+    <tbody>
+      {%for job in pagination.items %}
+      <tr>
+        <td><a href="{{ url_for('job.detail', job_id=job.id) }}">{{ job.name }}</a></td>
+        <td>{{ job.created_at }}</td>
+        <td>{{ job.updated_at }}</td>
+        <td>
+            <div class="btn-group" role="group">
+              {% if job.is_enable %}
+              <a href="{{ url_for('job.disable', job_id=job.id) }}" type="button" class="btn btn-default">下线</a>
+              {% else %}
+              <a href="{{ url_for('job.enable', job_id=job.id) }}" type="button" class="btn btn-default">上线</a>
+              {% endif %}
+              <a href="{{ url_for('job.edit', job_id=job.id) }}" type="button" class="btn btn-default">
+                  编辑
+              </a>
+              <button type="button" class="btn btn-default dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  删除
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url_for('job.delete', job_id=job.id) }}">确定</a></li>
+              </ul>
+            </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{{ render_pagination(pagination, 'company.jobs') }}
+{% endblock %}

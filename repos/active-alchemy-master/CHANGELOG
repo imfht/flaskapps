@@ -1,0 +1,52 @@
+- 1.1.0
+    - Fixed dependencies
+- 1.0.0
+    - Uses SQLAl 1.1
+    - Added SQLAlchemy-Utils to take advantage of ArrowType for Date
+    - Added ArrowType
+    - DateTime is now saved in UTC and ArrowType
+    - native db.DateTime is now ArrowType. Use SADateTime for sa.DateTime
+    - DateTime returned can be directly manipulated
+    - All SQLAlchemy-Utils data type is available (https://sqlalchemy-utils.readthedocs.io)
+    - Backwards incompatible as date will no longer be the one set
+
+--------------------------------------------------------------------------------
+
+- 0.10.0
+    - Change name from SQLAlchemy to ActiveAlchemy
+    - Replace method 'all()' with 'query()'
+    - access the base query with '_query()'
+    - Remove class IDMixin. Add 'id' column in 'Model'
+    - BaseModel must define the '__primary_key__'
+    - Use SQLAlchemy 1.0.*
+
+- 0.4.4
+    - Bump version. Remove version off Paginator
+
+- 0.4.3
+    - Bump Paginator version
+
+- 0.4.1
+    - Added library inflection
+    - cleanup code
+
+- 0.4.0
+    - rename to Active-Alchemy
+    - Use the module Paginator for pagination
+
+- 0.3.5
+    - Added PyMySQL and PG8000 as default drivers
+
+- 0.3.4
+    - Refactoring
+    - Prefix underscore with underscore
+
+- 0.3.3
+    - Remove print statement that should have not been there at all.
+
+- 0.3.2
+    - Put active-sqlalchemy in one file. + some clean up
+
+- 0.3
+    - change arg exclude_deleted to include_deleted with False as default value
+    - Upgrade SQLAlchemy 0.9. Set absolute versioning of dependencies

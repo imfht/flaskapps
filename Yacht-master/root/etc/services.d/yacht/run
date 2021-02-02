@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+cd /
+UMASK_SET=${UMASK_SET:-022}
+umask "$UMASK_SET"
+
+exec \
+	s6-setuidgid abc uvicorn \
+    --uds /tmp/gunicorn.sock \
+    api.main:app

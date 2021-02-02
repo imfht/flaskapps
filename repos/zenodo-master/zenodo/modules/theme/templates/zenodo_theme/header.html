@@ -1,0 +1,49 @@
+{#
+# This file is part of Zenodo.
+# Copyright (C) 2015 CERN.
+#
+# Zenodo is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# Zenodo is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Zenodo; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+#
+# In applying this license, CERN does not
+# waive the privileges and immunities granted to it by virtue of its status
+# as an Intergovernmental Organization or submit itself to any jurisdiction.
+-#}
+
+{% extends "invenio_theme/header.html" %}
+
+{%- block navbar_search %}
+<form class="navbar-form navbar-left navbar-search" action="{{config.THEME_SEARCH_ENDPOINT}}" role="search">
+  <div class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control search" name="q" placeholder="{{_('Search')}}">
+      <div class="input-group-btn">
+        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </div>
+</form>
+{%- endblock navbar_search %}
+
+{# Banner alert through global variable `banner_messages` #}
+{%- block flashmessages %}
+{{super()}}
+{%- for category, msg in banner_messages|default([]) %}
+  {%- set category = 'info' if category not in ['info', 'danger', 'warning', 'success'] else category %}
+  <div class="alert alert-{{category}}">
+    <div class="container">{{ msg }}</div>
+  </div>
+{% endfor %}
+{% endblock %}

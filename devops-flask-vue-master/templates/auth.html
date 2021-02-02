@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+{#<script src="https://unpkg.com/vue"></script>#}
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+{#<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>#}
+
+{#<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>#}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="example-2">
+<input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">${ checked }</label>
+</div>
+
+<div id='example-3'>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: ${ checkedNames }</span>
+</div>
+
+
+ <form action="/api/v1/login"  method = "post">
+ First name:<br>
+ <input type="text" name="user" value={{name}}>
+ <br>
+ Last name:<br>
+ <input type="text" name="passwd">
+     <br><br>
+<input type="submit" value="Submit">
+ </form>
+
+{#<div id="app" v-html="messages"></div>#}
+ <div id="app" >app -  ${messages == true ? "dui" : "cuo"}</div>
+
+<div id="app-2">
+    <span v-bind:title="message">
+        鼠标悬停查看绑定提示信息
+    </span>
+</div>
+
+<div id="app-3">
+    <p v-if="seen">现在你看到我了</p>
+</div>
+
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos" v-text="todo.text" v-if="todo.text.constructor != Array"></li>
+        <template v-for="todo in todos" v-if="todo.text.constructor == Array">
+            <li v-for="todo2 in todo.text" v-text="todo2.test"></li>
+        </template>
+        <li>{{ name }}</li>
+    </ol>
+</div>
+<hr about="s">
+<div id="app-5">
+    <p v-text="message"></p>
+    <button v-on:click="reverseMessage">逆转消息aa</button>
+    <input v-on:keyup.13="reverseMessage">逆转消息 enter</input>
+    <button v-on:keyup.13="reverseMessage">逆转消息 enter</button>  // tab键选中后生效
+    <p v-text="reverseMessage"></p>
+
+</div>
+
+<div id="app-6">
+    <p>${addStr}</p>
+    <p>${message | jias}</p>
+    <input v-model="message">
+    <p v-text="addStr"></p>
+</div>
+
+ <div id="app-7">
+     <ol>
+         <todo-item
+                 v-for="item in groceryList"
+                 v-bind:todo="item"
+                 eee="someaaa">
+
+         </todo-item>
+     </ol>
+
+ </div>
+ <div v-html="rawHtml">{{ name }}</div>
+
+<div id="watch-example">
+    <p>
+        ask a yes/no question:
+        <input v-model="question">
+    </p>
+    <p v-text="answer"></p>
+</div>
+
+<div id='app-8'>
+    <div v-for="(value, key, index) in obj">
+    ${index}. ${key}: ${value}
+    </div>
+</div>
+
+</body>
+
+
+<script>
+    new Vue({
+        el: '#example-3',
+        data: {
+            checkedNames: []
+        },
+        delimiters: ['${', '}']
+    });
+
+    new Vue({
+        el: '#example-2',
+        data: {
+            checked: true
+        },
+        delimiters: ['${', '}']
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            messages: true
+        },
+        delimiters: ['${', '}'],
+        created: function () {
+            console.log('create message is:' + this.messages)
+        },
+        destroyed: function () {
+            console.log('destroyed message is:' + this.messages)
+        }
+
+    });
+
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: '页面加载于' + new Date().toLocaleString()
+        }
+    });
+
+    var app3 = new Vue({
+        el: "#app-3",
+        data: {
+            seen: true
+        }
+    });
+
+    var app4 = new Vue({
+        el: "#app-4",
+        data: {
+            todos: [
+                {text: "学习 JavaScript"},
+                {text: "学习 vue"},
+                {text: "整个牛项目"},
+                {text: [{test: 't1'}, {test:'t2'}]},
+                {text: [{test: '2-t1'}, {test:'2-t2'}]},
+
+            ],
+            dicts: {}
+        }
+    });
+
+    var app5 = new Vue({
+        el: "#app-5",
+        data: {
+            message: "Hello Vue.js"
+        },
+        methods: {
+            reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('');
+{#                app.$destroy()#}
+            }
+        }
+    });
+
+    var app6 = new Vue({
+        el: "#app-6",
+        data: {
+            message: "haha hi fei"
+        },
+        filters: {
+            jias: function (value) {
+                if (!value) return '';
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1)
+            }
+        },
+        delimiters: ['${', '}'],
+        computed: {
+            addStr: function () {
+                return this.message + Date.now()
+            }
+        }
+    });
+
+
+    Vue.component('todo-item', {
+        props: ['todo', 'eee'],
+        template: '<li>${todo.id}-${todo.text} ${eee} </li>',
+        delimiters: ['${', '}']
+    });
+
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            groceryList: [
+                {id: 0, text: '蔬菜'},
+                {id: 1, text: '奶酪'},
+                {id: 2, text: '随便其他什么人吃的东西'}
+            ],
+            some: '日志'
+        }
+    });
+    
+    var watchExampleVM = new Vue({
+        el: '#watch-example',
+        data: {
+            question: '',
+            answer: 'i cannot give you an answer until you ask a question!'
+        },
+        watch: {
+          question: function (newData, oldData) {
+              this.answer = 'Waiting for you to stop typing... newdata:'+newData+', old data:'+oldData;
+              this.getAnswer()
+          }  
+        },
+        methods: {
+            getAnswer: _.debounce(
+                    function () {
+                        if (this.question.indexOf('?') === -1) {
+                            this.answer = '没打问号';
+                            return
+                        }
+                        this.answer = 'thinking...';
+                        var vm = this;
+                        axios.get('https://yesno.wtf/api').then(function (response) {
+                            vm.answer = _.capitalize(response.data.answer)
+                        }).catch(function (error) {
+                                    vm.answer = "error! " + error
+                        })
+                    },
+                    1000
+            )
+        }
+    });
+
+    var app8 = new Vue({
+        el: '#app-8',
+        data: {
+            obj: {
+                name: 'lifei',
+                age: '31',
+                sex: 'm'
+            }
+        },
+        delimiters: ['${', '}']
+    })
+
+</script>
+
+
+</html>
+

@@ -1,0 +1,11 @@
+Creoleparser
+Flask
+Flask-OpenID
+Flask-SQLAlchemy
+Genshi
+Jinja2
+Pygments
+SQLAlchemy
+Werkzeug
+Whoosh
+python-openid

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block header_ext%}
+    {% endblock %}
+    <title>{% if title %}{{ title }}{% endif %}-{{ _('admin') }}-{{ _("sitename") }}</title>
+
+    <!-- Core CSS - Include with every page -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/select.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/buttons.dataTables.min.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand">{{ _('Admin Management')}}</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle">{{ _('User')}}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('brother.user_manage', classify='normal') }}"> {{ _('Normal Users') }} </a></li>
+                            <li><a href="{{ url_for('brother.user_manage', classify='deleted') }}"> {{ _('Blacklist Users') }}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle">{{ _('Topic')}}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('brother.topic_manage', classify='normal') }}"> {{ _('Normal Topics') }} </a></li>
+                            <li><a href="{{ url_for('brother.topic_manage', classify='deleted') }}"> {{ _('Deleted Topics') }}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle">{{ _('Comment')}}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('brother.comment_manage', classify='normal') }}"> {{ _('Normal Comment') }} </a></li>
+                            <li><a href="{{ url_for('brother.comment_manage', classify='deleted') }}"> {{ _('Blacklist Comment') }}</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle"}}>{{ _('Node')}}</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('brother.node_manage', classify='normal') }}"> {{ _('Normal Nodes') }} </a></li>
+                            <li><a href="{{ url_for('brother.node_manage', classify='deleted') }}"> {{ _('Deleted Nodes') }}</a></li>
+                            <li><a href="{{ url_for('brother.node_create') }}"> {{ _('Create Node') }}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="navbar-form navbar-right">
+                    <a class="btn btn-info" id="new-btn" href="{{url_for('brother.signout')}}">
+                        {{ _('Log Out') }}
+                    </a>
+                </div>
+            </div>
+        </div><!--end nav container-->
+    </nav><!--end nav-->
+
+    <div id="wrap">
+        <div class="container" id="main">
+            <div class="col-md-10 col-md-offset-1">
+            {% block main %}
+            {% endblock %}
+            </div>
+        </div><!--end main-->
+    </div><!--end wrap-->
+    <!-- Core Scripts - Include with every page -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.select.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.buttons.min.js') }}"></script>
+    {% block footer_ext %}{% endblock %}
+</body>
+
+</html>

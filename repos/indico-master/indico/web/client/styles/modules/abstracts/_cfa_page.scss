@@ -1,0 +1,36 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+.call-for-abstracts {
+  .cfa-announcement {
+    color: $light-black;
+    padding: 20px 0 10px;
+  }
+
+  .actions {
+    margin-top: 20px;
+  }
+
+  .info-message-box {
+    align-items: center;
+  }
+
+  .message-text {
+    line-height: 1.3em;
+    padding-left: 5px;
+  }
+
+  .submit-abstract-btn {
+    font-weight: bold;
+  }
+
+  .cfa-infoline-section {
+    .infoline {
+      float: none;
+    }
+  }
+}

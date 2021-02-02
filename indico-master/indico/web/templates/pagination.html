@@ -1,0 +1,46 @@
+{% macro render_pagination(pagination, single_page=false) %}
+    {% if single_page or pagination.pages > 1 %}
+        <div class="pagination">
+            {% if single_page %}
+                <span class="page-number">
+                    <a href="{{ caller('1')|trim }}" class="i-button">
+                        {% trans %}Paginate results{% endtrans %}
+                    </a>
+                </span>
+            {% elif pagination.pages > 1 %}
+                {%- for page in pagination.iter_pages() %}
+                    {% if page %}
+                        <span class="page-number">
+                            {% if page != pagination.page %}
+                                <a href="{{ caller(page)|trim }}" class="i-button js-pagination-element">{{ page }}</a>
+                            {% else %}
+                                <a href="#" class="i-button highlight">{{ page }}</a>
+                            {% endif %}
+                        </span>
+                    {% else %}
+                        <span>…</span>
+                    {% endif %}
+                {%- endfor %}
+                <span class="page-number">
+                    <a href="{{ caller('all')|trim }}" class="i-button">
+                        {% trans count=pagination.total %}Show all ({{ count }}){% endtrans %}
+                    </a>
+                </span>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_pagination_entries_fragment(pagination) -%}
+    {% if pagination.pages > 1 %}
+        <span class="i-button label icon-list"
+              title="{% trans num=pagination.items|count, total=pagination.total -%}{{ num }} out of {{ total }} displayed{%- endtrans %}">
+            <strong>{{ pagination.items|count }}</strong> / {{ pagination.total }}
+        </span>
+    {% else %}
+        <span class="i-button label icon-list"
+              title="{% trans count=pagination.total %}{{ count }} displayed{% endtrans %}">
+            <strong>{{ pagination.total }}</strong>
+        </span>
+    {% endif %}
+{%- endmacro %}

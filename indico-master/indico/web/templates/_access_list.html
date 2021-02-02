@@ -1,0 +1,29 @@
+<div class="i-box-group vert">
+    {% if acl %}
+        <div class="i-box just-group-list">
+            <div class="i-box-content">
+                <ul class="group-list">
+                    {% for user in acl | selectattr('is_single_person') | sort(attribute='name') %}
+                        <li class="icon-user">{{ user.name }}</li>
+                    {% endfor %}
+                    {% for group in acl | selectattr('is_group') | sort(attribute='name') %}
+                        <li class="icon-users">{{ group.name }}</li>
+                    {% endfor %}
+                    {% for network in acl | selectattr('is_network') | sort(attribute='name') %}
+                        <li class="icon-lan">{{ network.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    <div class="action-box for-form highlight" style="display: block;">
+        <div class="section">
+            <div class="icon icon-info"></div>
+            <div class="text">
+                <div>
+                    {% trans %}Users with <strong>modification access</strong> to this resource and any parent resources <strong>will also have access</strong>{% endtrans %}.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

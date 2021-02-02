@@ -1,0 +1,11 @@
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    sha: v0.9.1
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-docstring-first
+    -   id: debug-statements
+    -   id: check-ast
+    -   id: check-symlinks
+    -   id: flake8
+        args: ['--exclude=examples/*', '--ignore=E501,E741']

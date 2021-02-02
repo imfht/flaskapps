@@ -1,0 +1,322 @@
+body {
+    background-color: #f1f1f1;
+}
+
+.chart-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1em;
+}
+.chart-header small {
+    position: relative;
+    top: -3px;
+    left: 10px;
+}
+
+/* Widgets */
+
+.dashboard-charts {
+    padding-bottom: 1em;
+    margin-bottom: 4em;
+}
+.dashboard-charts .chart-list .chart-list-item:hover {
+    background-color: #f1f1f1;
+}
+.dashboard-charts .widget {
+    margin: 5px;
+    float: left;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-bottom-width: 2px;
+    border-bottom-color: #bbb;
+    /*
+    set to relative initially, before layout is calculated.
+    this ensures any elements positioned absolutely work as expected.
+    */
+    position: relative;
+}
+.dashboard-charts small {
+    font-weight: 400;
+}
+
+/* Resizeable ui */
+
+.ui-resizable-e:hover,
+.ui-resizable-s:hover {
+    background-color: #85C785;
+}
+.ui-resizable-e:hover {
+    border-radius: 0 5px 5px 0;
+}
+.ui-resizable-s:hover {
+    border-radius: 0 0 5px 5px;
+}
+.resizable-helper {
+    border: 2px dotted #85C785;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.dashboard-charts .ui-icon-gripsmall-diagonal-se {}
+.dashboard-charts .ui-icon-gripsmall-diagonal-se:hover {
+    background-color: #85C785;
+}
+
+/**
+ * Draggable jquery-ui
+ */
+
+.grid-row.drag-target {
+    background-color: #E4F9E3;
+}
+.grid-row.ui-droppable-hover {
+    background-color: #C1E5BB;
+}
+.grid-row.ui-droppable-active {}
+.item.ui-draggable-dragging,
+.item.is-positioning-post-drag {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 3; /* keep dragged item on top */
+}
+
+/* Packer jq-ui-draggable integration */
+
+.packery-drop-placeholder {
+  outline: 2px dashed rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-transition: -webkit-transform 0.2s;
+          transition: transform 0.2s;
+}
+
+/* Widget/widget states */
+
+.dashboard-charts .widget.error {
+    opacity: 0.5;
+}
+.dashboard-charts .widget.error:hover {
+    opacity: 1;
+}
+.dashboard-charts .error-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+}
+.dashboard-charts .error-overlay .alert {
+    margin: 0 auto;
+    padding: 0.5em;
+    border-radius: 0 0 0 0;
+}
+
+.dashboard-charts .widget:hover {}
+
+.dashboard-charts .widget iframe {
+    border: 0;
+}
+.dashboard-charts .widget .icon {
+    display: none;
+    margin-left: 0.3em;
+    font-size: 16px;
+    color: #999;
+}
+.dashboard-charts .widget:hover .icon:not(.widget-delete) {
+    display: inline-block;
+}
+.dashboard-charts .widget .icon:hover {
+    -webkit-transition: all .25s ease-in-out;
+    -moz-transition: all .25s ease-in-out;
+    -ms-transition: all .25s ease-in-out;
+    -o-transition: all .25s ease-in-out;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+    color: #444;
+}
+.dashboard-charts .widget .icon.dragger:hover {
+    cursor: move;
+}
+.dashboard-charts .widget .widget-refresh:hover {
+    transform: rotate(60deg);
+}
+.dashboard-charts .widget .widget-delete {
+    display: none;
+}
+.jsondash-editing .widget:hover .icon.widget-delete {
+    display: inline-block;
+}
+.dashboard-charts .widget .widget-loader,
+.dashboard-charts .widget .loadfail {
+    position: absolute;
+    font-size: 30px;
+    color: #333;
+    top: 50%;
+    right: 50%;
+    margin-left: -50%;
+    z-index: 999;
+}
+.dashboard-charts .loader-overlay {
+    position: absolute;
+    top: 0;
+    z-index:998;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.dashboard-charts [data-failed="true"] {
+    opacity: 0.5 !important;
+}
+.dashboard-charts [data-failed="true"]:hover {
+    opacity: 1 !important;
+}
+.dashboard-charts .widget .loadfail {
+    font-size: 12px;
+}
+
+/* Custom form inputs */
+
+.dashboard-charts .widget .chart-inputs {
+    padding: 1em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top-width: 1px;
+    border-bottom-width: 3px;
+    margin-bottom: 1em;
+    margin-left: -1px;
+    margin-right: -1px;
+    margin-top: 8px;
+    position: relative;
+    z-index: 999;
+    box-shadow: 0 5px 5px #ddd;
+}
+.dashboard-charts .widget .chart-inputs form {
+    margin: 0 auto;
+}
+.dashboard-charts .widget .chart-inputs form label {
+    border-bottom: 1px solid #ccc;
+    display: block;
+    margin-right: 0.3em;
+    padding-bottom: 0.5em;
+}
+.dashboard-charts .widget .chart-inputs form label:last-of-type {
+    border-bottom: none;
+}
+.dashboard-charts .widget .chart-inputs .help-text {
+    font-weight: 200;
+}
+.dashboard-charts .widget .chart-inputs .input-radio {
+    margin-right: 0.2em;
+    text-align: center;
+}
+.dashboard-charts .widget .chart-inputs .input-radio,
+.dashboard-charts .widget .chart-inputs .input-radio input {
+    display: inline-block;
+}
+.dashboard-charts .widget .chart-inputs legend {
+    font-size: 16px;
+    font-weight: 200;
+}
+.dashboard-charts .widget .widget-title {
+    display: block;
+    font-weight: 400;
+    font-size: 1em;
+    border-bottom: 1px solid #ccc;
+    padding: 0.6em 1.2em;
+    height: 35px !important;
+    line-height: 20px;
+    overflow: hidden;
+    background-color: #eee;
+    color: #444;
+    text-shadow: 1px 1px rgba(255, 255, 255, 1);
+}
+.dashboard-charts .widget .chart-container {
+    margin: 0 auto;
+}
+.dashboard-charts .widget iframe,
+.dashboard-charts .widget svg,
+.dashboard-charts .widget .chart-container .img,
+.dashboard-charts .widget .chart-centered {
+    margin: 0 auto;
+    display: block;
+}
+.dashboard-charts #chart-options .guid-text-helper {
+    visibility: hidden;
+}
+.dashboard-charts #chart-options [data-view-chart-guid]:hover .guid-text {
+    border-bottom: 1px dotted #999;
+}
+.dashboard-charts #chart-options [data-view-chart-guid]:hover .guid-text-helper {
+    visibility: visible;
+}
+#api-output {
+    max-height: 600px;
+    overflow: scroll;
+    display: block;
+}
+.dashboard-charts #save-view-form {
+    padding: 1em;
+}
+.dashboard-charts #save-view-form .form-group label {
+    display: block;
+}
+.dashboard-charts #save-view-form .form-group input,
+.dashboard-charts #save-view-form .form-group select {
+    display: block;
+    width: 100%;
+}
+.dashboard-charts .form-inline {
+    text-align: left;
+    display: inline-block !important;
+}
+.dashboard-charts .form-inline input,
+.dashboard-charts .form-inline button {
+    display: inline-block;
+}
+
+/* Editing mode */
+
+.dashboard-charts .grid-row {
+    position: relative;
+    margin-bottom: 10px;
+}
+.dashboard-charts .grid-row .grid-row-label-wrapper {
+    display: none;
+}
+.jsondash-editing .dashboard-charts .grid-row {
+    min-height: 300px;
+    padding: 1em 0 1em 0;
+    margin:  1.4em 0;
+}
+.jsondash-editing .dashboard-charts .grid-row:hover {
+}
+.jsondash-editing .dashboard-charts .grid-row .grid-row-label {
+    margin: 0 auto;
+}
+.jsondash-editing .dashboard-charts .grid-row-label-wrapper {
+    display: block;
+    text-align: center;
+    margin-bottom: 1em;
+    padding: 1em 1em 0 1em;
+}
+
+/**
+ * SVG for graphlib.
+ */
+
+.dashboard-charts .widget .chart-graph {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    overflow: visible !important;
+}
+.dashboard-charts .widget .chart-graph .node {
+    fill: none;
+}
+
+/* Containers */
+
+.dashboard-charts .widget .chart-graph .nodes .node rect {
+    fill: #f1f1f1;
+    stroke: black;
+    stroke-width: 2px;
+}
+.dashboard-charts .widget .chart-graph .nodes .node text {
+    fill: black;
+}

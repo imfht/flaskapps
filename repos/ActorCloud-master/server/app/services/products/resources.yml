@@ -1,0 +1,253 @@
+products:
+  code: 'products'
+  enable: 1
+  icon: null
+  level: 2
+  method: null
+  order: 2
+  parentCode: 'device_manage'
+  tabs: 0
+  url: '/products'
+  service: devices
+
+products-view:
+  code: 'products-view'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'GET'
+  order: 1
+  parentCode: 'products'
+  tabs: 0
+  url: '/products'
+  service: devices
+
+products-create:
+  code: 'products-create'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'POST'
+  order: 2
+  parentCode: 'products'
+  tabs: 0
+  url: '/products'
+  service: devices
+
+products-edit:
+  code: 'products-edit'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'PUT'
+  order: 3
+  parentCode: 'products'
+  tabs: 0
+  url: '/products/:id'
+  service: devices
+
+products-delete:
+  code: 'products-delete'
+  enable: 1
+  icon: null
+  level: 3
+  method: 'DELETE'
+  order: 4
+  parentCode: 'products'
+  tabs: 0
+  url: '/products'
+  service: devices
+
+
+data_points:
+  code: 'data_points'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 5
+  parentCode: 'products'
+  tabs: 0
+  url: null
+  service: product_develop
+
+data_points-view:
+  code: 'data_points-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 1
+  parentCode: 'data_points'
+  tabs: 0
+  url: '/data_points'
+  service: product_develop
+
+data_points-create:
+  code: 'data_points-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 2
+  parentCode: 'data_points'
+  tabs: 0
+  url: '/data_points'
+  service: product_develop
+
+data_points-edit:
+  code: 'data_points-edit'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'PUT'
+  order: 3
+  parentCode: 'data_points'
+  tabs: 0
+  url: '/data_points/:id'
+  service: product_develop
+
+data_points-delete:
+  code: 'data_points-delete'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'DELETE'
+  order: 4
+  parentCode: 'data_points'
+  tabs: 0
+  url: '/data_points'
+  service: product_develop
+
+
+data_streams:
+  code: 'data_streams'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 6
+  parentCode: 'products'
+  tabs: 0
+  url: null
+  service: product_develop
+
+data_streams-view:
+  code: 'data_streams-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 1
+  parentCode: 'data_streams'
+  tabs: 0
+  url: '/data_streams'
+  service: product_develop
+
+data_streams-create:
+  code: 'data_streams-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 2
+  parentCode: 'data_streams'
+  tabs: 0
+  url: '/data_streams'
+  service: product_develop
+
+data_streams-edit:
+  code: 'data_streams-edit'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'PUT'
+  order: 3
+  parentCode: 'data_streams'
+  tabs: 0
+  url: '/data_streams/:id'
+  service: product_develop
+
+data_streams-delete:
+  code: 'data_streams-delete'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'DELETE'
+  order: 4
+  parentCode: 'data_streams'
+  tabs: 0
+  url: '/data_streams'
+  service: product_develop
+
+codec:
+  code: 'codec'
+  enable: 1
+  icon: null
+  level: 3
+  method: null
+  order: 9
+  parentCode: 'products'
+  tabs: 0
+  url: null
+  service: product_develop
+
+run_code:
+  code: 'run_code'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 1
+  parentCode: 'codec'
+  tabs: 0
+  url: '/run_code'
+  service: product_develop
+
+codec-view:
+  code: 'codec-view'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'GET'
+  order: 2
+  parentCode: 'codec'
+  tabs: 0
+  url: '/codec'
+  service: product_develop
+
+codec-create:
+  code: 'codec-create'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'POST'
+  order: 3
+  parentCode: 'codec'
+  tabs: 0
+  url: '/codec'
+  service: product_develop
+
+codec-edit:
+  code: 'codec-edit'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'PUT'
+  order: 4
+  parentCode: 'codec'
+  tabs: 0
+  url: '/codec/:id'
+  service: product_develop
+
+codec-delete:
+  code: 'codec-delete'
+  enable: 1
+  icon: null
+  level: 4
+  method: 'DELETE'
+  order: 5
+  parentCode: 'codec'
+  tabs: 0
+  url: '/codec'
+  service: product_develop

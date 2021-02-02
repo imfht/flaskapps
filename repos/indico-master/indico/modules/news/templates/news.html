@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+{% from 'news/_news.html' import render_news_item %}
+
+{% block page_class %}fixed-width-standalone-page{% endblock %}
+
+{% block title %}
+    {% trans %}Latest News{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    {% for item in news %}
+        {{ render_news_item(item, is_new=_is_new(item)) }}
+    {% endfor %}
+{% endblock %}

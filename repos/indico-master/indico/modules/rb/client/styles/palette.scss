@@ -1,0 +1,54 @@
+// This file is part of Indico.
+// Copyright (C) 2002 - 2021 CERN
+//
+// Indico is free software; you can redistribute it and/or
+// modify it under the terms of the MIT License; see the
+// LICENSE file for more details.
+
+@import 'base/palette';
+
+$white: #fff;
+$highlight-color: #7dcfb6;
+$dark-highlight-color: #45ba97;
+$primary-color: #2185d0;
+
+// Timeline colors
+$available-color: #07e04b;
+$pre-booking-color: #ffe733;
+$pre-booking-label-color: #c4930d;
+$booking-color: #fb3;
+$conflict-color: #f44;
+$cancellation-color: #f9e3cf;
+$other-booking-color: #dfdfdf;
+$rejection-color: #f9cebd;
+$unbookable-color: #bbb;
+$pending-cancellation-color: #e2cebc;
+$conflicting-candidate-color: #fbd1d6;
+$overridable-blocking-color: #749cc1;
+$pre-booking-stripe-colors: ($pre-booking-color, lighten($pre-booking-color, 20%));
+$pre-booking-conflict-stripe-colors: ($available-color, desaturate($available-color, 20%));
+$pre-booking-concurrent-stripe-colors: (
+  darken($pre-booking-color, 10%),
+  lighten($conflict-color, 27%)
+);
+$blocking-stripe-colors: (lighten($conflict-color, 50%), lighten($conflict-color, 20%));
+$overridable-blocking-stripe-colors: (
+  lighten($overridable-blocking-color, 60%),
+  lighten($overridable-blocking-color, 30%)
+);
+$unbookable-stripe-colors: (lighten($unbookable-color, 20%), $unbookable-color);
+$available-fadeout-colors: $available-color, lighten($available-color, 40%);
+$booking-fadeout-colors: $booking-color, lighten($booking-color, 30%);
+$conflict-fadeout-colors: $conflict-color, lighten($conflict-color, 20%);
+$conflicting-candidate-fadeout-colors: $conflicting-candidate-color,
+  lighten($conflicting-candidate-color, 5%);
+$cancellation-fadeout-colors: $cancellation-color, lighten($cancellation-color, 30%);
+$pending-cancellation-fadeout-colors: $pending-cancellation-color,
+  lighten($pending-cancellation-color, 30%);
+$rejection-fadeout-colors: $rejection-color, lighten($rejection-color, 30%);
+$other-booking-fadeout-colors: $other-booking-color, lighten($other-booking-color, 30%);
+
+%rb-splash-background {
+  background-image: url('static:images/globe.png');
+  background-size: cover;
+}

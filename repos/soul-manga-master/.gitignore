@@ -1,0 +1,36 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+# 这里我改了image-gallery.css（改为图片不缩放并居中）和image-gallery.js（翻页的时候滚动条重置）bullets/nav 固定位置 搜'hikaru'
+# 代码丢了。。。电脑重装了  哭。。。。 
+# 记录一下：slideToIndex 调用 window.scrollTo(0,0); _handleKeyDown 加上空格事件，window.scrollTo(0,document.body.scrollHeight);
+
+/node_modules
+/local_images
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# server
+server/__pycache__
+server/static
+server/templates
+server/.python-version
+*.pyc
+.python-version
+/public/temp-images
+!/public/images
+gun.pid
+
+*.zip
+!image-gallery.css

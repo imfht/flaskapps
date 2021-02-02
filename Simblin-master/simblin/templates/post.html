@@ -1,0 +1,7 @@
+{% from 'macros.html' import render_post with context %}
+{% extends "base.html" %}
+{% block body %}
+  {% if post %}
+    {{ render_post(post) }}
+  {% endif %}
+{% endblock %}

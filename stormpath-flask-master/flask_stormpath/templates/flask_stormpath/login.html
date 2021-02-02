@@ -1,0 +1,70 @@
+{% extends config['STORMPATH_BASE_TEMPLATE'] %}
+
+{% block title %}Log In{% endblock %}
+{% block description %}Log into your account!{% endblock %}
+{% block bodytag %}login{% endblock %}
+
+{% block body %}
+  <div class="container custom-container">
+    <div class="va-wrapper">
+      <div class="view login-view container">
+        <div class="box row">
+          <div class="email-password-area col-xs-12 {% if config['STORMPATH_ENABLE_FACEBOOK'] or config['STORMPATH_ENABLE_GOOGLE'] %}small col-sm-8{% else %}large col-sm-12{% endif %}">
+            <div class="header">
+              <span>Log In{% if config['STORMPATH_ENABLE_REGISTRATION'] %} or {% endif %}</span>
+              {% if config['STORMPATH_ENABLE_REGISTRATION'] %}
+                <a href="{{ url_for('stormpath.register') }}">Create an Account</a>
+              {% endif %}
+            </div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="alert alert-danger bad-login">
+                  {% for message in messages %}
+                    {{ message }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+            <form class="login-form form-horizontal" role="form" method="post">
+              {{ form.hidden_tag() }}
+              <div class="form-group group-email">
+                <label class="{% if config['STORMPATH_ENABLE_FACEBOOK'] or config['STORMPATH_ENABLE_GOOGLE'] %}col-sm-12{% else %}col-sm-4{% endif %}">{% if config['STORMPATH_ENABLE_USERNAME'] %}Username or {% endif %}Email</label>
+                <div class="{% if config['STORMPATH_ENABLE_FACEBOOK'] or config['STORMPATH_ENABLE_GOOGLE'] %}col-sm-12{% else %}col-sm-8{% endif %}">
+                  {% if config['STORMPATH_ENABLE_USERNAME'] %}
+                    {{ form.login(autofocus='true', class='form-control', placeholder='Username or Email', required='true') }}
+                  {% else %}
+                    {{ form.login(autofocus='true', class='form-control', placeholder='Email', required='true') }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group group-password">
+                <label class="{% if config['STORMPATH_ENABLE_FACEBOOK'] or config['STORMPATH_ENABLE_GOOGLE'] %}col-sm-12{% else %}col-sm-4{% endif %}">Password</label>
+                <div class="{% if config['STORMPATH_ENABLE_FACEBOOK'] or config['STORMPATH_ENABLE_GOOGLE'] %}col-sm-12{% else %}col-sm-8{% endif %}">
+                  {{ form.password(class='form-control', placeholder='Password', required='true') }}
+                </div>
+              </div>
+              <div>
+                <button class="login btn btn-login btn-sp-green" type="submit">Log In</button>
+              </div>
+            </form>
+          </div>
+          {% if config['STORMPATH_ENABLE_FACEBOOK'] or config['STORMPATH_ENABLE_GOOGLE'] %}
+            <div class="social-area col-xs-12 col-sm-4">
+              <div class="header">&nbsp;</div>
+              <label>Easy 1-click login:</label>
+              {% if config['STORMPATH_ENABLE_FACEBOOK'] %}
+                {% include "flask_stormpath/facebook_login_form.html" %}
+              {% endif %}
+              {% if config['STORMPATH_ENABLE_GOOGLE'] %}
+                {% include "flask_stormpath/google_login_form.html" %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+        {% if config['STORMPATH_ENABLE_FORGOT_PASSWORD'] %}
+          <a class="forgot" href="{{ url_for('stormpath.forgot') }}">Forgot Password?</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

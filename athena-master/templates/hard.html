@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8"/>
+  <title>{{ page.title }} &mdash; {{ config.title }}</title>
+
+  {% compress 'css' %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tufte.css') }}">
+  {% endcompress %}
+
+  {% compress 'js' %}
+  <script type="text/javascript" src="{{ url_for('static',
+    filename='enquire.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',
+    filename='jquery-1.12.4.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',
+    filename='resources.js') }}"></script>
+  {% endcompress %}
+
+  <link rel='shortcut icon' href="{{ url_for('static', filename='favicon.ico') }}" type='image/x-icon'/>
+  <style type="text/css">
+   img { mix-blend-mode: multiply; }
+  </style>
+</head>
+<body>
+ <div class="thearticle">
+
+  <article>
+    {% block content %}
+    <h1>{{ page.title }}</h1>
+    <p id="blog-p"><span id="blogdesc" class="marginnote">
+    {{ config.sidebardesc }}<br><br>
+    <a href="{{ url_for("index") }}">home</a> ·
+    {% for page in hpages %}
+      <a href="{{ url_for("hardpagelink", path=page.path)}}">
+        {{ page.title.lower() }}
+      </a> ·
+    {% endfor %}
+    <a href="{{ url_for("recent_feed") }}">subscribe</a></span></p>
+
+    <section>
+    {{ page.html|safe }}
+    {% endblock content %}
+    </section>
+  </article>
+  </div>
+
+  <div class="thefooter">
+    <p>{{ config.footer }}
+      <br><br>Copyright, <i>2016</i></p>
+  </div> <!-- footer end -->
+</body>
+</html>

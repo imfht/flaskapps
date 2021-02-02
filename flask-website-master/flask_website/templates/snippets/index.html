@@ -1,0 +1,11 @@
+{% extends "snippets/layout.html" %}
+{% block title %}Snippets Archive{% endblock %}
+{% block body %}
+  {{ super() }}
+  <h2>Categories</h2>
+  <ul>
+  {% for category in categories %}
+    <li><a href="{{ category.url }}">{{ category.name }}</a> ({{ category.count }})
+  {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,92 @@
+# Use Travis's container-based infrastructure.
+sudo: false
+
+cache: pip
+
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7-dev"
+  - "pypy"
+  # PyPy3 currently supports Python 3.2, which Flask does not support.
+  # - "pypy3"
+
+matrix:
+  include:
+    - python: "2.6"
+      env: WITHSIMPLEJSON=false WITHFUTURE=true
+    - python: "2.6"
+      env: WITHSIMPLEJSON=true WITHFUTURE=false
+    - python: "2.6"
+      env: WITHSIMPLEJSON=true WITHFUTURE=true
+    - python: "2.7"
+      env: WITHFUTURE=true
+
+addons:
+  # The default Travis build environment uses PostgreSQL 9.1, but some of the
+  # network operators (specifically the && operator) do not exist until version
+  # 9.4, so we manually specify the newer version.
+  postgresql: "9.4"
+  apt:
+    packages:
+      # These are build dependencies for the documentation; LaTeX is required
+      # for rendering math. These are the required packages for Ubuntu 12.04,
+      # Travis' current build environment!
+      - texlive-latex-base
+      - texlive-latex-extra
+      - dvipng
+
+
+before_install:
+  # Determine whether we're using PyPy, as it determines which requirements
+  # file we will use.
+  - |
+    if [[ "$TRAVIS_PYTHON_VERSION" == "pypy" ]]; then
+        export REQUIREMENTS=requirements/test-pypy.txt
+    else
+        export REQUIREMENTS=requirements/test-cpython.txt
+    fi
+
+install:
+  # Upgrade pip in case the installed version is out of date.
+  - pip install --upgrade pip
+  # Install the test requirements.
+  - pip install -r $REQUIREMENTS
+  # Install simplejson, if necessary for this build.
+  - |
+    if [[ "$WITHSIMPLEJSON" = true ]]; then
+      pip install simplejson
+    fi
+  # Install future, if necessary for this build.
+  - |
+    if [[ "$WITHFUTURE" = true ]]; then
+      pip install future
+    fi
+  # Install the requirements specific to Travis tests.
+  - pip install -r requirements/doc.txt
+  - pip install coveralls
+  # Install Flask-Restless so that it is available for the documentation build.
+  - python setup.py install
+
+before_script:
+  # Create the PostgreSQL database for testing PostgreSQL-specific operators.
+  - psql -c 'create database testdb;' -U postgres
+
+script:
+  # Documentation build checks. Sphinx 1.5 only supports Python version 2.7
+  # and 3.4+, so don't build the documentation on those versions.
+  - |
+    if [[ "$TRAVIS_PYTHON_VERSION" != "2.6" && "$TRAVIS_PYTHON_VERSION" != "3.3" ]]; then
+      sphinx-build -n -W docs/ build/sphinx/html/
+    fi
+  # Unit tests.
+  - coverage run --source=flask_restless setup.py test
+
+after_success:
+  coveralls

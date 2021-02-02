@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block head %}
+{% if css is defined and css %}
+<link href="/{{ css }}.css" type="text/css" rel="stylesheet"/>
+{% else %}
+{{ super() }}
+{% endif %}
+{% endblock %}
+{% block body %}
+{{ content | safe }}
+{% endblock %}

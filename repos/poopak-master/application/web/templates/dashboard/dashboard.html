@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block body %}
+
+<!--<script src="{{url_for('static', filename='js/d3.v3.min.js')}}"></script>-->
+<script src="{{url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/jquery-ui.js')}}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css')}}" >
+
+    <script>
+        $(function() {
+            $( ".frmdtpick" ).datepicker();
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $( ".todtpick" ).datepicker();
+        });
+    </script>
+
+<div>
+
+
+
+</div>
+
+<div class="col-md-12">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for class, message in messages %}
+                <div class="alert alert-{{class}} text-center fixed-top">
+                    <i class="glyphicon glyphicon-check" ></i> &nbsp;
+                    {{ message }}
+                </div>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="col-md-3">
+        <h3>
+             <i class="glyphicon glyphicon-dashboard"></i>
+            &nbsp;Dashboard
+        </h3>
+    </div>
+{% include 'dashboard/nav.html' %}
+</div>
+
+<div class="col-md-12 dashboard" style="margin-top: 15px;">
+    <h5>
+        <i class="glyphicon glyphicon-list"></i>&nbsp;Last LIVE onion page added
+    </h5>
+    <br/>
+    <div>
+        {% if last_200 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        URL
+                    </td>
+                    <td>
+                        Title
+                    </td>
+                    <td>
+                        Body
+                    </td>
+                    <td>
+                        Parent
+                    </td>
+                </tr>
+            </thead>
+            {% for item in last_200 %}
+                <tr>
+                    <td width="15%">
+                        <i class="glyphicon glyphicon-check text-success"></i>&nbsp;
+                        {{item.seen_time | datetimeformat}}</td>
+                    <td width="25%"><a href="http://{{item.url}}" target="_blank">{{item.url}}</a></td>
+                    <td width="25%">{{item.title}}</td>
+                    <td width="25%">
+                        {% if item.parent %}
+                            {{item.parent}}
+                        {% else %}
+                            <i class="glyphicon glyphicon-check"></i>
+                        {% endif %}
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    <hr/>
+    <h4>
+        <i class="glyphicon glyphicon-list"></i>&nbsp;Last onion page added
+    </h4>
+    <br/>
+    <div>
+        {% if last_all %}
+        <table class="table">
+            {% for item in last_all %}
+                <tr>
+                    <td>{{item.seen_time | datetimeformat}}</td>
+                    <td>{{item.url}}</td>
+                    <td>{{item.title}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+</div>
+
+
+{%endblock%}

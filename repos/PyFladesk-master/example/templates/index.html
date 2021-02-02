@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <h1 > Hello World! </h1>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <p><a href="http://github.com/smoqadam/PyFladesk">github</a></p>
+    <p><a href="{{ url_for('page2') }}">Page 2</a></p>
+{% endblock %}

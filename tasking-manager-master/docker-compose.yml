@@ -1,0 +1,62 @@
+# To use this file, run `docker-compose up`.
+version: "3.4"
+
+x-backend-config: &backend
+  image: hotosm-tasking-manager:backend
+  env_file: ${ENV_FILE:-tasking-manager.env}
+  depends_on:
+    - postgresql
+  links:
+    - postgresql
+  networks:
+    - tm-web
+
+services:
+  # Main application
+  backend:
+    <<: *backend
+    container_name: backend
+    restart: always
+    labels:
+      - traefik.http.routers.backend.rule=Host(`localhost`) && PathPrefix(`/api/`)
+      - traefik.http.services.backend.loadbalancer.server.port=5000
+
+  migration:
+    <<: *backend
+    container_name: migration
+    restart: on-failure
+    command: python manage.py db upgrade
+
+  frontend:
+    image: hotosm-tasking-manager:frontend
+    restart: always
+    networks:
+      - tm-web
+    labels:
+      - traefik.http.routers.frontend.rule=Host(`localhost`)
+      - traefik.http.services.frontend.loadbalancer.server.port=80
+
+  postgresql:
+    image: mdillon/postgis:11
+    container_name: postgresql
+    restart: always
+    env_file: ${ENV_FILE:-tasking-manager.env}
+    networks:
+      - tm-web
+
+  traefik:
+    image: traefik:v2.3
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - --entrypoints.web.address=:80
+      - --providers.docker=true
+    networks:
+      - tm-web
+
+networks:
+  tm-web:
+    external: true

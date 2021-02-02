@@ -1,0 +1,10 @@
+.DS_Store
+*.pyc
+*.pyo
+*.egg-info
+dist/
+docs/_build
+.tox/
+.vscode
+*.code-workspace
+venv
